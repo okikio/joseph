@@ -59,3 +59,12 @@ typings/
 
 # next.js build output
 .next
+
+# Heroku Test
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
+push-git*
+.cache
+.c9
