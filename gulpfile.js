@@ -1,8 +1,10 @@
-const { src, task, parallel, dest, watch } = require('gulp');
+const gulp = require('gulp');
+const { src, task, series, parallel, dest, watch } = gulp;
 const autoprefixer = require('autoprefixer');
 const sourcemap = require('gulp-sourcemaps');
 const { exec } = require('child_process');
 const beautify = require('gulp-beautify');
+let { pages } = require('./config.min');
 const htmlmin = require('gulp-htmlmin');
 const postcss = require('gulp-postcss');
 const uglify = require('gulp-uglify');
@@ -13,7 +15,7 @@ const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const $if = require('gulp-if');
 
-let minify = uglify();
+let last;
 let plugins = [
     autoprefixer,
     cssnano
@@ -29,15 +31,15 @@ let htmlMinOpts = {
     removeRedundantAttributes: false
 };
 
-let minSuffix = rename({ suffix: ".min" });
+let server, html, css, js;
+let minSuffix = { suffix: ".min" };
 let watchDelay = { delay: 500 };
 let publicDest = 'public';
-let babelPresets = babel({
+let babelPresets = {
     presets: ['@babel/env']
-});
+};
 
 task('html', () => {
-    let { pages } = require('./config.min'), last;
     for (let i in pages)
         last = src('views/app.pug')
             // Pug compiler
@@ -77,7 +79,7 @@ task("css", () =>
             )
         )
         // Rename
-        .pipe(minSuffix)
+        .pipe(rename(minSuffix))
         // Put sourcemap in public folder
         .pipe(sourcemap.write('.'))
         // Output
@@ -89,17 +91,17 @@ task("js", () =>
         // Sourcemaps start
         .pipe(sourcemap.init())
         // ES5 file for uglifing
-        .pipe(babelPresets)
+        .pipe(babel(babelPresets))
         // Minify the file
         .pipe(
             $if(
                 process.env.NODE_ENV == "production",
-                minify,
+                uglify(),
                 beautify.js({ indent_size: 4 })
             )
         )
         // Rename
-        .pipe(minSuffix)
+        .pipe(rename(minSuffix))
         // Put sourcemap in public folder
         .pipe(sourcemap.write('.'))
         // Output
@@ -109,11 +111,11 @@ task("js", () =>
 task("server", () =>
    src(["*.js", "!*.min.js", "!gulpfile.js"], { allowEmpty: true })
         // ES5 file for uglifing
-        .pipe(babelPresets)
+        .pipe(babel(babelPresets))
         // Minify the file
-        .pipe(minify)
+        .pipe(uglify())
         // Rename
-        .pipe(minSuffix)
+        .pipe(rename(minSuffix))
         // Output
         .pipe(dest('.'))
 );
@@ -131,8 +133,9 @@ task("git", fn => {
 });
 
 // Gulp task to minify all files
-task('default', parallel(['server', 'html', 'css', 'js'], fn => fn()) );
+task('default', parallel(series("server", "html"), "js", "css"));
 
+// server, series(html, js, css ), parallel(css, js)
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
     watch('views/**/*.pug', watchDelay, ['html']);
