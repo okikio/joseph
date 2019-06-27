@@ -1,4 +1,4 @@
-const { src, task, series, dest, watch } = require('gulp');
+const { src, task, parallel, dest, watch } = require('gulp');
 const autoprefixer = require('autoprefixer');
 const sourcemap = require('gulp-sourcemaps');
 const { exec } = require('child_process');
@@ -36,13 +36,13 @@ let babelPresets = babel({
     presets: ['@babel/env']
 });
 
-task('html', fn => {
-    config = require('./config.min');
-    for (let i in config.pages)
-        src('views/app.pug')
+task('html', () => {
+    let { pages } = require('./config.min'), last;
+    for (let i in pages)
+        last = src('views/app.pug')
             // Pug compiler
             .pipe(pug({
-                data: config.pages[i]
+                data: pages[i]
             }))
             // Minifies html
             .pipe(
@@ -59,7 +59,7 @@ task('html', fn => {
             }))
             // Output
             .pipe(dest(publicDest));
-    return fn();
+    return last;
 });
 
 task("css", () =>
@@ -131,7 +131,7 @@ task("git", fn => {
 });
 
 // Gulp task to minify all files
-task('default', series(['server', 'html', 'css', 'js'], fn => fn()) );
+task('default', parallel(['server', 'html', 'css', 'js'], fn => fn()) );
 
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
