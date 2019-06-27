@@ -1,6 +1,7 @@
 let shrinkRay = require('@magento/shrink-ray');
 let debug = require('debug')('okikio:server');
 let cookieParser = require('cookie-parser');
+let mcache = require('memory-cache');
 let express = require('express');
 let logger = require('morgan');
 let helmet = require('helmet');
@@ -9,18 +10,44 @@ let path = require('path');
 let app = express();
 let server, port;
 
-let { engine } = require("./render.min");
+// List of routes
+let { routes } = require("./config.min");
+let { engine } = require("./engine.min");
 
-// List of routes and routers
-let render = require("./render.min");
-let routeList = render["route"];
-let pageList = render["page"];
+// Cache times
+let day = (1000 * 60 * 60 * 24).toString();
+let week = (1000 * 60 * 60 * 24 * 7).toString();
 
-// A quick function for webpage get requests
+// Cache Function [glitch.com/edit/#!/server-side-cache-express?path=server.js:8:0]
+let cache = (duration) => {
+    return (req, res, next) => {
+        let barba = req.header("x-barba");
+        let key = `__express__${barba ? '__barba__' : ''}${req.originalUrl || req.url}`;
+        let cachedBody = mcache.get(key);
+        if (cachedBody) {
+            res.send(cachedBody);
+            return;
+        } else {
+            res.sendResponse = res.send;
+            res.send = body => {
+                mcache.put(key, body, duration * 1000);
+                res.sendResponse(body);
+            };
+            next();
+        }
+    }
+};
+
+// A quick function to render webpage get requests
 let render = (page = "index", data) => {
     return (req, res, next) => {
         res.render(page, { barba: req.header("x-barba"), data: data });
     };
+};
+
+// A quick get request function
+let get = (route = "/", fn, dur = day) => {
+    app.get(route, cache(dur), render(fn));
 };
 
 // Normalize a port into a number, string, or false.
@@ -39,10 +66,10 @@ app.use(helmet());
 
 // Compress/GZIP/Brotil Server
 app.use(shrinkRay());
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: (60 * 60 * 24).toString() }));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
+app.use(express.static(path.join(__dirname, 'config.js'), { maxAge: day }));
 app.use((req, res, next) => {
-    if (req.originalUrl == '/favicon.ico')
-        { res.status(204).json({nope: true}); }
+    if (req.originalUrl == '/favicon.ico') { res.status(204).json({ nope: true }); }
     else { next(); }
 });
 
@@ -58,14 +85,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Routes and the pages to render
-app.get('/', render());
-app.get('/about', render("about"));
-app.get('/contact', render("contact"));
-app.get('/project', render("project"));
-app.get('/project-list', render("project-list"));
-app.get(`/project/:url`, (req, res, next) => {
-    res.render(`project-${req.params.url}`, { barba: req.header("x-barba") });
-});
+for (let i in routes)
+    get(i, routes[i]);
 
 // Catch error and forward to error handler
 app.use(function(req, res, next) {
