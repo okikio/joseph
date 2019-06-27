@@ -1,19 +1,21 @@
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
+const modifyFile = require('gulp-modify-file');
 const autoprefixer = require('autoprefixer');
 const sourcemap = require('gulp-sourcemaps');
 const { exec } = require('child_process');
 const beautify = require('gulp-beautify');
-let { pages } = require('./config.min');
 const htmlmin = require('gulp-htmlmin');
 const postcss = require('gulp-postcss');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const babel = require('gulp-babel');
 const cssnano = require('cssnano');
+const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const $if = require('gulp-if');
+const { pages } = config;
 
 let last;
 let plugins = [
@@ -31,12 +33,26 @@ let htmlMinOpts = {
     removeRedundantAttributes: false
 };
 
-let server, html, css, js;
 let minSuffix = { suffix: ".min" };
 let watchDelay = { delay: 500 };
 let publicDest = 'public';
 let babelPresets = {
     presets: ['@babel/env']
+};
+
+// Stringify
+let stringify = obj => {
+    let fns = [];
+    let json = JSON.stringify(obj, ...args => {
+        let val = args[args.length - 1];
+        if (typeof val == "function") {
+            fns.push(val.toString());
+            return "_";
+        }
+        return val;
+    }, 4);
+
+    return json.replace(/\"_\"/g, () => fns.shift());
 };
 
 task('html', () => {
@@ -109,9 +125,21 @@ task("js", () =>
 );
 
 task("server", () =>
-   src(["*.js", "!*.min.js", "!gulpfile.js"], { allowEmpty: true })
+   src(["*.js", "!*.min.js", "!gulpfile.js", "!config.js"], { allowEmpty: true })
         // ES5 file for uglifing
         .pipe(babel(babelPresets))
+        // Minify the file
+        .pipe(uglify())
+        // Rename
+        .pipe(rename(minSuffix))
+        // Output
+        .pipe(dest('.'))
+);
+
+task("config", () =>
+   src("config.js", { allowEmpty: true })
+        // Edit config
+        .pipe(modifyFile(() => `"use strict";module.exports = ${stringify(config)};`))
         // Minify the file
         .pipe(uglify())
         // Rename
@@ -133,13 +161,13 @@ task("git", fn => {
 });
 
 // Gulp task to minify all files
-task('default', parallel(series("server", "html"), "js", "css"));
+task('default', parallel(series("config", "server", "html"), "js", "css"));
 
 // server, series(html, js, css ), parallel(css, js)
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
-    watch('views/**/*.pug', watchDelay, ['html']);
-    watch('src/**/*.scss', watchDelay, ['css']);
-    watch('config.js', watchDelay, ['server']);
-    watch('src/**/*.js', watchDelay, ['js']);
+    watch('views/**/*.pug', watchDelay, series('html'));
+    watch('src/**/*.scss', watchDelay, series('css'));
+    watch('config.js', watchDelay, series('config', 'server'));
+    watch('src/**/*.js', watchDelay, series('js'));
 });

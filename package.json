@@ -49,6 +49,7 @@
     "gulp-beautify": "^3.0.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^2.0.2",
+    "gulp-modify-file": "^1.0.1",
     "gulp-postcss": "^8.0.0",
     "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.4.0",

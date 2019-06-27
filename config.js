@@ -1,7 +1,3 @@
-let projects = [
-
-];
-
 module.exports = {
     "pages": {
         "index": {

@@ -40,7 +40,7 @@ let cache = (duration) => {
 
 // A quick function to render webpage get requests
 let render = (page = "index", data) => {
-    return (req, res, next) => {
+    return (req, res) => {
         res.render(page, { barba: req.header("x-barba"), data: data });
     };
 };
@@ -89,12 +89,13 @@ for (let i in routes)
     get(i, routes[i]);
 
 // Catch error and forward to error handler
-app.use(function(req, res, next) {
+app.use(...args => {
+    let next = args[args.length - 1];
     next(createError(Number(404)));
 });
 
 // Error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
     // Render the error page
     res.status(err.status || 500);
     res.send("There was an error: " + (err.status || 500));
