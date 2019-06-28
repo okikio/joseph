@@ -195,10 +195,9 @@ task("git", fn => {
 // Gulp task to minify all files
 task('default', parallel(series("config", "server", "html"), "js", "css"));
 
-
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
-    watch('config.js', watchDelay, series('config:watch'));
+    watch(['config.js', 'containers/*.js'], watchDelay, series('config:watch'));
     watch('views/**/*.pug', watchDelay, series('html'));
     watch('src/**/*.scss', watchDelay, series('css'));
     watch('src/**/*.js', watchDelay, series('js'));
