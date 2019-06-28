@@ -14,12 +14,15 @@ let server, port;
 let { routes } = require("./config.min");
 let { engine } = require("./engine.min");
 
+// It's in development if not in production
+let dev = process.env.NODE_ENV != "production";
+
 // Cache times
-let day = (1000 * 60 * 60 * 24).toString();
-let week = (1000 * 60 * 60 * 24 * 7).toString();
+let day = ((dev ? 0 : 1) * 1000 * 60 * 60 * 24).toString();
+let week = ((dev ? 0 : 1) * 1000 * 60 * 60 * 24 * 7).toString();
 
 // Cache Function [glitch.com/edit/#!/server-side-cache-express?path=server.js:8:0]
-let cache = (duration) => {
+let cache = dur => {
     return (req, res, next) => {
         let barba = req.header("x-barba");
         let key = `__express__${barba ? '__barba__' : ''}${req.originalUrl || req.url}`;
@@ -30,7 +33,7 @@ let cache = (duration) => {
         } else {
             res.sendResponse = res.send;
             res.send = body => {
-                mcache.put(key, body, duration * 1000);
+                mcache.put(key, body, dur * 1000);
                 res.sendResponse(body);
             };
             next();
@@ -67,7 +70,7 @@ app.use(helmet());
 // Compress/GZIP/Brotil Server
 app.use(shrinkRay());
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
-app.use(express.static(path.join(__dirname, 'config.js'), { maxAge: day }));
+app.use(express.static(path.join(__dirname, 'config.min.js'), { maxAge: day }));
 app.use((req, res, next) => {
     if (req.originalUrl == '/favicon.ico') { res.status(204).json({ nope: true }); }
     else { next(); }
@@ -77,7 +80,7 @@ app.use((req, res, next) => {
 app.engine("html", engine);
 app.set('views', path.join(__dirname, './public'));
 app.set('view engine', 'html');
-app.set('view cache', true);
+app.set('view cache', !dev);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -89,8 +92,7 @@ for (let i in routes)
     get(i, routes[i]);
 
 // Catch error and forward to error handler
-app.use(...args => {
-    let next = args[args.length - 1];
+app.use((req, res, next) => {
     next(createError(Number(404)));
 });
 

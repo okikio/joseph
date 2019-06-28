@@ -1,9 +1,9 @@
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
+const { spawn } = require('child_process');
 const modifyFile = require('gulp-modify-file');
 const autoprefixer = require('autoprefixer');
 const sourcemap = require('gulp-sourcemaps');
-const { exec } = require('child_process');
 const beautify = require('gulp-beautify');
 const htmlmin = require('gulp-htmlmin');
 const postcss = require('gulp-postcss');
@@ -43,8 +43,7 @@ let babelPresets = {
 // Stringify
 let stringify = obj => {
     let fns = [];
-    let json = JSON.stringify(obj, ...args => {
-        let val = args[args.length - 1];
+    let json = JSON.stringify(obj, (key, val) => {
         if (typeof val == "function") {
             fns.push(val.toString());
             return "_";
@@ -53,6 +52,36 @@ let stringify = obj => {
     }, 4);
 
     return json.replace(/\"_\"/g, () => fns.shift());
+};
+
+// Based on: [https://gist.github.com/millermedeiros/4724047]
+let exec = (cmd, cb) => {
+    var parts = cmd.split(/\s+/g);
+    spawn(parts[0], parts.slice(1), { stdio: 'inherit' })
+        .on('data', data => process.stdout.write(data))
+        .on('exit', code => {
+            var err = null;
+            if (code) {
+                err = new Error('Command "'+ cmd +'" exited with wrong status code "'+ code +'"');
+                err.code = code;
+                err.cmd = cmd;
+            }
+            if (cb) { cb(err); }
+        });
+};
+
+// Execute multiple commands in series
+let execSeries = (cmds, cb) => {
+    var execNext = () => {
+        exec(cmds.shift(), err => {
+            if (err) { cb(err); }
+            else {
+                if (cmds.length) execNext();
+                else cb(null);
+            }
+        });
+    };
+    execNext();
 };
 
 task('html', () => {
@@ -137,7 +166,7 @@ task("server", () =>
 );
 
 task("config", () =>
-   src("config.js", { allowEmpty: true })
+    src("config.js", { allowEmpty: true })
         // Edit config
         .pipe(modifyFile(() => `"use strict";module.exports = ${stringify(config)};`))
         // Minify the file
@@ -148,26 +177,29 @@ task("config", () =>
         .pipe(dest('.'))
 );
 
+task("config:watch", fn => {
+    exec("gulp config server html", () => fn())
+});
+
 task("git", fn => {
-    let gitCommand = `
-        git add -A &&
-        git commit -m "Upgrade" &&
-        git push origin master &&
-        git push heroku master
-    `;
-    let process = exec(gitCommand);
-    process.stdout.on('data', data => console.log(data));
-    res.on("end", () => fn());
+    let gitCommand = [
+        "git add .",
+        "git commit -m 'Upgrade'",
+        "git push -u origin master",
+        // "git push heroku master"
+    ];
+
+    execSeries(gitCommand, () => fn());
 });
 
 // Gulp task to minify all files
 task('default', parallel(series("config", "server", "html"), "js", "css"));
 
-// server, series(html, js, css ), parallel(css, js)
+
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
+    watch('config.js', watchDelay, series('config:watch'));
     watch('views/**/*.pug', watchDelay, series('html'));
     watch('src/**/*.scss', watchDelay, series('css'));
-    watch('config.js', watchDelay, series('config', 'server'));
     watch('src/**/*.js', watchDelay, series('js'));
 });

@@ -2,13 +2,12 @@
   "name": "joseph",
   "version": "1.0.0",
   "description": "The portfolio website for Jospeh Ojo",
-  "main": "server.js",
+  "main": "./server.min",
   "scripts": {
     "build": "export NODE_ENV=production && gulp",
     "build:dev": "export NODE_ENV=development && gulp",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.min.js",
-    "dev": "nodemon ./server.js"
+    "start": "nodemon ./server.min",
+    "dev": "nodemon ./server"
   },
   "repository": {
     "type": "git",

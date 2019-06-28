@@ -1,8 +1,4 @@
-let path = require('path');
-let fs = require("fs");
-
-// Config File
-let config = require("./config");
+const fs = require("fs");
 
 // For faster more efficient page switching
 const jsdom = require("jsdom");

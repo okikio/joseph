@@ -1,7 +1,9 @@
+let yeah = "Cool Yeah";
 module.exports = {
     "pages": {
         "index": {
-            "title": "Cool"
+            "title": "Cool",
+            "Alive": ` This works  `
         }
     },
     "routes": {
