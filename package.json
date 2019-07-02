@@ -4,8 +4,8 @@
   "description": "The portfolio website for Jospeh Ojo",
   "main": "./server.min",
   "scripts": {
-    "build": "export NODE_ENV=production && gulp",
-    "build:dev": "export NODE_ENV=development && gulp",
+    "build": "export NODE_ENV=production && gulp --gulpfile ./gulpfile.js",
+    "build:dev": "export NODE_ENV=development && gulp --gulpfile ./gulpfile.js",
     "start": "nodemon ./server.min",
     "dev": "nodemon ./server"
   },
