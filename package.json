@@ -9,6 +9,10 @@
     "start": "nodemon ./server.min",
     "dev": "nodemon ./server"
   },
+  "engines": {
+    "node": "v12.4.0",
+    "npm": "6.9.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/okikio/joseph.git"
