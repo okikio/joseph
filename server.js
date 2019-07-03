@@ -3,12 +3,14 @@ let debug = require('debug')('okikio:server');
 let cookieParser = require('cookie-parser');
 let mcache = require('memory-cache');
 let express = require('express');
+let dotenv = require('dotenv');
 let logger = require('morgan');
 let helmet = require('helmet');
 let http = require('http');
 let path = require('path');
 let app = express();
 let server, port;
+dotenv.config();
 
 // List of routes
 let { routes } = require("./config.min");
