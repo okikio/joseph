@@ -10,9 +10,9 @@ let engine = (filePath, opts, callback) => {
     fs.readFile(filePath, function(err, content) {
         if (err) return callback(err);
         val = content.toString();
-        dom = new JSDOM(val).window.document;
 
         if (barba) {
+            dom = new JSDOM(val).window.document;
             dom = dom.querySelector('[data-barba="container"]');
             val = dom.outerHTML;
         }

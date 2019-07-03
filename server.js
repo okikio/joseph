@@ -42,9 +42,9 @@ let cache = dur => {
 };
 
 // A quick function to render webpage get requests
-let render = (page = "index", data) => {
+let render = (page = "index") => {
     return (req, res) => {
-        res.render(page, { barba: req.header("x-barba"), data: data });
+        res.render(page, { barba: req.header("x-barba") });
     };
 };
 
