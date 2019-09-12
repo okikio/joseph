@@ -1,59 +1,20 @@
-let shrinkRay = require('@magento/shrink-ray');
-let debug = require('debug')('okikio:server');
-let cookieParser = require('cookie-parser');
-let mcache = require('memory-cache');
-let express = require('express');
-let dotenv = require('dotenv');
-let logger = require('morgan');
-let helmet = require('helmet');
-let http = require('http');
-let path = require('path');
-let app = express();
-let server, port;
-dotenv.config();
+let { env } = process;
+if (!('dev' in env)) require('dotenv').config();
+let dev = 'dev' in env && env.dev.toString() === "true";
+let heroku = 'heroku' in env && env.heroku.toString() === "true";
+
+const compress = require("fastify-compress");
+const noIcon = require("fastify-no-icon");
+const helmet = require("fastify-helmet");
+const cors = require("fastify-cors");
+const fastify = require("fastify");
+const logger = require('morgan');
+const path = require("path");
 
 // List of routes
-let { routes } = require("./config.min");
-let { engine } = require("./engine.min");
-
-// It's in development if not in production
-let dev = process.env.NODE_ENV != "production";
-
-// Cache times
-let day = ((dev ? 0 : 1) * 1000 * 60 * 60 * 24).toString();
-let week = ((dev ? 0 : 1) * 1000 * 60 * 60 * 24 * 7).toString();
-
-// Cache Function [glitch.com/edit/#!/server-side-cache-express?path=server.js:8:0]
-let cache = dur => {
-    return (req, res, next) => {
-        let barba = req.header("x-barba");
-        let key = `__express__${barba ? '__barba__' : ''}${req.originalUrl || req.url}`;
-        let cachedBody = mcache.get(key);
-        if (cachedBody) {
-            res.send(cachedBody);
-            return;
-        } else {
-            res.sendResponse = res.send;
-            res.send = body => {
-                mcache.put(key, body, dur * 1000);
-                res.sendResponse(body);
-            };
-            next();
-        }
-    }
-};
-
-// A quick function to render webpage get requests
-let render = (page = "index") => {
-    return (req, res) => {
-        res.render(page, { barba: req.header("x-barba") });
-    };
-};
-
-// A quick get request function
-let get = (route = "/", fn, dur = day) => {
-    app.get(route, cache(dur), render(fn));
-};
+let { routes } = require('./config.min');
+let { _render, _static, _assets } = require('./plugin');
+// Possibly faster: https://nanoexpress.js.org/middlewares.html
 
 // Normalize a port into a number, string, or false.
 let normalizePort = val => {
@@ -63,83 +24,65 @@ let normalizePort = val => {
     return false;
 };
 
-// Get port from environment and store in Express.
-port = normalizePort(process.env.PORT || '3000');
+let HOST = heroku ? '0.0.0.0' : 'localhost';
+let root = path.join(__dirname, 'public');
+let PORT = normalizePort(process.env.PORT || 3000);
 
-// Protect server
-app.use(helmet());
-
-// Compress/GZIP/Brotil Server
-app.use(shrinkRay());
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: week }));
-app.use(express.static(path.join(__dirname, 'config.min.js'), { maxAge: day }));
-app.use((req, res, next) => {
-    if (req.originalUrl == '/favicon.ico') { res.status(204).json({ nope: true }); }
-    else { next(); }
+let maxAge = (dev ? 0 : 1) * 1000 * 60 * 60 * 24 * 7;
+let app = fastify({
+    logger: dev && {
+        prettyPrint: {
+            translateTime: "hh:MM:ss TT",
+            ignore: 'pid,hostname,reqId' // --ignore
+        }
+    },
+    ignoreTrailingSlash: true,
+    caseSensitive: false
 });
 
-// View engine setup
-app.engine("html", engine);
-app.set('views', path.join(__dirname, './public'));
-app.set('view engine', 'html');
-app.set('view cache', !dev);
+app.use(logger('dev')) // Simple HTTP Logging
+   .register(compress) // Compress/GZIP/Brotil Server
+   .register(helmet) // Protect server
+   .register(noIcon) // Remove the no favicon error
+   .register(_render, { partial: "#swup" }) // Render Plugin
+   .register(_assets, { maxAge }) // Assets Plugin
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+   // Apply CORS
+   .register(cors, {
+        methods: ['GET', 'PUT', 'POST'],
+        cacheControl: true, maxAge,
+        preflightContinue: true,
+        preflight: true
+    })
+
+   // Server Static File
+   .register(_static, { cacheControl: true, maxAge, root });
 
 // Routes and the pages to render
 for (let i in routes)
-    get(i, routes[i]);
+    app.get(i, (req, res) => {
+        res.header("cache-control", `public, max-age=${maxAge}`);
+        res.render(routes[i], req.headers["x-partial"]);
+    });
 
-// Catch error and forward to error handler
-app.use((req, res, next) => {
-    next(createError(Number(404)));
+// Error handling
+app.setNotFoundHandler((req, res) => {
+    res
+        .code(404)
+        .type(req.headers["content-type"] || 'text/plain')
+        .render("404", req.headers["x-partial"]);
 });
 
-// Error handler
-app.use((err, req, res) => {
-    // Render the error page
-    res.status(err.status || 500);
-    res.send("There was an error: " + (err.status || 500));
+app.setErrorHandler((err, req, res) => {
+    let statusCode = err.statusCode >= 400 ? err.statusCode : 500;
+    req.log.warn(err);
+    res
+        .code(statusCode)
+        .type(req.headers["content-type"] || 'text/plain')
+        .send(statusCode >= 500 ? "Internal server error" : err.message);
 });
 
-// Set port
-app.set('port', port);
-
-// Create HTTP server.
-server = http.createServer(app);
-
-// Listen on provided port, on all network interfaces.
-server.listen(port);
-
-// Event listener for HTTP server "error" event.
-server.on('error', err => {
-    if (err.syscall !== 'listen') { throw err; }
-    let bind = typeof port === 'string' ?
-        'Pipe ' + port : 'Port ' + port;
-
-    // handle specific listen errors with friendly messages
-    switch (err.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
-            throw err;
-    }
-});
-
-// Event listener for HTTP server "listening" event.
-server.on('listening', () => {
-    let addr = server.address();
-    let bind = typeof addr === 'string' ?
-        'pipe ' + addr :
-        'port ' + addr.port;
-    debug('Listening on ' + bind);
+app.listen(PORT, HOST, err => {
+    if (err) app.log.error(err);
+    app.log.info("Server listening on port", PORT);
 });
