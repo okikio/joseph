@@ -9,7 +9,7 @@ module.exports = {
 			NODE_ENV: 'development',
 			dev: true,
 			heroku: false,
-			staticSite: false
+			staticSite: true
 		},
 		env_production: {
 			NODE_ENV: 'production',
