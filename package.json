@@ -4,7 +4,6 @@
   "description": "A fastify app.",
   "main": "./server.min",
   "scripts": {
-    "heroku-prebuild": "npm i -g gulp yarn",
     "test": "yarn build",
     "dev:watch": "gulp dev && gulp watch",
     "watch": "gulp watch",
