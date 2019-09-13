@@ -263,11 +263,11 @@ module.exports._assets = plugin((app, opts, next) => {
             let _url, height, width, quality, effect, crop, imgURLConfig;
 
             if (media) {
-                height = query.get("h");
-                width = query.get("w") || 'auto';
-                crop = query.get("crop") || imageURLConfig.crop;
-                effect = query.get("effect") || imageURLConfig.effect;
-                quality = query.get("quality") || imageURLConfig.quality;
+                height = query.h;
+                width = query.w || 'auto';
+                crop = query.crop || imageURLConfig.crop;
+                effect = query.effect || imageURLConfig.effect;
+                quality = query.quality || imageURLConfig.quality;
                 imgURLConfig = { ...imageURLConfig, width, height, quality, crop, effect };
                 _url = assets.url(asset, imgURLConfig);
             } else {

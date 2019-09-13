@@ -21,8 +21,7 @@
   "engines": {
     "node": "v12.5.0",
     "npm": "6.9.0",
-    "yarn": "1.17.3",
-    "gulp": "4.0.2"
+    "yarn": "1.17.3"
   },
   "repository": {
     "type": "git",
