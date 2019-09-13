@@ -12,7 +12,7 @@
     "dev:build": "gulp dev",
     "gulp:build": "gulp",
     "build": "gulp --gulpfile ./gulpfile.min.js",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "pm2 start ecosystem.config.js --env production",
     "logs": "pm2 logs fastify-app",
     "stop": "pm2 stop all",
     "restart": "pm2 restart all",
@@ -21,7 +21,9 @@
   },
   "engines": {
     "node": "v12.5.0",
-    "npm": "6.9.0"
+    "npm": "6.9.0",
+    "yarn": "1.17.3",
+    "gulp": "4.0.2"
   },
   "repository": {
     "type": "git",
