@@ -201,7 +201,7 @@ task('html', () => {
                     // Minify or Beautify html
                     dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts),
                     // Replace /assets/... URLs
-                    replace(/\/assets\/[^\s"']+/g, url => {
+                    staticSite ? replace(/\/assets\/[^\s"']+/g, url => {
                         let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
                         let query = URLObj.searchParams;
                         let queryString = URLObj.search;
@@ -213,12 +213,11 @@ task('html', () => {
                         let quality = query.get("quality") || imageURLConfig.quality;
                         let _imgURLConfig = { ...imageURLConfig, width, height, quality, crop, effect };
 
-                        return staticSite ?
-                                (/\/raw\/[^\s"']+/.test(url) ?
+                        return (/\/raw\/[^\s"']+/.test(url) ?
                                     `${assetURL + url.replace(queryString, '')}` :
                                     assets.url(url.replace(queryString, ''), _imgURLConfig)
-                                ).replace("/assets/", "") : url;
-                    })
+                                ).replace("/assets/", "");
+                    }) : null
                 ]
             }]
         )
