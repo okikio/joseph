@@ -2,6 +2,7 @@ let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
+let heroku = 'heroku' in env && env.heroku.toString() === "true";
 let staticSite = 'staticSite' in env && env.staticSite === "true";
 
 const gulp = require('gulp');
@@ -403,7 +404,7 @@ task('inline', () =>
 task('dev', series("config", parallel("server", "html", "js"), "css"));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', series("update", "dev", "inline"));
+task('default', series.apply(null, heroku ? ["update", "dev"] : ["update", "dev", "inline"]));
 
 // Gulp task to minify all files without -js
 task('other', series("update", "config", parallel("server", "html"), "css", "inline"));

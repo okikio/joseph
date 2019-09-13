@@ -4,7 +4,7 @@
   "description": "A fastify app.",
   "main": "./server.min",
   "scripts": {
-    "test": "yarn build:dev",
+    "test": "yarn build",
     "dev:watch": "gulp dev && gulp watch",
     "watch": "gulp watch",
     "build:dev": "gulp dev",
