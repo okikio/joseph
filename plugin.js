@@ -56,14 +56,14 @@ module.exports._render = plugin((app, opts, next) => {
         let data = "", res = this;
 
         if (key in app.cache) {
-            res.type("text/html").send(app.cache[key]);
+            this.type("text/html").send(app.cache[key]);
         } else {
             createReadStream(file)
                 .on("data", val => { data += val; })
-                .on("error", err => { res.log.error(err); })
+                .on("error", err => { this.log.error(err); })
                 .on("close", () => {
                     app.cache[key] = data;
-                    res.type("text/html").send(data);
+                    this.type("text/html").send(data);
                 });
         }
 
