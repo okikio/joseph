@@ -27,8 +27,8 @@
         &-layout {
             $radius: 18px;
 
-            transition: box-shadow .3s ease-out, background .3s ease-out;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0);
+            transition: box-shadow .2s linear .2s, background .2s linear;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
             border-radius: 0 0 $radius $radius;
             background: transparent;
             margin: 0 auto;
@@ -42,7 +42,7 @@
         }
 
         &-head {
-            transition: border-bottom-color .55s ease-in-out;
+            transition: border-bottom-color .45s linear;
             border-bottom: 1px solid transparent;
             flex-direction: row;
             align-items: center;
