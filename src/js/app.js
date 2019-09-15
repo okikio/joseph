@@ -33,9 +33,14 @@ _backToTop.click(e => {
     });
 });
 
+let actioncenter = el(".layer-action-center");
 _global.scroll(_scroll = () => {
     _navbar.toggleClass("navbar-focus", (_global.scrollTop() + _height) >= _focusPt);
     _navbar.hasClass("navbar-show") && _navbar.removeClass("navbar-show");
+
+    if ((_global.scrollTop() + _height) >= _focusPt * 2) {
+        actioncenter.show();
+    } else { actioncenter.hide(); }
 });
 
 _load = () => {
@@ -54,9 +59,9 @@ _load = () => {
         } else {
             _core_img.addEventListener("load", function () {
                 _placeholder_img.addClass("core-img-show");
-            }, false);
 
-            window.setTimeout(() => { _placeholder_img.hide(); }, 3000);
+                setTimeout(function () { _placeholder_img.hide(); }, 1000);
+            }, false);
         }
     });
 

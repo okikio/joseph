@@ -86,12 +86,12 @@
 
             &:hover {
                 text-decoration: none;
-                color: $primary-dark;
+                color: $tertiary;
             }
 
             &-focus {
-                // text-decoration: line-through;
-                color: $secondary-dark;
+                text-decoration: underline;
+                color: $secondary;
             }
         }
 
@@ -146,6 +146,11 @@
                     width: 100%;
                     opacity: 0;
                 }
+            }
+
+            &-link {
+                line-height: $height - 12px;
+                padding: 0 24px;
             }
 
             &-menu {
