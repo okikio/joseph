@@ -55,6 +55,8 @@ _load = () => {
             _core_img.addEventListener("load", function () {
                 _placeholder_img.addClass("core-img-show");
             }, false);
+
+            window.setTimeout(() => { _placeholder_img.hide(); }, 3000);
         }
     });
 

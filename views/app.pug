@@ -6,18 +6,11 @@ html(lang="en")
     meta(http-equiv='Accept-CH' content='DPR, Viewport-Width, Width')
     meta(http-equiv='Content-Security-Policy', content=`default-src data: https: 'self' https://polyfill.io/ https://fonts.gstatic.com/* https://cdnjs.cloudflare.com/* https://res.cloudinary.com/${cloud_name}/ 'unsafe-eval' 'unsafe-inline'; connect-src * data: blob: ws:; upgrade-insecure-requests`)
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-
-    link(rel='dns-prefetch' href='https://polyfill.io/')
     link(rel='preconnect' href='https://polyfill.io/')
-
-    link(rel='dns-prefetch' href='https://fonts.gstatic.com/')
     link(rel='preconnect' href='https://fonts.gstatic.com/')
-
-    link(rel='dns-prefetch' href='https://cdnjs.cloudflare.com/')
     link(rel='preconnect' href='https://cdnjs.cloudflare.com/')
 
     if staticSite
-      link(rel='dns-prefetch' href=`https://res.cloudinary.com/${cloud_name}/`)
       link(rel='preconnect' href=`https://res.cloudinary.com/${cloud_name}/`)
 
     link(rel="preload" href="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=IntersectionObserver%2CHTMLPictureElement%2CIntersectionObserverEntry%2CXMLHttpRequest%2Cconsole.log%2Cdocument.querySelector%2Cfetch%2CrequestAnimationFrame%2C%7Ehtml5-elements%2C%7Eviewport%2CgetComputedStyle%2CMutationObserver%2CObject.assign%2CObject.getOwnPropertyNames%2CObject.keys%2CObject.values%2CRegExp.prototype.flags%2CURL%2Cblissfuljs%2Cdefault%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces5%2Ces6%2Ces7%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.find%2CArray.prototype.forEach%2CArray.prototype.every%2CArray.isArray%2CArray.from%2CEvent" as="script" async crossorigin="anonymous")
@@ -31,8 +24,6 @@ html(lang="en")
 
     //- link(rel="preload" href='./css/app.min.css' as="style" async)
     //- link(rel="preload" href='./js/app.vendor.min.js' as="script" async)
-    script(src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=IntersectionObserver%2CHTMLPictureElement%2CIntersectionObserverEntry%2CXMLHttpRequest%2Cconsole.log%2Cdocument.querySelector%2Cfetch%2CrequestAnimationFrame%2C%7Ehtml5-elements%2C%7Eviewport%2CgetComputedStyle%2CMutationObserver%2CObject.assign%2CObject.getOwnPropertyNames%2CObject.keys%2CObject.values%2CRegExp.prototype.flags%2CURL%2Cblissfuljs%2Cdefault%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces5%2Ces6%2Ces7%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.find%2CArray.prototype.forEach%2CArray.prototype.every%2CArray.isArray%2CArray.from%2CEvent" crossorigin="anonymous" async)
-
 
     <!--[if lt IE 9]>
       script(src='https://cdnjs.cloudflare.com/ajax/libs/nwmatcher/1.4.2/nwmatcher.min.js' async)
@@ -78,15 +69,9 @@ html(lang="en")
       };
 
       if (/msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) || !check()) {
-        _require("https://cdnjs.cloudflare.com/ajax/libs/flexibility/2.0.1/flexibility.js", function () {
-          //- flexibility(document.documentElement);
-        });
         _require("https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js");
         _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.min.js");
         _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.ielte7.min.js");
-        document.write('<link rel="preload" href="./js/app.min.js" as="script" async="async" />');
-       } else {
-        document.write('<link rel="preload" href="./js/app.modern.min.js" as="script" async="async" />');
        }
 
     //- script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js")
@@ -153,7 +138,7 @@ html(lang="en")
         .layout-flex.layout-padding-horz
           section.layout-spacer
           section
-            button#back-to-top.btn.layer-round.layout-padding-small.layer-surface.layer-shadow.layer-secondary-hover.style-secondary.style-hover-black(tabindex='1', type='button')
+            button#back-to-top.btn.layer-round.layout-padding-small.layer-surface.layer-shadow.layer-secondary-hover.style-secondary.style-hover-black(tabindex='0', type='button')
               span.btn-group
                 i.icon.style-font-sz-24 expand_less
 
@@ -166,5 +151,7 @@ html(lang="en")
 
     if !page.noFooter
       +footer("Made with ❤ by Okiki Ojo.")
+
+    script(src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=IntersectionObserver%2CHTMLPictureElement%2CIntersectionObserverEntry%2CXMLHttpRequest%2Cconsole.log%2Cdocument.querySelector%2Cfetch%2CrequestAnimationFrame%2C%7Ehtml5-elements%2C%7Eviewport%2CgetComputedStyle%2CMutationObserver%2CObject.assign%2CObject.getOwnPropertyNames%2CObject.keys%2CObject.values%2CRegExp.prototype.flags%2CURL%2Cblissfuljs%2Cdefault%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces5%2Ces6%2Ces7%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.find%2CArray.prototype.forEach%2CArray.prototype.every%2CArray.isArray%2CArray.from%2CEvent" crossorigin="anonymous" async)
 
     script(src=`${dev ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline defer)

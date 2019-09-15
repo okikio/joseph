@@ -27,7 +27,7 @@
         &-layout {
             $radius: 18px;
 
-            transition: box-shadow .3s ease .1s, background .3s ease .1s;
+            transition: box-shadow .3s ease-out, background .3s ease-out;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0);
             border-radius: 0 0 $radius $radius;
             background: transparent;
@@ -42,7 +42,7 @@
         }
 
         &-head {
-            transition: border-bottom-color .25s linear 0s;
+            transition: border-bottom-color .55s ease-in-out;
             border-bottom: 1px solid transparent;
             flex-direction: row;
             align-items: center;
@@ -61,7 +61,7 @@
         }
 
         &-list {
-            transition: max-height .25s linear 0s;
+            transition: max-height .55s ease-in-out;
             justify-content: center;
             align-items: center;
             white-space: nowrap;
@@ -122,6 +122,16 @@
 
                 .navbar-list {
                     max-height: 100vh !important;
+
+                    li {
+                        opacity: 1;
+                    }
+
+                    @for $i from 1 to 4 {
+                        li:nth-of-type(#{$i}) {
+                            transition-delay: $i * .30s;
+                        }
+                    }
                 }
             }
 
@@ -130,9 +140,11 @@
                 max-height: 0;
 
                 li {
+                    transition: opacity .35s ease-in-out;
                     // text-align: center;
                     display: block;
                     width: 100%;
+                    opacity: 0;
                 }
             }
 

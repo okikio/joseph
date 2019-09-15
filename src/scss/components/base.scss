@@ -1,7 +1,6 @@
 /* -- Presets & Resets -- */
 /* -- Elements -- */
 * {
-
     &,
     &:before,
     &:after {
@@ -118,6 +117,7 @@ img {
     &-show {
         transform: scale(1) !important;
         opacity: 0 !important;
+        z-index: 0 !important;
     }
 }
 

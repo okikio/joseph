@@ -1,11 +1,11 @@
 /*! purgecss start ignore */
 .transition-fade {
-    transition: opacity 0.2s ease 0s, transform 0.4s ease 0.1s;
+    transition: opacity .55s ease-out, transform .55s ease-out;
     transform: translateY(0px);
     opacity: 1;
 
     .is-animating & {
-        transform: translateY(-20px) !important;
+        transform: translateY(35px) !important;
         opacity: 0 !important;
     }
 }
