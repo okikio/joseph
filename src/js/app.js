@@ -1,13 +1,14 @@
-import swup from "swup";
-import el from "./components/ele";
+// import swup from "swup";
+// import el from "./components/ele";
 import { _log } from "./components/util";
-import preload from '@swup/preload-plugin';
-import scrollPlugin from "@swup/scroll-plugin";
+// import preload from '@swup/preload-plugin';
+// import scrollPlugin from "@swup/scroll-plugin";
+import anime from 'animejs';
 
 // import './components/smoothstate';
 // import _class from "./components/class";
 // import _event from "./components/event";
-
+/* 
 let _backToTop = el('#back-to-top');
 let _navbar = el('.navbar');
 let _global = el(window);
@@ -42,6 +43,13 @@ _global.scroll(_scroll = () => {
         actioncenter.show();
     } else { actioncenter.hide(); }
 });
+
+// anime({
+//     targets: '.anim',
+//     translateX: [0, 250],
+//     loop: true
+// });
+
 
 _load = () => {
     let _next_layer_btn = el(".next-layer"), _next_layer;
@@ -92,3 +100,7 @@ new swup({
 
 // This event runs for every page view after initial load
 .on('contentReplaced', _load);
+ */
+
+ 
+_log(anime);

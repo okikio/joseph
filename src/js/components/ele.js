@@ -339,7 +339,7 @@ Ele = _event.extend(arrProto, {
     toggle(opt) {
         return this.each(el => {
             let _el = Ele(el);
-            let _opt = opt || el.style("display") === "none";
+            let _opt = opt || _el.style("display") === "none";
             _el[_opt ? "show" : "hide"]();
         });
     },
