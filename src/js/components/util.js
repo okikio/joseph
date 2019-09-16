@@ -127,4 +127,4 @@ export let _new = function (ctor, args) {
     return new F();
 };
 
-export default { _matches, _capital, _is, _intersect, _fnval, _argNames, _path, _attr, _new, assign, keys, values, from, of };
+export default { _matches, _capital, _is, _intersect, _fnval, _argNames, _path, _attr, _new, assign, keys, values, from, of, _log };

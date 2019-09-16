@@ -1,9 +1,9 @@
 // import swup from "swup";
 // import el from "./components/ele";
-import { _log } from "./components/util";
+import util from "./components/util-log";
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
-import anime from 'animejs';
+// import anime from 'animejs';
 
 // import './components/smoothstate';
 // import _class from "./components/class";
@@ -102,5 +102,5 @@ new swup({
 .on('contentReplaced', _load);
  */
 
- 
-_log(anime);
+console.log(util._log);
+// _log(anime);

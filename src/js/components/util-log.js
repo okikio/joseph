@@ -1,12 +1,31 @@
-let _log = (...args) => args.forEach(v => console.log(v)); // // Capitalize strings
+export let { assign, keys, values } = Object;
+// export let { isArray, from, of } = Array;
+
+// Remove certain properties
+export let _removeProps = (prop, obj) => {
+    let newObj = assign({}, obj);
+    prop.forEach(key => delete newObj[key]);
+    return newObj;
+ };
+
+// Create an array of values that two array share in common
+export let _intersect = (a, b) => a.filter(val => b.includes(val));
+
+// Log values
+export let _log = (...args) => args.forEach(v => console.log(v));
+
+// // Capitalize strings
 // export let _capital = val => val[0].toUpperCase() + val.slice(1);
+
 // // Test the type of a value
 // export let _is = (val, type) => (typeof val === type);
+
 // // Is Instance Of
 // let _isInst = (ctor, obj) => (ctor instanceof obj);
 // let _type = type => { // Tweak of _is
 //     return val => _is(val, type);
 // };
+
 // assign(_is, {
 //     el: el => _isInst(el, Element) || _isInst(el, Document),
 //     arrlike (obj) {
@@ -29,6 +48,7 @@ let _log = (...args) => args.forEach(v => console.log(v)); // // Capitalize stri
 //     arr: isArray,
 //     _type
 // });
+
 // /**
 //  * @param  {Function} fn
 //  * @param  {Array<any>} args
@@ -40,21 +60,26 @@ let _log = (...args) => args.forEach(v => console.log(v)); // // Capitalize stri
 //         { return fn; }
 //     return fn.apply(ctxt, args);
 // };
+
 // let STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
 // let ARGUMENT_NAMES = /(?:^|,)\s*([^\s,=]+)/g;
+
 // // Argument names
 // export let _argNames = fn => {
 //     let fnStr = fn.toString().replace(STRIP_COMMENTS, '');
 //     let argsList = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')'));
 //     let result = argsList.match( ARGUMENT_NAMES ), stripped = [];
+
 //     if (_is.nul(result)) return [];
 //     else {
 //         for (let i = 0; i < result.length; i ++) {
 //             stripped.push( result[i].replace(/[\s,]/g, '') );
 //         }
+
 //         return stripped;
 //     }
 // };
+
 // // Get or set a value in an Object, based on it's path
 // export let _path = (obj, path, val) => {
 //     path = path.toString().split(/[.,]/g);
@@ -68,6 +93,7 @@ let _log = (...args) => args.forEach(v => console.log(v)); // // Capitalize stri
 //     }
 //     return obj;
 // };
+
 // /*
 //     Builds on path and adds more power,
 //     * Allows for multiple paths one value
@@ -86,123 +112,20 @@ let _log = (...args) => args.forEach(v => console.log(v)); // // Capitalize stri
 //     } else { return _path(obj, path, val); }
 //     return obj;
 // };
+
 // // The matches() method checks to see if the Element would be selected by the provided selectorString -- in other words -- checks if the element "is" the selector.
 // export let _matches = (ele, sel) => {
 //     if (_is.undef(ele)) return;
 //     let matchSel = ele.matches || ele.msMatchesSelector || ele.webkitMatchesSelector;
 //     if (matchSel) return matchSel.call(ele, sel);
 // };
+
 // // A more efficient `new` keyword that allows for arrays to be passed as arguments
 // export let _new = function (ctor, args) {
 //     let F = function () { return ctor.apply(this, args); };
 //     F.prototype = ctor.prototype;
 //     return new F();
 // };
+
 // export default { _matches, _capital, _is, _intersect, _fnval, _argNames, _path, _attr, _new, assign, keys, values, from, of, _log };
-
-var util = {
-  _log
-};
-
-// import swup from "swup";
-// import scrollPlugin from "@swup/scroll-plugin";
-// import anime from 'animejs';
-// import './components/smoothstate';
-// import _class from "./components/class";
-// import _event from "./components/event";
-
-/* 
-let _backToTop = el('#back-to-top');
-let _navbar = el('.navbar');
-let _global = el(window);
-
-let _height = _navbar.height();
-let _focusPt = _height + 20;
-let _load, _scroll, _scrollEle;
-
-_scrollEle = window.document.scrollingElement || window.document.body || window.document.documentElement;
-_scrollEle = el(_scrollEle);
-
-_navbar.click('.navbar-menu', e => {
-    e.preventDefault();
-    _navbar.toggleClass("navbar-show");
-});
-
-_backToTop.click(e => {
-    e.preventDefault();
-    _scrollEle.animate({
-        scrollTop: 0,
-        duration: 500,
-        easing: 'easeInOutQuad'
-    });
-});
-
-let actioncenter = el(".layer-action-center");
-_global.scroll(_scroll = () => {
-    _navbar.toggleClass("navbar-focus", (_global.scrollTop() + _height) >= _focusPt);
-    _navbar.hasClass("navbar-show") && _navbar.removeClass("navbar-show");
-
-    if ((_global.scrollTop() + _height) >= _focusPt * 2) {
-        actioncenter.show();
-    } else { actioncenter.hide(); }
-});
-
-// anime({
-//     targets: '.anim',
-//     translateX: [0, 250],
-//     loop: true
-// });
-
-
-_load = () => {
-    let _next_layer_btn = el(".next-layer"), _next_layer;
-    let _img = el(".load-img");
-    let _main = el(".main");
-    _scroll();
-
-    _img.each($img => {
-        let img = el($img);
-        let _core_img = img.find(".core-img").get(0);
-        let _placeholder_img = img.find(".placeholder-img");
-
-        if (_core_img.complete) {
-            _placeholder_img.addClass("core-img-show");
-        } else {
-            _core_img.addEventListener("load", function () {
-                _placeholder_img.addClass("core-img-show");
-
-                setTimeout(function () { _placeholder_img.hide(); }, 1000);
-            }, false);
-        }
-    });
-
-    _next_layer_btn.click((e, _el) => {
-        e.preventDefault();
-        _next_layer = el(_el).closest(".layer", _main).next(".layer");
-        _scrollEle.animate({
-            scrollTop: el(_next_layer).offset().top - _height,
-            duration: 500,
-            easing: 'easeInOutQuad'
-        });
-    });
-};
-
-_load();
-new swup({
-    requestHeaders: {
-        "X-Requested-With": "swup", // So we can tell request comes from swup
-        "x-partial": "swup" // Request a partial html page
-    },
-    plugins: [new preload(), new scrollPlugin({
-        doScrollingRightAway: false,
-        animateScroll: true,
-        scrollFriction: 0.3,
-        scrollAcceleration: 0.04,
-    })]
-})
-
-// This event runs for every page view after initial load
-.on('contentReplaced', _load);
- */
-
-console.log(util._log); // _log(anime);
+export default {  _log };
