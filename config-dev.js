@@ -73,6 +73,70 @@ module.exports = {
                 "noFooter": true
             }
         },
+        "contact": {
+            "page": {
+                "title": "Contact",
+                "tabs": {
+                    "values": [{
+                        "a": {
+                            "href": "/about.html",
+                            "content": "about"
+                        }
+                    }, {
+                        "a": {
+                            "href": "/projects.html",
+                            "content": "projects"
+                        }
+                    }, {
+                        "a": {
+                            "href": "/contact.html",
+                            "content": "contact"
+                        }
+                    }]
+                },
+                "name": "contact",
+                "values": [{
+                    "layer": {
+                        "class": "layout-padding-horz",
+                        "layout": {
+                            "class": "layout-shorten layout-contain",
+                            "values": [{
+                                "section": {
+                                    "title": "Contact",
+                                    "type": "header"
+                                }
+                            }, {
+                                "section": {
+                                    "values": ["Github: ", {
+                                        "a": {
+                                            "href": "/index.html",
+                                            "content": "home"
+                                        }
+                                    }, "<br>", "Youtube: ", {
+                                        "a": {
+                                            "href": "/index.html",
+                                            "content": "home"
+                                        }
+                                    }],
+                                    "type": "main"
+                                }
+                            }]
+                        }
+                    }
+                }, {
+                    "layer": {
+                        "class": "footer",
+                        "layout": {
+                            "section": {
+                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
+                                "values": ["Made with ❤ by Okiki Ojo."]
+                            }
+                        }
+                    }
+                }],
+                "noFooter": true
+            }
+        },
         "projects": {
             "page": {
                 "title": "Projects",

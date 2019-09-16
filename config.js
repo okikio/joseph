@@ -66,6 +66,33 @@ module.exports = {
             ]),
             noFooter()
         ]),
+        "contact": page([
+            _name("contact"),
+            title("Contact"),
+            values([
+                // Intro layer
+                layer([
+                    _class([ padding("horz") ]),
+                    layout([
+                        _class([ _layout("shorten", "contain") ]),
+                        values([
+                            _header(title("Contact")),
+                            _main([
+                                values([
+                                    `Github: `, _link("home", "/"), `<br>`,
+                                    `Youtube: `, _link("home", "/")
+                                ])
+                            ])
+                        ])
+                    ])
+                ]),
+                // End Intro Layer
+
+                // Footer
+                newFooter()
+            ]),
+            noFooter()
+        ]),
         "projects": page([
             _name("projects"),
             title("Projects"),
