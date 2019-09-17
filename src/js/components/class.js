@@ -2,7 +2,7 @@
    - Based on Prototype.js [#class] (api.prototypejs.org/language/Class/)
 */
 
-import { _log, _is, _removeProps, _fnval, _argNames, _path, _attr, _new, assign, keys } from "./util";
+import { _is, _removeProps, _fnval, _argNames, _path, _attr, _new, assign, keys } from "./util";
 
 // Attach properties to class prototype or the class itself
 export let _attachProp = function (where) {
