@@ -1,6 +1,6 @@
 import anime from "animejs";
 import { _matches, _log, _is, keys, _fnval, _capital } from "./util";
-import { _get } from "./class";
+// import { _get } from "./class";
 import _event from './event';
 
 export const { timeline, remove, stagger, random } = anime;
@@ -158,6 +158,7 @@ let arrProto = Object.getOwnPropertyNames(Array.prototype)
     return acc;
 }, {});
 
+/*
 // Element Object [Based on Zepto.js]
 Ele = _event.extend(arrProto, {
     init($super, sel = '', ctxt) {
@@ -687,3 +688,7 @@ nativeEvents.reduce((acc, name) => {
 
 export let el = Ele;
 export default Ele;
+*/
+
+class EleEvt extends _event {};
+export Ele = class extends 
