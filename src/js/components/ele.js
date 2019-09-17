@@ -1,6 +1,5 @@
 import anime from "animejs";
-import { _matches, _log, _is, keys, _fnval, _capital } from "./util";
-// import { _get } from "./class";
+import { _matches, _log, _is, keys, _fnval, _capital, assign } from "./util";
 import _event from './event';
 
 export const { timeline, remove, stagger, random } = anime;
@@ -102,7 +101,7 @@ let _elem = (sel, ctxt) => {
     else if (_is.arr(sel) || _is.inst(sel, NodeList))
         { return [...sel].filter(item => _is.def(item)); }
     else if (_is.obj(sel) || _is.el(sel)) { return [sel]; }
-    else if (_is.fn(sel)) { Ele(document).ready(sel); }
+    else if (_is.fn(sel)) { new Ele(document).ready(sel); }
     return [];
 };
 
@@ -118,7 +117,7 @@ let traverseDF = (_node, fn, childType = "childNodes") => {
 };
 
 // Quickly filter nodes by a selector
-export let _filter = (nodes, sel) => !_is.def(sel) ? Ele(nodes) : Ele(nodes).filter(sel);
+export let _filter = (nodes, sel) => !_is.def(sel) ? new Ele(nodes) : new Ele(nodes).filter(sel);
 
 // Select all the different values in an Array, based on underscorejs
 export let _uniq = arr => {
@@ -158,26 +157,28 @@ let arrProto = Object.getOwnPropertyNames(Array.prototype)
     return acc;
 }, {});
 
-/*
+class EleEvt extends _event {};
+assign(EleEvt.prototype, arrProto);
+
 // Element Object [Based on Zepto.js]
-Ele = _event.extend(arrProto, {
-    init($super, sel = '', ctxt) {
-        $super();
+export default Ele = class extends EleEvt {
+    constructor(sel = '', ctxt) {
+        super();
         this.sel = sel; // Selector
         this.ele = _elem(this.sel, ctxt); // Element
 
         for (let i = 0; i < this.ele.length; i++) {
             this[i] = this.ele[i];
         }
-    },
+    }
 
-    slice(...args) { return Ele([].slice.apply(this, args)); },
+    slice(...args) { return new Ele([].slice.apply(this, args)); }
     map(fn) {
-        return Ele(_map(this, (el, i) => fn.call(el, el, i), this));
-    },
+        return new Ele(_map(this, (el, i) => fn.call(el, el, i), this));
+    }
 
-    on($super, evt, opts, callback) {
-        let _newEvts, _evt, delegate;
+    on(evt, opts, callback) {
+        let _newEvts, _evt, delegate, $super = EleEvt.prototype.on.bind(this);
         if (_is.undef(evt)) { return; } // If there is no event break
         if (_is.str(evt)) { evt = evt.split(/\s/g); }
         if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
@@ -193,10 +194,10 @@ Ele = _event.extend(arrProto, {
             applyNative(this, el, _newEvts, i, "addEventListener", delegate);
         }, this);
         return this;
-    },
+    }
 
-    off($super, evt, callback) {
-        let _evt;
+    off(evt, callback) {
+        let _evt, $super = EleEvt.prototype.off.bind(this);
         if (_is.undef(evt)) { return; } // If there is no event break
         if (_is.str(evt)) { evt = evt.split(/\s/g); }
         if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
@@ -207,86 +208,87 @@ Ele = _event.extend(arrProto, {
             applyNative(this, el, _evt, i, "removeEventListener");
         }, this);
         return this;
-    },
+    }
 
-    length: _get("len"),
-    len: _get("ele.length"),
+    get len() { return this.ele.length; }
+    get length() { return this.len; }
+
     each(fn) {
         [].every.call(this, function (el, idx)
             { return fn.call(el, el, idx) !== false; });
         return this;
-    },
+    }
 
     get(idx) {
         return _is.undef(idx) ? [].slice.call(this) : this[idx >= 0 ? idx : idx + this.length];
-    },
-    nth: _get("get"),
+    }
 
-    size() { return this.length; },
-    toArray() { return this.get(); },
+    nth(...args) { return this.get(...args); }
+    size() { return this.length; }
+    toArray() { return this.get(); }
     remove() {
         return this.each(el => {
             if (_is.def(el.parentNode));
                 el.parentNode.removeChild(el);
         });
-    },
+    }
 
     not(sel) {
         let excludes, $this = this;
-        return Ele(
+        return new Ele(
             this.reduce(function (acc, el, idx) {
                 if (_is.fn(sel) && _is.def(sel.call)) {
                     if (!sel.call(el, el, idx)) acc.push(el);
                 } else {
                     excludes = _is.str(sel) ? $this.filter(sel) :
-                        (_is.arrlike(sel) && _is.fn(sel.item)) ? [].slice.call(sel) : Ele(sel);
+                        (_is.arrlike(sel) && _is.fn(sel.item)) ? [].slice.call(sel) : new Ele(sel);
                     if (excludes.indexOf(el) < 0) acc.push(el);
                 }
                 return acc;
             }, [], this)
         );
-    },
+    }
 
     filter(sel) {
         if (_is.fn(sel)) return this.not(this.not(sel));
         return [].filter.call(this, ele => _matches(ele, sel), this);
-    },
+    }
 
     has(sel) {
         return this.filter(el => {
-            return _is.obj(sel) ? _contains(el, sel) : Ele(el).find(sel).size();
+            return _is.obj(sel) ? _contains(el, sel) : new Ele(el).find(sel).size();
         });
-    },
+    }
 
     eq(idx) {
         return idx === -1 ? this.slice(idx) : this.slice(idx, +idx + 1);
-    },
+    }
 
     first() {
         let el = this.get(0);
-        return el && !_is.obj(el) ? el : Ele(el);
-    },
+        return el && !_is.obj(el) ? el : new Ele(el);
+    }
 
     last() {
         let el = this.get(-1);
-        return el && !_is.obj(el) ? el : Ele(el);
-    },
+        return el && !_is.obj(el) ? el : new Ele(el);
+    }
 
     find(sel) {
         let result, $this = this;
-        if (!sel) result = Ele();
+        if (!sel) result = new Ele();
         else if (_is.obj(sel)) {
-            result = Ele(sel).filter(el => {
+            result = new Ele(sel).filter(el => {
                 return [].some.call($this, parent => _contains(parent, el));
             });
-        } else if (this.length === 1) { result = Ele(_qsa(this.get(0), sel)); }
+        } else if (this.length === 1) { result = new Ele(_qsa(this.get(0), sel)); }
         else { result = this.map(el => _qsa(el, sel)); }
         return result;
-    },
+    }
 
     closest(sel, ctxt) {
-        let list = _is.obj(sel) && Ele(sel);
-        return Ele(
+        let list = _is.obj(sel) && new Ele(sel);
+        return new Ele(
             this.reduce((acc, ele) => {
                 do {
                     if (list ? list.indexOf(ele) >= 0 : _matches(ele, sel)) break;
@@ -296,7 +298,7 @@ Ele = _event.extend(arrProto, {
                 return acc;
             }, [])
         );
-    },
+    }
 
     parents(sel) {
         let ancestors = [], nodes = this;
@@ -309,21 +311,21 @@ Ele = _event.extend(arrProto, {
             });
         }
         return _filter(ancestors, sel);
-    },
+    }
 
     // `pluck` based on underscore.js, but way more powerful
-    pluck(prop) { return this.map(el => el[prop]); },
+    pluck(prop) { return this.map(el => el[prop]); }
     parent(sel) {
         return _filter(_uniq(this.pluck('parentNode')), sel);
-    },
+    }
 
     children(sel) {
         return _filter(this.map(el => _children(el)), sel);
-    },
+    }
 
     contents() {
         return this.map(el => el.contentDocument || [].slice.call(el.childNodes));
-    },
+    }
 
     siblings(sel) {
         return _filter(this.map(el =>
@@ -332,29 +334,29 @@ Ele = _event.extend(arrProto, {
                 child => (child !== el)
             )
         ), sel);
-    },
+    }
 
-    replaceWith(content) { return this.before(content).remove(); },
-    clone() { return this.map(el => el.cloneNode(true)); },
+    replaceWith(content) { return this.before(content).remove(); }
+    clone() { return this.map(el => el.cloneNode(true)); }
 
     toggle(opt) {
         return this.each(el => {
-            let _el = Ele(el);
+            let _el = new Ele(el);
             let _opt = opt || _el.style("display") === "none";
             _el[_opt ? "show" : "hide"]();
         });
-    },
+    }
 
-    prev(sel){ return Ele(this.pluck('previousElementSibling')).filter(sel || '*'); },
-    next(sel){ return Ele(this.pluck('nextElementSibling')).filter(sel || '*'); },
+    prev(sel){ return new Ele(this.pluck('previousElementSibling')).filter(sel || '*'); }
+    next(sel){ return new Ele(this.pluck('nextElementSibling')).filter(sel || '*'); }
     html(...args) {
         let [html] = args;
         return args.length ?
             this.each((el, idx) => {
                 let originHTML = el.innerHTML;
-                Ele(el).empty().append(_fnval(html, [idx, originHTML], el));
+                new Ele(el).empty().append(_fnval(html, [idx, originHTML], el));
             }) : (this.length ? this.get(0).innerHTML : null);
-    },
+    }
 
     text(...args) {
         let [text] = args;
@@ -363,7 +365,7 @@ Ele = _event.extend(arrProto, {
                 let newText = _fnval(text, [idx, el.textContent], el);
                 el.textContent = _is.nul(newText) ? '' : `${newText}`;
             }) : (this.length ? this.pluck('textContent').join("") : null);
-    },
+    }
 
     attr(name, val) {
         let result;
@@ -382,20 +384,20 @@ Ele = _event.extend(arrProto, {
                 }
             });
         }
-    },
+    }
 
     removeAttr(name) {
         return this.each(el => {
             el.nodeType === 1 && name.split(' ')
                 .forEach(attr => { _setAttr(el, attr); });
         });
-    },
+    }
 
     data(name, value) {
         let attrName = `data-${name}`.toLowerCase();
         let data = _is.def(value) ? this.attr(attrName, value) : this.attr(attrName);
         return data !== null ? _valfix(data) : undefined;
-    },
+    }
 
     val(...args) {
         let [value] = args, _el;
@@ -407,16 +409,16 @@ Ele = _event.extend(arrProto, {
         } else {
             _el = this.get(0);
             return _el && (_el.multiple ?
-                Ele(_el).find('option').filter(el => el.selected).pluck('value') :
+                new Ele(_el).find('option').filter(el => el.selected).pluck('value') :
                 _el.value);
         }
-    },
+    }
 
     offset(coords) {
         let obj;
         if (coords) {
             return this.each((el, idx) => {
-                let $this = Ele(el);
+                let $this = new Ele(el);
                 let _coords = _fnval(coords, [idx, $this.offset()], el);
                 let parentOffset = $this.offsetParent().offset();
                 let props = {
@@ -440,7 +442,7 @@ Ele = _event.extend(arrProto, {
             width: Math.round(obj.width),
             height: Math.round(obj.height)
         };
-    },
+    }
 
     style(...args) {
         let [prop, val] = args, css = '', key;
@@ -476,21 +478,21 @@ Ele = _event.extend(arrProto, {
         }
 
         return this.each(el => { el.style.cssText += ';' + css; });
-    },
+    }
 
-    show() { return this.style("display", ""); },
-    hide() { return this.style("display", "none"); },
-    empty() { return this.each(el => { el.innerHTML = ''; }); },
+    show() { return this.style("display", ""); }
+    hide() { return this.style("display", "none"); }
+    empty() { return this.each(el => { el.innerHTML = ''; }); }
     index(el) {
-        return el ? this.indexOf(Ele(el).get(0)) : this.parent().children().indexOf(this.get(0));
-    },
+        return el ? this.indexOf(new Ele(el).get(0)) : this.parent().children().indexOf(this.get(0));
+    }
 
     hasClass(name) {
         if (!name) return false;
         return [].some.call(this, function (el) {
             return this.test(_getclass(el));
         }, _classRE(name));
-    },
+    }
 
     addClass(name) {
         if (!name) return this;
@@ -499,12 +501,12 @@ Ele = _event.extend(arrProto, {
 
             let classList = [], cls = _getclass(el);
             _fnval(name, [idx, cls], el).split(/\s+/g).forEach(function (_name) {
-                if (!Ele(this).hasClass(_name)) classList.push(_name);
+                if (!new Ele(this).hasClass(_name)) classList.push(_name);
             }, el);
 
             classList.length && _getclass(el, cls + (cls ? " " : "") + classList.join(" "));
         });
-    },
+    }
 
     removeClass(name) {
         return this.each(function (el, idx) {
@@ -518,19 +520,19 @@ Ele = _event.extend(arrProto, {
 
             _getclass(el, classList.trim());
         });
-    },
+    }
 
     toggleClass(name, when) {
         if (!name) return this;
         return this.each(function (el, idx) {
-            let $this = Ele(el);
+            let $this = new Ele(el);
             _fnval(name, [idx, _getclass(el)], el).split(/\s+/g)
             .forEach(function (_name) {
                 (_is.undef(when) ? !$this.hasClass(_name) : when) ?
                     $this.addClass(_name) : $this.removeClass(_name);
             });
         });
-    },
+    }
 
     scrollTop(val) {
         if (!this.length) return;
@@ -540,7 +542,7 @@ Ele = _event.extend(arrProto, {
         return this.each(function () {
             hasScroll ? (this.scrollTop = val) : this.scrollTo(this.scrollX, val);
         });
-    },
+    }
 
     scrollLeft(val) {
         if (!this.length) return;
@@ -550,17 +552,17 @@ Ele = _event.extend(arrProto, {
         return this.each(function () {
             hasScroll ? (this.scrollLeft = val) : this.scrollTo(val, this.scrollY);
         });
-    },
+    }
 
     offsetParent() {
         return this.map(function (el) {
             let parent = el.offsetParent || document.body;
             while (parent && !/^(?:body|html)$/i.test(parent.nodeName) &&
-                Ele(parent).style("position") === "static")
+                new Ele(parent).style("position") === "static")
                 parent = parent.offsetParent;
             return parent;
         });
-    },
+    }
 
     position() {
         if (!this.length) return;
@@ -570,19 +572,19 @@ Ele = _event.extend(arrProto, {
             offset = this.offset(),
             parentOffset = /^(?:body|html)$/i.test(offsetParent[0].nodeName) ? { top: 0, left: 0 } : offsetParent.offset();
 
-        offset.top -= parseFloat(Ele(elem).style('margin-top')) || 0;
-        offset.left -= parseFloat(Ele(elem).style('margin-left')) || 0;
+        offset.top -= parseFloat(new Ele(elem).style('margin-top')) || 0;
+        offset.left -= parseFloat(new Ele(elem).style('margin-left')) || 0;
 
-        parentOffset.top += parseFloat(Ele(offsetParent[0]).style('border-top-width')) || 0;
-        parentOffset.left += parseFloat(Ele(offsetParent[0]).style('border-left-width')) || 0;
+        parentOffset.top += parseFloat(new Ele(offsetParent[0]).style('border-top-width')) || 0;
+        parentOffset.left += parseFloat(new Ele(offsetParent[0]).style('border-left-width')) || 0;
 
         return {
             top: offset.top - parentOffset.top,
             left: offset.left - parentOffset.left
         }
-    },
+    }
 
-    getAnime() { return this.anime; },
+    getAnime() { return this.anime; }
     timeline(opt = {}) {
         this.anime = timeline({
             targets: _toArr(this),
@@ -590,105 +592,105 @@ Ele = _event.extend(arrProto, {
         });
 
         return this;
-    },
+    }
+
     animate(opt = {}, offset) {
         opt = _fnval(opt, [{ stagger, remove, random }, offset], this);
         _is.def(this.anime) && this.anime.add ? this.anime.add(opt, offset) :
             (this.anime = anime({ targets: _toArr(this), ...opt }));
 
         return this;
-    },
-},
+    }
+};
 
-// Generate shortforms for events eg. .click(), .hover(), etc...
-nativeEvents.reduce((acc, name) => {
-    // Handle event binding
-    acc[name] = function (...args) { return this.on(name, ...args); };
-    return acc;
-}, {
-    hover(fnOver, fnOut)
-        { return this.mouseenter(fnOver).mouseleave(fnOut || fnOver); }
-}),
+assign(Ele.prototype,
+    // Generate shortforms for events eg. .click(), .hover(), etc...
+    nativeEvents.reduce((acc, name) => {
+        // Handle event binding
+        acc[name] = function (...args) { return this.on(name, ...args); };
+        return acc;
+    }, {
+        hover(fnOver, fnOut)
+            { return this.mouseenter(fnOver).mouseleave(fnOut || fnOver); }
+    }),
 
-// Generate the `width` and `height` methods
-['width', 'height'].reduce((acc, sz) => {
-    let prop = _capital(sz);
-    acc[sz] = function (value) {
-        let offset, el = this.get(0);
-        if (_is.undef(value)) {
-            if (_is.win(el)) {
-                return el[`inner${prop}`];
-            } else if (_is.doc(el)) {
-                return el.documentElement[`scroll${prop}`];
-            } else { return (offset = this.offset()) && offset[sz]; }
-        } else {
-            return this.each((_el, idx) => {
-                el = Ele(_el);
-                el.style(sz, _fnval(value, [idx, el[sz]()], _el));
-            });
-        }
-    };
-
-    return acc;
-}, {}),
-
-// Generate the `after`, `prepend`, `before`, `append`, `insertAfter`, `insertBefore`, `appendTo`, and `prependTo` methods.
-[ 'after', 'prepend', 'before', 'append' ].reduce(function (acc, fn, idx) {
-    let inside = idx % 2 //=> prepend, append
-    acc[fn] = function (...args) {
-        // Arguments can be nodes, arrays of nodes, Element objects and HTML strings
-        let clone = this.length > 1;
-        let nodes = _map(args, function (arg) {
-            if (_is.arr(arg)) {
-                return arg.reduce((acc, el) => {
-                    if (_is.def(el.nodeType)) acc.push(el);
-                    else if (_is.inst(el, Ele)) acc = acc.concat(el.get());
-                    else if (_is.str(el)) acc = acc.concat(_createElem(el));
-                    return acc;
-                }, []);
+    // Generate the `width` and `height` methods
+    ['width', 'height'].reduce((acc, sz) => {
+        let prop = _capital(sz);
+        acc[sz] = function (value) {
+            let offset, el = this.get(0);
+            if (_is.undef(value)) {
+                if (_is.win(el)) {
+                    return el[`inner${prop}`];
+                } else if (_is.doc(el)) {
+                    return el.documentElement[`scroll${prop}`];
+                } else { return (offset = this.offset()) && offset[sz]; }
+            } else {
+                return this.each((_el, idx) => {
+                    el = new Ele(_el);
+                    el.style(sz, _fnval(value, [idx, el[sz]()], _el));
+                });
             }
+        };
 
-            return _is.obj(arg) || _is.nul(arg) ? arg : _createElem(arg);
-        });
+        return acc;
+    }, {}),
 
-        return this.each(function (target) {
-            let parent = inside ? target : target.parentNode;
-            let parentInDoc = _contains(documentElement, parent);
-            let next = target.nextSibling, first = target.firstChild;
-
-            // Convert all methods to a "before" operation
-            target = [next, first, target, null] [idx];
-            nodes.forEach(function (node) {
-                if (clone) node = node.cloneNode(true);
-                else if (!parent) return Ele(node).remove();
-                parent.insertBefore(node, target);
-
-                if (parentInDoc) {
-                    traverseDF(node, function (el) {
-                        if (!_is.nul(el.nodeName) && el.nodeName.toUpperCase() === 'SCRIPT' &&
-                            (!el.type || el.type === 'text/javascript') && !el.src) {
-                            let target = el.ownerDocument ? el.ownerDocument.defaultView : window;
-                            target.eval.call(target, el.innerHTML);
-                        }
-                    });
+    // Generate the `after`, `prepend`, `before`, `append`, `insertAfter`, `insertBefore`, `appendTo`, and `prependTo` methods.
+    [ 'after', 'prepend', 'before', 'append' ].reduce(function (acc, fn, idx) {
+        let inside = idx % 2 //=> prepend, append
+        acc[fn] = function (...args) {
+            // Arguments can be nodes, arrays of nodes, Element objects and HTML strings
+            let clone = this.length > 1;
+            let nodes = _map(args, function (arg) {
+                if (_is.arr(arg)) {
+                    return arg.reduce((acc, el) => {
+                        if (_is.def(el.nodeType)) acc.push(el);
+                        else if (_is.inst(el, Ele)) acc = acc.concat(el.get());
+                        else if (_is.str(el)) acc = acc.concat(_createElem(el));
+                        return acc;
+                    }, []);
                 }
+
+                return _is.obj(arg) || _is.nul(arg) ? arg : _createElem(arg);
             });
-        });
-    };
 
-    // after    => insertAfter, prepend  => prependTo
-    // before   => insertBefore, append   => appendTo
-    acc[inside ? `${fn}To` : `insert${_capital(fn)}`] = function (html) {
-        Ele(html) [fn] (this);
-        return this;
-    };
+            return this.each(function (target) {
+                let parent = inside ? target : target.parentNode;
+                let parentInDoc = _contains(documentElement, parent);
+                let next = target.nextSibling, first = target.firstChild;
 
-    return acc;
-}, {}));
+                // Convert all methods to a "before" operation
+                target = [next, first, target, null] [idx];
+                nodes.forEach(function (node) {
+                    if (clone) node = node.cloneNode(true);
+                    else if (!parent) return new Ele(node).remove();
+                    parent.insertBefore(node, target);
 
-export let el = Ele;
-export default Ele;
-*/
+                    if (parentInDoc) {
+                        traverseDF(node, function (el) {
+                            if (!_is.nul(el.nodeName) && el.nodeName.toUpperCase() === 'SCRIPT' &&
+                                (!el.type || el.type === 'text/javascript') && !el.src) {
+                                let target = el.ownerDocument ? el.ownerDocument.defaultView : window;
+                                target.eval.call(target, el.innerHTML);
+                            }
+                        });
+                    }
+                });
+            });
+        };
 
-class EleEvt extends _event {};
-export Ele = class extends 
+        // after    => insertAfter, prepend  => prependTo
+        // before   => insertBefore, append   => appendTo
+        acc[inside ? `${fn}To` : `insert${_capital(fn)}`] = function (html) {
+            new Ele(html) [fn] (this);
+            return this;
+        };
+
+        return acc;
+    }, {})
+);
+
+export let el = (sel, ctxt) => {
+    return new Ele(sel, ctxt);
+};

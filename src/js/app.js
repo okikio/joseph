@@ -1,14 +1,11 @@
-// import swup from "swup";
-// import el from "./components/ele";
+import swup from "swup";
+import { el } from "./components/ele";
 import { _log } from "./components/util";
-// import preload from '@swup/preload-plugin';
-// import scrollPlugin from "@swup/scroll-plugin";
+import preload from '@swup/preload-plugin';
+import scrollPlugin from "@swup/scroll-plugin";
 import anime from 'animejs';
 
-// import './components/smoothstate';
-// import _class from "./components/class";
-// import _event from "./components/event";
-/* 
+
 let _backToTop = el('#back-to-top');
 let _navbar = el('.navbar');
 let _global = el(window);
@@ -50,6 +47,12 @@ _load = () => {
     let _img = el(".load-img");
     let _main = el(".main");
     _scroll();
+
+    anime({
+        targets: '.anim',
+        translateX: [0, 250],
+        loop: true
+    });
 
     _img.each($img => {
         let img = el($img);
@@ -94,13 +97,3 @@ new swup({
 
 // This event runs for every page view after initial load
 .on('contentReplaced', _load);
- */
-// _log(anime);
-// _log(anime);
-
-
-anime({
-    targets: '.anim',
-    translateX: [0, 250],
-    loop: true
-});
