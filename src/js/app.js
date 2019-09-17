@@ -1,9 +1,9 @@
 // import swup from "swup";
 // import el from "./components/ele";
-import util from "./components/util-log";
+import { _log } from "./components/util";
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
-// import anime from 'animejs';
+import anime from 'animejs';
 
 // import './components/smoothstate';
 // import _class from "./components/class";
@@ -43,12 +43,6 @@ _global.scroll(_scroll = () => {
         actioncenter.show();
     } else { actioncenter.hide(); }
 });
-
-// anime({
-//     targets: '.anim',
-//     translateX: [0, 250],
-//     loop: true
-// });
 
 
 _load = () => {
@@ -101,6 +95,12 @@ new swup({
 // This event runs for every page view after initial load
 .on('contentReplaced', _load);
  */
-
-console.log(util._log);
 // _log(anime);
+// _log(anime);
+
+
+anime({
+    targets: '.anim',
+    translateX: [0, 250],
+    loop: true
+});

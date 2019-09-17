@@ -1,5 +1,12 @@
-export let { assign, keys, values } = Object;
-export let { isArray, from, of } = Array;
+// export const { assign, keys, values } = Object;
+// export let { isArray, from, of } = Array;
+export const assign = Object.assign;
+export const values = Object.values;
+export const keys = Object.keys;
+
+export const isArray = Array.isArray; 
+export const from = Array.from;  
+export const of = Array.of;
 
 // Remove certain properties
 export let _removeProps = (prop, obj) => {
