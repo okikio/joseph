@@ -1,8 +1,6 @@
-import anime from "animejs";
 import { _matches, _log, _is, keys, _fnval, _capital, assign } from "./util";
 import _event from './event';
 
-export const { timeline, remove, stagger, random } = anime;
 const { documentElement } = document;
 
 let Ele;
@@ -583,24 +581,6 @@ export default Ele = class extends EleEvt {
             left: offset.left - parentOffset.left
         }
     }
-
-    getAnime() { return this.anime; }
-    timeline(opt = {}) {
-        this.anime = timeline({
-            targets: _toArr(this),
-            ...opt
-        });
-
-        return this;
-    }
-
-    animate(opt = {}, offset) {
-        opt = _fnval(opt, [{ stagger, remove, random }, offset], this);
-        _is.def(this.anime) && this.anime.add ? this.anime.add(opt, offset) :
-            (this.anime = anime({ targets: _toArr(this), ...opt }));
-
-        return this;
-    }
 };
 
 assign(Ele.prototype,
@@ -694,3 +674,7 @@ assign(Ele.prototype,
 export let el = (sel, ctxt) => {
     return new Ele(sel, ctxt);
 };
+
+assign(Element.prototype, {
+    toEl() { return el(this); }
+});

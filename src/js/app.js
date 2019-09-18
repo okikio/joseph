@@ -3,19 +3,19 @@ import { el } from "./components/ele";
 import { _log } from "./components/util";
 import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
+import { _global, _body } from "./components/global";
 import anime from 'animejs';
 
 
 let _backToTop = el('#back-to-top');
 let _navbar = el('.navbar');
-let _global = el(window);
 
 let _height = _navbar.height();
 let _focusPt = _height + 20;
-let _load, _scroll, _scrollEle;
+let _load, _scroll, _scrollEle = _body.get(0);
 
-_scrollEle = window.document.scrollingElement || window.document.body || window.document.documentElement;
-_scrollEle = el(_scrollEle);
+// _scrollEle = window.document.scrollingElement || window.document.body || window.document.documentElement;
+// _scrollEle = el(_scrollEle);
 
 _navbar.click('.navbar-menu', e => {
     e.preventDefault();
@@ -46,6 +46,7 @@ _load = () => {
     let _next_layer_btn = el(".next-layer"), _next_layer;
     let _img = el(".load-img");
     let _main = el(".main");
+    let _timeline = anime.timeline();
     _scroll();
 
     anime({
@@ -79,6 +80,31 @@ _load = () => {
             easing: 'easeInOutQuad'
         });
     });
+
+    let options = {
+        // root: _scrollEle,
+        rootMargin: '0px',
+        threshold: Array.from(Array(101), (_, x) => x / 100)
+      };
+      
+      let observer = new IntersectionObserver(entries => { 
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                _timeline.add({
+                    targets: entry.target,
+                    translateY: 0,
+                    opacity: 1,
+                    complete: function() {
+                        observer.unobserve(entry.target);
+                        _log("Complete Animation: Very");
+                    }
+                }, "-200");
+            }
+        });
+      }, options);
+      el(".layer").forEach(_el => {
+        observer.observe(_el);
+      });
 };
 
 _load();
