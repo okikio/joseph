@@ -24,7 +24,8 @@ _navbar.click('.navbar-menu', e => {
 
 _backToTop.click(e => {
     e.preventDefault();
-    _scrollEle.animate({
+    anime({
+        targets: _scrollEle,
         scrollTop: 0,
         duration: 500,
         easing: 'easeInOutQuad'
@@ -74,7 +75,8 @@ _load = () => {
     _next_layer_btn.click((e, _el) => {
         e.preventDefault();
         _next_layer = el(_el).closest(".layer", _main).next(".layer");
-        _scrollEle.animate({
+        anime({
+            targets: _scrollEle,
             scrollTop: el(_next_layer).offset().top - _height,
             duration: 500,
             easing: 'easeInOutQuad'
@@ -94,11 +96,14 @@ _load = () => {
                     targets: entry.target,
                     translateY: 0,
                     opacity: 1,
+                    duration: 2000,
+                    easing: 'easeInOutExpo',
+                    delay: 500,
                     complete: function() {
                         observer.unobserve(entry.target);
                         _log("Complete Animation: Very");
                     }
-                }, "-200");
+                });
             }
         });
       }, options);
