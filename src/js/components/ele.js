@@ -155,7 +155,7 @@ let arrProto = Object.getOwnPropertyNames(Array.prototype)
     return acc;
 }, {});
 
-class EleEvt extends _event {};
+class EleEvt extends _event {}
 assign(EleEvt.prototype, arrProto);
 
 // Element Object [Based on Zepto.js]

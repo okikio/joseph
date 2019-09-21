@@ -47,7 +47,7 @@ _load = () => {
     let _next_layer_btn = el(".next-layer"), _next_layer;
     let _img = el(".load-img");
     let _main = el(".main");
-    let _timeline = anime.timeline();
+    // let _timeline = anime.timeline();
     _scroll();
 
     anime({
@@ -84,37 +84,31 @@ _load = () => {
     });
 
     let options = {
-        // root: _scrollEle,
         rootMargin: '0px',
         threshold: Array.from(Array(101), (_, x) => x / 100)
-      };
+    };
 
-      let observer = new IntersectionObserver((entries, _obs) => {
-        entries.forEach(entry => {
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, i) => {
             if (entry.isIntersecting) {
-                let $el = entry.target.toEl();
-                $el.data("animate", 0);
-                // _timeline.add({
-                //     targets: entry.target,
-                //     translateY: 0,
-                //     opacity: 1,
-                //     duration: 2000,
-                //     easing: 'easeInOutExpo',
-                //     delay: 500,
-                //     complete: function() {
-                //         observer.unobserve(entry.target);
-                //         _log("Complete Animation: Very");
-                //     }
-                // });
-
-                _obs.unobserve(entry.target);
-                _log("Complete Animation: Very", entry.target.toEl());
+                anime({
+                    targets: entry.target,
+                    translateY: 0,
+                    opacity: 1,
+                    duration: 1500,
+                    easing: 'easeInOutExpo',
+                    delay: i * 500,
+                    begin() {
+                        observer.unobserve(entry.target);
+                    }
+                });
             }
         });
-      }, options);
-      el(".layer").forEach(_el => {
+    }, options);
+
+    el(".layer").forEach(_el => {
         observer.observe(_el);
-      });
+    });
 };
 
 _load();
@@ -131,5 +125,5 @@ new swup({
     })]
 })
 
-// This event runs for every page view after initial load
-.on('contentReplaced', _load);
+    // This event runs for every page view after initial load
+    .on('contentReplaced', _load);
