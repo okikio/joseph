@@ -47,14 +47,8 @@ _load = () => {
     let _next_layer_btn = el(".next-layer"), _next_layer;
     let _img = el(".load-img");
     let _main = el(".main");
-    // let _timeline = anime.timeline();
-    _scroll();
 
-    anime({
-        targets: '.anim',
-        translateX: [0, 250],
-        loop: true
-    });
+    _scroll();
 
     _img.each($img => {
         let img = el($img);
