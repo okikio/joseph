@@ -88,22 +88,22 @@ _load = () => {
         rootMargin: '0px',
         threshold: Array.from(Array(101), (_, x) => x / 100)
       };
-      
-      let observer = new IntersectionObserver(entries => { 
+
+      let observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                _timeline.add({
-                    targets: entry.target,
-                    translateY: 0,
-                    opacity: 1,
-                    duration: 2000,
-                    easing: 'easeInOutExpo',
-                    delay: 500,
-                    complete: function() {
-                        observer.unobserve(entry.target);
-                        _log("Complete Animation: Very");
-                    }
-                });
+                // _timeline.add({
+                //     targets: entry.target,
+                //     translateY: 0,
+                //     opacity: 1,
+                //     duration: 2000,
+                //     easing: 'easeInOutExpo',
+                //     delay: 500,
+                //     complete: function() {
+                //         observer.unobserve(entry.target);
+                //         _log("Complete Animation: Very");
+                //     }
+                // });
             }
         });
       }, options);
