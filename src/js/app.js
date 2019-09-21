@@ -89,9 +89,11 @@ _load = () => {
         threshold: Array.from(Array(101), (_, x) => x / 100)
       };
 
-      let observer = new IntersectionObserver(entries => {
+      let observer = new IntersectionObserver((entries, _obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                let $el = entry.target.toEl();
+                $el.data("animate", 0);
                 // _timeline.add({
                 //     targets: entry.target,
                 //     translateY: 0,
@@ -104,6 +106,9 @@ _load = () => {
                 //         _log("Complete Animation: Very");
                 //     }
                 // });
+
+                _obs.unobserve(entry.target);
+                _log("Complete Animation: Very", entry.target.toEl());
             }
         });
       }, options);
