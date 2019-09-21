@@ -89,7 +89,7 @@ _load = () => {
                     targets: entry.target,
                     translateY: 0,
                     opacity: 1,
-                    duration: 1500,
+                    duration: 1000,
                     easing: 'easeInOutExpo',
                     delay: i * 500,
                     begin() {
@@ -119,5 +119,5 @@ new swup({
     })]
 })
 
-    // This event runs for every page view after initial load
-    .on('contentReplaced', _load);
+// This event runs for every page view after initial load
+.on('contentReplaced', _load);
