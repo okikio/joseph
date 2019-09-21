@@ -6,7 +6,7 @@ let { state, replaceState, pushState } = window.history;
 let { href, origin } = window.location;
 let { title } = document;
 
-// A transition manager [based on smoothState.js, swup.js & barba.js]
+// A transition manager [based on smoothState.js, swup.js, barba.js & highway.js]
 export default class _partial extends _event {
     // _class: "Partial-Transition-Manager",
     static defaults = {
