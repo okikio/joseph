@@ -90,7 +90,8 @@ let _createElem = html => {
 };
 
 // Element selector
-let _elem = (sel, ctxt) => {
+let _elem;
+let el = _elem = (sel, ctxt) => {
     if (_is.str(sel)) {
         sel = sel.trim();
         if (tagRE.test(sel)) { return _createElem(sel); }
@@ -115,7 +116,7 @@ let traverseDF = (_node, fn, childType = "childNodes") => {
 };
 
 // Quickly filter nodes by a selector
-export let _filter = (nodes, sel) => !_is.def(sel) ? new Ele(nodes) : new Ele(nodes).filter(sel);
+export let _filter = (nodes, sel) => !_is.def(sel) ? el(nodes) : filter(el(nodes), sel);
 
 // Select all the different values in an Array, based on underscorejs
 export let _uniq = arr => {
@@ -159,8 +160,8 @@ class EleEvt extends _event {}
 assign(EleEvt.prototype, arrProto);
 
 // Element Object [Based on Zepto.js]
-export let slice = (_el, ...args) => [].slice.apply(_el, args);
-export let map = (_el, fn) => _map(_el, (el, i) => fn.call(el, el, i), _el);
+export let slice = (_el, ...args) => el([].slice.apply(_el, args));
+export let map = (_el, fn) => el(_map(_el, (el, i) => fn.call(el, el, i), _el));
 export let each = (_el, fn) => {
     [].every.call(_el, function (el, idx)
         { return fn.call(el, el, idx) !== false; });
@@ -179,92 +180,95 @@ export let remove = _el => {
     });
 };
 export let filter = (_el, sel) => {
+    _el = el(_el);
+    if (!_is.def(sel)) return _el;
     if (_is.fn(sel))
-        return _is.def(sel.call) ? [].filter.call(_el, sel, _el) : [];
+        return [].filter.call(_el, sel, _el);
     return [].filter.call(_el, ele => _matches(ele, sel), _el);
 };
 export let find = (_el, sel) => {
     let result;
-    if (!sel) result = [];
+    if (!sel) result = el();
     else if (_is.obj(sel)) {
-        result = filter(sel, el => {
+        result = filter(el(sel), el => {
             return [].some.call(_el, parent => _contains(parent, el));
         });
-    } else if (_el.length === 1) { result = _qsa(get(_el, 0), sel); }
+    } else if (_el.length === 1) { result = el(_qsa(get(_el, 0), sel)); }
     else { result = map(_el, el => _qsa(el, sel)); }
     return result;
 };
 export let has = (_el, sel) => {
     return filter(_el, el => {
-        return _is.obj(sel) ? _contains(el, sel) : find(el, sel).length;
+        return _is.obj(sel) ? _contains(el, sel) : find(_elem(el), sel).length;
     });
 };
 export let eq = (_el, idx) => {
     return idx === -1 ? slice(_el, idx) : slice(_el, idx, +idx + 1);
 };
-export let first = _el => get(_el, 0);
-export let last = _el => get(_el, -1);
-export let closest = (_el, sel, ctxt) => {
-    let list = _is.obj(sel) && sel;
-    return [].reduce((acc, ele) => {
-        do {
-            if (list ? [].indexOf.apply(list, ele) >= 0 : _matches(ele, sel)) break;
-            ele = ele !== ctxt && !_is.doc( ele) && ele.parentNode;
-        } while (ele !== null && ele.nodeType === 1);
-        if (ele && acc.indexOf(ele) < 0) acc.push(ele);
-        return acc;
-    }, []);
+export let first = _el => {
+    let el = get(_el, 0);
+    return el && !_is.obj(el) ? el : _elem(el);
 };
-
+export let last = _el => {
+    let el = get(_el, -1);
+    return el && !_is.obj(el) ? el : _elem(el);
+};
+export let closest = (_el, sel, ctxt) => {
+    let list = _is.obj(sel) && el(sel);
+    return el(
+        [].reduce((acc, ele) => {
+            do {
+                if (list ? [].indexOf.apply(list, ele) >= 0 : _matches(ele, sel)) break;
+                ele = ele !== ctxt && !_is.doc( ele) && ele.parentNode;
+            } while (ele !== null && ele.nodeType === 1);
+            if (ele && acc.indexOf(ele) < 0) acc.push(ele);
+            return acc;
+        }, [])
+    );
+};
 export let parents = (_el, sel) => {
-        let ancestors = [], nodes = this;
-        while (nodes.length > 0) {
-            nodes = nodes.map(el => {
-                if ((el = el.parentNode) && !_is.doc(el) && ancestors.indexOf(el) < 0) {
-                    ancestors.push(el);
-                    return el;
-                }
-            });
-        }
-        return _filter(ancestors, sel);
-    }
-
-    // `pluck` based on underscore.js, but way more powerful
-export let pluck = (_el, prop) { return this.map(el => el[prop]); => }
-export let parent = (_el, sel) => {
-        return _filter(_uniq(this.pluck('parentNode')), sel);
-    }
-
-export let children = (_el, sel) => {
-        return _filter(this.map(el => _children(el)), sel);
-    }
-
-export let contents = (_el, ) => {
-        return this.map(el => el.contentDocument || [].slice.call(el.childNodes));
-    }
-
-export let siblings = (_el, sel) => {
-        return _filter(this.map(el =>
-            [].filter.call(
-                _children(el.parentNode),
-                child => (child !== el)
-            )
-        ), sel);
-    }
-
-export let replaceWith = (_el, content) { return this.before(content).remove(); => }
-export let clone = (_el, ) { return this.map(el => el.cloneNode(true)); => }
-
-export let toggle = (_el, opt) => {
-        return this.each(el => {
-            let _el = new Ele(el);
-            let _opt = opt || _el.style("display") === "none";
-            _el[_opt ? "show" : "hide"]();
+    let ancestors = [], nodes = _el;
+    while (nodes.length > 0) {
+        nodes = nodes.map(el => {
+            if ((el = el.parentNode) && !_is.doc(el) && ancestors.indexOf(el) < 0) {
+                ancestors.push(el);
+                return el;
+            }
         });
     }
+    return filter(ancestors, sel);
+};
 
-export let prev = (_el, sel){ return new Ele(this.pluck('previousElementSibling')).filter(sel || '*'); => }
-export let next = (_el, sel){ return new Ele(this.pluck('nextElementSibling')).filter(sel || '*'); => }
+// `pluck` based on underscore.js, but way more powerful
+export let pluck = (_el, prop) => map(_el, el => el[prop]);
+export let parent = (_el, sel) => {
+    return filter(_uniq(pluck(_el, 'parentNode')), sel);
+};
+export let children = (_el, sel) => {
+    return filter(map(_el, el => _children(el)), sel);
+};
+export let contents = _el => {
+    return map(_el, el => el.contentDocument || [].slice.call(el.childNodes));
+};
+export let siblings = (_el, sel) => {
+    return filter(map(_el, el =>
+        [].filter.call(
+            _children(el.parentNode),
+            child => (child !== el)
+        )
+    ), sel);
+};
+export let replaceWith = (_el, content) => remove(before(_el, content));
+export let clone = _el => map(_el, el => el.cloneNode(true));
+export let toggle = (_el, opt) => {
+    return each(_el, el => {
+        let _el = _elem(el);
+        let _opt = opt || _el.style("display") === "none";
+        _el[_opt ? "show" : "hide"]();
+    });
+};
+export let prev = (_el, sel) => filter(_elem(pluck(_el, 'previousElementSibling')), sel || '*');
+export let next = (_el, sel) => filter(_elem(pluck(_el, 'nextElementSibling')), sel || '*');
 export let html = (_el, ...args) => {
         let [html] = args;
         return args.length ?
