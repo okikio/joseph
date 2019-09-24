@@ -78,13 +78,18 @@ _load = () => {
     });
 
     let options = {
+        root: null,
         rootMargin: '0px',
-        threshold: Array.from(Array(101), (_, x) => x / 100)
+        threshold: 0,
+        // threshold: Array.from(Array(101), (_, x) => x / 100)
     };
 
     let observer = new IntersectionObserver(entries => {
         entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
+            // if (entry.isIntersecting) {
+            if (entry.intersectionRatio > 0) {
+                // this.onScreen(entry)
+
                 anime({
                     targets: entry.target,
                     translateY: 0,
@@ -96,7 +101,10 @@ _load = () => {
                         observer.unobserve(entry.target);
                     }
                 });
+            } else {
+                // this.offScreen(entry)
             }
+            // }
         });
     }, options);
 
