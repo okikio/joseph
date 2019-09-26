@@ -262,6 +262,7 @@
    /* -- Container (keep the page focused and content central) -- */
    &-contain {
       &,
+      &-larger,
       &-large,
       &-small {
          margin: 0 auto;
@@ -311,6 +312,18 @@
       @media (min-width: 1000px) {
          &-large {
             max-width: 1200px;
+         }
+      }
+      
+      @media (min-width: 1200px) {
+         &-larger {
+            max-width: 1400px;
+         }
+      }
+      
+      @media (min-width: 1400px) {
+         &-larger {
+            max-width: 1600px;
          }
       }
    }

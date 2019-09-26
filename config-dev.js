@@ -36,7 +36,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz layout-padding-large-top",
                         "layout": {
-                            "class": "layout-shorten layout-contain",
+                            "class": "layout-shorten layout-contain-large",
                             "values": [{
                                 "section": {
                                     "title": "404, Page Not Found.",
