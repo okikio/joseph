@@ -45,7 +45,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz", "large-top") ]),
                     layout([
-                        _class([ _layout("shorten", "contain-large") ]),
+                        _class([ _layout("shorten", "contain-larger") ]),
                         values([
                             _header(title("404, Page Not Found.")),
                             _main([
