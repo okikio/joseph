@@ -45,7 +45,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz", "large-top") ]),
                     layout([
-                        _class([ _layout("shorten", "contain-larger") ]),
+                        _class([ _layout("shorten", "contain") ]),
                         values([
                             _header(title("404, Page Not Found.")),
                             _main([
@@ -74,7 +74,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain") ]),
+                        _class([ _layout("shorten", "contain-large") ]),
                         values([
                             _header(title("Contact")),
                             _main([
@@ -105,7 +105,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain") ]),
+                        _class([ _layout("shorten", "contain-large") ]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
@@ -140,7 +140,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain") ]),
+                        _class([ _layout("shorten", "contain-large") ]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
@@ -175,7 +175,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain") ]),
+                        _class([ _layout("shorten", "contain-large") ]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
