@@ -1,4 +1,4 @@
-const { fetch, Promise } = window;
+const { fetch } = window;
 const { body } = document;
 
 let _src = v => `./js/${v}.min.js`;
@@ -7,7 +7,7 @@ try {
     let check = function () {
         "use strict";
 
-        if (typeof window.Symbol === "undefined") return false;
+        if (typeof window.Symbol === "undefined" || typeof window.Promise === "undefined") return false;
         try {
             Function("class Foo {}") ();
             Function("let bar = x => x+1;") ();

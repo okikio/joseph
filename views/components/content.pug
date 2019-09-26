@@ -19,7 +19,7 @@ mixin image(value)
           source(media='(min-width: 900px)' srcset!=`${_src}.webp` type='image/webp')
           img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy")
         picture
-          img.placeholder-img(src!=`${_src}.jpg?w=100&quality=100&effect=blur:150`, alt=_alt inline loading="auto")
+          img.placeholder-img(src!=`${_src}.jpg?w=60&quality=100&effect=blur:150`, alt=_alt inline loading="auto")
         noscript Javascript is necesscary for an amazing experience.
           img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy")
 
