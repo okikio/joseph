@@ -77,40 +77,40 @@ _load = () => {
         });
     });
 
-    let options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0,
-        // threshold: Array.from(Array(101), (_, x) => x / 100)
-    };
+    // let options = {
+    //     root: null,
+    //     rootMargin: '0px',
+    //     threshold: 0,
+    //     // threshold: Array.from(Array(101), (_, x) => x / 100)
+    // };
 
-    let observer = new IntersectionObserver(entries => {
-        entries.forEach((entry, i) => {
-            // if (entry.isIntersecting) {
-            if (entry.intersectionRatio > 0) {
-                // this.onScreen(entry)
+    // let observer = new IntersectionObserver(entries => {
+    //     entries.forEach((entry, i) => {
+    //         // if (entry.isIntersecting) {
+    //         if (entry.intersectionRatio > 0) {
+    //             // this.onScreen(entry)
 
-                anime({
-                    targets: entry.target,
-                    translateY: 0,
-                    opacity: 1,
-                    duration: 1000,
-                    easing: 'easeInOutExpo',
-                    delay: i * 500,
-                    begin() {
-                        observer.unobserve(entry.target);
-                    }
-                });
-            } else {
-                // this.offScreen(entry)
-            }
-            // }
-        });
-    }, options);
+    //             anime({
+    //                 targets: entry.target,
+    //                 translateY: 0,
+    //                 opacity: 1,
+    //                 duration: 1000,
+    //                 easing: 'easeInOutExpo',
+    //                 delay: i * 500,
+    //                 begin() {
+    //                     observer.unobserve(entry.target);
+    //                 }
+    //             });
+    //         } else {
+    //             // this.offScreen(entry)
+    //         }
+    //         // }
+    //     });
+    // }, options);
 
-    el(".layer").forEach(_el => {
-        observer.observe(_el);
-    });
+    // el(".layer").forEach(_el => {
+    //     observer.observe(_el);
+    // });
 };
 
 _load();
