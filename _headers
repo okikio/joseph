@@ -4,4 +4,3 @@
 /*.js
   content-type: text/javascript; charset=utf-8
   cache-control: public, max-age=31536000
-  x-content-type-options: no-sniff
