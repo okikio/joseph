@@ -2,7 +2,6 @@ let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
-let heroku = 'heroku' in env && env.heroku.toString() === "true";
 let staticSite = 'staticSite' in env && env.staticSite === "true";
 
 const gulp = require('gulp');
@@ -298,89 +297,48 @@ task("js", () =>
     ])
 );
 
-task("server", () =>
-    streamList([
-        ["server.js", {
-            opts: { allowEmpty: true },
-            pipes: [
-                // Bundle Modules
-                rollup({
-                    plugins: [
-                        rollupJSON(), // Parse JSON Exports
-                        commonJS(), // Use CommonJS to compile file
-                        rollupBabel(babelConfig.node) // Babelify file for minifing
-                    ],
-                    onwarn
-                }, 'cjs'),
-                debug ? null : terser(minifyOpts), // Minify the file
-                rename(minSuffix) // Rename
-            ],
-            dest: '.' // Output
-        }]
-    ])
-);
-
 task("config", () =>
     streamList(
         new Promise((resolve, reject) => {
-            // Create config.min
+            // Create config-dev.js
             writeFile(
-                "./config.min.js", `module.exports = ${stringify(config)};`,
+                "./config-dev.js", `module.exports = ${stringify(config)};`,
                 err => {
                     if (err) { reject(); throw err; }
                     resolve();
                 }
             );
         }),
-        ["config.min.js", {
-            opts: { allowEmpty: true },
-            pipes: [
-                // Minify the file
-                terser(minifyOpts),
-            ],
-            dest: '.' // Output
-        }],
-        dev ? ["config.min.js", {
+        ["config-dev.js", {
             opts: { allowEmpty: true },
             pipes: [
                 js({ indent_size: 4 }), // Beautify the file
-                // Rename
-                rename({
-                    basename: "config-dev",
-                    extname: ".js"
-                })
             ],
             dest: '.' // Output
-        }] : null
+        }]
     )
 );
 
+task("client", () =>
+    streamList([
+        ["client/*.js", {
+            opts: { allowEmpty: true },
+            pipes: [
+                terser(minifyOpts), // Minify the file
+                rename(minSuffix) // Rename
+            ],
+
+            dest: `${publicDest}/`
+        }], // Output
+        [["client/*", "!client/*.js"], {
+            opts: { allowEmpty: true }
+        }]
+    ])
+);
+
+task("gulpfile:watch", () => _exec("gulp"));
 task("config:watch", () =>
     _exec("gulp config html css")
-);
-
-task("update", () =>
-    stream("gulpfile.js", {
-        opts: { allowEmpty: true },
-        pipes: [
-            // Bundle Modules
-            rollup({
-                plugins: [
-                    rollupJSON(), // Parse JSON Exports
-                    commonJS(), // Use CommonJS to compile file
-                    rollupBabel(babelConfig.node) // Babelify file for minifing
-                ],
-                onwarn
-            }, 'cjs'),
-            debug ? null : terser(minifyOpts), // Minify the file
-            rename(minSuffix) // Rename
-        ],
-        dest: '.' // Output
-    })
-);
-
-task("gulpfile:watch", () =>
-    _execSeries("gulp update", "gulp")
 );
 
 task("git", () =>
@@ -400,19 +358,18 @@ task('inline', () =>
 );
 
 // Gulp task to minify all files
-task('dev', series("config", parallel("server", "html", "js"), "css"));
+task('dev', parallel("client", series("config", parallel("html", "js"), "css")));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', series.apply(null, heroku ? ["update", "dev"] : ["update", "dev", "inline"]));
+task('default', parallel("client", series("dev", "inline")));
 
 // Gulp task to minify all files without -js
-task('other', series("update", "config", parallel("server", "html"), "css", "inline"));
+task('other', parallel("client", series("config", "html", "css", "inline")));
 
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['server.js', 'plugin.js'], watchDelay, series('server'));
     watch(['config.js', 'containers.js'], watchDelay, series('config:watch'));
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'css', 'js'));
 

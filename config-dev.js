@@ -36,7 +36,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz layout-padding-large-top",
                         "layout": {
-                            "class": "layout-shorten layout-contain-large",
+                            "class": "layout-shorten layout-contain",
                             "values": [{
                                 "section": {
                                     "title": "404, Page Not Found.",
@@ -99,7 +99,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain",
+                            "class": "layout-shorten layout-contain-large",
                             "values": [{
                                 "section": {
                                     "title": "Contact",
@@ -171,7 +171,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain",
+                            "class": "layout-shorten layout-contain-large",
                             "values": [{
                                 "section": {
                                     "title": "Lorem itpsuim",
@@ -241,7 +241,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain",
+                            "class": "layout-shorten layout-contain-large",
                             "values": [{
                                 "section": {
                                     "title": "Lorem itpsuim",
@@ -301,7 +301,7 @@ module.exports = {
                 "name": "index",
                 "values": [{
                     "hero": {
-                        "title": "Relax.",
+                        "title": "Welcome!.",
                         "img": {
                             "src": "/assets/white_car",
                             "alt": "A city Image"
@@ -311,7 +311,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain",
+                            "class": "layout-shorten layout-contain-large",
                             "values": [{
                                 "section": {
                                     "title": "Lorem itpsuim",

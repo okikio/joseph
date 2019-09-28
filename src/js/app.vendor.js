@@ -41,7 +41,7 @@ try {
     }
 
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('/sw.min.js')
             .then(function (registration) {
                 console.log('Registration successful, scope is:', registration.scope);
             })
