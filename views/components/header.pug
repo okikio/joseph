@@ -16,7 +16,7 @@ mixin header(_page)
       article.layout-contain-large.navbar-layout
         section.navbar-head
           +link({
-            href: "/" + (dev && staticSite ? "index.html" : "index"),
+            href: "/" + (dev ? "index.html" : "index"),
             class: "navbar-title style-primary style-primary-dark-hover style-primary-focus",
             content: "JOSEPH!"
           })

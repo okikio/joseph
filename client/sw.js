@@ -1,9 +1,9 @@
-let CACHE_NAME = 'sw-v1';
+let CACHE = 'sw-v1';
 
 // Open a cache and use addAll() with an array of assets to add all of them to the cache. Return a promise resolving when all the assets are added.
 const precache = () => {
-    return caches.open(CACHE_NAME)
-        .then(cache => cache.addAll(['404.html', '.', 'about', 'projects', 'contact']))
+    return caches.open(CACHE)
+        .then(cache => cache.addAll(['/404.html', '/', '/about', '/projects', '/contact']))
         .catch((e) => {
             console.log("sw.min.js can't find files to cache, err:", e);
         });
@@ -37,7 +37,7 @@ const update = request => {
 
 // On fetch, use cache but update the entry with the latest contents from the server.
 self.addEventListener('fetch', function(evt) {
-    if (event.request.method === 'GET') {
+    if (evt.request.method === 'GET') {
         console.log('The service worker is serving the asset.');
 
         // You can use respondWith() to answer immediately, without waiting for the network response to reach the service worker…
