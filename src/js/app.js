@@ -50,6 +50,16 @@ try {
 
         _scroll();
 
+        var body = document.body,
+            html = document.documentElement;
+
+        var height = Math.max( body.scrollHeight, body.offsetHeight,
+                            html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+        if (height <= window.innerHeight) {
+            actioncenter.show();
+        }
+
         _img.each($img => {
             let img = el($img);
             let _core_img = img.find(".core-img").get(0);

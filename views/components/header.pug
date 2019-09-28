@@ -1,5 +1,11 @@
 include ./content.pug
 
+mixin install()
+  button.add-button.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-secondary.style-hover-secondary-dark(tabindex='-1', type='button' title="Install App")
+    span.btn-group
+      i.icon.style-font-family-bold.style-font-sz-24 add_circle_outline
+      block
+
 mixin header(_page)
   - let page = _page || page;
   - let _tabs = page.tabs && page.tabs.values || [];
@@ -16,9 +22,12 @@ mixin header(_page)
           })
           section.layout-spacer
           section.navbar-foot.navbar-mobile
-            button.navbar-menu.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-primary(tabindex='-1', type='button' title="Menu Bar")
-              span.btn-group
-                i.navbar-menu.icon.style-font-family-bold.style-font-sz-24 menu
+            section.layout-inline-block
+              +install
+            section.layout-inline-block
+              button.navbar-menu.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-primary(tabindex='-1', type='button' title="Menu Bar")
+                span.btn-group
+                  i.navbar-menu.icon.style-font-family-bold.style-font-sz-24 menu
 
         section.layout-spacer.navbar-desktop
         section.navbar-main
@@ -31,3 +40,7 @@ mixin header(_page)
 
               li
                 a.navbar-link(href=_href class=_class data-swup-preload)= _content
+            li.navbar-desktop
+              +install
+                  span.btn-spacer
+                  span.btn-content Install

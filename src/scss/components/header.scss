@@ -104,7 +104,7 @@
         }
 
         // Mobile navbar settings
-        @media (max-width: 600px) {
+        @media (max-width: 660px) {
             &-layout,
             &-list {
                 flex-direction: column;
@@ -158,7 +158,7 @@
             }
 
             &-desktop {
-                display: none;
+                display: none !important;
             }
 
             &-mobile {
@@ -167,7 +167,7 @@
         }
 
         // Desktop navbar settings
-        @media (min-width: 600px) {
+        @media (min-width: 660px) {
             &-layout {
                 padding: 0 $size;
                 display: flex;
