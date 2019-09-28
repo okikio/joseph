@@ -1,0 +1,36 @@
+{
+    "name": "Joseph Ojo",
+    "short_name": "JO-OJO",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f5f8fc",
+    "theme_color": "#4500ff",
+    "description": "A simply readable portfolio app.",
+    "icons": [
+        {
+            "src": "assets/science-30.png",
+            "sizes": "30x30",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/science-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/science-196.png",
+            "sizes": "196x196",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/science-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "assets/science-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

@@ -9,7 +9,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(name='Description' content='The porfolio of Joseph, it contains all amazing projects etc...')
 
-    link(rel='manifest', href='manifest.json')
+    link(rel='manifest', href='manifest.webmanifest')
     link(rel='preconnect' href='https://polyfill.io/')
     link(rel='preconnect' href='https://fonts.gstatic.com/')
     link(rel='preconnect' href='https://cdnjs.cloudflare.com/')
@@ -114,6 +114,12 @@ html(lang="en")
                 +sectionView(section)
 
     .header-top-spot
+      button.add-button.btn.layer-round.layout-margin-large.layout-padding-small-horz.layout-padding-smaller-vert.layer-primary.layer-primary-dark-hover.style-secondary.style-hover-secondary-dark(tabindex='0', type='button')
+        span.btn-group.style-font-sz-24
+          i.icon file_download
+          span.btn-spacer
+          span.btn-content Install app
+
     main.main#swup.transition-fade
       - let layerLists = page.values;
 

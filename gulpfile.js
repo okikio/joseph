@@ -330,7 +330,7 @@ task("client", () =>
 
             dest: `${publicDest}/`
         }], // Output
-        [["client/*", "!client/*.js"], {
+        [["client/**/*", "!client/*.js"], {
             opts: { allowEmpty: true }
         }]
     ])
