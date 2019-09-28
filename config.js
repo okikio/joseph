@@ -74,7 +74,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain-large") ]),
+                        _class([ _layout("shorten", "contain") ]),
                         values([
                             _header(title("Contact")),
                             _main([
@@ -105,7 +105,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain-large") ]),
+                        _class([ _layout("shorten", "contain") ]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
@@ -140,7 +140,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain-large") ]),
+                        _class([ _layout("shorten", "contain") ]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
@@ -175,7 +175,7 @@ module.exports = {
                 layer([
                     _class([ padding("horz") ]),
                     layout([
-                        _class([ _layout("shorten", "contain-large") ]),
+                        _class([ _layout("shorten", "contain") ]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([

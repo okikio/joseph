@@ -99,7 +99,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain-large",
+                            "class": "layout-shorten layout-contain",
                             "values": [{
                                 "section": {
                                     "title": "Contact",
@@ -171,7 +171,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain-large",
+                            "class": "layout-shorten layout-contain",
                             "values": [{
                                 "section": {
                                     "title": "Lorem itpsuim",
@@ -241,7 +241,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain-large",
+                            "class": "layout-shorten layout-contain",
                             "values": [{
                                 "section": {
                                     "title": "Lorem itpsuim",
@@ -311,7 +311,7 @@ module.exports = {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
-                            "class": "layout-shorten layout-contain-large",
+                            "class": "layout-shorten layout-contain",
                             "values": [{
                                 "section": {
                                     "title": "Lorem itpsuim",
