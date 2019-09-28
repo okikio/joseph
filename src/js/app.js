@@ -1,7 +1,7 @@
 import swup from "swup";
 import { el } from "./components/ele";
 import { _log } from "./components/util";
-import preload from '@swup/preload-plugin';
+// import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 import { _global, _body } from "./components/global";
 import anime from 'animejs';
@@ -119,12 +119,12 @@ try {
             "X-Requested-With": "swup", // So we can tell request comes from swup
             "x-partial": "swup" // Request a partial html page
         },
-        plugins: [new preload(), new scrollPlugin({
+        plugins: [new scrollPlugin({
             doScrollingRightAway: false,
             animateScroll: true,
             scrollFriction: 0.3,
             scrollAcceleration: 0.04,
-        })]
+        })] // new preload(),
     })
 
     // This event runs for every page view after initial load
