@@ -2,7 +2,6 @@ let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
-let staticSite = 'staticSite' in env && env.staticSite === "true";
 
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
@@ -196,11 +195,11 @@ task('html', () => {
                         extname: ".html"
                     }),
                     // Pug compiler
-                    pug({ locals: { ...page, cloud_name, dev, staticSite } }),
+                    pug({ locals: { ...page, cloud_name, dev } }),
                     // Minify or Beautify html
                     dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts),
                     // Replace /assets/... URLs
-                    staticSite ? replace(/\/assets\/[^\s"']+/g, url => {
+                    replace(/\/assets\/[^\s"']+/g, url => {
                         let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
                         let query = URLObj.searchParams;
                         let queryString = URLObj.search;
@@ -216,7 +215,7 @@ task('html', () => {
                                     `${assetURL + url.replace(queryString, '')}` :
                                     assets.url(url.replace(queryString, ''), _imgURLConfig)
                                 ).replace("/assets/", "");
-                    }) : null
+                    })
                 ]
             }]
         )

@@ -1,7 +1,6 @@
 let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
-let staticSite = 'staticSite' in env && env.staticSite === "true";
 
 /*
     -- Rules --
@@ -108,7 +107,7 @@ let section = component("section"); // The section component
 
 // -- Shortform Components --
 let _link = (_content, _href) => link([
-    href(_href + (dev && staticSite ? (_href === "/" ? "index.html" : ".html") : "")),
+    href(_href + (dev ? (_href === "/" ? "index.html" : ".html") : "")),
     content(_content)
 ]);
 
