@@ -48,6 +48,10 @@ try {
             .catch(function (error) {
                 console.log('Service worker registration failed, error:', error);
             });
+
+        navigator.serviceWorker.ready.then(function () {
+            console.log("Offline data will be updated on reload.");
+        });
     }
 } catch (e) {
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
