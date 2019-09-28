@@ -168,7 +168,7 @@ module.exports = {
             title("Hello There"),
             values([
                 // Hero layer
-                _hero([ "Relax.", [carImg, "A city Image"] ]),
+                _hero([ "Welcome!.", [carImg, "A city Image"] ]),
                 // End Hero layer
 
                 // Intro layer
