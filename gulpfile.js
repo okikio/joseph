@@ -270,7 +270,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            dev && staticSite ? null : ['src/js/app.vendor.js', {
+            ['src/js/app.vendor.js', {
             opts: { allowEmpty: true },
             pipes: [
                 init(), // Sourcemaps init
@@ -375,7 +375,8 @@ task('watch', () => {
 
     watch('views/**/*.pug', watchDelay, series('html', 'css'));
     watch('src/**/*.scss', watchDelay, series('css'));
-    watch(['src/**/*.js', '!src/**/app.vendor.js'], watchDelay, series('js'));
+    watch(['src/**/*.js'], watchDelay, series('js'));
+    watch(['client/**/*'], watchDelay, series('client'));
 
     watch('src/**/app.vendor.js', watchDelay, series('js'));
     watch(['public/**/*', '!public/css/*.css'])

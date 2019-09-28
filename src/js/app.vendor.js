@@ -41,9 +41,7 @@ try {
     }
 
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.min.js', {
-                scope: './'
-            })
+        navigator.serviceWorker.register('/sw.min.js', { scope: '/' })
             .then(function (registration) {
                 console.log('Registration successful, scope is:', registration.scope);
             })
@@ -51,9 +49,9 @@ try {
                 console.log('Service worker registration failed, error:', error);
             });
 
-        navigator.serviceWorker.ready.then(function () {
-            console.log("Offline data will be updated on reload.");
-        });
+        // navigator.serviceWorker.ready.then(function () {
+        //     console.log("Offline data will be updated on reload.");
+        // });
 
         let deferredPrompt;
         const addBtn = document.querySelector('.add-button');
@@ -76,14 +74,15 @@ try {
             // Wait for the user to respond to the prompt
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
+                    console.log('User accepted the A2HS prompt');
                 } else {
-                console.log('User dismissed the A2HS prompt');
+                    console.log('User dismissed the A2HS prompt');
                 }
                 deferredPrompt = null;
             });
         });
     }
+
 } catch (e) {
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
     document.write(err);

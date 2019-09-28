@@ -1,7 +1,7 @@
 {
     "name": "Joseph Ojo",
     "short_name": "JO-OJO",
-    "start_url": ".",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#f5f8fc",
     "theme_color": "#4500ff",
@@ -18,8 +18,8 @@
             "type": "image/png"
         },
         {
-            "src": "assets/science-196.png",
-            "sizes": "196x196",
+            "src": "assets/science-192.png",
+            "sizes": "192x192",
             "type": "image/png"
         },
         {
