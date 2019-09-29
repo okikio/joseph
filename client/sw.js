@@ -3,7 +3,7 @@ let CACHE = 'sw-v1';
 // Open a cache and use addAll() with an array of assets to add all of them to the cache. Return a promise resolving when all the assets are added.
 const precache = () => {
     return caches.open(CACHE)
-        .then(cache => cache.addAll(['/404.html', '/', '/about', '/projects', '/contact']))
+        .then(cache => cache.addAll(['/404.html', '/', '/about', '/projects', '/contact', '/sw.min.js']))
         .catch((e) => {
             console.log("sw.min.js can't find files to cache, err:", e);
         });
@@ -21,7 +21,12 @@ self.addEventListener('install', function (evt) {
 const fromCache = request => {
     return caches.open(CACHE).then(function(cache) {
         return cache.match(request).then(function(matching) {
-            return matching || Promise.reject('no-match');
+            return matching; //  || Promise.reject('no-match')
+        }).catch(function (e) {
+            return fetch(request).then(function(response) {
+                cache.put(request, response);
+                return response;
+            });
         });
     });
 };
