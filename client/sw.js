@@ -17,25 +17,24 @@ self.addEventListener('install', function (evt) {
     evt.waitUntil(precache());
 });
 
-// Open the cache where the assets were stored and search for the requested resource. Notice that in case of no matching, the promise still resolves but it does with undefined as value.
-const fromCache = request => {
-    return caches.open(CACHE).then(function(cache) {
-        return cache.match(request).then(function(matching) {
-            return matching; //  || Promise.reject('no-match')
-        }).catch(function (e) {
-            return fetch(request).then(function(response) {
-                cache.put(request, response);
-                return response;
-            });
-        });
-    });
-};
-
 // Update consists in opening the cache, performing a network request and storing the new response data.
 const update = request => {
     return caches.open(CACHE).then(function(cache) {
         return fetch(request).then(function(response) {
             return cache.put(request, response);
+        });
+    });
+};
+
+// Open the cache where the assets were stored and search for the requested resource. Notice that in case of no matching, the promise still resolves but it does with undefined as value.
+const fromCache = request => {
+    return caches.open(CACHE).then(function(cache) {
+        return cache.match(request).then(function(matching) {
+            return matching || Promise.reject('no-match').catch(function (e) {
+                return fetch(request).then(function(response) {
+                    return cache.put(request, response);
+                });
+            });
         });
     });
 };
