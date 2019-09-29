@@ -125,6 +125,11 @@
       &-right {
          text-align: right;
       }
+
+      &-justify {
+        text-align:justify;
+        text-justify:inter-word;
+      }
    }
 
    &, &-transform {

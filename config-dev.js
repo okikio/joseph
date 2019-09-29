@@ -319,6 +319,7 @@ module.exports = {
                                 }
                             }, {
                                 "section": {
+                                    "class": "style-justify",
                                     "values": [{
                                         "content": " ",
                                         "class": "layout-padding-top layout-margin-left-large layout-inline-block"
@@ -354,7 +355,7 @@ module.exports = {
                                                         "class": "layout-col-2 layout-padding-bottom-small",
                                                         "values": [{
                                                             "content": "03/03",
-                                                            "class": "style-bold style-font-16"
+                                                            "class": "style-bold style-font-24"
                                                         }]
                                                     }
                                                 }, {
@@ -362,21 +363,21 @@ module.exports = {
                                                         "class": "layout-col-3 layout-padding-bottom",
                                                         "values": [{
                                                             "content": "2018",
-                                                            "class": "style-line-height-double style-bold layout-block style-font-16"
+                                                            "class": "style-line-height-double style-bold layout-block style-font-24"
                                                         }, {
                                                             "content": "E-commerse",
                                                             "class": "style-line-height-double layout-block style-font-16"
                                                         }, {
                                                             "content": "Design Executive",
-                                                            "class": "style-line-height-double layout-block style-font-16"
+                                                            "class": "style-line-height-double layout-block style-font-24"
                                                         }]
                                                     }
                                                 }, {
                                                     "col": {
-                                                        "class": "layout-col-7",
+                                                        "class": "layout-col-7 style-justify",
                                                         "values": [{
                                                             "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an\n                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                                                            "class": "style-line-height-double style-font-16"
+                                                            "class": "style-line-height-double style-font-24"
                                                         }]
                                                     }
                                                 }]
@@ -481,7 +482,7 @@ module.exports = {
                                                     "class": "layout-col-6",
                                                     "values": [{
                                                         "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an\n                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                                                        "class": "layout-block style-line-height-double style-font-16"
+                                                        "class": "layout-block style-line-height-double style-font-24"
                                                     }]
                                                 }
                                             }]

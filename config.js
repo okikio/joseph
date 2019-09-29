@@ -179,6 +179,7 @@ module.exports = {
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
+                                _class([ _style("justify") ]),
                                 values([
                                     indent,
                                     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
@@ -209,7 +210,7 @@ module.exports = {
                                                 col([
                                                     _class([ _col("2"), padding("bottom-small") ]),
                                                     values([
-                                                        _content(`03/03`, [ _style("bold"), font("16") ])
+                                                        _content(`03/03`, [ _style("bold"), font("24") ])
                                                     ])
                                                 ]),
 
@@ -218,7 +219,7 @@ module.exports = {
                                                     values([
                                                         _content(`2018`, [
                                                             _style("line-height-double", "bold"),
-                                                            _layout("block"), font("16")
+                                                            _layout("block"), font("24")
                                                         ]),
                                                         _content(`E-commerse`, [
                                                             _style("line-height-double"),
@@ -227,18 +228,18 @@ module.exports = {
                                                         ]),
                                                         _content(`Design Executive`, [
                                                             _style("line-height-double"),
-                                                            _layout("block"), font("16")
+                                                            _layout("block"), font("24")
                                                         ])
                                                     ])
                                                 ]),
 
                                                 col([
-                                                    _class([ _col("7") ]),
+                                                    _class([ _col("7"), _style("justify") ]),
                                                     values([
                                                         _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                                                         unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-                                                        [ _style("line-height-double"), font("16") ])
+                                                        [ _style("line-height-double"), font("24") ])
                                                     ])
                                                 ])
                                             ])
@@ -358,7 +359,7 @@ module.exports = {
                                                     _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                                                         unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-                                                        [ _layout("block"), _style("line-height-double"), font("16") ])
+                                                        [ _layout("block"), _style("line-height-double"), font("24") ])
                                                 ])
                                             ])
                                         ])
