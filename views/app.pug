@@ -110,7 +110,7 @@ html(lang="en")
     include ./components/hero.pug
     include ./components/footer.pug
   body
-    if !dev
+    if dev
       //- Navbar etc...
       +header(page)
 
@@ -130,7 +130,7 @@ html(lang="en")
                 - let section = sections.section;
                   +sectionView(section)
 
-      .header-top-spot
+      .header-top-spot= dev
       main.main#swup.transition-fade
         - let layerLists = page.values;
 
@@ -197,14 +197,14 @@ html(lang="en")
               noscript Javascript is necesscary for an amazing experience.
                 img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="auto")
 
-        article.layout-contain 
+        article.layout-contain
           section.layout.layout-shorten.layer-overflow-hide.layer-max-height.layout-flex.layout-align-items-center.layout-justify-content-start
             section
               h3.style-secondary-dark.style-font-title.style-uppercase.layout-margin-dull-vert.layout-padding-vert-mini Joseph
-              h1.style-white.style-bold.layer-title.style-uppercase.layout-margin-dull-vert-top Coming SOON 
-              h5.style-white.style-line-height.style-capital.layer-content-detail This website is currently in development. We are working day and night.
+              h1.style-white.style-bold.layer-title.style-uppercase.layout-margin-dull-vert-top Coming SOON
+              h5.style-white.style-line-height.style-capital.layer-content-detail This website is currently in development. We are working day and night to have it in tip top shape.
 
     script(src='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=IntersectionObserver%2CHTMLPictureElement%2CXMLHttpRequest%2Cconsole.log%2Cdocument.querySelector%2Cfetch%2CrequestAnimationFrame%2C%7Ehtml5-elements%2C%7Eviewport%2CgetComputedStyle%2CMutationObserver%2CObject.assign%2CObject.getOwnPropertyNames%2CObject.keys%2CObject.values%2CRegExp.prototype.flags%2CURL%2Cblissfuljs%2Cdefault%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces5%2Ces6%2Ces7%2CArray.prototype.includes%2CArray.prototype.filter%2CArray.prototype.find%2CArray.prototype.forEach%2CArray.prototype.every%2CArray.isArray%2CArray.from%2CEvent' crossorigin='anonymous' async)
     script(src=`${debug ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline defer)
-    if !dev
+    if dev
       script(src=`./js/store.min.js` inline defer)

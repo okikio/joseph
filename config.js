@@ -234,7 +234,7 @@ module.exports = {
                                                 ]),
 
                                                 col([
-                                                    _class([ _col("7"), ]), // _style("justify") 
+                                                    _class([ _col("7"), ]), // _style("justify")
                                                     values([
                                                         _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
@@ -359,7 +359,7 @@ module.exports = {
                                                     _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                                                         unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-                                                        [ _layout("block"), _style("line-height-double"), font("24") ])
+                                                        [ _layout("block"), _style("line-height-double"), font("18") ])
                                                 ])
                                             ])
                                         ])
