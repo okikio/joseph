@@ -41,8 +41,10 @@ try {
     }
 
     try {
-        const addBtn = document.querySelectorAll('.add-button');
-        addBtn.forEach(btn => { btn.style.display = 'none'; });
+        const addBtn = [...document.querySelectorAll('.add-button')];
+        addBtn.forEach(btn => { 
+            if (btn !== undefined) btn.style.display = 'none';  
+        });
 
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.min.js', { scope: '/' })
@@ -59,6 +61,13 @@ try {
     }
 
 } catch (e) {
+    try {
+        const addBtn = [...document.querySelectorAll('.add-button')];
+        addBtn.forEach(btn => { btn.style.display = 'none'; });
+    } catch (e) {
+        console.log("Error with querySeletorAll.");
+    }
+
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
     document.write(err);
     console.warn(err);

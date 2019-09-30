@@ -22,7 +22,7 @@ const update = request => {
     return caches.open(CACHE).then(function(cache) {
         return fetch(request).then(function(response) {
             return cache.put(request, response);
-        });
+        }).catch(function () {});
     });
 };
 
@@ -30,11 +30,7 @@ const update = request => {
 const fromCache = request => {
     return caches.open(CACHE).then(function(cache) {
         return cache.match(request).then(function(matching) {
-            return matching || Promise.reject('no-match').catch(function (e) {
-                return fetch(request).then(function(response) {
-                    return cache.put(request, response);
-                });
-            });
+            return matching || Promise.reject('no-match');
         });
     });
 };
@@ -44,10 +40,10 @@ self.addEventListener('fetch', function(evt) {
     if (evt.request.method === 'GET') {
         console.log('The service worker is serving the asset.');
 
+        // …and waitUntil() to prevent the worker from being killed until the cache is updated.
+        update(evt.request);
+
         // You can use respondWith() to answer immediately, without waiting for the network response to reach the service worker…
         evt.respondWith(fromCache(evt.request));
-
-        // …and waitUntil() to prevent the worker from being killed until the cache is updated.
-        evt.waitUntil(update(evt.request));
     }
 });

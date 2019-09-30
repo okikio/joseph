@@ -365,10 +365,10 @@ module.exports = {
                                                             "class": "style-line-height-double style-bold layout-block style-font-24"
                                                         }, {
                                                             "content": "E-commerse",
-                                                            "class": "style-line-height-double layout-block style-font-16"
+                                                            "class": "style-line-height-double layout-block style-font-18"
                                                         }, {
                                                             "content": "Design Executive",
-                                                            "class": "style-line-height-double layout-block style-font-24"
+                                                            "class": "style-line-height-double layout-block style-font-18"
                                                         }]
                                                     }
                                                 }, {
@@ -376,7 +376,7 @@ module.exports = {
                                                         "class": "layout-col-7",
                                                         "values": [{
                                                             "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an\n                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                                                            "class": "style-line-height-double style-font-24"
+                                                            "class": "style-line-height-double style-font-18"
                                                         }]
                                                     }
                                                 }]

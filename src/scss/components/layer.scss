@@ -60,6 +60,15 @@
       }
    }
 
+   &-max-height {
+      position: relative;
+      height: 100vh;
+   }
+   
+   &-overflow-hide {
+      overflow: hidden;
+   }
+
    &-hero {
       // @extend %shadow;
       // background: $surface;

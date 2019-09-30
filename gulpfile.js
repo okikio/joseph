@@ -195,7 +195,7 @@ task('html', () => {
                         extname: ".html"
                     }),
                     // Pug compiler
-                    pug({ locals: { ...page, cloud_name, dev } }),
+                    pug({ locals: { ...page, cloud_name, dev, debug } }),
                     // Minify or Beautify html
                     dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts),
                     // Replace /assets/... URLs
@@ -215,7 +215,7 @@ task('html', () => {
                                     `${assetURL + url.replace(queryString, '')}` :
                                     assets.url(url.replace(queryString, ''), _imgURLConfig)
                                 ).replace("/assets/", "");
-                    })
+                    }, { logs: { enabled: false }})
                 ]
             }]
         )
@@ -320,7 +320,7 @@ task("config", () =>
 
 task("client", () =>
     streamList([
-        ["client/*.js", {
+        ["client/**/*.js", {
             opts: { allowEmpty: true },
             pipes: [
                 terser(minifyOpts), // Minify the file
@@ -329,7 +329,7 @@ task("client", () =>
 
             dest: `${publicDest}/`
         }], // Output
-        [["client/**/*", "!client/*.js"], {
+        [["client/**/*", "!client/**/*.js"], {
             opts: { allowEmpty: true }
         }]
     ])

@@ -168,7 +168,7 @@ export default class _event {
 
     static get nativeEvents() { return "ready load blur focus focusin focusout resize click scroll dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".replace(/\s+/g, " ").split(" "); }
     static applyNative(evt, el, ev, i, action = "addEventListener", delegate) {
-        if (!ev.length) return;
+        if (!ev.length || el === undefined) return;
 
         let useCapture;
         let _emit = _ev => e => {
@@ -195,4 +195,4 @@ export default class _event {
             });
         }
     }
-};
+}
