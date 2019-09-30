@@ -176,8 +176,8 @@ try {
     // This event runs for every page view after initial load
     .on('contentReplaced', _load);
 } catch (e) {
-    let _img = document.getElementsByClassName("placeholder-img");
-    let _navbar = document.getElementsByClassName("navbar");
+    let _img = [...document.getElementsByClassName("placeholder-img")];
+    let _navbar = [...document.getElementsByClassName("navbar")];
     _navbar.forEach(function (nav) {
         nav.classList.add("navbar-focus");
     });

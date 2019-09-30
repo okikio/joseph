@@ -179,7 +179,7 @@ module.exports = {
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
-                                _class([ _style("justify") ]),
+                                // _class([ _style("justify") ]),
                                 values([
                                     indent,
                                     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
@@ -224,17 +224,17 @@ module.exports = {
                                                         _content(`E-commerse`, [
                                                             _style("line-height-double"),
                                                             _layout("block"),
-                                                            font("16")
+                                                            font("18")
                                                         ]),
                                                         _content(`Design Executive`, [
                                                             _style("line-height-double"),
-                                                            _layout("block"), font("24")
+                                                            _layout("block"), font("18")
                                                         ])
                                                     ])
                                                 ]),
 
                                                 col([
-                                                    _class([ _col("7"), _style("justify") ]),
+                                                    _class([ _col("7"), ]), // _style("justify") 
                                                     values([
                                                         _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
