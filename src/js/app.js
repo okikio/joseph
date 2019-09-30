@@ -4,6 +4,7 @@ import { _log } from "./components/util";
 // import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 import { _global, _body } from "./components/global";
+import { _is } from "./components/util";
 import anime from 'animejs';
 
 try {
@@ -65,14 +66,16 @@ try {
             let _core_img = img.find(".core-img").get(0);
             let _placeholder_img = img.find(".placeholder-img");
 
-            if (_core_img.complete) {
-                _placeholder_img.addClass("core-img-show");
-            } else {
-                _core_img.addEventListener("load", function () {
+            if (_is.def(_core_img)) {
+                if (_core_img.complete) {
                     _placeholder_img.addClass("core-img-show");
+                } else {
+                    _core_img.addEventListener("load", function () {
+                        _placeholder_img.addClass("core-img-show");
 
-                    setTimeout(function () { _placeholder_img.hide(); }, 3000);
-                }, false);
+                        setTimeout(function () { _placeholder_img.hide(); }, 3000);
+                    }, false);
+                }
             }
         });
 
@@ -150,7 +153,7 @@ try {
     });
 
     const addBtn = [...document.querySelectorAll('.add-button')];
-    addBtn.forEach(btn => { 
+    addBtn.forEach(btn => {
         if (btn !== undefined) btn.style.display = 'none';
      });
     console.error(e);
