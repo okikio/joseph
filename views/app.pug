@@ -130,7 +130,7 @@ html(lang="en")
                 - let section = sections.section;
                   +sectionView(section)
 
-      .header-top-spot= dev
+      .header-top-spot
       main.main#swup.transition-fade
         - let layerLists = page.values;
 
@@ -174,29 +174,6 @@ html(lang="en")
         +footer("Made with ❤ by Okiki Ojo.")
     else
       section.layer
-        - let _src = "/assets/josephojo-logo";
-        - let _alt = "Assets city";
-        .layer-image(class=_class)
-          .load-img
-            .img-contain.layout-contain.layout-contain-slim
-              picture
-                img(src!=`${_src}.jpg?quality=100`, alt=_alt inline loading="lazy")
-              noscript Javascript is necesscary for an amazing experience.
-                img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="auto")
-
-        - _src = "/assets/mountains";
-        - _alt = "Assets city";
-        .layer-image(class=_class)
-          .load-img
-            .img-contain
-              picture
-                source(srcset!=`${_src}.webp?w=50&quality=100&effect=blur:150` type='image/webp')
-                img.core-img(src!=`${_src}.jpg?w=50&quality=100&effect=blur:150` alt=_alt inline width="auto" loading="lazy")
-              picture
-                img.placeholder-img(src!=`${_src}.jpg?w=50&quality=100&effect=blur:150`, alt=_alt inline loading="lazy")
-              noscript Javascript is necesscary for an amazing experience.
-                img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="auto")
-
         article.layout-contain
           section.layout.layout-shorten.layer-overflow-hide.layer-max-height.layout-flex.layout-align-items-center.layout-justify-content-start
             section
