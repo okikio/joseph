@@ -31,15 +31,16 @@ mixin header(_page)
 
         section.layout-spacer.navbar-desktop
         section.navbar-main
-          ul.navbar-list#swup
-            each tab in _tabs
-              - let _link = tab.a;
-              - let _href = _link.href;
-              - let _content = _link.content;
-              - let _class = _name == _content ? "navbar-link-focus" : "";
+          .layout-flex.layout-align-items-center
+            ul.navbar-list#swup
+              each tab in _tabs
+                - let _link = tab.a;
+                - let _href = _link.href;
+                - let _content = _link.content;
+                - let _class = _name == _content ? "navbar-link-focus" : "";
 
-              li
-                a.navbar-link(href=_href class=_class data-swup-preload)= _content
+                li
+                  a.navbar-link(href=_href class=_class data-swup-preload)= _content
             li.navbar-desktop
               +install
                   span.btn-spacer
