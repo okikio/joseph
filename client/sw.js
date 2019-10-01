@@ -10,12 +10,12 @@ const precache = () => {
 };
 
 // On install, cache some resources.
-self.addEventListener('install', function (evt) {
-    console.log('The service worker is being installed.');
+// self.addEventListener('install', function (evt) {
+//     console.log('The service worker is being installed.');
 
-    // Ask the service worker to keep installing until the returning promise resolves.
-    evt.waitUntil(precache());
-});
+//     // Ask the service worker to keep installing until the returning promise resolves.
+//     evt.waitUntil(precache());
+// });
 
 // Update consists in opening the cache, performing a network request and storing the new response data.
 const update = request => {
@@ -36,14 +36,14 @@ const fromCache = request => {
 };
 
 // On fetch, use cache but update the entry with the latest contents from the server.
-self.addEventListener('fetch', function(evt) {
-    if (evt.request.method === 'GET') {
-        console.log('The service worker is serving the asset.');
+// self.addEventListener('fetch', function(evt) {
+//     if (evt.request.method === 'GET') {
+//         console.log('The service worker is serving the asset.');
 
-        // …and waitUntil() to prevent the worker from being killed until the cache is updated.
-        update(evt.request);
+//         // …and waitUntil() to prevent the worker from being killed until the cache is updated.
+//         update(evt.request);
 
-        // You can use respondWith() to answer immediately, without waiting for the network response to reach the service worker…
-        evt.respondWith(fromCache(evt.request));
-    }
-});
+//         // You can use respondWith() to answer immediately, without waiting for the network response to reach the service worker…
+//         evt.respondWith(fromCache(evt.request));
+//     }
+// });

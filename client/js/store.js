@@ -1,4 +1,4 @@
-const addBtn = [...document.querySelectorAll('.add-button')];
+let addBtn = [...document.querySelectorAll('.add-button')];
 addBtn.forEach(btn => {
     btn.style.display = 'none';
 });

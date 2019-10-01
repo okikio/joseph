@@ -323,7 +323,7 @@ task("client", () =>
         ["client/**/*.js", {
             opts: { allowEmpty: true },
             pipes: [
-                terser(minifyOpts), // Minify the file
+                terser({ ...minifyOpts, toplevel: false }), // Minify the file
                 rename(minSuffix) // Rename
             ],
 
