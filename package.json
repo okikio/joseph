@@ -10,9 +10,9 @@
     "build": "gulp"
   },
   "engines": {
-    "node": "v12.11.0",
+    "node": "v12.11.1",
     "npm": "6.11.3",
-    "yarn": "1.19.0"
+    "yarn": "1.19.1"
   },
   "repository": {
     "type": "git",
