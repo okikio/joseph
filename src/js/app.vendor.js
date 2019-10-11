@@ -39,22 +39,6 @@ try {
     } else {
         body.appendChild(script);
     }
-
-    try {
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.min.js', { scope: '/' })
-                .then(function (registration) {
-                    console.log('Registration successful, scope is:', registration.scope);
-                })
-                .catch(function (error) {
-                    console.log('Service worker registration failed, error:', error);
-                });
-        }
-    } catch (e) {
-        let err = "There is an error in/with the service worker.";
-        console.warn(err, e);
-    }
-
 } catch (e) {
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
     document.write(err);

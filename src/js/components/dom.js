@@ -306,7 +306,7 @@ export let style = (_el, ...args) => {
 };
 
 // Generate the `width` and `height` methods
-export let { width, height }= ['width', 'height'].reduce((acc, sz) => {
+export let { width, height } = ['width', 'height'].reduce((acc, sz) => {
     let prop = _capital(sz);
     acc[sz] = (_el, value) => {
         let _offset, el = first(_el);
@@ -602,9 +602,7 @@ export let scrollLeft = (_el, val) => {
 };
 
 // Generate shortforms for events eg. onclick(), onhover(), etc...
-export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown,
-    onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit,
-    onkeydown, onkeypress, onkeyup, oncontextmenu } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
+export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown, onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit, onkeydown, onkeypress, onkeyup, oncontextmenu } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
     mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit
     keydown keypress keyup contextmenu`.split(/[\s\n]+/g)
 .reduce((acc, name) => {

@@ -1,4 +1,4 @@
-import { _matches, _is, keys } from "./util";
+import { _matches, _is, keys, _log } from "./util";
 import _event from './event';
 
 // Test for passive support, based on [github.com/rafrex/detect-passive-events]
@@ -71,8 +71,8 @@ export default ele = class extends _event {
         this.length = this.ele.length;
     }
 
-    on($super, evt, opts, callback) {
-        let _newEvts, _evt, delegate;
+    on(evt, opts, callback) {
+        let _newEvts, _evt, delegate, $super = _event.prototype.on.bind(this);
         if (_is.undef(evt)) { return; } // If there is no event break
         if (_is.str(evt)) { evt = evt.split(/\s/g); }
         if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
@@ -83,14 +83,17 @@ export default ele = class extends _event {
         if (_is.str(opts)) delegate = opts;
         else callback = opts;
 
-        [].forEach.call(this, function (el, i) {
+        _log(delegate);
+
+        [].forEach.call(this, (el, i) => {
             $super(evt, callback);
-            if (_newEvts.length < 1 && !_is.undef(el) && !_is.nul(el)) return;
+            if (!(_newEvts.length > 0) && !_is.undef(el) && !_is.nul(el)) return;
 
             let useCapture;
             let _emit = evt => e => {
                 let target = _is.str(delegate) && _matches(e.target, delegate) ? e.target : el;
-                this.emit(evt, [e, target, this, i], target);
+                if (!_is.str(delegate) || _matches(e.target, delegate))
+                    this.emit(evt, [e, target, this, i], target);
             };
 
             if (/ready|load/.test(_newEvts)) {
@@ -109,7 +112,7 @@ export default ele = class extends _event {
                     el.addEventListener(val, _emit(val), val === "scroll" ? passive : { useCapture });
                 });
             }
-        }, this);
+        });
         return this;
     }
 };

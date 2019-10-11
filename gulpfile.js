@@ -123,9 +123,9 @@ let posthtmlOpts = [
 ];
 
 let minifyOpts = {
-    mangle: { reserved: ["$super"] },
+    // mangle: { reserved: ["$super"] },
     keep_fnames: false, // change to true here
-    toplevel: true,
+    toplevel: false,
     compress: { dead_code: true },
     ecma: 8
 };

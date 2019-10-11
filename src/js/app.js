@@ -6,12 +6,14 @@ import { _log } from "./components/util";
 // import { _global, _body } from "./components/global";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import { onclick, el } from "./components/dom";
+import el, { onclick, toggleClass } from "./components/dom";
+// onclick,
 try {
     let _navbar = el('.navbar');
     onclick(_navbar, '.navbar-menu', e => {
         e.preventDefault();
-        _navbar.toggleClass("navbar-show");
+        toggleClass(_navbar, "navbar-show");
+        console.log("Navbar-show");
     });
     // let _backToTop = el('#back-to-top');
 
