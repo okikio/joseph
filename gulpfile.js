@@ -24,6 +24,7 @@ const { lookup } = require("mime-types");
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
+const imageSize = require("image-size");
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const { writeFile } = require("fs");
@@ -74,13 +75,15 @@ let posthtmlOpts = [
         let buf, warnings, mime, promises = [];
         tree.walk(node => {
             if (node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.class &&
-                node.attrs.class.includes("placeholder-img")) {
+            node.attrs.class.includes("placeholder-img")) {
                 mime = lookup(node.attrs.src) || 'text/plain';
 
                 promises.push(
                     axios.get(node.attrs.src, { responseType: 'arraybuffer' })
                         .then(val => {
                             buf = Buffer.from(val.data, 'base64');
+                            let { width, height } = imageSize(buf);
+                            Object.assign(node.attrs, { width, height });
                             node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
                         }).catch(err => {
                             console.error(`The image with the src: ${node.attrs.src} `, err);

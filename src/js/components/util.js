@@ -4,8 +4,8 @@ export const assign = Object.assign;
 export const values = Object.values;
 export const keys = Object.keys;
 
-export const isArray = Array.isArray; 
-export const from = Array.from;  
+export const isArray = Array.isArray;
+export const from = Array.from;
 export const of = Array.of;
 
 // Remove certain properties
@@ -43,9 +43,9 @@ assign(_is, {
     class: obj => obj && obj._method && obj._class,
     not: (type, ...args) => !_is[type](...args),
     doc: ctor => _isInst(ctor, Document),
-    def: val => !_is(val, "undefined"),
-    win: val => val && val.window,
+    def: v => !_is(v, "undefined"),
     undef: _type("undefined"),
+    win: v => v && v.window,
     bool: _type("boolean"),
     fn: _type("function"),
     str: _type("string"),

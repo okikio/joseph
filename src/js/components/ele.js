@@ -3,9 +3,17 @@ import _event from './event';
 
 const { documentElement } = document;
 
+// Test for passive support, based on [github.com/rafrex/detect-passive-events]
+let passive = false, opts = {}, noop = () => { };
+opts = Object.defineProperty({}, "passive", {
+	get: () => passive = { capture: false, passive: true }
+});
+
+window.addEventListener("PassiveEventTest", noop, opts);
+window.removeEventListener("PassiveEventsTest", noop, opts);
+
 let Ele;
 let tagRE = /^\s*<(\w+|!)[^>]*>/;
-let { applyNative, nativeEvents } = _event;
 let tagExpandRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig;
 let _cssNumber = ["column-count", "columns", "font-weight", "line-height", "opacity", "z-index", "zoom"];
 export let _qsa = (dom = document, sel) => {
@@ -189,21 +197,30 @@ export default Ele = class extends EleEvt {
 
         this.forEach(function (el, i) {
             $super(evt, callback);
-            applyNative(this, el, _newEvts, i, "addEventListener", delegate);
-        }, this);
-        return this;
-    }
+            if (_newEvts.length < 1 && !_is.undef(el) && !_is.nul(el)) return;
 
-    off(evt, callback) {
-        let _evt, $super = EleEvt.prototype.off.bind(this);
-        if (_is.undef(evt)) { return; } // If there is no event break
-        if (_is.str(evt)) { evt = evt.split(/\s/g); }
-        if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
-        _evt = (_is.obj(evt) && _is.not("arr", evt) ? keys(evt) : evt).join(" ");
+            let useCapture;
+            let _emit = evt => e => {
+                let target = _is.str(delegate) && _matches(e.target, delegate) ? e.target : el;
+                this.emit(evt, [e, target, this, i], target);
+            };
 
-        this.forEach(function (el, i) {
-            $super(evt, callback);
-            applyNative(this, el, _evt, i, "removeEventListener");
+            if (/ready|load/.test(_newEvts)) {
+                if (!/in/.test(document.readyState)) { _emit("ready load") (); }
+                else if (document.addEventListener) {
+                    document.addEventListener('DOMContentLoaded', _emit("ready load"));
+                } else {
+                    // Support for IE
+                    document.attachEvent('onreadystatechange', e => {
+                        if (!/in/.test(document.readyState)) _emit("ready load") (e);
+                    });
+                }
+            } else {
+                _newEvts.forEach(val => {
+                    useCapture = /blur|focus/.test(val);
+                    el.addEventListener(val, _emit(val), val === "scroll" ? passive : { useCapture });
+                });
+            }
         }, this);
         return this;
     }
@@ -585,7 +602,9 @@ export default Ele = class extends EleEvt {
 
 assign(Ele.prototype,
     // Generate shortforms for events eg. .click(), .hover(), etc...
-    nativeEvents.reduce((acc, name) => {
+    `ready load blur focus focusin focusout resize click scroll dblclick mousedown
+    mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit
+    keydown keypress keyup contextmenu`.split(/[\s\n]+/g).reduce((acc, name) => {
         // Handle event binding
         acc[name] = function (...args) { return this.on(name, ...args); };
         return acc;

@@ -142,23 +142,6 @@ let _maybeAddPx = (name, val) => {
     return _is.num(+val) && !_cssNumber.includes(name) ? `${val}px` : val;
 };
 
-// Allow default Array methods to work as Element Object methods
-let arrProto = Object.getOwnPropertyNames(Array.prototype)
-.reduce(function (acc, i) {
-    let _fn = Array.prototype[i];
-    if (_is.fn(_fn) && !/map|slice|filter|find/.test(i)) {
-        acc[i] = function (...args) {
-            let _val = _fn.apply(this, args);
-            return _is.undef(_val) ? this : _val;
-        };
-    }
-
-    return acc;
-}, {});
-
-class EleEvt extends _event {}
-assign(EleEvt.prototype, arrProto);
-
 // Element Object [Based on Zepto.js]
 export let slice = (_el, ...args) => el([].slice.apply(_el, args));
 export let map = (_el, fn) => el(_map(_el, (el, i) => fn.call(el, el, i), _el));
@@ -270,13 +253,13 @@ export let toggle = (_el, opt) => {
 export let prev = (_el, sel) => filter(_elem(pluck(_el, 'previousElementSibling')), sel || '*');
 export let next = (_el, sel) => filter(_elem(pluck(_el, 'nextElementSibling')), sel || '*');
 export let html = (_el, ...args) => {
-        let [html] = args;
-        return args.length ?
-            this.each((el, idx) => {
-                let originHTML = el.innerHTML;
-                new Ele(el).empty().append(_fnval(html, [idx, originHTML], el));
-            }) : (this.length ? this.get(0).innerHTML : null);
-    }
+    let [html] = args;
+    return args.length ?
+        this.each((el, idx) => {
+            let originHTML = el.innerHTML;
+            new Ele(el).empty().append(_fnval(html, [idx, originHTML], el));
+        }) : (this.length ? this.get(0).innerHTML : null);
+};
 
 export let text = (_el, ...args) => {
         let [text] = args;
@@ -507,7 +490,9 @@ export let position = (_el, ) => {
 
 assign(Ele.prototype,
     // Generate shortforms for events eg. .click(), .hover(), etc...
-    nativeEvents.reduce((acc, name) => {
+    `ready load blur focus focusin focusout resize click scroll dblclick mousedown
+    mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit
+    keydown keypress keyup contextmenu`.split(/[\s\n]+/g).reduce((acc, name) => {
         // Handle event binding
         acc[name] = function (...args) { return this.on(name, ...args); };
         return acc;
@@ -596,7 +581,3 @@ assign(Ele.prototype,
 export let el = (sel, ctxt) => {
     return new Ele(sel, ctxt);
 };
-
-assign(Element.prototype, {
-    toEl() { return el(this); }
-});

@@ -1,15 +1,5 @@
 import { _stringify } from "../../../util/stringify";
-import { _matches, _is, keys, _argNames } from "./util";
-const { readyState } = document;
-
-// Test for passive support, based on [github.com/rafrex/detect-passive-events]
-let passive = false, opts = {}, noop = () => { };
-opts = Object.defineProperty({}, "passive", {
-	get: () => passive = { capture: false, passive: true }
-});
-
-window.addEventListener("PassiveEventTest", noop, opts);
-window.removeEventListener("PassiveEventsTest", noop, opts);
+import { _is, keys, _argNames } from "./util";
 
 export default class _event {
     constructor() {
@@ -165,34 +155,4 @@ export default class _event {
 
     // Alias for the `listeners` method
     callbacks(...args) { return this.listeners(...args); }
-
-    static get nativeEvents() { return "ready load blur focus focusin focusout resize click scroll dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".replace(/\s+/g, " ").split(" "); }
-    static applyNative(evt, el, ev, i, action = "addEventListener", delegate) {
-        if (!ev.length || el === undefined || el === null) return;
-
-        let useCapture;
-        let _emit = _ev => e => {
-            if (_is.str(delegate) && _matches(e.target, delegate))
-                evt.emit(_ev, [e, e.target, evt, i], e.target);
-            else if (!_is.str(delegate))
-                evt.emit(_ev, [e, el, evt, i], el);
-        };
-
-        if (/ready|load/.test(ev)) {
-            if (!/in/.test(readyState)) { _emit("ready load") (); }
-            else if (document.addEventListener) {
-                document.addEventListener('DOMContentLoaded', _emit("ready load"));
-            } else {
-                document.attachEvent('onreadystatechange', e => {
-                    if (!/in/.test(readyState)) _emit("ready load") (e);
-                });
-            }
-        } else {
-            ev.split(" ").forEach(val => {
-                useCapture = /blur|focus/.test(val);
-                el[action](val, _emit(ev), ev === "scroll" ? passive :
-                            { useCapture });
-            });
-        }
-    }
 }
