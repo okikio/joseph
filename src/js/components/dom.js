@@ -201,11 +201,12 @@ let traverseDF = (_node, fn) => {
 };
 
 // Generate the `after`, `prepend`, `before`, `append`, `insertAfter`, `insertBefore`, `appendTo`, and `prependTo` methods.
-export let { after, prepend, before, append, insertAfter, insertBefore, appendTo, prependTo } = [ 'after', 'prepend', 'before', 'append' ].reduce((acc, fn, idx) => {
-    let inside = idx % 2 //=> prepend, append
-    acc[fn] = function (_el, ...args) {
-        _el = el(el);
+let _insert = (pos, _target) => {
+    // inside => prepend, append
+    let inside = pos === "inside";
+    return (_el, ...args) => {
         // Arguments can be nodes, arrays of nodes, Element objects and HTML strings
+        _el = el(el);
         let clone = _el.length > 1;
         let nodes = _map(args, arg => {
             if (_is.arr(arg)) {
@@ -226,7 +227,7 @@ export let { after, prepend, before, append, insertAfter, insertBefore, appendTo
             let next = target.nextSibling, first = target.firstChild;
 
             // Convert all methods to a "before" operation
-            target = [next, first, target, null] [idx];
+            target = { next, first, target, null: null } [_target];
             nodes.forEach(node => {
                 if (clone) node = node.cloneNode(true);
                 else if (!parent) return remove(node);
@@ -244,17 +245,27 @@ export let { after, prepend, before, append, insertAfter, insertBefore, appendTo
             });
         });
     };
+};
 
-    // after    => insertAfter, prepend  => prependTo
-    // before   => insertBefore, append   => appendTo
-    acc[inside ? `${fn}To` : `insert${_capital(fn)}`] = (_el, html) => {
+// after    => insertAfter, prepend  => prependTo
+// before   => insertBefore, append   => appendTo
+let _specificInsert = fn => {
+    return (_el, html) => {
         _el = el(_el);
-        acc[fn](el(html), _el);
+        fn(html, _el);
         return _el;
     };
+};
 
-    return acc;
-}, {});
+export let after = _insert("outside", "next");
+export let prepend = _insert("inside", "first");
+export let before = _insert("outside", "target");
+export let append = _insert("inside", "null");
+
+export let insertAfter = _specificInsert(after);
+export let insertBefore = _specificInsert(before);
+export let appendTo = _specificInsert(append);
+export let prependTo = _specificInsert(prepend);
 
 // Replace each element in the collection–both its contents and the element itself–with the new content. Content can be of any type described in before.
 export let replaceWith = (_el, content) => remove(before(_el, content));
@@ -305,10 +316,10 @@ export let style = (_el, ...args) => {
     return each(_el, el => { el.style.cssText += ';' + css; });
 };
 
-// Generate the `width` and `height` methods
-export let { width, height } = ['width', 'height'].reduce((acc, sz) => {
+// Method for creating size methods
+let _size = sz => {
     let prop = _capital(sz);
-    acc[sz] = (_el, value) => {
+    return (_el, value) => {
         let _offset, el = first(_el);
         if (_is.undef(value)) {
             if (_is.win(el)) {
@@ -322,9 +333,11 @@ export let { width, height } = ['width', 'height'].reduce((acc, sz) => {
             });
         }
     };
+};
 
-    return acc;
-}, {});
+// Generate the `width` and `height` methods
+export let width = _size("width");
+export let height = _size("height");
 
 // Show/hide an element
 export let show = _el => { return style(_el, "display", ""); };
