@@ -1,5 +1,5 @@
 import { _matches, _is, _fnval, _capital } from "./util";
-import ele, { _qsa, _elem, _createElem } from './ele-dev';
+import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
 export let el = (sel, ctxt) => {
