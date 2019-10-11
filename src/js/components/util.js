@@ -40,6 +40,7 @@ assign(_is, {
         return len === 0 || len > 0 && (len - 1) in obj;
     },
     num: val => !isNaN(val) && _type("number") (val),
+    usable: v => !_is(v, "undefined") && v !== null,
     class: obj => obj && obj._method && obj._class,
     not: (type, ...args) => !_is[type](...args),
     doc: ctor => _isInst(ctor, Document),
@@ -62,7 +63,7 @@ assign(_is, {
  * @param  {Object} ctxt
  */
 export let _fnval = (fn, args, ctxt) => {
-    if (_is.not("fn", fn) ||
+    if (!_is.fn(fn) ||
         keys(fn.prototype || {}).length > 0)
         { return fn; }
     return fn.apply(ctxt, args);
@@ -108,7 +109,7 @@ export let _path = (obj, path, val) => {
     * Access values as an Array, from multiple paths
 */
 export let _attr = (obj, path, val) => {
-    if (_is.obj(path) && _is.not("arr", path))
+    if (_is.obj(path) && !_is.arr(path))
         { return assign(obj, path); }
     else if (_is.arr(path)) {
         if (_is.undef(val)) {

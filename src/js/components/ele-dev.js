@@ -1,4 +1,4 @@
-import { _matches, _log, _is, keys } from "./util";
+import { _matches, _is, keys } from "./util";
 import _event from './event';
 
 // Test for passive support, based on [github.com/rafrex/detect-passive-events]
@@ -10,7 +10,7 @@ opts = Object.defineProperty({}, "passive", {
 window.addEventListener("PassiveEventTest", noop, opts);
 window.removeEventListener("PassiveEventsTest", noop, opts);
 
-let Ele;
+let ele;
 let tagRE = /^\s*<(\w+|!)[^>]*>/;
 let tagExpandRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig;
 export let _qsa = (dom = document, sel) => {
@@ -32,7 +32,7 @@ export let _qsa = (dom = document, sel) => {
 };
 
 // Create an Element List from a HTML string
-let _createElem = html => {
+export let _createElem = html => {
     let dom, container;
     container = document.createElement('div');
     container.innerHTML = '' + html.replace(tagExpandRE, "<$1></$2>");
@@ -45,21 +45,21 @@ let _createElem = html => {
 };
 
 // Element selector
-let _elem = (sel, ctxt) => {
+export let _elem = (sel, ctxt) => {
     if (_is.str(sel)) {
         sel = sel.trim();
         if (tagRE.test(sel)) { return _createElem(sel); }
         else { return _qsa(ctxt, sel); }
-    } else if (_is.inst(sel, Ele)) { return sel.ele; }
+    } else if (_is.inst(sel, ele)) { return sel; }
     else if (_is.arr(sel) || _is.inst(sel, NodeList))
         { return [...sel].filter(item => _is.def(item)); }
     else if (_is.obj(sel) || _is.el(sel)) { return [sel]; }
-    else if (_is.fn(sel)) { new Ele(document).ready(sel); }
+    else if (_is.fn(sel)) { new ele(document).ready(sel); }
     return [];
 };
 
 // Element Object [Based on Zepto.js]
-export default Ele = class extends _event {
+export default ele = class extends _event {
     constructor(sel = '', ctxt) {
         super();
         this.sel = sel; // Selector
@@ -68,6 +68,7 @@ export default Ele = class extends _event {
         for (let i = 0; i < this.ele.length; i++) {
             this[i] = this.ele[i];
         }
+        this.length = this.ele.length;
     }
 
     on($super, evt, opts, callback) {
@@ -111,7 +112,4 @@ export default Ele = class extends _event {
         }, this);
         return this;
     }
-
-    get len() { return this.ele.length; }
-    get length() { return this.len; }
 };

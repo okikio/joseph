@@ -1,6 +1,6 @@
 include ./content.pug
 
-mixin install()
+//- mixin install()
   button.add-button.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-secondary.style-hover-secondary-dark(tabindex='-1', type='button' title="Install App")
     span.btn-group
       i.icon.style-font-family-bold.style-font-sz-24 add_circle_outline
@@ -23,7 +23,7 @@ mixin header(_page)
           section.layout-spacer
           section.navbar-foot.navbar-mobile
             section.layout-inline-block
-              +install
+              //- +install
             section.layout-inline-block
               button.navbar-menu.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-primary(tabindex='-1', type='button' title="Menu Bar")
                 span.btn-group
@@ -41,7 +41,7 @@ mixin header(_page)
 
                 li
                   a.navbar-link(href=_href class=_class data-swup-preload)= _content
-            li.navbar-desktop
+            //- li.navbar-desktop
               +install
                   span.btn-spacer
                   span.btn-content Install

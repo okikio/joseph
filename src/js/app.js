@@ -1,23 +1,26 @@
-import swup from "swup";
-import { el } from "./components/ele";
+// import swup from "swup";
+// import { el } from "./components/ele";
 import { _log } from "./components/util";
 // import preload from '@swup/preload-plugin';
-import scrollPlugin from "@swup/scroll-plugin";
-import { _global, _body } from "./components/global";
-import { _is } from "./components/util";
-import anime from 'animejs';
-
+// import scrollPlugin from "@swup/scroll-plugin";
+// import { _global, _body } from "./components/global";
+// import { _is } from "./components/util";
+// import anime from 'animejs';
+import { onclick, el } from "./components/dom";
 try {
-    let _backToTop = el('#back-to-top');
     let _navbar = el('.navbar');
+    onclick(_navbar, '.navbar-menu', e => {
+        e.preventDefault();
+        _navbar.toggleClass("navbar-show");
+    });
+    // let _backToTop = el('#back-to-top');
 
-    let _height = _navbar.height();
-    let _focusPt = _height + 20;
-    let _load, _scroll, _scrollEle = _body.get(0);
-
+    // let _height = _navbar.height();
+    // let _focusPt = _height + 20;
+    // let _load, _scroll, _scrollEle = _body.get(0);
+    /*
     // _scrollEle = window.document.scrollingElement || window.document.body || window.document.documentElement;
     // _scrollEle = el(_scrollEle);
-
     _navbar.click('.navbar-menu', e => {
         e.preventDefault();
         _navbar.toggleClass("navbar-show");
@@ -141,7 +144,7 @@ try {
     })
 
     // This event runs for every page view after initial load
-    .on('contentReplaced', _load);
+    .on('contentReplaced', _load); */
 } catch (e) {
     let _img = [...document.getElementsByClassName("placeholder-img")];
     let _navbar = [...document.getElementsByClassName("navbar")];
@@ -151,10 +154,4 @@ try {
     _img.forEach(function (img) {
         img.classList.add("core-img-show");
     });
-
-    const addBtn = [...document.querySelectorAll('.add-button')];
-    addBtn.forEach(btn => {
-        if (btn !== undefined) btn.style.display = 'none';
-     });
-    console.error(e);
 }

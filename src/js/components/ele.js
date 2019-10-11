@@ -187,10 +187,10 @@ export default Ele = class extends EleEvt {
         let _newEvts, _evt, delegate, $super = EleEvt.prototype.on.bind(this);
         if (_is.undef(evt)) { return; } // If there is no event break
         if (_is.str(evt)) { evt = evt.split(/\s/g); }
-        if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
+        if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
 
-        _evt = (_is.obj(evt) && _is.not("arr", evt) ? keys(evt) : evt);
-        _newEvts = _evt.filter(val => !(val in this._events), this).join(" ");
+        _evt = (_is.obj(evt) && !_is.arr(evt) ? keys(evt) : evt);
+        _newEvts = _evt.filter(val => !(val in this._events), this);
 
         if (_is.str(opts)) delegate = opts;
         else callback = opts;
@@ -248,25 +248,9 @@ export default Ele = class extends EleEvt {
         });
     }
 
-    not(sel) {
-        let excludes, $this = this;
-        return new Ele(
-            this.reduce(function (acc, el, idx) {
-                if (_is.fn(sel) && _is.def(sel.call)) {
-                    if (!sel.call(el, el, idx)) acc.push(el);
-                } else {
-                    excludes = _is.str(sel) ? $this.filter(sel) :
-                        (_is.arrlike(sel) && _is.fn(sel.item)) ? [].slice.call(sel) : new Ele(sel);
-                    if (excludes.indexOf(el) < 0) acc.push(el);
-                }
-                return acc;
-            }, [], this)
-        );
-    }
-
     filter(sel) {
-        if (_is.fn(sel)) return this.not(this.not(sel));
-        return [].filter.call(this, ele => _matches(ele, sel), this);
+        if (!_is.def(sel)) return this;
+        return [].filter.call(this, _is.fn(sel) ? sel : ele => _matches(ele, sel), this);
     }
 
     has(sel) {
@@ -307,7 +291,7 @@ export default Ele = class extends EleEvt {
             this.reduce((acc, ele) => {
                 do {
                     if (list ? list.indexOf(ele) >= 0 : _matches(ele, sel)) break;
-                    ele = ele !== ctxt && _is.not("doc", ele) && ele.parentNode;
+                    ele = ele !== ctxt && !_is.doc(ele) && ele.parentNode;
                 } while (ele !== null && ele.nodeType === 1);
                 if (ele && acc.indexOf(ele) < 0) acc.push(ele);
                 return acc;

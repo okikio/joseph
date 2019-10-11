@@ -1,6 +1,6 @@
-import { _stringify } from "../../../util/stringify";
 import { _is, keys, _argNames } from "./util";
 
+// A small event emitter
 export default class _event {
     constructor() {
         this._events = {}; // Event info.
@@ -28,12 +28,12 @@ export default class _event {
         let $EvtApp, $evt;
         if (_is.undef(evt)) { return; } // If there is no event break
         if (_is.str(evt)) { evt = evt.split(/\s/g); }
-        if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
+        if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
 
         // Loop through the list of events
         keys(evt).forEach(function (key) {
             $evt = evt[key];
-            if (_is.obj(evt) && _is.not("arr", evt)) {
+            if (_is.obj(evt) && !_is.arr(evt)) {
                 $EvtApp = this._eventApp($evt, callback || this, key);
                 this._preEvent(key).push($EvtApp); // Set event list
             } else {
@@ -44,12 +44,59 @@ export default class _event {
         return this;
     }
 
+    // Removes a listener for a given event
+    off(evt, callback, scope) {
+        let $evt;
+        if (_is.undef(evt)) { return; } // If there is no event break
+        if (_is.str(evt)) { evt = evt.split(/\s/g); }
+        if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
+
+        let _off = function ($evt, callback, scope) {
+            let _Evt = this._preEvent($evt);
+
+            if (callback) {
+                let i = 0, val, app = this._eventApp(callback, scope, $evt);
+                for (; i < _Evt.length; i ++) {
+                    val = _Evt[i];
+                    if (val.callback === app.callback &&
+                         val.scope === app.scope)
+                         { break; }
+                }
+
+                _Evt.splice(i, 1);
+            } else { this._events[$evt] = undefined; }
+        };
+
+        keys(evt).forEach(function (key) {
+            $evt = evt[key];
+            if (_is.obj(evt) && !_is.obj(evt)) {
+                _off.call(this, key, $evt, scope);
+            } else { _off.call(this, $evt, callback, scope); }
+        }, this);
+        return this;
+    }
+
+    // Adds a one time event listener for a given event
+    once(evt, callback, scope) {
+        if (_is.undef(evt)) { return; } // If there is no event break
+        if (_is.str(evt)) { evt = evt.split(/\s/g); }
+        if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
+
+        let $Fn = function (...args) {
+            this.off(evt, $Fn, scope);
+            callback.apply(scope, args);
+        };
+
+        this.on(evt, $Fn, scope);
+        return this;
+    }
+
     // Call all function(s) within an event
     emit(evt, args, scope) {
         let $Evt, $args = args;
         if (_is.undef(evt)) { return; } // If there is no event break
         if (_is.str(evt)) { evt = evt.split(/\s/g); }
-        if (_is.not("arr", evt)) { evt = [evt]; } // Set evt to an array
+        if (!_is.arr(evt)) { evt = [evt]; } // Set evt to an array
 
         // Loop through the list of events
         evt.forEach(function ($evt) {
@@ -59,57 +106,14 @@ export default class _event {
 
             $Evt.forEach(_evt => {
                 $args = args;
+                // Check to see if first param is $evt, if so give details about event
                 if (_argNames(_evt.callback)[0] === "$evt")
                     { $args = [_evt, ...args]; }
+
                 _evt.callback
                     .apply(_is.undef(_evt.scope) ? scope : _evt.scope, $args);
             }, this);
         }, this);
-        return this;
-    }
-
-    // Removes a listener for a given event
-    off(evt, callback, scope) {
-        let $evt;
-        if (_is.undef(evt)) { return; } // If there is no event break
-        if (_is.str(evt)) { evt = evt.split(/\s/g); }
-        if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
-
-        let _off = function ($evt, callback, scope) {
-            let _Evt = this._preEvent($evt);
-
-            if (callback) {
-                let i, app = this._eventApp(callback, scope, $evt);
-
-                _Evt.forEach((val, _i) => {
-                    if (_stringify(val) === _stringify(app)) { i = _i; }
-                }, this);
-
-                if (i > - 1) { _Evt.splice(i, 1); }
-            } else { delete this._events[$evt]; }
-        }.bind(this);
-
-        keys(evt).forEach(function (key) {
-            $evt = evt[key];
-            if (_is.obj(evt) && _is.not("obj", evt)) {
-                _off(key, $evt, scope);
-            } else { _off($evt, callback, scope); }
-        }, this);
-        return this;
-    }
-
-    // Adds a one time event listener for a given event
-    once(evt, callback, scope) {
-        if (_is.undef(evt)) { return; } // If there is no event break
-        if (_is.str(evt)) { evt = evt.split(/\s/g); }
-        if (_is.not("arr", evt) && _is.not("obj", evt)) { evt = [evt]; } // Set evt to an array
-
-        let $Fn = function (...args) {
-            this.off(evt, $Fn, scope);
-            callback.apply(scope, args);
-        };
-
-        this.on(evt, $Fn, scope);
         return this;
     }
 
