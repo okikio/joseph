@@ -1,4 +1,4 @@
-let { attr, section, _img, background, _tile, _col, _style, _layer, _layout, _header, _main, values, title, row, page, padding, margin, _link, layout, layer, _hero, font, _content, color, col, _class } = require('./containers');
+let { config, attr, section, _img, background, _tile, _col, _style, _layer, _layout, _header, _main, values, title, row, page, padding, margin, _link, layout, layer, _hero, font, _content, color, col, _class } = require('./containers');
 let cityImg = "/assets/city";
 let carImg = "/assets/white_car";
 let blueSkyImg = "/assets/blue-sky";
@@ -26,16 +26,8 @@ let spacingColumns = size => col([
 ]);
 
 module.exports = {
+    ...config,
     "websiteURL": "https://app-fast.herokuapp.com/",
-    "cloud_name": "okikio-assets",
-    "imageURLConfig": {
-        "flags": "progressive:steep",
-        "fetch_format": "auto",
-        "client_hints": true,
-        "crop": "scale",
-        "quality": 30,
-        "dpr": "auto"
-    },
     "pages": {
         "404": page([
             _name("404"),

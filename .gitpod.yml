@@ -7,6 +7,6 @@ ports:
 
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/44_config_start_tasks/
 tasks:
-  - before: nvm i 12.11 && nvm use 12.11 && npm i yarn gulp -g
+  - before: nvm i 12 && nvm use 12 && npm i yarn gulp -g
     init: yarn install && yarn upgrade # runs during prebuild
     command: yarn build

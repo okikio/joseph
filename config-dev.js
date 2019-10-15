@@ -1,5 +1,4 @@
 module.exports = {
-    "websiteURL": "https://app-fast.herokuapp.com/",
     "cloud_name": "okikio-assets",
     "imageURLConfig": {
         "flags": "progressive:steep",
@@ -9,6 +8,7 @@ module.exports = {
         "quality": 30,
         "dpr": "auto"
     },
+    "websiteURL": "https://app-fast.herokuapp.com/",
     "pages": {
         "404": {
             "page": {
@@ -163,7 +163,7 @@ module.exports = {
                     "hero": {
                         "title": "Projects.",
                         "img": {
-                            "src": "/assets/blue-sky",
+                            "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/blue-sky",
                             "alt": "A city Image"
                         }
                     }
@@ -233,7 +233,7 @@ module.exports = {
                     "hero": {
                         "title": "Subpage.",
                         "img": {
-                            "src": "/assets/white-flower",
+                            "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/white-flower",
                             "alt": "A city Image"
                         }
                     }
@@ -303,7 +303,7 @@ module.exports = {
                     "hero": {
                         "title": "Welcome!.",
                         "img": {
-                            "src": "/assets/white_car",
+                            "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/white_car",
                             "alt": "A city Image"
                         }
                     }
@@ -530,7 +530,7 @@ module.exports = {
                                                             "title": "Google Designs",
                                                             "content": "",
                                                             "img": {
-                                                                "src": "/assets/blue-sky",
+                                                                "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/blue-sky",
                                                                 "alt": "City Alt"
                                                             },
                                                             "class": "layer-box layer-surface layer-shadow--1 layout-block"

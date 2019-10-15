@@ -11,7 +11,7 @@ export let get = (_el, idx) => {
     _el = el(_el);
     return _is.undef(idx) ? [].slice.call(_el) : _el[idx >= 0 ? idx : idx + _el.length];
 };
-export let nth = get;
+export let nth = get; // An alias of get
 export let toArray = val => (_is.inst(val, ele) ? get(val) : val); // Convert ele objects to arrays
 export let indexOf = (_el, val) => [].indexOf.call(el(_el), val); // Array.indexOf for the ele object
 
@@ -488,6 +488,12 @@ export let index = (_el, el) => {
 // Class name cache
 let classcache = {};
 
+// Class name RegExp
+let _classRE = name => {
+    return name in classcache ? classcache[name] :
+        (classcache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'));
+};
+
 // Get the class name for an element
 let getclass = (node, value) => {
     let name = node.className || '';
@@ -495,12 +501,6 @@ let getclass = (node, value) => {
 
     if (_is.undef(value)) return svg ? name.baseVal : name;
     svg ? (name.baseVal = value) : (node.className = value);
-};
-
-// Class name RegExp
-let _classRE = name => {
-    return name in classcache ? classcache[name] :
-        (classcache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'));
 };
 
 // Check if any elements in the collection have the specified class.

@@ -15,16 +15,13 @@ const rollupBabel = require('rollup-plugin-babel');
 const { stringify } = require('./util/stringify');
 const rollupJSON = require("rollup-plugin-json");
 const { babelConfig } = require("./browserlist");
-const replace = require('gulp-string-replace');
 const { html, js } = require('gulp-beautify');
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
 const { lookup } = require("mime-types");
 const htmlmin = require('gulp-htmlmin');
-const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
-const imageSize = require("image-size");
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const { writeFile } = require("fs");
@@ -32,10 +29,7 @@ const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const axios = require("axios");
-
-let { pages, cloud_name, imageURLConfig } = config;
-let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
-assets.config({ cloud_name, secure: true });
+let { pages, cloud_name } = config;
 
 // Rollup warnings are annoying
 let ignoreLog = ["CIRCULAR_DEPENDENCY", "UNRESOLVED_IMPORT", 'EXTERNAL_DEPENDENCY', 'THIS_IS_UNDEFINED'];
@@ -82,8 +76,6 @@ let posthtmlOpts = [
                     axios.get(node.attrs.src, { responseType: 'arraybuffer' })
                         .then(val => {
                             buf = Buffer.from(val.data, 'base64');
-                            let { width, height } = imageSize(buf);
-                            Object.assign(node.attrs, { width, height });
                             node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
                         }).catch(err => {
                             console.error(`The image with the src: ${node.attrs.src} `, err);
@@ -200,25 +192,7 @@ task('html', () => {
                     // Pug compiler
                     pug({ locals: { ...page, cloud_name, dev, debug } }),
                     // Minify or Beautify html
-                    dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts),
-                    // Replace /assets/... URLs
-                    replace(/\/assets\/[^\s"']+/g, url => {
-                        let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
-                        let query = URLObj.searchParams;
-                        let queryString = URLObj.search;
-
-                        let height = query.get("h");
-                        let width = query.get("w") || 'auto';
-                        let crop = query.get("crop") || imageURLConfig.crop;
-                        let effect = query.get("effect") || imageURLConfig.effect;
-                        let quality = query.get("quality") || imageURLConfig.quality;
-                        let _imgURLConfig = { ...imageURLConfig, width, height, quality, crop, effect };
-
-                        return (/\/raw\/[^\s"']+/.test(url) ?
-                                    `${assetURL + url.replace(queryString, '')}` :
-                                    assets.url(url.replace(queryString, ''), _imgURLConfig)
-                                ).replace("/assets/", "");
-                    }, { logs: { enabled: false }})
+                    dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts)
                 ]
             }]
         )

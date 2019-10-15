@@ -10,9 +10,9 @@
     "build": "gulp"
   },
   "engines": {
-    "node": "v12.11.1",
-    "npm": "6.11.3",
-    "yarn": "1.19.1"
+    "node": ">=12",
+    "npm": ">=6",
+    "yarn": ">=1"
   },
   "repository": {
     "type": "git",
@@ -57,9 +57,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
-    "gulp-string-replace": "^1.1.2",
     "gulp-terser": "^1.2.0",
-    "image-size": "^0.8.3",
     "postcss": "^7.0.18",
     "postcss-csso": "^3.0.0",
     "postcss-flexibility": "^2.0.0",
@@ -75,9 +73,8 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "smoothstate": "^0.7.2",
     "swup": "^2.0.5",
     "typographic-single-spaces": "^1.0.2",
-    "yarn": "^1.19.0"
+    "yarn": "^1.19.1"
   }
 }
