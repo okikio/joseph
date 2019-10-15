@@ -82,6 +82,6 @@ $ yarn
 
 Once **yarn** is done you should be able to now start editing your site, but first to see how your site looks, type into the command prompt:
 ```bash
-$ yarn watch
+$ yarn dev:watch
 ```
 (don't type the $, it indicates that you’re doing this at the command line) 
