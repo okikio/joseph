@@ -20,6 +20,13 @@
 
 If you don't want to do all this work you can leave it to me to design and post your website.
 
+---
+
+### *Edit Online*
+Click [Gitpod](https://www.gitpod.io/#https://github.com/okikio/okikio) and sign up, to edit online and have everything you need to start editing all ready for you, if you use this option **skip** the download section and go straight to the [Launch](#launch) portion of the **Usage** section, of **Getting Started**.
+
+--- 
+
 ### *Download*
 
 **Install Node.js**
@@ -66,6 +73,8 @@ $ git config --global user.email "your_email@example.com"
 ```
 (don't type the $, it indicates that you’re doing this at the command line, and remember to replace the values in `"quotes"` with your [Github](github.com) account info)
 
+---
+
 ### *Usage*
 
 In the command prompt type the command **git clone `url`**, this will download the website from online, note this may take a couple seconds to a few minutes depending on the speed of your internet connection and the performance of your computer. The `url` can be determined by going to the repository url link I will give you. When typed into your command prompt it should look like this:
@@ -73,6 +82,8 @@ In the command prompt type the command **git clone `url`**, this will download t
 $ git clone https://github.com/okikio/app-web.git
 ```
 (don't type the $, it indicates that you’re doing this at the command line, and remember to replace the url with your repository info) 
+
+<h4 style="font-weight: bold" id="launch">Launch</h4>
 
 Once the repository has been cloned go into the new folder that should have been created and open your command prompt in this folder. In the command prompt type the command **yarn**, this will start installing the packages required for the website, note this may take a couple seconds to a few minutes depending on the speed of your internet connection and the performance of your computer.
 ```bash
@@ -85,3 +96,9 @@ Once **yarn** is done you should be able to now start editing your site, but fir
 $ yarn dev:watch
 ```
 (don't type the $, it indicates that you’re doing this at the command line) 
+
+## Documentation
+
+## Demos and examples 
+
+## Browser support

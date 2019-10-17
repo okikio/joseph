@@ -62,6 +62,16 @@ $icon-font: "Material Icons", sans-serif;
 $regular-font: "Roboto", sans-serif;
 $bold-font: 'Montserrat', sans-serif;
 
+$desktop: 1280px;
+$laptop: 1080px;
+$tablet: 680px;
+$phone: 480px;
+
+$screen-size-desktop: "(min-width: #{$desktop})";
+$screen-size-laptop: "(max-width: #{$laptop})";
+$screen-size-tablet: "(max-width: #{$table})";
+$screen-size-phone: "(max-width: #{$phone})";
+
 $size-gigantic: 180px;
 $size-huge: 120px;
 $size-extra-xl: 100px;
