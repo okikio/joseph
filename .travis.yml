@@ -2,7 +2,6 @@ language: node_js
 node_js:
   - "12"
 before_script:
-  - nvm install 12
   - npm install -g yarn
   - yarn install
 cache: npm
