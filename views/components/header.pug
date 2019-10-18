@@ -13,7 +13,7 @@ mixin header(_page)
 
   header.header
     nav.navbar.navbar-fixed
-      article.layout-contain-large.navbar-layout
+      article.layout-contain-large.navbar-layout.layout-flex
         section.navbar-head
           +link({
             href: "/" + (dev ? "index.html" : "index"),
@@ -31,16 +31,16 @@ mixin header(_page)
 
         section.layout-spacer.navbar-desktop
         section.navbar-main
-          .layout-flex.layout-align-items-center
-            ul.navbar-list#swup
-              each tab in _tabs
-                - let _link = tab.a;
-                - let _href = _link.href;
-                - let _content = _link.content;
-                - let _class = _name == _content ? "navbar-link-focus" : "";
+          //- .layout-flex.layout-align-items-center
+          ul.navbar-list#swup
+            each tab in _tabs
+              - let _link = tab.a;
+              - let _href = _link.href;
+              - let _content = _link.content;
+              - let _class = _name == _content ? "navbar-link-focus" : "";
 
-                li
-                  a.navbar-link(href=_href class=_class data-swup-preload)= _content
+              li
+                a.navbar-link(href=_href class=_class data-swup-preload)= _content
             //- li.navbar-desktop
               +install
                   span.btn-spacer

@@ -10,12 +10,13 @@ mixin hero(value)
       .layer-hero
         +image(_image)
 
-        section.layout-enlarge
+        section.layout-enlarge.layout-flex.layout-align-items-center.layout-justify-content-center.layout-height-tablet.layout-max-height
           .layer-content.style-center
             section.layer-header
             section.layer-main
               h1.style-font-title.layer-title.style-white= _title
 
+            section.layer-footer.layout-align-self-end
               button.next-layer.btn.layer-round.layout-padding-small.layer-tertiary.layer-shadow.layer-secondary-hover.style-secondary.style-hover-tertiary.layer-hero-scroll-down(tabindex='0', type='button')
                 span.btn-group
                   i.icon.style-font-sz-36 expand_more

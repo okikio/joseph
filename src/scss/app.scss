@@ -62,15 +62,15 @@ $icon-font: "Material Icons", sans-serif;
 $regular-font: "Roboto", sans-serif;
 $bold-font: 'Montserrat', sans-serif;
 
-$desktop: 1280px;
-$laptop: 1080px;
-$tablet: 680px;
-$phone: 480px;
+$desktop: 1280;
+$laptop: 1080;
+$tablet: 680;
+$phone: 480;
 
-$screen-size-desktop: "(min-width: #{$desktop})";
-$screen-size-laptop: "(max-width: #{$laptop})";
-$screen-size-tablet: "(max-width: #{$table})";
-$screen-size-phone: "(max-width: #{$phone})";
+$screen-size-desktop: "(min-width: #{$desktop}px)";
+$screen-size-laptop: "(max-width: #{$laptop}px)";
+$screen-size-tablet: "(max-width: #{$tablet}px)";
+$screen-size-phone: "(max-width: #{$phone}px)";
 
 $size-gigantic: 180px;
 $size-huge: 120px;

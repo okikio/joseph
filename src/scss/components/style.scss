@@ -16,13 +16,14 @@
                font-size: #{$sz}px;
             }
          }
-            
+
          $screenSizes: (
-            "desktop": $screen-size-desktop, 
-            "laptop": $screen-size-laptop, 
-            "tablet": $screen-size-tablet, 
+            "desktop": $screen-size-desktop,
+            "laptop": $screen-size-laptop,
+            "tablet": $screen-size-tablet,
             "phone": $screen-size-phone
          );
+
          @each $device-type, $screen-size in $screenSizes {
             @media #{$screen-size} {
                @for $sz from 8 through 150 {

@@ -9,6 +9,60 @@
    margin: 0 auto;
    width: 100%;
 
+   &-max-height {
+      position: relative;
+      height: 100vh;
+   }
+
+   $dimension: ("width", "height");
+   @each $axis in $dimension {
+      $screenSizes: (
+         "desktop": $screen-size-desktop,
+         "laptop": $screen-size-laptop,
+         "tablet": $screen-size-tablet,
+         "phone": $screen-size-phone
+      );
+
+      $screenSizesPX: (
+         "desktop": $desktop,
+         "laptop": $laptop,
+         "tablet": $tablet,
+         "phone": $phone
+      );
+
+      @each $device-type, $screen-size in $screenSizes {
+         &-#{$axis}-#{$device-type} {
+            #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+         }
+
+         &-max-#{$axis}-#{$device-type} {
+            max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+         }
+
+         @for $sz from 0 through $desktop / 5 {
+            &-#{$axis}-#{$device-type}-#{$sz} {
+               #{$axis}: #{$sz * 5}px;
+            }
+
+            &-max-#{$axis}-#{$device-type}-#{$sz} {
+               max-#{$axis}: #{$sz * 5}px;
+            }
+         }
+
+         @media #{$screen-size} {
+            &-resize-#{$axis}-#{$device-type} {
+               #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+            }
+
+            @for $sz from 0 through $desktop / 5 {
+               &-resize-#{$axis}-#{$device-type}-#{$sz} {
+                  #{$axis}: #{$sz * 5}px;
+               }
+            }
+         }
+      }
+   }
+
    &,
    &-vert {
       padding: {
@@ -199,21 +253,28 @@
       }
    }
 
-   &-align-items {
-      &-start {
-         align-items: flex-start;
-      }
+   $alignments: ("self", "items");
+   @each $type in $alignments {
+      &-align-#{$type} {
+         &-start {
+            align-#{$type}: flex-start;
+         }
 
-      &-center {
-         align-items: center;
-      }
+         &-center {
+            align-#{$type}: center;
+         }
 
-      &-stretch {
-         align-items: stretch;
-      }
+         &-stretch {
+            align-#{$type}: stretch;
+         }
 
-      &-end {
-         align-items: flex-end;
+         &-baseline {
+            align-#{$type}: stretch;
+         }
+
+         &-end {
+            align-#{$type}: flex-end;
+         }
       }
    }
 
@@ -314,13 +375,13 @@
             max-width: 1200px;
          }
       }
-      
+
       @media (min-width: 1200px) {
          &-larger {
             max-width: 1400px;
          }
       }
-      
+
       @media (min-width: 1400px) {
          &-larger {
             max-width: 1600px;

@@ -60,11 +60,6 @@
       }
    }
 
-   &-max-height {
-      position: relative;
-      height: 100vh;
-   }
-   
    &-overflow-hide {
       overflow: hidden;
    }
@@ -73,7 +68,6 @@
       // @extend %shadow;
       // background: $surface;
       position: relative;
-      max-height: 800px;
       z-index: 125;
 
       .layer-image {
