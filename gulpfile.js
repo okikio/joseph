@@ -317,12 +317,17 @@ task("config:watch", () =>
     _exec("gulp config html css")
 );
 
-task("git", () =>
-    _execSeries(
-        "git add .",
-        "git commit -m 'Upgrade'",
+task("git:push", () => {
+    let commit = process.argv[3] || 'Upgrade';
+    return _execSeries(
+        "git add --ignore-removal .",
+        `git commit -m '${commit}'`,
         "git push -u origin master"
     )
+});
+
+task("git:pull", () =>
+    _exec("git pull origin master")
 );
 
 task('inline', () =>

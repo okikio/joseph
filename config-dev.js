@@ -618,49 +618,5 @@ module.exports = {
         "/": "index",
         "/about": "about",
         "/projects": "project"
-    },
-    "social_links": [{
-        "name": ["Twitter", "Tw"],
-        "href": "https://twitter.com/okikio_dev"
-    }, {
-        "name": ["Instagram", "In"],
-        "href": "https://www.instagram.com/okikio.dev/"
-    }, {
-        "name": ["Github", "Git"],
-        "href": "https://github.com/okikio"
-    }, {
-        "name": ["LinkedIn", "Lk"],
-        "href": "https://www.linkedin.com/in/okiki-o-a5287213b"
-    }, {
-        "name": ["Mail", "@"],
-        "href": "mailto:okikio.dev@gmail.com"
-    }],
-    "projects": [{
-        "name": "Leader",
-        "url": "leader",
-        "detail": "Lorem itpsim",
-        "info": "The nature of leadership",
-        "img": {
-            "src": "/assets/white-flower",
-            "alt": ""
-        }
-    }, {
-        "name": "Science",
-        "url": "science",
-        "detail": "Lorem itpsim",
-        "info": "Info about Leukemia",
-        "img": {
-            "src": "/assets/city",
-            "alt": ""
-        }
-    }, {
-        "name": "Civics",
-        "url": "civics",
-        "detail": "Lorem itpsim",
-        "info": "A little about renewable sources of energy",
-        "img": {
-            "src": "/assets/blue-sky",
-            "alt": ""
-        }
-    }]
+    }
 };

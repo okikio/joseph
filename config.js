@@ -25,9 +25,81 @@ let spacingColumns = size => col([
     _class([ _layout("block"), _col(size.toString()) ])
 ]);
 
+let social_links = [
+    {
+        "name": [
+            "Twitter",
+            "Tw"
+        ],
+        "href": "https://twitter.com/okikio_dev"
+    },
+    {
+        "name": [
+            "Instagram",
+            "In"
+        ],
+        "href": "https://www.instagram.com/okikio.dev/"
+    },
+    {
+        "name": [
+            "Github",
+            "Git"
+        ],
+        "href": "https://github.com/okikio"
+    },
+    {
+        "name": [
+            "LinkedIn",
+            "Lk"
+        ],
+        "href": "https://www.linkedin.com/in/okiki-o-a5287213b"
+    },
+    {
+        "name": [
+            "Mail",
+            "@"
+        ],
+        "href": "mailto:okikio.dev@gmail.com"
+    }
+];
+
+let projects = [
+    {
+        "name": "Leader",
+        "url": "leader",
+        "detail": "Lorem itpsim",
+        "info": "The nature of leadership",
+        "img": {
+            "src": flowerImg,
+            "alt": ""
+        }
+    },
+    {
+        "name": "Science",
+        "url": "science",
+        "detail": "Lorem itpsim",
+        "info": "Info about Leukemia",
+        "img": {
+            "src": cityImg,
+            "alt": ""
+        }
+    },
+    {
+        "name": "Civics",
+        "url": "civics",
+        "detail": "Lorem itpsim",
+        "info": "A little about renewable sources of energy",
+        "img": {
+            "src": blueSkyImg,
+            "alt": ""
+        }
+    }
+];
+
+// Edit this to change your site
 module.exports = {
     ...config,
-    "websiteURL": "https://app-fast.herokuapp.com/",
+    "websiteURL": "https://app-web.netlify.com/",
     "pages": {
         "404": page([
             _name("404"),
@@ -490,75 +562,6 @@ module.exports = {
     "routes": {
         "/": "index",
         "/about": "about",
-        "/projects": "project"
-    },
-    "social_links": [
-        {
-            "name": [
-                "Twitter",
-                "Tw"
-            ],
-            "href": "https://twitter.com/okikio_dev"
-        },
-        {
-            "name": [
-                "Instagram",
-                "In"
-            ],
-            "href": "https://www.instagram.com/okikio.dev/"
-        },
-        {
-            "name": [
-                "Github",
-                "Git"
-            ],
-            "href": "https://github.com/okikio"
-        },
-        {
-            "name": [
-                "LinkedIn",
-                "Lk"
-            ],
-            "href": "https://www.linkedin.com/in/okiki-o-a5287213b"
-        },
-        {
-            "name": [
-                "Mail",
-                "@"
-            ],
-            "href": "mailto:okikio.dev@gmail.com"
-        }
-    ],
-    "projects": [
-        {
-            "name": "Leader",
-            "url": "leader",
-            "detail": "Lorem itpsim",
-            "info": "The nature of leadership",
-            "img": {
-                "src": flowerImg,
-                "alt": ""
-            }
-        },
-        {
-            "name": "Science",
-            "url": "science",
-            "detail": "Lorem itpsim",
-            "info": "Info about Leukemia",
-            "img": {
-                "src": cityImg,
-                "alt": ""
-            }
-        },
-        {
-            "name": "Civics",
-            "url": "civics",
-            "detail": "Lorem itpsim",
-            "info": "A little about renewable sources of energy",
-            "img": {
-                "src": blueSkyImg,
-                "alt": ""
-            }
-        }
-    ]
+        "/projects": "project",
+    }
 };

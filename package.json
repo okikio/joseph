@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "A fastify app.",
   "scripts": {
-    "test": "yarn build",
-    "dev:watch": "gulp dev && gulp watch",
-    "watch": "gulp watch",
-    "dev:build": "gulp dev",
-    "build": "gulp"
+    "test": "gulp",
+    "watch": "gulp dev && gulp watch",
+    "develop": "gulp dev",
+    "build": "gulp",
+    "publish": "gulp git:push",
+    "reload": "gulp git:pull"
   },
   "engines": {
     "node": "12",
