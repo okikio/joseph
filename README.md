@@ -158,11 +158,11 @@ is meant for testing, testing how the website will react if it were published to
 You will most likely only need to change some text and maybe an image here and there, but I added the ability for you to change how the website looks completely, while still making it easy for you to understand, to reach this objects I created **containers**. Containers are components in the website that can be tweaked and edited easily while keeping the website design clean. The list of containers can be found in the [containers.js](./containers.js) file. All editing you will ever do is in one easy file the [config.js](./config.js) file. The **config.js** is very busy but easy to tweak. When you first open the file type the shortcuts to fold all code (to make code easy to read),
 The beauty of Visual Studio Code is
 
-<kbd>Ctrl</kbd> + <kbd>Shift<kbd> + <kbd>P</kbd>
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>
 
 Hit it and search anything you want.
 
-In your case, hit <kbd>Ctrl</kbd> + <kbd>Shift<kbd> + <kbd>P</kbd> and type `Fold All`. Click on the `Fold All` option, everything should now make more sense.
+In your case, hit <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and type `Fold All`. Click on the `Fold All` option, everything should now make more sense.
 
 **Adding Pages**
 
