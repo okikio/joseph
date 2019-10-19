@@ -3,12 +3,14 @@ import _event from './event';
 
 // Test for passive support, based on [github.com/rafrex/detect-passive-events]
 let passive = false, opts = {}, noop = () => { };
-opts = Object.defineProperty({}, "passive", {
-	get: () => passive = { capture: false, passive: true }
-});
+try {
+    opts = Object.defineProperty({}, "passive", {
+        get: () => passive = { capture: false, passive: true }
+    });
 
-window.addEventListener("PassiveEventTest", noop, opts);
-window.removeEventListener("PassiveEventsTest", noop, opts);
+    window.addEventListener("PassiveEventTest", noop, opts);
+    window.removeEventListener("PassiveEventsTest", noop, opts);
+} catch (e) {}
 
 let ele;
 let tagRE = /^\s*<(\w+|!)[^>]*>/;
