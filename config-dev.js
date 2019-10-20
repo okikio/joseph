@@ -8,7 +8,7 @@ module.exports = {
         "quality": 30,
         "dpr": "auto"
     },
-    "websiteURL": "https://app-fast.herokuapp.com/",
+    "websiteURL": "https://app-web.netlify.com/",
     "pages": {
         "404": {
             "page": {

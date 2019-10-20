@@ -40,10 +40,9 @@
       &, &-weight {
          font-weight: 400;
 
-         $fontWeight: (200, 300, 400, 500, 600, 700, 800, 900);
-         @each $weight in $fontWeight {
-            &-#{$weight} {
-               font-weight: #{$weight};
+         @for $weight from 1 through 9 {
+            &-#{$weight}00 {
+               font-weight: #{$weight}00;
             }
          }
 
@@ -165,4 +164,3 @@
 
    @include colorList;
 }
-
