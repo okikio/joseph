@@ -30,6 +30,26 @@
          "phone": $phone
       );
 
+    @for $sz from 0 through $desktop / 5 {
+        &-#{$axis}-#{$sz} {
+            #{$axis}: #{$sz * 5}px;
+        }
+
+        &-max-#{$axis}-#{$sz} {
+            max-#{$axis}: #{$sz * 5}px;
+        }
+    }
+
+    @for $sz from 0 through 100 {
+        &-#{$axis}%-#{$sz} {
+            #{$axis}: percentage($sz / 100);
+        }
+
+        &-max-#{$axis}%-#{$sz} {
+            max-#{$axis}: percentage($sz / 100);
+        }
+    }
+
       @each $device-type, $screen-size in $screenSizes {
          &-#{$axis}-#{$device-type} {
             #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
@@ -39,25 +59,33 @@
             max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
          }
 
-         @for $sz from 0 through $desktop / 5 {
-            &-#{$axis}-#{$device-type}-#{$sz} {
-               #{$axis}: #{$sz * 5}px;
-            }
-
-            &-max-#{$axis}-#{$device-type}-#{$sz} {
-               max-#{$axis}: #{$sz * 5}px;
-            }
-         }
-
          @media #{$screen-size} {
             &-resize-#{$axis}-#{$device-type} {
                #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+            }
+
+            &-resize-max-#{$axis}-#{$device-type} {
+                max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
             }
 
             @for $sz from 0 through $desktop / 5 {
                &-resize-#{$axis}-#{$device-type}-#{$sz} {
                   #{$axis}: #{$sz * 5}px;
                }
+
+               &-resize-max-#{$axis}-#{$device-type}-#{$sz} {
+                  max-#{$axis}: #{$sz * 5}px;
+               }
+            }
+
+            @for $sz from 0 through 100 {
+                &-resize-#{$axis}%-#{$device-type}-#{$sz} {
+                    #{$axis}: percentage($sz / 100);
+                }
+
+                &-resize-max-#{$axis}%-#{$device-type}-#{$sz} {
+                    max-#{$axis}: percentage($sz / 100);
+                }
             }
          }
       }
@@ -592,19 +620,20 @@
       flex-flow: row wrap;
       display: flex;
 
-      [class*="layout-col"] {
-         position: relative;
-         min-height: 1px;
-         max-width: 100%;
-         width: 100%;
+        [class*="layout-col"] {
+            position: relative;
+            min-height: 1px;
+            max-width: 100%;
+            width: 100%;
 
-         @media (min-width: 550px) {
-            padding-right: $size-small;
-            padding-left: $size-small;
-         }
-      }
+            @media (min-width: 550px) {
+                padding-right: $size-small;
+                padding-left: $size-small;
+            }
+        }
+   }
 
-      .layout-col {
+      &-col {
          max-width: 100%;
          flex-basis: 0;
          flex-grow: 1;
@@ -630,5 +659,4 @@
             }
          }
       }
-   }
 }
