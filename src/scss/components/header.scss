@@ -75,6 +75,7 @@
         &-link {
             text-transform: uppercase;
             font-family: $bold-font;
+            text-decoration: none;
             line-height: $height;
             letter-spacing: 1px;
             font-weight: 300;
@@ -86,7 +87,23 @@
 
             &:hover {
                 text-decoration: none;
-                color: $tertiary;
+                color: $black;
+            }
+
+            &:before {
+                transition: transform .25s cubic-bezier(.25,.46,.45,.94);
+                transform: translateY($height - 12px) scaleX(0);
+                border: 1px solid transparent;
+                transform-origin: 100% 50%;
+                background-color: $primary;
+                will-change: transform;
+                transition-delay: 70ms;
+                border-radius: 10px;
+                max-width: 80px;
+                display: block;
+                height: 2.5px;
+                width: 100%;
+                content: "";
             }
 
             &-focus {
@@ -151,6 +168,28 @@
             &-link {
                 line-height: $height - 12px;
                 padding: 0 24px;
+
+                &:before {
+                    transition: transform .25s cubic-bezier(.25,.46,.45,.94);
+                    transform: translateY($height / 2) scaleX(0);
+                    border: 1px solid transparent;
+                    transform-origin: 100% 50%;
+                    background-color: $primary;
+                    will-change: transform;
+                    transition-delay: 70ms;
+                    border-radius: 10px;
+                    max-width: 80px;
+                    display: block;
+                    height: 2.5px;
+                    width: 100%;
+                    content: "";
+                }
+
+
+                &:hover &:before {
+                    transform: translateY($height - 12px) scaleX(1);
+                    transform-origin: 0 50%;
+                }
             }
 
             &-menu {
@@ -167,7 +206,7 @@
         }
 
         // Desktop navbar settings
-        @media (min-width: $tablet) {
+        @media (max-width: $tablet) {
             &-layout {
                 padding: 0 $size;
                 display: flex;
@@ -175,6 +214,30 @@
 
             &-list {
                 height: $height;
+            }
+
+            &-link {
+                &:before {
+                    transition: transform .25s cubic-bezier(.25,.46,.45,.94);
+                    transform: translateY($height - 12px) scaleX(0);
+                    border: 1px solid transparent;
+                    transform-origin: 100% 50%;
+                    background-color: $primary;
+                    will-change: transform;
+                    transition-delay: 70ms;
+                    border-radius: 10px;
+                    max-width: 80px;
+                    display: block;
+                    height: 2.5px;
+                    width: 100%;
+                    content: "";
+                }
+
+
+                &:hover &:before {
+                    transform: translateY($height - 12px) scaleX(1);
+                    transform-origin: 0 50%;
+                }
             }
         }
     }
