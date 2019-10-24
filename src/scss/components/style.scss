@@ -11,9 +11,9 @@
       &, &-sz, &-size {
          font-size: 14px;
 
-         @for $sz from 8 through 150 {
-            &-#{$sz} {
-               font-size: #{$sz}px;
+         @for $sz from 8 through 50 {
+            &-#{$sz * 3} {
+               font-size: #{$sz * 3}px;
             }
          }
 
@@ -26,9 +26,9 @@
 
          @each $device-type, $screen-size in $screenSizes {
             @media #{$screen-size} {
-               @for $sz from 8 through 150 {
-                  &-#{$device-type}-#{$sz} {
-                     font-size: #{$sz}px;
+               @for $sz from 8 through 50 {
+                  &-#{$device-type}-#{$sz * 3} {
+                     font-size: #{$sz * 3}px;
                   }
                }
             }
@@ -96,7 +96,7 @@
          letter-spacing: 7px;
       }
 
-      @for $space from 0 to 150 {
+      @for $space from 0 to 10 {
          &-#{$space} {
             letter-spacing: #{$space}px;
          }
@@ -122,11 +122,11 @@
          line-height: 3em;
       }
 
-      @for $height from 8 through 150 {
-         &-#{$height} {
-            line-height: #{$height}px;
-         }
-      }
+    //   @for $height from 0 through 25 {
+    //      &-#{$height * 5} {
+    //         line-height: #{$height * 5}px;
+    //      }
+    //   }
    }
 
    &, &-align {

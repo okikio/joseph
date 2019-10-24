@@ -9,4 +9,4 @@ ports:
 tasks:
   - before: nvm i 12 && nvm use 12 && npm i yarn gulp -g
     init: yarn install && yarn upgrade # runs during prebuild
-    command: yarn build
+    command: yarn watch
