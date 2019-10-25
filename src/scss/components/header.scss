@@ -93,7 +93,6 @@
                 will-change: transform;
                 transition-delay: 70ms;
                 border-radius: 10px;
-                max-width: 80px;
                 display: block;
                 height: 2.5px;
                 width: 100%;
@@ -173,21 +172,17 @@
                 line-height: $height - 12px;
                 padding: 0 24px;
 
-                // &:before {
-                //     transition: transform .25s cubic-bezier(.25,.46,.45,.94);
-                //     transform: translateY($height / 2) scaleX(0);
-                //     border: 1px solid transparent;
-                //     transform-origin: 100% 50%;
-                //     background-color: $primary;
-                //     will-change: transform;
-                //     transition-delay: 70ms;
-                //     border-radius: 10px;
-                //     max-width: 80px;
-                //     display: block;
-                //     height: 2.5px;
-                //     width: 100%;
-                //     content: "";
-                // }
+                &:before {
+                    transform: translateY(-3px) scaleX(0);
+                    display: inline-block;
+                    margin-right: 5px;
+                    max-width: 60px;
+                }
+
+                &:hover:before {
+                    transform: translateY(-3px) scaleX(1);
+                    // display: inline-block;
+                }
 
                 // &:hover:before {
                 //     transform: translateY($height - 12px) scaleX(1);
