@@ -16,9 +16,9 @@ try {
         toggleClass(_navbar, "navbar-show");
         console.log("Navbar-show");
     });
-    new Rellax('.core-img', {
-        speed: -10,
-        // center: true,
+    new Rellax('.load-img', {
+        speed: -8,
+        center: true,
         // wrapper: '.layer-image',
         round: true,
         vertical: true,
