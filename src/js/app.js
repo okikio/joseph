@@ -1,6 +1,7 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
 import { _log } from "./components/util";
+import Rellax from "rellax";
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
 // import { _global, _body } from "./components/global";
@@ -14,6 +15,14 @@ try {
         e.preventDefault();
         toggleClass(_navbar, "navbar-show");
         console.log("Navbar-show");
+    });
+    new Rellax('.core-img', {
+        speed: -10,
+        // center: true,
+        // wrapper: '.layer-image',
+        round: true,
+        vertical: true,
+        horizontal: false
     });
     // let _backToTop = el('#back-to-top');
 

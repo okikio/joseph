@@ -68,6 +68,7 @@
     "posthtml-link-noreferrer": "^1.0.4",
     "posthtml-lorem": "^1.0.0",
     "posthtml-textr": "^1.0.5",
+    "rellax": "^1.10.0",
     "rollup": "^1.21.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
