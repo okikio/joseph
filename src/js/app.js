@@ -50,7 +50,7 @@ let _focusPt = _height + 10;
             show(actioncenter);
         } else { hide(actioncenter); }
     });
-
+    try {
     new Rellax('.load-img', {
         speed: -10,
         center: true,
@@ -59,6 +59,7 @@ let _focusPt = _height + 10;
         vertical: true,
         horizontal: false
     });
+    } catch (e) {}
     // let _backToTop = el('#back-to-top');
 
     // let _height = _navbar.height();
