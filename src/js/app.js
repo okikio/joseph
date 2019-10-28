@@ -23,6 +23,16 @@ let _focusPt = _height + 10;
         toggleClass(_navbar, "navbar-show");
     });
 
+    onscroll(window, () => {
+        toggleClass(_navbar, "navbar-focus", (scrollTop(window) + _height) >= _focusPt);
+        hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+
+        if ((scrollTop(window) + _height) >= _focusPt * 2) {
+            show(actioncenter);
+        } else { hide(actioncenter); }
+    });
+
+    try {
     each(_img, $img => {
         let _core_img = get(find($img, ".core-img"), 0);
         let _placeholder_img = find($img, ".placeholder-img");
@@ -41,16 +51,6 @@ let _focusPt = _height + 10;
             }
         }
     });
-
-    onscroll(window, () => {
-        toggleClass(_navbar, "navbar-focus", (scrollTop(window) + _height) >= _focusPt);
-        hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
-
-        if ((scrollTop(window) + _height) >= _focusPt * 2) {
-            show(actioncenter);
-        } else { hide(actioncenter); }
-    });
-    try {
     new Rellax('.load-img', {
         speed: -10,
         center: true,
