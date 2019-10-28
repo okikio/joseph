@@ -11,7 +11,7 @@ import el, { onscroll, onclick, toggleClass, each, find, get, addClass, removeCl
 // onclick,
 let _navbar = '.navbar';
 let _backToTop = '#back-to-top';
-let __actioncenter = ".layer-action-center";
+let _actioncenter = ".layer-action-center";
 let _img = ".load-img";
 
 let _height = height(_navbar);
