@@ -11,7 +11,7 @@ import el, { onscroll, onclick, toggleClass, each, find, get, addClass, removeCl
 // onclick,
 let _navbar = '.navbar';
 let _backToTop = '#back-to-top';
-let _actioncenter = ".layer-action-center";
+let __actioncenter = ".layer-action-center";
 let _img = ".load-img";
 
 let _height = height(_navbar);
@@ -28,8 +28,8 @@ let _focusPt = _height + 10;
         hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
         if ((scrollTop(window) + _height) >= _focusPt * 2) {
-            show(actioncenter);
-        } else { hide(actioncenter); }
+            show(_actioncenter);
+        } else { hide(_actioncenter); }
     });
 
     try {
@@ -83,14 +83,14 @@ let _focusPt = _height + 10;
         });
     });
 
-    let actioncenter = el(".layer-action-center");
+    let _actioncenter = el(".layer-action-center");
     _global.scroll(_scroll = () => {
         _navbar.toggleClass("navbar-focus", (_global.scrollTop() + _height) >= _focusPt);
         _navbar.hasClass("navbar-show") && _navbar.removeClass("navbar-show");
 
         if ((_global.scrollTop() + _height) >= _focusPt * 2) {
-            actioncenter.show();
-        } else { actioncenter.hide(); }
+            _actioncenter.show();
+        } else { _actioncenter.hide(); }
     });
 
 
@@ -108,7 +108,7 @@ let _focusPt = _height + 10;
                             html.clientHeight, html.scrollHeight, html.offsetHeight );
 
         if (height <= window.innerHeight) {
-            actioncenter.show();
+            _actioncenter.show();
         }
 
         _img.each($img => {
