@@ -17,22 +17,19 @@ let _img = ".load-img";
 let _height = height(_navbar);
 let _focusPt = _height + 10;
 
-// try {
     onclick(_navbar, '.navbar-menu', e => {
         e.preventDefault();
         toggleClass(_navbar, "navbar-show");
     });
 
-    onscroll(window, () => {
-        toggleClass(_navbar, "navbar-focus", (scrollTop(window) + _height) >= _focusPt);
+    onscroll(_global, () => {
+        toggleClass(_navbar, "navbar-focus", (scrollTop(_global) + _height) >= _focusPt);
         hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
-        if ((scrollTop(window) + _height) >= _focusPt * 2) {
-            show(_actioncenter);
-        } else { hide(_actioncenter); }
+        toggleClass(_actioncenter, "layer-action-center-show", scrollTop(_global) > _focusPt * 2);
+        toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(_global) <= _focusPt * 2);
     });
 
-    try {
     each(_img, $img => {
         let _core_img = get(find($img, ".core-img"), 0);
         let _placeholder_img = find($img, ".placeholder-img");
@@ -51,15 +48,14 @@ let _focusPt = _height + 10;
             }
         }
     });
+
     new Rellax('.load-img', {
         speed: -10,
         center: true,
-        // wrapper: '.layer-image',
-        round: true,
+        round: false,
         vertical: true,
         horizontal: false
     });
-    } catch (e) {}
     // let _backToTop = el('#back-to-top');
 
     // let _height = _navbar.height();
@@ -192,6 +188,8 @@ let _focusPt = _height + 10;
 
     // This event runs for every page view after initial load
     .on('contentReplaced', _load);
+
+// try {
 } catch (e) {
     let _img = [...document.getElementsByClassName("placeholder-img")];
     let _navbar = [...document.getElementsByClassName("navbar")];

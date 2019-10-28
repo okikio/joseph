@@ -230,11 +230,20 @@
    }
 
     &-action-center {
+        transition: opacity .4s ease 0s;
         font-size: 24px;
         position: fixed;
         bottom: 15px;
         z-index: 250;
         width: 100%;
         right: 0;
+
+        &-hide {
+            opacity: 0;
+        }
+
+        &-show {
+            opacity: 1;
+        }
     }
 }

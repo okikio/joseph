@@ -8,7 +8,7 @@ module.exports = {
     plugins: [
         purgecss({
             content: ['public/**/*.html'],
-            whitelistPatterns: [/-show$/, /navbar-focus/, /navbar-link-focus/],
+            whitelistPatterns: [/-show$/, /-hide$/, /navbar-focus/, /navbar-link-focus/],
             keyframes: false,
             fontFace: false
         }),
