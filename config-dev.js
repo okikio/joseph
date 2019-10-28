@@ -163,7 +163,7 @@ module.exports = {
                     "hero": {
                         "title": "Projects.",
                         "img": {
-                            "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/blue-sky",
+                            "src": "/assets/blue-sky",
                             "alt": "A city Image"
                         }
                     }
@@ -233,7 +233,7 @@ module.exports = {
                     "hero": {
                         "title": "Subpage.",
                         "img": {
-                            "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/white-flower",
+                            "src": "/assets/white-flower",
                             "alt": "A city Image"
                         }
                     }
@@ -303,7 +303,7 @@ module.exports = {
                     "hero": {
                         "title": "Welcome!.",
                         "img": {
-                            "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/white_car",
+                            "src": "/assets/white_car",
                             "alt": "A city Image"
                         }
                     }
@@ -530,7 +530,7 @@ module.exports = {
                                                             "title": "Google Designs",
                                                             "content": "",
                                                             "img": {
-                                                                "src": "https://res.cloudinary.com/okikio-assets/image/upload/c_scale,dpr_auto,f_auto,fl_progressive:steep,q_30,w_auto/v1/blue-sky",
+                                                                "src": "/assets/blue-sky",
                                                                 "alt": "City Alt"
                                                             },
                                                             "class": "layer-box layer-surface layer-shadow--1 layout-block"

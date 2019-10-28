@@ -4,7 +4,7 @@
   "description": "A fastify app.",
   "scripts": {
     "test": "gulp",
-    "watch": "gulp dev && gulp watch",
+    "watch": "gulp && gulp watch",
     "develop": "gulp dev",
     "build": "gulp",
     "publish": "gulp git:push",
@@ -67,6 +67,7 @@
     "posthtml-lazyload": "^1.0.3",
     "posthtml-link-noreferrer": "^1.0.4",
     "posthtml-lorem": "^1.0.0",
+    "posthtml-match-helper": "^1.0.1",
     "posthtml-textr": "^1.0.5",
     "rellax": "^1.10.0",
     "rollup": "^1.21.4",

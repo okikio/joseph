@@ -1,23 +1,58 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
-import { _log } from "./components/util";
+import { _log, _is } from "./components/util";
 import Rellax from "rellax";
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
-// import { _global, _body } from "./components/global";
+import { _global, _body } from "./components/global";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import el, { onclick, toggleClass } from "./components/dom";
+import el, { onscroll, onclick, toggleClass, each, find, get, addClass, removeClass, hide, show, scrollTop, hasClass, height } from "./components/dom";
 // onclick,
-try {
-    let _navbar = el('.navbar');
+let _navbar = '.navbar';
+let _backToTop = '#back-to-top';
+let _actioncenter = ".layer-action-center";
+let _img = ".load-img";
+
+let _height = height(_navbar);
+let _focusPt = _height + 10;
+
+// try {
     onclick(_navbar, '.navbar-menu', e => {
         e.preventDefault();
         toggleClass(_navbar, "navbar-show");
-        console.log("Navbar-show");
     });
+
+    each(_img, $img => {
+        let _core_img = get(find($img, ".core-img"), 0);
+        let _placeholder_img = find($img, ".placeholder-img");
+
+        if (_is.def(_core_img)) {
+            if (_core_img.complete) {
+                addClass(_placeholder_img, "core-img-show");
+            } else {
+                _core_img.addEventListener("load", function () {
+                    addClass(_placeholder_img, "core-img-show");
+
+                    setTimeout(function () {
+                        hide(_placeholder_img);
+                    }, 3000);
+                }, false);
+            }
+        }
+    });
+
+    onscroll(window, () => {
+        toggleClass(_navbar, "navbar-focus", (scrollTop(window) + _height) >= _focusPt);
+        hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+
+        if ((scrollTop(window) + _height) >= _focusPt * 2) {
+            show(actioncenter);
+        } else { hide(actioncenter); }
+    });
+
     new Rellax('.load-img', {
-        speed: -8,
+        speed: -10,
         center: true,
         // wrapper: '.layer-image',
         round: true,
@@ -155,7 +190,7 @@ try {
     })
 
     // This event runs for every page view after initial load
-    .on('contentReplaced', _load); */
+    .on('contentReplaced', _load);
 } catch (e) {
     let _img = [...document.getElementsByClassName("placeholder-img")];
     let _navbar = [...document.getElementsByClassName("navbar")];
@@ -165,4 +200,4 @@ try {
     _img.forEach(function (img) {
         img.classList.add("core-img-show");
     });
-}
+} */

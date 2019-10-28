@@ -1,4 +1,4 @@
-import { el } from "./ele";
+import { el } from "./dom";
 
 // Window element Object
 export let _global = el(window);

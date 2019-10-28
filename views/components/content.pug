@@ -7,18 +7,17 @@ mixin image(value)
     .load-img
       .img-contain
         picture
-          if !_src.includes("city")
-            source(media='(max-width: 500px)' srcset!=`${_src}.webp?w=500&quality=70` type='image/webp')
-            source(media='(max-width: 500px)' srcset!=`${_src}.jpg?w=500&quality=70` type='image/jpeg')
+          source(media='(max-width: 500px)' srcset!=`${_src}.webp?w=500&quality=70` type='image/webp')
+          source(media='(max-width: 500px)' srcset!=`${_src}.jpg?w=500&quality=70` type='image/jpeg')
 
-            source(media='(max-width: 700px)' srcset!=`${_src}.webp?w=700` type='image/webp')
-            source(media='(max-width: 700px)' srcset!=`${_src}.jpg?w=700` type='image/jpeg')
+          source(media='(max-width: 700px)' srcset!=`${_src}.webp?w=700` type='image/webp')
+          source(media='(max-width: 700px)' srcset!=`${_src}.jpg?w=700` type='image/jpeg')
 
-            source(media='(max-width: 900px)' srcset!=`${_src}.webp?w=900` type='image/webp')
-            source(media='(max-width: 900px)' srcset!=`${_src}.jpg?w=900` type='image/jpeg')
+          source(media='(max-width: 900px)' srcset!=`${_src}.webp?w=900` type='image/webp')
+          source(media='(max-width: 900px)' srcset!=`${_src}.jpg?w=900` type='image/jpeg')
 
-            source(media='(min-width: 900px)' srcset!=`${_src}.webp` type='image/webp')
-            img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="auto")
+          source(media='(min-width: 900px)' srcset!=`${_src}.webp` type='image/webp')
+          img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="auto")
 
           //- img.core-img(src!=`${_src}.jpg?w=50&quality=100&effect=blur:150`, alt=_alt inline loading="auto")
         picture

@@ -9,7 +9,7 @@ export let el = (sel, ctxt) => {
 // Select specific element at an index of the ele object
 export let get = (_el, idx) => {
     _el = el(_el);
-    return _is.undef(idx) ? [].slice.call(_el) : _el[idx >= 0 ? idx : idx + _el.length];
+    return !_is.num(idx) ? [].slice.call(_el) : _el[idx >= 0 ? idx : idx + _el.length];
 };
 export let nth = get; // An alias of get
 export let toArray = val => (_is.inst(val, ele) ? get(val) : val); // Convert ele objects to arrays
@@ -97,7 +97,7 @@ export let find = (_el, sel) => {
         result = filter(sel, el => {
             return [].some.call(_el, parent => _contains(parent, el));
         });
-    } else if (_el.length === 1) { result = el(_qsa(first(_el), sel)); }
+    } else if (_el.length === 1) { result = el(_qsa(get(_el, 0), sel)); }
     else { result = map(_el, el => _qsa(el, sel)); }
     return result;
 };
@@ -283,7 +283,7 @@ let _maybeAddPx = (name, val) => {
 export let style = (_el, ...args) => {
     let [prop, val] = args, css = '', key;
     if (args.length < 2) {
-        let el = first(_el);
+        let el = get(_el, 0);
         if (!el) return;
         if (_is.str(prop)) {
             return el.style[prop] || window.getComputedStyle(el, '').getPropertyValue(prop);
@@ -320,7 +320,7 @@ export let style = (_el, ...args) => {
 let _size = sz => {
     let prop = _capital(sz);
     return (_el, value) => {
-        let _offset, el = first(_el);
+        let _offset, el = get(_el, 0);
         if (_is.undef(value)) {
             if (_is.win(el)) {
                 return el[`inner${prop}`];
@@ -367,7 +367,7 @@ export let html = (_el, ...args) => {
         each(_el, (el, idx) => {
             let originHTML = el.innerHTML;
             append(empty(el), _fnval(html, [idx, originHTML], el));
-        }) : (_el.length ? first(_el).innerHTML : null);
+        }) : (_el.length ? get(_el, 0).innerHTML : null);
 };
 
 export let text = (_el, ...args) => {
@@ -388,8 +388,8 @@ export let attr = (_el, name, val) => {
     let result;
     _el = el(_el);
     if (_is.str(name) && _is.undef(val)) {
-        result = _el.length && first(_el).nodeType === 1 &&
-            first(_el).getAttribute(name);
+        result = _el.length && get(_el, 0).nodeType === 1 &&
+            get(_el, 0).getAttribute(name);
         return !_is.nul(result) ? result : undefined;
     } else {
         return each(_el, (el, idx) => {
@@ -440,7 +440,7 @@ export let val = (_el, value, ...args) => {
             el.value = _fnval(value, [idx, el.value], el);
         });
     } else {
-        _el = first(_el);
+        _el = get(_el, 0);
         return _el && (_el.multiple ?
             pluck(filter(find(_el, 'option'), el => el.selected), 'value') :
             _el.value);
@@ -467,10 +467,10 @@ export let offset = (_el, coords) => {
     }
 
     if (!_el.length) return null;
-    if (document.documentElement !== first(_el) && !_contains(document.documentElement, first(_el)))
+    if (document.documentElement !== get(_el, 0) && !_contains(document.documentElement, get(_el, 0)))
         return { top: 0, left: 0 };
 
-    obj = first(_el).getBoundingClientRect();
+    obj = get(_el, 0).getBoundingClientRect();
     return {
         left: obj.left + window.pageXOffset,
         top: obj.top + window.pageYOffset,
@@ -482,7 +482,7 @@ export let offset = (_el, coords) => {
 // Get the position of an element in the ele object collection. When no element is given, returns position of the current element among its siblings. When an element is given, returns its position in the current collection. Returns -1 if not found.
 export let index = (_el, el) => {
     _el = new ele(_el);
-    return el ? indexOf(_el, first(el)) : indexOf(children(parent(_el)), first(_el));
+    return el ? indexOf(_el, get(el, 0)) : indexOf(children(parent(_el)), get(_el, 0));
 };
 
 // Class name cache
@@ -573,7 +573,7 @@ export let position = _el => {
     _el = el(_el);
     if (!_el.length) return;
 
-    let elem = first(_el),
+    let elem = get(_el, 0),
         _offsetParent = offsetParent(_el),
         _offset = offset(_el),
         parentOffset = /^(?:body|html)$/i.test(_offsetParent[0].nodeName) ? { top: 0, left: 0 } : offset(_offsetParent);
@@ -595,8 +595,8 @@ export let scrollTop = (_el, val) => {
     _el = el(_el);
     if (!_el.length) return;
 
-    let hasScroll = 'scrollTop' in first(_el);
-    if (_is.undef(val)) return first(_el)[hasScroll ? "scrollTop" : "pageYOffset"];
+    let hasScroll = 'scrollTop' in get(_el, 0);
+    if (_is.undef(val)) return get(_el, 0)[hasScroll ? "scrollTop" : "pageYOffset"];
     return each(_el, el => {
         hasScroll ? (el.scrollTop = val) : el.scrollTo(el.scrollX, val);
     });
@@ -607,8 +607,8 @@ export let scrollLeft = (_el, val) => {
     _el = el(_el);
     if (!_el.length) return;
 
-    let hasScroll = 'scrollLeft' in first(_el);
-    if (_is.undef(val)) return first(_el)[hasScroll ? "scrollLeft" : "pageXOffset"];
+    let hasScroll = 'scrollLeft' in get(_el, 0);
+    if (_is.undef(val)) return get(_el, 0)[hasScroll ? "scrollLeft" : "pageXOffset"];
     return each(_el, el => {
         hasScroll ? (el.scrollLeft = val) : el.scrollTo(val, el.scrollY);
     });

@@ -2,22 +2,6 @@ let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 
-let config = {
-    "cloud_name": "okikio-assets",
-    "imageURLConfig": {
-        "flags": "progressive:steep",
-        "fetch_format": "auto",
-        "client_hints": true,
-        "crop": "scale",
-        "quality": 30,
-        "dpr": "auto"
-    },
-};
-
-const assets = require("cloudinary").v2;
-const { cloud_name, imageURLConfig } = config;
-assets.config({ cloud_name, secure: true });
-
 /*
     -- Rules --
     General rules to use the containers.
@@ -142,28 +126,6 @@ let _tabs = (...args) => tabs([
 
 let _img = (...args) => {
     let [_src = src().src, _alt = alt().alt, ...$args] = anyArgs(args);
-
-    if (/\/assets\/[^\s"']+/g.test(_src)) {
-        let url = _src;
-        let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
-
-        let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
-        let query = URLObj.searchParams;
-        let queryString = URLObj.search;
-
-        let height = query.get("h");
-        let width = query.get("w") || 'auto';
-        let crop = query.get("crop") || imageURLConfig.crop;
-        let effect = query.get("effect") || imageURLConfig.effect;
-        let quality = query.get("quality") || imageURLConfig.quality;
-        let _imgURLConfig = { ...imageURLConfig, width, height, quality, crop, effect };
-
-        _src = (/\/raw\/[^\s"']+/.test(url) ?
-                    `${assetURL + url.replace(queryString, '')}` :
-                    assets.url(url.replace(queryString, ''), _imgURLConfig)
-                ).replace("/assets/", "");
-    }
-
     return img(src(_src), alt(_alt), ...anyArgs($args));
 };
 
@@ -188,5 +150,5 @@ let page = (...args) => {
     return component("page") (assign(assign(...defaults), ...anyArgs(args)));
 };
 
-assign(page, { config, _content, _col, _style, _layer, _layout, type, _header, _main, _footer, _link, _tabs, _tile, _img, _hero, values, title, tile, tabs, src, section, row, page, padding, margin, link, layout, layer, img, href, hero, font, content, component, color, col, _class, class_add, background, attr, alt });
+assign(page, { _content, _col, _style, _layer, _layout, type, _header, _main, _footer, _link, _tabs, _tile, _img, _hero, values, title, tile, tabs, src, section, row, page, padding, margin, link, layout, layer, img, href, hero, font, content, component, color, col, _class, class_add, background, attr, alt });
 module.exports = page;

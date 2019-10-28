@@ -8,6 +8,7 @@ const { src, task, series, parallel, dest, watch } = gulp;
 
 const nodeResolve = require('rollup-plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
+const querySelector = require("posthtml-match-helper");
 const browserSync = require('browser-sync').create();
 const { init, write } = require('gulp-sourcemaps');
 const commonJS = require('rollup-plugin-commonjs');
@@ -21,6 +22,7 @@ const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
 const { lookup } = require("mime-types");
 const htmlmin = require('gulp-htmlmin');
+const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
@@ -29,7 +31,10 @@ const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const axios = require("axios");
-let { pages, cloud_name } = config;
+
+let { pages, cloud_name, imageURLConfig } = config;
+let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
+assets.config({ cloud_name, secure: true });
 
 // Rollup warnings are annoying
 let ignoreLog = ["CIRCULAR_DEPENDENCY", "UNRESOLVED_IMPORT", 'EXTERNAL_DEPENDENCY', 'THIS_IS_UNDEFINED'];
@@ -66,21 +71,45 @@ let posthtmlOpts = [
         tree.match(/\n\s\w/gim, node => node.replace(/\n\s/gim, ' '));
     },
     tree => {
-        let buf, warnings, mime, promises = [];
+        let parse = (_src = "src") => node => {
+            let url = node.attrs[_src];
+            let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
+            let query = URLObj.searchParams;
+            let queryString = URLObj.search;
+
+            let height = query.get("h");
+            let width = query.get("w") || 'auto';
+            let crop = query.get("crop") || imageURLConfig.crop;
+            let effect = query.get("effect") || imageURLConfig.effect;
+            let quality = query.get("quality") || imageURLConfig.quality;
+            let _imgURLConfig = { ...imageURLConfig, width, height, quality, crop, effect };
+            node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
+                `${assetURL + url.replace(queryString, '')}` :
+                assets.url(url.replace(queryString, ''), _imgURLConfig)
+            ).replace("/assets/", "");
+            return node;
+        };
+
+        tree.match(querySelector("[src^='/assets/']"), parse());
+        tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
+    },
+    tree => {
+        let _src, buf, warnings, mime, promises = [];
         tree.walk(node => {
             if (node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.class &&
-            node.attrs.class.includes("placeholder-img")) {
-                mime = lookup(node.attrs.src) || 'text/plain';
-
-                promises.push(
-                    axios.get(node.attrs.src, { responseType: 'arraybuffer' })
-                        .then(val => {
-                            buf = Buffer.from(val.data, 'base64');
-                            node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
-                        }).catch(err => {
-                            console.error(`The image with the src: ${node.attrs.src} `, err);
-                        })
-                );
+                node.attrs.class.includes("placeholder-img")) {
+                if (!node.attrs.src.includes("data:image/")) {
+                    mime = lookup(_src = node.attrs.src) || 'text/plain';
+                    promises.push(
+                        axios.get(_src, { responseType: 'arraybuffer' })
+                            .then(val => {
+                                buf = Buffer.from(val.data, 'base64');
+                                node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
+                            }).catch(err => {
+                                console.error(`The image with the src: ${_src} `, err);
+                            })
+                    );
+                }
             }
 
             return node;
@@ -110,7 +139,7 @@ let posthtmlOpts = [
       loading: 'auto',
       class: 'core-img',
     }),
-    require('posthtml-inline-assets')(),
+    dev ? () => {} : require('posthtml-inline-assets')(),
     require('posthtml-lorem')(),
 ];
 
