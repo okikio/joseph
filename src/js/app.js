@@ -50,7 +50,7 @@ let _focusPt = _height + 10;
     });
 
     new Rellax('.load-img', {
-        speed: -10,
+        speed: -4,
         center: true,
         round: false,
         vertical: true,
