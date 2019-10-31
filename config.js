@@ -566,10 +566,5 @@ module.exports = {
             ]),
             noFooter()
         ])
-    },
-    "routes": {
-        "/": "index",
-        "/about": "about",
-        "/projects": "project",
     }
 };

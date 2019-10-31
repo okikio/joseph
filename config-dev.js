@@ -613,10 +613,5 @@ module.exports = {
                 "noFooter": true
             }
         }
-    },
-    "routes": {
-        "/": "index",
-        "/about": "about",
-        "/projects": "project"
     }
 };
