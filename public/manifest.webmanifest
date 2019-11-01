@@ -1,0 +1,10 @@
+{
+    "name": "Joseph Ojo",
+    "short_name": "JO-OJO",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f5f8fc",
+    "theme_color": "#4500ff",
+    "description": "A simply readable portfolio app.",
+    "icons": []
+}
