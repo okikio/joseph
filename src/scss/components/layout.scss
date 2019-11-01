@@ -640,21 +640,17 @@
 
          @for $i from 1 through 12 {
             &-#{$i} {
-               max-width: 100% / 12 * $i;
+               max-width: 100% / 12 * $i !important;
                @media (max-width: 750px) {
                   @if $i >= 6 {
-                     max-width: 100%;
-                  }
-               }
-
-               @media (max-width: 750px) {
-                  @if $i < 6 {
-                     max-width: 50%;
+                     max-width: 100% !important;
+                  } @else {
+                     max-width: 50% !important;
                   }
                }
 
                @media (max-width: 550px) {
-                  max-width: 100%;
+                  max-width: 100% !important;
                }
             }
          }

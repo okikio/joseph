@@ -359,11 +359,14 @@ task("git:pull", () =>
     _exec("git pull origin master")
 );
 
-task('inline', () =>
+task('inline', done =>
     stream('public/*.html', {
         pipes: [
             posthtml(posthtmlOpts)
         ]
+    }, (...args) => {
+        browserSync.reload();
+        done(...args);
     })
 );
 
@@ -383,12 +386,12 @@ task('watch', () => {
     watch(['config.js', 'containers.js'], watchDelay, series('config:watch'));
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'css', 'js'));
 
-    watch('views/**/*.pug', watchDelay, series('html', 'css'));
+    watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline'));
     watch('src/**/*.scss', watchDelay, series('css'));
     watch(['src/**/*.js'], watchDelay, series('js'));
     watch(['client/**/*'], watchDelay, series('client'));
 
     watch('src/**/app.vendor.js', watchDelay, series('js'));
-    watch(['public/**/*', '!public/css/*.css'])
+    watch(['public/**/*', '!public/css/*.css', '!public/**/*.html'])
         .on('change', browserSync.reload);
 });
