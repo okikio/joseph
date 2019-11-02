@@ -4,458 +4,478 @@
      * horz = horizontal
 */
 .layout {
-   position: relative;
-   display: block;
-   margin: 0 auto;
-   width: 100%;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 
-   &-max-height {
-      position: relative;
-      height: 100vh;
-   }
+    &-max-height {
+        position: relative;
+        height: 100vh;
+    }
 
-   $dimension: ("width", "height");
-//    @each $axis in $dimension {
-//       $screenSizes: (
-//          "desktop": $screen-size-desktop,
-//          "laptop": $screen-size-laptop,
-//          "tablet": $screen-size-tablet,
-//          "phone": $screen-size-phone
-//       );
+    $dimension: ("width", "height");
+    //    @each $axis in $dimension {
+    //       $screenSizes: (
+    //          "desktop": $screen-size-desktop,
+    //          "laptop": $screen-size-laptop,
+    //          "tablet": $screen-size-tablet,
+    //          "phone": $screen-size-phone
+    //       );
 
-//       $screenSizesPX: (
-//          "desktop": $desktop,
-//          "laptop": $laptop,
-//          "tablet": $tablet,
-//          "phone": $phone
-//       );
+    //       $screenSizesPX: (
+    //          "desktop": $desktop,
+    //          "laptop": $laptop,
+    //          "tablet": $tablet,
+    //          "phone": $phone
+    //       );
 
-//     @for $sz from 0 through $desktop / 10 {
-//         &-#{$axis}-#{$sz * 10} {
-//             #{$axis}: #{$sz * 10}px;
-//         }
+    //     @for $sz from 0 through $desktop / 10 {
+    //         &-#{$axis}-#{$sz * 10} {
+    //             #{$axis}: #{$sz * 10}px;
+    //         }
 
-//         &-max-#{$axis}-#{$sz * 10} {
-//             max-#{$axis}: #{$sz * 10}px;
-//         }
-//     }
+    //         &-max-#{$axis}-#{$sz * 10} {
+    //             max-#{$axis}: #{$sz * 10}px;
+    //         }
+    //     }
 
-//     @for $sz from 0 through 100 {
-//         &-#{$axis}%-#{$sz} {
-//             #{$axis}: percentage($sz / 100);
-//         }
+    //     @for $sz from 0 through 100 {
+    //         &-#{$axis}%-#{$sz} {
+    //             #{$axis}: percentage($sz / 100);
+    //         }
 
-//         &-max-#{$axis}%-#{$sz} {
-//             max-#{$axis}: percentage($sz / 100);
-//         }
-//     }
+    //         &-max-#{$axis}%-#{$sz} {
+    //             max-#{$axis}: percentage($sz / 100);
+    //         }
+    //     }
 
-//       @each $device-type, $screen-size in $screenSizes {
-//          &-#{$axis}-#{$device-type} {
-//             #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-//          }
+    //       @each $device-type, $screen-size in $screenSizes {
+    //          &-#{$axis}-#{$device-type} {
+    //             #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+    //          }
 
-//          &-max-#{$axis}-#{$device-type} {
-//             max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-//          }
+    //          &-max-#{$axis}-#{$device-type} {
+    //             max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+    //          }
 
-//          @media #{$screen-size} {
-//             &-resize-#{$axis}-#{$device-type} {
-//                #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-//             }
+    //          @media #{$screen-size} {
+    //             &-resize-#{$axis}-#{$device-type} {
+    //                #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+    //             }
 
-//             &-resize-max-#{$axis}-#{$device-type} {
-//                 max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-//             }
+    //             &-resize-max-#{$axis}-#{$device-type} {
+    //                 max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
+    //             }
 
-//             @for $sz from 0 through $desktop / 10 {
-//                &-resize-#{$axis}-#{$device-type}-#{$sz * 10} {
-//                   #{$axis}: #{$sz * 10}px;
-//                }
+    //             @for $sz from 0 through $desktop / 10 {
+    //                &-resize-#{$axis}-#{$device-type}-#{$sz * 10} {
+    //                   #{$axis}: #{$sz * 10}px;
+    //                }
 
-//                &-resize-max-#{$axis}-#{$device-type}-#{$sz} {
-//                   max-#{$axis}: #{$sz * 10}px;
-//                }
-//             }
+    //                &-resize-max-#{$axis}-#{$device-type}-#{$sz} {
+    //                   max-#{$axis}: #{$sz * 10}px;
+    //                }
+    //             }
 
-//             @for $sz from 0 through 100 {
-//                 &-resize-#{$axis}%-#{$device-type}-#{$sz} {
-//                     #{$axis}: percentage($sz / 100);
-//                 }
+    //             @for $sz from 0 through 100 {
+    //                 &-resize-#{$axis}%-#{$device-type}-#{$sz} {
+    //                     #{$axis}: percentage($sz / 100);
+    //                 }
 
-//                 &-resize-max-#{$axis}%-#{$device-type}-#{$sz} {
-//                     max-#{$axis}: percentage($sz / 100);
-//                 }
-//             }
-//          }
-//       }
-//    }
+    //                 &-resize-max-#{$axis}%-#{$device-type}-#{$sz} {
+    //                     max-#{$axis}: percentage($sz / 100);
+    //                 }
+    //             }
+    //          }
+    //       }
+    //    }
 
-   &,
-   &-vert {
-      padding: {
-         bottom: $size-extra-xl;
-         top: $size-extra-xl;
-      }
-   }
+    &,
+    &-vert {
+        padding: {
+            bottom: $size-extra-xl;
+            top: $size-extra-xl;
+        }
+    }
 
-   &,
-   &-horz {
-      padding: {
-         right: $size-sub-extra-large;
-         left: $size-sub-extra-large;
-      }
-   }
+    &,
+    &-horz {
+        padding: {
+            right: $size-sub-extra-large;
+            left: $size-sub-extra-large;
+        }
+    }
 
-   /*
+    /*
        -- Base Layouts (these tamper with all the layout setting and provide a great start for a layer) --
    */
-   &-enlarge {
-      &,
-      &-vert {
-         padding: {
-            bottom: $size-gigantic;
-            top: $size-gigantic;
-         }
-      }
+    &-enlarge {
 
-      &,
-      &-horz {
-         padding: {
-            right: $size-huge;
-            left: $size-huge;
-         }
-      }
-   }
-
-   &-shorten {
-      &,
-      &-vert {
-         padding: {
-            bottom: $size-sub-large;
-            top: $size-sub-large;
-         }
-      }
-
-      &,
-      &-horz {
-         padding: {
-            right: $size-sub-large;
-            left: $size-sub-large;
-         }
-      }
-   }
-
-   @media (max-width: 500px) {
-      &,
-      &-vert {
-         padding: {
-            bottom: $size-sub-large;
-            top: $size-sub-large;
-         }
-      }
-
-      &,
-      &-horz {
-         padding: {
-            right: $size-sub-large;
-            left: $size-sub-large;
-         }
-      }
-
-      &-enlarge {
-         &,
-         &-vert {
+        &,
+        &-vert {
             padding: {
-               bottom: $size-extra-large;
-               top: $size-extra-large;
+                bottom: $size-gigantic;
+                top: $size-gigantic;
             }
-         }
+        }
 
-         &,
-         &-horz {
+        &,
+        &-horz {
             padding: {
-               right: $size-larger;
-               left: $size-larger;
+                right: $size-huge;
+                left: $size-huge;
             }
-         }
-      }
+        }
+    }
 
-      &-shorten {
-         &,
-         &-vert {
+    &-shorten {
+
+        &,
+        &-vert {
             padding: {
-               bottom: $size;
-               top: $size;
+                bottom: $size-sub-large;
+                top: $size-sub-large;
             }
-         }
+        }
 
-         &,
-         &-horz {
+        &,
+        &-horz {
             padding: {
-               right: $size;
-               left: $size;
+                right: $size-sub-large;
+                left: $size-sub-large;
             }
-         }
-      }
+        }
+    }
 
-      &-shrink {
-         &,
-         &-vert {
+    @media (max-width: 500px) {
+
+        &,
+        &-vert {
             padding: {
-               bottom: $size-sub-large !important;
-               top: $size-sub-large !important;
+                bottom: $size-sub-large;
+                top: $size-sub-large;
             }
-         }
+        }
 
-         &,
-         &-horz {
+        &,
+        &-horz {
             padding: {
-               right: $size-sub-large !important;
-               left: $size-sub-large !important;
+                right: $size-sub-large;
+                left: $size-sub-large;
             }
-         }
+        }
 
-         &-shorten {
+        &-enlarge {
+
             &,
             &-vert {
-               padding: {
-                  bottom: $size !important;
-                  top: $size !important;
-               }
+                padding: {
+                    bottom: $size-extra-large;
+                    top: $size-extra-large;
+                }
             }
 
             &,
             &-horz {
-               padding: {
-                  right: $size !important;
-                  left: $size !important;
-               }
+                padding: {
+                    right: $size-larger;
+                    left: $size-larger;
+                }
             }
-         }
+        }
 
-         &-mini {
+        &-shorten {
+
             &,
             &-vert {
-               padding: {
-                  bottom: $size-small !important;
-                  top: $size-small !important;
-               }
+                padding: {
+                    bottom: $size;
+                    top: $size;
+                }
             }
 
             &,
             &-horz {
-               padding: {
-                  right: $size-small !important;
-                  left: $size-small !important;
-               }
+                padding: {
+                    right: $size;
+                    left: $size;
+                }
             }
-         }
-      }
-   }
+        }
 
-   /* -- Layout Type (block, inline-block, inline, flex) -- */
-   &-block {
-      display: block !important;
-   }
+        &-shrink {
 
-   &-flex {
-      display: flex !important;
-
-      &-center {
-         justify-content: center;
-         align-content: center;
-         align-items: center;
-      }
-
-      &-wrap {
-         flex-wrap: wrap;
-      }
-
-      &-row {
-         flex-direction: row;
-      }
-
-      &-col {
-         flex-direction: column;
-      }
-   }
-
-   $alignments: ("self", "items");
-   @each $type in $alignments {
-      &-align-#{$type} {
-         &-start {
-            align-#{$type}: flex-start;
-         }
-
-         &-center {
-            align-#{$type}: center;
-         }
-
-         &-stretch {
-            align-#{$type}: stretch;
-         }
-
-         &-baseline {
-            align-#{$type}: stretch;
-         }
-
-         &-end {
-            align-#{$type}: flex-end;
-         }
-      }
-   }
-
-   &-justify-content {
-      &-start {
-         justify-content: start;
-      }
-
-      &-center {
-         justify-content: center;
-      }
-   }
-
-   &-spacer {
-      -webkit-box-flex: 1; /* OLD - iOS 6-, Safari 3.1-6 */
-      -webkit-flex: 1; /* Safari 6.1+. iOS 7.1+, BB10 */
-      -ms-flex: 1; /* IE 10 */
-      flex: 1;
-   }
-
-   &-inline {
-      display: inline !important;
-
-      &-block {
-         display: inline-block !important;
-      }
-   }
-
-   /* -- Position (horizontal - left, center, right) -- */
-   &-left {
-      position: relative;
-      float: left;
-   }
-
-   &-center {
-      position: relative;
-      margin: 0 auto;
-      width: 100%;
-   }
-
-   &-right {
-      position: relative;
-      float: right;
-   }
-
-   /* -- Container (keep the page focused and content central) -- */
-   &-contain {
-      &,
-      &-larger,
-      &-large,
-      &-small {
-         margin: 0 auto;
-         width: 100%;
-      }
-
-      &-small {
-         max-width: 550px;
-      }
-
-      @media (min-width: 300px) {
-         &-slim {
-            padding: {
-               left: 0;
-               right: 0;
+            &,
+            &-vert {
+                padding: {
+                    bottom: $size-sub-large !important;
+                    top: $size-sub-large !important;
+                }
             }
-         }
-      }
 
-      @media (min-width: 650px) {
-         .layout-row {
-            margin: {
-               right: -$size-small;
-               left: -$size-small;
+            &,
+            &-horz {
+                padding: {
+                    right: $size-sub-large !important;
+                    left: $size-sub-large !important;
+                }
             }
-         }
-      }
 
-      @media (min-width: 800px) {
-         &,
-         &-large {
-            max-width: 800px;
-         }
-      }
+            &-shorten {
 
-      @media (min-width: 900px) {
-         &-small {
-            max-width: 700px;
-         }
+                &,
+                &-vert {
+                    padding: {
+                        bottom: $size !important;
+                        top: $size !important;
+                    }
+                }
 
-         &,
-         &-large {
-            max-width: 1000px;
-         }
-      }
+                &,
+                &-horz {
+                    padding: {
+                        right: $size !important;
+                        left: $size !important;
+                    }
+                }
+            }
 
-      @media (min-width: 1000px) {
-         &-large {
-            max-width: 1200px;
-         }
-      }
+            &-mini {
 
-      @media (min-width: 1200px) {
-         &-larger {
-            max-width: 1400px;
-         }
-      }
+                &,
+                &-vert {
+                    padding: {
+                        bottom: $size-small !important;
+                        top: $size-small !important;
+                    }
+                }
 
-      @media (min-width: 1400px) {
-         &-larger {
-            max-width: 1600px;
-         }
-      }
-   }
+                &,
+                &-horz {
+                    padding: {
+                        right: $size-small !important;
+                        left: $size-small !important;
+                    }
+                }
+            }
+        }
+    }
 
-   /*
+    /* -- Layout Type (block, inline-block, inline, flex) -- */
+    &-block {
+        display: block !important;
+    }
+
+    &-flex {
+        display: flex !important;
+
+        &-center {
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+        }
+
+        &-wrap {
+            flex-wrap: wrap;
+        }
+
+        &-row {
+            flex-direction: row;
+        }
+
+        &-col {
+            flex-direction: column;
+        }
+    }
+
+    $alignments: ("self", "items");
+
+    @each $type in $alignments {
+        &-align-#{$type} {
+            &-start {
+                align-#{$type}: flex-start;
+            }
+
+            &-center {
+                align-#{$type}: center;
+            }
+
+            &-stretch {
+                align-#{$type}: stretch;
+            }
+
+            &-baseline {
+                align-#{$type}: stretch;
+            }
+
+            &-end {
+                align-#{$type}: flex-end;
+            }
+        }
+    }
+
+    &-justify-content {
+        &-start {
+            justify-content: start;
+        }
+
+        &-center {
+            justify-content: center;
+        }
+    }
+
+    &-spacer {
+        -webkit-box-flex: 1;
+        /* OLD - iOS 6-, Safari 3.1-6 */
+        -webkit-flex: 1;
+        /* Safari 6.1+. iOS 7.1+, BB10 */
+        -ms-flex: 1;
+        /* IE 10 */
+        flex: 1;
+    }
+
+    &-inline {
+        display: inline !important;
+
+        &-block {
+            display: inline-block !important;
+        }
+    }
+
+    /* -- Position (horizontal - left, center, right) -- */
+    &-left {
+        position: relative;
+        float: left;
+    }
+
+    &-center {
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    &-right {
+        position: relative;
+        float: right;
+    }
+
+    /* -- Container (keep the page focused and content central) -- */
+    &-contain {
+
+        &,
+        &-larger,
+        &-large,
+        &-small {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        &-small {
+            max-width: 550px;
+        }
+
+        @media (min-width: 300px) {
+            &-slim {
+                padding: {
+                    left: 0;
+                    right: 0;
+                }
+            }
+        }
+
+        @media (min-width: 650px) {
+            .layout-row {
+                margin: {
+                    right: -$size-small;
+                    left: -$size-small;
+                }
+            }
+        }
+
+        @media (min-width: 800px) {
+
+            &,
+            &-large {
+                max-width: 800px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            &-small {
+                max-width: 700px;
+            }
+
+            &,
+            &-large {
+                max-width: 1000px;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            &-large {
+                max-width: 1200px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            &-larger {
+                max-width: 1400px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            &-larger {
+                max-width: 1600px;
+            }
+        }
+    }
+
+    /*
     -- Paddings & Margins (create padding & margin defaults for left, top, right, bottom, small, mid, large, etc...[these can be conbined to make cool paddings and margins without css]) --
      * dull = the value is 0
    */
-   $spaceTypes: ("margin", "padding");
+    $spaceTypes: ("margin", "padding");
+
     @each $spacing in $spaceTypes {
         &-#{$spacing} {
             $spacing-parent: &;
+
             #{$spacing}: {
                 bottom: $size;
                 right: $size;
                 left: $size;
                 top: $size;
-            };
+            }
 
-            @each $type, $val in $sizes {
+            ;
+
+            @each $type,
+            $val in $sizes {
                 &-#{$type} {
                     $type-parent: &;
-                    $basic-dirs: (
-                        "horz": ("left", "right"),
-                        "vert": ("top", "bottom")
-                    );
+                    $basic-dirs: ("horz": ("left", "right"),
+                            "vert": ("top", "bottom"));
 
-                    @each $basic-dir, $dirs in $basic-dirs {
+                    @each $basic-dir,
+                    $dirs in $basic-dirs {
+
                         &,
                         &-#{$basic-dir} {
                             @each $dir in $dirs {
+
                                 &,
                                 &-#{$dir} {
                                     #{$spacing}-#{$dir}: $val;
                                 }
 
                                 @at-root #{$spacing-parent}-#{$type},
-                                    #{$spacing-parent}-#{$type}-#{$dir},
-                                    #{$type-parent}-#{$basic-dir}-#{$dir},
-                                    #{$type-parent}-#{$dir}-#{$basic-dir},
-                                    #{$spacing-parent}-#{$basic-dir}-#{$type},
-                                    #{$spacing-parent}-#{$basic-dir}-#{$type}-#{$dir},
-                                    #{$spacing-parent}-#{$basic-dir}-#{$dir}-#{$type} {
+                                #{$spacing-parent}-#{$type}-#{$dir},
+                                #{$type-parent}-#{$basic-dir}-#{$dir},
+                                #{$type-parent}-#{$dir}-#{$basic-dir},
+                                #{$spacing-parent}-#{$basic-dir}-#{$type},
+                                #{$spacing-parent}-#{$basic-dir}-#{$type}-#{$dir},
+                                #{$spacing-parent}-#{$basic-dir}-#{$dir}-#{$type} {
                                     #{$spacing}-#{$dir}: $val;
                                 }
                             }
@@ -601,24 +621,24 @@
         }
     }
 
-   /* -- Clearfix (fix for using float) -- */
-   &-clearfix:after,
-   &-clearfix:before,
-   &-contain:after,
-   &-contain:before,
-   &-contain-small:after,
-   &-contain-small:before,
-   &-row:after,
-   &-row:before {
-      display: table;
-      content: "";
-      clear: both;
-   }
+    /* -- Clearfix (fix for using float) -- */
+    &-clearfix:after,
+    &-clearfix:before,
+    &-contain:after,
+    &-contain:before,
+    &-contain-small:after,
+    &-contain-small:before,
+    &-row:after,
+    &-row:before {
+        display: table;
+        content: "";
+        clear: both;
+    }
 
-   /* -- Rows & Columns -- */
-   &-row {
-      flex-flow: row wrap;
-      display: flex;
+    /* -- Rows & Columns -- */
+    &-row {
+        flex-flow: row wrap;
+        display: flex;
 
         [class*="layout-col"] {
             position: relative;
@@ -631,28 +651,31 @@
                 padding-left: $size-small;
             }
         }
-   }
+    }
 
-      &-col {
-         max-width: 100%;
-         flex-basis: 0;
-         flex-grow: 1;
+    &-col {
+        max-width: 100%;
+        flex-basis: 0;
+        flex-grow: 1;
 
-         @for $i from 1 through 12 {
+        @for $i from 1 through 12 {
             &-#{$i} {
-               max-width: 100% / 12 * $i !important;
-               @media (max-width: 750px) {
-                  @if $i >= 6 {
-                     max-width: 100% !important;
-                  } @else {
-                     max-width: 50% !important;
-                  }
-               }
+                max-width: 100% / 12 * $i !important;
 
-               @media (max-width: 550px) {
-                  max-width: 100% !important;
-               }
+                @media (max-width: 750px) {
+                    @if $i>=6 {
+                        max-width: 100% !important;
+                    }
+
+                    @else {
+                        max-width: 50% !important;
+                    }
+                }
+
+                @media (max-width: 550px) {
+                    max-width: 100% !important;
+                }
             }
-         }
-      }
+        }
+    }
 }
