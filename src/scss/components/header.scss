@@ -11,6 +11,7 @@
 
     /* -- Navigation -- */
     @at-root .navbar {
+        $radius: 18px;
         position: relative;
         max-height: 1000px;
         height: $height;
@@ -26,20 +27,38 @@
         &-layout {
             $radius: 18px;
 
-            transition: box-shadow .35s ease; // , background .025s ease
-            box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
+            // transition: box-shadow .35s ease; // , background .025s ease
+            // box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
             border-radius: 0 0 $radius $radius;
             background: transparent;
             height: $height;
             margin: 0 auto;
         }
 
+        &-shadow {
+            transition: opacity .45s ease, transform .25s cubic-bezier(.25, .46, .45, .94);
+            box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
+            border-radius: 0 0 $radius $radius;
+            transform: translateY(-$height);
+            background: transparent;
+            height: $height;
+            // position: absolute;
+            display: block;
+            width: 100%;
+            z-index: 1;
+            opacity: 0;
+        }
+
         &-focus,
         &-show,
         &:hover {
             .navbar-layout {
-                box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
+                // box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
                 background: $surface;
+            }
+
+            .navbar-shadow {
+                opacity: 1;
             }
 
             .navbar-title-line {
@@ -48,7 +67,6 @@
         }
 
         &-head {
-            transition: background 0.05s ease .25s, border-bottom-color .45s linear;
             border-bottom: 1px solid transparent;
             flex-direction: row;
             align-items: center;
@@ -87,8 +105,8 @@
         }
 
         &-main {
-            transition: box-shadow .35s linear, transform .55s ease;
-            box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
+            transition: transform .55s ease; // box-shadow .35s linear,
+            // box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
             transform: translateY(0);
         }
 
@@ -100,6 +118,7 @@
             list-style: none;
             display: flex;
             width: 100%;
+            z-index: 2;
             margin: 0;
         }
 
@@ -177,15 +196,22 @@
             }
 
             &-main {
-                transform: translateY(-150%);
+                transform: translateY(-100%);
+                display: block;
+                width: 100%;
                 z-index: 2;
             }
 
             &-list {
                 background: lighten($very-light, 2%);
+                border-radius: 0 0 $radius $radius;
+                border: 1px solid transparent;
+                position: relative;
+                overflow: hidden;
+                display: block;
 
                 li {
-                    transition: opacity .35s ease-in-out;
+                    transition: opacity .35s ease;
                     // max-height: 100vh !important;
                     // text-align: center;
                     display: block;
@@ -205,7 +231,7 @@
 
             &-show {
                 .navbar-main {
-                    box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
+                    // box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
                     transform: translateY(0);
 
                     li {
