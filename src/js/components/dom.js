@@ -614,6 +614,34 @@ export let scrollLeft = (_el, val) => {
     });
 };
 
+// Animates the scrolling of the window in the y-axis
+export let scrollTo = (to, dur, ease) => {
+    to = parseInt(to); dur = parseInt(dur);
+    let start = window.pageYOffset, change = to - start, time = 0;
+    let $ease = ease || ((time, start, change, length) => {
+        if ((time /= length / 2) < 1) {
+            return change / 2 * time * time + start;
+        }
+
+        return - change / 2 * ((-- time) * (time - 2) - 1) + start;
+    });
+
+    let scroll, startTime = performance.now();
+    return new Promise(resolve => {
+        requestAnimationFrame((scroll = newTime => {
+            time = newTime - startTime;
+            window.scroll(0, $ease(time, start, change, dur));
+
+            if (time < dur) {
+                requestAnimationFrame(scroll);
+            } else {
+                window.scroll(0, to);
+                resolve();
+            }
+        }));
+    });
+};
+
 // Generate shortforms for events eg. onclick(), onhover(), etc...
 export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown, onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit, onkeydown, onkeypress, onkeyup, oncontextmenu } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
     mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit

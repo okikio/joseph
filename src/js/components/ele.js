@@ -56,7 +56,7 @@ export let _elem = (sel, ctxt) => {
     else if (_is.arr(sel) || _is.inst(sel, NodeList))
         { return [...sel].filter(item => _is.def(item)); }
     else if (_is.obj(sel) || _is.el(sel)) { return [sel]; }
-    else if (_is.fn(sel)) { new ele(document).ready(sel); }
+    else if (_is.fn(sel)) { new ele(document).on("ready", sel); }
     return [];
 };
 

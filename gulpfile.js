@@ -282,7 +282,7 @@ task("js", () =>
             ['src/js/app.vendor.js', {
             opts: { allowEmpty: true },
             pipes: [
-                init(), // Sourcemaps init
+                debug ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -299,7 +299,7 @@ task("js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                write(...srcMapsWrite) // Put sourcemap in public folder
+                debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
         }]
@@ -363,11 +363,17 @@ task("git:pull", () =>
     _exec("git pull origin master")
 );
 
-task('inline', done =>
+task('inline', () =>
     stream('public/*.html', {
         pipes: [
             posthtml(posthtmlOpts)
         ]
+    })
+);
+
+task('reload', done =>
+    stream('public/*.html', {
+        pipes: [ ]
     }, (...args) => {
         browserSync.reload();
         done(...args);
@@ -386,16 +392,16 @@ task('other', parallel("client", series("config", "html", "css", "inline")));
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
     browserSync.init({ server: "./public" });
-
+    console.log("debug: " + debug);
     watch(['config.js', 'containers.js'], watchDelay, series('config:watch'));
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'css', 'js'));
 
-    watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline'));
+    watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));
-    watch('src/**/*.js', watchDelay, series('js'));
-    watch(['client/**/*'], watchDelay, series('client'));
+    watch('src/**/*.js', watchDelay, series('js', 'inline', 'reload'));
+    watch(['client/**/*'], watchDelay, series('client', 'reload'));
 
-    watch('src/**/app.vendor.js', watchDelay, series('js'));
-    watch(['public/**/*', '!public/css/*.css', '!public/**/*.html'])
-        .on('change', browserSync.reload);
+    // watch('src/**/app.vendor.js', watchDelay, series('js', 'inline', 'reload'));
+    // watch(['public/**/*', '!public/css/*.css', '!public/**/*.html', '!public/js/*.js'])
+    //     .on('change', browserSync.reload);
 });

@@ -14,6 +14,11 @@
     min-height: 20px;
     width: auto;
 
+    &:focus,
+    &:hover {
+        text-decoration: none;
+    }
+
     &,
     &-bkg,
     &-background {

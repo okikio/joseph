@@ -12,11 +12,40 @@
     /* -- Navigation -- */
     @at-root .navbar {
         $radius: 18px;
+
         position: relative;
         max-height: 1000px;
         height: $height;
         z-index: 1200;
         width: 100%;
+
+        &-focus,
+        &-show,
+        &:hover {
+            .navbar-layout {
+                $border-color: darken($very-light, 8%);
+                border-bottom-color: $border-color;
+                border-right-color: $border-color;
+                border-left-color: $border-color;
+                background: $surface;
+            }
+
+            .navbar-title-line {
+                border-left-color: darken($background, 14%) !important;
+            }
+        }
+
+        &:hover .navbar-layout {
+            // $border-width: 2px;
+            $border-color: $primary; // darken($very-light, 15%);
+            border-bottom-color: $border-color;
+            border-right-color: $border-color;
+            border-left-color: $border-color;
+
+            // border-bottom-width: $border-width;
+            // border-right-width: $border-width;
+            // border-left-width: $border-width;
+        }
 
         &-fixed {
             position: fixed;
@@ -25,29 +54,14 @@
         }
 
         &-layout {
+            // transition: border .25s linear;
             border-bottom: 1px solid transparent;
             border-right: 1px solid transparent;
             border-left: 1px solid transparent;
+            border-radius: 0 0 $radius $radius;
             background: transparent;
             height: $height;
             margin: 0 auto;
-        }
-
-        &-focus,
-        &-show,
-        &:hover {
-            .navbar-layout {
-                background: $surface;
-
-                border-bottom-color: darken($very-light, 1%);
-                border-right-color: darken($very-light, 1%);
-                border-left-color: darken($very-light, 1%);
-                border-radius: 0 0 $radius $radius;
-            }
-
-            .navbar-title-line {
-                border-left-color: darken($background, 14%) !important;
-            }
         }
 
         &-head {
@@ -151,6 +165,10 @@
             }
         }
 
+        a:hover {
+            text-decoration: none;
+        }
+
         &-mobile {
             display: none;
         }
@@ -161,6 +179,7 @@
 
         // Mobile navbar settings
         @media #{$screen-size-tablet} {
+
             &-layout,
             &-list {
                 flex-direction: column;
@@ -189,38 +208,38 @@
                 display: block;
 
                 li {
-                    transition: opacity .35s ease;
                     display: block;
                     width: 100%;
-                    opacity: 0;
                 }
+            }
+
+            .navbar-layout {
+                $border-color: none;
+                border-bottom: $border-color;
+                border-right: $border-color;
+                border-left: $border-color;
             }
 
             &:hover,
             &-focus,
             &-show {
+
                 .navbar-head {
                     background: $surface;
                 }
 
-                .navbar-head, .navbar-main {
-                    border-bottom-color: darken($very-light, 1%);
+                .navbar-head,
+                .navbar-main {
+                    $border-color: darken($very-light, 8%);
+                    border-bottom-color: $border-color;
+                    border-right-color: $border-color;
+                    border-left-color: $border-color;
                 }
             }
 
             &-show {
                 .navbar-main {
                     transform: translateY(0);
-
-                    li {
-                        opacity: 1;
-
-                        @for $i from 1 to 4 {
-                            &:nth-of-type(#{$i}) {
-                                transition-delay: $i * .30s;
-                            }
-                        }
-                    }
                 }
             }
 
