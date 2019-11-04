@@ -96,8 +96,8 @@ let posthtmlOpts = [
     tree => {
         let _src, buf, warnings, mime, promises = [];
         tree.walk(node => {
-            //  && node.attrs.class.includes("placeholder-img")
-            if (node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.class) {
+            if (node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.class &&
+                node.attrs.class.includes("placeholder-img")) {
                 if (!node.attrs.src.includes("data:image/")) {
                     mime = lookup(_src = node.attrs.src) || 'text/plain';
                     promises.push(
