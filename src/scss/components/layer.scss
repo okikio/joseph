@@ -31,11 +31,14 @@
         top: 0;
 
         picture {
-            position: absolute;
-            // overflow: hidden;
+            position: relative;
+            // // overflow: hidden;
             display: block;
             height: 100%;
             width: 100%;
+            left: 0;
+            top: 0;
+
         }
 
         &-overlay {
@@ -100,22 +103,16 @@
 
         .layer-title {
             font-size: 8vmax;
-        }
 
-        @media (min-width: 700px) {
-            .layer-title {
+            @media (min-width: 700px) {
                 font-size: 12vmax;
             }
-        }
 
-        @media (min-width: 1000px) {
-            .layer-title {
+            @media (min-width: 1000px) {
                 font-size: 12vw;
             }
-        }
 
-        @media (min-width: 1600px) {
-            .layer-title {
+            @media (min-width: 1600px) {
                 font-size: 160px;
             }
         }

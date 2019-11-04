@@ -96,8 +96,8 @@ let posthtmlOpts = [
     tree => {
         let _src, buf, warnings, mime, promises = [];
         tree.walk(node => {
-            if (node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.class &&
-                node.attrs.class.includes("placeholder-img")) {
+            //  && node.attrs.class.includes("placeholder-img")
+            if (node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.class) {
                 if (!node.attrs.src.includes("data:image/")) {
                     mime = lookup(_src = node.attrs.src) || 'text/plain';
                     promises.push(
@@ -392,7 +392,7 @@ task('watch', () => {
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline'));
     watch('src/**/*.scss', watchDelay, series('css'));
-    watch(['src/**/*.js'], watchDelay, series('js'));
+    watch('src/**/*.js', watchDelay, series('js'));
     watch(['client/**/*'], watchDelay, series('client'));
 
     watch('src/**/app.vendor.js', watchDelay, series('js'));

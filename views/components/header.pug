@@ -19,7 +19,8 @@ mixin header(_page)
             href: "/" + (dev ? "index.html" : "index"),
             class: "navbar-title style-primary style-primary-dark-hover style-primary-focus"
           })
-            img.navbar-logo(src="/assets/gear-svg-icon-logo.svg" inline)
+            img.navbar-logo(src="/assets/gear-svg-icon-logo-color.svg" inline)
+            span.navbar-title-line
             span JOSEPH!
           section.layout-spacer
           section.navbar-foot.navbar-mobile
@@ -41,7 +42,8 @@ mixin header(_page)
               - let _class = _name == _content ? "navbar-link-focus" : "";
 
               li
-                a.navbar-link(href=_href class=_class data-swup-preload)= _content
+                a.navbar-link(href=_href class=_class data-swup-preload)
+                  span.navbar-link-content= _content
             //- li.navbar-desktop
               +install
                   span.btn-spacer

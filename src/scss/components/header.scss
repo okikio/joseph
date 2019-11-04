@@ -26,10 +26,11 @@
         &-layout {
             $radius: 18px;
 
-            transition: box-shadow .15s ease, background .15s ease;
+            transition: box-shadow .35s ease; // , background .025s ease
             box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
             border-radius: 0 0 $radius $radius;
             background: transparent;
+            height: $height;
             margin: 0 auto;
         }
 
@@ -40,10 +41,14 @@
                 box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
                 background: $surface;
             }
+
+            .navbar-title-line {
+                border-left-color: darken($background, 14%) !important;
+            }
         }
 
         &-head {
-            transition: border-bottom-color .45s linear;
+            transition: background 0.05s ease .25s, border-bottom-color .45s linear;
             border-bottom: 1px solid transparent;
             flex-direction: row;
             align-items: center;
@@ -52,26 +57,42 @@
         }
 
         &-logo {
-            width: 18px;
-            min-height: 18px;
+            transform: translateY(4px);
             display: inline-block;
-            transform: translateY(2px);
-            margin-right: 8px;
-            fill: aqua;
+            min-height: 22px;
+            width: 22px;
         }
 
         &-title {
-            padding-left: $size-sub-large;
             font-family: $bold-font;
             letter-spacing: 0.05em;
             text-decoration: none;
             line-height: $height;
+            padding-left: $size;
             position: relative;
             font-size: 17px;
+
+            &-line {
+                transition: border-left-color linear .45s;
+
+                border-left: 1px solid transparent;
+                border-left-color: darken($mid-light, 2%);
+
+                margin-right: $size-smaller;
+                margin-left: $size-smaller;
+                // transform: translateY(1px);
+                display: inline-block;
+                height: 14px;
+            }
+        }
+
+        &-main {
+            transition: box-shadow .35s linear, transform .55s ease;
+            box-shadow: 0 0px 15px rgba(0, 0, 0, 0);
+            transform: translateY(0);
         }
 
         &-list {
-            transition: max-height .55s ease-in-out;
             justify-content: center;
             align-items: center;
             white-space: nowrap;
@@ -92,30 +113,36 @@
             padding: 0 28px;
             font-size: 14px;
             color: $black;
+            width: 100%;
 
-            &:before {
-                transition: transform .25s cubic-bezier(.25, .46, .45, .94);
-                transform: translateY($height - 12px) scaleX(0);
-                background-color: $primary !important;
-                border: 1px solid transparent;
-                transform-origin: 100% 50%;
-                will-change: transform;
-                transition-delay: 70ms;
-                border-radius: 10px;
-                display: block;
-                height: 2.5px;
-                width: 100%;
-                content: "";
+            &-content {
+                display: inline-block;
+
+                &:before {
+                    transition: transform .25s cubic-bezier(.25, .46, .45, .94);
+                    transform: translateY($height - 12px) scaleX(0);
+                    background-color: $primary !important;
+                    border: 1.5px solid transparent;
+                    transform-origin: 100% 50%;
+                    will-change: transform;
+                    transition-delay: 70ms;
+                    border-radius: 10px;
+                    display: block;
+                    height: 2.5px;
+                    width: 100%;
+                    content: "";
+                }
             }
 
             &:hover,
+            &:focus,
             &-focus {
                 text-decoration: none;
                 color: $black;
 
-                &:before {
-                    transform: translateY($height - 12px) scaleX(1);
-                    transform-origin: 0 50%;
+                .navbar-link-content:before {
+                    transform: translateY($height - 12px) scaleX(1) !important;
+                    transform-origin: 0 50% !important;
                 }
             }
 
@@ -138,7 +165,6 @@
 
         // Mobile navbar settings
         @media #{$screen-size-tablet} {
-
             &-layout,
             &-list {
                 flex-direction: column;
@@ -147,15 +173,40 @@
             &-head {
                 padding-right: $size-small;
                 width: 100%;
+                z-index: 10;
             }
 
+            &-main {
+                transform: translateY(-150%);
+                z-index: 2;
+            }
+
+            &-list {
+                background: lighten($very-light, 2%);
+
+                li {
+                    transition: opacity .35s ease-in-out;
+                    // max-height: 100vh !important;
+                    // text-align: center;
+                    display: block;
+                    width: 100%;
+                    opacity: 0;
+                }
+            }
+
+            &:hover,
+            &-focus,
             &-show {
                 .navbar-head {
                     border-bottom-color: darken($very-light, 0.5%);
+                    background: $surface;
                 }
+            }
 
-                .navbar-list {
-                    max-height: 100vh !important;
+            &-show {
+                .navbar-main {
+                    box-shadow: 0 5px 25px rgba(0, 0, 50, 0.12);
+                    transform: translateY(0);
 
                     li {
                         opacity: 1;
@@ -169,31 +220,19 @@
                 }
             }
 
-            &-list {
-                background: lighten($very-light, 2%);
-                max-height: 0;
-
-                li {
-                    transition: opacity .35s ease-in-out;
-                    // text-align: center;
-                    display: block;
-                    width: 100%;
-                    opacity: 0;
-                }
-            }
-
             &-link {
                 line-height: $height - 12px;
                 padding: 0 24px;
 
-                &:before {
-                    transform: translateY($height - 24px) scaleX(0);
+                &-content:before {
+                    transform: translateY($height - 18px) scaleX(0);
                 }
 
                 &-focus,
+                &:focus,
                 &:hover {
-                    &:before {
-                        transform: translateY($height - 18px) scaleX(1);
+                    .navbar-link-content:before {
+                        transform: translateY($height - 18px) scaleX(1) !important;
                     }
                 }
             }
