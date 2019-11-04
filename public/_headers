@@ -1,6 +1,41 @@
 /*
-  cache-control: public, max-age=31536000
+  cache-control: public, max-age=31536
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Link: </app.min.css> rel=preload as=stylesheet
+  Link: </app.modern.min.js> rel=preload as=script
+  Link: <https://polyfill.io/> rel=preconnect
+  Link: <https://fonts.gstatic.com/> rel=preconnect
+  Link: <https://cdnjs.cloudflare.com/> rel=preconnect
+  Link: <https://res.cloudinary.com/okikio/> rel=preconnect
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+/*.css
+  content-type: text/css; charset=utf-8
+  cache-control: immutable, public, max-age=31536000
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
 
 /*.js
   content-type: text/javascript; charset=utf-8
+  cache-control: immutable, public, max-age=31536000
+  X-Content-Type-Options: nosniff
+
+https://fonts.gstatic.com/*
+  cache-control: immutable, public, max-age=31536000
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+https://res.cloudinary.com/okikio/*
+  cache-control: immutable, public, max-age=31536000
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+
+https://polyfill.io/*
   cache-control: public, max-age=31536000
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+/manifest.webmanifest
+  content-type: application/manifest+json
+  X-Content-Type-Options: nosniff

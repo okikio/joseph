@@ -21,7 +21,9 @@ try {
     let src = _src(`app${isModern ? ".modern" : ""}`);
     script.setAttribute("src", src);
     if (isModern) {
-        fetch(src)
+        fetch(src, {
+            headers: new Headers({'content-type': 'text/javascript; charset=utf-8'})
+        })
             .then(res => {
                 if (!res.ok) {
                     console.log('Looks like there was a problem. Status Code: ', status);

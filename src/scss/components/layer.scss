@@ -30,6 +30,14 @@
         left: 0;
         top: 0;
 
+        picture {
+            position: absolute;
+            // overflow: hidden;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+
         &-overlay {
             background: #473eca;
             position: absolute;

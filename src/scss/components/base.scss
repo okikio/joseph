@@ -1,6 +1,7 @@
 /* -- Presets & Resets -- */
 /* -- Elements -- */
 * {
+
     &,
     &:before,
     &:after {
@@ -83,10 +84,17 @@ p,
 }
 
 $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
+
 @each $sz in $headerSizes {
     $i: index($headerSizes, $sz);
-    h#{$i} { font-size: $sz; }
-    .h#{$i} { font-size: $sz !important; }
+
+    h#{$i} {
+        font-size: $sz;
+    }
+
+    .h#{$i} {
+        font-size: $sz !important;
+    }
 }
 
 
@@ -103,9 +111,8 @@ img {
 }
 
 .placeholder-img {
-    transition: transform 3s ease, opacity .8s ease;
-    transform: scale(1.2);
-    // filter: blur(25px);
+    transition: opacity 2s ease;
+    // filter: blur(3px);
     opacity: 1;
 }
 
@@ -115,7 +122,7 @@ img {
     top: 0;
 
     &-show {
-        transform: scale(1) !important;
+        // filter: blur(0px) !important;
         opacity: 0 !important;
         z-index: 0 !important;
     }
