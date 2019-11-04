@@ -39,9 +39,9 @@
             .navbar-layout {
                 background: $surface;
 
-                border-bottom-color: darken($very-light, 3%);
-                border-right-color: darken($very-light, 3%);
-                border-left-color: darken($very-light, 3%);
+                border-bottom-color: darken($very-light, 1%);
+                border-right-color: darken($very-light, 1%);
+                border-left-color: darken($very-light, 1%);
                 border-radius: 0 0 $radius $radius;
             }
 
@@ -204,7 +204,7 @@
                 }
 
                 .navbar-head, .navbar-main {
-                    border-bottom-color: darken($very-light, 3%);
+                    border-bottom-color: darken($very-light, 1%);
                 }
             }
 
