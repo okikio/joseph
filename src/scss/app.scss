@@ -84,6 +84,7 @@ $size: 25px;
 $size-mid: 20px;
 $size-small: 15px;
 $size-smaller: 10px;
+$size-smallest: 8px;
 $size-mini: 5px;
 $size-nano: 2px;
 
@@ -132,6 +133,7 @@ $sizes: (
     "mid": $size-mid,
     "small": $size-small,
     "smaller": $size-smaller,
+    "smallest": $size-smallest,
     "mini": $size-mini,
     "nano": $size-nano
 );
