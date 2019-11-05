@@ -20,10 +20,10 @@ let _scrolldown = '.layer-hero-scroll-down';
 let _height = height(_navbar);
 let _focusPt = _height + 10;
 
-// el(_navbar).on("click touchstart", '.navbar-menu', e => {
-//     e.preventDefault();
-//     toggleClass(_navbar, "navbar-show");
-// });
+el(_navbar).on("click touchstart", '.navbar-menu', () => {
+    toggleClass(_navbar, "navbar-show");
+    return false;
+});
 
 onscroll(_global, () => {
     toggleClass(_navbar, "navbar-focus", scrollTop(_global) >= 5);
@@ -48,16 +48,16 @@ each(_img, $img => {
     }
 });
 
-el(_actioncenter).on("click touchstart", _backUp, e => {
-    e.preventDefault();
+el(_actioncenter).on("click touchstart", _backUp, () => {
     addClass(_backUp, "permanent");
     scrollTo("0px", "700s");
+    return false;
 });
 // click
-el(_hero).on("click touchstart", _scrolldown, e => {
-    e.preventDefault();
+el(_hero).on("click touchstart", _scrolldown, () => {
     addClass(_scrolldown, "permanent");
     scrollTo(height(_hero) + _focusPt, "700s");
+    return false;
 });
 
 let images = [];

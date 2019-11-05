@@ -93,7 +93,7 @@ export default ele = class extends _event {
             let _emit = evt => e => {
                 let target = _is.str(delegate) && _matches(e.target, delegate) ? e.target : el;
                 if (!_is.str(delegate) || _matches(e.target, delegate))
-                    this.emit(evt, [e, target, this, i], target);
+                    return this.emit(evt, [e, target, this, i], target);
             };
 
             if (/ready/.test(_newEvts)) {
