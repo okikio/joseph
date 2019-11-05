@@ -53,8 +53,8 @@ el(_backUp).on("click touchstart", e => {
     addClass(_backUp, "permanent");
     scrollTo("0px", "700s");
 });
-
-el(_scrolldown).on("click touchstart", e => {
+// click
+el(_scrolldown).on("touchstart", e => {
     e.preventDefault();
     addClass(_scrolldown, "permanent");
     scrollTo(height(_hero) + _focusPt, "700s");
