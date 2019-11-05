@@ -189,7 +189,7 @@
                 padding-right: $size-small;
                 position: relative;
                 width: 100%;
-                z-index: 10;
+                z-index: 5;
             }
 
             &-main {
@@ -198,7 +198,7 @@
                 transform: translateY(-150%);
                 display: block;
                 width: 100%;
-                z-index: 20;
+                z-index: 0;
             }
 
             &-list {

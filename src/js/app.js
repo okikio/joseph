@@ -8,7 +8,7 @@ import rallax from 'rallax.js';
 import { _global } from "./components/global";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import { onscroll, onclick, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height } from "./components/dom";
+import el, { onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height } from "./components/dom";
 
 let _img = ".load-img";
 let _hero = ".layer-hero";
@@ -20,7 +20,7 @@ let _scrolldown = '.layer-hero-scroll-down';
 let _height = height(_navbar);
 let _focusPt = _height + 10;
 
-onclick(_navbar, '.navbar-menu', e => {
+el(_navbar).on("click touchstart", '.navbar-menu', e => {
     e.preventDefault();
     toggleClass(_navbar, "navbar-show");
 });
@@ -48,12 +48,12 @@ each(_img, $img => {
     }
 });
 
-onclick(_backUp, e => {
+el(_backUp).on("click touchstart", e => {
     e.preventDefault();
     scrollTo("0px", "700s");
 });
 
-onclick(_scrolldown, e => {
+el(_scrolldown).on("click touchstart", e => {
     e.preventDefault();
     scrollTo(height(_hero) + _focusPt, "700s");
 });
