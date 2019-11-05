@@ -124,7 +124,11 @@ export let _attr = (obj, path, val) => {
 // The matches() method checks to see if the Element would be selected by the provided selectorString -- in other words -- checks if the element "is" the selector.
 export let _matches = (ele, sel) => {
     if (_is.undef(ele)) return;
-    let matchSel = ele.matches || ele.msMatchesSelector || ele.webkitMatchesSelector;
+    let matchSel = _is.el(sel) ? el => {
+        var matches = [el], i = matches.length;
+        while (--i >= 0 && matches[i] !== ele);
+        return i > -1;
+    } : ele.matches || ele.msMatchesSelector || ele.webkitMatchesSelector;
     if (matchSel) return matchSel.call(ele, sel);
 };
 

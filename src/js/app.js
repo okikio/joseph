@@ -1,6 +1,6 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
-import { _log, _is } from "./components/util";
+import { _log, _is, _matches } from "./components/util";
 // import Rellax from "rellax";
 import rallax from 'rallax.js';
 // import preload from '@swup/preload-plugin';
@@ -48,16 +48,40 @@ each(_img, $img => {
     }
 });
 
-el(_actioncenter).on("click touchstart", _backUp, () => {
-    addClass(_backUp, "permanent");
-    scrollTo("0px", "700s");
-    return false;
-});
+// el(_backUp).on("click touchstart", () => {
+//     addClass(_backUp, "permanent");
+//     scrollTo("0px", "700s");
+//     return false;
+// });
 // click
-el(_hero).on("click touchstart", _scrolldown, () => {
-    addClass(_scrolldown, "permanent");
-    scrollTo(height(_hero) + _focusPt, "700s");
-    return false;
+// el(_scrolldown).on("click touchstart", () => {
+//     addClass(_scrolldown, "permanent");
+//     scrollTo(height(_hero) + _focusPt, "700s");
+//     return false;
+// });
+
+each(_scrolldown, $el => {
+    let fn = e => {
+        if (_matches(e.target, $el)) {
+            e.preventDefault();
+            addClass(_scrolldown, "permanent");
+            scrollTo(height(_hero) + _focusPt, "700s");
+        }
+    };
+
+    document.addEventListener("click", fn, false);
+    document.addEventListener("touchstart", fn, false);
+});
+
+each(_backUp, $el => {
+    let fn = e => {
+        e.preventDefault();
+        addClass(_backUp, "permanent");
+        scrollTo("0px", "700s");
+    };
+
+    $el.addEventListener("click", fn);
+    $el.addEventListener("touchstart", fn);
 });
 
 let images = [];
