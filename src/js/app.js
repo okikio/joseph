@@ -61,11 +61,16 @@ each(_img, $img => {
 // });
 
 each(_scrolldown, $el => {
+    let _el;
     let fn = e => {
-        if (_matches(e.target, $el)) {
-            e.preventDefault();
-            addClass(_scrolldown, "permanent");
-            scrollTo(height(_hero) + _focusPt, "700s");
+        _el = e.target;
+        while (_el && !_matches(_el, $el)) {
+            _el = _el.parentNode;
+            if (_matches(_el, $el)) {
+                e.preventDefault();
+                addClass(_scrolldown, "permanent");
+                scrollTo(height(_hero) + _focusPt, "700s");
+            }
         }
     };
 
