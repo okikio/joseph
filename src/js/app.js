@@ -8,11 +8,12 @@ import rallax from 'rallax.js';
 import { _global } from "./components/global";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import el, { onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height } from "./components/dom";
+import el, { on, onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height } from "./components/dom";
 
 let _img = ".load-img";
-let _hero = ".layer-hero";
 let _navbar = '.navbar';
+let _hero = ".layer-hero";
+let _menu = '.navbar-menu';
 let _backUp = '.back-to-top';
 let _actioncenter = ".layer-action-center";
 let _scrolldown = '.layer-hero-scroll-down';
@@ -20,9 +21,21 @@ let _scrolldown = '.layer-hero-scroll-down';
 let _height = height(_navbar);
 let _focusPt = _height + 10;
 
-el(_navbar).on("click touchstart", '.navbar-menu', () => {
+on(_menu, "click touchstart", e => {
+    e.preventDefault();
     toggleClass(_navbar, "navbar-show");
-    return false;
+});
+
+on(_backUp, "click touchstart", e => {
+    e.preventDefault();
+    addClass(_backUp, "permanent");
+    scrollTo("0px", "700s");
+});
+
+on(_scrolldown, "click touchstart", e => {
+    e.preventDefault();
+    addClass(_scrolldown, "permanent");
+    scrollTo(height(_hero) + _focusPt, "700s");
 });
 
 onscroll(_global, () => {
@@ -46,48 +59,6 @@ each(_img, $img => {
             }, false);
         }
     }
-});
-
-// el(_backUp).on("click touchstart", () => {
-//     addClass(_backUp, "permanent");
-//     scrollTo("0px", "700s");
-//     return false;
-// });
-// click
-// el(_scrolldown).on("click touchstart", () => {
-//     addClass(_scrolldown, "permanent");
-//     scrollTo(height(_hero) + _focusPt, "700s");
-//     return false;
-// });
-
-each(_scrolldown, $el => {
-    let _el;
-    let fn = e => {
-        _el = e.target;
-        do {
-            if (_matches(_el, $el)) {
-                e.preventDefault();
-                addClass(_scrolldown, "permanent");
-                scrollTo(height(_hero) + _focusPt, "700s");
-                break;
-            }
-            _el = _el.parentNode;
-        } while (_el && !_matches(_el, $el));
-    };
-
-    document.addEventListener("click", fn, false);
-    document.addEventListener("touchstart", fn, false);
-});
-
-each(_backUp, $el => {
-    let fn = e => {
-        e.preventDefault();
-        addClass(_backUp, "permanent");
-        scrollTo("0px", "700s");
-    };
-
-    $el.addEventListener("click", fn);
-    $el.addEventListener("touchstart", fn);
 });
 
 let images = [];

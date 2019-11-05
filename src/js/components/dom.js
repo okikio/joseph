@@ -1,4 +1,4 @@
-import { _matches, _is, _fnval, _capital } from "./util";
+import { _matches, _is, _fnval, _capital, keys, assign } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
@@ -642,18 +642,84 @@ export let scrollTo = (to, dur, ease) => {
     });
 };
 
+// Test for passive support, based on [github.com/rafrex/detect-passive-events]
+let passive = false, opts = {}, noop = () => { };
+try {
+    opts = Object.defineProperty({}, "passive", {
+        get: () => passive = { capture: false, passive: true }
+    });
+
+    window.addEventListener("PassiveEventTest", noop, opts);
+    window.removeEventListener("PassiveEventsTest", noop, opts);
+} catch (e) {}
+
+// Alias for the addEventListener; supports multiple elements
+export let on = ($el, evt, fn, opts) => {
+    let $evt, _emit, useCapture;
+    if (_is.undef(evt)) { return; } // If there is no event break
+    if (_is.str(evt)) { evt = evt.split(/\s/g); }
+    if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
+
+    return each($el, (_el, i) => {
+        _emit = e => fn(e, _el, i);
+
+        // Loop through the list of events
+        keys(evt).forEach(key => {
+            $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
+            if (/ready/.test($evt)) {
+                if (!/in/.test(document.readyState)) {
+                    _emit({  preventDefault: () => {} });
+                } else if (document.addEventListener) {
+                    document.addEventListener('DOMContentLoaded', _emit);
+                } else {
+                    // Support for IE
+                    document.attachEvent('onreadystatechange', e => {
+                        if (!/in/.test(document.readyState)) _emit(e);
+                    });
+                }
+            } else {
+                useCapture = /blur|focus|touch/.test($evt);
+                opts = opts || $evt === "scroll" ? passive || {} : { useCapture };
+                _el.addEventListener($evt, _emit, opts);
+            }
+        });
+    });
+};
+
+// Alias for the removeEventListener; supports multiple elements
+export let off = ($el, evt, fn, opts) => {
+    let $evt, _emit, useCapture;
+    if (_is.undef(evt)) { return; } // If there is no event break
+    if (_is.str(evt)) { evt = evt.split(/\s/g); }
+    if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
+
+    return each($el, (_el, i) => {
+        _emit = e => fn(e, _el, i);
+
+        // Loop through the list of events
+        keys(evt).forEach(key => {
+            $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
+            useCapture = /blur|focus|touch/.test($evt);
+            opts = opts || $evt === "scroll" ? passive || {} : { useCapture };
+            _el.removeEventListener($evt, _emit, opts);
+        });
+    });
+};
+
 // Generate shortforms for events eg. onclick(), onhover(), etc...
 export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown, onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit, onkeydown, onkeypress, onkeyup, oncontextmenu } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
     mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit
     keydown keypress keyup contextmenu`.split(/[\s\n]+/g)
 .reduce((acc, name) => {
     // Handle event binding
-    acc[`on${name}`] = (_el, ...args) => el(_el).on(name, ...args);
+    acc[`on${name}`] = (_el, ...args) => on(_el, name, ...args);
     return acc;
 }, {
     onhover: (_el, fnOver, fnOut) =>
-        el(_el).on("mouseenter", fnOver)
-               .on("mouseleave", fnOut || fnOver)
+        on(_el, {
+            mouseenter: fnOver,
+            mouseleave: fnOut || fnOver
+        })
 });
 
 export default el;
