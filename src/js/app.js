@@ -64,14 +64,15 @@ each(_scrolldown, $el => {
     let _el;
     let fn = e => {
         _el = e.target;
-        while (_el && !_matches(_el, $el)) {
-            _el = _el.parentNode;
+        do {
             if (_matches(_el, $el)) {
                 e.preventDefault();
                 addClass(_scrolldown, "permanent");
                 scrollTo(height(_hero) + _focusPt, "700s");
+                break;
             }
-        }
+            _el = _el.parentNode;
+        } while (_el && !_matches(_el, $el));
     };
 
     document.addEventListener("click", fn, false);
