@@ -19,7 +19,6 @@ try {
 
     let isModern = check();
     let src = _src(`app${isModern ? ".modern" : ""}`);
-    script.setAttribute("src", src);
     if (isModern) {
         fetch(src, {
             headers: new Headers({'content-type': 'text/javascript; charset=utf-8'})
@@ -39,6 +38,7 @@ try {
                 console.log('Fetch Error: ', err);
             });
     } else {
+        script.setAttribute("src", src);
         body.appendChild(script);
     }
 } catch (e) {
