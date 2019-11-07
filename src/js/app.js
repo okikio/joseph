@@ -1,6 +1,6 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
-import { _log, _is, _matches } from "./components/util";
+import { _log, _is } from "./components/util";
 // import Rellax from "rellax";
 import rallax from 'rallax.js';
 // import preload from '@swup/preload-plugin';
@@ -8,7 +8,7 @@ import rallax from 'rallax.js';
 import { _global } from "./components/global";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import el, { on, onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height } from "./components/dom";
+import { on, onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, width } from "./components/dom";
 
 let _img = ".load-img";
 let _navbar = '.navbar';
@@ -25,15 +25,13 @@ on(_menu, "click touchstart", () => {
     toggleClass(_navbar, "navbar-show");
 });
 
-// click
-on(_backUp, "touchstart", () => {
-    addClass(_backUp, "permanent");
+//
+on(_backUp, "click touchstart", () => {
     scrollTo("0px", "700s");
 });
 
-// click
-on(_scrolldown, "touchstart", () => {
-    addClass(_scrolldown, "permanent");
+//
+on(_scrolldown, "click touchstart", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
@@ -71,7 +69,7 @@ each('.load-img', ($el, i) => {
         () => images[i].start()
     );
     images[i].when(
-        () => !images[i].inWindow(),
+        () => !images[i].inWindow() || width(_global) < 600,
         () => images[i].stop()
     );
 });
