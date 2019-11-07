@@ -9,10 +9,10 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(name='Description' content='The porfolio of Joseph, it contains all amazing projects etc...')
 
-    link(rel='preconnect' href=`https://res.cloudinary.com/${cloud_name}/`)
-    link(rel='preconnect' href='https://polyfill.io/')
-    link(rel='preconnect' href='https://fonts.gstatic.com/')
-    link(rel='preconnect' href='https://cdnjs.cloudflare.com/')
+    link(rel='preconnect' href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
+    link(rel='preconnect' href='https://fonts.gstatic.com/' crossorigin)
+    link(rel='preconnect' href='https://cdnjs.cloudflare.com/' crossorigin)
+    link(rel='preconnect' href='https://polyfill.io/' crossorigin)
 
     //- link(rel='apple-touch-icon', sizes='57x57', href='/apple-icon-57x57.png')
     //- link(rel='apple-touch-icon', sizes='60x60', href='/apple-icon-60x60.png')
@@ -33,19 +33,19 @@ html(lang="en")
     meta(name='msapplication-TileColor', content='#4500ff')
     //- meta(name='msapplication-TileImage', content='/ms-icon-144x144.png')
 
-    link(rel="preload" href="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now" as="script" async crossorigin="anonymous")
-    link(rel="preload" href="https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JnGhLeI.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-    link(rel="preload" href="https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JnGhLeI.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-    link(rel="preload" href="https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-    link(rel="preload" href="https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-    link(rel="preload" href="https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD_g.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-    link(rel="preload" href="https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uP.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-    link(rel="preload" href="https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2" as="font" type="font/woff2" crossorigin="anonymous" async)
-
-    //- link(rel="preload" href='./css/app.min.css' as="style" async)
-    //- link(rel="prefetch" href='./js/app.vendor.min.js' as="script" async)
+    link(rel="preload" href="https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JnGhLeI.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JnGhLeI.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD_g.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="prefetch" href="https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uP.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2" as="font" type="font/woff2" crossorigin)
 
     link(rel='stylesheet' href='./css/app.min.css' inline async)
+
+    //- link(rel="preload" href='./css/app.min.css' as="style" async)
+    link(rel="prefetch" href='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now' as="script" crossorigin)
+    link(rel="prefetch" href='./js/app.modern.min.js' as="script")
     <!--[if lt IE 9]>
       script(src='https://cdnjs.cloudflare.com/ajax/libs/nwmatcher/1.4.2/nwmatcher.min.js' async)
       script(src='https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js' async)
@@ -188,7 +188,7 @@ html(lang="en")
               h1.style-white.style-bold.layer-title.style-uppercase.layout-margin-dull-vert-top Coming SOON
               h5.style-white.style-line-height.style-capital.layer-content-detail This website is currently in development. We are working day and night to have it in tip top shape.
 
-    script(src='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now' crossorigin='anonymous' async)
+    script(src='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now' crossorigin async)
     script(src=`${debug ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline defer)
     if false
       script(src=`./js/store.min.js` inline defer)

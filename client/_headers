@@ -1,54 +1,62 @@
 /*
-  cache-control: public, max-age=180
+  cache-control: public, s-max-age=180
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
-  Link: </app.min.css> rel=preload as=stylesheet
-  Link: </app.modern.min.js> rel=preload as=script
-  Link: <https://polyfill.io/> rel=preconnect
-  Link: <https://fonts.gstatic.com/> rel=preconnect
-  Link: <https://cdnjs.cloudflare.com/> rel=preconnect
-  Link: <https://res.cloudinary.com/okikio/> rel=preconnect
+  Link: </css/app.min.css> rel=prefetch; as=stylesheet
+  Link: </js/app.vendor.min.js> rel=prefetch; as=script
+  Link: </js/app.modern.min.js> rel=prefetch; as=script
+  Link: <https://polyfill.io/> rel=preconnect; crossorigin
+  Link: <https://fonts.gstatic.com/> rel=preconnect; crossorigin
+  Link: <https://cdnjs.cloudflare.com/> rel=preconnect; crossorigin
+  Link: <https://res.cloudinary.com/okikio/> rel=preconnect; crossorigin
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Link: <https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JnGhLeI.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: <https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JnGhLeI.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: <https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: <https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: <https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD_g.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: <https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uP.woff2> rel=prefetch; as=font; type=font/woff2; crossorigin
+  Link: <https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2> rel=prefetch; as=font; type=font/woff2; crossorigin
   X-Content-Type-Options: nosniff
 
 /*.css
   content-type: text/css; charset=utf-8
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 /*.js
   content-type: text/javascript; charset=utf-8
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 https://fonts.gstatic.com/*
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 https://res.cloudinary.com/okikio/*
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 https://polyfill.io/*
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 /manifest.webmanifest
   content-type: application/manifest+json
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 /favicon.ico
-  cache-control: immutable, max-age=31536000
+  cache-control: immutable, s-max-age=31536000
