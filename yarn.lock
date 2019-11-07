@@ -5424,11 +5424,6 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-rallax.js@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/rallax.js/-/rallax.js-2.0.4.tgz#4b393d858a124770fe2703cd1566ebc7f75cbd25"
-  integrity sha512-E0WiHrWrnoX4RU79xWP4SvTmgrrXIU3lILwFv7rkrt8r6sDtq+ZMELiLlgDsvY7GW/Ut78bsUIzP0JWDhMBzog==
-
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"

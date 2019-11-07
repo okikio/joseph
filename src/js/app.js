@@ -1,8 +1,8 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
 import { _log, _is } from "./components/util";
-// import Rellax from "rellax";
-import rallax from 'rallax.js';
+import Rellax from "rellax";
+// import rallax from 'rallax.js';
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
 import { _global } from "./components/global";
@@ -35,14 +35,6 @@ on(_scrolldown, "click touchstart", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
-onscroll(_global, () => {
-    toggleClass(_navbar, "navbar-focus", scrollTop(_global) >= 5);
-    hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
-
-    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(_global) > _focusPt * 2);
-    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(_global) <= _focusPt * 2);
-});
-
 each(_img, $img => {
     let _core_img = get(find($img, ".core-img"), 0);
     let _placeholder_img = find($img, ".placeholder-img");
@@ -58,20 +50,39 @@ each(_img, $img => {
     }
 });
 
+// Check to see is Object is in the window
+let inWin = $el => {
+    let { top, bottom } = $el.getBoundingClientRect();
+    return top < window.innerHeight && bottom > 0;
+};
+
 let images = [];
 each('.load-img', ($el, i) => {
-    images[i] = rallax($el, {
-        speed: 0.3,
-        mobilePx: 600
+    images[i] = new Rellax($el, {
+        speed: width(_global) >= 600 ? -6 : 0,
+        center: false,
+        round: false,
     });
-    images[i].when(
-        () => images[i].inWindow(),
-        () => images[i].start()
-    );
-    images[i].when(
-        () => !images[i].inWindow() || width(_global) < 600,
-        () => images[i].stop()
-    );
+
+    images[i].destroy();
+    _log("In Window: " + inWin($el));
+});
+
+onscroll(_global, () => {
+    toggleClass(_navbar, "navbar-focus", scrollTop(_global) >= 5);
+    hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+
+    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(_global) > _focusPt * 2);
+    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(_global) <= _focusPt * 2);
+
+    each('.load-img', ($el, i) => {
+        if (inWin($el) && width(_global) >= 600) {
+            images[i].refresh();
+        } else { images[i].destroy(); }
+
+        i == 1 && console.log("Top: " + $el.getBoundingClientRect().top + " < Bottom: " + (height(_global)));
+        _log("In Window: " + inWin($el));
+    });
 });
 // new Rellax('.load-img', {
 //     speed: width(_global) > 600 ? 2 : 0,
