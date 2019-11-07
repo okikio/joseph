@@ -35,6 +35,8 @@ try {
                 });
             })
             .catch(err => {
+                script.setAttribute("src", src);
+                body.appendChild(script);
                 console.log('Fetch Error: ', err);
             });
     } else {
