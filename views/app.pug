@@ -192,6 +192,6 @@ html(lang="en")
               h5.style-white.style-line-height.style-capital.layer-content-detail This website is currently in development. We are working day and night to have it in tip top shape.
 
     script(src='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now' crossorigin async)
-    script(src=`${debug ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline defer)
+    script(src=`${debug ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline async)
     if false
       script(src=`./js/store.min.js` inline defer)
