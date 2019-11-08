@@ -35,6 +35,14 @@ on(_scrolldown, "click touchstart", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
+onscroll(_global, () => {
+    toggleClass(_navbar, "navbar-focus", scrollTop(_global) >= 5);
+    hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+
+    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(_global) > _focusPt * 2);
+    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(_global) <= _focusPt * 2);
+});
+
 each(_img, $img => {
     let _core_img = get(find($img, ".core-img"), 0);
     let _placeholder_img = find($img, ".placeholder-img");
@@ -50,40 +58,41 @@ each(_img, $img => {
     }
 });
 
-// Check to see is Object is in the window
-let inWin = $el => {
-    let { top, bottom } = $el.getBoundingClientRect();
-    return top < window.innerHeight && bottom > 0;
-};
+let images = [], isVisible = [];
 
-let images = [];
+let observer = new IntersectionObserver((entries, i) => {
+    entries.forEach(entry => isVisible[i] = entry.intersectionRatio > 0);
+});
+
 each('.load-img', ($el, i) => {
-    images[i] = new Rellax($el, {
-        speed: width(_global) >= 600 ? -6 : 0,
+    images[i] = width(_global) >= 600 ? new Rellax($el, {
+        speed: -6,
         center: false,
         round: false,
-    });
+    }) : { destroy() {}, refresh() {} };
 
     images[i].destroy();
-    _log("In Window: " + inWin($el));
+    observer.observe($el);
 });
 
-onscroll(_global, () => {
-    toggleClass(_navbar, "navbar-focus", scrollTop(_global) >= 5);
-    hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
-
-    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(_global) > _focusPt * 2);
-    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(_global) <= _focusPt * 2);
-
+let loop;
+requestAnimationFrame(loop = () => {
     each('.load-img', ($el, i) => {
-        if (inWin($el) && width(_global) >= 600) {
-            images[i].refresh();
-        } else { images[i].destroy(); }
 
-        i == 1 && console.log("Top: " + $el.getBoundingClientRect().top + " < Bottom: " + (height(_global)));
-        _log("In Window: " + inWin($el));
     });
 });
+
+
+
+    // each('.load-img', ($el, i) => {
+    //     if (inWin($el) && width(_global) >= 600) {
+    //         images[i].refresh();
+    //     } else { images[i].destroy(); }
+
+    //     i == 1 && console.log("Top: " + $el.getBoundingClientRect().top + " < Bottom: " + (height(_global)));
+    //     _log("In Window: " + inWin($el));
+    // });
+
 // new Rellax('.load-img', {
 //     speed: width(_global) > 600 ? 2 : 0,
 //     center: false,

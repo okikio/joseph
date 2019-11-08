@@ -707,9 +707,9 @@ export let off = ($el, evt, fn, opts) => {
 };
 
 // Generate shortforms for events eg. onclick(), onhover(), etc...
-export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown, onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit, onkeydown, onkeypress, onkeyup, oncontextmenu } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
+export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown, onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit, onkeydown, onkeypress, onkeyup, oncontextmenu, onorientationchange, ontouchstart, ontouchmove, ontouchend, ontouchcancel } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
     mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit
-    keydown keypress keyup contextmenu`.split(/[\s\n]+/g)
+    keydown keypress keyup contextmenu orientationchange touchstart touchmove touchend touchcancel`.split(/[\s\n]+/g)
 .reduce((acc, name) => {
     // Handle event binding
     acc[`on${name}`] = (_el, ...args) => on(_el, name, ...args);
