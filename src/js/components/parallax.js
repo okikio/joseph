@@ -1,5 +1,5 @@
 import { assign, _is } from './util';
-import el, { data, scrollTop, scrollLeft, offset, width, height, each, style, onresize } from './dom';
+import el, { data, scrollTop, scrollLeft, offset, width, height, each, style, on, onresize } from './dom';
 import { _global } from "./global";
 
 const _raf = window.requestAnimationFrame;
@@ -34,48 +34,8 @@ export class Parallax {
         this.posY = 0;
 
         this.list = [];
+        this.loop = null;
 
-        // store the id for later use
-        let loopId = null;
-
-
-
-        // Get and cache initial position of all elements
-        let cacheBlocks = function() {
-            for (let i = 0; i < self.elems.length; i++) {
-                let block = createBlock(self.elems[i]);
-                blocks.push(block);
-            }
-        };
-
-        // Remove event listeners and loop again
-        let deferredUpdate = function() {
-            window.removeEventListener('resize', deferredUpdate);
-            window.removeEventListener('orientationchange', deferredUpdate);
-            (self.options.wrapper ? self.options.wrapper : window).removeEventListener('scroll', deferredUpdate);
-            (self.options.wrapper ? self.options.wrapper : document).removeEventListener('touchmove', deferredUpdate);
-
-            // loop again
-            loopId = _raf(update);
-        };
-
-        // Loop
-        let update = function() {
-            if (setPosition() && pause === false) {
-                animate();
-
-                // loop again
-                loopId = _raf(update);
-            } else {
-                loopId = null;
-
-                // Don't animate until we get a position updating event
-                window.addEventListener('resize', deferredUpdate);
-                window.addEventListener('orientationchange', deferredUpdate);
-                (self.options.wrapper ? self.options.wrapper : window).addEventListener('scroll', deferredUpdate, supportsPassive ? { passive: true } : false);
-                (self.options.wrapper ? self.options.wrapper : document).addEventListener('touchmove', deferredUpdate, supportsPassive ? { passive: true } : false);
-            }
-        };
         self.destroy = function() {
             for (let i = 0; i < self.elems.length; i++) {
                 self.elems[i].style.cssText = blocks[i].style;
@@ -254,7 +214,15 @@ export class Parallax {
         (wrapper ? wrapper : document).removeEventListener('touchmove', this.deferredUpdate.bind(this));
 
         // loop again
-        loopId = _raf(this.update.bind(this));
+        this.loop = _raf(this.update.bind(this));
+    }
+
+    applyEvents() {
+
+    }
+
+    removeEvents() {
+
     }
 
     // Loop
@@ -264,10 +232,11 @@ export class Parallax {
             this.animate();
 
             // loop again
-            loopId = _raf(this.update.bind(this));
+            this.loop = _raf(this.update.bind(this));
         } else {
-            loopId = null;
+            this.loop = null;
 
+            on(_global, 'resize')
             // Don't animate until we get a position updating event
             window.addEventListener('resize', this.deferredUpdate.bind(this));
             window.addEventListener('orientationchange', this.deferredUpdate.bind(this));
@@ -275,7 +244,6 @@ export class Parallax {
             (wrapper ? wrapper : document).addEventListener('touchmove', this.deferredUpdate.bind(this), supportsPassive ? { passive: true } : false);
         }
     }
-
 
     start() {
         this.list.forEach((block, i) => {
@@ -296,7 +264,7 @@ export class Parallax {
 
         // If paused, unpause and set listener for window resizing events
         if (!this.play) {
-            onresize(_global, 'resize', this.start.bind(this));
+            on(_global, 'resize', this.start.bind(this));
             this.play = true;
             // Start the loop
             this.update();

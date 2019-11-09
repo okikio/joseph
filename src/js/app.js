@@ -21,17 +21,18 @@ let _scrolldown = '.layer-hero-scroll-down';
 let _height = height(_navbar);
 let _focusPt = _height + 10;
 
-on(_menu, "click touchstart", () => {
+//  touchstart
+on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
 });
 
-//
-on(_backUp, "click touchstart", () => {
+// touchstart
+on(_backUp, "click", () => {
     scrollTo("0px", "700s");
 });
 
-//
-on(_scrolldown, "click touchstart", () => {
+// touchstart
+on(_scrolldown, "click", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
