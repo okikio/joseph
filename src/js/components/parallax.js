@@ -1,6 +1,5 @@
 import { assign, _is } from './util';
-import el, { data, scrollTop, scrollLeft, offset, width, height, each, style, on, onresize } from './dom';
-import { _global } from "./global";
+import el, { data, scrollTop, scrollLeft, offset, width, height, each, style, on } from './dom';
 
 const _raf = window.requestAnimationFrame;
 const _cancelRaf = window.cancelAnimationFrame;
@@ -102,8 +101,8 @@ export class Parallax {
         const dataMin = data($el, 'parallax-min');
         const dataMax = data($el, 'parallax-max');
 
-        let x_scrll = scrollLeft(_global);
-        let y_scrll = scrollTop(_global);
+        let x_scrll = scrollLeft(window);
+        let y_scrll = scrollTop(window);
 
         let wrapperY = wrapper ? scrollTop(wrapper) : y_scrll;
         if (relativeToWrapper) wrapperY = y_scrll - offset(wrapper).top;
@@ -116,8 +115,8 @@ export class Parallax {
         let blockW = $el.clientWidth || $el.offsetWidth || $el.scrollWidth;
         let blockH = $el.clientHeight || $el.offsetHeight || $el.scrollHeight;
 
-        this.screenX = width(_global);
-        this.screenY = height(_global);
+        this.screenX = width(window);
+        this.screenY = height(window);
 
         let percentx = dataPercentage ? dataPercentage :
             (posX - blockLeft + this.screenX) / (blockW + this.screenX);
@@ -150,8 +149,8 @@ export class Parallax {
         const { wrapper, vertical, horizontal, relativeToWrapper } = this.opts;
         let oldX = this.posX, oldY = this.posY;
 
-        let x_scrll = scrollLeft(_global);
-        let y_scrll = scrollTop(_global);
+        let x_scrll = scrollLeft(window);
+        let y_scrll = scrollTop(window);
 
         this.posX = wrapper ? scrollLeft(wrapper) : x_scrll;
         this.posY = wrapper ? scrollTop(wrapper) : y_scrll;
@@ -164,8 +163,8 @@ export class Parallax {
         const { wrapper, vertical, horizontal, relativeToWrapper } = this.opts;
         let oldX = this.posX, oldY = this.posY;
 
-        let x_scrll = scrollLeft(_global);
-        let y_scrll = scrollTop(_global);
+        let x_scrll = scrollLeft(window);
+        let y_scrll = scrollTop(window);
 
         let posX = wrapper ? scrollLeft(wrapper) : x_scrll;
         let posY = wrapper ? scrollTop(wrapper) : y_scrll;
@@ -236,7 +235,7 @@ export class Parallax {
         } else {
             this.loop = null;
 
-            on(_global, 'resize')
+            on(window, 'resize')
             // Don't animate until we get a position updating event
             window.addEventListener('resize', this.deferredUpdate.bind(this));
             window.addEventListener('orientationchange', this.deferredUpdate.bind(this));
@@ -252,8 +251,8 @@ export class Parallax {
 
         this.list = [];
 
-        this.screenX = width(_global);
-        this.screenY = height(_global);
+        this.screenX = width(window);
+        this.screenY = height(window);
         this.setPos();
 
         each(this.elems, ($el, i) => {
@@ -264,7 +263,7 @@ export class Parallax {
 
         // If paused, unpause and set listener for window resizing events
         if (!this.play) {
-            on(_global, 'resize', this.start.bind(this));
+            on(window, 'resize', this.start.bind(this));
             this.play = true;
             // Start the loop
             this.update();

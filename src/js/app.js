@@ -5,7 +5,6 @@ import Rellax from "rellax";
 // import rallax from 'rallax.js';
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
-import { _global } from "./components/global";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
 import { on, onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, width } from "./components/dom";
@@ -36,12 +35,12 @@ on(_scrolldown, "click", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
-onscroll(_global, () => {
-    toggleClass(_navbar, "navbar-focus", scrollTop(_global) >= 5);
+onscroll(window, () => {
+    toggleClass(_navbar, "navbar-focus", scrollTop(window) >= 5);
     hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
-    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(_global) > _focusPt * 2);
-    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(_global) <= _focusPt * 2);
+    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(window) > _focusPt * 2);
+    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(window) <= _focusPt * 2);
 });
 
 each(_img, $img => {
@@ -66,7 +65,7 @@ let observer = new IntersectionObserver((entries, i) => {
 });
 
 each('.load-img', ($el, i) => {
-    images[i] = width(_global) >= 600 ? new Rellax($el, {
+    images[i] = width(window) >= 600 ? new Rellax($el, {
         speed: -6,
         center: false,
         round: false,
@@ -86,16 +85,16 @@ requestAnimationFrame(loop = () => {
 
 
     // each('.load-img', ($el, i) => {
-    //     if (inWin($el) && width(_global) >= 600) {
+    //     if (inWin($el) && width(window) >= 600) {
     //         images[i].refresh();
     //     } else { images[i].destroy(); }
 
-    //     i == 1 && console.log("Top: " + $el.getBoundingClientRect().top + " < Bottom: " + (height(_global)));
+    //     i == 1 && console.log("Top: " + $el.getBoundingClientRect().top + " < Bottom: " + (height(window)));
     //     _log("In Window: " + inWin($el));
     // });
 
 // new Rellax('.load-img', {
-//     speed: width(_global) > 600 ? 2 : 0,
+//     speed: width(window) > 600 ? 2 : 0,
 //     center: false,
 //     round: false,
 //     vertical: true,
@@ -260,11 +259,11 @@ _backToTop.click(e => {
 });
 
 let _actioncenter = el(".layer-action-center");
-_global.scroll(_scroll = () => {
-    _navbar.toggleClass("navbar-focus", (_global.scrollTop() + _height) >= _focusPt);
+window.scroll(_scroll = () => {
+    _navbar.toggleClass("navbar-focus", (window.scrollTop() + _height) >= _focusPt);
     _navbar.hasClass("navbar-show") && _navbar.removeClass("navbar-show");
 
-    if ((_global.scrollTop() + _height) >= _focusPt * 2) {
+    if ((window.scrollTop() + _height) >= _focusPt * 2) {
         _actioncenter.show();
     } else { _actioncenter.hide(); }
 });
