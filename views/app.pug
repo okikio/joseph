@@ -24,6 +24,11 @@ html(lang="en")
     link(rel='apple-touch-icon', sizes='144x144', href='/apple-icon-144x144.png')
     link(rel='apple-touch-icon', sizes='152x152', href='/apple-icon-152x152.png')
     link(rel='apple-touch-icon', sizes='180x180', href='/apple-icon-180x180.png')
+
+    link(rel="preload" href="manifest.webmanifest" as="fetch" crossorigin)
+    link(rel="preload" href="/favicon-32x32.png" as="image" crossorigin)
+    link(rel="preload" href="/android-icon-144x144.png" as="image" crossorigin)
+
     link(rel='icon', type='image/png', sizes='512x512', href='/android-icon-512x512.png')
     link(rel='icon', type='image/png', sizes='192x192', href='/android-icon-192x192.png')
     link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
