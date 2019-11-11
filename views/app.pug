@@ -71,14 +71,12 @@ html(lang="en")
     script.
       var check = function () {
           "use strict";
-
           if (typeof window.Symbol == "undefined") return false;
           try {
               Function("class Foo {}") ();
               Function("let bar = x => x+1;") ();
               Function("let bez = { a: 'b' }; let box = { b: 'a', ...bez };") ();
           } catch (e) { return false; }
-
           return true;
       };
 
