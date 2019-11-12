@@ -679,7 +679,7 @@ export let on = ($el, evt, fn, opts) => {
                 }
             } else {
                 useCapture = /blur|focus|touch/.test($evt);
-                opts = opts || $evt === "scroll" ? passive || {} : { useCapture };
+                opts = _is.usable(opts) ? opts : ($evt === "scroll" ? passive || {} : { useCapture });
                 _el.addEventListener($evt, _emit, opts);
             }
         });
@@ -700,7 +700,7 @@ export let off = ($el, evt, fn, opts) => {
         keys(evt).forEach(key => {
             $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
             useCapture = /blur|focus|touch/.test($evt);
-            opts = opts || $evt === "scroll" ? passive || {} : { useCapture };
+            // opts = opts || $evt === "scroll" ? passive || {} : { useCapture };
             _el.removeEventListener($evt, _emit, opts);
         });
     });

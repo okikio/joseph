@@ -7,7 +7,7 @@ import { _log, _is } from "./components/util";
 // import scrollPlugin from "@swup/scroll-plugin";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import { on, onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, width } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, width, off } from "./components/dom";
 import parallax from "./components/parallax";
 
 let _img = ".load-img";
@@ -24,7 +24,13 @@ let _focusPt = _height + 10;
 //  touchstart
 on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
-});
+}, false);
+
+off(_menu, "click", () => {
+    toggleClass(_navbar, "navbar-show");
+}, false);
+
+// _menu
 
 // touchstart
 on(_backUp, "click", () => {
@@ -36,7 +42,7 @@ on(_scrolldown, "click", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
-onscroll(window, () => {
+on(window, 'scroll', () => {
     toggleClass(_navbar, "navbar-focus", scrollTop(window) >= 5);
     hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
@@ -59,7 +65,7 @@ each(_img, $img => {
     }
 });
 
-let images = [], isVisible = [];
+let images = [];
 
 /*
 let observer = new IntersectionObserver(entries => {
@@ -69,13 +75,11 @@ let observer = new IntersectionObserver(entries => {
   threshold: 1.0
 });
 */
-each('.load-img', ($el, i) => {
-    images[i] = parallax($el, {
-        play: true,
-        speed: -6,
-        center: true,
-        round: true,
-    });
+parallax('.load-img', {
+    play: true,
+    speed: -6,
+    center: true,
+    round: true,
 });
 
 
