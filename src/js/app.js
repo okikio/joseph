@@ -30,7 +30,7 @@ off(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
 }, false);
 
-// _menu
+// each(_menu, .addEventListener($evt, _emit, opts)
 
 // touchstart
 on(_backUp, "click", () => {
