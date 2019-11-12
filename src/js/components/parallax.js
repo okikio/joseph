@@ -1,5 +1,5 @@
 import { assign, _is } from './util';
-import el, { data, scrollTop, scrollLeft, offset, width, height, each, style, on } from './dom';
+import el, { data, scrollTop, scrollLeft, offset, width, height, each, style, on, off } from './dom';
 
 const _raf = window.requestAnimationFrame;
 const _cancelRaf = window.cancelAnimationFrame;
@@ -24,7 +24,7 @@ export class Parallax {
 
         // Has a wrapper and it exists
         _is.usable(wrapper) && (this.opts.wrapper = el(wrapper));
-        this.play = this.opts.play;
+        this.isPlaying = this.opts.play;
 
         this.screenX = 0;
         this.screenY = 0;
@@ -35,29 +35,7 @@ export class Parallax {
         this.list = [];
         this.loop = null;
 
-        self.destroy = function() {
-            for (let i = 0; i < self.elems.length; i++) {
-                self.elems[i].style.cssText = blocks[i].style;
-            }
-
-            // Remove resize event listener if not pause, and pause
-            if (!pause) {
-                window.removeEventListener('resize', init);
-                pause = true;
-            }
-
-            // Clear the animation loop to prevent possible memory leak
-            clearLoop(loopId);
-            loopId = null;
-        };
-
-        // Init
-        init();
-
-        // Allow to recalculate the initial values whenever we want
-        self.refresh = init;
-
-        return self;
+        if (this.isPlaying) this.start();
     }
 
     getPos(percentx, percenty, speed) {
@@ -127,7 +105,7 @@ export class Parallax {
         // Optional individual block speed as data attr, otherwise global speed
         let $speed = dataSpeed ? dataSpeed : speed;
         let $bases = this.getPos(percentx, percenty, $speed);
-        let $transform = this.getTransform(el);
+        let $transform = this.getTransform($el);
 
         return {
             style: $el.style.cssText,
@@ -201,47 +179,58 @@ export class Parallax {
             // (Set the new translation and append initial inline transforms.)
             style($el, "transform", `translate3d(${horizontal ? _posX : '0'}px, ${vertical ? _posY : '0'}px,${zindex}px) ${transform}`);
         }, this);
+        return this;
         // self.options.callback(positions);
     }
 
-    // Remove event listeners and loop again
-    deferredUpdate() {
-        const { wrapper } = this.opts;
-        window.removeEventListener('resize', this.deferredUpdate.bind(this));
-        window.removeEventListener('orientationchange', this.deferredUpdate.bind(this));
-        (wrapper ? wrapper : window).removeEventListener('scroll', this.deferredUpdate.bind(this));
-        (wrapper ? wrapper : document).removeEventListener('touchmove', this.deferredUpdate.bind(this));
-
-        // loop again
-        this.loop = _raf(this.update.bind(this));
-    }
-
     applyEvents() {
-
+        const { wrapper } = this.opts;
+        this.loop = null;
+        on(window, 'resize orientationchange', this.removeEvents.bind(this));
+        on(window, 'scroll', this.removeEvents.bind(this));
+        on(wrapper ? wrapper : window, 'scroll', this.removeEvents.bind(this));
+        on(wrapper ? wrapper : document, 'touchmove', this.removeEvents.bind(this));
+        // Don't animate until we get a position updating event
+        // window.addEventListener('resize', this.deferredUpdate.bind(this));
+        // window.addEventListener('orientationchange', this.deferredUpdate.bind(this));
+        // (wrapper ? wrapper : window).addEventListener('scroll', this.deferredUpdate.bind(this), supportsPassive ? { passive: true } : false);
+        // (wrapper ? wrapper : document).addEventListener('touchmove', this.deferredUpdate.bind(this), supportsPassive ? { passive: true } : false);
     }
 
     removeEvents() {
+        const { wrapper } = this.opts;
+        off(window, 'resize orientationchange', this.removeEvents.bind(this));
+        off(window, 'scroll', this.removeEvents.bind(this));
+        off(wrapper ? wrapper : window, 'scroll', this.removeEvents.bind(this));
+        off(wrapper ? wrapper : document, 'touchmove', this.removeEvents.bind(this));
+        // window.removeEventListener('resize', this.deferredUpdate.bind(this));
+        // window.removeEventListener('orientationchange', this.deferredUpdate.bind(this));
+        // (wrapper ? wrapper : window).removeEventListener('scroll', this.deferredUpdate.bind(this));
+        // (wrapper ? wrapper : document).removeEventListener('touchmove', this.deferredUpdate.bind(this));
 
+        // Loop again
+        this.loop = _raf(this.update.bind(this));
     }
+
+    play() {
+        this.isPlaying = true;
+        return this;
+    }  
+
+    pause() {
+        this.isPlaying = false;
+        return this;
+    }    
 
     // Loop
     update() {
-        const { wrapper } = this.opts;
-        if (this.setPos() && this.play) {
+        if (this.setPos() && this.isPlaying) {
             this.animate();
 
-            // loop again
+            // Loop again
             this.loop = _raf(this.update.bind(this));
-        } else {
-            this.loop = null;
+        } else { this.applyEvents(); }
 
-            on(window, 'resize')
-            // Don't animate until we get a position updating event
-            window.addEventListener('resize', this.deferredUpdate.bind(this));
-            window.addEventListener('orientationchange', this.deferredUpdate.bind(this));
-            (wrapper ? wrapper : window).addEventListener('scroll', this.deferredUpdate.bind(this), supportsPassive ? { passive: true } : false);
-            (wrapper ? wrapper : document).addEventListener('touchmove', this.deferredUpdate.bind(this), supportsPassive ? { passive: true } : false);
-        }
     }
 
     start() {
@@ -262,11 +251,36 @@ export class Parallax {
         this.animate();
 
         // If paused, unpause and set listener for window resizing events
-        if (!this.play) {
+        if (!this.isPlaying && this.mobileDevices) {
             on(window, 'resize', this.start.bind(this));
-            this.play = true;
+            this.play();
+
             // Start the loop
             this.update();
         }
     }
+
+    destroy() {
+        each(this.elems, ($el, i) => {
+            this.elems[i].style.cssText = this.list[i].style;
+        }, this);
+
+        // Remove resize event listener if not pause, and pause
+        if (this.isPlaying) {
+            off(window, 'resize', this.start.bind(this));
+            this.pause();
+        }
+
+        // Clear the animation loop to prevent possible memory leak
+        _cancelRaf(this.loop);
+        this.loop = null;
+    }
+    
+    // Allow to recalculate the initial values whenever we want
+    get refresh() {
+        return this.start;
+    }
 }
+
+export let parallax = (...args) => new Parallax(...args);
+export default parallax;

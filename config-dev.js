@@ -513,7 +513,7 @@ module.exports = {
                                                         "tile": {
                                                             "title": "",
                                                             "content": "",
-                                                            "class": "layer-box layer-surface layer-shadow--1 layout-block"
+                                                            "class": "layer-box layer-surface layout-block"
                                                         }
                                                     }]
                                                 }
@@ -533,7 +533,7 @@ module.exports = {
                                                                 "src": "/assets/blue-sky",
                                                                 "alt": "City Alt"
                                                             },
-                                                            "class": "layer-box layer-surface layer-shadow--1 layout-block"
+                                                            "class": "layer-box layer-surface layout-block"
                                                         }
                                                     }]
                                                 }
@@ -565,7 +565,7 @@ module.exports = {
                                                         "tile": {
                                                             "title": "",
                                                             "content": "",
-                                                            "class": "layer-box layer-box-flat layer-box-tall layer-surface layer-shadow--2 layout-block"
+                                                            "class": "layer-box layer-box-flat layer-box-tall layer-surface layout-block"
                                                         }
                                                     }]
                                                 }

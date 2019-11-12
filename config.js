@@ -390,7 +390,7 @@ module.exports = {
                                                 values([
                                                     _tile([ "", "",
                                                         _class([
-                                                            _layer("box", "surface", "shadow--1"),
+                                                            _layer("box", "surface"), // , "shadow--1"
                                                             _layout("block")
                                                         ])
                                                     ])
@@ -409,7 +409,7 @@ module.exports = {
                                                         "Google Designs", "",
                                                         _img(blueSkyImg, "City Alt"),
                                                         _class([
-                                                            _layer("box", "surface", "shadow--1"),
+                                                            _layer("box", "surface"), // , "shadow--1"
                                                             _layout("block")
                                                         ])
                                                     ])
@@ -441,7 +441,7 @@ module.exports = {
                                                 values([
                                                     _tile([ "", "",
                                                         _class([
-                                                            _layer("box", "box-flat", "box-tall", "surface", "shadow--2"),
+                                                            _layer("box", "box-flat", "box-tall", "surface"), // , "shadow--2"
                                                             _layout("block")
                                                         ])
                                                     ])

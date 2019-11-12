@@ -1,13 +1,14 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
 import { _log, _is } from "./components/util";
-import Rellax from "rellax";
+// import Rellax from "rellax";
 // import rallax from 'rallax.js';
 // import preload from '@swup/preload-plugin';
 // import scrollPlugin from "@swup/scroll-plugin";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
 import { on, onscroll, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, width } from "./components/dom";
+import parallax from "./components/parallax";
 
 let _img = ".load-img";
 let _navbar = '.navbar';
@@ -60,34 +61,23 @@ each(_img, $img => {
 
 let images = [], isVisible = [];
 
+/*
 let observer = new IntersectionObserver(entries => {
     entries.forEach((entry, i) => isVisible[i] = entry.intersectionRatio > 0);
 }, {
   rootMargin: '0px',
   threshold: 1.0
 });
-
+*/
 each('.load-img', ($el, i) => {
-    images[i] = width(window) >= 600 ? new Rellax($el, {
+    images[i] = parallax($el, {
+        play: true,
         speed: -6,
         center: true,
         round: true,
-    }) : { destroy() {}, refresh() {} };
-
-    images[i].destroy();
-    observer.observe($el);
+    });
 });
 
-let loop = () => {
-    each('.load-img', ($el, i) => {
-        if (isVisible[i]) 
-            images[i].refresh();
-        else 
-            images[i].destroy();
-    });
-    requestAnimationFrame(loop);
-};
-requestAnimationFrame(loop);
 
 
 
