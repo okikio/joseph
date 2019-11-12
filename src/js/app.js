@@ -60,27 +60,34 @@ each(_img, $img => {
 
 let images = [], isVisible = [];
 
-let observer = new IntersectionObserver((entries, i) => {
-    entries.forEach(entry => isVisible[i] = entry.intersectionRatio > 0);
+let observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => isVisible[i] = entry.intersectionRatio > 0);
+}, {
+  rootMargin: '0px',
+  threshold: 1.0
 });
 
 each('.load-img', ($el, i) => {
     images[i] = width(window) >= 600 ? new Rellax($el, {
         speed: -6,
-        center: false,
-        round: false,
+        center: true,
+        round: true,
     }) : { destroy() {}, refresh() {} };
 
     images[i].destroy();
     observer.observe($el);
 });
 
-let loop;
-requestAnimationFrame(loop = () => {
+let loop = () => {
     each('.load-img', ($el, i) => {
-
+        if (isVisible[i]) 
+            images[i].refresh();
+        else 
+            images[i].destroy();
     });
-});
+    requestAnimationFrame(loop);
+};
+requestAnimationFrame(loop);
 
 
 

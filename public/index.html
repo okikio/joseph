@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="./css/app.min.css" inline="" async="">
     <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/nwmatcher/1.4.2/nwmatcher.min.js" async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js" async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js" async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" async></script><script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.13/es5-shim.min.js" async></script><![endif]-->
     <!--[if lt IE 10]><script src="https://cdnjs.cloudflare.com/ajax/libs/flexibility/2.0.1/flexibility.js" async></script><script>flexibility(document.documentElement);</script><![endif]-->
-    <script> var check = function() { "use strict";  if (typeof window.Symbol == "undefined") return false; try { Function("class Foo {}")(); Function("let bar = x => x+1;")(); Function("let bez = { a: 'b' }; let box = { b: 'a', ...bez };")(); } catch (e) { return false; }  return true; };  var _require = function(src, fn) { var head = document.getElementsByTagName('head')[0]; var script = document.createElement('script'); script.setAttribute("async", ""); script.type = 'text/javascript'; script.onload = fn; script.onreadystatechange = function() { if (this.readyState === 'complete') { fn(); } }; script.src = src; head.appendChild(script); };  if (/msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) || !check()) { _require("https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js"); _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.min.js"); _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.ielte7.min.js"); } </script>
+    <script> var check = function() { "use strict"; if (typeof window.Symbol == "undefined") return false; try { Function("class Foo {}")(); Function("let bar = x => x+1;")(); Function("let bez = { a: 'b' }; let box = { b: 'a', ...bez };")(); } catch (e) { return false; } return true; }; var _require = function(src, fn) { var head = document.getElementsByTagName('head')[0]; var script = document.createElement('script'); script.setAttribute("async", ""); script.type = 'text/javascript'; script.onload = fn; script.onreadystatechange = function() { if (this.readyState === 'complete') { fn(); } }; script.src = src; head.appendChild(script); }; if (/msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) || !check()) { _require("https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js"); _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.min.js"); _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.ielte7.min.js"); } </script>
     <title>Hello There</title>
 </head>
 
@@ -238,7 +238,7 @@
         </article>
     </div>
     <script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&amp;features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now" crossorigin="" async=""></script>
-    <script src="./js/app.vendor.min.js" inline="" async=""></script>
+    <script src="./js/app.modern.min.js" inline="" async=""></script>
 </body>
 
 </html>
