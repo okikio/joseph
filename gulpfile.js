@@ -148,11 +148,12 @@ let minifyOpts = {
     keep_fnames: false, // change to true here
     toplevel: true,
     compress: {
-        passes: 5,
+        // passes: 5,
         dead_code: true,
         pure_getters: true
     },
-    ecma: 8
+    ecma: 8,
+    safari10: true
 };
 let minSuffix = { suffix: ".min" };
 let watchDelay = { delay: 1000 };
