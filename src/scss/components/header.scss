@@ -24,9 +24,10 @@
         &:hover {
             .navbar-layout {
                 $border-color: darken($very-light, 8%);
-                border-bottom-color: $border-color;
-                border-right-color: $border-color;
-                border-left-color: $border-color;
+                box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
+                // border-bottom-color: $border-color;
+                // border-right-color: $border-color;
+                // border-left-color: $border-color;
                 background: $surface;
             }
 
@@ -179,7 +180,6 @@
 
         // Mobile navbar settings
         @media #{$screen-size-tablet} {
-
             &-layout,
             &-list {
                 flex-direction: column;
@@ -194,6 +194,7 @@
 
             &-main {
                 border-bottom: 1px solid transparent;
+                box-shadow: 0 5px 25px transparent;
                 transition: transform .55s ease;
                 transform: translateY(-150%);
                 display: block;
@@ -223,7 +224,6 @@
             &:hover,
             &-focus,
             &-show {
-
                 .navbar-head {
                     background: $surface;
                 }
@@ -231,6 +231,7 @@
                 .navbar-head,
                 .navbar-main {
                     $border-color: darken($very-light, 8%);
+                    box-shadow: 0 0 25px rgba(0, 0, 50, .12);
                     border-bottom-color: $border-color;
                     border-right-color: $border-color;
                     border-left-color: $border-color;
@@ -238,6 +239,10 @@
             }
 
             &-show {
+                .navbar-head {
+                    box-shadow: none;
+                }
+
                 .navbar-main {
                     transform: translateY(0);
                 }
