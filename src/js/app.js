@@ -8,7 +8,7 @@ import { _log, _is } from "./components/util";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, width, off } from "./components/dom";
-import parallax from "./components/parallax";
+// import parallax from "./components/parallax";
 
 let _img = ".load-img";
 let _navbar = '.navbar';
@@ -75,12 +75,12 @@ let observer = new IntersectionObserver(entries => {
   threshold: 1.0
 });
 */
-parallax('.load-img', {
-    play: true,
-    speed: -6,
-    center: true,
-    round: true,
-});
+// parallax('.load-img', {
+//     play: true,
+//     speed: -6,
+//     center: true,
+//     round: true,
+// });
 
 
 

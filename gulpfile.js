@@ -96,27 +96,21 @@ let posthtmlOpts = [
     },
     tree => {
         let _src, buf, warnings, mime, promises = [];
-
-        tree.match({ tag: 'img' }, (node) => {
+        tree.match({ tag: 'img' }, node => {
             if (node.attrs && node.attrs.src && "inline" in node.attrs) {
-                mime = lookup(_src = node.attrs.src) + '' || 'image/unknown';
-                promises.push(
-                    new Promise(resolve => {
-                    axios.get(_src, !/svg/g.test(_src) ? { responseType: 'arraybuffer' } : null)
-                        .then(val => {
-                            buf = Buffer.from(val.data, 'utf8');
-                            if (/svg/g.test(_src)) {
-                                node.tag = "div";
-                                node.content = [val.data];
-                            } else {
-                                node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
-                            }
-                            resolve(node);
-                        }).catch(err => {
-                            console.error(`The image with the src: ${_src} `, err);
-                        })
-                    })
-                );
+                if (!node.attrs.src.includes("data:image/")) {
+                    mime = lookup(_src = node.attrs.src) || 'image/unknown';
+                    /\.svg$/g.test(_src) && console.log(mime);
+                    promises.push(
+                        axios.get(_src, { responseType: 'arraybuffer' })
+                            .then(val => {
+                                buf = Buffer.from(val.data, 'base64');
+                                node.attrs.src = `data:${/\.svg$/g.test(_src) ? "image/svg+xml" : mime};base64,${buf.toString('base64')}`;
+                            }).catch(err => {
+                                console.error(`The image with the src: ${_src} `, err);
+                            })
+                    );
+                }
             }
             return node;
         });
@@ -128,7 +122,7 @@ let posthtmlOpts = [
             if (warnings.length) {
                 // Conditionally warn the user about any issues
                 console.warn(`\nWarnings (${warnings.length}):\n${
-                    warnings.map(msg => `  ${msg.message}`).join('\n') }\n`);
+                    warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
             }
 
             // Return the ast
@@ -136,17 +130,17 @@ let posthtmlOpts = [
         });
     },
 
-    // Dom process
-    require('posthtml-doctype')({ doctype: 'HTML 5' }),
-    require('posthtml-link-noreferrer')({
-      attr: ['noopener', 'noreferrer']
-    }),
-    dev ? () => {} : require('posthtml-inline-assets')({
-        transforms: {
-            // any non-object will work
-            image: false
-        }
-    })
+    // // Dom process
+    // require('posthtml-doctype')({ doctype: 'HTML 5' }),
+    // require('posthtml-link-noreferrer')({
+    //   attr: ['noopener', 'noreferrer']
+    // }),
+    // dev ? () => {} : require('posthtml-inline-assets')({
+    //     transforms: {
+    //         // any non-object will work
+    //         image: false
+    //     }
+    // })
 ];
 
 let minifyOpts = {
