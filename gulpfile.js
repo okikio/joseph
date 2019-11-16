@@ -100,7 +100,7 @@ let posthtmlOpts = [
             if (node.attrs && node.attrs.src && "inline" in node.attrs) {
                 if (!node.attrs.src.includes("data:image/")) {
                     mime = lookup(_src = node.attrs.src) || 'image/unknown';
-                    /\.svg$/g.test(_src) && console.log(mime);
+                    // /\.svg$/g.test(_src) && console.log(mime);
                     promises.push(
                         axios.get(_src, { responseType: 'arraybuffer' })
                             .then(val => {
@@ -130,17 +130,17 @@ let posthtmlOpts = [
         });
     },
 
-    // // Dom process
-    // require('posthtml-doctype')({ doctype: 'HTML 5' }),
-    // require('posthtml-link-noreferrer')({
-    //   attr: ['noopener', 'noreferrer']
-    // }),
-    // dev ? () => {} : require('posthtml-inline-assets')({
-    //     transforms: {
-    //         // any non-object will work
-    //         image: false
-    //     }
-    // })
+    // Dom process
+    require('posthtml-doctype')({ doctype: 'HTML 5' }),
+    require('posthtml-link-noreferrer')({
+      attr: ['noopener', 'noreferrer']
+    }),
+    dev ? () => {} : require('posthtml-inline-assets')({
+        transforms: {
+            // any non-object will work
+            image: false
+        }
+    })
 ];
 
 let minifyOpts = {
@@ -393,7 +393,7 @@ task('other', parallel("client", series("config", "html", "css", "inline")));
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
     browserSync.init({ server: "./public" });
-    console.log("debug: " + debug);
+
     watch(['config.js', 'containers.js'], watchDelay, series('config:watch'));
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'css', 'js'));
 
