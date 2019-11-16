@@ -13,7 +13,6 @@ const browserSync = require('browser-sync').create();
 const { init, write } = require('gulp-sourcemaps');
 const commonJS = require('rollup-plugin-commonjs');
 const rollupBabel = require('rollup-plugin-babel');
-const request = require("request-promise-native");
 const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
@@ -21,16 +20,17 @@ const { html, js } = require('gulp-beautify');
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
-const { lookup } = require("mime-types");
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const { writeFile } = require("fs");
+const icons = require('microicon');
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
+const https = require('https');
 
 let { pages, cloud_name, imageURLConfig } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
@@ -95,24 +95,32 @@ let posthtmlOpts = [
         tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
     },
     tree => {
-        let _src, buf, warnings, mime, promises = [];
+        let warnings, promises = [];
         tree.match({ tag: 'img' }, node => {
             if (node.attrs && node.attrs.src && "inline" in node.attrs) {
-                if (!node.attrs.src.includes("data:image/")) {
-                    _src = node.attrs.src;
-                    // /\.svg$/g.test(_src) && console.log(mime);
+                const _src = node.attrs.src;
+                if (!_src.includes("data:image/")) {
                     promises.push(
-                        request.get(_src) // , { responseType: 'arraybuffer' }
-                            .then(body => {
-                                mime = lookup(_src) || 'image/unknown';
-                                buf = Buffer.from(body, 'base64');
-                                node.attrs.src = `data:${/\.svg$/g.test(_src) ? "image/svg+xml" : mime};base64,${buf.toString('base64')}`;
-                            }).catch(err => {
+                        new Promise((resolve, reject) => {
+                            https.get(_src, res => {
+                                let contentType = res.headers["content-type"];
+                                let body = `data:${contentType};base64,`;
+
+                                res.setEncoding('base64');
+                                res.on('data', data => { body += data });
+                                res.on('end', () => {
+                                    node.attrs.src = body;
+                                    resolve(node);
+                                });
+                            }).on('error', err => {
                                 console.error(`The image with the src: ${_src} `, err);
-                            })
+                                reject(node);
+                            });
+                        })
                     );
                 }
             }
+
             return node;
         });
 
@@ -130,6 +138,29 @@ let posthtmlOpts = [
             return tree;
         });
     },
+    tree => {
+        tree.match(querySelector("i.icon"), node => {
+            if ("inline" in node.attrs) {
+                const _attrs = node.attrs;
+                const _content = node.content;
+                node = {
+                    tag: 'svg',
+                    attrs: {
+                        width: '24', height: '24',
+                        viewBox: '0 0 24 24',
+                        fill: 'currentcolor',
+                        ..._attrs
+                    },
+                    content: [{
+                        tag: 'path',
+                        attrs: { d: icons[_content] },
+                    }]
+                };
+            }
+
+            return node;
+        });
+    },
 
     // Dom process
     require('posthtml-doctype')({ doctype: 'HTML 5' }),
@@ -137,10 +168,7 @@ let posthtmlOpts = [
       attr: ['noopener', 'noreferrer']
     }),
     dev ? () => {} : require('posthtml-inline-assets')({
-        transforms: {
-            // any non-object will work
-            image: false
-        }
+        transforms: { image: false }
     })
 ];
 
