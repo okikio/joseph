@@ -2,9 +2,8 @@
   cache-control: public, s-max-age=180
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
-  Link: </css/app.min.css> rel=prefetch; as=stylesheet
-  Link: </js/app.vendor.min.js> rel=prefetch; as=script
-  Link: </js/app.modern.min.js> rel=prefetch; as=script
+  Link: </js/app.vendor.min.js> rel=preload; as=script
+  Link: </js/app.modern.min.js> rel=preload; as=script
   Link: <https://polyfill.io/> rel=preconnect; crossorigin
   Link: <https://fonts.gstatic.com/> rel=preconnect; crossorigin
   Link: <https://cdnjs.cloudflare.com/> rel=preconnect; crossorigin

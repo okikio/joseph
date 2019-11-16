@@ -16,7 +16,7 @@ const rollupBabel = require('rollup-plugin-babel');
 const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
-const { html, js } = require('gulp-beautify');
+const { html, js } = require('gulp-beautify'); 
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
@@ -82,7 +82,8 @@ let posthtmlOpts = [
             let crop = query.get("crop") || imageURLConfig.crop;
             let effect = query.get("effect") || imageURLConfig.effect;
             let quality = query.get("quality") || imageURLConfig.quality;
-            let _imgURLConfig = { ...imageURLConfig, width, height, quality, crop, effect };
+            let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect }, 
+                    /svg/g.test(url) ? { fetch_format: null } : {});
             node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
                 `${assetURL + url.replace(queryString, '')}` :
                 assets.url(url.replace(queryString, ''), _imgURLConfig)
@@ -95,25 +96,30 @@ let posthtmlOpts = [
     },
     tree => {
         let _src, buf, warnings, mime, promises = [];
-        tree.walk(node => {
-            // (node.attrs.class && node.attrs.class.includes("placeholder-img"))
-            if (node.tag === 'img' && node.attrs && node.attrs.src && "inline" in node.attrs) {
-                if (!node.attrs.src.includes("data:image/")) {
-                    mime = lookup(_src = node.attrs.src) || 'text/plain';
-                    promises.push(
-                        axios.get(_src, { responseType: 'arraybuffer' })
-                            .then(val => {
-                                buf = Buffer.from(val.data, 'base64');
-                                node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
-                            }).catch(err => {
-                                console.error(`The image with the src: ${_src} `, err);
-                            })
-                    );
-                }
-            }
 
+        tree.match({ tag: 'img' }, (node) => {
+            if (node.attrs && node.attrs.src && "inline" in node.attrs) {
+                mime = lookup(_src = node.attrs.src) + '' || 'image/unknown';
+                promises.push(
+                    new Promise(resolve => {
+                    axios.get(_src, !/svg/g.test(_src) ? { responseType: 'arraybuffer' } : null)
+                        .then(val => {
+                            buf = Buffer.from(val.data, 'utf8');
+                            if (/svg/g.test(_src)) {
+                                node.tag = "div";
+                                node.content = [val.data];
+                            } else {
+                                node.attrs.src = `data:${mime};base64,${buf.toString('base64')}`;
+                            }
+                            resolve(node);
+                        }).catch(err => {
+                            console.error(`The image with the src: ${_src} `, err);
+                        })
+                    })
+                );
+            }
             return node;
-		});
+        });
 
         return Promise.all(promises).then(() => {
             // Filter errors from messages as warnings
@@ -135,12 +141,12 @@ let posthtmlOpts = [
     require('posthtml-link-noreferrer')({
       attr: ['noopener', 'noreferrer']
     }),
-    require('posthtml-lazyload')({
-      loading: 'auto',
-      class: 'core-img',
-    }),
-    dev ? () => {} : require('posthtml-inline-assets')(),
-    require('posthtml-lorem')(),
+    dev ? () => {} : require('posthtml-inline-assets')({
+        transforms: {
+            // any non-object will work
+            image: false
+        }
+    })
 ];
 
 let minifyOpts = {
