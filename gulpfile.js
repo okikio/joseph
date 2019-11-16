@@ -13,6 +13,7 @@ const browserSync = require('browser-sync').create();
 const { init, write } = require('gulp-sourcemaps');
 const commonJS = require('rollup-plugin-commonjs');
 const rollupBabel = require('rollup-plugin-babel');
+const request = require("request-promise-native");
 const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
@@ -30,7 +31,6 @@ const { writeFile } = require("fs");
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
-const axios = require("axios");
 
 let { pages, cloud_name, imageURLConfig } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
@@ -99,12 +99,13 @@ let posthtmlOpts = [
         tree.match({ tag: 'img' }, node => {
             if (node.attrs && node.attrs.src && "inline" in node.attrs) {
                 if (!node.attrs.src.includes("data:image/")) {
-                    mime = lookup(_src = node.attrs.src) || 'image/unknown';
+                    _src = node.attrs.src;
                     // /\.svg$/g.test(_src) && console.log(mime);
                     promises.push(
-                        axios.get(_src, { responseType: 'arraybuffer' })
-                            .then(val => {
-                                buf = Buffer.from(val.data, 'base64');
+                        request.get(_src) // , { responseType: 'arraybuffer' }
+                            .then(body => {
+                                mime = lookup(_src) || 'image/unknown';
+                                buf = Buffer.from(body, 'base64');
                                 node.attrs.src = `data:${/\.svg$/g.test(_src) ? "image/svg+xml" : mime};base64,${buf.toString('base64')}`;
                             }).catch(err => {
                                 console.error(`The image with the src: ${_src} `, err);
