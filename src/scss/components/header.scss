@@ -6,7 +6,7 @@
     display: block;
 
     &-top-spot {
-        height: $height + $size;
+        margin-top: $height + $size;
     }
 
     /* -- Navigation -- */

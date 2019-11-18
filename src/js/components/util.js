@@ -15,8 +15,11 @@ export let _removeProps = (prop, obj) => {
     return newObj;
  };
 
-// Create an array of values that two array share in common
-export let _intersect = (a, b) => a.filter(val => b.includes(val));
+// Limits a number to a max, and a min value
+export let _constrain = (v, a, b) => (v > b ? b : v < a ? a : v);
+
+// Re-maps a number from one range to another. Numbers outside the range are not clamped to 0 and 1, because out-of-range values are often intentional and useful.
+export let _map = (e, t, n, r, i) => (r + (i - r) * ((e - t) / (n - t)));
 
 // Log values
 export let _log = (...args) => args.forEach(v => console.log(v));
@@ -139,4 +142,4 @@ export let _new = function (ctor, args) {
     return new F();
 };
 
-export default { _matches, _capital, _is, _intersect, _fnval, _argNames, _path, _attr, _new, assign, keys, values, from, of, _log };
+export default { _matches, _capital, _is, _constrain, _map, _fnval, _argNames, _path, _attr, _new, assign, keys, values, from, of, _log };

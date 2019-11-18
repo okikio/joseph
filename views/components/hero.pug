@@ -1,13 +1,13 @@
 include ./content.pug
 
-mixin hero(value)
+mixin hero(value, banner)
   - let _value = value || { img: {}, title: "Title", };
   - let _title = _value.title;
   - let _image = _value.img;
 
   section.layer
-    article.layout-contain-large.layout-padding-horz-small.layout-padding-bottom.layout-padding-dull-top
-      .layer-hero
+    article.layout-padding-bottom.layout-padding-dull-top(class=`${!banner ? "layout-contain-large layout-padding-horz-small" : ''}`)
+      .layer-hero(class=`${!banner ? "header-top-spot" : 'banner-mode'}`)
         +image(_image)
 
         section.layout-enlarge.layout-flex.layout-align-items-center.layout-justify-content-center
@@ -20,3 +20,4 @@ mixin hero(value)
               a.btn.layer-round.layout-padding-small.layer-tertiary.layer-shadow.layer-secondary-hover.layer-tertiary-dark-focus.style-secondary.style-hover-tertiary.layer-hero-scroll-down
                 span.btn-group
                   i.icon.style-font-sz-36(inline) expand_more
+

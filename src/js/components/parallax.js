@@ -185,11 +185,12 @@ export class Parallax {
 
     applyEvents() {
         const { wrapper } = this.opts;
+        const fn = this.removeEvents.bind(this);
         this.loop = null;
-        on(window, 'resize orientationchange', this.removeEvents.bind(this));
-        on(window, 'scroll', this.removeEvents.bind(this));
-        on(wrapper ? wrapper : window, 'scroll', this.removeEvents.bind(this));
-        on(wrapper ? wrapper : document, 'touchmove', this.removeEvents.bind(this));
+        on(window, 'resize orientationchange', fn);
+        on(window, 'scroll', fn);
+        on(wrapper ? wrapper : window, 'scroll', fn);
+        on(wrapper ? wrapper : document, 'touchmove', fn);
         // Don't animate until we get a position updating event
         // window.addEventListener('resize', this.deferredUpdate.bind(this));
         // window.addEventListener('orientationchange', this.deferredUpdate.bind(this));
@@ -199,10 +200,11 @@ export class Parallax {
 
     removeEvents() {
         const { wrapper } = this.opts;
-        off(window, 'resize orientationchange', this.removeEvents.bind(this));
-        off(window, 'scroll', this.removeEvents.bind(this));
-        off(wrapper ? wrapper : window, 'scroll', this.removeEvents.bind(this));
-        off(wrapper ? wrapper : document, 'touchmove', this.removeEvents.bind(this));
+        const fn = this.removeEvents.bind(this);
+        off(window, 'resize orientationchange', fn);
+        off(window, 'scroll', fn);
+        off(wrapper ? wrapper : window, 'scroll', fn);
+        off(wrapper ? wrapper : document, 'touchmove', fn);
         // window.removeEventListener('resize', this.deferredUpdate.bind(this));
         // window.removeEventListener('orientationchange', this.deferredUpdate.bind(this));
         // (wrapper ? wrapper : window).removeEventListener('scroll', this.deferredUpdate.bind(this));

@@ -655,32 +655,30 @@ try {
 
 // Alias for the addEventListener; supports multiple elements
 export let on = ($el, evt, fn, opts) => {
-    let $evt, _emit, useCapture;
+    let $evt, useCapture;
     if (_is.undef(evt)) { return; } // If there is no event break
     if (_is.str(evt)) { evt = evt.split(/\s/g); }
     if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
 
-    return each($el, (_el, i) => {
-        _emit = e => fn(e, _el, i);
-
+    return each($el, _el => {
         // Loop through the list of events
         keys(evt).forEach(key => {
             $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
             if (/ready/.test($evt)) {
                 if (!/in/.test(document.readyState)) {
-                    _emit({  preventDefault: () => {} });
+                    fn({  preventDefault: () => {} });
                 } else if (document.addEventListener) {
-                    document.addEventListener('DOMContentLoaded', _emit);
+                    document.addEventListener('DOMContentLoaded', fn);
                 } else {
                     // Support for IE
                     document.attachEvent('onreadystatechange', e => {
-                        if (!/in/.test(document.readyState)) _emit(e);
+                        if (!/in/.test(document.readyState)) fn(e);
                     });
                 }
             } else {
                 useCapture = /blur|focus|touch/.test($evt);
                 opts = _is.usable(opts) ? opts : ($evt === "scroll" ? passive || {} : { useCapture });
-                _el.addEventListener($evt, _emit, opts);
+                _el.addEventListener($evt, fn, opts);
             }
         });
     });
@@ -688,20 +686,18 @@ export let on = ($el, evt, fn, opts) => {
 
 // Alias for the removeEventListener; supports multiple elements
 export let off = ($el, evt, fn, opts) => {
-    let $evt, _emit, useCapture;
+    let $evt, useCapture;
     if (_is.undef(evt)) { return; } // If there is no event break
     if (_is.str(evt)) { evt = evt.split(/\s/g); }
     if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
 
-    return each($el, (_el, i) => {
-        _emit = e => fn(e, _el, i);
-
+    return each($el, _el => {
         // Loop through the list of events
         keys(evt).forEach(key => {
             $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
             useCapture = /blur|focus|touch/.test($evt);
-            // opts = opts || $evt === "scroll" ? passive || {} : { useCapture };
-            _el.removeEventListener($evt, _emit, opts);
+            opts = _is.usable(opts) ? opts : ($evt === "scroll" ? passive || {} : { useCapture });
+            _el.removeEventListener($evt, fn, opts);
         });
     });
 };

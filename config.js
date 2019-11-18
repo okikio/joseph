@@ -95,6 +95,7 @@ module.exports = {
             noFooter()
         ]),
         "projects": page([
+            attr("banner", true) (),
             _name("projects"),
             title("Projects"),
             values([

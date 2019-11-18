@@ -12,7 +12,7 @@ mixin header(_page)
   - let _name = (page.name || "").toLowerCase();
 
   header.header
-    nav.navbar.navbar-fixed
+    nav.navbar.navbar-fixed(class=`${page.banner ? "banner-mode" : ''}`)
       article.layout-contain-large.navbar-layout
         section.navbar-head
           +link({

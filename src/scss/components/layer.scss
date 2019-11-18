@@ -42,7 +42,7 @@
         }
 
         &-overlay {
-            background: #473eca;
+            background: darken($primary-dark, 20%);
             position: absolute;
             display: block;
             opacity: 0.15;
@@ -76,21 +76,24 @@
         overflow: hidden;
     }
 
-    &-hero {
+    &-hero,
+    %hero {
         // @extend %shadow;
         // background: $surface;
         position: relative;
         z-index: 125;
 
-        .layer-image {
+        &:not(.banner-mode) .layer-image {
             border-radius: 25px;
+        }
 
+        .layer-image {
             img {
                 min-width: 500px;
             }
 
             &-overlay {
-                background-color: #58677b;
+                // background-color: #58677b;
             }
         }
 

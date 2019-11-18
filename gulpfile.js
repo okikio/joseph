@@ -376,10 +376,6 @@ task("client", () =>
 );
 
 task("gulpfile:watch", () => _exec("gulp"));
-task("config:watch", () =>
-    _exec("gulp config html css")
-);
-
 task("git:push", () => {
     let commit = process.argv[3] || 'Upgrade';
     return _execSeries(
@@ -423,8 +419,8 @@ task('other', parallel("client", series("config", "html", "css", "inline")));
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['config.js', 'containers.js'], watchDelay, series('config:watch'));
-    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'css', 'js'));
+    watch(['config.js', 'containers.js'], watchDelay, series('gulpfile:watch'));
+    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch'));
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));

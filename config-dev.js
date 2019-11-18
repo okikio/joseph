@@ -158,6 +158,7 @@ module.exports = {
                         }
                     }]
                 },
+                "banner": true,
                 "name": "projects",
                 "values": [{
                     "hero": {
