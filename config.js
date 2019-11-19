@@ -44,9 +44,9 @@ module.exports = {
             values([
                 // Intro layer
                 layer([
-                    _class([ padding("horz", "large-top") ]),
+                    _class([ padding("horz", "large-top"), "header-top-spot" ]),
                     layout([
-                        _class([ _layout("shorten", "contain") ]),
+                        _class([_layout("enlarge", "contain") ]),
                         values([
                             _header(title("404, Page Not Found.")),
                             _main([
@@ -71,13 +71,17 @@ module.exports = {
             _name("contact"),
             title("Contact"),
             values([
+                // Hero Layer
+                _hero(["Contact.", ["/assets/engineer-piping", "A city Image"]]),
+                // End Hero Layer
+
                 // Intro layer
                 layer([
                     _class([ padding("horz") ]),
                     layout([
                         _class([ _layout("shorten", "contain") ]),
                         values([
-                            _header(title("Contact")),
+                            _header(title("Lorem Iptsium")),
                             _main([
                                 values([
                                     `Github: `, _link("home", "/"), `<br>`,

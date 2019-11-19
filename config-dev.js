@@ -34,9 +34,9 @@ module.exports = {
                 "name": "404",
                 "values": [{
                     "layer": {
-                        "class": "layout-padding-horz layout-padding-large-top",
+                        "class": "layout-padding-horz layout-padding-large-top header-top-spot",
                         "layout": {
-                            "class": "layout-shorten layout-contain",
+                            "class": "layout-enlarge layout-contain",
                             "values": [{
                                 "section": {
                                     "title": "404, Page Not Found.",
@@ -96,13 +96,21 @@ module.exports = {
                 },
                 "name": "contact",
                 "values": [{
+                    "hero": {
+                        "title": "Contact.",
+                        "img": {
+                            "src": "/assets/engineer-piping",
+                            "alt": "A city Image"
+                        }
+                    }
+                }, {
                     "layer": {
                         "class": "layout-padding-horz",
                         "layout": {
                             "class": "layout-shorten layout-contain",
                             "values": [{
                                 "section": {
-                                    "title": "Contact",
+                                    "title": "Lorem Iptsium",
                                     "type": "header"
                                 }
                             }, {
