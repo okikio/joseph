@@ -1,6 +1,6 @@
 // import swup from "swup";
 // import { el } from "./components/ele";
-import { _log, _is, _constrain, _map } from "./components/util";
+import { _log, _is, _constrain, _map, assign } from "./components/util";
 // import Rellax from "rellax";
 // import rallax from 'rallax.js';
 // import preload from '@swup/preload-plugin';
@@ -36,48 +36,72 @@ on(_scrolldown, "click touchstart", () => {
     scrollTo(height(_hero) + _focusPt, "700s");
 });
 
-on(window, 'scroll', () => {
-    hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", scrollTop(window) >= 5);
-    hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+let _images = [];
+each(_img, ($img, i) => {
+    let load_img = get(find($img, ".load-img"), 0);
+    let overlay = get(find($img, ".layer-image-overlay"), 0);
+    let clientRect = $img.getBoundingClientRect();
+    _images[i] = {
+        overlay, load_img,
+        target: $img,
+        clientRect
+    };
 
-    toggleClass(_actioncenter, "layer-action-center-show", scrollTop(window) > _focusPt * 2);
-    toggleClass(_actioncenter, "layer-action-center-hide", scrollTop(window) <= _focusPt * 2);
-});
-
-let observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        const { boundingClientRect, target } = entry;
-        const { top, height } = boundingClientRect;
-        let load_img = find(target, ".load-img");
-        let overlay = find(target, ".layer-image-overlay");
-        let value = _constrain(Math.round(Math.abs(top) / height * 100) / 100, 0, 1);
-
-        style(overlay, { opacity: _map(value, 0, 1, 0, 0.65) });
-        style(load_img, {
-            transform: `scale(${1 + value})`
-        });
-    });
-}, {
-    root: null,
-    rootMargin: "0px",
-    threshold: Array.from(Array(101), (_, x) => x / 100)
-});
-
-each(_img, $img => {
     let _core_img = get(find($img, ".core-img"), 0);
     let _placeholder_img = find($img, ".placeholder-img");
-    observer.observe($img);
 
     if (_is.def(_core_img)) {
         if (_core_img.complete) {
             addClass(_placeholder_img, "core-img-show");
         } else {
-            _core_img.addEventListener("load", function() {
+            on(_core_img, "load", function () {
                 addClass(_placeholder_img, "core-img-show");
             }, false);
         }
     }
 });
+
+on(window, 'scroll', () => {
+    let _scrollTop = scrollTop(window);
+    hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
+    hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+
+    toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 2);
+    toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
+
+    // _images.forEach(data => {
+        let { clientRect, load_img, overlay } = _images[0];
+        let { top, bottom } = clientRect;
+        let value = _constrain(_scrollTop - top, 0, height) / height;
+        _log(top);
+        // style(overlay, { opacity: _constrain(value, 0, 0.65) });
+        // style(load_img, {
+        //     transform: `scale(${1 + value})`
+        // });
+    // });
+});
+
+// let observer = new IntersectionObserver(entries => {
+//     entries.forEach(entry => {
+//         const { intersectionRect, boundingClientRect, target } = entry;
+//         const { top, bottom, height } = boundingClientRect;
+//         // const { top } = intersectionRect;
+//         let load_img = find(target, ".load-img");
+//         let overlay = find(target, ".layer-image-overlay");
+//         let value = Math.max(Math.round((bottom - top) / height * 100) / 100, 0);
+
+//         style(overlay, { opacity: _constrain(value, 0, 0.65) });
+//         style(load_img, {
+//             transform: `scale(${1 + value})`
+//         });
+//         _log(boundingClientRect);
+//     });
+// }, {
+//     root: null,
+//     rootMargin: "0px",
+//     threshold: Array.from(Array(101), (_, x) => x / 100)
+// });
+
 
 // parallax('.load-img', {
 //     play: true,
