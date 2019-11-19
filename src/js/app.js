@@ -7,7 +7,7 @@ import { _log, _is, _constrain, _map } from "./components/util";
 // import scrollPlugin from "@swup/scroll-plugin";
 // import { _is } from "./components/util";
 // import anime from 'animejs';
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, off } from "./components/dom";
 // import parallax from "./components/parallax";
 
 let _img = ".layer-image";
@@ -46,23 +46,21 @@ on(window, 'scroll', () => {
 
 let observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        const { top, height } = entry.boundingClientRect;
-        let load_img = find(entry.target, ".load-img");
-        let overlay = find(entry.target, ".layer-image-overlay");
-        let value = Math.round(-top / height * 100) / 100;
+        const { boundingClientRect, target } = entry;
+        const { top, height } = boundingClientRect;
+        let load_img = find(target, ".load-img");
+        let overlay = find(target, ".layer-image-overlay");
+        let value = _constrain(Math.round(Math.abs(top) / height * 100) / 100, 0, 1);
 
+        style(overlay, { opacity: _map(value, 0, 1, 0, 0.65) });
         style(load_img, {
-            transform: `scale(${1 + _map(_constrain(value, 0, 1), 0, 1, 0, 0.25)})`
-        });
-
-        style(overlay, {
-            opacity: _constrain(value, 0.15, 0.75)
+            transform: `scale(${1 + value})`
         });
     });
 }, {
     root: null,
     rootMargin: "0px",
-    threshold: Array.from(Array(1001), (_, x) => x / 1000)
+    threshold: Array.from(Array(101), (_, x) => x / 100)
 });
 
 each(_img, $img => {

@@ -137,7 +137,9 @@ export let _matches = (ele, sel) => {
 
 // A more efficient `new` keyword that allows for arrays to be passed as arguments
 export let _new = function (ctor, args) {
-    let F = function () { return ctor.apply(this, args); };
+    class F {
+        constructor() { return ctor.apply(this, args); }
+    }
     F.prototype = ctor.prototype;
     return new F();
 };
