@@ -69,16 +69,20 @@ on(window, 'scroll', () => {
     toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 2);
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
 
-    // _images.forEach(data => {
-        let { clientRect, load_img, overlay } = _images[0];
-        let { top, bottom } = clientRect;
-        let value = _constrain(_scrollTop - top, 0, height) / height;
-        _log(top);
-        // style(overlay, { opacity: _constrain(value, 0, 0.65) });
-        // style(load_img, {
-        //     transform: `scale(${1 + value})`
-        // });
-    // });
+    _images.forEach(data => {
+        let { clientRect, load_img, overlay } = data;
+        let { top, height } = clientRect;
+        let dist = _scrollTop - top;
+
+        if (dist >= 0) {
+            let value = _constrain(dist, 0, height) / height;
+            
+            style(overlay, { opacity: _map(value, 0, 1, 0.15, 0.65) });
+            style(load_img, {
+                transform: `translateY(${value * height / 2}px) scale(${1 + value})`
+            });
+        }
+    });
 });
 
 // let observer = new IntersectionObserver(entries => {

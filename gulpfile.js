@@ -348,13 +348,13 @@ task("config", () =>
                 }
             );
         }),
-        ["config-dev.js", {
+        dev ? ["config-dev.js", {
             opts: { allowEmpty: true },
             pipes: [
                 js({ indent_size: 4 }), // Beautify the file
             ],
             dest: '.' // Output
-        }]
+        }] : null
     )
 );
 
