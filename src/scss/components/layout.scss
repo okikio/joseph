@@ -448,8 +448,6 @@
                 top: $size;
             }
 
-            ;
-
             @each $type,
             $val in $sizes {
                 &-#{$type} {

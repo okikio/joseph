@@ -1,4 +1,4 @@
-import { _matches, _is, _fnval, _capital, keys, assign } from "./util";
+import { _matches, _is, _fnval, _capital, keys } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
@@ -651,7 +651,7 @@ try {
 
     window.addEventListener("PassiveEventTest", noop, opts);
     window.removeEventListener("PassiveEventsTest", noop, opts);
-} catch (e) {}
+} catch (e) { console.warn("Passive Events aren't supported in this browser, performance may suffer."); }
 
 // Alias for the addEventListener; supports multiple elements
 export let on = ($el, evt, fn, opts) => {

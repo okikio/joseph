@@ -1,11 +1,11 @@
-import { _matches, _is, keys } from "./util";
+import { _is } from "./util";
 
 let ele;
 let tagRE = /^\s*<(\w+|!)[^>]*>/;
 let tagExpandRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig;
 export let _qsa = (dom = document, sel) => {
     let classes;
-    if (!_is.str(sel) && sel.length === 0) return [];
+    if (!_is.str(sel) || sel.length === 0) return [];
     if (/^(#?[\w-]+|\.[\w-.]+)$/.test(sel)) {
         switch (sel.charAt(0)) {
             case '#':

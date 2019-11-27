@@ -1,16 +1,7 @@
-// import swup from "swup";
-// import { el } from "./components/ele";
-import { _log, _is, _constrain, _map, assign } from "./components/util";
-// import Rellax from "rellax";
-// import rallax from 'rallax.js';
-// import preload from '@swup/preload-plugin';
-// import scrollPlugin from "@swup/scroll-plugin";
-// import { _is } from "./components/util";
-// import anime from 'animejs';
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, off } from "./components/dom";
-// import parallax from "./components/parallax";
+import { _is, _constrain, _map } from "./components/util";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style } from "./components/dom";
 
-let _img = ".layer-image";
+let _layer = ".layer";
 let _navbar = '.navbar';
 let _hero = ".layer-hero";
 let _menu = '.navbar-menu';
@@ -37,28 +28,36 @@ on(_scrolldown, "click touchstart", () => {
 });
 
 let _images = [];
-each(_img, ($img, i) => {
-    let load_img = get(find($img, ".load-img"), 0);
-    let overlay = get(find($img, ".layer-image-overlay"), 0);
-    let clientRect = $img.getBoundingClientRect();
-    _images[i] = {
-        overlay, load_img,
-        target: $img,
-        clientRect
-    };
+each(_layer, $layer => {
+    let header = get(find($layer, ".layer-header"), 0);
+    let footer = get(find($layer, ".layer-footer"), 0);
+    let layer_image = find($layer, ".layer-image");
+    
+    each(layer_image, ($img, i) => {
+        let load_img = get(find($img, ".load-img"), 0);
+        let overlay = get(find($img, ".layer-image-overlay"), 0);
+        let clientRect = $img.getBoundingClientRect();
+        _images.push({
+            header: i === 0 ? header : null,
+            footer: i === 0 ? footer : null,
+            overlay, load_img, 
+            target: $img,
+            clientRect
+        });
 
-    let _core_img = get(find($img, ".core-img"), 0);
-    let _placeholder_img = find($img, ".placeholder-img");
+        let _core_img = get(find($img, ".core-img"), 0);
+        let _placeholder_img = find($img, ".placeholder-img");
 
-    if (_is.def(_core_img)) {
-        if (_core_img.complete) {
-            addClass(_placeholder_img, "core-img-show");
-        } else {
-            on(_core_img, "load", function () {
+        if (_is.def(_core_img)) {
+            if (_core_img.complete) {
                 addClass(_placeholder_img, "core-img-show");
-            }, false);
+            } else {
+                on(_core_img, "load", function () {
+                    addClass(_placeholder_img, "core-img-show");
+                }, false);
+            }
         }
-    }
+    });
 });
 
 on(window, 'scroll', () => {
@@ -70,107 +69,30 @@ on(window, 'scroll', () => {
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
 
     _images.forEach(data => {
-        let { clientRect, load_img, overlay } = data;
+        let { clientRect, load_img, overlay, header, footer } = data;
         let { top, height } = clientRect;
-        let dist = _scrollTop - top;
+        let dist = _scrollTop - top + 60;
 
-        if (dist >= 0) {
-            let value = _constrain(dist, 0, height) / height;
+        if (dist >= -60 && dist <= height - 60) {
+            let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
             
-            style(overlay, { opacity: _map(value, 0, 1, 0.15, 0.65) });
+            style(overlay, { opacity: _map(value, 0, 0.75, 0.15, 0.55) });
             style(load_img, {
-                transform: `translateY(${value * height / 2}px) scale(${1 + value})`
+                transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
             });
+
+            if (header)
+                style(header, {
+                    transform: `translateY(${_constrain(_map(value, 0, 1, 0, height / 2), 0, height / 2 - 60)}px)`
+                });
+
+            if (footer)
+                style(footer, { opacity: _map(value, 0, 0.5, 1, 0) });
         }
     });
 });
 
-// let observer = new IntersectionObserver(entries => {
-//     entries.forEach(entry => {
-//         const { intersectionRect, boundingClientRect, target } = entry;
-//         const { top, bottom, height } = boundingClientRect;
-//         // const { top } = intersectionRect;
-//         let load_img = find(target, ".load-img");
-//         let overlay = find(target, ".layer-image-overlay");
-//         let value = Math.max(Math.round((bottom - top) / height * 100) / 100, 0);
-
-//         style(overlay, { opacity: _constrain(value, 0, 0.65) });
-//         style(load_img, {
-//             transform: `scale(${1 + value})`
-//         });
-//         _log(boundingClientRect);
-//     });
-// }, {
-//     root: null,
-//     rootMargin: "0px",
-//     threshold: Array.from(Array(101), (_, x) => x / 100)
-// });
-
-
-// parallax('.load-img', {
-//     play: true,
-//     speed: -6,
-//     center: true,
-//     round: true,
-// });
-
-
-
-
-    // each('.load-img', ($el, i) => {
-    //     if (inWin($el) && width(window) >= 600) {
-    //         images[i].refresh();
-    //     } else { images[i].destroy(); }
-
-    //     i == 1 && console.log("Top: " + $el.getBoundingClientRect().top + " < Bottom: " + (height(window)));
-    //     _log("In Window: " + inWin($el));
-    // });
-
-// new Rellax('.load-img', {
-//     speed: width(window) > 600 ? 2 : 0,
-//     center: false,
-//     round: false,
-//     vertical: true,
-//     horizontal: false
-// })
-
 /*
-    // let options = {
-    //     root: null,
-    //     rootMargin: '0px',
-    //     threshold: 0,
-    //     // threshold: Array.from(Array(101), (_, x) => x / 100)
-    // };
-
-    // let observer = new IntersectionObserver(entries => {
-    //     entries.forEach((entry, i) => {
-    //         // if (entry.isIntersecting) {
-    //         if (entry.intersectionRatio > 0) {
-    //             // this.onScreen(entry)
-
-    //             anime({
-    //                 targets: entry.target,
-    //                 translateY: 0,
-    //                 opacity: 1,
-    //                 duration: 1000,
-    //                 easing: 'easeInOutExpo',
-    //                 delay: i * 500,
-    //                 begin() {
-    //                     observer.unobserve(entry.target);
-    //                 }
-    //             });
-    //         } else {
-    //             // this.offScreen(entry)
-    //         }
-    //         // }
-    //     });
-    // }, options);
-
-    // el(".layer").forEach(_el => {
-    //     observer.observe(_el);
-    // });
-};
-
 _load();
 new swup({
     requestHeaders: {
