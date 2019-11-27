@@ -69,25 +69,27 @@ on(window, 'scroll', () => {
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
 
     _images.forEach(data => {
-        let { clientRect, load_img, overlay, header, footer } = data;
-        let { top, height } = clientRect;
-        let dist = _scrollTop - top + 60;
+        if (hasClass(data.target, "effect-parallax")) {
+            let { clientRect, load_img, overlay, header, footer } = data;
+            let { top, height } = clientRect;
+            let dist = _scrollTop - top + 60;
 
-        if (dist >= -60 && dist <= height - 60) {
-            let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
-            
-            style(overlay, { opacity: _map(value, 0, 0.75, 0.15, 0.55) });
-            style(load_img, {
-                transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
-            });
-
-            if (header)
-                style(header, {
-                    transform: `translateY(${_constrain(_map(value, 0, 1, 0, height / 2), 0, height / 2 - 60)}px)`
+            if (dist >= -60 && dist <= height - 60) {
+                let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
+                
+                style(overlay, { opacity: _map(value, 0, 0.75, 0.15, 0.55) });
+                style(load_img, {
+                    transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
                 });
 
-            if (footer)
-                style(footer, { opacity: _map(value, 0, 0.5, 1, 0) });
+                if (header)
+                    style(header, {
+                        transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height / 2 - 60), 0, height / 2 - 60)}px)`
+                    });
+
+                if (footer)
+                    style(footer, { opacity: _map(value, 0, 0.5, 1, 0) });
+            }
         }
     });
 });

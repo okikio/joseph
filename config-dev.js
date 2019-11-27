@@ -100,7 +100,8 @@ module.exports = {
                         "title": "Contact.",
                         "img": {
                             "src": "/assets/engineer-piping",
-                            "alt": "A city Image"
+                            "alt": "A city Image",
+                            "class": "effect-parallax hero-img"
                         }
                     }
                 }, {
@@ -219,7 +220,8 @@ module.exports = {
                         "title": "Projects.",
                         "img": {
                             "src": "/assets/blue-sky",
-                            "alt": "A city Image"
+                            "alt": "A city Image",
+                            "class": "effect-parallax hero-img"
                         }
                     }
                 }, {
@@ -289,7 +291,8 @@ module.exports = {
                         "title": "Subpage.",
                         "img": {
                             "src": "/assets/white-flower",
-                            "alt": "A city Image"
+                            "alt": "A city Image",
+                            "class": "effect-parallax hero-img"
                         }
                     }
                 }, {
@@ -359,7 +362,8 @@ module.exports = {
                         "title": "Welcome!.",
                         "img": {
                             "src": "/assets/white_car",
-                            "alt": "A city Image"
+                            "alt": "A city Image",
+                            "class": "effect-parallax hero-img"
                         }
                     }
                 }, {

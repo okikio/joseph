@@ -132,12 +132,7 @@ let _img = (...args) => {
 
 let _hero = (...args) => {
     let [$title = "Title", $img = [], ...$args] = anyArgs(args);
-    return hero([ title($title), _img($img), ...anyArgs($args) ]);
-};
-
-let _banner = (...args) => {
-    let [$title = "Title", $img = [], ...$args] = anyArgs(args);
-    return banner([title($title), _img($img), ...anyArgs($args)]);
+    return hero([title($title), _img($img), ...anyArgs($args) ]);
 };
 
 let _tile = (...args) => {
