@@ -478,7 +478,7 @@
                                 #{$spacing-parent}-#{$basic-dir}-#{$type}-#{$dir},
                                 #{$spacing-parent}-#{$basic-dir}-#{$dir}-#{$type} {
                                     #{$spacing}-#{$dir}: $val;
-                                    @include resizeList(#{$spacing}-#{$dir}, "-", val);
+                                    @include resizeList(#{$spacing}-#{$dir}, "-", $val);
                                 }
                             }
                         }

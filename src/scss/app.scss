@@ -163,7 +163,7 @@ $sizes: (
     @include propertyList($property, $name, $colors, "focus");
 }
 
-@mixin resizeList($property, $name: null, $amount: 10) {
+@mixin resizeList($property, $name: null, $val) {
     $screenSizes: (
         "desktop": $screen-size-desktop,
         "laptop": $screen-size-laptop,
@@ -183,20 +183,9 @@ $sizes: (
     }
 
     @each $device-type, $screen-size in $screenSizes {
-        &#{$name}#{$device-type} {
-            #{$property}: #{map-get($screenSizesPX, $device-type)}px;
-        }
-
         @media #{$screen-size} {
             &#{$name}resize-#{$device-type} {
-                #{$property}: #{map-get($screenSizesPX, $device-type)}px;
-
-                @each $type, $val in $sizes {
-                    @debug #{&};
-                    &-#{$type} {
-                        #{$property}: #{$val};
-                    }
-                }
+                #{$property}: #{$val};
             }
         }
     }
