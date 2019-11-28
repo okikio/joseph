@@ -14,7 +14,7 @@
         height: 100vh;
     }
 
-    $dimension: ("width", "height");
+    // $dimension: ("width", "height");
     //    @each $axis in $dimension {
     //       $screenSizes: (
     //          "desktop": $screen-size-desktop,
@@ -365,6 +365,7 @@
 
         &,
         &-larger,
+        &-enlarge,
         &-large,
         &-small {
             margin: 0 auto;
@@ -399,6 +400,10 @@
             &-large {
                 max-width: 800px;
             }
+            
+            &-enlarge {
+                max-width: 900px;
+            }
         }
 
         @media (min-width: 900px) {
@@ -410,16 +415,28 @@
             &-large {
                 max-width: 1000px;
             }
+            
+            &-enlarge {
+                max-width: 1100px;
+            }
         }
 
         @media (min-width: 1000px) {
             &-large {
                 max-width: 1200px;
             }
+
+            &-enlarge {
+                max-width: 1300px;
+            }
         }
 
         @media (min-width: 1200px) {
             &-larger {
+                max-width: 1400px;
+            }
+
+            &-enlarge {
                 max-width: 1400px;
             }
         }
@@ -449,11 +466,6 @@
                 left: $size;
                 top: $size;
             }
-            
-            @each $basic-dir, $dirs in $basic-dirs {
-                @each $dir in $dirs {
-                }
-            }
 
             @each $type, $val in $sizes {
                 &-#{$type} {
@@ -478,7 +490,7 @@
                                 #{$spacing-parent}-#{$basic-dir}-#{$type}-#{$dir},
                                 #{$spacing-parent}-#{$basic-dir}-#{$dir}-#{$type} {
                                     #{$spacing}-#{$dir}: $val;
-                                    @include resizeList(#{$spacing}-#{$dir}, "-", $val);
+                                    @include deviceList(#{$spacing}-#{$dir}, $val);
                                 }
                             }
                         }

@@ -62,17 +62,21 @@ $icon-font: "Material Icons", sans-serif;
 $regular-font: "Roboto", sans-serif;
 $bold-font: 'Montserrat', sans-serif;
 
-$desktop: 1280;
+$desktop: 1480;
 $laptop: 1080;
 $tablet: 680;
 $phone: 480;
 
 $screen-size-desktop: "(min-width: #{$desktop}px)";
-$screen-size-laptop: "(max-width: #{$laptop}px)";
-$screen-size-tablet: "(max-width: #{$tablet}px)";
+$screen-size-laptop: "(min-width: #{$laptop}px) and (max-width: #{$desktop}px)";
+$screen-size-tablet: "(min-width: #{$tablet}px) and (max-width: #{$laptop}px)";
 $screen-size-phone: "(max-width: #{$phone}px)";
 
-$size-gigantic: 180px;
+$size-humungus-xl: 500px;
+$size-humungus: 420px;
+$size-gigantic-xl: 340px;
+$size-gigantic: 220px;
+$size-huge-xl: 180px;
 $size-huge: 120px;
 $size-extra-xl: 100px;
 $size-extra-large: 90px;
@@ -121,7 +125,11 @@ $fonts: (
 
 $sizes: (
     "dull": 0 !important,
+    "humungus-xl": $size-humungus-xl,
+    "humungus": $size-humungus,
+    "gigantic-xl": $size-gigantic,
     "gigantic": $size-gigantic,
+    "huge-xl": $size-huge-xl,
     "huge": $size-huge,
     "extra-xl": $size-extra-xl,
     "extra-large": $size-extra-large,
@@ -135,7 +143,12 @@ $sizes: (
     "smaller": $size-smaller,
     "smallest": $size-smallest,
     "mini": $size-mini,
-    "nano": $size-nano
+    "nano": $size-nano,
+
+    "desktop": #{$desktop}px,
+    "laptop": #{$laptop}px,
+    "tablet": #{$tablet}px,
+    "phone": #{$phone}px
 );
 
 @mixin propertyList($property, $prefix, $list, $action: "") {
@@ -163,7 +176,7 @@ $sizes: (
     @include propertyList($property, $name, $colors, "focus");
 }
 
-@mixin resizeList($property, $name: null, $val) {
+@mixin deviceList($property, $val: 0px) {
     $screenSizes: (
         "desktop": $screen-size-desktop,
         "laptop": $screen-size-laptop,
@@ -171,20 +184,9 @@ $sizes: (
         "phone": $screen-size-phone
     );
 
-    $screenSizesPX: (
-        "desktop": $desktop,
-        "laptop": $laptop,
-        "tablet": $tablet,
-        "phone": $phone
-    );
-
-    @if not($name) {
-        $name: "-#{$property}";
-    }
-
     @each $device-type, $screen-size in $screenSizes {
         @media #{$screen-size} {
-            &#{$name}resize-#{$device-type} {
+            &--device-#{$device-type} {
                 #{$property}: #{$val};
             }
         }

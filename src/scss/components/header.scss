@@ -179,7 +179,7 @@
         }
 
         // Mobile navbar settings
-        @media #{$screen-size-tablet} {
+        @media (max-width: #{$tablet}px) {
             &-layout,
             &-list {
                 flex-direction: column;

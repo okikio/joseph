@@ -76,18 +76,18 @@ on(window, 'scroll', () => {
                 if (dist >= -_focusPt && dist <= height - _focusPt) {
                     let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
                     
-                    style(overlay, { opacity: _map(value, 0, 0.75, 0.15, 0.55) });
+                    style(overlay, { opacity: _map(value, 0, 0.75, 0.05, 0.55) });
                     style(load_img, {
                         transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
                     });
 
                     if (header)
                         style(header, {
-                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height / 2 - _focusPt), 0, height / 2 - _focusPt)}px)`
+                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 8), 0, height * 3 / 8)}px)`
                         });
 
                     if (footer)
-                        style(footer, { opacity: _map(value, 0, 0.15, 1, 0) });
+                        style(footer, { opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.15, 1, 0), 0, 1) });
                 }
             }
         });

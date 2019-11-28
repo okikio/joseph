@@ -45,7 +45,7 @@
             background: darken(#53507c, 20%);
             position: absolute;
             display: block;
-            opacity: 0.15;
+            opacity: 0.05;
             height: 100%;
             width: 100%;
             z-index: 5;
@@ -101,6 +101,10 @@
             background: $white;
             position: relative;
             z-index: 250;
+
+            @media (min-width: #{$tablet}px) {
+                margin-bottom: -326px;
+            }
         }
 
         .layer-title {
