@@ -1,5 +1,5 @@
 import { _is, _constrain, _map } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width } from "./components/dom";
 
 let _layer = ".layer";
 let _navbar = '.navbar';
@@ -8,9 +8,7 @@ let _menu = '.navbar-menu';
 let _backUp = '.back-to-top';
 let _actioncenter = ".layer-action-center";
 let _scrolldown = '.layer-hero-scroll-down';
-
-let _height = height(_navbar);
-let _focusPt = _height + 10;
+let _focusPt = height(_navbar) + 10;
 
 //  touchstart
 on(_menu, "click", () => {
@@ -68,30 +66,32 @@ on(window, 'scroll', () => {
     toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 2);
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
 
-    _images.forEach(data => {
-        if (hasClass(data.target, "effect-parallax")) {
-            let { clientRect, load_img, overlay, header, footer } = data;
-            let { top, height } = clientRect;
-            let dist = _scrollTop - top + 60;
+    if (width(window) > 600) {
+        _images.forEach(data => {
+            if (hasClass(data.target, "effect-parallax")) {
+                let { clientRect, load_img, overlay, header, footer } = data;
+                let { top, height } = clientRect;
+                let dist = _scrollTop - top + 60;
 
-            if (dist >= -60 && dist <= height - 60) {
-                let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
-                
-                style(overlay, { opacity: _map(value, 0, 0.75, 0.15, 0.55) });
-                style(load_img, {
-                    transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
-                });
-
-                if (header)
-                    style(header, {
-                        transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height / 2 - 60), 0, height / 2 - 60)}px)`
+                if (dist >= -_focusPt && dist <= height - _focusPt) {
+                    let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
+                    
+                    style(overlay, { opacity: _map(value, 0, 0.75, 0.15, 0.55) });
+                    style(load_img, {
+                        transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
                     });
 
-                if (footer)
-                    style(footer, { opacity: _map(value, 0, 0.5, 1, 0) });
+                    if (header)
+                        style(header, {
+                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height / 2 - _focusPt), 0, height / 2 - _focusPt)}px)`
+                        });
+
+                    if (footer)
+                        style(footer, { opacity: _map(value, 0, 0.15, 1, 0) });
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 /*

@@ -448,15 +448,13 @@
                 top: $size;
             }
 
-            @each $type,
-            $val in $sizes {
+            @each $type, $val in $sizes {
                 &-#{$type} {
                     $type-parent: &;
                     $basic-dirs: ("horz": ("left", "right"),
                             "vert": ("top", "bottom"));
 
-                    @each $basic-dir,
-                    $dirs in $basic-dirs {
+                    @each $basic-dir, $dirs in $basic-dirs {
 
                         &,
                         &-#{$basic-dir} {
@@ -475,6 +473,12 @@
                                 #{$spacing-parent}-#{$basic-dir}-#{$type}-#{$dir},
                                 #{$spacing-parent}-#{$basic-dir}-#{$dir}-#{$type} {
                                     #{$spacing}-#{$dir}: $val;
+                                }
+
+                                @at-root #{$spacing-parent},
+                                #{$spacing-parent}-#{$basic-dir}, 
+                                #{$spacing-parent}-#{$basic-dir}-#{$dir} {
+                                    @include resizeList(#{$spacing}-#{$dir}, "-");
                                 }
                             }
                         }

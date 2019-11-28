@@ -163,6 +163,45 @@ $sizes: (
     @include propertyList($property, $name, $colors, "focus");
 }
 
+@mixin resizeList($property, $name: null, $amount: 10) {
+    $screenSizes: (
+        "desktop": $screen-size-desktop,
+        "laptop": $screen-size-laptop,
+        "tablet": $screen-size-tablet,
+        "phone": $screen-size-phone
+    );
+
+    $screenSizesPX: (
+        "desktop": $desktop,
+        "laptop": $laptop,
+        "tablet": $tablet,
+        "phone": $phone
+    );
+
+    @if not($name) {
+        $name: "-#{$property}";
+    }
+
+    @each $device-type, $screen-size in $screenSizes {
+        &#{$name}#{$device-type} {
+            #{$property}: #{map-get($screenSizesPX, $device-type)}px;
+        }
+
+        @media #{$screen-size} {
+            &#{$name}resize-#{$device-type} {
+                #{$property}: #{map-get($screenSizesPX, $device-type)}px;
+
+                @each $type, $val in $sizes {
+                    @debug #{&};
+                    &-#{$type} {
+                        #{$property}: #{$val};
+                    }
+                }
+            }
+        }
+    }
+}
+
 @import "./components/base.scss";
 @import "./components/fonts.scss";
 @import "./components/header.scss";

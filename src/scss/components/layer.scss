@@ -58,7 +58,6 @@
         }
     }
 
-
     &-shadow,
     %shadow {
         box-shadow: 0 40px 85px rgba(0, 0, 40, 0.3);
@@ -84,7 +83,7 @@
         z-index: 125;
 
         &:not(.banner-mode) .layer-image {
-            border-radius: 25px;
+            border-radius: 15px;
         }
 
         .layer-image {
