@@ -131,8 +131,8 @@ let _img = (...args) => {
 };
 
 let _hero = (...args) => {
-    let [$title = "Title", $img = [], ...$args] = anyArgs(args);
-    return hero([title($title), _img($img), ...anyArgs($args) ]);
+    let [$title = "Title", $content = "...", $img = [], ...$args] = anyArgs(args);
+    return hero([title($title), content($content), _img($img), ...anyArgs($args) ]);
 };
 
 let _tile = (...args) => {

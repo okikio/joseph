@@ -98,6 +98,7 @@ module.exports = {
                 "values": [{
                     "hero": {
                         "title": "Contact.",
+                        "content": "...",
                         "img": {
                             "src": "/assets/engineer-piping",
                             "alt": "A city Image",
@@ -218,6 +219,7 @@ module.exports = {
                 "values": [{
                     "hero": {
                         "title": "Projects.",
+                        "content": "...",
                         "img": {
                             "src": "/assets/blue-sky",
                             "alt": "A city Image",
@@ -289,6 +291,7 @@ module.exports = {
                 "values": [{
                     "hero": {
                         "title": "Subpage.",
+                        "content": "...",
                         "img": {
                             "src": "/assets/white-flower",
                             "alt": "A city Image",
@@ -359,7 +362,8 @@ module.exports = {
                 "name": "index",
                 "values": [{
                     "hero": {
-                        "title": "Welcome!.",
+                        "title": "Brilliant <br/> Engineering",
+                        "content": "Creating with passion, crafting with love.",
                         "img": {
                             "src": "/assets/white_car",
                             "alt": "A city Image",
@@ -368,7 +372,7 @@ module.exports = {
                     }
                 }, {
                     "layer": {
-                        "class": "layout-padding-horz",
+                        "class": "layout-padding-horz layout-padding-vert-top-default--device-phone",
                         "layout": {
                             "class": "layout-shorten layout-contain",
                             "values": [{
@@ -378,6 +382,7 @@ module.exports = {
                                 }
                             }, {
                                 "section": {
+                                    "class": "style-font-18--device-phone",
                                     "values": [{
                                         "content": " ",
                                         "class": "layout-padding-top layout-margin-left-large layout-inline-block"

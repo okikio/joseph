@@ -419,8 +419,8 @@ task('other', parallel("client", series("config", "html", "css", "inline")));
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['config.js', 'containers.js'], watchDelay, series('gulpfile:watch'));
-    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch'));
+    watch(['config.js', 'containers.js'], watchDelay, series('gulpfile:watch', 'reload'));
+    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'reload'));
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));

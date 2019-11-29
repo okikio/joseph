@@ -29,6 +29,7 @@ let _images = [];
 each(_layer, $layer => {
     let header = get(find($layer, ".layer-header"), 0);
     let footer = get(find($layer, ".layer-footer"), 0);
+    let main = get(find($layer, ".layer-main"), 0);
     let layer_image = find($layer, ".layer-image");
     
     each(layer_image, ($img, i) => {
@@ -38,6 +39,7 @@ each(_layer, $layer => {
         _images.push({
             header: i === 0 ? header : null,
             footer: i === 0 ? footer : null,
+            main: i === 0 ? main : null,
             overlay, load_img, 
             target: $img,
             clientRect
@@ -69,25 +71,37 @@ on(window, 'scroll', () => {
     if (width(window) > 600) {
         _images.forEach(data => {
             if (hasClass(data.target, "effect-parallax")) {
-                let { clientRect, load_img, overlay, header, footer } = data;
+                let { clientRect, load_img, overlay, header, main, footer } = data;
                 let { top, height } = clientRect;
                 let dist = _scrollTop - top + 60;
 
                 if (dist >= -_focusPt && dist <= height - _focusPt) {
-                    let value = Math.round(_constrain(dist, 0, height) / height * 100) / 100;
+                    let value = Math.round(_map(_constrain(dist, 0, height), 0, height, 0, 1) * 100) / 100;
                     
-                    style(overlay, { opacity: _map(value, 0, 0.75, 0.05, 0.55) });
+                    style(overlay, { opacity: _map(value, 0, 0.75, 0.35, 0.15) });
                     style(load_img, {
-                        transform: `scale(${1 + _map(value, 0, 1, 0, 0.65)})`
+                        transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                     });
 
-                    if (header)
+                    if (header) {
                         style(header, {
-                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 8), 0, height * 3 / 8)}px)`
+                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 16), 0, height * 3 / 16)}px)`,
+                            opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.45, 1, 0), 0, 1)
                         });
+                    }
 
-                    if (footer)
-                        style(footer, { opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.15, 1, 0), 0, 1) });
+                    if (main) {
+                        style(main, {
+                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 16), 0, height * 3 / 16)}px)`,
+                            opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.45, 1, 0), 0, 1)
+                        });
+                    }
+
+                    if (footer) {
+                        style(footer, { 
+                            transform: `scale(${_constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.45, 1, 0), 0, 1)})`
+                        });
+                    }
                 }
             }
         });

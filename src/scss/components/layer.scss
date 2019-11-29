@@ -45,7 +45,7 @@
             background: darken(#53507c, 20%);
             position: absolute;
             display: block;
-            opacity: 0.05;
+            opacity: 0.35;
             height: 100%;
             width: 100%;
             z-index: 5;
@@ -103,23 +103,44 @@
             z-index: 250;
 
             @media (min-width: #{$tablet}px) {
-                margin-bottom: -326px;
+                margin-bottom: -286px;
             }
         }
 
         .layer-title {
-            font-size: 8vmax;
+            font-size: 64px;
 
-            @media (min-width: 700px) {
-                font-size: 9vmax;
+            @media (max-width: 500px) {
+                font-size: 44px;
             }
 
-            @media (min-width: 1000px) {
-                font-size: 9vw;
+            @media (min-width: 700px) {
+                font-size: 7vw;
             }
 
             @media (min-width: 1600px) {
-                font-size: 130px;
+                font-size: 100px;
+            }
+        }
+
+        .layer-main-text {
+            font-weight: 400;
+            font-family: $regular-font;
+            // letter-spacing: 0.05rem;
+            // line-height: 1.35em;
+            line-height: 1.25;
+            font-size: 4vw;
+
+            @media (max-width: 500px) {
+                font-size: 24px;
+            }
+
+            @media (max-width: 700px) {
+                font-size: 22px;
+            }
+
+            @media (min-width: 900px) {
+                font-size: 26px;
             }
         }
     }

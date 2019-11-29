@@ -72,7 +72,7 @@ module.exports = {
             title("Contact"),
             values([
                 // Hero Layer
-                _hero(["Contact.", ["/assets/engineer-piping", "A city Image", [_class("effect-parallax", "hero-img")]]]),
+                _hero(["Contact.", "...", ["/assets/engineer-piping", "A city Image", [_class("effect-parallax", "hero-img")]]]),
                 // End Hero Layer
 
                 // Intro layer
@@ -131,7 +131,7 @@ module.exports = {
             title("Projects"),
             values([
                 // Hero Layer
-                _hero(["Projects.", [blueSkyImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
+                _hero(["Projects.", "...", [blueSkyImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
                 // End Hero Layer
 
                 // Intro layer
@@ -166,7 +166,7 @@ module.exports = {
             title("The Sub Page"),
             values([
                 // Hero Layer
-                _hero(["Subpage.", [flowerImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
+                _hero(["Subpage.", "...", [flowerImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
                 // End Hero Layer
 
                 // Intro layer
@@ -201,18 +201,18 @@ module.exports = {
             title("Hello There"),
             values([
                 // Hero layer
-                _hero(["Welcome!.", [carImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
+                _hero(["Brilliant <br/> Engineering", "Creating with passion, crafting with love.", [carImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
                 // End Hero layer
 
                 // Intro layer
                 layer([
-                    _class([ padding("horz") ]),
+                    _class([ padding("horz", "vert-top-default--device-phone") ]),
                     layout([
-                        _class([ _layout("shorten", "contain") ]),
+                        _class([_layout("shorten", "contain")]),
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
-                                // _class([ _style("justify") ]),
+                                _class([ font("18--device-phone") ]),
                                 values([
                                     indent,
                                     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer

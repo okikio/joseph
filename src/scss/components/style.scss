@@ -12,25 +12,10 @@
          font-size: 14px;
 
          @for $sz from 8 through 50 {
-            &-#{$sz * 3} {
-               font-size: #{$sz * 3}px;
-            }
-         }
+            &-#{$sz} {
+               font-size: #{$sz}px;
 
-         $screenSizes: (
-            "desktop": $screen-size-desktop,
-            "laptop": $screen-size-laptop,
-            "tablet": $screen-size-tablet,
-            "phone": $screen-size-phone
-         );
-
-         @each $device-type, $screen-size in $screenSizes {
-            @media #{$screen-size} {
-               @for $sz from 8 through 50 {
-                  &-#{$device-type}-#{$sz * 3} {
-                     font-size: #{$sz * 3}px;
-                  }
-               }
+                @include deviceList(font-size, #{$sz}px);
             }
          }
       }
@@ -43,6 +28,8 @@
          @for $weight from 1 through 9 {
             &-#{$weight}00 {
                font-weight: #{$weight}00;
+
+                @include deviceList(font-weight, #{$weight}00);
             }
          }
 
