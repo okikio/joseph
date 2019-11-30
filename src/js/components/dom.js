@@ -695,8 +695,10 @@ export let off = ($el, evt, fn, opts) => {
         // Loop through the list of events
         keys(evt).forEach(key => {
             $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
-            useCapture = /blur|focus|touch/.test($evt);
-            opts = _is.usable(opts) ? opts : (useCapture ? passive || {} : { useCapture });
+            useCapture = /blur|focus/g.test($evt);
+            opts = _is.usable(opts) ? opts : 
+                    useCapture ? { useCapture } : 
+                        (/touch|scroll/g.test($evt) ? { passive } : false);
             _el.removeEventListener($evt, fn, opts);
         });
     });
