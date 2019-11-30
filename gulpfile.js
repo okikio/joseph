@@ -370,7 +370,7 @@ task("client", () =>
 
             // dest: `${publicDest}/`
         }], // Output
-        [["client/**/*", "!client/**/*.js", "!client/**/*.{jpg,png,ico,svg}"], {
+        [["client/**/*", "!client/**/*.js", "!client/**/*.{jpg,jpeg,png,ico,svg}"], {
             opts: { allowEmpty: true }
         }],
         [["client/**/*.{jpg,png,ico}"], {
