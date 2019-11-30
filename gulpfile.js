@@ -20,6 +20,7 @@ const { html, js } = require('gulp-beautify');
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
+const imagemin = require('gulp-imagemin');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
@@ -367,10 +368,16 @@ task("client", () =>
                 rename(minSuffix) // Rename
             ],
 
-            dest: `${publicDest}/`
+            // dest: `${publicDest}/`
         }], // Output
-        [["client/**/*", "!client/**/*.js"], {
+        [["client/**/*", "!client/**/*.js", "!client/**/*.{jpg,png,ico,svg}"], {
             opts: { allowEmpty: true }
+        }],
+        [["client/**/*.{jpg,png,ico}"], {
+            opts: { allowEmpty: true },
+            pipes: [
+                imagemin()
+            ]
         }]
     ])
 );
