@@ -68,7 +68,7 @@ on(window, 'scroll', () => {
     toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 2);
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
 
-    if (width(window) > 600) {
+    if (width(window) > 300) {
         _images.forEach(data => {
             if (hasClass(data.target, "effect-parallax")) {
                 let { clientRect, load_img, overlay, header, main, footer } = data;
@@ -85,21 +85,21 @@ on(window, 'scroll', () => {
 
                     if (header) {
                         style(header, {
-                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 16), 0, height * 3 / 16)}px)`,
-                            opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.45, 1, 0), 0, 1)
+                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 16), 0, height * 5 / 16)}px)`,
+                            opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1)
                         });
                     }
 
                     if (main) {
                         style(main, {
-                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 16), 0, height * 3 / 16)}px)`,
-                            opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.45, 1, 0), 0, 1)
+                            transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 3 / 16), 0, height * 5 / 16)}px)`,
+                            opacity: _constrain(_map(_constrain(value - 0.05, 0, 1), 0, 0.45, 1, 0), 0, 1)
                         });
                     }
 
                     if (footer) {
                         style(footer, { 
-                            transform: `scale(${_constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.45, 1, 0), 0, 1)})`
+                            transform: `scale(${_constrain(_map(_constrain(value - 0.15, 0, 1), 0.5, 1, 1, 0.45), 0, 1)})`
                         });
                     }
                 }

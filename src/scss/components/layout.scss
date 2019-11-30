@@ -209,16 +209,16 @@
             &,
             &-vert {
                 padding: {
-                    bottom: $size-sub-large !important;
-                    top: $size-sub-large !important;
+                    bottom: $size-sub-large ;
+                    top: $size-sub-large ;
                 }
             }
 
             &,
             &-horz {
                 padding: {
-                    right: $size-sub-large !important;
-                    left: $size-sub-large !important;
+                    right: $size-sub-large ;
+                    left: $size-sub-large ;
                 }
             }
 
@@ -227,16 +227,16 @@
                 &,
                 &-vert {
                     padding: {
-                        bottom: $size !important;
-                        top: $size !important;
+                        bottom: $size ;
+                        top: $size ;
                     }
                 }
 
                 &,
                 &-horz {
                     padding: {
-                        right: $size !important;
-                        left: $size !important;
+                        right: $size ;
+                        left: $size ;
                     }
                 }
             }
@@ -246,16 +246,16 @@
                 &,
                 &-vert {
                     padding: {
-                        bottom: $size-small !important;
-                        top: $size-small !important;
+                        bottom: $size-small ;
+                        top: $size-small ;
                     }
                 }
 
                 &,
                 &-horz {
                     padding: {
-                        right: $size-small !important;
-                        left: $size-small !important;
+                        right: $size-small ;
+                        left: $size-small ;
                     }
                 }
             }
@@ -268,7 +268,7 @@
     }
 
     &-flex {
-        display: flex !important;
+        display: flex ;
 
         &-center {
             justify-content: center;

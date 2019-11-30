@@ -67,9 +67,9 @@ $laptop: 1080;
 $tablet: 680;
 $phone: 480;
 
-$screen-size-desktop: "(min-width: #{$desktop}px)";
-$screen-size-laptop: "(min-width: #{$laptop}px) and (max-width: #{$desktop}px)";
-$screen-size-tablet: "(min-width: #{$tablet}px) and (max-width: #{$laptop}px)";
+$screen-size-desktop: "(min-width: #{$laptop}px)";
+$screen-size-laptop: "(min-width: #{$tablet}px) and (max-width: #{$laptop}px)";
+$screen-size-tablet: "(min-width: #{$phone}px) and (max-width: #{$tablet}px)";
 $screen-size-phone: "(max-width: #{$phone}px)";
 
 $size-humungus-xl: 500px;
