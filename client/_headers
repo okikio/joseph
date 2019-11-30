@@ -42,7 +42,7 @@ https://fonts.gstatic.com/*
   X-XSS-Protection: 1; mode=block
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-https://res.cloudinary.com/okikio/*
+https://res.cloudinary.com/okikio-assets/*
   cache-control: public, immutable, max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
