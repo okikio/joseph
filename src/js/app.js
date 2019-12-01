@@ -60,7 +60,8 @@ each(_layer, $layer => {
     });
 });
 
-on(window, 'scroll', () => {
+let _load;
+on(window, 'scroll', _load = () => {
     let _scrollTop = scrollTop(window);
     hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
     hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
@@ -68,7 +69,7 @@ on(window, 'scroll', () => {
     toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 2);
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
 
-    if (width(window) > 300) {
+    if (width(window) > 500) {
         _images.forEach(data => {
             if (hasClass(data.target, "effect-parallax")) {
                 let { clientRect, load_img, overlay, header, main, footer } = data;
@@ -107,6 +108,8 @@ on(window, 'scroll', () => {
         });
     }
 });
+
+_load();
 
 /*
 _load();
