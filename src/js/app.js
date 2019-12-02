@@ -83,7 +83,7 @@ try {
 
                         style(overlay, { opacity: _map(value, 0, 0.75, 0.35, 0.15) });
                         style(load_img, {
-                            transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 4)}px)`,
+                            transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
 
                         let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
