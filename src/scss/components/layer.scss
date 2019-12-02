@@ -59,7 +59,8 @@
     }
 
     &-shadow,
-    %shadow {box-shadow: 0 0px 35px 5px rgba(0, 0, 40, 0.23)
+    %shadow {
+        box-shadow: 0 0px 35px 5px rgba(0, 0, 40, 0.23);
 
         &--1 {
             box-shadow: 0 20px 65px rgba(0, 0, 40, 0.12);
