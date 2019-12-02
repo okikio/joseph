@@ -60,7 +60,7 @@
 
     &-shadow,
     %shadow {
-        box-shadow: 0 0px 35px 5px rgba(0, 0, 40, 0.23);
+        box-shadow: 0 0px 35px 5px change-color($primary-dark, $alpha: 0.23);// rgba(0, 0, 40, 0.23);
 
         &--1 {
             box-shadow: 0 20px 65px rgba(0, 0, 40, 0.12);
@@ -98,16 +98,23 @@
         }
 
         &-scroll-down {
-            margin-bottom: -216px;
             background: $white;
             position: relative;
             z-index: 250;
+
+            @media #{$screen-size-phone} {
+                margin-bottom: -196px;
+            }
 
             @media #{$screen-size-tablet} {
                 margin-bottom: -276px;
             }
 
-            @media (min-width: #{$tablet}px) {
+            @media #{$screen-size-laptop} {
+                margin-bottom: -276px;
+            }
+
+            @media #{$screen-size-desktop} {
                 margin-bottom: -270px;
             }
         }

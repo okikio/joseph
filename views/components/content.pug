@@ -8,15 +8,15 @@ mixin image(value)
       .img-contain
         picture
           each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-            source(media=`(max-width: ${n}00px)` srcset!=`${_src}.webp?w=${n}00&quality=${n <= 8 ? 70 : 100}` sizes=`(max-width: ${n}00px) ${n}00w` type='image/webp')
-            source(media=`(max-width: ${n}00px)` srcset!=`${_src}.jpg?w=${n}00&quality=${n <= 8 ? 70 : 100}` sizes=`(max-width: ${n}00px) ${n}00w` type='image/jpeg')
+            source(media=`(max-width: ${n}00px)` srcset!=`${_src}.webp?w=${n + 1}00&quality=${n <= 8 ? 70 : 100}` sizes=`(max-width: ${n}00px) ${n + 1}00w` type='image/webp')
+            source(media=`(max-width: ${n}00px)` srcset!=`${_src}.jpg?w=${n + 1}00&quality=${n <= 8 ? 70 : 100}` sizes=`(max-width: ${n}00px) ${n + 1}00w` type='image/jpeg')
 
           source(media='(min-width: 1600px)' srcset!=`${_src}.webp` sizes="100vmax" type='image/webp')
-          img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" sizes="(max-width: 500px) 500w,(max-width: 700px) 700w,(max-width: 900px) 900w, 100vmax" width="100vmax")
+          img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" sizes="(max-width: 500px) 600w,(max-width: 700px) 800w,(max-width: 900px) 1000w, 100vmax" width="100vmax")
 
           //- img.core-img(src!=`${_src}.jpg?w=50&quality=100&effect=blur:150` sizes="50w" alt=_alt inline loading="auto")
         picture
-          img.placeholder-img(src!=`${_src}.webp?w=50&quality=100&effect=blur:150` sizes="50w" alt=_alt inline loading="auto" width="50w")
+          img.placeholder-img(src!=`${_src}.jpg?w=50&quality=100&effect=blur:150` sizes="50w" alt=_alt inline loading="auto" width="50w")
         noscript Javascript is necesscary for this site awesome experience.
           img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="100vw")
     .layer-image-overlay

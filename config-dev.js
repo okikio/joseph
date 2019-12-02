@@ -365,7 +365,7 @@ module.exports = {
                         "title": "Brilliant <br/> Engineering",
                         "content": "Creating with passion, crafting with love.",
                         "img": {
-                            "src": "/assets/white_car",
+                            "src": "/assets/closeup-stones",
                             "alt": "A city Image",
                             "class": "effect-parallax hero-img"
                         }
