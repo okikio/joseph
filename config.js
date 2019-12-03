@@ -353,25 +353,6 @@ module.exports = {
 
                 // Banner layer 3
                 layer([
-                    _class([ background("secondary") ]),
-                    layout([
-                        _class([ _layout("contain-large", "enlarge-vert") ]),
-                        values([
-                            _header([
-                                title(""),
-                                _class([ _layout("vert"), _style("bold-font", "500"), "h2", color("white") ]),
-                                values([
-                                    `Got your attention.`, ` `,
-                                    _content(`Good!`, [color("secondary-dark") ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Banner layer 3
-
-                // Banner layer 4
-                layer([
                     _class([ background("tertiary") ]),
                     layout([
                         _class([ _layout("contain-large", "enlarge-vert") ]),
@@ -387,7 +368,7 @@ module.exports = {
                         ])
                     ])
                 ]),
-                // End Banner layer 4
+                // End Banner layer 3
 
                 // Breakthrough layer
                 layer([
@@ -533,7 +514,7 @@ module.exports = {
                                     _main([
                                         _class([ _style("center"), padding("vert") ]),
                                         values([
-                                            _content(`NASA Rocket Ship`, [ "h1", _style("bold", "primary") ]),
+                                            _content(`NASA Rocket Ship`, [ "h1", _style("bold", "tertiary") ]),
                                         ])
                                     ])
 

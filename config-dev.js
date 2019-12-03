@@ -541,24 +541,6 @@ module.exports = {
                     }
                 }, {
                     "layer": {
-                        "class": "layer-color-secondary",
-                        "layout": {
-                            "class": "layout-contain-large layout-enlarge-vert",
-                            "values": [{
-                                "section": {
-                                    "title": "",
-                                    "class": "layout-vert style-bold-font style-500 h2 style-color-white",
-                                    "values": ["Got your attention.", " ", {
-                                        "content": "Good!",
-                                        "class": "style-color-secondary-dark"
-                                    }],
-                                    "type": "header"
-                                }
-                            }]
-                        }
-                    }
-                }, {
-                    "layer": {
                         "class": "layer-color-tertiary",
                         "layout": {
                             "class": "layout-contain-large layout-enlarge-vert",
@@ -712,7 +694,7 @@ module.exports = {
                                             "class": "style-center layout-padding-vert",
                                             "values": [{
                                                 "content": "NASA Rocket Ship",
-                                                "class": "h1 style-bold style-primary"
+                                                "class": "h1 style-bold style-tertiary"
                                             }],
                                             "type": "main"
                                         }

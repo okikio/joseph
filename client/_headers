@@ -1,12 +1,8 @@
 /*
-  cache-control: public, max-age=31536000
+  Cache-Control: public, immutable, max-age=31536000
   X-Frame-Options: DENY
-  Service-Worker-Navigation-Preload: true
-  X-XSS-Protection: 1; mode=block
   Accept-CH: DPR, Viewport-Width, Width
-  X-UA-Compatible: IE=edge,chrome=1
-  Content-Security-Policy: default-src https: 'self'; font-src data: 'self' https://fonts.gstatic.com/; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://www.josephojo.com/ https://josephojo.netlify.com/; script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self'; upgrade-insecure-requests; base-uri 'self';
-  Link: </js/app.vendor.min.js> rel=preload; as=script
+  Content-Security-Policy: default-src https: 'self'; font-src data: 'self' https://fonts.gstatic.com/; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://www.josephojo.com/ https://josephojo.netlify.com/; script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://fonts.gstatic.com/ https://res.cloudinary.com/okikio-assets/ https://polyfill.io/ https://cdnjs.cloudflare.com/; upgrade-insecure-requests; base-uri 'self';
   Link: </js/app.modern.min.js> rel=preload; as=script
   Link: <https://polyfill.io/> rel=preconnect; crossorigin
   Link: <https://fonts.gstatic.com/> rel=preconnect; crossorigin
@@ -22,47 +18,46 @@
   X-Content-Type-Options: nosniff
 
 /*.html
-  cache-control: public, immutable, max-age=31536000
+  Cache-Control: public, immutable, max-age=31536000
   Content-Type: text/html; charset=utf-8
 
 /*.css
-  content-type: text/css; charset=utf-8
-  cache-control: public, immutable, max-age=31536000
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, immutable, max-age=31536000
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 /*.js
-  content-type: text/javascript; charset=utf-8
-  cache-control: public, immutable, max-age=31536000
+  Content-Type: text/javascript; charset=utf-8
+  Cache-Control: public, immutable, max-age=31536000
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
+/*.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, immutable, max-age=31536000
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+
+/favicon.ico
+  Cache-Control: public, immutable, max-age=31536000
+
 https://fonts.gstatic.com/*
-  cache-control: public, immutable, max-age=31536000
+  Cache-Control: public, immutable, max-age=31536000
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 https://res.cloudinary.com/okikio-assets/*
-  cache-control: public, immutable, max-age=31536000
+  Cache-Control: public, immutable, max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
 https://polyfill.io/*
-  cache-control: public, immutable, max-age=31536000
+  Cache-Control: public, immutable, max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
-
-/manifest.webmanifest
-  content-type: application/manifest+json
-  cache-control: public, immutable, max-age=31536000
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  X-XSS-Protection: 1; mode=block
-
-/favicon.ico
-  cache-control: public, immutable, max-age=31536000

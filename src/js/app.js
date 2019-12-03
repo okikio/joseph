@@ -1,5 +1,5 @@
 import { _is, _constrain, _map } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, attr } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width } from "./components/dom";
 
 let _layer = ".layer";
 let _navbar = '.navbar';
