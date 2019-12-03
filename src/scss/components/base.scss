@@ -97,8 +97,6 @@ $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
     }
 }
 
-
-
 img {
     min-height: 200px;
     display: block;
@@ -112,7 +110,8 @@ img {
 
 .placeholder-img {
     transition: opacity .8s ease;
-    // filter: blur(3px);
+    transform: scale(1.2);
+    filter: blur(3px);
     opacity: 1;
 }
 
@@ -131,13 +130,13 @@ img {
 a {
     text-decoration: none;
     display: inline-block;
-    color: $secondary;
+    color: $secondary-dark;
     cursor: pointer;
 
     &:hover,
     &:focus {
         text-decoration: underline;
-        color: $secondary-dark;
+        color: $secondary;
     }
 }
 

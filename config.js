@@ -317,7 +317,7 @@ module.exports = {
                                 _class([ _layout("vert"), _style("bold-font", "500"), "h2", color("white") ]),
                                 values([
                                     `Got your attention.`, ` `,
-                                    _content(`Good!`, [ color("tertiary") ])
+                                    _content(`Good!`, [ color("tertiary-dark") ])
                                 ])
                             ])
                         ])
@@ -336,7 +336,7 @@ module.exports = {
                                 _class([ _layout("vert"), _style("bold-font", "500"), "h2", color("white") ]),
                                 values([
                                     `Got your attention.`, ` `,
-                                    _content(`Good!`, [ color("tertiary") ])
+                                    _content(`Good!`, [color("secondary-dark") ])
                                 ])
                             ])
                         ])
@@ -355,7 +355,7 @@ module.exports = {
                                 _class([ _layout("vert"), _style("bold-font", "500"), "h2", color("dark") ]),
                                 values([
                                     `Got your attention.`, ` `,
-                                    _content(`Good!`, [ color("secondary") ])
+                                    _content(`Good!`, [ color("secondary-dark") ])
                                 ])
                             ])
                         ])

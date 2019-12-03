@@ -480,7 +480,7 @@ module.exports = {
                                     "class": "layout-vert style-bold-font style-500 h2 style-color-white",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
-                                        "class": "style-color-tertiary"
+                                        "class": "style-color-tertiary-dark"
                                     }],
                                     "type": "header"
                                 }
@@ -498,7 +498,7 @@ module.exports = {
                                     "class": "layout-vert style-bold-font style-500 h2 style-color-white",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
-                                        "class": "style-color-tertiary"
+                                        "class": "style-color-secondary-dark"
                                     }],
                                     "type": "header"
                                 }
@@ -516,7 +516,7 @@ module.exports = {
                                     "class": "layout-vert style-bold-font style-500 h2 style-color-dark",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
-                                        "class": "style-color-secondary"
+                                        "class": "style-color-secondary-dark"
                                     }],
                                     "type": "header"
                                 }
