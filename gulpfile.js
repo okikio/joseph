@@ -371,7 +371,7 @@ task("client", () =>
                     ],
                     onwarn
                 }, 'umd'),
-                terser({ ...minifyOpts, toplevel: false, ecma: 5 }), // Minify the file
+                terser({ ...minifyOpts, toplevel: false }), // Minify the file
                 rename(minSuffix) // Rename
             ],
 
