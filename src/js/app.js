@@ -1,5 +1,5 @@
 import { _is, _constrain, _map } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, attr } from "./components/dom";
 
 let _layer = ".layer";
 let _navbar = '.navbar';
@@ -49,6 +49,10 @@ try {
 
             let _core_img = get(find($img, ".core-img"), 0);
             let _placeholder_img = find($img, ".placeholder-img");
+            // window.caches.open("josephojo-v1.0.0")
+            //     .then(cache => cache.put(attr(_core_img, "src")))
+            //     .then(() => alert('content is now available offline'))
+            //     .catch(() => alert('oh noes! something went wrong'));
 
             if (_is.def(_core_img)) {
                 if (_core_img.complete) {
