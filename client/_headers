@@ -1,6 +1,7 @@
 /*
   cache-control: public, max-age=31536000
   X-Frame-Options: DENY
+  Service-Worker-Navigation-Preload: true
   X-XSS-Protection: 1; mode=block
   Accept-CH: DPR, Viewport-Width, Width
   X-UA-Compatible: IE=edge,chrome=1

@@ -1,18 +1,14 @@
 
 const cacheName = 'josephojo-v1.0.0';
 const startPage = '/';
-const offlinePage = '/offline';
+const offlinePage = '/offline.html';
 const filesToCache = ["/index.html", startPage, offlinePage];
 
 // Install
 self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open(cacheName).then(function (cache) {
-            filesToCache.map(function (url) {
-                return cache.add(url).catch(function (reason) {
-                    return console.log(`Service Worker Error: ${reason} url`);
-                });
-            });
+            return cache.addAll(filesToCache);
         })
     );
 });
@@ -37,10 +33,6 @@ self.addEventListener('fetch', function (e) {
     if (!e.request.url.match(/^(http|https):\/\//i))
         return;
 
-    // Return if request url is from an external domain.
-    if (new URL(e.request.url).origin !== location.origin)
-        return;
-
     // For POST requests, do not use the cache. Serve offline page if offline.
     if (e.request.method !== 'GET') {
         e.respondWith(
@@ -50,7 +42,6 @@ self.addEventListener('fetch', function (e) {
         );
         return;
     }
-
     // Revving strategy
     if (e.request.mode === 'navigate' && navigator.onLine) {
         fetch(e.request).then(function (response) {
@@ -58,6 +49,7 @@ self.addEventListener('fetch', function (e) {
                 cache.put(e.request, response.clone());
                 return response;
             });
+
         });
         return;
     }
