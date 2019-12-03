@@ -38,21 +38,47 @@ module.exports = {
     },
     "websiteURL": "https://app-web.netlify.com/",
     "pages": {
+        "offline": page([
+            _name("offline"),
+            title("Yikes you're offline!"),
+            values([
+                // Intro layer
+                layer([
+                    _class([padding("horz"), _layout("enlarge-vert"), "header-top-spot"]),
+                    layout([
+                        _class([_layout("contain-small")]),
+                        values([
+                            _header(title("Yikes you're offline!")),
+                            _main([
+                                _class([_style("center")]),
+                                values([
+                                    `Psshhh, psshhh, you are cutting off, psshhh. You have disconnected from the internet. Reload the page or try again later.`,
+                                ])
+                            ])
+                        ])
+                    ])
+                ]),
+                // End Intro Layer
+
+                // Footer
+                newFooter()
+            ]),
+            noFooter()
+        ]),
         "404": page([
             _name("404"),
             title("Ooops!"),
             values([
                 // Intro layer
                 layer([
-                    _class([ padding("horz", "large-top"), "header-top-spot" ]),
+                    _class([padding("horz"), _layout("enlarge-vert"), "header-top-spot" ]),
                     layout([
-                        _class([_layout("enlarge", "contain") ]),
+                        _class([_layout("contain-small") ]),
                         values([
                             _header(title("404, Page Not Found.")),
                             _main([
                                 _class([ _style("center") ]),
                                 values([
-                                    indent,
                                     `Sorry, the page you are looking for doesn't exist. How about going back `,
                                     _link("home", "/"), "."
                                 ])

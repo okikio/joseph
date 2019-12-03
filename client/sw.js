@@ -1,49 +1,80 @@
-let CACHE = 'sw-v1';
 
-// Open a cache and use addAll() with an array of assets to add all of them to the cache. Return a promise resolving when all the assets are added.
-const precache = () => {
-    return caches.open(CACHE)
-        .then(cache => cache.addAll(['/404', '/index', '/', '/about', '/projects', '/contact', '/sw.min.js', '/js/app.vendor.min.js', '/js/app.modern.min.js']))
-        .catch((e) => {
-            console.log("sw.min.js can't find files to cache, err:", e);
-        });
-};
+const cacheName = 'josephojo-v1.0.0';
+const startPage = '/';
+const offlinePage = '/offline';
+const filesToCache = [startPage, offlinePage];
 
-// On install, cache some resources.
-// self.addEventListener('install', function (evt) {
-//     console.log('The service worker is being installed.');
+// Install
+self.addEventListener('install', function (e) {
+    e.waitUntil(
+        caches.open(cacheName).then(function (cache) {
+            filesToCache.map(function (url) {
+                return cache.add(url).catch(function (reason) {
+                    return console.log(`Service Worker Error: ${reason} url`);
+                });
+            });
+        })
+    );
+});
 
-//     // Ask the service worker to keep installing until the returning promise resolves.
-//     evt.waitUntil(precache());
-// });
+// Activate
+self.addEventListener('activate', function (e) {
+    e.waitUntil(
+        caches.keys().then(function (keyList) {
+            return Promise.all(keyList.map(function (key) {
+                if (key !== cacheName) {
+                    return caches.delete(key);
+                }
+            }));
+        })
+    );
+    return self.clients.claim();
+});
 
-// Update consists in opening the cache, performing a network request and storing the new response data.
-const update = request => {
-    return caches.open(CACHE).then(function(cache) {
-        return fetch(request).then(function(response) {
-            return cache.put(request, response);
-        }).catch(function () {});
-    });
-};
+// Fetch
+self.addEventListener('fetch', function (e) {
+    // Return if request url protocal isn't http or https
+    if (!e.request.url.match(/^(http|https):\/\//i))
+        return;
 
-// Open the cache where the assets were stored and search for the requested resource. Notice that in case of no matching, the promise still resolves but it does with undefined as value.
-const fromCache = request => {
-    return caches.open(CACHE).then(function(cache) {
-        return cache.match(request).then(function(matching) {
-            return matching || Promise.reject('no-match');
-        });
-    });
-};
+    // Return if request url is from an external domain.
+    if (new URL(e.request.url).origin !== location.origin)
+        return;
 
-// On fetch, use cache but update the entry with the latest contents from the server.
-// self.addEventListener('fetch', function(evt) {
-//     if (evt.request.method === 'GET') {
-//         console.log('The service worker is serving the asset.');
+    // For POST requests, do not use the cache. Serve offline page if offline.
+    if (e.request.method !== 'GET') {
+        e.respondWith(
+            fetch(e.request).catch(function () {
+                return caches.match(offlinePage);
+            })
+        );
+        return;
+    }
 
-//         // …and waitUntil() to prevent the worker from being killed until the cache is updated.
-//         update(evt.request);
+    // Revving strategy
+    if (e.request.mode === 'navigate' && navigator.onLine) {
+        e.respondWith(
+            fetch(e.request).then(function (response) {
+                return caches.open(cacheName).then(function (cache) {
+                    cache.put(e.request, response.clone());
+                    return response;
+                });
+            })
+        );
+        return;
+    }
 
-//         // You can use respondWith() to answer immediately, without waiting for the network response to reach the service worker…
-//         evt.respondWith(fromCache(evt.request));
-//     }
-// });
+    e.respondWith(
+        caches.match(e.request).then(function (response) {
+            return response || fetch(e.request).then(function (response) {
+                return caches.open(cacheName).then(function (cache) {
+                    cache.put(e.request, response.clone());
+                    return response;
+                });
+            });
+        }).catch(function () {
+            return caches.match(offlinePage);
+        })
+    );
+});
+

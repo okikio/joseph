@@ -34,9 +34,9 @@ module.exports = {
                 "name": "404",
                 "values": [{
                     "layer": {
-                        "class": "layout-padding-horz layout-padding-large-top header-top-spot",
+                        "class": "layout-padding-horz layout-enlarge-vert header-top-spot",
                         "layout": {
-                            "class": "layout-enlarge layout-contain",
+                            "class": "layout-contain-small",
                             "values": [{
                                 "section": {
                                     "title": "404, Page Not Found.",
@@ -45,15 +45,67 @@ module.exports = {
                             }, {
                                 "section": {
                                     "class": "style-center",
-                                    "values": [{
-                                        "content": " ",
-                                        "class": "layout-padding-top layout-margin-left-large layout-inline-block"
-                                    }, "Sorry, the page you are looking for doesn't exist. How about going back ", {
+                                    "values": ["Sorry, the page you are looking for doesn't exist. How about going back ", {
                                         "a": {
                                             "href": "/index.html",
                                             "content": "home"
                                         }
                                     }, "."],
+                                    "type": "main"
+                                }
+                            }]
+                        }
+                    }
+                }, {
+                    "layer": {
+                        "class": "footer",
+                        "layout": {
+                            "section": {
+                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
+                                "values": ["Made with ❤ by Okiki Ojo."]
+                            }
+                        }
+                    }
+                }],
+                "noFooter": true
+            }
+        },
+        "offline": {
+            "page": {
+                "title": "Yikes you're offline!",
+                "tabs": {
+                    "values": [{
+                        "a": {
+                            "href": "/about.html",
+                            "content": "about"
+                        }
+                    }, {
+                        "a": {
+                            "href": "/projects.html",
+                            "content": "projects"
+                        }
+                    }, {
+                        "a": {
+                            "href": "/contact.html",
+                            "content": "contact"
+                        }
+                    }]
+                },
+                "name": "offline",
+                "values": [{
+                    "layer": {
+                        "class": "layout-padding-horz layout-enlarge-vert header-top-spot",
+                        "layout": {
+                            "class": "layout-contain-small",
+                            "values": [{
+                                "section": {
+                                    "title": "Yikes you're offline!",
+                                    "type": "header"
+                                }
+                            }, {
+                                "section": {
+                                    "class": "style-center",
+                                    "values": ["Psshhh, psshhh, you are cutting off, psshhh. You have disconnected from the internet. Reload the page or try again later."],
                                     "type": "main"
                                 }
                             }]

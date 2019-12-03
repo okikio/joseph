@@ -95,7 +95,7 @@ let posthtmlOpts = [
         tree.match(querySelector("[src^='/assets/']"), parse());
         tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
     },
-    tree => {
+    async tree => {
         let warnings, promises = [];
         tree.match({ tag: 'img' }, node => {
             if (node.attrs && node.attrs.src && "inline" in node.attrs) {
@@ -125,19 +125,15 @@ let posthtmlOpts = [
             return node;
         });
 
-        return Promise.all(promises).then(() => {
-            // Filter errors from messages as warnings
-            warnings = tree.messages.filter(msg => msg instanceof Error);
-
-            if (warnings.length) {
-                // Conditionally warn the user about any issues
-                console.warn(`\nWarnings (${warnings.length}):\n${
-                    warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
-            }
-
-            // Return the ast
-            return tree;
-        });
+        await Promise.all(promises);
+        // Filter errors from messages as warnings
+        warnings = tree.messages.filter(msg => msg instanceof Error);
+        if (warnings.length) {
+            // Conditionally warn the user about any issues
+            console.warn(`\nWarnings (${warnings.length}):\n${warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
+        }
+        // Return the ast
+        return tree;
     },
     tree => {
         tree.match(querySelector("i.icon"), node => {
@@ -364,7 +360,18 @@ task("client", () =>
         ["client/**/*.js", {
             opts: { allowEmpty: true },
             pipes: [
-                terser({ ...minifyOpts, toplevel: false }), // Minify the file
+                // Bundle Modules
+                rollup({
+                    plugins: [
+                        builtins(), // Access to builtin Modules
+                        rollupJSON(), // Parse JSON Exports
+                        commonJS(), // Use CommonJS to compile the program
+                        nodeResolve(), // Bundle all Modules
+                        rollupBabel(babelConfig.general) // Babelify file for uglifing
+                    ],
+                    onwarn
+                }, 'umd'),
+                terser({ ...minifyOpts, toplevel: false, ecma: 5 }), // Minify the file
                 rename(minSuffix) // Rename
             ],
 

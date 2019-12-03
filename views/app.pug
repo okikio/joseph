@@ -232,5 +232,5 @@ html(lang="en")
 
     script(src='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now' crossorigin async)
     script(src=`${debug ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline async)
-    if false
-      script(src=`./js/store.min.js` inline defer)
+    if !debug
+      script(src=`./js/store.min.js` inline async)
