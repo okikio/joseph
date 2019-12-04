@@ -1,8 +1,8 @@
 
-const cacheName = 'josephojo-v1.0.0';
-// /* const startPage = '/';
+const cacheName = 'josephojo-v1.0.1';
+const startPage = '/';
 const offlinePage = '/offline.html';
-const filesToCache = ["/index.html", '/', offlinePage];
+const filesToCache = ["/index.html", startPage, offlinePage];
 
 // Install
 self.addEventListener('install', function (e) {

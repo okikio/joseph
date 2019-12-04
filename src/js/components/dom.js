@@ -329,7 +329,7 @@ let _size = sz => {
             } else { return (_offset = offset(_el)) && _offset[sz]; }
         } else {
             return each(_el, ($el, idx) => {
-                style($el, sz, _fnval(value, [idx, el[sz]()], $el));
+                style($el, sz, _fnval(value, [el[sz](), idx], $el));
             });
         }
     };
@@ -366,7 +366,7 @@ export let html = (_el, ...args) => {
     return args.length ?
         each(_el, (el, idx) => {
             let originHTML = el.innerHTML;
-            append(empty(el), _fnval(html, [idx, originHTML], el));
+            append(empty(el), _fnval(html, [originHTML, idx], el));
         }) : (_el.length ? get(_el, 0).innerHTML : null);
 };
 
@@ -375,7 +375,7 @@ export let text = (_el, ...args) => {
     _el = el(_el);
     return args.length ?
         each(_el, (el, idx) => {
-            let newText = _fnval(text, [idx, el.textContent], el);
+            let newText = _fnval(text, [el.textContent, idx], el);
             el.textContent = _is.nul(newText) ? '' : `${newText}`;
         }) : (_el.length ? pluck(_el, 'textContent').join("") : null);
 };
@@ -398,7 +398,7 @@ export let attr = (_el, name, val) => {
                 for (let i in name)
                     _setAttr(el, i, name[i]);
             } else {
-                _setAttr(el, name, _fnval(val, [idx, el.getAttribute(name)], el));
+                _setAttr(el, name, _fnval(val, [el.getAttribute(name), idx], el));
             }
         });
     }
@@ -410,6 +410,43 @@ export let removeAttr = (_el, name) => {
         el.nodeType === 1 && name.split(' ')
             .forEach(attr => { _setAttr(el, attr); });
     });
+};
+
+let propMap = {
+    'tabindex': 'tabIndex',
+    'readonly': 'readOnly',
+    'for': 'htmlFor',
+    'class': 'className',
+    'maxlength': 'maxLength',
+    'cellspacing': 'cellSpacing',
+    'cellpadding': 'cellPadding',
+    'rowspan': 'rowSpan',
+    'colspan': 'colSpan',
+    'usemap': 'useMap',
+    'frameborder': 'frameBorder',
+    'contenteditable': 'contentEditable'
+};
+
+// Read or set properties of DOM elements. This should be preferred over attr in case of reading values of properties that change with user interaction over time, such as checked and selected.
+export let prop = (_el, name, value) => {
+    name = propMap[name] || name;
+    return _is.str(name) && _is.undef(value) ?
+        (get(_el, 0) && get(_el, 0)[name]) : 
+        each(_el, ($el, idx) => {
+            if (_is.obj(name)) {
+                for (let key in name) {
+                    $el[propMap[key] || key] = name[key];
+                }
+            } else {
+                $el[name] = _fnval(value, [$el[name], idx], $el);
+            }
+        });
+};
+
+// Remove a property from each of the DOM nodes in the collection. This is done with JavaScript’s delete operator. Note that trying to remove some built-in DOM properties such as className or maxLength won’t have any affect, since browsers disallow removing those properties.
+export let removeProp = (_el, name) => {
+    name = propMap[name] || name;
+    return each(_el, $el => { delete $el[name]; });
 };
 
 // Transform string values to the proper type of value eg. "12" = 12, "[12, 'xyz']" = [12, 'xyz']
@@ -437,7 +474,7 @@ export let val = (_el, value, ...args) => {
     if (args.length) {
         if (_is.nul(value)) value = "";
         return each(_el, (el, idx) => {
-            el.value = _fnval(value, [idx, el.value], el);
+            el.value = _fnval(value, [el.value, idx], el);
         });
     } else {
         _el = get(_el, 0);
@@ -454,7 +491,7 @@ export let offset = (_el, coords) => {
     if (coords) {
         return each(_el, (el, idx) => {
             let $this = new ele(el);
-            let _coords = _fnval(coords, [idx, offset($this)], el);
+            let _coords = _fnval(coords, [offset($this), idx], el);
             let parentOffset = offset(offsetParent($this));
             let props = {
                 top: _coords.top - parentOffset.top,
@@ -519,7 +556,7 @@ export let addClass = (_el, name) => {
         if (!('className' in el)) return;
 
         let classList = [], cls = getclass(el);
-        _fnval(name, [idx, cls], el).split(/\s+/g).forEach(_name => {
+        _fnval(name, [cls, idx], el).split(/\s+/g).forEach(_name => {
             if (!hasClass(el, _name)) classList.push(_name);
         });
 
@@ -534,7 +571,7 @@ export let removeClass = (_el, name) => {
         if (_is.undef(name)) return getclass(el, '');
 
         let classList = getclass(el);
-        _fnval(name, [idx, classList], el).split(/\s+/g).forEach(_name => {
+        _fnval(name, [classList, idx], el).split(/\s+/g).forEach(_name => {
             classList = classList.replace(_classRE(_name), " ");
         });
 
@@ -548,7 +585,7 @@ export let toggleClass = (_el, name, when) => {
     if (!name) return _el;
     return each(_el, function (el, idx) {
         let $this = new ele(el);
-        _fnval(name, [idx, getclass(el)], el).split(/\s+/g)
+        _fnval(name, [getclass(el), idx], el).split(/\s+/g)
         .forEach(_name => {
             (_is.undef(when) ? !hasClass($this, _name) : when) ?
             addClass($this, _name) : removeClass($this, _name);

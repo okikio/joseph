@@ -30,6 +30,11 @@ export let _capital = val => val[0].toUpperCase() + val.slice(1);
 // Test the type of a value
 export let _is = (val, type) => (typeof val === type);
 
+// Does the object contain the given key ? Identical to object.hasOwnProperty(key), but uses a safe reference to the hasOwnProperty function, in case it's been overridden
+export let has = (obj, path) => {
+    return obj != null && ({}).hasOwnProperty.call(obj, path);
+};
+
 // Is Instance Of
 let _isInst = (ctor, obj) => (ctor instanceof obj);
 let _type = type => { // Tweak of _is
