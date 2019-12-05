@@ -5,8 +5,9 @@ html(lang="en")
     meta(http-equiv='Accept-CH' content='DPR, Viewport-Width, Width')
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
     meta(http-equiv='Cache-Control' content='public, max-age=31536000')
-    meta(http-equiv='Content-Security-Policy' content=`font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/; 
-    script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://polyfill.io/${dev ? " * blob: ws:" : ""}; upgrade-insecure-requests; base-uri 'self'; default-src https: 'self';`)
+    if dev
+      meta(http-equiv='Content-Security-Policy' content=`font-src 'self' data: https://www.josephojo.com; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://www.josephojo.com https://res.cloudinary.com/${cloud_name}/; 
+    script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://polyfill.io/${dev ? " * blob: ws:" : ""}; upgrade-insecure-requests; base-uri 'self'; default-src https: https://www.josephojo.com 'self';`)
 
     meta(name='robots' content='all')
     meta(name='title' content=page.title)
@@ -18,14 +19,14 @@ html(lang="en")
     meta(name='keywords' content='Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, website, netlify')
 
     meta(property='og:type' content='website')
-    meta(property='og:image' content=`/android-icon-192x192.png`)
+    meta(property='og:image' content=`https://www.josephojo.com/android-icon-192x192.png`)
     meta(property='article:author' content='Joseph Ojo')
     meta(property='og:site_name' content='josephojo.com')
     meta(property='og:title' content=`${page.title} - josephojo.com`)
     meta(property='og:url' content=`https://www.josephojo.com/${page.name}`)
 
     meta(itemprop='name' content=`${page.title} - josephojo.com`)
-    meta(itemprop='image' content='/android-icon-192x192.png')
+    meta(itemprop='image' content='https://www.josephojo.com/android-icon-192x192.png')
     meta(name='description' content='The porfolio of Joseph, it contains all amazing projects etc...')
     meta(itemprop='description' content='The porfolio of Joseph, it contains all amazing projects etc...')
     meta(property='og:description' content='The porfolio of Joseph, it contains all amazing projects etc...')
@@ -150,7 +151,7 @@ html(lang="en")
         | by 
         span(itemprop='author') Joseph Ojo
           div(itemscope='' itemtype='https://schema.org/Person')
-            img(itemprop='image' src='/android-icon-192x192.png' alt='The logo for josephojo.com')
+            img(itemprop='image' src='https://www.josephojo.com/android-icon-192x192.png' alt='The logo for josephojo.com')
             span(itemprop="email") laoluojo
               span &#64;
               span gmail.com
