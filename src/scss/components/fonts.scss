@@ -4,7 +4,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JXGhLeI.woff2) format('woff2');
+    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(/fonts/frank-ruhl-libre--medium_hebrew.woff2) format('woff2');
     unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 
@@ -14,7 +14,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JnGhLeI.woff2) format('woff2');
+    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(/fonts/frank-ruhl-libre--medium_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -24,7 +24,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JfGhA.woff2) format('woff2'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPU0PG9JfGgg.woff) format('woff');
+    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(/fonts/frank-ruhl-libre--medium_latin.woff2) format('woff2'), url(/fonts/frank-ruhl-libre--medium_hebrew.woff) format('woff');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -34,7 +34,7 @@
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JXGhLeI.woff2) format('woff2');
+    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(/fonts/frank-ruhl-libre--black_hebrew.woff2) format('woff2');
     unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 
@@ -44,7 +44,7 @@
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JnGhLeI.woff2) format('woff2');
+    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(/fonts/frank-ruhl-libre--black_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -54,18 +54,9 @@
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGhA.woff2) format('woff2'), url(https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGgg.woff) format('woff');
+    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(/fonts/frank-ruhl-libre--black_latin.woff2) format('woff2'), url(/fonts/frank-ruhl-libre--black_latin.woff) format('woff');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
-// /* fallback */
-// @font-face {
-//     font-family: 'Material Icons';
-//     font-style: normal;
-//     font-weight: 400;
-//     font-display: swap;
-//     src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2'), url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.woff) format('woff');
-// }
 
 /* cyrillic-ext */
 @font-face {
@@ -73,7 +64,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gTD_u50.woff2) format('woff2');
+    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(/fonts/montserrat--bold_cyrillic-ext.woff2) format('woff2');
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -83,7 +74,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3g3D_u50.woff2) format('woff2');
+    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(/fonts/montserrat--bold_cyrillic.woff2) format('woff2');
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -93,7 +84,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gbD_u50.woff2) format('woff2');
+    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(/fonts/montserrat--bold_vietnamese.woff2) format('woff2');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
 }
 
@@ -103,7 +94,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gfD_u50.woff2) format('woff2');
+    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(/fonts/montserrat--bold_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -113,7 +104,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2) format('woff2'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD-A.woff) format('woff');
+    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(/fonts/montserrat--bold_latin.woff2) format('woff2'), url(/fonts/montserrat--bold_latin.woff) format('woff');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -123,7 +114,7 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gTD_u50.woff2) format('woff2');
+    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(/fonts/montserrat--extrabold_cyrillic-ext.woff2) format('woff2');
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -133,7 +124,7 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3g3D_u50.woff2) format('woff2');
+    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(/fonts/montserrat--extrabold_cyrillic.woff2) format('woff2');
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -143,7 +134,7 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gbD_u50.woff2) format('woff2');
+    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(/fonts/montserrat--extrabold_vietnamese.woff2) format('woff2');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
 }
 
@@ -153,7 +144,7 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gfD_u50.woff2) format('woff2');
+    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(/fonts/montserrat--extrabold_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -163,7 +154,7 @@
     font-style: normal;
     font-weight: 800;
     font-display: swap;
-    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD_g.woff2) format('woff2'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD-A.woff) format('woff');
+    src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), url(/fonts/montserrat--extrabold_latin.woff2) format('woff2'), url(/fonts/montserrat--extrabold_latin.woff) format('woff');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -173,7 +164,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_cyrillic-ext.woff2) format('woff2');
     unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -183,7 +174,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu5mxKOzY.woff2) format('woff2');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_cyrillic.woff2) format('woff2');
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -193,7 +184,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7mxKOzY.woff2) format('woff2');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_greek-ext.woff2) format('woff2');
     unicode-range: U+1F00-1FFF;
 }
 
@@ -203,7 +194,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4WxKOzY.woff2) format('woff2');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_greek.woff2) format('woff2');
     unicode-range: U+0370-03FF;
 }
 
@@ -213,7 +204,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7WxKOzY.woff2) format('woff2');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_vietnamese.woff2) format('woff2');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
 }
 
@@ -223,7 +214,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7GxKOzY.woff2) format('woff2');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -233,7 +224,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxM.woff) format('woff');
+    src: local('Roboto'), local('Roboto-Regular'), url(/fonts/roboto--regular_latin.woff2) format('woff2'), url(/fonts/roboto--regular_latin.woff) format('woff');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -243,7 +234,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfpcuPP9g.woff2) format('woff2');
+    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(/fonts/varela-round--regular_hebrew.woff2) format('woff2');
     unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 
@@ -253,7 +244,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfqMuPP9g.woff2) format('woff2');
+    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(/fonts/varela-round--regular_vietnamese.woff2) format('woff2');
     unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
 }
 
@@ -263,7 +254,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfqcuPP9g.woff2) format('woff2');
+    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(/fonts/varela-round--regular_latin-ext.woff2) format('woff2');
     unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -273,6 +264,15 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uP.woff2) format('woff2'), url(https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uJ.woff) format('woff');
+    src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(/fonts/varela-round--regular_latin.woff2) format('woff2'), url(/fonts/varela-round--regular_latin.woff) format('woff');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+// /* fallback */
+// @font-face {
+//     font-family: 'Material Icons';
+//     font-style: normal;
+//     font-weight: 400;
+//     font-display: swap;
+//     src: url(/fonts/material-icons.woff2) format('woff2'), url(/fonts/material-icons.woff) format('woff');
+// }

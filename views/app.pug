@@ -5,8 +5,8 @@ html(lang="en")
     meta(http-equiv='Accept-CH' content='DPR, Viewport-Width, Width')
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
     meta(http-equiv='Cache-Control' content='public, max-age=31536000')
-    meta(http-equiv='Content-Security-Policy' content=`default-src https: 'self'; font-src data: 'self' https://fonts.gstatic.com/; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com/ https://josephojo.netlify.com/; 
-    script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://fonts.gstatic.com/ https://res.cloudinary.com/${cloud_name}/ https://polyfill.io/ https://cdnjs.cloudflare.com/${dev ? " * blob: ws:" : ""}; upgrade-insecure-requests; base-uri 'self' https://josephojo.netlify.com/ https://www.josephojo.com/;`)
+    meta(http-equiv='Content-Security-Policy' content=`font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/; 
+    script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://polyfill.io/${dev ? " * blob: ws:" : ""}; upgrade-insecure-requests; base-uri 'self'; default-src https: 'self';`)
 
     meta(name='robots' content='all')
     meta(name='title' content=page.title)
@@ -18,21 +18,21 @@ html(lang="en")
     meta(name='keywords' content='Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, website, netlify')
 
     meta(property='og:type' content='website')
-    meta(property='og:image' content=`https://www.josephojo.com/android-icon-192x192.png`)
+    meta(property='og:image' content=`/android-icon-192x192.png`)
     meta(property='article:author' content='Joseph Ojo')
     meta(property='og:site_name' content='josephojo.com')
     meta(property='og:title' content=`${page.title} - josephojo.com`)
     meta(property='og:url' content=`https://www.josephojo.com/${page.name}`)
 
     meta(itemprop='name' content=`${page.title} - josephojo.com`)
-    meta(itemprop='image' content='https://www.josephojo.com/android-icon-192x192.png')
+    meta(itemprop='image' content='/android-icon-192x192.png')
     meta(name='description' content='The porfolio of Joseph, it contains all amazing projects etc...')
     meta(itemprop='description' content='The porfolio of Joseph, it contains all amazing projects etc...')
     meta(property='og:description' content='The porfolio of Joseph, it contains all amazing projects etc...')
     title= page.title
 
     link(rel='preconnect' href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
-    link(rel='preconnect' href='https://fonts.gstatic.com/' crossorigin)
+    //- link(rel='preconnect' href='https://fonts.gstatic.com/' crossorigin)
     link(rel='preconnect' href='https://polyfill.io/' crossorigin)
 
     link(rel='apple-touch-icon', sizes='57x57', href='/apple-icon-57x57.png')
@@ -64,11 +64,11 @@ html(lang="en")
     meta(name='msapplication-TileColor', content='#4500ff')
     meta(name='msapplication-TileImage', content='/ms-icon-144x144.png')
 
-    link(rel="preload" href="https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGhA.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="preload" href="https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="preload" href="https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD_g.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="preload" href="https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="prefetch" href="https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uP.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="prefetch" href="/fonts/varela-round--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
 
     link(rel='stylesheet' href='./css/app.min.css' inline async)
 
@@ -150,7 +150,7 @@ html(lang="en")
         | by 
         span(itemprop='author') Joseph Ojo
           div(itemscope='' itemtype='https://schema.org/Person')
-            img(itemprop='image' src='https://www.josephojo.com/android-icon-192x192.png' alt='The logo for josephojo.com')
+            img(itemprop='image' src='/android-icon-192x192.png' alt='The logo for josephojo.com')
             span(itemprop="email") laoluojo
               span &#64;
               span gmail.com

@@ -1,25 +1,30 @@
 /*
   Cache-Control: public, immutable, max-age=31536000
   X-Frame-Options: DENY
-  Accept-CH: DPR, Viewport-Width, Width
-  Content-Security-Policy: default-src https: 'self'; font-src data: 'self' https://fonts.gstatic.com/; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://www.josephojo.com/ https://josephojo.netlify.com/; script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://fonts.gstatic.com/ https://res.cloudinary.com/okikio-assets/ https://polyfill.io/ https://cdnjs.cloudflare.com/; upgrade-insecure-requests; base-uri 'self';
-  Link: </js/app.modern.min.js> rel=preload; as=script
-  Link: <https://polyfill.io/> rel=preconnect; crossorigin
-  Link: <https://fonts.gstatic.com/> rel=preconnect; crossorigin
-  Link: <https://cdnjs.cloudflare.com/> rel=preconnect; crossorigin
-  Link: <https://res.cloudinary.com/okikio/> rel=preconnect; crossorigin
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Link: <https://fonts.gstatic.com/s/frankruhllibre/v5/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGhA.woff2> rel=preload; as=font; type=font/woff2; crossorigin
-  Link: <https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2> rel=preload; as=font; type=font/woff2; crossorigin
-  Link: <https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2> rel=preload; as=font; type=font/woff2; crossorigin
-  Link: <https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_c5H3gnD_g.woff2> rel=preload; as=font; type=font/woff2; crossorigin
-  Link: <https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2> rel=preload; as=font; type=font/woff2; crossorigin
-  Link: <https://fonts.gstatic.com/s/varelaround/v12/w8gdH283Tvk__Lua32TysjIfp8uP.woff2> rel=preload; as=font; type=font/woff2; crossorigin
   X-Content-Type-Options: nosniff
 
-/*.html
+/*.woff2
   Cache-Control: public, immutable, max-age=31536000
+  Content-Type: font/woff2; charset=utf-8
+
+/*.woff
+  Cache-Control: public, immutable, max-age=31536000
+  Content-Type: font/woff; charset=utf-8
+
+/*.html
+  Cache-Control: public, max-age=315360
   Content-Type: text/html; charset=utf-8
+  Accept-CH: DPR, Viewport-Width, Width
+  Content-Security-Policy: default-src https: 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/; script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://polyfill.io/ https://cdnjs.cloudflare.com/; upgrade-insecure-requests; base-uri 'self';
+  Link: </js/app.modern.min.js> rel=preload; as=script
+  Link: <https://polyfill.io/> rel=preconnect; crossorigin
+  Link: <https://res.cloudinary.com/okikio/> rel=preconnect; crossorigin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Link: </fonts/frank-ruhl-libre--black_latin.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/montserrat--bold_latin.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/montserrat--extrabold_latin.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/roboto--regular_latin.woff2> rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/varela-round--regular_latin.woff2> rel=preload; as=font; type=font/woff2; crossorigin
 
 /*.css
   Content-Type: text/css; charset=utf-8
@@ -34,7 +39,7 @@
   X-XSS-Protection: 1; mode=block
 
 /*.webmanifest
-  Content-Type: application/manifest+json
+  Content-Type: application/manifest+json; charset=utf-8
   Cache-Control: public, immutable, max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
@@ -43,20 +48,14 @@
 /favicon.ico
   Cache-Control: public, immutable, max-age=31536000
 
-https://fonts.gstatic.com/*
-  Cache-Control: public, immutable, max-age=31536000
-  X-Frame-Options: DENY
-  X-XSS-Protection: 1; mode=block
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-
-https://res.cloudinary.com/okikio-assets/*
+//res.cloudinary.com/okikio-assets/*
   Cache-Control: public, immutable, max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
-https://polyfill.io/*
+//polyfill.io/*
   Cache-Control: public, immutable, max-age=31536000
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
