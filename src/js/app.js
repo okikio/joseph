@@ -54,7 +54,7 @@ try {
                     addClass(_placeholder_img, "core-img-show");
                 } else {
                     on(_core_img, "load", function () {
-                        addClass(_placeholder_img, "core-img-show");
+                        addClass(load_img, "core-img-show");
                     }, false);
                 }
             }
