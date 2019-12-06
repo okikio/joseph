@@ -6,8 +6,8 @@ html(lang="en")
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
     meta(http-equiv='Cache-Control' content='public, max-age=31536000')
     if dev
-      meta(http-equiv='Content-Security-Policy' content=`font-src 'self' data: https://www.josephojo.com; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://www.josephojo.com https://res.cloudinary.com/${cloud_name}/; 
-    script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://polyfill.io/${dev ? " * blob: ws:" : ""}; upgrade-insecure-requests; base-uri 'self'; default-src https: https://www.josephojo.com 'self';`)
+      meta(http-equiv='Content-Security-Policy' content=`default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://www.josephojo.com https://res.cloudinary.com/${cloud_name}/; 
+    script-src https://polyfill.io/ https://cdnjs.cloudflare.com/ 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'none' ${dev ? " * blob: ws:" : ""}; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/${cloud_name}/;`)
 
     meta(name='robots' content='all')
     meta(name='title' content=page.title)
@@ -65,11 +65,11 @@ html(lang="en")
     meta(name='msapplication-TileColor', content='#4500ff')
     meta(name='msapplication-TileImage', content='/ms-icon-144x144.png')
 
-    link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
-    link(rel="prefetch" href="/fonts/varela-round--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="prefetch" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="prefetch" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="prefetch" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="prefetch" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="prefetch" href="/fonts/varela-round--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
 
     link(rel='stylesheet' href='./css/app.min.css' inline async)
 
