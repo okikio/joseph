@@ -34,7 +34,7 @@ html(lang="en")
 
     link(rel='preconnect' href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
     //- link(rel='preconnect' href='https://fonts.gstatic.com/' crossorigin)
-    link(rel='preconnect' href='https://polyfill.io/' crossorigin)
+    //- link(rel='preconnect' href='https://polyfill.io/' crossorigin)
 
     link(rel='apple-touch-icon', sizes='57x57', href='/apple-icon-57x57.png')
     link(rel='apple-touch-icon', sizes='60x60', href='/apple-icon-60x60.png')
@@ -113,6 +113,7 @@ html(lang="en")
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
         script.setAttribute("async", "");
+        script.setAttribute("crossorigin", "");
         script.type = 'text/javascript';
         script.onload = fn;
         script.onreadystatechange = function () {
@@ -122,7 +123,8 @@ html(lang="en")
         head.appendChild(script);
       };
 
-      if (/msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) || !check()) {
+      if (/msie|trident|edge/g.test(window.navigator.userAgent.toLowerCase()) || !check()) {
+        _require("https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now");
         _require("https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js");
         _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.min.js");
         _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.ielte7.min.js");
@@ -234,7 +236,6 @@ html(lang="en")
               h1.style-white.style-bold.layer-title.style-uppercase.layout-margin-dull-vert-top Coming SOON
               h5.style-white.style-line-height.style-capital.layer-content-detail This website is currently in development. We are working day and night to have it in tip top shape.
 
-    script(src='https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now' crossorigin async)
     script(src=`${debug ? './js/app.modern.min.js' : './js/app.vendor.min.js'}` inline async)
     if !debug
       script(src=`./js/store.min.js` inline async)
