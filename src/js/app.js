@@ -19,12 +19,12 @@ try {
 
     // touchstart
     on(_backUp, "click touchstart", () => {
-        scrollTo("0px", "2500ms");
+        scrollTo("0px", "2000ms");
     });
 
     // touchstart
     on(_scrolldown, "click touchstart", () => {
-        scrollTo(height(_hero) + _focusPt, "700ms");
+        scrollTo(height(_hero) + _focusPt, "1500ms");
     });
 
     let _images = [];
