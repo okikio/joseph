@@ -269,7 +269,7 @@ module.exports = {
                                                 col([
                                                     _class([ _col("2"), padding("bottom-small") ]),
                                                     values([
-                                                        _content(`03/03`, [ _style("bold"), font("24") ])
+                                                        _content(`03/03`, [_style("bold"), font("24", "weight-bold") ])
                                                     ])
                                                 ]),
 
@@ -278,7 +278,7 @@ module.exports = {
                                                     values([
                                                         _content(`2018`, [
                                                             _style("line-height-double", "bold"),
-                                                            _layout("block"), font("24")
+                                                            _layout("block"), font("24", "weight-bold")
                                                         ]),
                                                         _content(`E-commerse`, [
                                                             _style("line-height-double"),
@@ -321,7 +321,7 @@ module.exports = {
                         values([
                             _header([
                                 title(""),
-                                _class([ _layout("vert"), _style("bold-font", "500"), "h2" ]),
+                                _class([ _layout("vert"), _style("bold-font", "600"), "h2" ]),
                                 values([
                                     `Got your attention.`, ` `,
                                     _content(`Good!`, [ color("primary") ])
@@ -340,7 +340,7 @@ module.exports = {
                         values([
                             _header([
                                 title(""),
-                                _class([ _layout("vert"), _style("bold-font", "500"), "h2", color("white") ]),
+                                _class([ _layout("vert"), _style("bold-font", "600"), "h2", color("white") ]),
                                 values([
                                     `Got your attention.`, ` `,
                                     _content(`Good!`, [ color("tertiary-dark") ])
@@ -359,7 +359,7 @@ module.exports = {
                         values([
                             _header([
                                 title(""),
-                                _class([ _layout("vert"), _style("bold-font", "500"), "h2", color("dark") ]),
+                                _class([ _layout("vert"), _style("bold-font", "600"), "h2", color("dark") ]),
                                 values([
                                     `Got your attention.`, ` `,
                                     _content(`Good!`, [ color("secondary-dark") ])
@@ -387,7 +387,7 @@ module.exports = {
                                                 _class([ _col("6"), padding("bottom-small", "right-large") ]),
                                                 values([
                                                     _content(`Breakthrough<br>Limits!`, [
-                                                        _style("bold", "line-height"),
+                                                        _style("bold", "line-height", "600"),
                                                         "h3", color("primary")
                                                     ])
                                                 ])
@@ -514,7 +514,7 @@ module.exports = {
                                     _main([
                                         _class([ _style("center"), padding("vert") ]),
                                         values([
-                                            _content(`NASA Rocket Ship`, [ "h1", _style("bold", "tertiary") ]),
+                                            _content(`NASA Rocket Ship`, [ "h1", _style("bold", "tertiary", "500") ]),
                                         ])
                                     ])
 

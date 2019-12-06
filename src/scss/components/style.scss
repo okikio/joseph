@@ -27,9 +27,9 @@
 
          @for $weight from 1 through 9 {
             &-#{$weight}00 {
-               font-weight: #{$weight}00;
+               font-weight: #{$weight + "00"};
 
-                @include deviceList(font-weight, #{$weight}00);
+                @include deviceList(font-weight, #{$weight + "00"});
             }
          }
 

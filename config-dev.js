@@ -470,7 +470,7 @@ module.exports = {
                                                         "class": "layout-col-2 layout-padding-bottom-small",
                                                         "values": [{
                                                             "content": "03/03",
-                                                            "class": "style-bold style-font-24"
+                                                            "class": "style-bold style-font-24 style-font-weight-bold"
                                                         }]
                                                     }
                                                 }, {
@@ -478,7 +478,7 @@ module.exports = {
                                                         "class": "layout-col-3 layout-padding-bottom",
                                                         "values": [{
                                                             "content": "2018",
-                                                            "class": "style-line-height-double style-bold layout-block style-font-24"
+                                                            "class": "style-line-height-double style-bold layout-block style-font-24 style-font-weight-bold"
                                                         }, {
                                                             "content": "E-commerse",
                                                             "class": "style-line-height-double layout-block style-font-18"
@@ -511,7 +511,7 @@ module.exports = {
                             "values": [{
                                 "section": {
                                     "title": "",
-                                    "class": "layout-vert style-bold-font style-500 h2",
+                                    "class": "layout-vert style-bold-font style-600 h2",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
                                         "class": "style-color-primary"
@@ -529,7 +529,7 @@ module.exports = {
                             "values": [{
                                 "section": {
                                     "title": "",
-                                    "class": "layout-vert style-bold-font style-500 h2 style-color-white",
+                                    "class": "layout-vert style-bold-font style-600 h2 style-color-white",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
                                         "class": "style-color-tertiary-dark"
@@ -547,7 +547,7 @@ module.exports = {
                             "values": [{
                                 "section": {
                                     "title": "",
-                                    "class": "layout-vert style-bold-font style-500 h2 style-color-dark",
+                                    "class": "layout-vert style-bold-font style-600 h2 style-color-dark",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
                                         "class": "style-color-secondary-dark"
@@ -571,7 +571,7 @@ module.exports = {
                                                     "class": "layout-col-6 layout-padding-bottom-small layout-padding-right-large",
                                                     "values": [{
                                                         "content": "Breakthrough<br>Limits!",
-                                                        "class": "style-bold style-line-height h3 style-color-primary"
+                                                        "class": "style-bold style-line-height style-600 h3 style-color-primary"
                                                     }]
                                                 }
                                             }, {
@@ -694,7 +694,7 @@ module.exports = {
                                             "class": "style-center layout-padding-vert",
                                             "values": [{
                                                 "content": "NASA Rocket Ship",
-                                                "class": "h1 style-bold style-tertiary"
+                                                "class": "h1 style-bold style-tertiary style-500"
                                             }],
                                             "type": "main"
                                         }

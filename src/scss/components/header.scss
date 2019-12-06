@@ -87,6 +87,7 @@
             line-height: $height;
             padding-left: $size;
             position: relative;
+            font-weight: 600;
             font-size: 17px;
 
             &-line {
@@ -120,7 +121,7 @@
             text-decoration: none;
             line-height: $height;
             letter-spacing: 1px;
-            font-weight: 300;
+            font-weight: 600;
             padding: 0 28px;
             font-size: 14px;
             color: $black;
