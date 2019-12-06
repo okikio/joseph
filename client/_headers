@@ -17,15 +17,15 @@
 /fonts/*.woff2
   Cache-Control: public, immutable, max-age=31536000
   Access-Control-Allow-Origin: *
-  Content-Type: application/font-woff
+  Content-Type: application/font-woff2
 
 /fonts/*.woff
   Cache-Control: public, immutable, max-age=31536000
   Access-Control-Allow-Origin: *
-  Content-Type: application/font-woff2
+  Content-Type: application/font-woff
 
 /*.html
-  Cache-Control: public, max-age=315360
+  Cache-Control: public, max-age=360
   Content-Type: text/html; charset=utf-8
 
 /*.css
