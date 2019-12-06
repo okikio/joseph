@@ -24,7 +24,7 @@ try {
 
     // touchstart
     on(_scrolldown, "click touchstart", () => {
-        scrollTo(height(_hero) + _focusPt, "1500ms");
+        scrollTo(height(_hero) + _focusPt, "1000ms");
     });
 
     let _images = [];
