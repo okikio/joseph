@@ -14,13 +14,15 @@
   Link: </fonts/roboto--regular_latin.woff2> rel=preload as=font type=font/woff2 crossorigin
   Link: </fonts/varela-round--regular_latin.woff2> rel=preload as=font type=font/woff2 crossorigin
 
-/*.woff2
+/fonts/*.woff2
   Cache-Control: public, immutable, max-age=31536000
-  Content-Type: font/woff2; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Content-Type: application/font-woff
 
-/*.woff
+/fonts/*.woff
   Cache-Control: public, immutable, max-age=31536000
-  Content-Type: font/woff; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Content-Type: application/font-woff2
 
 /*.html
   Cache-Control: public, max-age=315360
