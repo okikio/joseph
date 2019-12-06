@@ -51,7 +51,7 @@ try {
             let _placeholder_img = find($img, ".placeholder-img");
             if (_is.def(_core_img)) {
                 if (_core_img.complete) {
-                    addClass(_placeholder_img, "core-img-show");
+                    addClass(load_img, "core-img-show");
                 } else {
                     on(_core_img, "load", function () {
                         addClass(load_img, "core-img-show");
