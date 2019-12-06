@@ -109,7 +109,7 @@ img {
 }
 
 .placeholder-img {
-    image-rendering: optimizeSpeed; 
+    image-rendering: smooth; 
     transition: opacity .9s ease;
     will-change: transform;
     transform: scale(1.2);
