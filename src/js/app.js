@@ -19,7 +19,7 @@ try {
 
     // touchstart
     on(_backUp, "click touchstart", () => {
-        scrollTo("0px", "2000ms");
+        scrollTo("0px", "1500ms");
     });
 
     // touchstart
@@ -30,7 +30,6 @@ try {
     let _images = [];
     each(_layer, $layer => {
         let header = get(find($layer, ".layer-header"), 0);
-        // let footer = get(find($layer, ".layer-footer"), 0);
         let main = get(find($layer, ".layer-main"), 0);
         let layer_image = find($layer, ".layer-image");
 
@@ -40,7 +39,6 @@ try {
             let clientRect = $img.getBoundingClientRect();
             _images.push({
                 header: i === 0 ? header : null,
-                // footer: i === 0 ? footer : null,
                 main: i === 0 ? main : null,
                 overlay, load_img,
                 target: $img,
@@ -73,7 +71,7 @@ try {
         if (width(window) > 500) {
             _images.forEach(data => {
                 if (hasClass(data.target, "effect-parallax")) {
-                    let { clientRect, load_img, overlay, header, main } = data; // , footer 
+                    let { clientRect, load_img, overlay, header, main } = data;
                     let { top, height } = clientRect;
                     let dist = _scrollTop - top + 60;
 
