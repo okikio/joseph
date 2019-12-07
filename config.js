@@ -1,5 +1,5 @@
 let { attr, section, _img, background, _tile, _col, _style, _layer, _layout, _header, _main, values, title, row, page, padding, margin, _link, layout, layer, _hero, font, _content, color, col, _class } = require('./containers');
-// let cityImg = "/assets/city";
+let cityImg = "/assets/city";
 let carImg = "/assets/closeup-stones";
 let blueSkyImg = "/assets/blue-sky";
 let flowerImg = "/assets/white-flower";
@@ -427,7 +427,9 @@ module.exports = {
                                             col([
                                                 _class([ _col("9"), padding("small") ]),
                                                 values([
-                                                    _tile([ "", "",
+                                                    _tile([
+                                                        "Google Designs", "",
+                                                        _img(cityImg, "City Alt", [ _class("effect-parallax") ]),
                                                         _class([
                                                             _layer("box", "surface"), // , "shadow--1"
                                                             _layout("block")
@@ -446,7 +448,7 @@ module.exports = {
                                                 values([
                                                     _tile([
                                                         "Google Designs", "",
-                                                        _img(blueSkyImg, "City Alt"),
+                                                        _img(blueSkyImg, "Blue sky Alt", [ _class("effect-parallax") ]),
                                                         _class([
                                                             _layer("box", "surface"), // , "shadow--1"
                                                             _layout("block")
