@@ -45,19 +45,25 @@
             background: darken(#53507c, 20%);
             position: absolute;
             display: block;
-            opacity: 0.35;
+            opacity: 0.15;
             height: 100%;
             width: 100%;
             z-index: 5;
             left: 0;
             top: 0;
+            
+            @at-root {
+                .effect-parallax .layer-image-overlay {
+                    opacity: 0.35 !important;
+                }
+            }
         }
 
         &-blur {
             filter: blur(3px);
         }
     }
-
+    
     &-shadow,
     %shadow {
         box-shadow: 0 0px 35px 5px change-color($primary-dark, $alpha: 0.23);// rgba(0, 0, 40, 0.23);
