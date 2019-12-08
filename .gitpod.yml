@@ -4,11 +4,13 @@ image:
 # List the ports you want to expose and what to do when they are served. See https://www.gitpod.io/docs/43_config_ports/
 ports:
 - port: 3000
+  onOpen: open-preview
+  port: 3001
+  onOpen: ignore
 
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/44_config_start_tasks/
 tasks:
-  - before: nvm i 12 && nvm alias default 12 && nvm use 12 && npm i yarn gulp eslint -g
-    init: yarn install && yarn upgrade # runs during prebuild
+  - init: yarn install && yarn upgrade # runs during prebuild
     command: yarn watch
 vscode:
   extensions:
