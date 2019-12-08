@@ -430,7 +430,7 @@ module.exports = {
                                                 values([
                                                     _tile([
                                                         "Google Designs", "",
-                                                        _img(cityImg, "City Alt", [ _class("") ]),
+                                                        _img(cityImg, "City Alt", [_class("effect-parallax") ]),
                                                         _class([
                                                             _layer("box", "surface"), // , "shadow--1"
                                                             _layout("block")

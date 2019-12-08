@@ -19,7 +19,7 @@ try {
 
     // touchstart
     on(_backUp, "click touchstart", () => {
-        scrollTo("0px", "1500ms");
+        scrollTo("0px", "1400ms");
     });
 
     // touchstart
@@ -85,10 +85,10 @@ try {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
 
-                        let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
-                        let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
-
                         if (isHero) {
+                            let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
+                            let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
+
                             header && style(header, {
                                 transform: `translateY(${translate}px)`,
                                 opacity

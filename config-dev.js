@@ -614,7 +614,7 @@ module.exports = {
                                                             "img": {
                                                                 "src": "/assets/city",
                                                                 "alt": "City Alt",
-                                                                "class": ""
+                                                                "class": "effect-parallax"
                                                             },
                                                             "class": "layer-box layer-surface layout-block"
                                                         }
