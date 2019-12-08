@@ -609,8 +609,13 @@ module.exports = {
                                                     "class": "layout-col-9 layout-padding-small",
                                                     "values": [{
                                                         "tile": {
-                                                            "title": "",
+                                                            "title": "Google Designs",
                                                             "content": "",
+                                                            "img": {
+                                                                "src": "/assets/city",
+                                                                "alt": "City Alt",
+                                                                "class": ""
+                                                            },
                                                             "class": "layer-box layer-surface layout-block"
                                                         }
                                                     }]
@@ -629,7 +634,8 @@ module.exports = {
                                                             "content": "",
                                                             "img": {
                                                                 "src": "/assets/blue-sky",
-                                                                "alt": "City Alt"
+                                                                "alt": "Blue sky Alt",
+                                                                "class": ""
                                                             },
                                                             "class": "layer-box layer-surface layout-block"
                                                         }
@@ -663,7 +669,12 @@ module.exports = {
                                                         "tile": {
                                                             "title": "",
                                                             "content": "",
-                                                            "class": "layer-box layer-box-flat layer-box-tall layer-surface layout-block"
+                                                            "img": {
+                                                                "src": "/assets/footsteps-sand",
+                                                                "alt": "Foot Step Alt",
+                                                                "class": "effect-parallax"
+                                                            },
+                                                            "class": "layer-box layer-box-flat layer-box-mid layer-surface layout-block"
                                                         }
                                                     }]
                                                 }
@@ -677,7 +688,7 @@ module.exports = {
                     }
                 }, {
                     "layer": {
-                        "class": "layer-color-black",
+                        "class": "layer-color-dark",
                         "layout": {
                             "class": "layout-contain layout-padding-horz layout-padding-top",
                             "values": [{
@@ -702,7 +713,7 @@ module.exports = {
                                 }
                             }, {
                                 "section": {
-                                    "class": "layer-box layer-box-flat layer-surface layer-shadow layout-block"
+                                    "class": "layer-box layer-box-flat layer-tertiary-dark layer-shadow--1 layout-block"
                                 }
                             }]
                         }

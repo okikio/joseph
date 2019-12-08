@@ -1,5 +1,5 @@
 import { _is, _constrain, _map } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset } from "./components/dom";
 
 let _layer = ".layer";
 let _navbar = '.navbar';
@@ -24,7 +24,7 @@ try {
 
     // touchstart
     on(_scrolldown, "click touchstart", () => {
-        scrollTo(height(_hero) + _focusPt, "1000ms");
+        scrollTo(height(_hero) + _focusPt, "800ms");
     });
 
     let _images = [];
@@ -33,20 +33,22 @@ try {
         let main = get(find($layer, ".layer-main"), 0);
         let layer_image = find($layer, ".layer-image");
 
-        each(layer_image, ($img, i) => {
+        each(layer_image, $img => {
             let load_img = get(find($img, ".load-img"), 0);
             let overlay = get(find($img, ".layer-image-overlay"), 0);
-            let clientRect = $img.getBoundingClientRect();
+            let isHero = hasClass($img, "layer-hero-id");
+            let clientRect = offset($img);
+            
             _images.push({
-                header: i === 0 ? header : null,
-                main: i === 0 ? main : null,
+                header: isHero ? header : null,
+                main: isHero ? main : null,
                 overlay, load_img,
                 target: $img,
-                clientRect
+                clientRect,
+                isHero,
             });
 
             let _core_img = get(find($img, ".core-img"), 0);
-            let _placeholder_img = find($img, ".placeholder-img");
             if (_is.def(_core_img)) {
                 if (_core_img.complete) {
                     addClass(load_img, "core-img-show");
@@ -71,7 +73,7 @@ try {
         if (width(window) > 500) {
             _images.forEach(data => {
                 if (hasClass(data.target, "effect-parallax")) {
-                    let { clientRect, load_img, overlay, header, main } = data;
+                    let { clientRect, load_img, overlay, header, main, isHero } = data;
                     let { top, height } = clientRect;
                     let dist = _scrollTop - top + 60;
 
@@ -86,15 +88,13 @@ try {
                         let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
                         let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
 
-                        if (header) {
-                            style(header, {
+                        if (isHero) {
+                            header && style(header, {
                                 transform: `translateY(${translate}px)`,
                                 opacity
                             });
-                        }
-
-                        if (main) {
-                            style(main, {
+                            
+                            main && style(main, {
                                 transform: `translateY(${translate}px)`,
                                 opacity
                             });

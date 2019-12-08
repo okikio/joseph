@@ -509,8 +509,8 @@ export let offset = (_el, coords) => {
 
     obj = get(_el, 0).getBoundingClientRect();
     return {
-        left: obj.left + window.pageXOffset,
-        top: obj.top + window.pageYOffset,
+        left: obj.left + (window.pageXOffset || document.documentElement.scrollLeft),
+        top: obj.top + (window.pageYOffset || document.documentElement.scrollTop),
         width: Math.round(obj.width),
         height: Math.round(obj.height)
     };

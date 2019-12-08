@@ -273,7 +273,14 @@
         }
 
         &-flat {
-            border-radius: 0 !important;
+            &,
+            & .layer-image {
+                border-radius: 0 !important;
+            }
+        }
+
+        &-mid {
+            min-height: 600px;
         }
 
         &-tall {

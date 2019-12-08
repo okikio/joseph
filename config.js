@@ -1,8 +1,9 @@
 let { attr, section, _img, background, _tile, _col, _style, _layer, _layout, _header, _main, values, title, row, page, padding, margin, _link, layout, layer, _hero, font, _content, color, col, _class } = require('./containers');
 let cityImg = "/assets/city";
-let carImg = "/assets/closeup-stones";
 let blueSkyImg = "/assets/blue-sky";
+let carImg = "/assets/closeup-stones";
 let flowerImg = "/assets/white-flower";
+let footStepImg = "/assets/footsteps-sand";
 
 let _name = attr("name", "index");
 let noFooter = attr("noFooter", true);
@@ -481,8 +482,9 @@ module.exports = {
                                                 _class([ _col("12"), padding("dull") ]),
                                                 values([
                                                     _tile([ "", "",
+                                                        _img(footStepImg, "Foot Step Alt", [_class("effect-parallax")]),
                                                         _class([
-                                                            _layer("box", "box-flat", "box-tall", "surface"), // , "shadow--2"
+                                                            _layer("box", "box-flat", "box-mid", "surface"), // , "shadow--2"
                                                             _layout("block")
                                                         ])
                                                     ])
@@ -502,7 +504,7 @@ module.exports = {
 
                 // Next Page layer
                 layer([
-                    _class([ background("black") ]),
+                    _class([ background("dark") ]),
                     layout([
                         _class([ _layout("contain"), padding("horz", "top") ]),
                         values([
@@ -524,7 +526,7 @@ module.exports = {
                             ]),
                             section([
                                 _class([
-                                    _layer("box", "box-flat", "surface", "shadow"),
+                                    _layer("box", "box-flat", "tertiary-dark", "shadow--1"),
                                     _layout("block")
                                 ])
                             ])

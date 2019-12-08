@@ -6,7 +6,7 @@ mixin hero(value, banner)
   - let _title = _value.title;
   - let _image = _value.img;
 
-  section.layer
+  section.layer.layer-hero-id
     article.layout-padding-bottom.layout-padding-dull-top(class=`${!banner ? "layout-contain-larger layout-padding-horz-small" : ''}`)
       .layer-hero(class=`${!banner ? "header-top-spot" : 'banner-mode'}`)
         +image(_image)
