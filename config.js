@@ -482,9 +482,9 @@ module.exports = {
                                                 _class([ _col("12"), padding("dull") ]),
                                                 values([
                                                     _tile([ "", "",
-                                                        _img(footStepImg, "Foot Step Alt", [_class("effect-parallax")]),
+                                                        _img(footStepImg, "Foot Step Alt", [_class("effect-parallax", "layer-box-tall")]),
                                                         _class([
-                                                            _layer("box", "box-flat", "box-mid", "surface"), // , "shadow--2"
+                                                            _layer("box", "box-flat", "surface"), // , "shadow--2"
                                                             _layout("block")
                                                         ])
                                                     ])

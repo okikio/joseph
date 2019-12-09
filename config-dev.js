@@ -672,9 +672,9 @@ module.exports = {
                                                             "img": {
                                                                 "src": "/assets/footsteps-sand",
                                                                 "alt": "Foot Step Alt",
-                                                                "class": "effect-parallax"
+                                                                "class": "effect-parallax layer-box-tall"
                                                             },
-                                                            "class": "layer-box layer-box-flat layer-box-mid layer-surface layout-block"
+                                                            "class": "layer-box layer-box-flat layer-surface layout-block"
                                                         }
                                                     }]
                                                 }
