@@ -280,11 +280,11 @@
         }
 
         &-mid {
-            min-height: 600px;
+            max-height: 600px;
         }
 
         &-tall {
-            min-height: 800px;
+            max-height: 800px;
         }
     }
 
