@@ -1,4 +1,4 @@
-import { _is, _constrain, _map } from "./components/util";
+import { _is, _constrain, _map, _log } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset } from "./components/dom";
 
 let _layer = ".layer";
@@ -32,11 +32,11 @@ try {
         let header = get(find($layer, ".layer-header"), 0);
         let main = get(find($layer, ".layer-main"), 0);
         let layer_image = find($layer, ".layer-image");
-
+        let isHero = hasClass($layer, "layer-hero-id");
+        
         each(layer_image, $img => {
             let load_img = get(find($img, ".load-img"), 0);
             let overlay = get(find($img, ".layer-image-overlay"), 0);
-            let isHero = hasClass($img, "layer-hero-id");
             let clientRect = offset($img);
             
             _images.push({
@@ -45,7 +45,7 @@ try {
                 overlay, load_img,
                 target: $img,
                 clientRect,
-                isHero,
+                isHero
             });
 
             let _core_img = get(find($img, ".core-img"), 0);
@@ -84,7 +84,8 @@ try {
                         style(load_img, {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
-
+                        
+                        _log(isHero);
                         if (isHero) {
                             let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
                             let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
