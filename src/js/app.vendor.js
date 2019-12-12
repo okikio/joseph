@@ -17,7 +17,7 @@ try {
         return true;
     };
 
-    let isModern = check();
+    let isModern = window.isModern = check();
     let src = _src(`app${isModern ? ".modern" : ""}`);
     if (isModern) {
         fetch(src, {

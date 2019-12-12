@@ -92,5 +92,6 @@ npm-debug.log
 push-git*
 .cache
 .c9
+core.git.*
 core.node.*
 /public

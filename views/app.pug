@@ -34,6 +34,7 @@ html(lang="en")
     title= page.title
 
     link(rel='preconnect' href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
+    link(rel='preconnect' href='https://www.josephojo.com/' crossorigin)
     //- link(rel='preconnect' href='https://fonts.gstatic.com/' crossorigin)
     //- link(rel='preconnect' href='https://polyfill.io/' crossorigin)
 
@@ -69,7 +70,7 @@ html(lang="en")
     link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
     link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
     link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
-    //- link(rel="prefetch" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
     //- link(rel="prefetch" href="./js/app.modern.min.js" as="script" type="text/javascript" crossorigin)
 
     link(rel='stylesheet' href='./css/app.min.css' inline async)
@@ -125,7 +126,7 @@ html(lang="en")
       };
 
       if (/msie|trident|edge/g.test(window.navigator.userAgent.toLowerCase()) || !check()) {
-        _require("https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2CWebAnimations%2Cperformance.now");
+        _require("https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2Cperformance.now");
         _require("https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js");
         _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.min.js");
         _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.ielte7.min.js");

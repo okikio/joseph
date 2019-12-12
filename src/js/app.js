@@ -1,5 +1,5 @@
 import { _is, _constrain, _map, _log } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 let _layer = ".layer";
 let _navbar = '.navbar';
@@ -28,6 +28,10 @@ try {
     });
 
     let _images = [];
+    let onload = $load_img => function () {
+        addClass($load_img, "core-img-show");
+    };
+
     each(_layer, $layer => {
         let header = get(find($layer, ".layer-header"), 0);
         let main = get(find($layer, ".layer-main"), 0);
@@ -51,11 +55,15 @@ try {
             let _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
                 if (_core_img.complete) {
-                    addClass(load_img, "core-img-show");
+                    onload(load_img) ();
                 } else {
-                    on(_core_img, "load", function () {
-                        addClass(load_img, "core-img-show");
-                    }, false);
+                    if (!window.isModern) {
+                        let img = new Image(_core_img);
+                        img.src = attr(_core_img, "src");
+                        img.onload = onload(load_img);
+                    } else {
+                        on(_core_img, "load", onload(load_img));
+                    }
                 }
             }
         });
