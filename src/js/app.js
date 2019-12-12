@@ -54,7 +54,7 @@ try {
 
             let _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
-                if (_core_img.complete) {
+                if (_core_img.complete && _core_img.naturalWidth !== 0) {
                     onload(load_img) ();
                 } else {
                     if (!window.isModern) {

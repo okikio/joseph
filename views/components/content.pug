@@ -12,13 +12,14 @@ mixin image(value)
             source(media=`(max-width: ${n}00px)` srcset!=`${_src}.webp?w=${n + 1}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00w` type='image/webp')
             source(media=`(max-width: ${n}00px)` srcset!=`${_src}.jpg?w=${n + 1}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00w` type='image/jpeg')
 
-          source(media='(min-width: 1600px)' srcset!=`${_src}.webp` sizes="100vmax" type='image/webp')
-          img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" sizes="(max-width: 500px) 600w,(max-width: 700px) 800w,(max-width: 900px) 1000w, 100vmax" width="100vmax")
+          source(media='(min-width: 1600px)' srcset!=`${_src}.webp?quality=100` sizes="100vw" type='image/webp')
+          source(media='(min-width: 1600px)' srcset!=`${_src}.jpg?quality=100` sizes="100vw" type='image/jpeg')
+          img.core-img(src!=`${_src}.jpg?quality=100` alt=_alt loading="lazy" sizes="(max-width: 500px) 500w,(max-width: 700px) 700w,(max-width: 900px) 900w, 100vw" width="100vw")
         picture
           //- source(srcset!=`${_src}.webp?w=70&quality=100&effect=blur:150` sizes="100vw" type='image/webp' inline="inline")
-          img.placeholder-img(src!=`${_src}.jpg?w=70&quality=100&effect=blur:150` sizes="70w" alt=_alt  loading="auto" width="70w" inline)
+          img.placeholder-img(src!=`${_src}.jpg?w=70&quality=80&effect=blur:150` sizes="70w" alt=_alt  loading="auto" width="70w" inline)
         noscript Javascript is necesscary for this sites awesome experience.
-          img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" width="100vw")
+          img.no-script-img(src!=`${_src}.jpg?quality=100` alt=_alt loading="lazy" width="100vw")
     .layer-image-overlay
 
 
