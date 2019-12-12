@@ -164,9 +164,10 @@ let posthtmlOpts = [
     require('posthtml-link-noreferrer')({
       attr: ['noopener', 'noreferrer']
     }),
-    dev ? () => {} : require('posthtml-inline-assets')({
+    dev ? () => { } : require('posthtml-inline-assets')({
         transforms: { image: false }
-    })
+    }),
+    dev ? () => { } : require("posthtml-minify-classnames") ()
 ];
 
 let minifyOpts = {
