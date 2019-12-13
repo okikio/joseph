@@ -1,6 +1,6 @@
 FROM gitpod/workspace-full
 ## bash -c ". .nvm/nvm.sh \ && 
-USER root
+USER gitpod
 RUN nvm install 12 \
     && nvm alias default 12 \
     && nvm use 12 \

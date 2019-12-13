@@ -12,7 +12,6 @@ ports:
 tasks:
   - command: yarn install && yarn upgrade # runs during prebuild
   - command: yarn watch
-  
 vscode:
   extensions:
     - michelemelluso.code-beautifier@2.3.3:aRVPC/UxkGF1U5lMncPQNw==

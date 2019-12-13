@@ -82,7 +82,7 @@ let posthtmlOpts = [
             let width = query.get("w") || 'auto';
             let crop = query.get("crop") || imageURLConfig.crop;
             let effect = query.get("effect") || imageURLConfig.effect;
-            let quality = query.get("quality") || imageURLConfig.quality;
+            let quality = query.get("quality");
             let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect }, 
                     /svg/g.test(url) ? { fetch_format: null } : {});
             node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
@@ -167,7 +167,7 @@ let posthtmlOpts = [
     dev ? () => { } : require('posthtml-inline-assets')({
         transforms: { image: false }
     }),
-    dev ? () => { } : require("posthtml-minify-classnames") ()
+    // dev ? () => { } : require("posthtml-minify-classnames") ()
 ];
 
 let minifyOpts = {

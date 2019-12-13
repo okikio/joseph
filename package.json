@@ -66,7 +66,6 @@
     "posthtml-inline-assets": "^3.0.0",
     "posthtml-link-noreferrer": "^1.0.4",
     "posthtml-match-helper": "^1.0.1",
-    "posthtml-minify-classnames": "^0.2.2",
     "posthtml-textr": "^1.0.5",
     "rollup": "^1.21.4",
     "rollup-plugin-babel": "^4.3.3",
