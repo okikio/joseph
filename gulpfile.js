@@ -391,7 +391,12 @@ task("client", () =>
     ])
 );
 
-task("gulpfile:watch", () => _exec("gulp"));
+task("gulp:reload", () => {
+    _execSeries("gulp", "gulp watch");
+    console.log("CoAol aabb yeah");
+    process.exit();
+});
+
 task("git:push", () => {
     let commit = process.argv[3] || 'Upgrade';
     return _execSeries(
@@ -435,14 +440,14 @@ task('other', parallel("client", series("config", "html", "css", "inline")));
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['config.js', 'containers.js'], watchDelay, series('gulpfile:watch', 'reload'));
-    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulpfile:watch', 'reload'));
+    watch(['config.js', 'containers.js'], watchDelay, series('gulp:reload', 'reload'));
+    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulp:reload', 'reload'));
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));
     watch('src/**/*.js', watchDelay, series('js', 'inline', 'reload'));
     watch(['client/**/*'], watchDelay, series('client', 'reload'));
-
+    // IT works 
     // watch('src/**/app.vendor.js', watchDelay, series('js', 'inline', 'reload'));
     // watch(['public/**/*', '!public/css/*.css', '!public/**/*.html', '!public/js/*.js'])
     //     .on('change', browserSync.reload);
