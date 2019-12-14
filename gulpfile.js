@@ -98,7 +98,7 @@ let posthtmlOpts = [
     async tree => {
         let warnings, promises = [];
         tree.match({ tag: 'img' }, node => {
-            if (promises.length >= 2) return node;
+            if (promises.length >= 2) return node; // Don't inline everything
             if (node.attrs && node.attrs.src && "inline" in node.attrs) {
                 const _src = node.attrs.src;
                 if (!_src.includes("data:image/")) {
