@@ -158,6 +158,10 @@
                 }
             }
 
+            &:active {
+                color: $primary;
+            }
+
             &-focus {
                 color: $primary-dark;
 

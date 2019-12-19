@@ -393,7 +393,6 @@ task("client", () =>
 
 task("gulp:reload", () => {
     _execSeries("gulp", "gulp watch");
-    console.log("CoAol aabb yeah");
     process.exit();
 });
 

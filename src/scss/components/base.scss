@@ -104,6 +104,35 @@ img {
     width: 100%;
 }
 
+a.skip-main {
+    position: absolute;
+    overflow: hidden;
+    z-index: -999;
+    left: -999px;
+    height: 1px;
+    width: 1px;
+    top: auto;
+
+    &:focus,
+    &:active {
+        background-color: $dark;
+        border: 2px solid $tertiary;
+        border-radius: 8px;
+        text-align: center;
+        margin: 10px 35%;
+        font-size: 1.2em;
+        color: yellow;
+        overflow: auto;
+        height: auto;
+        padding: 5px;
+        z-index: 999;
+        width: 30%;
+        left: auto;
+        top: auto;
+    }
+
+}
+
 .load-img {
     background: $dark;
 }

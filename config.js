@@ -37,7 +37,7 @@ module.exports = {
         "quality": 30,
         "dpr": "auto"
     },
-    "websiteURL": "https://app-web.netlify.com/",
+    "websiteURL": "https://www.josephojo.com/",
     "pages": {
         "offline": page([
             _name("offline"),
@@ -54,6 +54,37 @@ module.exports = {
                                 _class([_style("center")]),
                                 values([
                                     `Psshhh, psshhh, you are cutting off, psshhh. You have disconnected from the internet. Reload the page or try again later.`,
+                                ])
+                            ])
+                        ])
+                    ])
+                ]),
+                // End Intro Layer
+
+                // Footer
+                newFooter()
+            ]),
+            noFooter()
+        ]),
+
+        "sitemap": page([
+            _name("Sitemap"),
+            title("Now lets find you a destination!"),
+            values([
+                // Intro layer
+                layer([
+                    _class([padding("horz"), _layout("enlarge-vert"), "header-top-spot"]),
+                    layout([
+                        _class([_layout("contain-small")]),
+                        values([
+                            _header(title("The sitemap!")),
+                            _main([
+                                _class([_style("center")]),
+                                values([
+                                    _link("home", "/"), " - Homepage galor, its the begining of our little adventure. Do you want to go back?<br>",
+                                    _link("about", "/about"), " - The story of me, myself and I. Shall we then?<br>",
+                                    _link("projects", "/projects"), " - Hardwork and perseverance, hear all about it.<br>",
+                                    _link("contact", "/contact"), " - Call me maybe? How about that, why don't we create something amazing?<br>",
                                 ])
                             ])
                         ])

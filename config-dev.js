@@ -8,7 +8,7 @@ module.exports = {
         "quality": 30,
         "dpr": "auto"
     },
-    "websiteURL": "https://app-web.netlify.com/",
+    "websiteURL": "https://www.josephojo.com/",
     "pages": {
         "404": {
             "page": {
@@ -106,6 +106,81 @@ module.exports = {
                                 "section": {
                                     "class": "style-center",
                                     "values": ["Psshhh, psshhh, you are cutting off, psshhh. You have disconnected from the internet. Reload the page or try again later."],
+                                    "type": "main"
+                                }
+                            }]
+                        }
+                    }
+                }, {
+                    "layer": {
+                        "class": "footer",
+                        "layout": {
+                            "section": {
+                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
+                                "values": ["Made with ❤ by Okiki Ojo."]
+                            }
+                        }
+                    }
+                }],
+                "noFooter": true
+            }
+        },
+        "sitemap": {
+            "page": {
+                "title": "Now lets find you a destination!",
+                "tabs": {
+                    "values": [{
+                        "a": {
+                            "href": "/about.html",
+                            "content": "about"
+                        }
+                    }, {
+                        "a": {
+                            "href": "/projects.html",
+                            "content": "projects"
+                        }
+                    }, {
+                        "a": {
+                            "href": "/contact.html",
+                            "content": "contact"
+                        }
+                    }]
+                },
+                "name": "Sitemap",
+                "values": [{
+                    "layer": {
+                        "class": "layout-padding-horz layout-enlarge-vert header-top-spot",
+                        "layout": {
+                            "class": "layout-contain-small",
+                            "values": [{
+                                "section": {
+                                    "title": "The sitemap!",
+                                    "type": "header"
+                                }
+                            }, {
+                                "section": {
+                                    "class": "style-center",
+                                    "values": [{
+                                        "a": {
+                                            "href": "/index.html",
+                                            "content": "home"
+                                        }
+                                    }, " - Homepage galor, its the begining of our little adventure. Do you want to go back?<br>", {
+                                        "a": {
+                                            "href": "/about.html",
+                                            "content": "about"
+                                        }
+                                    }, " - The story of me, myself and I. Shall we then?<br>", {
+                                        "a": {
+                                            "href": "/projects.html",
+                                            "content": "projects"
+                                        }
+                                    }, " - Hardwork and perseverance, hear all about it.<br>", {
+                                        "a": {
+                                            "href": "/contact.html",
+                                            "content": "contact"
+                                        }
+                                    }, " - Call me maybe? How about that, why don't we create something amazing?<br>"],
                                     "type": "main"
                                 }
                             }]

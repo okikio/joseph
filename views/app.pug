@@ -59,7 +59,7 @@ html(lang="en")
     link(rel='icon', type='image/png', sizes='96x96', href='/favicon-96x96.png')
     link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
     link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
-    link(rel='icon', href='/favicon.ico', type='image/x-icon')
+    //- link(rel='icon', href='/favicon.ico', type='image/x-icon')
     link(rel='manifest', href='manifest.webmanifest')
     link(rel='home', href='https://www.josephojo.com/')
 
@@ -165,6 +165,7 @@ html(lang="en")
               | OnTech - Ontario Tech University
             a(href='https://www.linkedin.com/in/o-josephojo/' itemprop='url') linkedin 
     if true
+      a.skip-main(href="#main" tabindex="1") Skip to main content
       //- dev
       //- Navbar etc...
       +header(page)
@@ -185,7 +186,7 @@ html(lang="en")
                 - let section = sections.section;
                   +sectionView(section)
 
-      main.main
+      main#main.main(tabindex="-1")
         - let layerLists = page.values;
 
         //- Page Layers
