@@ -165,7 +165,7 @@ html(lang="en")
               | OnTech - Ontario Tech University
             a(href='https://www.linkedin.com/in/o-josephojo/' itemprop='url') linkedin 
     if true
-      a.skip-main(href="#main" tabindex="1") Skip to main content
+      a.skip-main(href="#main" tabindex="1" focus) Skip to main content
       //- dev
       //- Navbar etc...
       +header(page)
@@ -210,7 +210,7 @@ html(lang="en")
                     +layoutView(layout)
 
       .layer-action-center.layer-action-center-show
-        article
+        article.layer-action-group
           .layout-flex.layout-padding-horz
             section.layout-spacer
             section.layer-primary-dark.layer-shadow.layer-round

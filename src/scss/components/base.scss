@@ -105,7 +105,7 @@ img {
 }
 
 a.skip-main {
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     z-index: -999;
     left: -999px;
@@ -117,7 +117,7 @@ a.skip-main {
     &:active {
         background-color: $dark;
         border: 2px solid $tertiary;
-        border-radius: 8px;
+        border-radius: 6px;
         text-align: center;
         margin: 10px 35%;
         font-size: 1.2em;
