@@ -42,21 +42,40 @@ mixin basicSection(_section)
   - let _type = _section.type;
   - let _class = _section.class;
   - let _values = _section.values;
+  if _type
+    case _type
+      when "header"
+        +_header(_section)
 
-  case _type
-    when "header"
-      +_header(_section)
+      when "main"
+        +_main(_section)
 
-    when "main"
-      +_main(_section)
+      when "footer"
+        +_footer(_section)
 
-    when "footer"
-      +_footer(_section)
-
-    default
-      section(class=_class)
-        if Array.isArray(_values)
-          each _value in _values
+      default
+        section(class=_class)
+          if Array.isArray(_values)
+            each _value in _values
+              if _value && _value.section === "object"
+                - let _values = _value;
+                section(class=_class)
+                  if Array.isArray(_values)
+                    each _value in _values
+                      +content(_value)
+              else
+                +content(_value)
+  else
+    section(class=_class)
+      if Array.isArray(_values)
+        each _value in _values
+          if _value && _value.section === "object"
+            - let _values = _value;
+            section(class=_class)
+              if Array.isArray(_values)
+                each _value in _values
+                  +content(_value)
+          else
             +content(_value)
 
             

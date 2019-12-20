@@ -102,7 +102,6 @@ let tabs = component("tabs"); // Tabs component
 let tile = component("tile"); // Tile layer component
 let hero = component("hero"); // Hero layer component
 let layer = component("layer"); // The layer component has access to the various styles available
-let banner = component("banner"); // Banner layer component
 let layout = component("layout"); // The layout component has access to the various layouts available
 let section = component("section"); // The section component
 

@@ -62,11 +62,10 @@ module.exports = {
                 // End Intro Layer
 
                 // Footer
-                newFooter()
+                // newFooter()
             ]),
-            noFooter()
+            // noFooter()
         ]),
-
         "sitemap": page([
             _name("Sitemap"),
             title("Now lets find you a destination!"),
@@ -78,14 +77,16 @@ module.exports = {
                         _class([_layout("contain-small")]),
                         values([
                             _header(title("The sitemap!")),
-                            _main([
-                                _class([_style("center")]),
+                            section([
+                                _class([ "ul" ]),
                                 values([
-                                    _link("home", "/"), " - Homepage galor, its the begining of our little adventure. Do you want to go back?<br>",
-                                    _link("about", "/about"), " - The story of me, myself and I. Shall we then?<br>",
-                                    _link("projects", "/projects"), " - Hardwork and perseverance, hear all about it.<br>",
-                                    _link("contact", "/contact"), " - Call me maybe? How about that, why don't we create something amazing?<br>",
-                                ])
+                                    [_link("Home", "/"), " - Homepage galor, its the begining of our little adventure. Do you want to go back?<br>"],
+                                    [_link("About", "/about"), " - The story of me, myself and I. Shall we then?<br>"],
+                                    [_link("Projects", "/projects"), " - Hardwork and perseverance, hear all about it.<br>"],
+                                    [_link("Contact", "/contact"), " - Call me maybe? How about that, why don't we create something amazing?<br>"],
+                                ].map(val => 
+                                    section([ _class([ "li" ]), values(val) ])
+                                ))
                             ])
                         ])
                     ])
@@ -93,9 +94,9 @@ module.exports = {
                 // End Intro Layer
 
                 // Footer
-                newFooter()
+                // newFooter()
             ]),
-            noFooter()
+            // noFooter()
         ]),
         "404": page([
             _name("404"),
@@ -121,9 +122,9 @@ module.exports = {
                 // End Intro Layer
 
                 // Footer
-                newFooter()
+                // newFooter()
             ]),
-            noFooter()
+            // noFooter()
         ]),
         "contact": page([
             _name("contact"),
@@ -179,9 +180,9 @@ module.exports = {
                 // End Intro Layer
 
                 // Footer
-                newFooter()
+                // newFooter()
             ]),
-            noFooter()
+            // noFooter()
         ]),
         "projects": page([
             attr("banner", true) (),
@@ -215,9 +216,43 @@ module.exports = {
                 // End Intro Layer
 
                 // Footer
-                newFooter()
+                // newFooter()
+
+                // Next Page layer
+                layer([
+                    _class([background("dark")]),
+                    layout([
+                        _class([_layout("contain"), padding("horz", "top")]),
+                        values([
+                            section([
+                                _class(["h4", _layout("shorten")]),
+                                values([
+                                    _header([
+                                        title("Next"),
+                                        _class([color("white"), font("light", "thin"), _style("spaceout")])
+                                    ]),
+                                    _main([
+                                        _class([_style("center"), padding("vert")]),
+                                        values([
+                                            _content(`NASA Rocket Ship`, ["h1", _style("bold", "tertiary", "500")]),
+                                        ])
+                                    ])
+
+                                ])
+                            ]),
+                            section([
+                                _class([
+                                    _layer("box", "box-flat", "tertiary-dark", "shadow--1"),
+                                    _layout("block")
+                                ])
+                            ])
+
+                        ])
+                    ])
+                ]),
+                // End Next Page layer
             ]),
-            noFooter()
+            // noFooter()
         ]),
         "about": page([
             _name("about"),
@@ -250,9 +285,9 @@ module.exports = {
                 // End Intro Layer
 
                 // Footer
-                newFooter()
+                // newFooter()
             ]),
-            noFooter()
+            // noFooter()
         ]),
         "index": page([
             _name(),
@@ -345,18 +380,16 @@ module.exports = {
 
                 // Banner layer 1
                 layer([
+                    _class([background("dark")]),
                     layout([
-                        _class([
-                            padding("horz", "vert-large"),
-                            _layout("contain-large")
-                        ]),
+                        _class([_layout("contain-large", "enlarge-vert")]),
                         values([
                             _header([
                                 title(""),
-                                _class([ _layout("vert"), _style("bold-font", "600"), "h2" ]),
+                                _class([_layout("vert"), _style("bold-font", "600"), "h2", color("white")]),
                                 values([
                                     `Got your attention.`, ` `,
-                                    _content(`Good!`, [ color("primary") ])
+                                    _content(`Good!`, [color("tertiary-dark")])
                                 ])
                             ])
                         ])
@@ -509,18 +542,22 @@ module.exports = {
                                     row([
                                         _class([ margin("dull") ]),
                                         values([
-                                            col([
-                                                _class([ _col("12"), padding("dull") ]),
-                                                values([
-                                                    _tile([ "", "",
-                                                        _img(footStepImg, "Foot Step Alt", [_class("effect-parallax", "layer-box-tall")]),
-                                                        _class([
-                                                            _layer("box", "box-flat", "surface"), // , "shadow--2"
-                                                            _layout("block")
-                                                        ])
+                                            // _tile([ "", "",
+                                                _img(footStepImg, "Foot Step Alt", [
+                                                    _class([
+                                                        // "effect-parallax", "layer-box-tall"
+                                                        // "layout-flex layout-align-items-center layout-justify-content-center"
+                                                    padding(["horz-sub-large--device-phone", "horz-sub-large--device-tablet", "horz-sub-large--device-laptop", "layout-enlarge-horz", "vert-large--device-phone", "vert-huge--device-tablet", "vert-huge--device-laptop", "vert-huge--device-desktop"]),
                                                     ])
-                                                ])
-                                            ])
+                                                ]),
+                                            //     _class([
+                                            //         _layer([
+                                            //             // "box", "box-flat", "surface",
+                                            //         ]), // , "shadow--2"
+                                            //         // _layout("block")
+                                            //     ])
+                                            // ])
+                                        
                                         ])
                                     ]),
                                 ])
@@ -532,42 +569,8 @@ module.exports = {
 
                 // Footer
                 // newFooter(),
-
-                // Next Page layer
-                layer([
-                    _class([ background("dark") ]),
-                    layout([
-                        _class([ _layout("contain"), padding("horz", "top") ]),
-                        values([
-                            section([
-                                _class([ "h4", _layout("shorten") ]),
-                                values([
-                                    _header([
-                                        title("Next"),
-                                        _class([ color("white"), font("light", "thin"), _style("spaceout") ])
-                                    ]),
-                                    _main([
-                                        _class([ _style("center"), padding("vert") ]),
-                                        values([
-                                            _content(`NASA Rocket Ship`, [ "h1", _style("bold", "tertiary", "500") ]),
-                                        ])
-                                    ])
-
-                                ])
-                            ]),
-                            section([
-                                _class([
-                                    _layer("box", "box-flat", "tertiary-dark", "shadow--1"),
-                                    _layout("block")
-                                ])
-                            ])
-
-                        ])
-                    ])
-                ]),
-                // End Next Page layer
             ]),
-            noFooter()
+            // noFooter()
         ])
     }
 };

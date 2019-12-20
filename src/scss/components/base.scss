@@ -171,27 +171,37 @@ a {
     }
 }
 
-ul,
-ol {
+ul, .ul,
+ol, .ol {
     list-style-type: disc;
     margin: 20px 2em;
     display: block;
 }
 
-ol {
+ol, .ol {
     list-style-type: decimal;
 }
 
-ul ul,
-ol ul {
+ul ul, .ul .ul,
+ol ul, .ol .ul {
     list-style-type: circle;
 }
 
-li {
+li, .li {
     text-align: inherit;
     display: list-item;
 }
 
-.list-none {
-    list-style: none;
+.list { 
+    list-style: circle;
+    display: list-item;
+
+    &-none {
+        list-style: none;
+    }
+}
+
+footer {
+    position: relative;
+    z-index: 250;
 }

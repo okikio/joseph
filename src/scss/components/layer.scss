@@ -264,7 +264,7 @@
     &-box {
         position: relative;
         min-height: 400px;
-        height: auto;
+        // height: auto;
         width: 100%;
 
         &,
@@ -280,13 +280,13 @@
         }
 
         &-mid {
-            max-height: 600px;
+            // max-height: 600px;
         }
 
         &-tall {
             width: 100%;
             height: auto;
-            max-height: 800px;
+            // max-height: 1600px;
         }
     }
 
@@ -296,7 +296,7 @@
     }
 
     &-action-center {
-        transition: transform .8s ease 0s;
+        transition: opacity .5s ease 0s;
         font-size: 24px;
         position: fixed;
         bottom: 15px;
@@ -305,11 +305,11 @@
         right: 0;
 
         &-hide {
-            transform: translateX(30%);
+            opacity: 0;
         }
 
         &-show {
-            transform: translateX(0);
+            opacity: 1;
         }
     }
 }

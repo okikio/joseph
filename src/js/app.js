@@ -18,12 +18,12 @@ try {
     });
 
     // touchstart
-    on(_backUp, "click touchstart", () => {
+    on(_backUp, "click", () => {
         scrollTo("0px", "1400ms");
     });
 
     // touchstart
-    on(_scrolldown, "click touchstart", () => {
+    on(_scrolldown, "click", () => {
         scrollTo(height(_hero) + _focusPt, "800ms");
     });
 
@@ -69,14 +69,19 @@ try {
         });
     });
 
-    let _load;
+    let _load, resize;
+    on(window, 'resize', resize = () => {
+        width(window) > 500 && addClass(_backUp, "btn-expand");
+    });
+
     on(window, 'scroll', _load = () => {
         let _scrollTop = scrollTop(window);
+        resize();
         hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
         hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
-        toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 2);
-        toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 2);
+        toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
+        toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
 
         if (width(window) > 500) {
             _images.forEach(data => {

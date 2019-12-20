@@ -56,18 +56,7 @@ module.exports = {
                             }]
                         }
                     }
-                }, {
-                    "layer": {
-                        "class": "footer",
-                        "layout": {
-                            "section": {
-                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
-                                "values": ["Made with ❤ by Okiki Ojo."]
-                            }
-                        }
-                    }
-                }],
-                "noFooter": true
+                }]
             }
         },
         "offline": {
@@ -111,18 +100,7 @@ module.exports = {
                             }]
                         }
                     }
-                }, {
-                    "layer": {
-                        "class": "footer",
-                        "layout": {
-                            "section": {
-                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
-                                "values": ["Made with ❤ by Okiki Ojo."]
-                            }
-                        }
-                    }
-                }],
-                "noFooter": true
+                }]
             }
         },
         "sitemap": {
@@ -159,45 +137,53 @@ module.exports = {
                                 }
                             }, {
                                 "section": {
-                                    "class": "style-center",
+                                    "class": "ul",
                                     "values": [{
-                                        "a": {
-                                            "href": "/index.html",
-                                            "content": "home"
+                                        "section": {
+                                            "class": "li",
+                                            "values": [{
+                                                "a": {
+                                                    "href": "/index.html",
+                                                    "content": "Home"
+                                                }
+                                            }, " - Homepage galor, its the begining of our little adventure. Do you want to go back?<br>"]
                                         }
-                                    }, " - Homepage galor, its the begining of our little adventure. Do you want to go back?<br>", {
-                                        "a": {
-                                            "href": "/about.html",
-                                            "content": "about"
+                                    }, {
+                                        "section": {
+                                            "class": "li",
+                                            "values": [{
+                                                "a": {
+                                                    "href": "/about.html",
+                                                    "content": "About"
+                                                }
+                                            }, " - The story of me, myself and I. Shall we then?<br>"]
                                         }
-                                    }, " - The story of me, myself and I. Shall we then?<br>", {
-                                        "a": {
-                                            "href": "/projects.html",
-                                            "content": "projects"
+                                    }, {
+                                        "section": {
+                                            "class": "li",
+                                            "values": [{
+                                                "a": {
+                                                    "href": "/projects.html",
+                                                    "content": "Projects"
+                                                }
+                                            }, " - Hardwork and perseverance, hear all about it.<br>"]
                                         }
-                                    }, " - Hardwork and perseverance, hear all about it.<br>", {
-                                        "a": {
-                                            "href": "/contact.html",
-                                            "content": "contact"
+                                    }, {
+                                        "section": {
+                                            "class": "li",
+                                            "values": [{
+                                                "a": {
+                                                    "href": "/contact.html",
+                                                    "content": "Contact"
+                                                }
+                                            }, " - Call me maybe? How about that, why don't we create something amazing?<br>"]
                                         }
-                                    }, " - Call me maybe? How about that, why don't we create something amazing?<br>"],
-                                    "type": "main"
+                                    }]
                                 }
                             }]
                         }
                     }
-                }, {
-                    "layer": {
-                        "class": "footer",
-                        "layout": {
-                            "section": {
-                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
-                                "values": ["Made with ❤ by Okiki Ojo."]
-                            }
-                        }
-                    }
-                }],
-                "noFooter": true
+                }]
             }
         },
         "contact": {
@@ -306,18 +292,7 @@ module.exports = {
                             }]
                         }
                     }
-                }, {
-                    "layer": {
-                        "class": "footer",
-                        "layout": {
-                            "section": {
-                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
-                                "values": ["Made with ❤ by Okiki Ojo."]
-                            }
-                        }
-                    }
-                }],
-                "noFooter": true
+                }]
             }
         },
         "projects": {
@@ -381,16 +356,37 @@ module.exports = {
                     }
                 }, {
                     "layer": {
-                        "class": "footer",
+                        "class": "layer-color-dark",
                         "layout": {
-                            "section": {
-                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
-                                "values": ["Made with ❤ by Okiki Ojo."]
-                            }
+                            "class": "layout-contain layout-padding-horz layout-padding-top",
+                            "values": [{
+                                "section": {
+                                    "class": "h4 layout-shorten",
+                                    "values": [{
+                                        "section": {
+                                            "title": "Next",
+                                            "class": "style-color-white style-font-light style-font-thin style-spaceout",
+                                            "type": "header"
+                                        }
+                                    }, {
+                                        "section": {
+                                            "class": "style-center layout-padding-vert",
+                                            "values": [{
+                                                "content": "NASA Rocket Ship",
+                                                "class": "h1 style-bold style-tertiary style-500"
+                                            }],
+                                            "type": "main"
+                                        }
+                                    }]
+                                }
+                            }, {
+                                "section": {
+                                    "class": "layer-box layer-box-flat layer-tertiary-dark layer-shadow--1 layout-block"
+                                }
+                            }]
                         }
                     }
-                }],
-                "noFooter": true
+                }]
             }
         },
         "about": {
@@ -451,18 +447,7 @@ module.exports = {
                             }]
                         }
                     }
-                }, {
-                    "layer": {
-                        "class": "footer",
-                        "layout": {
-                            "section": {
-                                "class": "layout-padding style-center style-spaceout-small style-font-weight-bold style-font-title",
-                                "values": ["Made with ❤ by Okiki Ojo."]
-                            }
-                        }
-                    }
-                }],
-                "noFooter": true
+                }]
             }
         },
         "index": {
@@ -581,15 +566,16 @@ module.exports = {
                     }
                 }, {
                     "layer": {
+                        "class": "layer-color-dark",
                         "layout": {
-                            "class": "layout-padding-horz layout-padding-vert-large layout-contain-large",
+                            "class": "layout-contain-large layout-enlarge-vert",
                             "values": [{
                                 "section": {
                                     "title": "",
-                                    "class": "layout-vert style-bold-font style-600 h2",
+                                    "class": "layout-vert style-bold-font style-600 h2 style-color-white",
                                     "values": ["Got your attention.", " ", {
                                         "content": "Good!",
-                                        "class": "style-color-primary"
+                                        "class": "style-color-tertiary-dark"
                                     }],
                                     "type": "header"
                                 }
@@ -738,20 +724,10 @@ module.exports = {
                                         "row": {
                                             "class": "layout-margin-dull",
                                             "values": [{
-                                                "col": {
-                                                    "class": "layout-col-12 layout-padding-dull",
-                                                    "values": [{
-                                                        "tile": {
-                                                            "title": "",
-                                                            "content": "",
-                                                            "img": {
-                                                                "src": "/assets/footsteps-sand",
-                                                                "alt": "Foot Step Alt",
-                                                                "class": "effect-parallax layer-box-tall"
-                                                            },
-                                                            "class": "layer-box layer-box-flat layer-surface layout-block"
-                                                        }
-                                                    }]
+                                                "img": {
+                                                    "src": "/assets/footsteps-sand",
+                                                    "alt": "Foot Step Alt",
+                                                    "class": "layout-padding-horz-sub-large--device-phone layout-padding-horz-sub-large--device-tablet layout-padding-horz-sub-large--device-laptop layout-padding-layout-enlarge-horz layout-padding-vert-large--device-phone layout-padding-vert-huge--device-tablet layout-padding-vert-huge--device-laptop layout-padding-vert-huge--device-desktop"
                                                 }
                                             }]
                                         }
@@ -761,40 +737,7 @@ module.exports = {
                             }]
                         }
                     }
-                }, {
-                    "layer": {
-                        "class": "layer-color-dark",
-                        "layout": {
-                            "class": "layout-contain layout-padding-horz layout-padding-top",
-                            "values": [{
-                                "section": {
-                                    "class": "h4 layout-shorten",
-                                    "values": [{
-                                        "section": {
-                                            "title": "Next",
-                                            "class": "style-color-white style-font-light style-font-thin style-spaceout",
-                                            "type": "header"
-                                        }
-                                    }, {
-                                        "section": {
-                                            "class": "style-center layout-padding-vert",
-                                            "values": [{
-                                                "content": "NASA Rocket Ship",
-                                                "class": "h1 style-bold style-tertiary style-500"
-                                            }],
-                                            "type": "main"
-                                        }
-                                    }]
-                                }
-                            }, {
-                                "section": {
-                                    "class": "layer-box layer-box-flat layer-tertiary-dark layer-shadow--1 layout-block"
-                                }
-                            }]
-                        }
-                    }
-                }],
-                "noFooter": true
+                }]
             }
         }
     }

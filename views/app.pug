@@ -220,17 +220,29 @@ html(lang="en")
                   span.btn-section
                     span.btn-spacer
                     span.btn-content Back To Top
+                    span.btn-spacer
 
-                button.copyright-btn.btn.btn-hover.layer-round.layout-padding-horz-smallest.layout-padding-vert-smallest.layer-primary-dark.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
-                  span.btn-group.style-font-sz-24
-                    i.icon(inline) copyright
-                    span.btn-section
-                      span.btn-spacer
-                      span.btn-content 2019 Okiki Ojo
+                //- button.copyright-btn.btn.btn-hover.layer-round.layout-padding-horz-smallest.layout-padding-vert-smallest.layer-primary-dark.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
+                //-   span.btn-group.style-font-sz-24
+                //-     i.icon(inline) copyright
+                //-     span.btn-section
+                //-       span.btn-spacer
+                //-       span.btn-content 2019 Okiki Ojo
 
       if !page.noFooter
         +footer("Made with ❤ by Okiki Ojo | ") 
-        a(href="/sitemap") Sitemap.
+          span.btn
+            section.btn-group
+              i.icon(inline) copyright
+              span.btn-section
+                span.btn-spacer
+                span 2019 Joseph Ojo -            
+                span.btn-spacer
+          +link({
+            href: "/sitemap.html",
+            class: "layout-inline-block"
+          }) 
+            i Sitemap
     else
       section.layer.layer-dark
         article.layout-contain

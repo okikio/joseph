@@ -125,9 +125,13 @@ mixin row(value)
     if Array.isArray(_values)
       each _value in _values
         - let _column = _value.col;
+        - let _tile = _value.tile;
 
         if typeof _column == "object"
           +column(_column)
+
+        else if typeof _tile == "object"
+          +tile(_tile)
 
         else
           +basicContent(_value)
@@ -135,6 +139,7 @@ mixin row(value)
 
 mixin content(value)
   - let column = value.col;
+  - let _tile = value.tile;
   - let row = value.row;
 
   if typeof column == "object"
@@ -142,6 +147,9 @@ mixin content(value)
 
   else if typeof row == "object"
     +row(row)
+
+  else if typeof _tile == "object"
+    +tile(_tile)
 
   else
     +basicContent(value)
