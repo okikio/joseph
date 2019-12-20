@@ -542,7 +542,7 @@ module.exports = {
                                     row([
                                         _class([ margin("dull") ]),
                                         values([
-                                            // _tile([ "", "",
+                                            _tile([ "", "",
                                                 _img(footStepImg, "Foot Step Alt", [
                                                     _class([
                                                         // "effect-parallax", "layer-box-tall"
@@ -556,7 +556,7 @@ module.exports = {
                                             //         ]), // , "shadow--2"
                                             //         // _layout("block")
                                             //     ])
-                                            // ])
+                                            ])
                                         
                                         ])
                                     ]),

@@ -724,10 +724,14 @@ module.exports = {
                                         "row": {
                                             "class": "layout-margin-dull",
                                             "values": [{
-                                                "img": {
-                                                    "src": "/assets/footsteps-sand",
-                                                    "alt": "Foot Step Alt",
-                                                    "class": "layout-padding-horz-sub-large--device-phone layout-padding-horz-sub-large--device-tablet layout-padding-horz-sub-large--device-laptop layout-padding-layout-enlarge-horz layout-padding-vert-large--device-phone layout-padding-vert-huge--device-tablet layout-padding-vert-huge--device-laptop layout-padding-vert-huge--device-desktop"
+                                                "tile": {
+                                                    "title": "",
+                                                    "content": "",
+                                                    "img": {
+                                                        "src": "/assets/footsteps-sand",
+                                                        "alt": "Foot Step Alt",
+                                                        "class": "layout-padding-horz-sub-large--device-phone layout-padding-horz-sub-large--device-tablet layout-padding-horz-sub-large--device-laptop layout-padding-layout-enlarge-horz layout-padding-vert-large--device-phone layout-padding-vert-huge--device-tablet layout-padding-vert-huge--device-laptop layout-padding-vert-huge--device-desktop"
+                                                    }
                                                 }
                                             }]
                                         }

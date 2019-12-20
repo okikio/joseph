@@ -71,7 +71,7 @@ try {
 
     let _load, resize;
     on(window, 'resize', resize = () => {
-        width(window) > 500 && addClass(_backUp, "btn-expand");
+        if (width(window) > 500) addClass(_backUp, "btn-expand");
     });
 
     on(window, 'scroll', _load = () => {
