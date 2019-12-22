@@ -28,7 +28,7 @@
   Content-Type: application/font-woff
 
 /*.html
-  Cache-Control: public, max-age=360
+  Cache-Control: public, max-age=604800
   Content-Type: text/html; charset=utf-8
 
 /*.css
