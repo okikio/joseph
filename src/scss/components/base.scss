@@ -202,6 +202,10 @@ li, .li {
 }
 
 footer {
-    position: relative;
-    z-index: 250;
+    // position: relative;
+    // z-index: 250;
+}
+
+.back-to-top {
+    z-index: 500;
 }

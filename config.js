@@ -533,39 +533,41 @@ module.exports = {
                 // End Image Column layer
 
                 // Image Banner layer
-                layer([
-                    layout([
-                        _class([]),
-                        values([
-                            _main([
-                                values([
-                                    row([
-                                        _class([ margin("dull") ]),
-                                        values([
-                                            _tile([ "", "",
-                                                _img(footStepImg, "Foot Step Alt", [
-                                                    _class([
-                                                        // "effect-parallax", "layer-box-tall"
-                                                        // "layout-flex layout-align-items-center layout-justify-content-center"
-                                                    padding(["horz-sub-large--device-phone", "horz-sub-large--device-tablet", "horz-sub-large--device-laptop", "layout-enlarge-horz", "vert-large--device-phone", "vert-huge--device-tablet", "vert-huge--device-laptop", "vert-huge--device-desktop"]),
-                                                    ])
-                                                ]),
-                                            //     _class([
-                                            //         _layer([
-                                            //             // "box", "box-flat", "surface",
-                                            //         ]), // , "shadow--2"
-                                            //         // _layout("block")
-                                            //     ])
-                                            ])
+                // layer([
+                //     layout([
+                //         _class([]),
+                //         values([
+                //             _main([
+                //                 values([
+                //                     row([
+                //                         _class([ margin("dull") ]),
+                //                         values([
+                //                             _tile([ "", "",
+                //                                 _img(footStepImg, "Foot Step Alt", [
+                //                                     // _class([
+                //                                         // "effect-parallax", "layer-box-tall"
+                //                                         // "layout-flex layout-align-items-center layout-justify-content-center"
+                                                    
+                //                                 ]),
+                //                                 _class([
+                //                                     padding([
+                //                                         "horz-sub-large--device-phone", "horz-sub-large--device-tablet", "horz-sub-large--device-laptop", "layout-enlarge-horz", "vert-large--device-phone", "vert-huge--device-tablet", "vert-huge--device-laptop", "vert-huge--device-desktop",
+                //                                     ]),
+                //                                     _layer([
+                //                                         // "box", "box-flat", "surface",
+                //                                     ]), // , "shadow--2"
+                //                                     // _layout("block")
+                //                                 ])
+                //                             ])
                                         
-                                        ])
-                                    ]),
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Image Banner layer
+                //                         ])
+                //                     ]),
+                //                 ])
+                //             ])
+                //         ])
+                //     ])
+                // ]),
+                // // End Image Banner layer
 
                 // Footer
                 // newFooter(),
