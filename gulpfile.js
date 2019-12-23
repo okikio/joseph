@@ -31,7 +31,6 @@ const icons = require('microicon');
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
-const https = require('https');
 
 let { pages, cloud_name, imageURLConfig } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
@@ -68,23 +67,24 @@ let posthtmlOpts = [
     require('posthtml-textr')({}, [
         require('typographic-single-spaces')
     ]),
-    tree => {
+    /* tree => {
         tree.match(/\n\s\w/gim, node => node.replace(/\n\s/gim, ' '));
-    },
+    }, */
     tree => {
         let parse = (_src = "src") => node => {
-            let url = node.attrs[_src];
+            let url = node.attrs[_src].replace(/&amp;/g, "&");
             let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
             let query = URLObj.searchParams;
             let queryString = URLObj.search;
 
             let height = query.get("h");
             let width = query.get("w") || 'auto';
-            let crop = query.get("crop") || imageURLConfig.crop;
-            let effect = query.get("effect") || imageURLConfig.effect;
+            let crop = query.get("crop");
+            let effect = query.get("effect");
             let quality = query.get("quality");
             let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect }, 
                     /svg/g.test(url) ? { fetch_format: null } : {});
+                    
             node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
                 `${assetURL + url.replace(queryString, '')}` :
                 assets.url(url.replace(queryString, ''), _imgURLConfig)
@@ -93,9 +93,10 @@ let posthtmlOpts = [
         };
 
         tree.match(querySelector("[src^='/assets/']"), parse());
+        tree.match(querySelector("[href^='/assets/']"), parse("href"));
         tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
     },
-    async tree => {
+    /* async tree => {
         let warnings, promises = [];
         tree.match({ tag: 'img' }, node => {
             if (promises.length >= 2) return node; // Don't inline everything
@@ -135,7 +136,7 @@ let posthtmlOpts = [
         }
         // Return the ast
         return tree;
-    },
+    }, */
     tree => {
         tree.match(querySelector("i.icon"), node => {
             if ("inline" in node.attrs) {
@@ -161,10 +162,10 @@ let posthtmlOpts = [
     },
 
     // Dom process
-    require('posthtml-doctype')({ doctype: 'HTML 5' }),
-    require('posthtml-link-noreferrer')({
-      attr: ['noopener', 'noreferrer']
-    }),
+    // require('posthtml-doctype')({ doctype: 'HTML 5' }),
+    // require('posthtml-link-noreferrer')({
+    //   attr: ['noopener', 'noreferrer']
+    // }),
     dev ? () => { } : require('posthtml-inline-assets')({
         transforms: { image: false }
     }),
