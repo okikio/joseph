@@ -7,7 +7,7 @@ html(lang="en")
     meta(http-equiv='Cache-Control' content='public, max-age=31536000')
     if dev
       meta(http-equiv='Content-Security-Policy' content=`
-      default-src 'self' https://res.cloudinary.com/${cloud_name}/; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'${dev ? " * blob: ws:" : ""}; 
+      default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'${dev ? " * blob: ws:" : ""}; 
       block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/${cloud_name}/;`)
 
     meta(name='robots' content='all')
