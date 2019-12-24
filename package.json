@@ -34,7 +34,8 @@
   "homepage": "https://github.com/okikio/fastify-app#readme",
   "dependencies": {
     "cloudinary": "^1.15.0",
-    "dotenv": "^8.1.0"
+    "dotenv": "^8.1.0",
+    "gulp-changed": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

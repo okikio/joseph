@@ -4,7 +4,7 @@
     "start_url": "/",
     "display": "standalone",
     "background_color": "#f5f8fc",
-    "theme_color": "#4500ff",
+    "theme_color": "#ffffff",
     "description": "A simply readable portfolio app.",
     "icons": [
         {

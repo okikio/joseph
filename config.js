@@ -305,7 +305,7 @@ module.exports = {
                         values([
                             _header(title("Lorem itpsuim")),
                             _main([
-                                _class([ font("18--device-phone") ]),
+                                // _class([ font("14--device-phone") ]),
                                 values([
                                     indent,
                                     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
@@ -336,25 +336,26 @@ module.exports = {
                                                 col([
                                                     _class([ _col("2"), padding("bottom-small") ]),
                                                     values([
-                                                        _content(`03/03`, [_style("bold"), font("24", "weight-bold") ])
+                                                        _content(`03/03`, [_style("bold"), font("18--device-phone","24") ])
                                                     ])
                                                 ]),
 
                                                 col([
-                                                    _class([ _col("3"), padding("bottom") ]),
+                                                    _class([_col("3"), padding("bottom"), _style("line-height-small--device-phone", "line-height-double") ]),
                                                     values([
                                                         _content(`2018`, [
-                                                            _style("line-height-double", "bold"),
-                                                            _layout("block"), font("24", "weight-bold")
+                                                            _style("bold"),
+                                                            _layout("block"), font("18--device-phone", "24")
                                                         ]),
                                                         _content(`E-commerse`, [
-                                                            _style("line-height-double"),
+                                                            // _style("line-height-double"),
                                                             _layout("block"),
-                                                            font("18")
+                                                            font("16--device-phone", "18")
                                                         ]),
                                                         _content(`Design Executive`, [
-                                                            _style("line-height-double"),
-                                                            _layout("block"), font("18")
+                                                            // _style("line-height-double"),
+                                                            _layout("block"),
+                                                            font("16--device-phone", "18")
                                                         ])
                                                     ])
                                                 ]),

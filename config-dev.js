@@ -494,7 +494,6 @@ module.exports = {
                                 }
                             }, {
                                 "section": {
-                                    "class": "style-font-18--device-phone",
                                     "values": [{
                                         "content": " ",
                                         "class": "layout-padding-top layout-margin-left-large layout-inline-block"
@@ -530,21 +529,21 @@ module.exports = {
                                                         "class": "layout-col-2 layout-padding-bottom-small",
                                                         "values": [{
                                                             "content": "03/03",
-                                                            "class": "style-bold style-font-24 style-font-weight-bold"
+                                                            "class": "style-bold style-font-18--device-phone style-font-24"
                                                         }]
                                                     }
                                                 }, {
                                                     "col": {
-                                                        "class": "layout-col-3 layout-padding-bottom",
+                                                        "class": "layout-col-3 layout-padding-bottom style-line-height-small--device-phone style-line-height-double",
                                                         "values": [{
                                                             "content": "2018",
-                                                            "class": "style-line-height-double style-bold layout-block style-font-24 style-font-weight-bold"
+                                                            "class": "style-bold layout-block style-font-18--device-phone style-font-24"
                                                         }, {
                                                             "content": "E-commerse",
-                                                            "class": "style-line-height-double layout-block style-font-18"
+                                                            "class": "layout-block style-font-16--device-phone style-font-18"
                                                         }, {
                                                             "content": "Design Executive",
-                                                            "class": "style-line-height-double layout-block style-font-18"
+                                                            "class": "layout-block style-font-16--device-phone style-font-18"
                                                         }]
                                                     }
                                                 }, {

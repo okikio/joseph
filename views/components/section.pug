@@ -7,7 +7,7 @@ mixin _header(value)
   - let _class = _value.class;
   
   section.layer-header.style-center
-    h4(class=_class)= _title
+    h4.style-font-20--device-phone.layout-padding-dull--device-phone.layout-margin-dull--device-phone(class=_class)= _title
       if Array.isArray(_values)
         each _value in _values
           +content(_value)
@@ -18,8 +18,8 @@ mixin _main(section)
   - let _values = _section.values;
   - let _class = _section.class;
   
-  section.layer-main(class=_class)
-    span.style-line-height-double
+  section.layer-main.style-font-14--device-phone(class=_class)
+    span.style-line-height-double--tablet.style-line-height-double--laptop.style-line-height-double--desktop
       if Array.isArray(_values)
         each _value in _values
           +content(_value)

@@ -6,6 +6,7 @@ mixin image(value)
   .layer-image(class=_class)
     .load-img
       .img-contain
+        .layer-image-preview-img-card
         picture
           each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
             - let val = n > 5 && n <= 8 ? 70 : (n <= 5 ? Math.max(70 - (n * 5), 45) * 10 : 100);

@@ -24,6 +24,7 @@ const imagemin = require('gulp-imagemin');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
+const changed = require('gulp-changed');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const { writeFile } = require("fs");
@@ -32,6 +33,7 @@ const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 
+let watching = false;
 let { pages, cloud_name, imageURLConfig } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
 assets.config({ cloud_name, secure: true });
@@ -265,6 +267,7 @@ task('html', () => {
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
+            // watching ? changed(`${publicDest}/css`) : null,
             init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
@@ -287,6 +290,7 @@ task("js", () =>
                 return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
+                        watching ? changed(`${publicDest}/js`) : null,
                         debug ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
@@ -338,7 +342,7 @@ task("js", () =>
 
 task("config", () =>
     streamList(
-        new Promise((resolve, reject) => {
+        debug ? new Promise((resolve, reject) => {
             // Create config-dev.js
             writeFile(
                 "./config-dev.js", `module.exports = ${stringify(config)};`,
@@ -347,8 +351,8 @@ task("config", () =>
                     resolve();
                 }
             );
-        }),
-        dev ? ["config-dev.js", {
+        }) : null,
+        debug ? ["config-dev.js", {
             opts: { allowEmpty: true },
             pipes: [
                 js({ indent_size: 4 }), // Beautify the file
@@ -363,6 +367,7 @@ task("client", () =>
         ["client/**/*.js", {
             opts: { allowEmpty: true },
             pipes: [
+                watching ? changed(publicDest) : null,
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -386,6 +391,7 @@ task("client", () =>
         [["client/**/*.{jpg,png,ico}"], {
             opts: { allowEmpty: true },
             pipes: [
+                watching ? changed(publicDest) : null,
                 imagemin()
             ]
         }]
@@ -393,7 +399,7 @@ task("client", () =>
 );
 
 task("gulp:reload", () => {
-    _execSeries("gulp", "gulp watch");
+    _execSeries("gulp watch", "gulp other");
     process.exit();
 });
 
@@ -413,6 +419,7 @@ task("git:pull", () =>
 task('inline', () =>
     stream('public/*.html', {
         pipes: [
+            watching ? changed(publicDest) : null,
             posthtml(posthtmlOpts)
         ]
     })
@@ -440,7 +447,7 @@ task('other', parallel("client", series("config", "html", "css", "inline")));
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['config.js', 'containers.js'], watchDelay, series('gulp:reload', 'reload'));
+    watch(['config.js', 'containers.js'], watchDelay, series('other', 'reload'));
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulp:reload', 'reload'));
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
