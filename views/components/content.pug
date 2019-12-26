@@ -4,7 +4,7 @@ mixin image(value)
   - let _src = _value.src || "/assets/city";
   - let _alt = _value.alt || "Alternate text";
   .layer-image(class=_class)
-    .layer-image-preview-img-card
+    .layer-image-preview-img-card.load-animation
     .load-img
       .img-contain
         picture
