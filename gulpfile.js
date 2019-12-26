@@ -6,12 +6,12 @@ let debug = 'debug' in env && env.debug.toString() === "true";
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
 
-const nodeResolve = require('rollup-plugin-node-resolve');
+const nodeResolve = require('@rollup/plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
 const querySelector = require("posthtml-match-helper");
 const browserSync = require('browser-sync').create();
 const { init, write } = require('gulp-sourcemaps');
-const commonJS = require('rollup-plugin-commonjs');
+const commonJS = require('@rollup/plugin-commonjs');
 const rollupBabel = require('rollup-plugin-babel');
 const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");

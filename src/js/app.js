@@ -28,9 +28,9 @@ try {
     });
 
     let _images = [];
-    let onload = $load_img => function () {
-        addClass($load_img, "core-img-show");
-    };
+    // let onload = $load_img => function () {
+    //     addClass($load_img, "core-img-show");
+    // };
 
     each(_layer, $layer => {
         let header = get(find($layer, ".layer-header"), 0);
@@ -52,20 +52,20 @@ try {
                 isHero
             });
 
-            let _core_img = get(find($img, ".core-img"), 0);
-            if (_is.def(_core_img)) {
-                if (_core_img.complete && _core_img.naturalWidth !== 0) {
-                    onload(load_img) ();
-                } else {
-                    if (!window.isModern) {
-                        let img = new Image(_core_img);
-                        img.src = attr(_core_img, "src");
-                        img.onload = onload(load_img);
-                    } else {
-                        on(_core_img, "load", onload(load_img));
-                    }
-                }
-            }
+            // let _core_img = get(find($img, ".core-img"), 0);
+            // if (_is.def(_core_img)) {
+            //     if (_core_img.complete && _core_img.naturalWidth !== 0) {
+            //         onload(load_img) ();
+            //     } else {
+            //         if (!window.isModern) {
+            //             let img = new Image(_core_img);
+            //             img.src = attr(_core_img, "src");
+            //             img.onload = onload(load_img);
+            //         } else {
+            //             on(_core_img, "load", onload(load_img));
+            //         }
+            //     }
+            // }
         });
     });
 

@@ -39,18 +39,28 @@
             width: 100%;
             left: 0;
             top: 0;
-        }
+        }       
         
         &-preview-img-card {
+            // transition: opacity 0.2s ease;
+            animation: load 0.5s ease infinite alternate;
+            will-change: opacity;
             position: absolute;
-            background: $dark;
+            background: $black;
             display: block;
             height: 100%;
             width: 100%;
             z-index: 0;
+            opacity: 0;
             left: 0;
             top: 0;
         }
+
+        @keyframes load {
+            to {
+                opacity: 0.35;
+            }
+        } 
 
         &-overlay {
             background: darken(#53507c, 20%);

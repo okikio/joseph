@@ -4,9 +4,9 @@ mixin image(value)
   - let _src = _value.src || "/assets/city";
   - let _alt = _value.alt || "Alternate text";
   .layer-image(class=_class)
+    .layer-image-preview-img-card
     .load-img
       .img-contain
-        .layer-image-preview-img-card
         picture
           each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
             - let val = n > 5 && n <= 8 ? 70 : (n <= 5 ? Math.max(70 - (n * 5), 45) * 10 : 100);
@@ -16,14 +16,14 @@ mixin image(value)
           source(media='(min-width: 1200px)' srcset!=`${_src}.webp` sizes="100vw" type='image/webp')
           source(media='(min-width: 1200px)' srcset!=`${_src}.jpg` sizes="100vw" type='image/jpeg')
           img.core-img(src!=`${_src}.jpg` alt=_alt loading="lazy" sizes="(max-width: 500px) 500w,(max-width: 700px) 700w,(max-width: 900px) 900w, 100vw" width="100vw")
-        picture
-          source(srcset!=`${_src}.webp?w=60&quality=100&effect=blur:120` sizes="60w" type='image/webp')
-          img.placeholder-img(src!=`${_src}.jpg?w=60&quality=100&effect=blur:120` sizes="60w" alt=_alt  loading="lazy" width="60w")
-        noscript Javascript is necesscary for this sites awesome experience.
-          picture
-            source(srcset!=`${_src}.webp` sizes="100vw" type='image/webp')
-            source(srcset!=`${_src}.jpg` sizes="100vw" type='image/jpeg')
-            img.no-script-img(src!=`${_src}.jpg` alt=_alt loading="lazy" sizes="(max-width: 500px) 500w,(max-width: 700px) 700w,(max-width: 900px) 900w, 100vw" width="100vw")
+        //- picture
+        //-   source(srcset!=`${_src}.webp?w=60&quality=100&effect=blur:120` sizes="60w" type='image/webp')
+        //-   img.placeholder-img(src!=`${_src}.jpg?w=60&quality=100&effect=blur:120` sizes="60w" alt=_alt  loading="lazy" width="60w")
+        //- noscript Javascript is necesscary for this sites awesome experience.
+        //-   picture
+        //-     source(srcset!=`${_src}.webp` sizes="100vw" type='image/webp')
+        //-     source(srcset!=`${_src}.jpg` sizes="100vw" type='image/jpeg')
+        //-     img.no-script-img(src!=`${_src}.jpg` alt=_alt loading="lazy" sizes="(max-width: 500px) 500w,(max-width: 700px) 700w,(max-width: 900px) 900w, 100vw" width="100vw")
     .layer-image-overlay
 
 
