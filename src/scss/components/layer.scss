@@ -43,7 +43,6 @@
         
         &-preview-img-card {
             // transition: opacity 0.2s ease;
-            animation: load 0.5s ease infinite alternate;
             will-change: opacity;
             position: absolute;
             background: $black;
@@ -54,6 +53,10 @@
             opacity: 1;
             left: 0;
             top: 0;
+
+            &.load-animation {
+                animation: load 0.5s ease infinite alternate;
+            }
         }
 
         @keyframes load {
