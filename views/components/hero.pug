@@ -18,10 +18,12 @@ mixin hero(value, banner)
             section.layer-main
               h2.h5.style-font-family-bold.style-font-weight-300.style-white.layer-main-text!= _content
             section.layout-align-self-end
-              a.layer-footer.btn.layer-round.layout-padding-horz-small.layout-padding-vert-smallest.layer-primary-dark.layer-shadow.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.layer-hero-scroll-down
-                span.btn-group.style-font-sz-16--device-phone
-                  i.icon.style-font-sz-16--device-phone.style-font-sz-24(inline) expand_more
+              button.layer-footer.btn.btn-hover.layer-shadow.layer-round.layout-padding-smallest.layer-primary-dark.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary.layer-hero-scroll-down(type="button" tabindex="0")
+                span.btn-group
+                  i.icon.style-font-sz-24(inline) expand_more
                   span.btn-section
                     span.btn-spacer
                     span.btn-content Scroll Down
+                    span.btn-spacer
+              //- a.layer-footer.btn.layer-round.layout-padding-horz-small.layout-padding-vert-smallest.layer-primary-dark.layer-shadow.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.layer-hero-scroll-down
 

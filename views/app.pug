@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="en" itemscope='' itemtype='https://schema.org/WebPage')
   head
     meta(charset='utf-8')
     meta(http-equiv='Accept-CH' content='DPR, Viewport-Width, Width')
@@ -126,7 +126,7 @@ html(lang="en")
     include ./components/hero.pug
     include ./components/footer.pug
   body.animate-in
-    div(itemscope='' itemtype='https://schema.org/Article' style="display: none" hidden)
+    div(style="display: none" hidden)
       meta(itemprop='url' content=`https://www.josephojo.com/${page.name}`)
       span(itemprop='name' content=`${page.title} - josephojo.com`)
         | by 

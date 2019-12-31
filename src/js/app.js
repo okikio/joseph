@@ -73,7 +73,8 @@ try {
 
     let _load, resize;
     on(window, 'resize', resize = () => {
-        toggleClass(_backUp, "btn-expand", width(window) > 500);
+        toggleClass(_backUp, "btn-expand", width(window) > 650);
+        toggleClass(_scrolldown, "btn-expand", width(window) > 650);
     });
 
     on(window, 'scroll', _load = () => {
