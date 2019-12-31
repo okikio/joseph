@@ -31,7 +31,7 @@
                 background: $surface;
 
                 @supports (backdrop-filter: blur(20px)) {
-                    background: change-color($surface, $alpha: 0.73);
+                    background: change-color($surface, $alpha: 0.83);
                     backdrop-filter: blur(20px);
                 }
             }
@@ -238,7 +238,7 @@
                     background: $surface;
 
                     @supports (backdrop-filter: blur(20px)) {
-                        background: change-color($surface, $alpha: 0.73);
+                        background: change-color($surface, $alpha: 0.83);
                         backdrop-filter: blur(20px);
                     }
                 }
