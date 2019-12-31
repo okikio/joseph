@@ -255,9 +255,8 @@ export default class State extends _event {
             },
             "after": (oldcontainers, newcontainers) => {
                 each(oldcontainers, (container, i) => {
-                    replaceWith()
+                    replaceWith(container, newcontainers[i]);
                 });
-                replaceWith
             }
         });
 
@@ -266,3 +265,5 @@ export default class State extends _event {
         on(window, 'popstate', this.onPopState, this);
     }
 }
+
+export let state = opts => new State();
