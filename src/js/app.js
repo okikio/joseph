@@ -28,8 +28,9 @@ try {
     });
 
     let _images = [];
-    let onload = $load_img => function () {
-        removeClass($load_img, "load-animation");
+    let onload = ([$load_anim, $load_img]) => function () {
+        removeClass($load_anim, "load-animation");
+        addClass($load_img, "core-img-show");
     };
 
     each(_layer, $layer => {
@@ -56,14 +57,14 @@ try {
             let _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
                 if (_core_img.complete && _core_img.naturalWidth !== 0) {
-                    onload(load_anim) ();
+                    onload([load_anim, load_img]) ();
                 } else {
                     if (!window.isModern) {
                         let img = new Image(_core_img);
                         img.src = attr(_core_img, "src");
-                        img.onload = onload(load_anim);
+                        img.onload = onload([load_anim, load_img]);
                     } else {
-                        on(_core_img, "load", onload(load_anim));
+                        on(_core_img, "load", onload([load_anim, load_img]));
                     }
                 }
             }

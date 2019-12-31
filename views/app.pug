@@ -125,7 +125,7 @@ html(lang="en")
     include ./components/section.pug
     include ./components/hero.pug
     include ./components/footer.pug
-  body
+  body.animate-in
     div(itemscope='' itemtype='https://schema.org/Article' style="display: none" hidden)
       meta(itemprop='url' content=`https://www.josephojo.com/${page.name}`)
       span(itemprop='name' content=`${page.title} - josephojo.com`)

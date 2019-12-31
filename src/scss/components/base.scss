@@ -197,6 +197,34 @@ li, .li {
     }
 }
 
+.animate-in {
+    & .header a {
+        // transform: translateY(20px);
+        // visibility: hidden;
+        // opacity: 0;
+
+        // animation: appear 2s ease .35s;
+    }
+}
+
+@for $i from 1 through 5 {
+    .header a:nth-of-type(#{$i}) {
+        animation-delay: ($i * .35s);
+    }
+}
+
+@keyframes appear {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
 footer {
     // position: relative;
     // z-index: 250;

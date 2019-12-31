@@ -192,7 +192,7 @@ let publicDest = 'public';
 let { assign } = Object;
 
 // Streamline Gulp Tasks
-let stream = (_src, _opt = { }, done) => {
+let stream = (_src, _opt = { }) => {
     let _end = _opt.end || [];
     let host = src(_src, _opt.opts), _pipes = _opt.pipes || [], _dest = _opt.dest || publicDest;
     return new Promise((resolve, reject) => {
@@ -202,11 +202,11 @@ let stream = (_src, _opt = { }, done) => {
         });
 
         host = host.pipe(dest(_dest))
-                   .on('end', typeof done === 'function' ? done : resolve); // Output
-
+                   .on('error', reject)
+                   .on('end', resolve); // Output
         _end.forEach(val => {
             if (val !== undefined && val !== null)
-                { host = host.pipe(val).on('error', reject); }
+                { host = host.pipe(val); }
         });
     });
 };
@@ -268,13 +268,13 @@ task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
             // watching ? changed(`${publicDest}/css`) : null,
-            init(), // Sourcemaps init
+            // init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
             rename(minSuffix), // Rename
-            write(...srcMapsWrite) // Put sourcemap in public folder
+            // write(...srcMapsWrite) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -290,8 +290,8 @@ task("js", () =>
                 return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        watching ? changed(`${publicDest}/js`) : null,
-                        debug ? null : init(), // Sourcemaps init
+                        // watching ? changed(`${publicDest}/js`) : null,
+                        // debug ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -308,7 +308,7 @@ task("js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`app${suffix}.min.js`), // Rename
-                        debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        // debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -316,7 +316,7 @@ task("js", () =>
             ['src/js/app.vendor.js', {
             opts: { allowEmpty: true },
             pipes: [
-                debug ? null : init(), // Sourcemaps init
+                // debug ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -333,7 +333,7 @@ task("js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                // debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
         }]
@@ -426,12 +426,11 @@ task('inline', () =>
 );
 
 task('reload', done =>
-    stream('public/*.html', {
-        pipes: [ ]
-    }, (...args) => {
-        browserSync.reload();
-        done(...args);
-    })
+    stream('public/*.html', { })
+        .then((...args) => {
+            browserSync.reload();
+            done(...args);
+        })
 );
 
 // Gulp task to minify all files
@@ -451,7 +450,7 @@ task('watch', () => {
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulp:reload', 'reload'));
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
-    watch('src/**/*.scss', watchDelay, series('css'));
+    watch('src/**/*.scss', watchDelay, series('css', 'inline'));
     watch('src/**/*.js', watchDelay, series('js', 'inline', 'reload'));
     watch(['client/**/*'], watchDelay, series('client', 'reload'));
     // IT works 
