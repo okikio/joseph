@@ -32,6 +32,7 @@ const icons = require('microicon');
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
+const https = require('https');
 
 let watching = false;
 let { pages, cloud_name, imageURLConfig } = config;
@@ -98,7 +99,7 @@ let posthtmlOpts = [
         tree.match(querySelector("[href^='/assets/']"), parse("href"));
         tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
     },
-    /* async tree => {
+    async tree => {
         let warnings, promises = [];
         tree.match({ tag: 'img' }, node => {
             if (promises.length >= 2) return node; // Don't inline everything
@@ -138,7 +139,7 @@ let posthtmlOpts = [
         }
         // Return the ast
         return tree;
-    }, */
+    }, 
     tree => {
         tree.match(querySelector("i.icon"), node => {
             if ("inline" in node.attrs) {
@@ -268,13 +269,13 @@ task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
             // watching ? changed(`${publicDest}/css`) : null,
-            // init(), // Sourcemaps init
+            init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
             rename(minSuffix), // Rename
-            // write(...srcMapsWrite) // Put sourcemap in public folder
+            write(...srcMapsWrite) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -291,7 +292,7 @@ task("js", () =>
                     opts: { allowEmpty: true },
                     pipes: [
                         // watching ? changed(`${publicDest}/js`) : null,
-                        // debug ? null : init(), // Sourcemaps init
+                        debug ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -308,7 +309,7 @@ task("js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`app${suffix}.min.js`), // Rename
-                        // debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -316,7 +317,7 @@ task("js", () =>
             ['src/js/app.vendor.js', {
             opts: { allowEmpty: true },
             pipes: [
-                // debug ? null : init(), // Sourcemaps init
+                debug ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -333,7 +334,7 @@ task("js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                // debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
         }]
