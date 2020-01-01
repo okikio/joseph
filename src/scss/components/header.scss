@@ -29,11 +29,6 @@
                 // border-right-color: $border-color;
                 // border-left-color: $border-color;
                 background: $surface;
-
-                @supports (backdrop-filter: blur(20px)) {
-                    background: change-color($surface, $alpha: 0.83);
-                    backdrop-filter: blur(20px);
-                }
             }
 
             .navbar-title-line {
@@ -217,11 +212,6 @@
                 position: relative;
                 overflow: hidden;
                 display: block;
-                
-                @supports (backdrop-filter: blur(20px)) {
-                    background: change-color( lighten($very-light, 2%), $alpha: 0.83);
-                    backdrop-filter: blur(20px);
-                }
 
                 li {
                     display: block;
