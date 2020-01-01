@@ -1,5 +1,6 @@
 import { _is, _constrain, _map, _log } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { statemanager } from './components/state-manager';
 
 let _layer = ".layer";
 let _navbar = '.navbar';
@@ -8,6 +9,8 @@ let _menu = '.navbar-menu';
 let _backUp = '.back-to-top';
 let _actioncenter = ".layer-action-center";
 let _scrolldown = '.layer-hero-scroll-down';
+
+statemanager();
 
 try {
     let _focusPt = height(_navbar) + 10;

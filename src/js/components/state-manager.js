@@ -2,10 +2,11 @@ import { _is, keys, assign, has, _log } from "./util";
 import { el, on, filter, first, text, scrollTo, replaceWith, each } from "./dom";
 import _event from "./event";
 
-let { href, origin, pathname } = window.location;
-let { replaceState, pushState } = window.history;
+let { history, location } = window;
+let { href, origin, pathname } = location;
+// let { replaceState, pushState } = history;
 
-export default class State extends _event {
+export default class StateManager extends _event {
     constructor (opts) {
         let defaults = {
             container: "[data-container]",
@@ -27,8 +28,8 @@ export default class State extends _event {
         this.cache = {};
 
         // Initialize push state
-        this.replaceState(url);
-        this.bindEvents(this.opt.container);
+        this.replaceState(this.currentURL);
+        this.bindEvents(this.opts.container);
     }
 
     // Changes the loading status of an individual URL
@@ -144,7 +145,7 @@ export default class State extends _event {
             this.emit("after", [this.containers, newcontainers], this);
         } else if (_is.null(newcontainers)) {
             // Throw warning to help debug error
-            console.warn(`%c[Page Render] - No containers have been found in the response from ${url} in ${}.`);
+            console.warn(`%c[Page Render] - No containers have been found in the response from ${url} in cache.`);
         } else {
             // No content availble to update with, aborting...
             window.location = url;
@@ -153,24 +154,28 @@ export default class State extends _event {
         return this;
     }
 
+    // Strips the hash from a url and returns a new url
+    stripHash (url) { return url.replace(/#.*/, ''); }
+
     // Determine if anchor is valid for load
     validAnchor (e, anchor) {
-        return !(
+        return (
+            (anchor.href && anchor.href.length) &&
             // Ignore modified clicks.
             (e.button !== 0) ||
-            (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) ||
+            !(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) ||
             
             // Ignore links to other sites.
-            ((anchor.protocol + '//' + anchor.host) !== origin) ||
+            ((anchor.protocol + '//' + anchor.host) === origin) ||
 
             // Ignore links intended to affet other tabs or windows.
-            (anchor.target === '_blank' || anchor.target === '_top') ||
+            (anchor.target !== '_blank' || anchor.target !== '_top') ||
 
             // Ignore links with the data-no-state-change attribute.
-            (anchor.hasAttribute('data-no-state-change')) ||
+            (!anchor.hasAttribute('data-no-state-change')) ||
 
             // Ignore hash links on the same page.
-            (anchor.pathname === pathname) 
+            (this.stripHash(anchor.pathname) !== this.stripHash(pathname)) 
         );
     }
 
@@ -193,25 +198,28 @@ export default class State extends _event {
         if (this.validAnchor(e, anchor)) {
             // Stop propagation so that event doesn't fire on parent element.
             e.stopPropagation();
-            e.preventDefault();
 
+            _log(anchor);
             // If URL is new request and cache it
             if (!this.inCache(anchor.href)) this.request(anchor.href);
-            this.prefetchState(url);
+            this.prefetchState(anchor.href);
         }
     }
 
     // Since replaceState and pushState contain similar info. when modifing the history state
     stateModifier (action = "push", url) {
-        (action == "push" ? pushState : replaceState) ({
-            url,
+        let stateObj = {
+            url: url,
             pushState: action == "push",
             title: this.getTitle(url),
             scrollPos: {
                 x: window.scrollX,
                 y: window.scrollY
             }
-        }, this.getTitle(url), url);
+        };
+
+        if (action == "push") { history.pushState(stateObj, this.getTitle(url), url); }
+        else { history.replaceState(stateObj, this.getTitle(url), url); }
         return this;
     }
 
@@ -232,8 +240,8 @@ export default class State extends _event {
             scrollTo(currentY, "800ms");
 
             // Striphash
-            let url = window.location.href.replace(/#.*/, '');
-            let currentURL = this.currentURL.replace(/#.*/, '');
+            let url = this.stripHash(href);
+            let currentURL = this.stripHash(this.currentURL);
             if (currentURL !== url) {
                 this.load(url).render(url);
             }
@@ -260,10 +268,10 @@ export default class State extends _event {
             }
         });
 
-        on($el, "click", this.anchorClick, this);
-        on($el, "mouseover touchstart", this.anchorHover, this);
-        on(window, 'popstate', this.onPopState, this);
+        on($el, "click", this.anchorClick.bind(this));
+        on($el, "mouseover touchstart", this.anchorHover.bind(this));
+        on(window, 'popstate', this.onPopState.bind(this));
     }
 }
 
-export let state = opts => new State();
+export let statemanager = opts => new StateManager(opts);
