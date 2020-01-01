@@ -1,5 +1,5 @@
 import { _is, keys, assign, has, _log } from "./util";
-import { el, on, filter, first, text, scrollTo, replaceWith, each } from "./dom";
+import { el, on, filter, first, text, scrollTo, replaceWith, each, _matches, outerHTML } from "./dom";
 import _event from "./event";
 
 let { history, location } = window;
@@ -24,6 +24,8 @@ export default class StateManager extends _event {
         this.containers = el(this.opts.container);
         this.headers = this.opts.headers;
         this.currentURL = href; // Url of the content that is currently displayed
+        
+        this.popState = false;
         this.status = {}; // Loading, Prefetching, Error, Completed
         this.cache = {};
 
@@ -45,9 +47,6 @@ export default class StateManager extends _event {
     // Cache content by URL
     cacheHTML (url, doc) {
         let { container } = this.opts;
-        
-        // URL has completed loading
-        this.completedState(url);
 
         // Content is indexed by the url
         this.cache[url] = { 
@@ -57,6 +56,12 @@ export default class StateManager extends _event {
             // Stores the contents of the page
             html: [...doc.querySelectorAll(container)], 
         };
+        
+        // URL has completed loading
+        if (this.getStatus(url) !== "prefetch") 
+            this.completedState(url);
+
+        this.emit("completed", [url, this], this);
         return this;
     }
 
@@ -94,7 +99,9 @@ export default class StateManager extends _event {
         this.clearCache();
 
         // The URL has a status of loading
-        this.loadingState(url);
+        if (this.getStatus(url) !== "prefetch") 
+            this.loadingState(url);
+        this.emit("loading", [url, this], this);
         
         // New Fetch for the URL
         fetch(url, {
@@ -103,7 +110,9 @@ export default class StateManager extends _event {
         })
         .then(response => {
             if (response.ok) {
-                response.text().then(this.parseContent.bind(this));
+                response.text().then(data => { 
+                    this.parseContent(url, data);
+                });
             } else {
                 console.warn(`%c[Page Load] - %cUnknow error, the repsonse was not 'ok'.`, 'color:#f3ff35', 'color:#eee');
             }
@@ -123,10 +132,10 @@ export default class StateManager extends _event {
     // Load URL and render page
     load (url) {
         // If URL is new request and cache it
-        if (!this.inCache(url)) this.request(url);
+        if (!this.inCache(url)) return this.request(url);
 
-        // Run the event that most matches with the status
-        this.emit(this.getStatus(url), [url, this], this);
+        this.completedState(url);
+        this.emit("completed", [url, this], this);
         return this;
     }
 
@@ -143,7 +152,7 @@ export default class StateManager extends _event {
 
             // Emit the after event 
             this.emit("after", [this.containers, newcontainers], this);
-        } else if (_is.null(newcontainers)) {
+        } else if (_is.nul(newcontainers)) {
             // Throw warning to help debug error
             console.warn(`%c[Page Render] - No containers have been found in the response from ${url} in cache.`);
         } else {
@@ -159,8 +168,7 @@ export default class StateManager extends _event {
 
     // Determine if anchor is valid for load
     validAnchor (e, anchor) {
-        return (
-            (anchor.href && anchor.href.length) &&
+        return _matches(anchor, 'a') && (
             // Ignore modified clicks.
             (e.button !== 0) ||
             !(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) ||
@@ -181,28 +189,33 @@ export default class StateManager extends _event {
 
     // On the click of an anchor, ensure link is valid
     anchorClick (e) {
-        let anchor = e.currentTarget;
+        let anchor = e.target; 
         if (this.validAnchor(e, anchor)) {
             // Stop propagation so that event doesn't fire on parent element.
             e.stopPropagation();
             e.preventDefault();
 
             this.emit("before", [anchor, this.containers], this);
+            this.loadingState(anchor.href);
             this.load(anchor.href); // Load new page
+
+            console.log(`%c[Anchor Click] - %cLoading ${anchor.href}.`, 'color:#f3ff35', 'color:#eee');
         }
     }
 
     // On Hover of an anchor reuest the anchor href 
     anchorHover (e) {
-        let anchor = e.currentTarget;
+        let anchor = e.target; 
         if (this.validAnchor(e, anchor)) {
             // Stop propagation so that event doesn't fire on parent element.
             e.stopPropagation();
 
-            _log(anchor);
             // If URL is new request and cache it
             if (!this.inCache(anchor.href)) this.request(anchor.href);
+            this.emit("prefetch", [anchor.href, this], this);
             this.prefetchState(anchor.href);
+
+            console.log(`%c[Page Prefetch] - %cPrefetching ${anchor.href}.`, 'color:#f3ff35', 'color:#eee');
         }
     }
 
@@ -240,10 +253,11 @@ export default class StateManager extends _event {
             scrollTo(currentY, "800ms");
 
             // Striphash
-            let url = this.stripHash(href);
+            let url = this.stripHash(window.location.href);
             let currentURL = this.stripHash(this.currentURL);
             if (currentURL !== url) {
-                this.load(url).render(url);
+                this.popState = true;
+                this.load(url);
             }
         }
     }
@@ -258,13 +272,31 @@ export default class StateManager extends _event {
             },
             "prefetch": () => {},
             "completed": url => {
-                this.render(url);
-                this.pushState(url);
+                if (this.getStatus(url) !== "prefetch") {
+                    this.render(url);
+                    this.pushState(url);
+                }
             },
             "after": (oldcontainers, newcontainers) => {
-                each(oldcontainers, (container, i) => {
-                    replaceWith(container, newcontainers[i]);
-                });
+                try {
+                    each(oldcontainers, (container, i) => {
+                        // replaceWith(container, newcontainers[i]);
+                        container.outerHTML = newcontainers[i].outerHTML;
+                    });
+
+                    let $$el = this.containers = el(this.opts.container);
+                    this._events = {}; // Event info.
+                    this._emit = [];  // Store events set to be emitted
+
+                    on($$el, "click", this.anchorClick.bind(this));
+                    on($$el, "mouseover touchstart", this.anchorHover.bind(this));
+                } catch (e) {
+                    _log("outerHTML error");
+                }
+                _log(newcontainers[0]);
+
+                // new StateManager(this.opts);
+                this.popState = false;
             }
         });
 

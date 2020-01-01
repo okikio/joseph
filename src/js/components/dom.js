@@ -1,4 +1,4 @@
-import { _matches, _is, _fnval, _capital, keys } from "./util";
+import { _is, _fnval, _capital, keys } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
@@ -33,6 +33,17 @@ export let first = _el => {
 export let last = _el => {
     let el = get(_el, -1);
     return el && !_is.obj(el) ? el : new ele(el);
+};
+
+// The matches() method checks to see if the Element would be selected by the provided selectorString -- in other words -- checks if the element "is" the selector.
+export let _matches = (ele, sel) => {
+    if (_is.undef(ele)) return;
+    let matchSel = _is.el(sel) ? el => {
+        var matches = [el], i = matches.length;
+        while (--i >= 0 && matches[i] !== ele);
+        return i > -1;
+    } : ele.matches || ele.msMatchesSelector || ele.webkitMatchesSelector;
+    if (matchSel) return matchSel.call(ele, sel);
 };
 
 // Support the Element Object as an Array
@@ -183,9 +194,9 @@ export let siblings = (_el, sel) => {
 /* - DOM Manipulation - */
 // Remove elements in the current collection from their parent nodes, effectively detaching them from the DOM.
 export let remove = _el => {
-    return each(_el, el => {
-        if (_is.def(el.parentNode));
-            el.parentNode.removeChild(el);
+    return each(_el, $el => {
+        if (_is.usable($el.parentNode))
+            $el.parentNode.removeChild($el);
     });
 };
 
@@ -206,7 +217,7 @@ let _insert = (pos, _target) => {
     let inside = pos === "inside";
     return (_el, ...args) => {
         // Arguments can be nodes, arrays of nodes, Element objects and HTML strings
-        _el = el(el);
+        _el = el(_el);
         let clone = _el.length > 1;
         let nodes = _map(args, arg => {
             if (_is.arr(arg)) {
@@ -368,6 +379,17 @@ export let html = (_el, ...args) => {
             let originHTML = el.innerHTML;
             append(empty(el), _fnval(html, [originHTML, idx], el));
         }) : (_el.length ? get(_el, 0).innerHTML : null);
+};
+
+// Get or set HTML element in the collection. When no content given, returns innerHTML of the first element.
+export let outerHTML = (_el, ...args) => {
+    let [html] = args;
+    _el = el(_el);
+    return args.length ?
+        each(_el, (el, idx) => {
+            let originHTML = el.outerHTML;
+            append(empty(el), _fnval(html, [originHTML, idx], el));
+        }) : (_el.length ? get(_el, 0).outerHTML : null);
 };
 
 export let text = (_el, ...args) => {

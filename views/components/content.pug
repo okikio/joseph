@@ -33,7 +33,7 @@ mixin link(value)
   - let _class = _value.class;
   - let _href = _value.href;
 
-  a(href=_href class=_class tabindex="0" title=_content)= _content
+  a(href=_href class=_class tabindex="0" title=_content data-state-change)= _content
     block
 
 

@@ -314,7 +314,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            ['src/js/app.vendor.js', {
+            !dev ? ['src/js/app.vendor.js', {
             opts: { allowEmpty: true },
             pipes: [
                 debug ? null : init(), // Sourcemaps init
@@ -337,7 +337,7 @@ task("js", () =>
                 debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
-        }]
+        }] : null
     ])
 );
 
