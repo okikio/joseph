@@ -15,7 +15,6 @@ tasks:
       nvm alias default 13 && 
       nvm use 13 && 
       npm install -g gulp pnpm &&
-      pnpm add -g pnpm && 
       pnpm install && 
       pnpm update && 
       pnpm run watch
