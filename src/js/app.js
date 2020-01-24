@@ -37,8 +37,6 @@ try {
     };
 
     each(_layer, $layer => {
-        let header = get(find($layer, ".layer-header"), 0);
-        let main = get(find($layer, ".layer-main"), 0);
         let layer_image = find($layer, ".layer-image");
         let isHero = hasClass($layer, "layer-hero-id");
         
@@ -48,8 +46,6 @@ try {
             let clientRect = offset($img);
             
             _images.push({
-                header: isHero ? header : null,
-                main: isHero ? main : null,
                 overlay, load_img,
                 target: $img,
                 clientRect,
@@ -92,7 +88,7 @@ try {
         if (width(window) > 500) {
             _images.forEach(data => {
                 if (hasClass(data.target, "effect-parallax")) {
-                    let { clientRect, load_img, overlay, header, main, isHero } = data;
+                    let { clientRect, load_img, overlay, isHero } = data;
                     let { top, height } = clientRect;
                     let dist = _scrollTop - top + 60;
 
@@ -103,21 +99,6 @@ try {
                         style(load_img, {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
-                        
-                        if (isHero) {
-                            let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
-                            let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
-
-                            header && style(header, {
-                                transform: `translateY(${translate}px)`,
-                                opacity
-                            });
-                            
-                            main && style(main, {
-                                transform: `translateY(${translate}px)`,
-                                opacity
-                            });
-                        }
                     }
                 }
             });

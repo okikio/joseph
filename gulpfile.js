@@ -17,6 +17,7 @@ const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
 const { html, js } = require('gulp-beautify'); 
+const buble = require("@rollup/plugin-buble");
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
@@ -300,7 +301,7 @@ task("js", () =>
                                 rollupJSON(), // Parse JSON Exports
                                 commonJS(), // Use CommonJS to compile the program
                                 nodeResolve(), // Bundle all Modules
-                                rollupBabel(babelConfig[type]) // Babelify file for uglifing
+                                gen ? buble() : rollupBabel(babelConfig[type]) // Babelify file for uglifing
                             ],
                             onwarn
                         }, gen ? 'umd' : 'es'),
@@ -325,7 +326,7 @@ task("js", () =>
                         rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
-                        rollupBabel(babelConfig.general) // ES5 file for uglifing
+                        buble() // : rollupBabel(babelConfig[type]) // Babelify file for uglifing
                     ],
                     onwarn
                 }, 'umd'),
@@ -376,7 +377,7 @@ task("client", () =>
                         rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
-                        rollupBabel(babelConfig.general) // Babelify file for uglifing
+                        buble() // rollupBabel(babelConfig.general) // Babelify file for uglifing
                     ],
                     onwarn
                 }, 'umd'),
@@ -452,8 +453,9 @@ task('watch', () => {
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
     watch('src/**/*.scss', watchDelay, series('css', 'inline'));
-    watch('src/**/*.js', watchDelay, series('js', 'inline', 'reload'));
-    watch(['client/**/*'], watchDelay, series('client', 'reload'));
+    watch('src/**/*.js', watchDelay, series('js', 'inline'));
+    watch(['client/**/*'], watchDelay, series('client'));
+    watch('public/**/*.html', watchDelay, series('reload'));
     // IT works 
     // watch('src/**/app.vendor.js', watchDelay, series('js', 'inline', 'reload'));
     // watch(['public/**/*', '!public/css/*.css', '!public/**/*.html', '!public/js/*.js'])
