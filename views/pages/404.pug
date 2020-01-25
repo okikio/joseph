@@ -1,0 +1,35 @@
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/layer.pug
+include ../components/text.pug
+include ../components/link.pug
+
+block pageInfo
+	-
+		let page = {
+			url: "/404",
+			name: "404",
+			title: "Ooops!",
+			description: "Sorry, the page you are looking for doesn't exist. How about going back home."
+		};
+
+block content
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-enlarge-vert"
+	})
+		+layout({
+			class: "layout-contain-small style-line-height-double"
+		})
+			+head("404, Page Not Found.")
+			+main({
+				class: "style-center",
+			})
+				+p("Sorry, the page you are looking for doesn't exist. How about going back ")
+				+link({
+					href: "/",
+					class: "style-italic style-underline",
+					content: "home"
+				})
+				+p(".")

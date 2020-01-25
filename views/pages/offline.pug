@@ -1,0 +1,28 @@
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/layer.pug
+include ../components/text.pug
+
+block pageInfo
+	-
+		let page = {
+			url: "/offline",
+			name: "offline",
+			title: "Yikes you're offline!",
+			description: "Psshhh, psshhh, you are cutting off, psshhh. You are currently offline. Reload the page or try again later."
+		};
+
+block content
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-enlarge-vert"
+	})
+		+layout({
+			class: "layout-contain-small style-line-height-double"
+		})
+			+head("Yikes you're offline!")
+			+main({
+				class: "style-center",
+			})
+				+p("Psshhh, psshhh, you are cutting off, psshhh. You are currently offline. Reload the page or try again later.")

@@ -13,7 +13,7 @@ mixin navbar(value = {})
       .layout-contain-large.navbar-layout
         .navbar-head
           +link({
-            href: "/" + (dev ? "index.html" : "index"),
+            href: "/",
             class: "navbar-title style-primary style-primary-dark-hover style-primary-focus"
           })
             img.navbar-logo(src="/assets/gear-svg-icon-logo-color-2.svg" alt="The Joseph Ojo logo." inline)
@@ -31,5 +31,8 @@ mixin navbar(value = {})
           ul.navbar-list
             each tab, i in tabs
               li
-                a.navbar-link(href=`/${tab}` class=`${i == focusIndex ? "navbar-link-focus" : ""}`)
+                +link({
+                  href: `/${tab}`,
+                  class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
+                })
                   span.navbar-link-content= tab

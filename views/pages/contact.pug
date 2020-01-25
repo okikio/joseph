@@ -1,0 +1,51 @@
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/layer.pug
+include ../components/text.pug
+
+block pageInfo
+	-
+		let page = {
+			url: "/contact",
+			name: "contact",
+			title: "Let's talk.",
+			description: "Let's talk, do you have a project that requires passion and dedication, then let's talk..."
+		};
+
+block content
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-enlarge-vert"
+	})
+		+layout({
+			class: "layout-contain style-line-height-double"
+		})
+			+head
+				h1.layout-padding-dull--device-phone.layout-margin-dull--device-phone.style-font-20--device-phone.style-primary-dark.style-bold.style-uppercase Say Hello
+			+main
+				span(itemprop='author') Hey, I am Joseph Ojo, the man, the myth, the legend, let's talk.
+				section(itemtype='https://schema.org/Person')
+					+p("You can find me at:")
+					+link({
+						href: "https://www.linkedin.com/in/o-josephojo/",
+						class: "layout-margin-horz-small",
+						content: "LinkedIn"
+					})
+					span -
+					+link({
+						href: "https://github.com/laoluojo",
+						class: "layout-margin-horz-small",
+						content: "Github"
+					})
+					span -
+					span(itemprop="email")
+						+link({
+							href: "mailto:laoluojo@gmail.com",
+							class: "layout-margin-horz-small",
+							content: "Email"
+						})
+					section.layout-margin-vert-top(itemprop='description')
+						p.layout-inline.layout-margin-dull(lorem="3")
+						span(itemtype='https://schema.org/EducationalOrganization' itemprop="alumniOf")
+							|  I am an alumni of OnTech - Ontario Tech University

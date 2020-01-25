@@ -10,26 +10,21 @@ const nodeResolve = require('@rollup/plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
 const querySelector = require("posthtml-match-helper");
 const browserSync = require('browser-sync').create();
-const { init, write } = require('gulp-sourcemaps');
 const commonJS = require('@rollup/plugin-commonjs');
+const { init, write } = require('gulp-sourcemaps');
 const rollupBabel = require('rollup-plugin-babel');
-// const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
-const { html } = require('gulp-beautify'); // , js
-const buble = require("@rollup/plugin-buble");
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
 const posthtml = require('gulp-posthtml');
 const imagemin = require('gulp-imagemin');
+const { html } = require('gulp-beautify');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
-// const changed = require('gulp-changed');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
-// const { writeFile } = require("fs");
-const icons = debug ? {} : require('microicon');
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
@@ -54,111 +49,6 @@ let srcMapsWrite = ["../maps", {
         return `/maps/${file.relative}.map`;
     }
 }];
-
-let posthtmlOpts = [
-    // Test processes
-    require('posthtml-textr')({}, [
-        require('typographic-single-spaces')
-    ]),
-    require('posthtml-lorem')(),
-    debug ? () => {} : tree => {
-        let parse = (_src = "src") => node => {
-            let url = node.attrs[_src].replace(/&amp;/g, "&");
-            let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
-            let query = URLObj.searchParams;
-            let queryString = URLObj.search;
-
-            let height = query.get("h");
-            let width = query.get("w") || 'auto';
-            let crop = query.get("crop");
-            let effect = query.get("effect");
-            let quality = query.get("quality");
-            let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect },
-                    /svg/g.test(url) ? { fetch_format: null } : {});
-
-            node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
-                `${assetURL + url.replace(queryString, '')}` :
-                assets.url(url.replace(queryString, ''), _imgURLConfig)
-            ).replace("/assets/", "");
-            return node;
-        };
-
-        tree.match(querySelector("[src^='/assets/']"), parse());
-        tree.match(querySelector("[href^='/assets/']"), parse("href"));
-        tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
-    },
-    debug ? () => {} : async tree => {
-        let warnings, promises = [];
-        tree.match({ tag: 'img' }, node => {
-            if (promises.length >= 2) return node; // Don't inline everything
-            if (node.attrs && node.attrs.src && "inline" in node.attrs) {
-                const _src = node.attrs.src;
-                if (!_src.includes("data:image/")) {
-                    promises.push(
-                        new Promise((resolve, reject) => {
-                            https.get(_src, res => {
-                                let contentType = res.headers["content-type"];
-                                let body = `data:${contentType};base64,`;
-
-                                res.setEncoding('base64');
-                                res.on('data', data => { body += data });
-                                res.on('end', () => {
-                                    node.attrs.src = body;
-                                    resolve(node);
-                                });
-                            }).on('error', err => {
-                                console.error(`The image with the src: ${_src} `, err);
-                                reject(node);
-                            });
-                        })
-                    );
-                }
-            }
-
-            return node;
-        });
-
-        await Promise.all(promises);
-
-        // Filter errors from messages as warnings
-        warnings = tree.messages.filter(msg => msg instanceof Error);
-        if (warnings.length) {
-            // Conditionally warn the user about any issues
-            console.warn(`\nWarnings (${warnings.length}):\n${warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
-        }
-
-        // Return the ast
-        return tree;
-    },
-    debug ? () => {} : tree => {
-        tree.match(querySelector("i.icon"), node => {
-            if ("inline" in node.attrs) {
-                const _attrs = node.attrs;
-                const _content = node.content;
-                node = {
-                    tag: 'svg',
-                    attrs: {
-                        width: '24', height: '24',
-                        viewBox: '0 0 24 24',
-                        fill: 'currentcolor',
-                        ..._attrs
-                    },
-                    content: [{
-                        tag: 'path',
-                        attrs: { d: icons[_content] },
-                    }]
-                };
-            }
-
-            return node;
-        });
-    },
-
-    // Dom process
-    debug ? () => { } : require('posthtml-inline-assets')({
-        transforms: { image: false }
-    }),
-];
 
 let minifyOpts = {
     keep_fnames: false, // change to true here
@@ -279,7 +169,7 @@ task("js", () =>
                                 rollupJSON(), // Parse JSON Exports
                                 commonJS(), // Use CommonJS to compile the program
                                 nodeResolve(), // Bundle all Modules
-                                gen ? buble() : rollupBabel(babelConfig[type]) // Babelify file for uglifing
+                                rollupBabel(babelConfig[type]) // Babelify file for uglifing
                             ],
                             onwarn
                         }, gen ? 'umd' : 'es'),
@@ -304,7 +194,7 @@ task("js", () =>
                         rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
-                        buble() // : rollupBabel(babelConfig[type]) // Babelify file for uglifing
+                        rollupBabel(babelConfig.general) // Babelify file for uglifing
                     ],
                     onwarn
                 }, 'umd'),
@@ -322,28 +212,10 @@ task("js", () =>
 
 task("client", () =>
     streamList([
-        ["client/**/*.js", {
-            opts: { allowEmpty: true },
-            pipes: [
-                // Bundle Modules
-                rollup({
-                    plugins: [
-                        builtins(), // Access to builtin Modules
-                        rollupJSON(), // Parse JSON Exports
-                        commonJS(), // Use CommonJS to compile the program
-                        nodeResolve(), // Bundle all Modules
-                        buble() // rollupBabel(babelConfig.general) // Babelify file for uglifing
-                    ],
-                    onwarn
-                }, 'umd'),
-                terser({ ...minifyOpts, toplevel: false }), // Minify the file
-                rename(minSuffix) // Rename
-            ],
-        }], // Output
-        [["client/**/*", "!client/**/*.js", "!client/**/*.{jpg,jpeg,png,ico,svg}"], {
+        [["client/**/*", "!client/**/*.{png,ico,svg}"], {
             opts: { allowEmpty: true }
         }],
-        [["client/**/*.{jpg,png,ico}"], {
+        [["client/**/*.{png,ico,svg}"], {
             opts: { allowEmpty: true },
             pipes: [ imagemin() ]
         }]
@@ -351,7 +223,7 @@ task("client", () =>
 );
 
 task("gulp:reload", () => {
-    _execSeries("gulp watch", "gulp other");
+    _execSeries("gulp pre-watch", "gulp watch");
     process.exit();
 });
 
@@ -368,9 +240,133 @@ task("git:pull", () =>
     _exec("git pull origin master")
 );
 
-task('inline', () =>
+task('posthtml', () =>
     stream('public/*.html', {
-        pipes: [ posthtml(posthtmlOpts) ]
+        pipes: [
+            posthtml([
+                // Test processes
+                require('posthtml-textr')({}, [
+                    require('typographic-single-spaces')
+                ]),
+                require('posthtml-lorem')(),
+            ])
+        ]
+    })
+);
+
+task('inline-assets', () =>
+    stream('public/*.html', {
+        pipes: [
+            posthtml([
+                debug ? () => {} : tree => {
+                    let parse = (_src = "src") => node => {
+                        let url = node.attrs[_src].replace(/&amp;/g, "&");
+                        let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
+                        let query = URLObj.searchParams;
+                        let queryString = URLObj.search;
+
+                        let height = query.get("h");
+                        let width = query.get("w") || 'auto';
+                        let crop = query.get("crop");
+                        let effect = query.get("effect");
+                        let quality = query.get("quality");
+                        let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect },
+                                /svg/g.test(url) ? { fetch_format: null } : {});
+
+                        node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
+                            `${assetURL + url.replace(queryString, '')}` :
+                            assets.url(url.replace(queryString, ''), _imgURLConfig)
+                        ).replace("/assets/", "");
+                        return node;
+                    };
+
+                    tree.match(querySelector("[src^='/assets/']"), parse());
+                    tree.match(querySelector("[href^='/assets/']"), parse("href"));
+                    tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
+                },
+                debug ? () => {} : async tree => {
+                    let warnings, promises = [];
+                    tree.match({ tag: 'img' }, node => {
+                        if (promises.length >= 2) return node; // Don't inline everything
+                        if (node.attrs && node.attrs.src && "inline" in node.attrs) {
+                            const { inline, async, ..._attrs } = node.attrs;
+                            const _src = _attrs.src;
+                            if (!_src.includes("data:image/")) {
+                                promises.push(
+                                    new Promise((resolve, reject) => {
+                                        https.get(_src, res => {
+                                            let contentType = res.headers["content-type"];
+                                            let body = `data:${contentType};base64,`;
+
+                                            res.setEncoding('base64');
+                                            res.on('data', data => { body += data });
+                                            res.on('end', () => {
+                                                node.attrs = { ..._attrs, src: body };
+                                                resolve(node);
+                                            });
+                                        }).on('error', err => {
+                                            console.error(`The image with the src: ${_src} `, err);
+                                            reject(node);
+                                        });
+                                    })
+                                );
+                            }
+                        }
+
+                        return node;
+                    });
+
+                    await Promise.all(promises);
+
+                    // Filter errors from messages as warnings
+                    warnings = tree.messages.filter(msg => msg instanceof Error);
+                    if (warnings.length) {
+                        // Conditionally warn the user about any issues
+                        console.warn(`\nWarnings (${warnings.length}):\n${warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
+                    }
+
+                    // Return the ast
+                    return tree;
+                },
+                debug ? () => {} : tree => {
+                    let icons = debug ? {} : require('microicon');
+                    tree.match(querySelector("i.icon"), node => {
+                        if ("inline" in node.attrs) {
+                            const { inline, async, ..._attrs } = node.attrs;
+                            const _content = node.content;
+                            node = {
+                                tag: 'svg',
+                                attrs: {
+                                    width: '24', height: '24',
+                                    viewBox: '0 0 24 24',
+                                    fill: 'currentcolor',
+                                    ..._attrs
+                                },
+                                content: [{
+                                    tag: 'path',
+                                    attrs: { d: icons[_content] },
+                                }]
+                            };
+                        }
+
+                        return node;
+                    });
+                },
+            ])
+        ]
+    })
+);
+
+task('inline-js-css', () =>
+    stream('public/*.html', {
+        pipes: [
+            posthtml([
+                // Dom process
+                debug ? () => { } : require('posthtml-inline-assets')({
+                    transforms: { image: false }
+                }),
+            ])
+        ]
     })
 );
 
@@ -386,19 +382,19 @@ task('reload', done =>
 task('dev', parallel("client", series(parallel("html", "js"), "css")));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', parallel(series("dev", "inline")));
+task('default', parallel(series("dev", "posthtml", "inline-assets", "inline-js-css")));
 
-// Gulp task to minify all files without -js
-task('other', parallel("client", series("html", "css", "inline")));
+// Gulp task to run before watching for file changes
+task('pre-watch', parallel(series("dev", "posthtml", "inline-assets")));
 
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulp:reload', 'reload'));
+    watch(['gulpfile.js', 'postcss.config.js'], watchDelay, series('gulp:reload', 'reload'));
 
-    watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
+    watch('views/**/*.pug', watchDelay, series('html', 'css', "posthtml", "inline-assets", 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));
-    watch('src/**/*.js', watchDelay, series('js', 'inline', 'reload'));
-    watch(['client/**/*'], watchDelay, series('client', 'reload'));
+    watch('src/**/*.js', watchDelay, series('js', 'reload'));
+    watch(['client/**/*'], watchDelay, series('client', "inline-assets", 'reload'));
 });

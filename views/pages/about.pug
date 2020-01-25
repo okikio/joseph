@@ -1,0 +1,46 @@
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/layer.pug
+include ../components/text.pug
+include ../components/hero.pug
+
+block pageInfo
+	-
+		let page = {
+			url: "/about",
+			name: "about",
+			title: "A little about me.",
+			description: "My story. What drove me to become a Mechatronics Engineer..."
+		};
+
+block content
+	//- Hero layer
+	+hero({
+		title: "Subpage",
+		content: "...",
+		image: {
+			class: "effect-parallax hero-img",
+			src: "/assets/white-flower",
+			alt: "A city Image"
+		}
+	})
+
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
+	})
+		+layout({
+			class: "layout-shorten layout-contain style-line-height-double"
+		})
+			+head("Lorem itpsuim")
+			+main({
+				class: "layout-padding-vert-small"
+			})
+				span.layout-margin-horz-left-large.layout-inline-block= " "
+				p.layout-inline.layout-margin-dull(lorem="3")
+				+link({
+					href: "/",
+					class: "layout-margin-horz-left-mini",
+					content: "Click here"
+				})

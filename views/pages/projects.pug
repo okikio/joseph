@@ -1,0 +1,62 @@
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/banner.pug
+include ../components/layer.pug
+include ../components/text.pug
+
+block pageInfo
+	-
+		let page = {
+			url: "/projects",
+			name: "projects",
+			title: "A showcase of some of my works.",
+			description: "A potfolio of projects I have completed, and even some that are still on-going..."
+		};
+
+block content
+	//- Banner layer
+	+banner({
+		title: "Projects",
+		content: "...",
+		image: {
+			class: "effect-parallax hero-img",
+			src: "/assets/blue-sky",
+			alt: "A city Image"
+		}
+	})
+
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz"
+	})
+		+layout({
+			class: "layout-shorten layout-contain"
+		})
+			+head("Lorem itpsuim")
+			+main({
+				class: "layout-padding-vert-small"
+			})
+				span.layout-margin-horz-left-large.layout-inline-block= " "
+				p.layout-inline.layout-margin-dull(lorem="3")
+				+link({
+					href: "/",
+					class: "layout-margin-horz-left-mini",
+					content: "Click here"
+				})
+
+	//- Next page layer
+	+layer({
+		class: "layout-padding-horz layer-dark"
+	})
+		+layout({
+			class: "layout-contain layout-padding-horz layout-padding-top"
+		})
+			section.layout-shorten
+				+head
+					h3.h4.style-center.style-white.style-font-light.style-font-thin.style-spaceout Next
+				+main({
+					class: "style-center layout-padding-vert"
+				})
+					h2.h1.style-bold.style-tertiary.style-500 NASA Rocket Ship
+			.layer-box.layer-box-flat.layer-tertiary-dark.layer-shadow--1.layout-block

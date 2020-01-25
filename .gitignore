@@ -96,3 +96,5 @@ core.gitpod.*
 core.git.*
 core.node.*
 /public
+pnpm-debug.log
+*debug.log

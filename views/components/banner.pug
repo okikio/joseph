@@ -6,7 +6,7 @@ mixin banner(value = {})
   .layer.layer-hero-id
     article.layout-padding-bottom.layout-padding-dull-top
       .layer-hero.banner-mode
-        +image(img)
+        +image(img)(inline)
 
         .layout-padding-horz-sub-large--device-phone.layout-padding-horz-sub-large--device-tablet.layout-padding-horz-sub-large--device-laptop.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center.layout-padding-vert-large--device-phone.layout-padding-vert-huge--device-tablet.layout-padding-vert-huge--device-laptop.layout-padding-vert-huge--device-desktop
           .layer-content.layout-contain
@@ -15,7 +15,7 @@ mixin banner(value = {})
             .layer-main
               h2.h5.style-font-family-bold.style-font-weight-300.style-white.layer-main-text!= content
             .layout-align-self-end
-              button.layer-footer.btn.btn-hover.layer-shadow.layer-round.layout-padding-smallest.layer-primary-dark.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary.layer-hero-scroll-down(type="button" tabindex="0")
+              button.layer-footer.btn.btn-hover.layer-shadow.layer-round.layout-padding-smallest.layer-white.layer-secondary-light-hover.layer-secondary-focus.style-primary.style-surface-hover.style-surface-focus.layer-hero-scroll-down(type="button" tabindex="0")
                 span.btn-group
                   i.icon.style-font-sz-24(inline) expand_more
                   span.btn-section

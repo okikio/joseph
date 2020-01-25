@@ -1,11 +1,11 @@
 mixin p(value = {})
   if typeof value == "string"
-    p.style-line-height-double.layout-padding-vert-small !{value}
+    p.style-line-height-double.layout-padding-vert-small.layout-margin-dull.layout-inline !{value}
       block
 
   else
     - let { content, type } = value;
     - let _class = value.class;
 
-    p(class=_class) !{content}
+    p.layout-margin-dull(class=_class) !{content}
       block

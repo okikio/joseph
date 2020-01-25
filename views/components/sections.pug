@@ -3,7 +3,7 @@ mixin head(value = {})
 
   .layer-header(class=_class)
     if typeof value == "string"
-      h3.h4.layout-padding-dull--device-phone.layout-margin-dull--device-phone.style-center.style-font-20--device-phone= value
+      h3.h4.layout-padding-dull--device-phone.layout-margin-dull--device-phone.style-center.style-font-20--device-phone.style-primary-dark.style-bold= value
     block
 
 mixin main(value = {})
@@ -11,7 +11,7 @@ mixin main(value = {})
 
   .layer-main(class=_class)
     if typeof value == "string"
-      span.style-line-height-double--tablet.style-line-height-double--laptop.style-line-height-double--desktop= value
+      p.style-line-height-double--tablet.style-line-height-double--laptop.style-line-height-double--desktop= value
     block
 
 mixin foot(value = {})

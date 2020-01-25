@@ -1,4 +1,4 @@
-extends ../layout.pug
+extends ../app.pug
 include ../components/sections.pug
 include ../components/layout.pug
 include ../components/column.pug
@@ -25,16 +25,17 @@ block content
 		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
 	})
 		+layout({
-			class: "layout-shorten layout-contain"
+			class: "layout-shorten layout-contain style-line-height-double"
 		})
 			+head("Lorem itpsuim")
 			+main({
-					class: "style-line-height-double"
+				class: "layout-padding-vert-small"
 			})
-				p.layout-padding-top.layout-margin-left-large.layout-inline-block= " "
-				p(lorem="2")
+				span.layout-margin-horz-left-large.layout-inline-block= " "
+				p.layout-inline.layout-margin-dull(lorem="3")
 				+link({
-					href: "/",
+					href: "/about",
+					class: "layout-margin-horz-left-mini",
 					content: "Click here"
 				})
 
@@ -55,7 +56,7 @@ block content
 						})
 							+p({
 								content: "03/03",
-								class: "style-bold style-font-18--device-phone style-font-24"
+								class: "style-font-18--device-phone style-font-24 style-bold"
 							})
 
 						//- 2nd Column
@@ -64,22 +65,22 @@ block content
 						})
 							+p({
 								content: "2018",
-								class: "style-bold layout-block style-font-18--device-phone style-font-24"
+								class: "layout-block style-font-18--device-phone style-font-24 style-bold "
 							})
 							+p({
 								content: "E-commerse",
-								class: "style-bold layout-block style-font-18--device-phone style-font-24"
+								class: "layout-block style-font-16--device-phone style-font-18"
 							})
 							+p({
 								content: "Design Executive",
-								class: "style-bold layout-block style-font-18--device-phone style-font-24"
+								class: "layout-block style-font-16--device-phone style-font-18"
 							})
 
 						//- 3rd Column
 						+column({
 							class: "layout-col-7"
 						})
-							p.style-font-15--device-phone.style-font-18(lorem="1")
+							p.style-font-15--device-phone.style-font-18.layout-margin-dull(lorem="1")
 
 	//- Banner layer 1
 	+layer({
@@ -89,14 +90,10 @@ block content
 			class: "layout-contain-large layout-enlarge-vert"
 		})
 			+head({
-					class: "layout-padding-vert style-bold-font style-600 h2 style-color-white"
+					class: "style-center"
 			})
-				p Got your attention.
-				p= " "
-				+p({
-					class: "style-color-tertiary-dark",
-					content: "Good!"
-				})
+				h2.layout-padding-vert.style-bold-font.style-600.style-color-white  Got your attention
+					span.style-color-tertiary-dark . Good!
 
 	//- Banner layer 2
 	+layer({
@@ -106,14 +103,10 @@ block content
 			class: "layout-contain-large layout-enlarge-vert"
 		})
 			+head({
-					class: "layout-padding-vert style-bold-font style-600 h2 style-color-white"
+					class: "style-center"
 			})
-				p Got your attention.
-				p= " "
-				+p({
-					class: "style-color-tertiary-dark",
-					content: "Good!"
-				})
+				h2.layout-padding-vert.style-bold-font.style-600.style-color-white  Got your attention
+					span.style-color-tertiary-dark . Good!
 
 	//- Banner layer 3
 	+layer({
@@ -123,14 +116,10 @@ block content
 			class: "layout-contain-large layout-enlarge-vert"
 		})
 			+head({
-					class: "layout-padding-vert style-bold-font style-600 h2 style-color-dark"
+					class: "layout-padding-vert style-bold-font style-600 h2 style-color-dark style-center"
 			})
-				p Got your attention.
-				p= " "
-				+p({
-					class: "style-color-secondary-dark",
-					content: "Good!"
-				})
+				h2.layout-padding-vert.style-bold-font.style-600.style-color-dark  Got your attention
+					span.style-color-secondary-dark . Good!
 
 	//- Breakthrough layer
 	+layer
@@ -147,14 +136,14 @@ block content
 					})
 						+p({
 							content: "Breakthrough<br>Limits!",
-							class: "style-color-primary style-bold style-600 style-font-18--device-phone style-font-24 h3"
+							class: "style-color-primary style-bold-font style-600 style-font-15--device-phone style-line-height h3"
 						})
 
 					//- 2nd Column
 					+column({
 						class: "layout-col-6"
 					})
-						p.style-font-15--device-phone.style-font-18.layout-block(lorem="1")
+						p.style-font-15--device-phone.style-font-18.layout-block.layout-margin-dull(lorem="1")
 
 	//- Image Column layer
 	+layer

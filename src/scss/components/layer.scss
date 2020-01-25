@@ -39,13 +39,11 @@
             width: 100%;
             left: 0;
             top: 0;
-        }       
-        
+        }
+
         &-preview-img-card {
-            // transition: opacity 0.2s ease;
-            will-change: opacity;
             position: absolute;
-            background: $black;
+            background: $dark;
             display: block;
             height: 100%;
             width: 100%;
@@ -53,17 +51,7 @@
             opacity: 1;
             left: 0;
             top: 0;
-
-            &.load-animation {
-                animation: load 0.5s ease infinite alternate;
-            }
         }
-
-        @keyframes load {
-            to {
-                opacity: 0.75;
-            }
-        } 
 
         &-overlay {
             background: darken(#53507c, 20%);
@@ -75,7 +63,7 @@
             z-index: 5;
             left: 0;
             top: 0;
-            
+
             @at-root {
                 .effect-parallax .layer-image-overlay {
                     opacity: 0.35;
@@ -87,7 +75,7 @@
             filter: blur(3px);
         }
     }
-    
+
     &-shadow,
     %shadow {
         box-shadow: 0 0px 35px 5px change-color($primary-dark, $alpha: 0.23);// rgba(0, 0, 40, 0.23);

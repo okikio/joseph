@@ -1,27 +1,28 @@
 mixin image(value = {})
-  - let _class = value.class;
-  - let src = value.src || "/assets/city";
-  - let alt = value.alt || "Alternate text";
+	- let _class = value.class;
+	- let src = value.src || "/assets/city";
+	- let alt = value.alt || "Alternate text";
 
-  .layer-image(class=_class)
-    .layer-image-preview-img-card.load-animation
-    .load-img
-      .img-contain
-        picture
-          each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-            - let val = n > 5 && n <= 8 ? 70 : (n <= 5 ? Math.max(70 - (n * 5), 45) * 10 : 100);
-            source(media=`(max-width: ${n}00px)` srcset!=`${_src}.webp?w=${n + 1}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00px` width=`${n}00px` type='image/webp')
-            source(media=`(max-width: ${n}00px)` srcset!=`${_src}.jpg?w=${n + 1}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00px` width=`${n}00px` type='image/jpeg')
+	.layer-image(class=_class)
+		.layer-image-preview-img-card
+		.load-img
+			.img-contain
+				picture
+					each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+						- let val = n > 5 && n <= 8 ? 70 : (n <= 5 ? Math.max(70 - (n * 5), 45) * 10 : 100);
+						source(media=`(max-width: ${n}00px)` srcset!=`${src}.webp?w=${n + 1}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00px` width=`${n}00px` type='image/webp')
+						source(media=`(max-width: ${n}00px)` srcset!=`${src}.jpg?w=${n + 1}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00px` width=`${n}00px` type='image/jpeg')
 
-          source(media='(min-width: 1200px)' srcset!=`${_src}.webp` sizes="100vw" width="100vw" type='image/webp')
-          source(media='(min-width: 1200px)' srcset!=`${_src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
-          img.core-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw")
-        picture
-          source(srcset!=`${src}.webp?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" type='image/webp')
-          img.placeholder-img(src!=`${src}.jpg?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" alt=alt loading="auto")
-        noscript Javascript is necesscary for this sites awesome experience.
-          picture
-            source(srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
-            source(srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
-            img.no-script-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw")
-    .layer-image-overlay
+					source(media='(min-width: 1200px)' srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
+					source(media='(min-width: 1200px)' srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
+					img.core-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw")
+				picture
+					if !attributes.inline
+						source(srcset!=`${src}.webp?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" type='image/webp')
+					img.placeholder-img(src!=`${src}.jpg?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" alt=alt loading="auto")&attributes(attributes)
+				noscript Javascript is necesscary for this sites awesome experience.
+					picture
+						source(srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
+						source(srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
+						img.no-script-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw")
+		.layer-image-overlay

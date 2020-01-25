@@ -37,13 +37,17 @@
 */
 
 // Variables
+$primary-light: #6832ff;
 $primary: #4500ff;
 $primary-dark: #2d22ca;
+$secondary-light: #ff3887;
 $secondary: #ff0266;
 $secondary-dark: #dc0057;
+$tertiary-light: #ffe851;
 $tertiary: #ffde03;
 $tertiary-dark: #e5c702;
-$background: #f5f8fc;
+
+$background: #ecf1f7;
 $surface: #fff;
 
 $white: #fff;
@@ -94,12 +98,16 @@ $size-nano: 2px;
 
 // --google-blue: #3367d6
 $colors: (
+    "primary-light": $primary-light,
     "primary": $primary,
     "primary-dark": $primary-dark,
+    "secondary-light": $secondary-light,
     "secondary": $secondary,
     "secondary-dark": $secondary-dark,
+    "tertiary-light": $tertiary-light,
     "tertiary": $tertiary,
     "tertiary-dark": $tertiary-dark,
+
     "background": $background,
     "surface": $surface,
     "transparent": transparent,

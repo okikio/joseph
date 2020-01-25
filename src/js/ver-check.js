@@ -14,6 +14,8 @@ export let isModern = () => {
     return true;
 };
 
+window.isModern = isModern();
+
 // Add scripts to be reqested to the head tag
 export let _require = (src, fn) => {
     let head = document.getElementsByTagName('head')[0];
@@ -30,7 +32,7 @@ export let _require = (src, fn) => {
 };
 
 // Test for IE and older versions of Edge
-if (/msie|trident|edge/g.test(userAgent.toLowerCase()) || !isModern()) {
+if (/msie|trident|edge/g.test(userAgent.toLowerCase()) || !window.isModern) {
     _require("https://cdnjs.cloudflare.com/ajax/libs/nwmatcher/1.4.2/nwmatcher.min.js");
     _require("https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js");
     _require("https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.j");

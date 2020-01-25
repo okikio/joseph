@@ -1,0 +1,60 @@
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/layer.pug
+include ../components/text.pug
+
+block pageInfo
+	-
+		let page = {
+			url: "/sitemap",
+			name: "sitemap",
+			title: "Lets find you a destination!",
+			description: "A little lost, here is a map..."
+		};
+
+block content
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-enlarge-vert"
+	})
+		+layout({
+			class: "layout-contain-small"
+		})
+			+head("The sitemap!")
+			ul
+				//- Index
+				li
+					+link({
+						href: "/",
+						content: "Home"
+					})
+					+p(" - Homepage galor, its the begining of our little adventure. Do you want to go back?")
+					br
+
+				//- About
+				li
+					+link({
+						href: "/about",
+						content: "About"
+					})
+					+p(" - The story of me, myself and I. Shall we begin?")
+					br
+
+				//- Projects
+				li
+					+link({
+						href: "/projects",
+						content: "Projects"
+					})
+					+p(" - Hardwork and perseverance, hear all about it.")
+					br
+
+				//- Contact
+				li
+					+link({
+						href: "/contact",
+						content: "Contact"
+					})
+					+p(" - Do you have a project that demands perservance and passion? Then, lets talk.")
+					br
