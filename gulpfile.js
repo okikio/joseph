@@ -16,7 +16,7 @@ const rollupBabel = require('rollup-plugin-babel');
 const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
-const { html, js } = require('gulp-beautify'); 
+const { html, js } = require('gulp-beautify');
 const buble = require("@rollup/plugin-buble");
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
@@ -86,9 +86,9 @@ let posthtmlOpts = [
             let crop = query.get("crop");
             let effect = query.get("effect");
             let quality = query.get("quality");
-            let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect }, 
+            let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect },
                     /svg/g.test(url) ? { fetch_format: null } : {});
-                    
+
             node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
                 `${assetURL + url.replace(queryString, '')}` :
                 assets.url(url.replace(queryString, ''), _imgURLConfig)
@@ -140,7 +140,7 @@ let posthtmlOpts = [
         }
         // Return the ast
         return tree;
-    }, 
+    },
     tree => {
         tree.match(querySelector("i.icon"), node => {
             if ("inline" in node.attrs) {
@@ -177,7 +177,6 @@ let posthtmlOpts = [
 ];
 
 let minifyOpts = {
-    // mangle: { reserved: ["$super"] },
     keep_fnames: false, // change to true here
     toplevel: true,
     compress: {
@@ -288,7 +287,6 @@ task("js", () =>
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                let suffix = gen ? '' : '.modern';
                 return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
@@ -309,13 +307,13 @@ task("js", () =>
                         debug ? null : terser(
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
-                        rename(`app${suffix}.min.js`), // Rename
+                        rename(`${type}.min.js`), // Rename
                         debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            !dev ? ['src/js/app.vendor.js', {
+            [['src/js/**.js', '!src/js/app.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 debug ? null : init(), // Sourcemaps init
@@ -338,7 +336,7 @@ task("js", () =>
                 debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
-        }] : null
+        }]
     ])
 );
 
@@ -456,7 +454,7 @@ task('watch', () => {
     watch('src/**/*.js', watchDelay, series('js', 'inline'));
     watch(['client/**/*'], watchDelay, series('client'));
     watch('public/**/*.html', watchDelay, series('reload'));
-    // IT works 
+    // IT works
     // watch('src/**/app.vendor.js', watchDelay, series('js', 'inline', 'reload'));
     // watch(['public/**/*', '!public/css/*.css', '!public/**/*.html', '!public/js/*.js'])
     //     .on('change', browserSync.reload);

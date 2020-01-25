@@ -1,0 +1,11 @@
+mixin span(value)
+  if typeof value == "string"
+    span.style-line-height-double.layout-padding-vert-small !{value}
+      block
+
+  else
+    - let { content, type } = value;
+    - let _class = value.class;
+
+    span(class=_class) !{content}
+      block

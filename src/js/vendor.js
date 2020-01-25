@@ -1,31 +1,21 @@
+import { isModern } from './ver-check';
 const { fetch } = window;
 const { body } = document;
 
-let _src = v => `./js/${v}.min.js`;
 try {
     let script = document.createElement("script");
-    let check = function () {
-        "use strict";
+    let src = `./js/${isModern() ? "modern" : "general"}.min.js`;
 
-        if (typeof window.Symbol === "undefined" || typeof window.Promise === "undefined") return false;
-        try {
-            Function("class Foo {}") ();
-            Function("let bar = x => x+1;") ();
-            Function("let bez = { a: 'b' }; let box = { b: 'a', ...bez };") ();
-        } catch (e) { return false; }
-
-        return true;
-    };
-
-    let isModern = window.isModern = check();
-    let src = _src(`app${isModern ? ".modern" : ""}`);
-    if (isModern) {
+    /* Depending on the browser load two different type of js file, one that supports all the new ecmascript standards,
+       and a general one that uses the ecmascript 5 standard by default.
+       The modern js file is much smaller because it follows newer echmascript standards */
+    if (isModern()) {
         fetch(src, {
             headers: new Headers({'content-type': 'text/javascript; charset=utf-8'})
         })
             .then(res => {
                 if (!res.ok) {
-                    console.log('Looks like there was a problem. Status Code: ', status);
+                    console.warn('Looks like there was a problem. Status Code: ', status);
                     return;
                 }
 
@@ -37,7 +27,7 @@ try {
             .catch(err => {
                 script.setAttribute("src", src);
                 body.appendChild(script);
-                console.log('Fetch Error: ', err);
+                console.error('Fetch Error: ', err);
             });
     } else {
         script.setAttribute("src", src);

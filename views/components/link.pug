@@ -1,0 +1,6 @@
+mixin link(value)
+  - let _class = value.class || "layout-inline";
+  - let { content, href } = value;
+
+  a(href=href class=_class tabindex="0" title=content)= content
+    block
