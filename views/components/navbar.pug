@@ -2,11 +2,11 @@ include ./link.pug
 include ./image.pug
 
 mixin navbar(value)
-  - let { title } = value;
+  - let { name } = value;
   - let _class = value.class;
 
   - let tabs = ["about", "projects", "contact"];
-  - let focusIndex = tabs.indexOf(title.toLowerCase());
+  - let focusIndex = tabs.indexOf(name.toLowerCase());
 
   header.header
     nav.navbar.navbar-fixed(class=_class)

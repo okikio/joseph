@@ -1,5 +1,8 @@
 import { _is, _constrain, _map, _log } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+
+import barba from '@barba/core';
+import anime from 'animejs';
 // import { statemanager } from './components/state-manager';
 
 let _layer = ".layer";
@@ -105,6 +108,79 @@ try {
         }
     });
 
+    // basic default transition (with no rules and minimal hooks)
+    barba.init({
+        transitions: [{
+            before({ current, next, trigger }) {
+                const done = this.async();
+                let url = next.url.path;
+
+                anime.timeline()
+                    .add({
+                        targets: "#yellow-banner",
+                        height: "100vh",
+                        easing: "easeOutSine",
+                        duration: 400,
+                    })
+                    .add({
+                        targets: document.scrollingElement || document.body || document.documentElement,
+                        scrollTop: 0,
+                        easing: "easeOutSine",
+                        delay: 200,
+                        duration: 400,
+                    })
+                    .add({
+                        targets: ".mobile-on",
+                        height: "50px",
+                        easing: "easeOutSine",
+                        duration: 600,
+                        complete() {
+                            let mobileON = Page.ele(".mobile-on");
+                            mobileON.each(el => {
+                                mobileON.style(el, {
+                                    height: "0"
+                                });
+                                el.classList.remove("mobile-on");
+                            });
+                        }
+                    }, 0)
+                    .add({
+                        targets: "#yellow-banner",
+                        easing: "easeOutSine",
+                        delay: 400,
+                        duration: 400,
+                        complete() {
+                            Util.pageSetup(url);
+                            done();
+                        },
+                    });
+            },
+            enter({ current, next, trigger }) {
+                const done = this.async();
+                try {
+                    document.title = next.container.getAttribute('title');
+                    Page.base.call(base);
+                } catch (e) {
+                    console.log(e.message);
+                }
+                done();
+            },
+            after({ current, next, trigger }) {
+                const done = this.async();
+                anime.timeline()
+                    .add({
+                        targets: "#yellow-banner",
+                        height: "0vh",
+                        delay: 200,
+                        easing: "easeOutSine",
+                        duration: 400,
+                        complete() {
+                            done();
+                        }
+                    });
+            },
+        }]
+    });
     _load();
 
 } catch (e) {
@@ -135,66 +211,4 @@ new swup({
 // This event runs for every page view after initial load
 .on('contentReplaced', _load);
 
-// / global location, XMLHttpRequest, Location, requestAnimationFrame, cancelAnimationFrame, history, HTMLElement, HTMLScriptElement, HTMLAnchorElement, HTMLDocument, DOMParser, Event, getComputedStyle
-
-// /
-//  * Export.
-//  /
-const pjax = {
-
-    // /
-    //  * Configuration.
-
-
-    // Disables pjax globally.
-    disabled: false,
-
-    // How long until we run loading indicators.
-    loadIndicatorDelay: 250,
-
-    // Called when loading takes longer than `loadIndicatorDelay`. Should
-    // visibly indicate the loading.
-    onIndicateLoadStart() {
-        document.documentElement.style.transition = 'opacity linear 0.05s'
-        document.documentElement.style.opacity = '0.8'
-    },
-
-    // Called when transition is finished. Should roll back the effects of
-    // `onIndicateLoadStart`.
-    onIndicateLoadEnd() {
-        document.documentElement.style.transition = ''
-        document.documentElement.style.opacity = ''
-    },
-
-    // If a CSS selector is provided, it's checked every time when scrolling to an
-    // element (e.g. via data-scroll-to-id). If an element with the {position:
-    // 'fixed', top: '0px'} computed style properties is found, the scroll
-    // position will be offset by that element's height.
-    scrollOffsetSelector: '',
-
-    // If a value is provided, it will be used as the default id for the
-    // `[data-scroll-to-id]` attribute.
-    defaultMainId: '',
-
-    // /
-    //  * Methods.
-    //  /
-
-    // Triggers a pjax transition to the current page, reloading it without
-    // destroying the JavaScript runtime and other assets.
-    reload() {
-        transitionTo(createConfig(location, {
-            'data-noscroll': true,
-            'data-force-reload': true
-        }))
-    }
-}
-
-// Export in a CommonJS environment, otherwise assign to window.
-if (typeof module === 'object' && module !== null &&
-    typeof module.exports === 'object' && module.exports !== null) {
-    module.exports = pjax
-} else {
-    window.simplePjax = pjax
-}
  */

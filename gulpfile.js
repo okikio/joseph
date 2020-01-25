@@ -13,10 +13,10 @@ const browserSync = require('browser-sync').create();
 const { init, write } = require('gulp-sourcemaps');
 const commonJS = require('@rollup/plugin-commonjs');
 const rollupBabel = require('rollup-plugin-babel');
-const { stringify } = require('./util/stringify');
+// const { stringify } = require('./util/stringify');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
-const { html, js } = require('gulp-beautify');
+const { html } = require('gulp-beautify'); // , js
 const buble = require("@rollup/plugin-buble");
 const rollup = require('gulp-better-rollup');
 const { spawn } = require('child_process');
@@ -28,7 +28,7 @@ const postcss = require('gulp-postcss');
 const changed = require('gulp-changed');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
-const { writeFile } = require("fs");
+// const { writeFile } = require("fs");
 const icons = require('microicon');
 const config = require('./config');
 const sass = require('gulp-sass');
@@ -36,7 +36,7 @@ const pug = require('gulp-pug');
 const https = require('https');
 
 let watching = false;
-let { pages, cloud_name, imageURLConfig } = config;
+let { cloud_name, imageURLConfig } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
 assets.config({ cloud_name, secure: true });
 
@@ -74,6 +74,7 @@ let posthtmlOpts = [
     /* tree => {
         tree.match(/\n\s\w/gim, node => node.replace(/\n\s/gim, ' '));
     }, */
+    require('posthtml-lorem')(),
     tree => {
         let parse = (_src = "src") => node => {
             let url = node.attrs[_src].replace(/&amp;/g, "&");
@@ -244,31 +245,25 @@ let _execSeries = (...cmds) => {
 };
 
 task('html', () => {
-    let pageNames = Object.keys(pages);
-    let pageValues = Object.values(pages);
     return streamList(
-        pageValues.map((page, i) =>
-            ['views/app.pug', {
-                pipes: [
-                    // Rename
-                    rename({
-                        basename: pageNames[i],
-                        extname: ".html"
-                    }),
-                    // Pug compiler
-                    pug({ locals: { ...page, cloud_name, dev, debug } }),
-                    // Minify or Beautify html
-                    dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts)
-                ]
-            }]
-        )
+        ['views/pages/*.pug', {
+            pipes: [
+                // Rename
+                rename({
+                    extname: ".html"
+                }),
+                // Pug compiler
+                pug({ locals: { ...config, dev, debug } }),
+                // Minify or Beautify html
+                dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts)
+            ]
+        }]
     );
 });
 
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            // watching ? changed(`${publicDest}/css`) : null,
             init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
@@ -290,7 +285,6 @@ task("js", () =>
                 return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        // watching ? changed(`${publicDest}/js`) : null,
                         debug ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
@@ -313,7 +307,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            [['src/js/**.js', '!src/js/app.js'], {
+            [['src/js/*.js', '!src/js/app.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 debug ? null : init(), // Sourcemaps init
@@ -340,28 +334,6 @@ task("js", () =>
     ])
 );
 
-task("config", () =>
-    streamList(
-        debug ? new Promise((resolve, reject) => {
-            // Create config-dev.js
-            writeFile(
-                "./config-dev.js", `module.exports = ${stringify(config)};`,
-                err => {
-                    if (err) { reject(); throw err; }
-                    resolve();
-                }
-            );
-        }) : null,
-        debug ? ["config-dev.js", {
-            opts: { allowEmpty: true },
-            pipes: [
-                js({ indent_size: 4 }), // Beautify the file
-            ],
-            dest: '.' // Output
-        }] : null
-    )
-);
-
 task("client", () =>
     streamList([
         ["client/**/*.js", {
@@ -382,8 +354,6 @@ task("client", () =>
                 terser({ ...minifyOpts, toplevel: false }), // Minify the file
                 rename(minSuffix) // Rename
             ],
-
-            // dest: `${publicDest}/`
         }], // Output
         [["client/**/*", "!client/**/*.js", "!client/**/*.{jpg,jpeg,png,ico,svg}"], {
             opts: { allowEmpty: true }
@@ -434,28 +404,22 @@ task('reload', done =>
 );
 
 // Gulp task to minify all files
-task('dev', parallel("client", series("config", parallel("html", "js"), "css")));
+task('dev', parallel("client", series(parallel("html", "js"), "css")));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', parallel("client", series("dev", "inline")));
+task('default', parallel(series("dev", "inline")));
 
 // Gulp task to minify all files without -js
-task('other', parallel("client", series("config", "html", "css", "inline")));
+task('other', parallel("client", series("html", "css", "inline")));
 
 // Gulp task to check to make sure a file has changed before minify that file files
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['config.js', 'containers.js'], watchDelay, series('other', 'reload'));
     watch(['gulpfile.js', 'postcss.config.js', 'util/*.js'], watchDelay, series('gulp:reload', 'reload'));
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', 'inline', 'reload'));
-    watch('src/**/*.scss', watchDelay, series('css', 'inline'));
-    watch('src/**/*.js', watchDelay, series('js', 'inline'));
-    watch(['client/**/*'], watchDelay, series('client'));
-    watch('public/**/*.html', watchDelay, series('reload'));
-    // IT works
-    // watch('src/**/app.vendor.js', watchDelay, series('js', 'inline', 'reload'));
-    // watch(['public/**/*', '!public/css/*.css', '!public/**/*.html', '!public/js/*.js'])
-    //     .on('change', browserSync.reload);
+    watch('src/**/*.scss', watchDelay, series('css'));
+    watch('src/**/*.js', watchDelay, series('js', 'inline', 'reload'));
+    watch(['client/**/*'], watchDelay, series('client', 'reload'));
 });

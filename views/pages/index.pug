@@ -1,244 +1,262 @@
-include ./components/section.pug
+include ./components/sections.pug
+include ./components/layout.pug
+include ./components/layer.pug
 include ./components/hero.pug
 extends layout.pug
 
 block content
-                // Hero layer
-                _hero(["Brilliant <br/> Engineering", "Creating with passion, crafting with love.", [carImg, "A city Image", [_class("effect-parallax", "hero-img")]] ]),
-                // End Hero layer
+  //- Hero layer
+  +hero({
+    title: "Brilliant <br/> Engineering", 
+    content: "Creating with passion, crafting with love.",
+    image: {
+      class: "effect-parallax hero-img"
+      src: "/assets/closeup-stones",
+      alt: "A city Image"
+    }
+  })
 
-                // Intro layer
-                layer([
-                    _class([ padding("horz", "vert-top-default--device-phone") ]),
-                    layout([
-                        _class([_layout("shorten", "contain")]),
-                        values([
-                            _header(title("Lorem itpsuim")),
-                            _main([
-                                // _class([ font("14--device-phone") ]),
-                                values([
-                                    indent,
-                                    `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                        took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                        It was popularised in the 1960s with the release of Letraset sheets
-                                        containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum, `,
-                                    _link("run", "/about")
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Intro layer
+  //- Intro layer
+  +layer({
+    class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
+  })
+    +layout({
+      class: "layout-shorten layout-contain"
+    })
+      +head("Lorem itpsuim")
+      +main()
+    
+  layer([
+      _class([ padding("horz", "vert-top-default--device-phone") ]),
+      layout([
+          _class([_layout("shorten", "contain")]),
+          values([
+              _header(title("Lorem itpsuim")),
+              _main([
+                  // _class([ font("14--device-phone") ]),
+                  values([
+                      indent,
+                      `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                          took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                          It was popularised in the 1960s with the release of Letraset sheets
+                          containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum, `,
+                      _link("run", "/about")
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Intro layer
 
-                // Listings layer
-                layer([
-                    layout([
-                        _class([ padding("horz", "large-top") ]),
-                        section([
-                            _class([ _layout("shorten", "contain") ]),
-                            values([
-                                _header(title("Listings")),
-                                _main([
-                                    _class([ padding("top"), _style("line-height-double") ]),
-                                    values([
-                                        row([
-                                            values([
-                                                col([
-                                                    _class([ _col("2"), padding("bottom-small") ]),
-                                                    values([
-                                                        _content(`03/03`, [_style("bold"), font("18--device-phone","24") ])
-                                                    ])
-                                                ]),
+  // Listings layer
+  layer([
+      layout([
+          _class([ padding("horz", "large-top") ]),
+          section([
+              _class([ _layout("shorten", "contain") ]),
+              values([
+                  _header(title("Listings")),
+                  _main([
+                      _class([ padding("top"), _style("line-height-double") ]),
+                      values([
+                          row([
+                              values([
+                                  col([
+                                      _class([ _col("2"), padding("bottom-small") ]),
+                                      values([
+                                          _content(`03/03`, [_style("bold"), font("18--device-phone","24") ])
+                                      ])
+                                  ]),
 
-                                                col([
-                                                    _class([_col("3"), padding("bottom"), _style("line-height-small--device-phone", "line-height-double") ]),
-                                                    values([
-                                                        _content(`2018`, [
-                                                            _style("bold"),
-                                                            _layout("block"), font("18--device-phone", "24")
-                                                        ]),
-                                                        _content(`E-commerse`, [
-                                                            // _style("line-height-double"),
-                                                            _layout("block"),
-                                                            font("16--device-phone", "18")
-                                                        ]),
-                                                        _content(`Design Executive`, [
-                                                            // _style("line-height-double"),
-                                                            _layout("block"),
-                                                            font("16--device-phone", "18")
-                                                        ])
-                                                    ])
-                                                ]),
+                                  col([
+                                      _class([_col("3"), padding("bottom"), _style("line-height-small--device-phone", "line-height-double") ]),
+                                      values([
+                                          _content(`2018`, [
+                                              _style("bold"),
+                                              _layout("block"), font("18--device-phone", "24")
+                                          ]),
+                                          _content(`E-commerse`, [
+                                              // _style("line-height-double"),
+                                              _layout("block"),
+                                              font("16--device-phone", "18")
+                                          ]),
+                                          _content(`Design Executive`, [
+                                              // _style("line-height-double"),
+                                              _layout("block"),
+                                              font("16--device-phone", "18")
+                                          ])
+                                      ])
+                                  ]),
 
-                                                col([
-                                                    _class([ _col("7"), ]), // _style("justify")
-                                                    values([
-                                                        _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-                                                        [ _style("line-height-double"), font("18") ])
-                                                    ])
-                                                ])
-                                            ])
-                                        ])
-                                    ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Listings layer
+                                  col([
+                                      _class([ _col("7"), ]), // _style("justify")
+                                      values([
+                                          _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                          unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+                                          [ _style("line-height-double"), font("18") ])
+                                      ])
+                                  ])
+                              ])
+                          ])
+                      ])
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Listings layer
 
-                // Banner layer 1
-                layer([
-                    _class([background("dark")]),
-                    layout([
-                        _class([_layout("contain-large", "enlarge-vert")]),
-                        values([
-                            _header([
-                                title(""),
-                                _class([_layout("vert"), _style("bold-font", "600"), "h2", color("white")]),
-                                values([
-                                    `Got your attention.`, ` `,
-                                    _content(`Good!`, [color("tertiary-dark")])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Banner layer 1
+  // Banner layer 1
+  layer([
+      _class([background("dark")]),
+      layout([
+          _class([_layout("contain-large", "enlarge-vert")]),
+          values([
+              _header([
+                  title(""),
+                  _class([_layout("vert"), _style("bold-font", "600"), "h2", color("white")]),
+                  values([
+                      `Got your attention.`, ` `,
+                      _content(`Good!`, [color("tertiary-dark")])
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Banner layer 1
 
-                // Banner layer 2
-                layer([
-                    _class([ background("primary") ]),
-                    layout([
-                        _class([ _layout("contain-large", "enlarge-vert") ]),
-                        values([
-                            _header([
-                                title(""),
-                                _class([ _layout("vert"), _style("bold-font", "600"), "h2", color("white") ]),
-                                values([
-                                    `Got your attention.`, ` `,
-                                    _content(`Good!`, [ color("tertiary-dark") ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Banner layer 2
+  // Banner layer 2
+  layer([
+      _class([ background("primary") ]),
+      layout([
+          _class([ _layout("contain-large", "enlarge-vert") ]),
+          values([
+              _header([
+                  title(""),
+                  _class([ _layout("vert"), _style("bold-font", "600"), "h2", color("white") ]),
+                  values([
+                      `Got your attention.`, ` `,
+                      _content(`Good!`, [ color("tertiary-dark") ])
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Banner layer 2
 
-                // Banner layer 3
-                layer([
-                    _class([ background("tertiary") ]),
-                    layout([
-                        _class([ _layout("contain-large", "enlarge-vert") ]),
-                        values([
-                            _header([
-                                title(""),
-                                _class([ _layout("vert"), _style("bold-font", "600"), "h2", color("dark") ]),
-                                values([
-                                    `Got your attention.`, ` `,
-                                    _content(`Good!`, [ color("secondary-dark") ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Banner layer 3
+  // Banner layer 3
+  layer([
+      _class([ background("tertiary") ]),
+      layout([
+          _class([ _layout("contain-large", "enlarge-vert") ]),
+          values([
+              _header([
+                  title(""),
+                  _class([ _layout("vert"), _style("bold-font", "600"), "h2", color("dark") ]),
+                  values([
+                      `Got your attention.`, ` `,
+                      _content(`Good!`, [ color("secondary-dark") ])
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Banner layer 3
 
-                // Breakthrough layer
-                layer([
-                    layout([
-                        _class([
-                            _layout("contain-large"),
-                            padding("horz", "large")
-                        ]),
-                        values([
-                            _main([
-                                _class([ _layout("vert") ]),
-                                values([
-                                    row([
-                                        values([
-                                            col([
-                                                _class([ _col("6"), padding("bottom-small", "right-large") ]),
-                                                values([
-                                                    _content(`Breakthrough<br>Limits!`, [
-                                                        _style("bold", "line-height", "600"),
-                                                        "h3", color("primary")
-                                                    ])
-                                                ])
-                                            ]),
+  // Breakthrough layer
+  layer([
+      layout([
+          _class([
+              _layout("contain-large"),
+              padding("horz", "large")
+          ]),
+          values([
+              _main([
+                  _class([ _layout("vert") ]),
+                  values([
+                      row([
+                          values([
+                              col([
+                                  _class([ _col("6"), padding("bottom-small", "right-large") ]),
+                                  values([
+                                      _content(`Breakthrough<br>Limits!`, [
+                                          _style("bold", "line-height", "600"),
+                                          "h3", color("primary")
+                                      ])
+                                  ])
+                              ]),
 
-                                            col([
-                                                _class( _col("6") ),
-                                                values([
-                                                    _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-                                                        [ _layout("block"), _style("line-height-double"), font("18") ])
-                                                ])
-                                            ])
-                                        ])
-                                    ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Breakthrough layer
+                              col([
+                                  _class( _col("6") ),
+                                  values([
+                                      _content(`Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                          unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+                                          [ _layout("block"), _style("line-height-double"), font("18") ])
+                                  ])
+                              ])
+                          ])
+                      ])
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Breakthrough layer
 
-                // Image Column layer
-                layer([
-                    layout([
-                        _class([ _layout("contain-large") ]),
-                        values([
-                            _main([
-                                _class([ _layout("shorten-vert") ]),
-                                values([
-                                    row([
-                                        _class([ margin("dull") ]),
-                                        values([
-                                            spacingColumns(3),
+  // Image Column layer
+  layer([
+      layout([
+          _class([ _layout("contain-large") ]),
+          values([
+              _main([
+                  _class([ _layout("shorten-vert") ]),
+                  values([
+                      row([
+                          _class([ margin("dull") ]),
+                          values([
+                              spacingColumns(3),
 
-                                            col([
-                                                _class([ _col("9"), padding("small") ]),
-                                                values([
-                                                    _tile([
-                                                        "Google Designs", "",
-                                                        _img(cityImg, "City Alt", [_class("effect-parallax") ]),
-                                                        _class([
-                                                            _layer("box", "surface"), // , "shadow--1"
-                                                            _layout("block")
-                                                        ])
-                                                    ])
-                                                ])
-                                            ])
-                                        ])
-                                    ]),
+                              col([
+                                  _class([ _col("9"), padding("small") ]),
+                                  values([
+                                      _tile([
+                                          "Google Designs", "",
+                                          _img(cityImg, "City Alt", [_class("effect-parallax") ]),
+                                          _class([
+                                              _layer("box", "surface"), // , "shadow--1"
+                                              _layout("block")
+                                          ])
+                                      ])
+                                  ])
+                              ])
+                          ])
+                      ]),
 
-                                    row([
-                                        _class([ margin("dull") ]),
-                                        values([
-                                            col([
-                                                _class([ _col("9"), padding("small", "vert-large") ]),
-                                                values([
-                                                    _tile([
-                                                        "Google Designs", "",
-                                                        _img(blueSkyImg, "Blue sky Alt", [ _class("") ]),
-                                                        _class([
-                                                            _layer("box", "surface"), // , "shadow--1"
-                                                            _layout("block")
-                                                        ])
-                                                    ])
-                                                ])
-                                            ]),
+                      row([
+                          _class([ margin("dull") ]),
+                          values([
+                              col([
+                                  _class([ _col("9"), padding("small", "vert-large") ]),
+                                  values([
+                                      _tile([
+                                          "Google Designs", "",
+                                          _img(blueSkyImg, "Blue sky Alt", [ _class("") ]),
+                                          _class([
+                                              _layer("box", "surface"), // , "shadow--1"
+                                              _layout("block")
+                                          ])
+                                      ])
+                                  ])
+                              ]),
 
-                                            spacingColumns(3),
-                                        ])
-                                    ])
-                                ])
-                            ])
-                        ])
-                    ])
-                ]),
-                // End Image Column layer
+                              spacingColumns(3),
+                          ])
+                      ])
+                  ])
+              ])
+          ])
+      ])
+  ]),
+  // End Image Column layer

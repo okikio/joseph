@@ -34,6 +34,7 @@ devDependencies:
   posthtml-doctype: 1.1.1
   posthtml-inline-assets: 3.0.0
   posthtml-link-noreferrer: 1.0.5
+  posthtml-lorem: 1.0.0
   posthtml-match-helper: 1.0.1
   posthtml-textr: 1.0.5
   rollup: 1.29.1
@@ -4389,6 +4390,9 @@ packages:
       node: '>=8'
     peerDependencies:
       gulp: '>=4'
+    peerDependenciesMeta:
+      gulp:
+        optional: true
     resolution:
       integrity: sha512-rAvQt+ByaqrMuJLwucvxC+MC02Vh8ksiJ16hoQlk4xnmlHiLJMque2aXXQMmyocQac3RIjNRcyr7iG1TNH15GA==
   /gulp-cli/2.2.0:
@@ -7155,12 +7159,27 @@ packages:
       npm: '>=3'
     resolution:
       integrity: sha1-X5pvP/wCQmmDQcN2Gde8M3/smEQ=
+  /posthtml-lorem/1.0.0:
+    dependencies:
+      posthtml: 0.8.7
+    dev: true
+    engines:
+      iojs: '>=2.0.0'
+      node: '>=0.12.0'
+    resolution:
+      integrity: sha1-vD2sucwN10UDUElg9fzzJc/jvGc=
   /posthtml-match-helper/1.0.1:
     dev: true
     peerDependencies:
       posthtml: '>=0.5.0'
     resolution:
       integrity: sha1-RRJT3o5YRKNI6WOtXt13aesSlRM=
+  /posthtml-parser/0.1.3:
+    dependencies:
+      htmlparser2: 3.10.1
+    dev: true
+    resolution:
+      integrity: sha1-QyUfV1ujTjYQMveaEeD8k6sjKyQ=
   /posthtml-parser/0.4.2:
     dependencies:
       htmlparser2: 3.10.1
@@ -7197,6 +7216,15 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-aNUEP/SfKUXAt+ghG51LC5MmafChBZeslVe/SSdfKIgLGUVRE68mrMF4V8XbH07ZifM91tCSuxY3eHIFLlecQw==
+  /posthtml/0.8.7:
+    dependencies:
+      posthtml-parser: 0.1.3
+      posthtml-render: 1.1.5
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-q6YSTGz4e0zuprq19+UCaPLCAG0=
   /prelude-ls/1.1.2:
     dev: true
     engines:
@@ -9784,6 +9812,7 @@ specifiers:
   posthtml-doctype: ^1.1.1
   posthtml-inline-assets: ^3.0.0
   posthtml-link-noreferrer: ^1.0.5
+  posthtml-lorem: ^1.0.0
   posthtml-match-helper: ^1.0.1
   posthtml-textr: ^1.0.5
   rollup: ^1.29.1

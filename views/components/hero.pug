@@ -1,20 +1,20 @@
 include ./image.pug
 
 mixin hero(value)
-  - let { content, title, img } = value;
+  - let { content, title, image } = value;
 
-  section.layer.layer-hero-id
+  .layer.layer-hero-id
     article.layout-padding-bottom.layout-padding-dull-top.layout-contain-larger.layout-padding-horz-small
       .layer-hero.header-top-spot
-        +image(img)
+        +image(image)
 
-        section.layout-padding-horz-sub-large--device-phone.layout-padding-horz-sub-large--device-tablet.layout-padding-horz-sub-large--device-laptop.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center.layout-padding-vert-large--device-phone.layout-padding-vert-huge--device-tablet.layout-padding-vert-huge--device-laptop.layout-padding-vert-huge--device-desktop
+        .layout-padding-horz-sub-large--device-phone.layout-padding-horz-sub-large--device-tablet.layout-padding-horz-sub-large--device-laptop.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center.layout-padding-vert-large--device-phone.layout-padding-vert-huge--device-tablet.layout-padding-vert-huge--device-laptop.layout-padding-vert-huge--device-desktop
           .layer-content.layout-contain
-            section.layer-header
+            .layer-header
               h1.style-font-title.layer-title.style-white.style-font-weight-bolder!= title
-            section.layer-main
+            .layer-main
               h2.h5.style-font-family-bold.style-font-weight-300.style-white.layer-main-text!= content
-            section.layout-align-self-end
+            .layout-align-self-end
               button.layer-footer.btn.btn-hover.layer-shadow.layer-round.layout-padding-smallest.layer-primary-dark.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary.layer-hero-scroll-down(type="button" tabindex="0")
                 span.btn-group
                   i.icon.style-font-sz-24(inline) expand_more

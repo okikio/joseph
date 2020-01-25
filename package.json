@@ -84,6 +84,7 @@
         "posthtml-doctype": "^1.1.1",
         "posthtml-inline-assets": "^3.0.0",
         "posthtml-link-noreferrer": "^1.0.5",
+        "posthtml-lorem": "^1.0.0",
         "posthtml-match-helper": "^1.0.1",
         "posthtml-textr": "^1.0.5",
         "rollup": "^1.29.1",
