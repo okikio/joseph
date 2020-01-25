@@ -1,12 +1,15 @@
-include ./content.pug
+include ./link.pug
+include ./image.pug
 
-mixin header(_page)
-  - let page = _page || page;
-  - let _tabs = page.tabs && page.tabs.values || [];
-  - let _name = (page.name || "").toLowerCase();
+mixin navbar(value)
+  - let { title } = value;
+  - let _class = value.class;
+
+  - let tabs = ["about", "projects", "contact"];
+  - let focusIndex = tabs.indexOf(title.toLowerCase());
 
   header.header
-    nav.navbar.navbar-fixed(class=`${page.banner ? "banner-mode" : ''}`)
+    nav.navbar.navbar-fixed(class=_class)
       .layout-contain-large.navbar-layout
         .navbar-head
           +link({
@@ -26,12 +29,7 @@ mixin header(_page)
         .layout-spacer.navbar-desktop
         .navbar-main
           ul.navbar-list
-            each tab in _tabs
-              - let _link = tab.a;
-              - let _href = _link.href;
-              - let _content = _link.content;
-              - let _class = _name == _content ? "navbar-link-focus" : "";
-
+            each tab, i in tabs
               li
-                a.navbar-link(href=_href class=_class data-swup-preload)
-                  span.navbar-link-content= _content
+                a.navbar-link(href=`/${tab}` class=`${i == focusIndex ? "navbar-link-focus" : ""}`)
+                  span.navbar-link-content= tab

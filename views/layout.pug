@@ -1,13 +1,17 @@
 doctype html
 html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
   head
-    include ./components/header.pug
-    include ./components/layer.pug
-    include ./components/layout.pug
-    include ./components/section.pug
-    include ./components/hero.pug
+    include ./components/navbar.pug
     include ./components/footer.pug
+    include ./components/link.pug
     include ./components/seo.pug
+
+    - let page = {
+    -  url: "",
+    -  name: "index",
+    -  title: "Intro of a jorney.",
+    -  description: "The porfolio of Joseph, it contains all amazing projects etc..."
+    - }; 
 
     meta(charset="utf-8")
     meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
@@ -35,11 +39,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     meta(name="twitter:image" content="https://www.josephojo.com/android-icon-192x192.png")
 
     block head
-      +seo({
-        url: "",
-        title: "Intro of a jorney.",
-        description: "The porfolio of Joseph, it contains all amazing projects etc..."
-      })
+      +seo(page)
 
     link(rel="preconnect" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
     link(rel="preconnect" href="https://www.josephojo.com/" crossorigin)
@@ -83,11 +83,16 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     <![endif]-->
 
     script(src="./js/ver-check.min.js" inline async)
-  body
-    a.skip-main(href="#main" tabindex="0" title="Skip to main content") Skip to main content
-    +header(page)
+  body(data-barba="wrapper")
+    +link({
+      class: "skip-main",
+      href: "#main",
+      content: "Skip to main content"
+    })
+    block navbar
+      +navbar(page)
 
-    main#main.main(data-container)
+    main#main.main(data-barba="container" data-barba-namespace="home")
       block content
 
     .layer-action-center.layer-action-center-show
