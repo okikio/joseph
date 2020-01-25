@@ -1,7 +1,7 @@
 include ./link.pug
 include ./image.pug
 
-mixin navbar(value)
+mixin navbar(value = {})
   - let { name } = value;
   - let _class = value.class;
 

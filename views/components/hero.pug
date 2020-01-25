@@ -1,6 +1,6 @@
 include ./image.pug
 
-mixin hero(value)
+mixin hero(value = {})
   - let { content, title, image } = value;
 
   .layer.layer-hero-id

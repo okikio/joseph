@@ -25,11 +25,11 @@ const imagemin = require('gulp-imagemin');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
-const changed = require('gulp-changed');
+// const changed = require('gulp-changed');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 // const { writeFile } = require("fs");
-const icons = require('microicon');
+const icons = debug ? {} : require('microicon');
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
@@ -61,7 +61,7 @@ let posthtmlOpts = [
         require('typographic-single-spaces')
     ]),
     require('posthtml-lorem')(),
-    tree => {
+    debug ? () => {} : tree => {
         let parse = (_src = "src") => node => {
             let url = node.attrs[_src].replace(/&amp;/g, "&");
             let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
@@ -87,7 +87,7 @@ let posthtmlOpts = [
         tree.match(querySelector("[href^='/assets/']"), parse("href"));
         tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
     },
-    async tree => {
+    debug ? () => {} : async tree => {
         let warnings, promises = [];
         tree.match({ tag: 'img' }, node => {
             if (promises.length >= 2) return node; // Don't inline everything
@@ -130,7 +130,7 @@ let posthtmlOpts = [
         // Return the ast
         return tree;
     },
-    tree => {
+    debug ? () => {} : tree => {
         tree.match(querySelector("i.icon"), node => {
             if ("inline" in node.attrs) {
                 const _attrs = node.attrs;
@@ -155,7 +155,7 @@ let posthtmlOpts = [
     },
 
     // Dom process
-    dev ? () => { } : require('posthtml-inline-assets')({
+    debug ? () => { } : require('posthtml-inline-assets')({
         transforms: { image: false }
     }),
 ];
@@ -226,28 +226,26 @@ let _execSeries = (...cmds) => {
     );
 };
 
-task('html', () => {
-    return streamList(
-        ['views/pages/*.pug', {
-            pipes: [
-                // Pug compiler
-                pug({ locals: { cloud_name, dev, debug } }),
-                // Rename
-                rename({ extname: ".html" }),
-                // Minify or Beautify html
-                dev ? html({ indent_size: 4 }) : htmlmin({
-                    minifyJS: true,
-                    minifyCSS: true,
-                    removeComments: true,
-                    collapseWhitespace: true,
-                    removeEmptyAttributes: false,
-                    removeRedundantAttributes: true,
-                    processScripts: ["application/ld+json"]
-                })
-            ]
-        }]
-    );
-});
+task('html', () => stream(
+    'views/pages/*.pug', {
+        pipes: [
+            // Pug compiler
+            pug({ locals: { cloud_name, dev, debug } }),
+            // Rename
+            rename({ extname: ".html" }),
+            // Minify or Beautify html
+            dev ? html({ indent_size: 4 }) : htmlmin({
+                minifyJS: true,
+                minifyCSS: true,
+                removeComments: true,
+                collapseWhitespace: true,
+                removeEmptyAttributes: false,
+                removeRedundantAttributes: true,
+                processScripts: ["application/ld+json"]
+            })
+        ]
+    })
+);
 
 task("css", () =>
     stream('src/scss/*.scss', {

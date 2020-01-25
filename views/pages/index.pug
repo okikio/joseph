@@ -1,48 +1,48 @@
-include ./components/sections.pug
-include ./components/layout.pug
-include ./components/column.pug
-include ./components/layer.pug
-include ./components/text.pug
-include ./components/tile.pug
-include ./components/hero.pug
-include ./components/row.pug
-extends layout.pug
+extends ../layout.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/column.pug
+include ../components/layer.pug
+include ../components/text.pug
+include ../components/tile.pug
+include ../components/hero.pug
+include ../components/row.pug
 
 block content
-  //- Hero layer
-  +hero({
-    title: "Brilliant <br/> Engineering",
-    content: "Creating with passion, crafting with love.",
-    image: {
-      class: "effect-parallax hero-img"
-      src: "/assets/closeup-stones",
-      alt: "A city Image"
-    }
-  })
+	//- Hero layer
+	+hero({
+		title: "Brilliant <br/> Engineering",
+		content: "Creating with passion, crafting with love.",
+		image: {
+			class: "effect-parallax hero-img",
+			src: "/assets/closeup-stones",
+			alt: "A city Image"
+		}
+	})
 
-  //- Intro layer
-  +layer({
-    class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
-  })
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +head("Lorem itpsuim")
-      +main({
-          class: "style-line-height-double"
-      })
-        p.layout-padding-top.layout-margin-left-large.layout-inline-block= " "
-        p(lorem="2")
-        +link({
-          href: "/",
-          content: "Click here"
-        })
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
+	})
+		+layout({
+			class: "layout-shorten layout-contain"
+		})
+			+head("Lorem itpsuim")
+			+main({
+					class: "style-line-height-double"
+			})
+				p.layout-padding-top.layout-margin-left-large.layout-inline-block= " "
+				p(lorem="2")
+				+link({
+					href: "/",
+					content: "Click here"
+				})
 
-  //- Listings layer
-  +layer
-    +layout({
-      class: "layout-padding-horz layout-padding-large-top"
-    })
+	//- Listings layer
+	+layer
+		+layout({
+			class: "layout-padding-horz layout-padding-large-top"
+		})
 			section.layout-shorten.layout-contain
 				+head("Listings")
 				+main({
@@ -82,10 +82,10 @@ block content
 							p.style-font-15--device-phone.style-font-18(lorem="1")
 
 	//- Banner layer 1
-  +layer({
+	+layer({
 		class: "layer-color-dark"
 	})
-    +layout({
+		+layout({
 			class: "layout-contain-large layout-enlarge-vert"
 		})
 			+head({
@@ -99,10 +99,10 @@ block content
 				})
 
 	//- Banner layer 2
-  +layer({
+	+layer({
 		class: "layer-color-primary"
 	})
-    +layout({
+		+layout({
 			class: "layout-contain-large layout-enlarge-vert"
 		})
 			+head({
@@ -116,10 +116,10 @@ block content
 				})
 
 	//- Banner layer 3
-  +layer({
+	+layer({
 		class: "layer-color-tertiary"
 	})
-    +layout({
+		+layout({
 			class: "layout-contain-large layout-enlarge-vert"
 		})
 			+head({
@@ -132,9 +132,9 @@ block content
 					content: "Good!"
 				})
 
-  //- Breakthrough layer
-  +layer
-    +layout({
+	//- Breakthrough layer
+	+layer
+		+layout({
 			class: "layout-contain-large layout-padding-large"
 		})
 			+main({
@@ -156,9 +156,9 @@ block content
 					})
 						p.style-font-15--device-phone.style-font-18.layout-block(lorem="1")
 
-  //- Image Column layer
-  +layer
-    +layout({
+	//- Image Column layer
+	+layer
+		+layout({
 			class: "layout-contain-large"
 		})
 			+main({
@@ -179,7 +179,7 @@ block content
 					})
 						+tile({
 							title: "Google Designs",
-							class: "layer-box layer-surface layout-block", // , "layer-shadow--1"
+							class: "layer-box layer-surface layout-block",
 							image: {
 								class: "effect-parallax",
 								src: "/assets/city",
@@ -197,9 +197,8 @@ block content
 					})
 						+tile({
 							title: "Google Designs",
-							class: "layer-box layer-surface layout-block", // , "layer-shadow--1"
+							class: "layer-box layer-surface layout-block",
 							image: {
-								//- class: "effect-parallax",
 								src: "/assets/blue-sky",
 								alt: "Blue sky Alt",
 							}

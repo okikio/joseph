@@ -1,22 +1,22 @@
-mixin head(value)
-  - let _class = value.class;
-  
+mixin head(value = {})
+  - let _class = typeof value != "string" ? value.class : "";
+
   .layer-header(class=_class)
     if typeof value == "string"
       h3.h4.layout-padding-dull--device-phone.layout-margin-dull--device-phone.style-center.style-font-20--device-phone= value
     block
 
-mixin main(value)
-  - let _class = value.class || "style-font-14--device-phone";
-  
+mixin main(value = {})
+  - let _class = typeof value != "string" ? value.class : "style-font-14--device-phone";
+
   .layer-main(class=_class)
     if typeof value == "string"
       span.style-line-height-double--tablet.style-line-height-double--laptop.style-line-height-double--desktop= value
     block
 
-mixin foot(value)
-  - let _class = value.class || "style-font-14--device-phone";
-  
+mixin foot(value = {})
+  - let _class = typeof value != "string" ? value.class : "style-font-14--device-phone";
+
   .layer-footer(class=_class)
     if typeof value == "string"
       span.style-bold= value

@@ -6,18 +6,19 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     include ./components/link.pug
     include ./components/seo.pug
 
-    - let page = {
-    -  url: "",
-    -  name: "index",
-    -  title: "Intro of a jorney.",
-    -  description: "The porfolio of Joseph, it contains all amazing projects etc..."
-    - }; 
+    -
+      let page = {
+        url: "",
+        name: "index",
+        title: "Intro of a jorney.",
+        description: "The porfolio of Joseph, it contains all amazing projects etc..."
+      };
 
     meta(charset="utf-8")
     meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
 
-    if dev
+    //- if dev
       meta(http-equiv="Content-Security-Policy" content=`
       default-src "self"; font-src "self" data:; style-src "self" "unsafe-inline"; img-src data: "self" https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com; script-src "self" https://polyfill.io/ https://cdnjs.cloudflare.com/ "unsafe-inline" "unsafe-eval"; connect-src "self"${dev ? " * blob: ws:" : ""};
       block-all-mixed-content; upgrade-insecure-requests; base-uri "self"; object-src "none"; child-src "none"; frame-src "none"; manifest-src "self"; media-src "self" https://res.cloudinary.com/${cloud_name}/;`)

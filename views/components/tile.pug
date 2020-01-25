@@ -1,6 +1,6 @@
 include ./image.pug
 
-mixin tile(value)
+mixin tile(value = {})
   - let { title, content, image } = value;
   - let _class = value.class;
 
