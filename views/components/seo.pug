@@ -1,0 +1,16 @@
+mixin layout(value)
+  title= value.title
+  meta(name='title' content=value.title)
+  meta(name='twitter:title' content=value.title)
+  meta(name="apple-mobile-web-app-title", content=value.title)
+  meta(itemprop='name' content=`${value.title} - josephojo.com`)
+  meta(property='og:title' content=`${value.title} - josephojo.com`)
+
+  meta(itemprop='url' content=`https://www.josephojo.com/${value.url}`)
+  meta(property='og:url' content=`https://www.josephojo.com/${value.url}`)
+  meta(name='twitter:url' content=`https://www.josephojo.com/${value.url}`)
+
+  meta(name='description' content=`${value.description}`)
+  meta(name='description' content=`${value.description}`)
+  meta(itemprop='description' content=`${value.description}`)
+  meta(property='og:description' content=`${value.description}`)

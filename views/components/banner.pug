@@ -1,11 +1,11 @@
-include ./image.pug
+include ./content.pug
 
-mixin hero(value)
+mixin banner(value)
   - let { content, title, img } = value;
 
   section.layer.layer-hero-id
-    article.layout-padding-bottom.layout-padding-dull-top.layout-contain-larger.layout-padding-horz-small
-      .layer-hero.header-top-spot
+    article.layout-padding-bottom.layout-padding-dull-top
+      .layer-hero.banner-mode
         +image(img)
 
         section.layout-padding-horz-sub-large--device-phone.layout-padding-horz-sub-large--device-tablet.layout-padding-horz-sub-large--device-laptop.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center.layout-padding-vert-large--device-phone.layout-padding-vert-huge--device-tablet.layout-padding-vert-huge--device-laptop.layout-padding-vert-huge--device-desktop

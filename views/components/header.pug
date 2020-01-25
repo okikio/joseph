@@ -1,11 +1,5 @@
 include ./content.pug
 
-//- mixin install()
-  button.add-button.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-secondary.style-hover-secondary-dark(tabindex='-1', type='button' title="Install App")
-    span.btn-group
-      i.icon.style-font-family-bold.style-font-sz-24 add_circle_outline
-      block
-
 mixin header(_page)
   - let page = _page || page;
   - let _tabs = page.tabs && page.tabs.values || [];
@@ -13,8 +7,8 @@ mixin header(_page)
 
   header.header
     nav.navbar.navbar-fixed(class=`${page.banner ? "banner-mode" : ''}`)
-      article.layout-contain-large.navbar-layout
-        section.navbar-head
+      .layout-contain-large.navbar-layout
+        .navbar-head
           +link({
             href: "/" + (dev ? "index.html" : "index"),
             class: "navbar-title style-primary style-primary-dark-hover style-primary-focus"
@@ -22,18 +16,15 @@ mixin header(_page)
             img.navbar-logo(src="/assets/gear-svg-icon-logo-color-2.svg" alt="The Joseph Ojo logo." inline)
             span.navbar-title-line
             span JOSEPH!
-          section.layout-spacer
-          section.navbar-foot.navbar-mobile
-            section.layout-inline-block
-              //- +install
-            section.layout-inline-block
+          .layout-spacer
+          .navbar-foot.navbar-mobile
+            .layout-inline-block
               a.navbar-menu.btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.style-primary.style-hover-primary.style-focus-primary(title="Menu Bar")
                 span.btn-group
                   i.icon.style-font-family-bold.style-font-sz-24(inline) menu
 
-        section.layout-spacer.navbar-desktop
-        section.navbar-main
-          //- .layout-flex.layout-align-items-center
+        .layout-spacer.navbar-desktop
+        .navbar-main
           ul.navbar-list
             each tab in _tabs
               - let _link = tab.a;
@@ -44,8 +35,3 @@ mixin header(_page)
               li
                 a.navbar-link(href=_href class=_class data-swup-preload)
                   span.navbar-link-content= _content
-            //- li.navbar-desktop
-              +install
-                  span.btn-spacer
-                  span.btn-content Install
-

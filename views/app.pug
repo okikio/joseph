@@ -7,7 +7,7 @@ html(lang="en" itemscope='' itemtype='https://schema.org/WebPage')
     //- meta(http-equiv='Cache-Control' content='public, max-age=31536000')
     if dev
       meta(http-equiv='Content-Security-Policy' content=`
-      default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'${dev ? " * blob: ws:" : ""}; 
+      default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'${dev ? " * blob: ws:" : ""};
       block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/${cloud_name}/;`)
 
     meta(name='robots' content='all')
@@ -88,7 +88,7 @@ html(lang="en" itemscope='' itemtype='https://schema.org/WebPage')
     script.
       var check = function () {
           "use strict";
-          if (typeof window.Symbol == "undefined" || 
+          if (typeof window.Symbol == "undefined" ||
               typeof window.IntersectionObserver == "undefined") return false;
           try {
               Function("class Foo {}") ();
@@ -129,7 +129,7 @@ html(lang="en" itemscope='' itemtype='https://schema.org/WebPage')
     div(style="display: none" hidden)
       meta(itemprop='url' content=`https://www.josephojo.com/${page.name}`)
       span(itemprop='name' content=`${page.title} - josephojo.com`)
-        | by 
+        | by
         span(itemprop='author') Joseph Ojo
           div(itemscope='' itemtype='https://schema.org/Person')
             img(itemprop='image' src='https://www.josephojo.com/android-icon-192x192.png' alt='The logo for josephojo.com')
@@ -140,13 +140,13 @@ html(lang="en" itemscope='' itemtype='https://schema.org/WebPage')
               | The porfolio of Joseph, it contains all amazing projects etc...
             span(itemtype='https://schema.org/EducationalOrganization' itemprop="alumniOf")
               | OnTech - Ontario Tech University
-            a(href='https://www.linkedin.com/in/o-josephojo/' itemprop='url' title="Link to Joseph's linkedin account") linkedin 
+            a(href='https://www.linkedin.com/in/o-josephojo/' itemprop='url' title="Link to Joseph's linkedin account") linkedin
     if true
       a.skip-main(href="#main" tabindex="0" title="Skip to main content") Skip to main content
       //- dev
       //- Navbar etc...
       +header(page)
-      
+
       mixin sectionView(section)
         if typeof section == "object"
           +section(section)
@@ -198,18 +198,18 @@ html(lang="en" itemscope='' itemtype='https://schema.org/WebPage')
                   span.btn-spacer
 
       if !page.noFooter
-        +footer("Made with ❤ by Okiki Ojo | ") 
+        +footer("Made with ❤ by Okiki Ojo | ")
           span.btn.pointer-default
             section.btn-group
               i.icon(inline) copyright
               span.btn-section
                 span.btn-spacer
-                span 2019 Joseph Ojo -            
+                span 2019 Joseph Ojo -
                 span.btn-spacer
           +link({
             href: "/sitemap.html",
             class: "layout-inline-block"
-          }) 
+          })
             i Sitemap
     else
       section.layer.layer-dark

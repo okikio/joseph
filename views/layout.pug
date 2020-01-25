@@ -1,0 +1,118 @@
+doctype html
+html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
+  head
+    include ./components/header.pug
+    include ./components/layer.pug
+    include ./components/layout.pug
+    include ./components/section.pug
+    include ./components/hero.pug
+    include ./components/footer.pug
+    include ./components/seo.pug
+
+    meta(charset="utf-8")
+    meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+
+    if dev
+      meta(http-equiv="Content-Security-Policy" content=`
+      default-src "self"; font-src "self" data:; style-src "self" "unsafe-inline"; img-src data: "self" https://res.cloudinary.com/${cloud_name}/ https://www.josephojo.com; script-src "self" https://polyfill.io/ https://cdnjs.cloudflare.com/ "unsafe-inline" "unsafe-eval"; connect-src "self"${dev ? " * blob: ws:" : ""};
+      block-all-mixed-content; upgrade-insecure-requests; base-uri "self"; object-src "none"; child-src "none"; frame-src "none"; manifest-src "self"; media-src "self" https://res.cloudinary.com/${cloud_name}/;`)
+
+    meta(name="robots" content="index,follow")
+    meta(name="copyright" content="Joseph Ojo")
+    meta(name="shortlink" content="https://www.josephojo.com/")
+    meta(name="canonical" content="https://www.josephojo.com/")
+
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes")
+    meta(name="keywords" content="Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, mech, robots, UOIT, OntarioTech, tech, website, netlify")
+
+    meta(property="og:type" content="website")
+    meta(name="twitter:site", content="@jo-ojo")
+    meta(property="article:author" content="Joseph Ojo")
+    meta(property="og:site_name" content="josephojo.com")
+    meta(itemprop="image" content="https://www.josephojo.com/android-icon-192x192.png")
+    meta(property="og:image" content="https://www.josephojo.com/android-icon-192x192.png")
+    meta(name="twitter:image" content="https://www.josephojo.com/android-icon-192x192.png")
+
+    block head
+      +seo({
+        url: "",
+        title: "Intro of a jorney.",
+        description: "The porfolio of Joseph, it contains all amazing projects etc..."
+      })
+
+    link(rel="preconnect" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
+    link(rel="preconnect" href="https://www.josephojo.com/" crossorigin)
+
+    link(rel="apple-touch-icon", sizes="57x57", href="/apple-icon-57x57.png")
+    link(rel="apple-touch-icon", sizes="60x60", href="/apple-icon-60x60.png")
+    link(rel="apple-touch-icon", sizes="72x72", href="/apple-icon-72x72.png")
+    link(rel="apple-touch-icon", sizes="76x76", href="/apple-icon-76x76.png")
+    link(rel="apple-touch-icon", sizes="114x114", href="/apple-icon-114x114.png")
+    link(rel="apple-touch-icon", sizes="120x120", href="/apple-icon-120x120.png")
+    link(rel="apple-touch-icon", sizes="144x144", href="/apple-icon-144x144.png")
+    link(rel="apple-touch-icon", sizes="152x152", href="/apple-icon-152x152.png")
+    link(rel="apple-touch-icon", sizes="180x180", href="/apple-icon-180x180.png")
+    link(rel="mask-icon", href="/favicon.svg", color="#000000")
+
+    link(rel="icon", type="image/png", sizes="512x512", href="/android-icon-512x512.png")
+    link(rel="icon", type="image/png", sizes="192x192", href="/android-icon-192x192.png")
+    link(rel="icon", type="image/png", sizes="144x144", href="/android-icon-144x144.png")
+    link(rel="icon", type="image/png", sizes="32x32", href="/favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="96x96", href="/favicon-96x96.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="/favicon-16x16.png")
+    link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+    link(rel="manifest", href="manifest.webmanifest")
+    link(rel="home", href="https://www.josephojo.com/")
+
+    meta(name="theme-color", content="#ffffff")
+    meta(name="twitter:card", content="summary")
+    meta(name="msapplication-TileColor", content="#ffffff")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style", content="white")
+    meta(name="msapplication-TileImage", content="/ms-icon-144x144.png")
+
+    link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="stylesheet" href="./css/app.min.css" inline async)
+
+    <!--[if lt IE 9]>
+      link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
+    <![endif]-->
+
+    script(src="./js/ver-check.min.js" inline async)
+  body
+    a.skip-main(href="#main" tabindex="0" title="Skip to main content") Skip to main content
+    +header(page)
+
+    main#main.main(data-container)
+      block content
+
+    .layer-action-center.layer-action-center-show
+      article.layer-action-group
+        section.layer-primary-dark.layer-shadow.layer-round.layout-align-self-end.layout-margin-horz
+          button.back-to-top.btn.btn-hover.layer-round.layout-padding-horz-smallest.layout-padding-vert-smallest.layer-primary-dark.layer-primary-hover.layer-primary-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
+            span.btn-group
+              i.icon.style-font-sz-24(inline) expand_less
+              span.btn-section
+                span.btn-spacer
+                span.btn-content Back To Top
+                span.btn-spacer
+
+    +footer("Made with ❤ by Okiki Ojo | ")
+      span.btn.pointer-default
+        section.btn-group
+          i.icon(inline) copyright
+          span.btn-section
+            span.btn-spacer
+            span 2019 Joseph Ojo -
+            span.btn-spacer
+      +link({
+        href: "/sitemap.html",
+        class: "layout-inline-block"
+      })
+        i Sitemap
+
+    script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` inline async)

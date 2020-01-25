@@ -16,8 +16,7 @@ tasks:
       nvm use 13 && 
       npm install -g gulp pnpm &&
       pnpm install && 
-      pnpm update && 
-      pnpm run watch
+      pnpm update
   
 vscode:
   extensions:
