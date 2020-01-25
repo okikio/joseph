@@ -25,6 +25,12 @@ block content
     })
       +head("Lorem itpsuim")
       +main()
+        span(class="layout-padding-top layout-margin-left-large layout-inline-block")= " "
+        p(lorem="2")
+        +link({
+          href: "/",
+          content: "Click here"
+        })
     
   layer([
       _class([ padding("horz", "vert-top-default--device-phone") ]),
