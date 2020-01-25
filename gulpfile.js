@@ -35,7 +35,6 @@ const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const https = require('https');
 
-let watching = false;
 let { cloud_name, imageURLConfig } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
 assets.config({ cloud_name, secure: true });
@@ -56,24 +55,11 @@ let srcMapsWrite = ["../maps", {
     }
 }];
 
-let htmlMinOpts = {
-    minifyJS: true,
-    minifyCSS: true,
-    removeComments: true,
-    collapseWhitespace: true,
-    removeEmptyAttributes: false,
-    removeRedundantAttributes: false,
-    processScripts: ["application/ld+json"]
-};
-
 let posthtmlOpts = [
     // Test processes
     require('posthtml-textr')({}, [
         require('typographic-single-spaces')
     ]),
-    /* tree => {
-        tree.match(/\n\s\w/gim, node => node.replace(/\n\s/gim, ' '));
-    }, */
     require('posthtml-lorem')(),
     tree => {
         let parse = (_src = "src") => node => {
@@ -133,12 +119,14 @@ let posthtmlOpts = [
         });
 
         await Promise.all(promises);
+
         // Filter errors from messages as warnings
         warnings = tree.messages.filter(msg => msg instanceof Error);
         if (warnings.length) {
             // Conditionally warn the user about any issues
             console.warn(`\nWarnings (${warnings.length}):\n${warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
         }
+
         // Return the ast
         return tree;
     },
@@ -167,21 +155,15 @@ let posthtmlOpts = [
     },
 
     // Dom process
-    // require('posthtml-doctype')({ doctype: 'HTML 5' }),
-    // require('posthtml-link-noreferrer')({
-    //   attr: ['noopener', 'noreferrer']
-    // }),
     dev ? () => { } : require('posthtml-inline-assets')({
         transforms: { image: false }
     }),
-    // dev ? () => { } : require("posthtml-minify-classnames") ()
 ];
 
 let minifyOpts = {
     keep_fnames: false, // change to true here
     toplevel: true,
     compress: {
-        // passes: 5,
         dead_code: true,
         pure_getters: true
     },
@@ -248,14 +230,20 @@ task('html', () => {
     return streamList(
         ['views/pages/*.pug', {
             pipes: [
-                // Rename
-                rename({
-                    extname: ".html"
-                }),
                 // Pug compiler
-                pug({ locals: { ...config, dev, debug } }),
+                pug({ locals: { cloud_name, dev, debug } }),
+                // Rename
+                rename({ extname: ".html" }),
                 // Minify or Beautify html
-                dev ? html({ indent_size: 4 }) : htmlmin(htmlMinOpts)
+                dev ? html({ indent_size: 4 }) : htmlmin({
+                    minifyJS: true,
+                    minifyCSS: true,
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    removeEmptyAttributes: false,
+                    removeRedundantAttributes: true,
+                    processScripts: ["application/ld+json"]
+                })
             ]
         }]
     );
@@ -339,7 +327,6 @@ task("client", () =>
         ["client/**/*.js", {
             opts: { allowEmpty: true },
             pipes: [
-                watching ? changed(publicDest) : null,
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -360,10 +347,7 @@ task("client", () =>
         }],
         [["client/**/*.{jpg,png,ico}"], {
             opts: { allowEmpty: true },
-            pipes: [
-                watching ? changed(publicDest) : null,
-                imagemin()
-            ]
+            pipes: [ imagemin() ]
         }]
     ])
 );
@@ -388,10 +372,7 @@ task("git:pull", () =>
 
 task('inline', () =>
     stream('public/*.html', {
-        pipes: [
-            watching ? changed(publicDest) : null,
-            posthtml(posthtmlOpts)
-        ]
+        pipes: [ posthtml(posthtmlOpts) ]
     })
 );
 

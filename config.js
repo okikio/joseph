@@ -84,7 +84,7 @@ module.exports = {
                                     [_link("About", "/about"), " - The story of me, myself and I. Shall we then?<br>"],
                                     [_link("Projects", "/projects"), " - Hardwork and perseverance, hear all about it.<br>"],
                                     [_link("Contact", "/contact"), " - Call me maybe? How about that, why don't we create something amazing?<br>"],
-                                ].map(val => 
+                                ].map(val =>
                                     section([ _class([ "li" ]), values(val) ])
                                 ))
                             ])
@@ -548,7 +548,7 @@ module.exports = {
                 //                                     // _class([
                 //                                         // "effect-parallax", "layer-box-tall"
                 //                                         // "layout-flex layout-align-items-center layout-justify-content-center"
-                                                    
+
                 //                                 ]),
                 //                                 _class([
                 //                                     padding([
@@ -560,7 +560,7 @@ module.exports = {
                 //                                     // _layout("block")
                 //                                 ])
                 //                             ])
-                                        
+
                 //                         ])
                 //                     ]),
                 //                 ])

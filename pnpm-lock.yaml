@@ -4390,9 +4390,6 @@ packages:
       node: '>=8'
     peerDependencies:
       gulp: '>=4'
-    peerDependenciesMeta:
-      gulp:
-        optional: true
     resolution:
       integrity: sha512-rAvQt+ByaqrMuJLwucvxC+MC02Vh8ksiJ16hoQlk4xnmlHiLJMque2aXXQMmyocQac3RIjNRcyr7iG1TNH15GA==
   /gulp-cli/2.2.0:
