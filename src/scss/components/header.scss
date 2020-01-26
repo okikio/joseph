@@ -65,21 +65,22 @@
         }
 
         &-logo {
-            transform: translateY(4px);
+            transform: translateY(4px) rotate(30deg);
             display: inline-block;
             min-height: 20px;
             width: 20px;
         }
 
         &-title {
-            font-family: $bold-font;
-            letter-spacing: 0.05em;
-            text-decoration: none;
-            padding-left: $size;
-            position: relative;
-            font-weight: 600;
-            font-size: 17px;
             color: darken($primary-dark, 10%);
+            padding-left: $size-small;
+            font-family: $bold-font;
+            letter-spacing: 0.03em;
+            text-decoration: none;
+            line-height: $height;
+            position: relative;
+            font-weight: 900;
+            font-size: 17px;
 
             &-line {
                 transition: border-left-color linear .45s;
@@ -88,7 +89,7 @@
                 // border-left-color: darken($mid-light, 2%);
 
                 margin-right: $size-smaller;
-                margin-left: $size-smaller;
+                margin-left: $size-mini;
                 display: inline-block;
                 height: 14px;
             }
