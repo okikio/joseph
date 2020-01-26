@@ -98,22 +98,31 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     .layer-action-center.layer-action-center-show
       article.layer-action-group
         .layer-shadow.layer-round.layout-align-self-end.layout-margin-horz
-          button.back-to-top.btn.btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-dark-hover.layer-primary-light-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
-            span.btn-group
-              i.icon.style-font-sz-24(inline) expand_less
-              span.btn-section
-                span.btn-spacer
-                span.btn-content Back To Top
-                span.btn-spacer
+          button.back-to-top.action-btn.action-btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-dark-hover.layer-primary-light-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
+            span.action-btn-group
+              i.action-icon.style-font-sz-24(inline) expand_less
+              span.action-btn-section
+                span.action-btn-spacer
+                span.action-btn-content Back To Top
+                span.action-btn-spacer
 
-    +footer("Made with ❤ by Okiki Ojo | ")
-      span.btn.pointer-default
-        .btn-group
-          i.icon(inline) copyright
-          span.btn-section
-            span.btn-spacer
-            span 2019 Joseph Ojo -
-            span.btn-spacer
+    +footer("Made with ❤ ")
+      span by
+      span= " "
+      +link({
+        href: "https://github.com/okikio",
+        content: "Okiki Ojo"
+      })
+      span  |
+      span= " "
+      span.action-btn.pointer-default
+        .action-btn-group
+          i.action-icon(inline) copyright
+          span.action-btn-section
+            span.action-btn-spacer
+            span(itemprop="copyrightYear") 2019
+            span(itemprop="copyrightHolder")  Joseph Ojo -
+            span.action-btn-spacer
       +link({
         href: "/sitemap",
         class: "layout-inline-block"

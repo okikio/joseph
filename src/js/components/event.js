@@ -140,7 +140,7 @@ export default class _event {
         { this._events[evt] = []; return this; }
 
     // Name of all event's
-    get _names() { return Object.keys(this._events); }
+    get _names() { return keys(this._events); }
 
     // Number of events
     get _eventCount() { return this._names.length; }

@@ -3,14 +3,9 @@ let browserlist = {
     "general": ["defaults, IE 8"]
 };
 
-let babelConfig = {
-    "node": {
-        "presets": ["@babel/preset-env"]
-    }
-};
-
-["modern", "general"].forEach(function (type) {
-    babelConfig[type] = {
+let babelConfig = ["modern", "general"]
+.reduce((acc, type) => {
+    acc[type] = {
         "babelrc": false,
         "presets": [
             ["@babel/preset-env", {
@@ -22,6 +17,11 @@ let babelConfig = {
             }]
         ]
     };
+    return acc;
+}, {
+    "node": {
+        "presets": ["@babel/preset-env"]
+    }
 });
 
 let _export = { babelConfig, ...browserlist };

@@ -1,5 +1,5 @@
 mixin footer(value = "Copyright")
-  footer
+  footer(itemprop="author")
     .layout-contain
-      .layout-padding.style-center.style-font-weight-bold.style-font-title.style-spaceout-small= value
+      .layout-padding.style-center.style-font-weight-bold.style-font-title.style-spaceout-small(itemprop="publisher" itemscope itemtype="https://schema.org/Organization" itemid="https://www.josephojo.com")= value
         block

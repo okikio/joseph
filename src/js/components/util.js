@@ -1,16 +1,16 @@
-// export const { assign, keys, values } = Object;
-// export let { isArray, from, of } = Array;
-export const assign = Object.assign;
-export const values = Object.values;
-export const keys = Object.keys;
+export let { assign, keys, values } = Object;
+export let { isArray, from, of } = Array;
+// export let assign = Object.assign;
+// export let values = Object.values;
+// export let keys = Object.keys;
 
-export const isArray = Array.isArray;
-export const from = Array.from;
-export const of = Array.of;
+// export let isArray = Array.isArray;
+// export let from = Array.from;
+// export let of = Array.of;
 
 // Remove certain properties
 export let _removeProps = (prop, obj) => {
-    let newObj = assign({}, obj);
+    let newObj = { ...obj };
     prop.forEach(key => delete newObj[key]);
     return newObj;
  };
@@ -97,45 +97,4 @@ export let _argNames = fn => {
     }
 };
 
-// Get or set a value in an Object, based on it's path
-export let _path = (obj, path, val) => {
-    path = path.toString().split(/[.,]/g);
-    if (_is.def(val)) {
-        if (path.length > 1) {
-            _path(obj[path.shift()], path, val);
-        } else { obj[path[0]] = val; }
-        return val;
-    } else {
-        path.forEach(_val => { obj = obj[_val]; });
-    }
-    return obj;
-};
-
-/*
-    Builds on path and adds more power,
-    * Allows for multiple paths one value
-    * Using Objects as paths and setting the values individually
-    * Access values as an Array, from multiple paths
-*/
-export let _attr = (obj, path, val) => {
-    if (_is.obj(path) && !_is.arr(path))
-        { return assign(obj, path); }
-    else if (_is.arr(path)) {
-        if (_is.undef(val)) {
-            return path.map(_key => _path(obj, _key));
-        } else {
-            path.forEach(_key => { _path(obj, _key, val); });
-        }
-    } else { return _path(obj, path, val); }
-    return obj;
-};
-// A more efficient `new` keyword that allows for arrays to be passed as arguments
-export let _new = function (ctor, args) {
-    class F {
-        constructor() { return ctor.apply(this, args); }
-    }
-    F.prototype = ctor.prototype;
-    return new F();
-};
-
-export default { _capital, _is, _constrain, _map, _fnval, _argNames, _path, _attr, _new, assign, keys, values, from, of, _log };
+export default { _capital, _is, _constrain, _map, _fnval, _argNames, assign, keys, values, from, of, _log };

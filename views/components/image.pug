@@ -5,7 +5,7 @@ mixin image(value = {})
 
 	.layer-image(class=_class)
 		.layer-image-preview-img-card
-		.load-img
+		figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
 			.img-contain
 				picture
 					each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -15,14 +15,14 @@ mixin image(value = {})
 
 					source(media='(min-width: 1200px)' srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
 					source(media='(min-width: 1200px)' srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
-					img.core-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw")
+					img.core-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
 				picture
 					if !attributes.inline
 						source(srcset!=`${src}.webp?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" type='image/webp')
-					img.placeholder-img(src!=`${src}.jpg?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" alt=alt loading="auto")&attributes(attributes)
+					img.placeholder-img(src!=`${src}.jpg?w=60&quality=100&effect=blur:120` sizes="60px" width="60px" alt=alt loading="auto" itemprop="url")&attributes(attributes)
 				noscript Javascript is necesscary for this sites awesome experience.
 					picture
 						source(srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
 						source(srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
-						img.no-script-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw")
+						img.no-script-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
 		.layer-image-overlay

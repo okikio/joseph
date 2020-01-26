@@ -161,7 +161,7 @@ task("js", () =>
                 return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        debug ? null : init(), // Sourcemaps init
+                        dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -178,7 +178,7 @@ task("js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`${type}.min.js`), // Rename
-                        debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -186,7 +186,7 @@ task("js", () =>
             [['src/js/*.js', '!src/js/app.js'], {
             opts: { allowEmpty: true },
             pipes: [
-                debug ? null : init(), // Sourcemaps init
+                dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -197,13 +197,13 @@ task("js", () =>
                         rollupBabel(babelConfig.general) // Babelify file for uglifing
                     ],
                     onwarn
-                }, 'umd'),
+                }, 'iife'),
                 // Minify the file
                 debug ? null : terser(
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                debug ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
         }]
@@ -329,8 +329,8 @@ task('inline-assets', () =>
                     return tree;
                 },
                 debug ? () => {} : tree => {
-                    let icons = debug ? {} : require('microicon');
-                    tree.match(querySelector("i.icon"), node => {
+                    let icons = require('microicon');
+                    tree.match(querySelector("i.action-icon"), node => {
                         if ("inline" in node.attrs) {
                             const { inline, async, ..._attrs } = node.attrs;
                             const _content = node.content;

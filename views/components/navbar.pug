@@ -9,16 +9,16 @@ mixin navbar(value = {})
   - let focusIndex = tabs.indexOf(name.toLowerCase());
 
   header.header
-    nav.navbar.navbar-fixed(class=_class)
+    nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement")
       .layout-contain-large.navbar-layout
         .navbar-head
           +link({
             href: "/",
-            class: "navbar-title style-primary style-primary-dark-hover style-primary-focus"
-          })
+            class: "navbar-title style-primary-dark-hover style-primary-focus"
+          })(itemprop="url")
             img.navbar-logo(src="/assets/gear-svg-icon-logo-color-2.svg" alt="The Joseph Ojo logo." inline)
             span.navbar-title-line
-            span JOSEPH!
+            span(itemprop="name") JOSEPH!
           .layout-spacer
           .navbar-foot.navbar-mobile
             .layout-inline-block
@@ -34,5 +34,5 @@ mixin navbar(value = {})
                 +link({
                   href: `/${tab}`,
                   class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
-                })
-                  span.navbar-link-content= tab
+                })(itemprop="url")
+                  span.navbar-link-content(itemprop="name")= tab

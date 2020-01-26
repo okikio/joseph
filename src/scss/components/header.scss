@@ -25,9 +25,6 @@
             .navbar-layout {
                 $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
-                // border-bottom-color: $border-color;
-                // border-right-color: $border-color;
-                // border-left-color: $border-color;
                 background: $surface;
             }
 
@@ -37,15 +34,10 @@
         }
 
         &:hover .navbar-layout {
-            // $border-width: 2px;
-            $border-color: $primary; // darken($very-light, 15%);
+            $border-color: $primary;
             border-bottom-color: $border-color;
             border-right-color: $border-color;
             border-left-color: $border-color;
-
-            // border-bottom-width: $border-width;
-            // border-right-width: $border-width;
-            // border-left-width: $border-width;
         }
 
         &-fixed {
@@ -55,7 +47,6 @@
         }
 
         &-layout {
-            // transition: border .25s linear;
             border-bottom: 1px solid transparent;
             border-right: 1px solid transparent;
             border-left: 1px solid transparent;
@@ -76,29 +67,28 @@
         &-logo {
             transform: translateY(4px);
             display: inline-block;
-            min-height: 22px;
-            width: 22px;
+            min-height: 20px;
+            width: 20px;
         }
 
         &-title {
             font-family: $bold-font;
             letter-spacing: 0.05em;
             text-decoration: none;
-            line-height: $height;
             padding-left: $size;
             position: relative;
             font-weight: 600;
             font-size: 17px;
+            color: darken($primary-dark, 10%);
 
             &-line {
                 transition: border-left-color linear .45s;
 
-                border-left: 1px solid transparent;
-                border-left-color: darken($mid-light, 2%);
+                // border-left: 1px solid transparent;
+                // border-left-color: darken($mid-light, 2%);
 
                 margin-right: $size-smaller;
                 margin-left: $size-smaller;
-                // transform: translateY(1px);
                 display: inline-block;
                 height: 14px;
             }

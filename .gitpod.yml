@@ -11,13 +11,14 @@ ports:
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/44_config_start_tasks/
 tasks:
   - command: >
-      nvm install 13 && 
-      nvm alias default 13 && 
-      nvm use 13 && 
+      nvm install 13 &&
+      nvm alias default 13 &&
+      nvm use 13 &&
       npm install -g gulp pnpm &&
-      pnpm install && 
-      pnpm update
-  
+      pnpm install &&
+      pnpm update &&
+      pnpm run watch
+
 vscode:
   extensions:
     - michelemelluso.code-beautifier@2.3.3:aRVPC/UxkGF1U5lMncPQNw==
