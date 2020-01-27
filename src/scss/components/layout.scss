@@ -15,14 +15,11 @@
     }
 
     &-vert-centered-box {
-        margin-top: $size-huge;
-        @media (min-width: #{$tablet}px) {
-            align-items: center;
-            position: relative;
-            height: 100vh;
-            display: flex;
-            margin-top: 0;
-        }
+        align-items: center;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        margin-top: 0;
     }
 
     // $dimension: ("width", "height");

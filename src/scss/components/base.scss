@@ -233,13 +233,11 @@ li, .li {
     }
 }
 
-@media #{$screen-size-gt-laptop} {
-    .footer-stuck {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
-    }
+.footer-stuck {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 .back-to-top {
