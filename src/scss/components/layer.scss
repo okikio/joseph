@@ -4,9 +4,9 @@
 */
 .layer {
     font-family: $regular-font;
-    position: static;
     line-height: 1.85;
-    font-size: 18px;
+    position: static;
+    font-size: 17px;
     display: block;
     width: 100%;
     z-index: 0;
@@ -201,61 +201,24 @@
                 "outset": outset,
                 "hidden": hidden,
                 "none": none);
-        $borderDirs: ("top",
-                "left",
-                "right",
-                "bottom"
-            );
         border: 1px solid $mid;
 
         @for $sz from 1 through 10 {
-
-            &-#{$sz},
-            &-sz-#{$sz},
-            &-wid-#{$sz},
             &-width-#{$sz} {
                 border-width: #{$sz}px;
             }
         }
 
         @for $sz from 1 through 20 {
-
-            &-rad-#{$sz},
             &-radius-#{$sz} {
                 border-radius: #{$sz}px;
             }
         }
 
         @include colorList(border-color);
-        @include propertyList(border-width, "sz", $sizes);
-        @include propertyList(border-radius, "rad", $sizes);
+        @include propertyList(border-width, "size", $sizes);
         @include propertyList(border-radius, "radius", $sizes);
         @include propertyList(border-style, "style", $borderStyles);
-
-        @each $val in $borderDirs {
-            &-#{$val} {
-                @include colorList(border-color-#{$val});
-                @include propertyList(border-width-#{$val}, "sz", $sizes);
-                @include propertyList(border-style-#{$val}, "style", $borderStyles);
-            }
-
-            @each $otherVal in $borderDirs {
-                @for $sz from 1 through 20 {
-
-                    &-rad-#{$val}-#{$otherVal}-#{$sz},
-                    &-radius-#{$val}-#{$otherVal}-#{$sz} {
-                        border-radius-#{$val}-#{$otherVal}: #{$sz}px;
-                    }
-                }
-
-                @include propertyList(border-radius-#{$val}-#{$otherVal}, "rad-#{$val}-#{$otherVal}", $sizes);
-                @include propertyList(border-radius-#{$val}-#{$otherVal}, "radius-#{$val}-#{$otherVal}", $sizes);
-            }
-
-            @include colorList(border-color-#{$val}, "color-#{$val}");
-            @include propertyList(border-width-#{$val}, "sz-#{$val}", $sizes);
-            @include propertyList(border-style-#{$val}, "style-#{$val}", $borderStyles);
-        }
     }
 
     &-round {

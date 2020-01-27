@@ -226,18 +226,20 @@ li, .li {
 }
 
 .footer {
-    font-size: 17px;
+    font-size: 16px;
 
     @media #{$screen-size-lt-tablet} {
         font-size: 15px;
     }
 }
 
-.footer-stuck {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
+@media #{$screen-size-gt-laptop} {
+    .footer-stuck {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
 }
 
 .back-to-top {

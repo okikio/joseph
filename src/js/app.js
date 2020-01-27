@@ -69,13 +69,12 @@ each(_layer, $layer => {
 
 let ready, resize;
 on(window, 'resize', resize = () => {
-    // toggleClass(_backUp, "action-btn-expand", width(window) <= 650);
     toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
 });
 
 on(window, 'scroll', ready = () => {
     let _scrollTop = scrollTop(window);
-    // hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
+    hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
     hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
     resize();
 
@@ -101,4 +100,5 @@ on(window, 'scroll', ready = () => {
         });
     }
 });
+
 ready();

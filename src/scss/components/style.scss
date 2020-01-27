@@ -1,163 +1,156 @@
 /* -- Styles (only affect text) -- */
 .style {
-   $styleParent: &;
-   &, &-font {
-      @each $name, $family in $fonts {
-         &-#{$name}, &-#{$name}-font, &-family-#{$name}  {
-            font-family: #{$family};
-         }
-      }
+	$styleParent: &;
 
-      &, &-sz, &-size {
-         font-size: 14px;
+	&, &-font {
+		@each $name, $family in $fonts {
 
-         @for $sz from 8 through 50 {
-            &-#{$sz} {
-               font-size: #{$sz}px;
+			&-#{$name},
+			&-#{$name}-font,
+			&-family-#{$name} {
+				font-family: #{$family};
+			}
+		}
 
-                @include deviceList(font-size, #{$sz}px);
-            }
-         }
-      }
+		&,
+		&-size {
+			font-size: 14px;
 
-      @include propertyList(font-size, "sz", $sizes);
+			@for $sz from 8 through 50 {
+				&-#{$sz} {
+					font-size: #{$sz}px;
 
-      &, &-weight {
-         font-weight: 400;
+					@include deviceList(font-size, #{$sz}px);
+				}
+			}
+		}
 
-         @for $weight from 1 through 9 {
-            &-#{$weight}00 {
-               font-weight: #{$weight + "00"};
+		@each $name,
+		$value in $sizes {
 
-                @include deviceList(font-weight, #{$weight + "00"});
-            }
-         }
+			&-#{$name},
+			&-size-#{$name} {
+				font-size: $value;
 
-         &-bolder {
-            font-weight: 900;
-         }
+				@include deviceList(font-size, $value);
+			}
+		}
 
-         &-bold {
-            font-weight: 700;
-         }
+		&,
+		&-weight {
+			font-weight: 400;
 
-         &-regular {
-            font-weight: 600;
-         }
+			@for $weight from 1 through 9 {
+				&-#{$weight}00 {
+					font-weight: #{$weight + "00"};
+				}
+			}
 
-         &-thin {
-            font-weight: 300;
-         }
+			&-bolder {
+				font-weight: 900;
+			}
 
-         &-thiner {
-            font-weight: 100;
-         }
-      }
+			&-bold {
+				font-weight: 700;
+			}
 
-      &-italic {
-         font-style: italic;
-      }
+			&-regular {
+				font-weight: 600;
+			}
 
-      &-underline {
-         text-decoration: underline;
-      }
-   }
+			&-thin {
+				font-weight: 300;
+			}
 
-   &-spaceout,
-   &-letter-spacing {
-      letter-spacing: 3px;
+			&-thiner {
+				font-weight: 100;
+			}
+		}
 
-      &-none {
-         letter-spacing: 0;
-      }
+		&-italic {
+			font-style: italic;
+		}
 
-      &-small {
-         letter-spacing: 1px;
-      }
+		&-underline {
+			text-decoration: underline;
+		}
+	}
 
-      &-double {
-         letter-spacing: 2px;
-      }
+	&-spaceout,
+	&-letter-spacing {
+		letter-spacing: 3px;
 
-      &-large {
-         letter-spacing: 7px;
-      }
+		&-none {
+			letter-spacing: 0;
+		}
 
-      @for $space from 0 to 10 {
-         &-#{$space} {
-            letter-spacing: #{$space}px;
+		&-small {
+			letter-spacing: 1px;
+		}
 
-            @include deviceList(letter-spacing, #{$space}px);
-         }
-      }
-   }
+		&-double {
+			letter-spacing: 2px;
+		}
 
-   &-line-height {
-      line-height: 1.5em;
+		&-large {
+			letter-spacing: 7px;
+		}
+	}
 
-      &-none {
-         line-height: 0;
-      }
+	&-line-height {
+		line-height: 1.5em;
 
-      &-small {
-         line-height: 1;
+		&-none {
+			line-height: 0;
+		}
 
-        @include deviceList(line-height, 1);
-      }
+		&-small {
+			line-height: 1;
+		}
 
-      &-double {
-         line-height: 2em;
+		&-double {
+			line-height: 2em;
+		}
 
-        @include deviceList(line-height, 2em);
-      }
+		&-large {
+			line-height: 3em;
+		}
+	}
 
-      &-large {
-         line-height: 3em;
+	&,
+	&-align {
+		&-left {
+			text-align: left;
+		}
 
-        @include deviceList(line-height, 3em);
-      }
+		&-center {
+			text-align: center;
+		}
 
-    //   @for $height from 1 through 5 {
-    //      &-#{$height / 5} {
-    //         line-height: #{$height / 5}em;
+		&-right {
+			text-align: right;
+		}
 
-    //         @include deviceList(line-height, #{$height / 5}em);
-    //      }
-    //   }
-   }
+		&-justify {
+			text-align: justify;
+			text-justify: inter-word;
+		}
+	}
 
-   &, &-align {
-      &-left {
-         text-align: left;
-      }
+	&,
+	&-transform {
+		&-capital {
+			text-transform: capitalize;
+		}
 
-      &-center {
-         text-align: center;
-      }
+		&-uppercase {
+			text-transform: uppercase;
+		}
 
-      &-right {
-         text-align: right;
-      }
+		&-lowercase {
+			text-transform: lowercase;
+		}
+	}
 
-      &-justify {
-        text-align: justify;
-        text-justify: inter-word;
-      }
-   }
-
-   &, &-transform {
-      &-capital {
-         text-transform: capitalize;
-      }
-
-      &-uppercase {
-         text-transform: uppercase;
-      }
-
-      &-lowercase {
-         text-transform: lowercase;
-      }
-   }
-
-   @include colorList;
+	@include colorList;
 }

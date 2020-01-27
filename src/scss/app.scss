@@ -146,8 +146,8 @@ $sizes: (
     // "gigantic": $size-gigantic,
     // "huge-xl": $size-huge-xl,
     "huge": $size-huge,
-    "extra-xl": $size-extra-xl,
-    // "extra-large": $size-extra-large,
+    // "extra-xl": $size-extra-xl,
+    "extra-large": $size-extra-large,
     "sub-extra-large": $size-sub-extra-large,
     "larger": $size-larger,
     "large": $size-large,
@@ -165,31 +165,6 @@ $sizes: (
     "tablet": #{$tablet}px,
     "phone": #{$phone}px
 );
-
-@mixin propertyList($property, $prefix, $list, $action: "") {
-    @each $name, $value in $list {
-        @if str-length($action) > 0 {
-            &-#{$action}-#{$name}:#{$action},
-            &-#{$name}-#{$action}:#{$action},
-            &-#{$action}-#{$prefix}-#{$name}:#{$action},
-            &-#{$prefix}-#{$action}-#{$name}:#{$action},
-            &-#{$prefix}-#{$name}-#{$action}:#{$action} {
-                #{$property}: $value;
-            }
-        } @else {
-            &-#{$name},
-            &-#{$prefix}-#{$name} {
-                #{$property}: $value;
-            }
-        }
-    }
-}
-
-@mixin colorList($property: color, $name: "color") {
-    @include propertyList($property, $name, $colors);
-    @include propertyList($property, $name, $colors, "hover");
-    @include propertyList($property, $name, $colors, "focus");
-}
 
 @mixin deviceList($property, $val: 0px) {
     $screenSizes: (
@@ -215,6 +190,31 @@ $sizes: (
         }
     }
 }
+@mixin propertyList($property, $prefix, $list, $action: "") {
+    @each $name, $value in $list {
+        @if str-length($action) > 0 {
+            &-#{$action}-#{$name}:#{$action},
+            &-#{$name}-#{$action}:#{$action},
+            &-#{$action}-#{$prefix}-#{$name}:#{$action},
+            &-#{$prefix}-#{$action}-#{$name}:#{$action},
+            &-#{$prefix}-#{$name}-#{$action}:#{$action} {
+                #{$property}: $value;
+            }
+        } @else {
+            &-#{$name},
+            &-#{$prefix}-#{$name} {
+                #{$property}: $value;
+            }
+        }
+    }
+}
+
+@mixin colorList($property: color, $name: "color") {
+    @include propertyList($property, $name, $colors);
+    @include propertyList($property, $name, $colors, "hover");
+    @include propertyList($property, $name, $colors, "focus");
+}
+
 
 @import "./components/base.scss";
 @import "./components/fonts.scss";

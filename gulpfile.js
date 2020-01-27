@@ -140,13 +140,13 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            init(), // Sourcemaps init
+            // init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
             rename(minSuffix), // Rename
-            write(...srcMapsWrite) // Put sourcemap in public folder
+            // write(...srcMapsWrite) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -161,7 +161,7 @@ task("js", () =>
                 return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        dev ? null : init(), // Sourcemaps init
+                        // dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -178,7 +178,7 @@ task("js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`${type}.min.js`), // Rename
-                        dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -186,7 +186,7 @@ task("js", () =>
             [['src/js/*.js', '!src/js/app.js'], {
             opts: { allowEmpty: true },
             pipes: [
-                dev ? null : init(), // Sourcemaps init
+                // dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -203,7 +203,7 @@ task("js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
         }]

@@ -20,12 +20,6 @@
             text-decoration: none;
         }
 
-        &,
-        &-bkg,
-        &-background {
-            @include colorList(background-color);
-        }
-
         &-default {
             padding: 8px 16px;
             margin: 8px;
