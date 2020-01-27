@@ -2,7 +2,5 @@ language: node_js
 node_js:
   - "13"
 before_script:
-  - npm install -g yarn
-  - yarn install
+  - npm install
 cache: npm
-cache: yarn
