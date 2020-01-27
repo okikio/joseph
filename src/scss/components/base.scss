@@ -135,14 +135,14 @@ a.skip-main {
 
 .placeholder-img {
     transition: opacity .9s ease;
-    image-rendering: smooth; 
+    image-rendering: smooth;
     will-change: transform;
     transform: scale(1.2);
     opacity: 1;
 }
 
 .core-img, .no-script-img {
-    image-rendering: high-quality; 
+    image-rendering: high-quality;
     position: absolute;
     left: 0;
     top: 0;
@@ -188,7 +188,7 @@ li, .li {
     display: list-item;
 }
 
-.list { 
+.list {
     list-style: circle;
     display: list-item;
 
@@ -225,9 +225,21 @@ li, .li {
     }
 }
 
-footer {
-    // position: relative;
-    // z-index: 250;
+.footer {
+    font-size: 17px;
+
+    @media #{$screen-size-lt-tablet} {
+        font-size: 15px;
+    }
+}
+
+@media #{$screen-size-gt-laptop} {
+    .footer-stuck {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
 }
 
 .back-to-top {

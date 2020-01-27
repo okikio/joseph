@@ -72,8 +72,16 @@ $tablet: 680;
 $phone: 480;
 
 $screen-size-desktop: "(min-width: #{$laptop}px)";
+
+$screen-size-gt-laptop: "(min-width: #{$laptop}px)"; // Greater Than
 $screen-size-laptop: "(min-width: #{$tablet}px) and (max-width: #{$laptop}px)";
+$screen-size-lt-laptop: "(max-width: #{$laptop}px)"; // Less Than
+
+$screen-size-gt-tablet: "(min-width: #{$tablet}px)"; // Greater Than
 $screen-size-tablet: "(min-width: #{$phone}px) and (max-width: #{$tablet}px)";
+$screen-size-lt-tablet: "(max-width: #{$tablet}px)"; // Less Than
+
+$screen-size-gt-phone: "(min-width: #{$phone}px)"; // Greater Than
 $screen-size-phone: "(max-width: #{$phone}px)";
 
 $size-humungus-xl: 500px;
@@ -96,7 +104,6 @@ $size-smallest: 8px;
 $size-mini: 5px;
 $size-nano: 2px;
 
-// --google-blue: #3367d6
 $colors: (
     "primary-light": $primary-light,
     "primary": $primary,
@@ -133,14 +140,14 @@ $fonts: (
 
 $sizes: (
     "dull": 0 !important,
-    "humungus-xl": $size-humungus-xl,
-    "humungus": $size-humungus,
-    "gigantic-xl": $size-gigantic,
-    "gigantic": $size-gigantic,
-    "huge-xl": $size-huge-xl,
+    // "humungus-xl": $size-humungus-xl,
+    // "humungus": $size-humungus,
+    // "gigantic-xl": $size-gigantic,
+    // "gigantic": $size-gigantic,
+    // "huge-xl": $size-huge-xl,
     "huge": $size-huge,
     "extra-xl": $size-extra-xl,
-    "extra-large": $size-extra-large,
+    // "extra-large": $size-extra-large,
     "sub-extra-large": $size-sub-extra-large,
     "larger": $size-larger,
     "large": $size-large,
@@ -187,8 +194,16 @@ $sizes: (
 @mixin deviceList($property, $val: 0px) {
     $screenSizes: (
         "desktop": $screen-size-desktop,
+
+        "gt-laptop": $screen-size-gt-laptop, // Greater Than
         "laptop": $screen-size-laptop,
+        "lt-laptop": $screen-size-lt-laptop, // Less Than
+
+        "gt-tablet": $screen-size-gt-tablet, // Greater Than
         "tablet": $screen-size-tablet,
+        "lt-tablet": $screen-size-lt-tablet, // Less Than
+
+        "gt-phone": $screen-size-gt-phone, // Greater Than
         "phone": $screen-size-phone
     );
 

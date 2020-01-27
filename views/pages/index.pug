@@ -11,8 +11,8 @@ include ../components/row.pug
 block content
 	//- Hero layer
 	+hero({
-		title: "Brilliant <br/> Engineering",
-		content: "Creating with passion, crafting with love.",
+		title: "Mechatronics",
+		content: "Crafting the extrodinary is my passion.",
 		image: {
 			class: "effect-parallax hero-img",
 			src: "/assets/closeup-stones",
@@ -25,62 +25,55 @@ block content
 		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
 	})
 		+layout({
-			class: "layout-shorten layout-contain style-line-height-double"
+			class: "layout-shorten layout-contain"
 		})
-			+head("Lorem itpsuim")
+			+head("About me")
 			+main({
-				class: "layout-padding-vert-small"
+					class: "layout-padding-top-large"
 			})
-				span.layout-margin-horz-left-large.layout-inline-block= " "
-				p.layout-inline.layout-margin-dull(lorem="3")
+				+row
+					//- 1st Column
+					+column({
+						class: "layout-col-2 layout-padding-bottom-small"
+					})
+						+p({
+							content: "03/03",
+							class: "style-font-17--device-phone style-font-20 style-bold"
+						})
+
+					//- 2nd Column
+					+column({
+						class: "layout-col-3 layout-padding-bottom"
+					})
+						+p({
+							content: "2018",
+							class: "layout-block style-font-17--device-phone style-font-20 style-bold "
+						})
+						+p({
+							content: "E-commerse",
+							class: "layout-block style-font-15--device-phone style-font-16"
+						})
+						+p({
+							content: "Design Executive",
+							class: "layout-block style-font-15--device-phone style-font-16"
+						})
+
+					//- 3rd Column
+					+column({
+						class: "layout-col-7"
+					})
+						p.style-font-15--device-phone.style-font-17.layout-margin-dull(lorem="1")
+
+			+main({
+				class: "layout-padding-vert-large"
+			})
+				span.layout-margin-horz-left.layout-inline-block= " "
+				+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info ")
 				+link({
 					href: "/about",
-					class: "layout-margin-horz-left-mini",
-					content: "Click here"
+					class: "layout-margin-dull",
+					content: "click here."
 				})
-
-	//- Listings layer
-	+layer
-		+layout({
-			class: "layout-padding-horz layout-padding-large-top"
-		})
-			section.layout-shorten.layout-contain
-				+head("Listings")
-				+main({
-						class: "layout-padding-top style-line-height-double"
-				})
-					+row
-						//- 1st Column
-						+column({
-							class: "layout-col-2 layout-padding-bottom-small"
-						})
-							+p({
-								content: "03/03",
-								class: "style-font-18--device-phone style-font-24 style-bold"
-							})
-
-						//- 2nd Column
-						+column({
-							class: "layout-col-3 layout-padding-bottom style-line-height-small--device-phone style-line-height-double"
-						})
-							+p({
-								content: "2018",
-								class: "layout-block style-font-18--device-phone style-font-24 style-bold "
-							})
-							+p({
-								content: "E-commerse",
-								class: "layout-block style-font-16--device-phone style-font-18"
-							})
-							+p({
-								content: "Design Executive",
-								class: "layout-block style-font-16--device-phone style-font-18"
-							})
-
-						//- 3rd Column
-						+column({
-							class: "layout-col-7"
-						})
-							p.style-font-15--device-phone.style-font-18.layout-margin-dull(lorem="1")
 
 	//- Banner layer 1
 	+layer({

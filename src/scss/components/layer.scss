@@ -11,6 +11,12 @@
     width: 100%;
     z-index: 0;
 
+    @media #{$screen-size-lt-tablet} {
+        line-height: 1.15;
+        font-weight: 400;
+        font-size: 15px;
+    }
+
     // /* &-title {
     //    // overflow-wrap: break-word;
     // } */
@@ -57,16 +63,16 @@
             background: darken(#53507c, 20%);
             position: absolute;
             display: block;
-            opacity: 0.15;
+            opacity: 0.45;
+            z-index: 250;
             height: 100%;
             width: 100%;
-            z-index: 5;
             left: 0;
             top: 0;
 
             @at-root {
                 .effect-parallax .layer-image-overlay {
-                    opacity: 0.35;
+                    opacity: 0.55;
                 }
             }
         }
@@ -109,10 +115,6 @@
                 transform: scale(1.2);
                 min-width: 500px;
             }
-
-            &-overlay {
-                // background-color: #58677b;
-            }
         }
 
         &-scroll-down {
@@ -120,12 +122,8 @@
             position: relative;
             z-index: 250;
 
-            @media #{$screen-size-phone} {
-                margin-bottom: -132px;
-            }
-
-            @media #{$screen-size-tablet} {
-                margin-bottom: -276px;
+            @media #{$screen-size-lt-tablet} {
+                margin-bottom: -176px;
             }
 
             @media #{$screen-size-laptop} {
@@ -141,11 +139,19 @@
             font-size: 64px;
 
             @media (max-width: 500px) {
+                font-size: 34px;
+            }
+
+            @media (min-width: 500px) {
                 font-size: 44px;
             }
 
             @media (min-width: 700px) {
                 font-size: 7vw;
+            }
+
+            @media (min-width: 900px) {
+                font-size: 64px;
             }
 
             @media (min-width: 1600px) {
@@ -154,18 +160,21 @@
         }
 
         .layer-main-text {
-            font-weight: 400;
             font-family: $regular-font;
-            // letter-spacing: 0.05rem;
-            // line-height: 1.35em;
             line-height: 1.25;
+            font-weight: 400;
             font-size: 4vw;
 
             @media (max-width: 500px) {
-                font-size: 24px;
+                line-height: 1.5;
+                font-size: 20px;
             }
 
-            @media (max-width: 700px) {
+            @media (min-width: 500px) {
+                font-size: 20px;
+            }
+
+            @media (min-width: 700px) {
                 font-size: 22px;
             }
 

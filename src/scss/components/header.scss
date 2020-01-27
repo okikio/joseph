@@ -65,31 +65,31 @@
         }
 
         &-logo {
-            transform: translateY(4px) rotate(30deg);
+            transform: translateY(4px);
             display: inline-block;
             min-height: 20px;
             width: 20px;
         }
 
         &-title {
-            color: darken($primary-dark, 10%);
-            padding-left: $size-small;
             font-family: $bold-font;
             letter-spacing: 0.03em;
             text-decoration: none;
             line-height: $height;
+            padding-left: $size;
             position: relative;
             font-weight: 900;
             font-size: 17px;
+            color: $dark;
 
             &-line {
                 transition: border-left-color linear .45s;
 
-                // border-left: 1px solid transparent;
-                // border-left-color: darken($mid-light, 2%);
+                border-left: 1px solid transparent;
+                border-left-color: darken($mid-light, 2%);
 
                 margin-right: $size-smaller;
-                margin-left: $size-mini;
+                margin-left: $size-smaller;
                 display: inline-block;
                 height: 14px;
             }

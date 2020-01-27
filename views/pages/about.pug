@@ -17,8 +17,8 @@ block pageInfo
 block content
 	//- Hero layer
 	+hero({
-		title: "Subpage",
-		content: "...",
+		title: "A little about me.",
+		content: "What drove me to become a Mechatronics Engineer?",
 		image: {
 			class: "effect-parallax hero-img",
 			src: "/assets/white-flower",
@@ -31,16 +31,16 @@ block content
 		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
 	})
 		+layout({
-			class: "layout-shorten layout-contain style-line-height-double"
+			class: "layout-shorten layout-contain-small"
 		})
-			+head("Lorem itpsuim")
+			+head("My story.")
 			+main({
 				class: "layout-padding-vert-small"
 			})
 				span.layout-margin-horz-left-large.layout-inline-block= " "
-				p.layout-inline.layout-margin-dull(lorem="3")
+				+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes. <br> <br> In case you were wondering what my skills outside engineering are, they include problem-solving, leadership, communication and conflict resolution. For more info. check out my resume ")
 				+link({
-					href: "/",
-					class: "layout-margin-horz-left-mini",
-					content: "Click here"
+					href: "/resume",
+					class: "layout-margin-dull",
+					content: "here."
 				})

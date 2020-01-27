@@ -36,6 +36,7 @@ let onload = ($load_img) => function () {
 
 each(_layer, $layer => {
     let layer_image = find($layer, ".layer-image");
+    let isHero = hasClass($layer, "layer-hero-id");
 
     each(layer_image, $img => {
         let load_img = get(find($img, ".load-img"), 0);
@@ -45,7 +46,8 @@ each(_layer, $layer => {
         _images.push({
             overlay, load_img,
             target: $img,
-            clientRect
+            clientRect,
+            isHero
         });
 
         let _core_img = get(find($img, ".core-img"), 0);
@@ -65,11 +67,17 @@ each(_layer, $layer => {
     });
 });
 
-let ready;
+let ready, resize;
+on(window, 'resize', resize = () => {
+    // toggleClass(_backUp, "action-btn-expand", width(window) <= 650);
+    toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
+});
+
 on(window, 'scroll', ready = () => {
     let _scrollTop = scrollTop(window);
-    hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
+    // hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
     hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+    resize();
 
     toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
@@ -77,14 +85,14 @@ on(window, 'scroll', ready = () => {
     if (width(window) > 500) {
         _images.forEach(data => {
             if (hasClass(data.target, "effect-parallax")) {
-                let { clientRect, load_img, overlay } = data;
+                let { clientRect, load_img, overlay, isHero } = data;
                 let { top, height } = clientRect;
                 let dist = _scrollTop - top + 60;
 
                 if (dist >= -_focusPt && dist <= height - _focusPt) {
                     let value = Math.round(_map(_constrain(dist, 0, height), 0, height, 0, 1) * 100) / 100;
 
-                    style(overlay, { opacity: _map(value, 0.75, 0, 0.15, 0.35) });
+                    isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.55, 0.15) });
                     style(load_img, {
                         transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                     });

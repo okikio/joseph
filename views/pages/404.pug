@@ -17,19 +17,25 @@ block pageInfo
 block content
 	//- Intro layer
 	+layer({
-		class: "layout-padding-horz layout-enlarge-vert"
+		class: "layout-padding-horz"
 	})
 		+layout({
-			class: "layout-contain-small style-line-height-double"
+			class: "layout-contain-small layout-vert-centered-box"
 		})
-			+head("404, Page Not Found.")
-			+main({
-				class: "style-center",
-			})
-				+p("Sorry, the page you are looking for doesn't exist. How about going back ")
-				+link({
-					href: "/",
-					class: "style-italic style-underline",
-					content: "home"
+			section
+				+head("404, Page Not Found.")
+				+main({
+					class: "style-center",
 				})
-				+p(".")
+					+p("Sorry, the page you are looking for doesn't exist. How about going back ")
+					+link({
+						href: "/",
+						class: "style-italic style-underline",
+						content: "home"
+					})
+					+p(".")
+
+block footer
+	+footer({
+		class: "footer-stuck layout-margin-vert-top"
+	})

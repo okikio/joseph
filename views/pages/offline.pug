@@ -16,13 +16,19 @@ block pageInfo
 block content
 	//- Intro layer
 	+layer({
-		class: "layout-padding-horz layout-enlarge-vert"
+		class: "layout-padding-horz"
 	})
 		+layout({
-			class: "layout-contain-small style-line-height-double"
+			class: "layout-contain-small layout-vert-centered-box"
 		})
-			+head("Yikes you're offline!")
-			+main({
-				class: "style-center",
-			})
-				+p("Psshhh, psshhh, you are cutting off, psshhh. You are currently offline. Reload the page or try again later.")
+			section
+				+head("Yikes you're offline!")
+				+main({
+					class: "style-center",
+				})
+					+p("Psshhh, psshhh, you are cutting off, psshhh. You are currently offline. Reload the page or try again later.")
+
+block footer
+	+footer({
+		class: "footer-stuck layout-margin-vert-top"
+	})
