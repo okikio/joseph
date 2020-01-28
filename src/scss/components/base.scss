@@ -105,9 +105,9 @@ img {
 }
 
 a {
+    color: darken($secondary-dark, 2%);
     text-decoration: none;
     display: inline-block;
-    color: $secondary-dark;
     cursor: pointer;
 
     &:hover,
@@ -230,6 +230,8 @@ a.skip-main {
     a {
         & {
             text-decoration: underline;
+            padding: 8px;
+            padding-left: 0;
         }
 
         &:active,
@@ -250,6 +252,10 @@ a.skip-main {
 
     @media #{$screen-size-lt-tablet} {
         font-size: 15px;
+    }
+
+    @media #{$screen-size-lt-laptop} {
+        padding-right: $size + 10px;
     }
 }
 

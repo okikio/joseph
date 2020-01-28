@@ -7,10 +7,10 @@ mixin footer(value = {})
 				span= " "
 				+link({
 					href: "https://github.com/okikio",
+					class: "layout-margin-left-mini",
 					content: "Okiki Ojo"
-				})(target="_blank")
-				span  |
-				span= " "
+				})(target="_blank" rel="noreferrer")
+				span= " | "
 				span.action-btn.pointer-default
 					.action-btn-group
 						i.action-icon(inline) copyright
@@ -21,22 +21,25 @@ mixin footer(value = {})
 							span.action-btn-spacer
 				+link({
 					href: "/sitemap",
-					class: "layout-inline-block",
+					class: "layout-inline-block layout-margin-left-mini",
 					content: "Sitemap"
 				})
 				span= " | "
 				+link({
 					href: "https://www.linkedin.com/in/o-josephojo/",
+					class: "layout-margin-left-mini",
 					content: "LinkedIn"
-				})(target="_blank")
+				})(target="_blank" rel="noreferrer")
 				span= " - "
 				+link({
 					href: "https://github.com/laoluojo",
+					class: "layout-margin-left-mini",
 					content: "Github"
-				})(target="_blank")
+				})(target="_blank" rel="noreferrer")
 				span= " - "
 				span(itemprop="email")
 					+link({
 						href: "mailto:laoluojo@gmail.com",
+						class: "layout-margin-left-mini",
 						content: "Email"
-					})(target="_blank")
+					})(target="_blank" rel="noreferrer")
