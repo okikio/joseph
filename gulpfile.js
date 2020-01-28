@@ -264,6 +264,7 @@ task('inline-assets', () =>
                         let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
                         let query = URLObj.searchParams;
                         let queryString = URLObj.search;
+                        console.log(query);
 
                         let height = query.get("h");
                         let width = query.get("w") || 'auto';
