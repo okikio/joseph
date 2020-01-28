@@ -26,7 +26,7 @@ on(_backUp, "click", () => {
 
 // touchstart
 on(_scrolldown, "click", () => {
-    scrollTo(height(_hero) + _focusPt, "800ms");
+    scrollTo(height(_hero) - _focusPt, "800ms");
 });
 
 let _images = [];
