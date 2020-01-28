@@ -17,7 +17,7 @@ mixin image(value = {})
 					source(media='(min-width: 1200px)' srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
 					img.core-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
 				picture
-					img.placeholder-img(src!=`${src}.png?w=60&quality=100&effect=blur:150` sizes="60px" width="60px" alt=alt loading="auto" itemprop="url" inline)
+					img.placeholder-img(src!=`${src}.png?w=60&quality=auto&effect=blur:150` sizes="60px" width="60px" alt=alt loading="auto" itemprop="url" inline)
 				noscript Javascript is necesscary for this sites awesome experience.
 					picture
 						source(srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
