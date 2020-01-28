@@ -104,56 +104,6 @@ img {
     width: 100%;
 }
 
-a.skip-main {
-    position: fixed;
-    overflow: hidden;
-    z-index: -999;
-    left: -999px;
-    height: 1px;
-    width: 1px;
-    top: auto;
-
-    &:focus,
-    &:active {
-        background-color: $dark;
-        border: 2px solid $tertiary;
-        border-radius: 6px;
-        text-align: center;
-        margin: 10px 35%;
-        font-size: 1.2em;
-        color: yellow;
-        overflow: auto;
-        height: auto;
-        padding: 5px;
-        z-index: 999;
-        width: 30%;
-        left: auto;
-        top: auto;
-    }
-
-}
-
-.placeholder-img {
-    transition: opacity .9s ease;
-    image-rendering: smooth;
-    will-change: transform;
-    transform: scale(1.2);
-    opacity: 1;
-}
-
-.core-img, .no-script-img {
-    image-rendering: high-quality;
-    position: absolute;
-    left: 0;
-    top: 0;
-
-    &-show {
-        & .placeholder-img {
-            opacity: 0;
-        }
-    }
-}
-
 a {
     text-decoration: none;
     display: inline-block;
@@ -186,6 +136,57 @@ ol ul, .ol .ul {
 li, .li {
     text-align: inherit;
     display: list-item;
+}
+
+a.skip-main {
+    position: fixed;
+    overflow: hidden;
+    z-index: -999;
+    left: -999px;
+    height: 1px;
+    width: 1px;
+    top: auto;
+
+    &:focus,
+    &:active {
+        border: 2px solid $secondary-light;
+        color: $secondary-light;
+        background-color: $dark;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: 600;
+        margin: 10px 35%;
+        font-size: 1.2em;
+        overflow: auto;
+        height: auto;
+        padding: 5px;
+        z-index: 999;
+        width: 30%;
+        left: auto;
+        top: auto;
+    }
+
+}
+
+.placeholder-img {
+    transition: opacity .9s ease;
+    image-rendering: smooth;
+    will-change: transform;
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.core-img, .no-script-img {
+    image-rendering: high-quality;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    &-show {
+        & .placeholder-img {
+            opacity: 0;
+        }
+    }
 }
 
 .list {
