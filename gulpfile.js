@@ -264,7 +264,6 @@ task('inline-assets', () =>
                         let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
                         let query = URLObj.searchParams;
                         let queryString = URLObj.search;
-                        // console.log(query);
 
                         let height = query.get("h");
                         let width = query.get("w") || 'auto';
@@ -288,7 +287,7 @@ task('inline-assets', () =>
                 debug ? () => {} : async tree => {
                     let warnings, promises = [];
                     tree.match({ tag: 'img' }, node => {
-                        if (promises.length >= 2) return node; // Don't inline everything
+                        if (promises.length >= 3) return node; // Don't inline everything
                         if (node.attrs && node.attrs.src && "inline" in node.attrs) {
                             const { inline, async, ..._attrs } = node.attrs;
                             const _src = _attrs.src;
