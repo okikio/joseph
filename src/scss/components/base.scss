@@ -228,6 +228,10 @@ a.skip-main {
 
 .layer, .footer {
     a {
+        & {
+            text-decoration: underline;
+        }
+
         &:active,
         &:focus {
             border: solid 2px $secondary-light;
