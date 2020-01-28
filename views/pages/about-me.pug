@@ -8,10 +8,10 @@ include ../components/hero.pug
 block pageInfo
 	-
 		let page = {
-			url: "/about",
+			url: "/about-me",
 			name: "about",
-			title: "A little about me.",
-			description: "What drove me to become a Mechatronics Engineer..."
+			title: "A little about me, on how I became a mechatronics engineer.",
+			description: "What drove me to become a Mechatronics Engineer, why, how, wait what?"
 		};
 
 block content
@@ -40,7 +40,7 @@ block content
 				span.layout-margin-horz-left-large.layout-inline-block= " "
 				+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes. <br> <br> In case you were wondering what my skills outside engineering are, they include problem-solving, leadership, communication and conflict resolution. For more info. check out my resume")
 				+link({
-					href: "/resume",
+					href: "/my-resume",
 					class: "layout-margin-vert-dull layout-margin-left-mini",
 					content: "here."
 				})

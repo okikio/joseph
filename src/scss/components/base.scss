@@ -246,6 +246,7 @@ a.skip-main {
 
 .footer {
     font-size: 16px;
+    line-height: 25px;
 
     @media #{$screen-size-lt-tablet} {
         font-size: 15px;

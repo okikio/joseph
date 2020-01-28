@@ -21,6 +21,22 @@ mixin footer(value = {})
 							span.action-btn-spacer
 				+link({
 					href: "/sitemap",
-					class: "layout-inline-block"
+					class: "layout-inline-block",
+					content: "Sitemap"
 				})
-					i Sitemap
+				span= " | "
+				+link({
+					href: "https://www.linkedin.com/in/o-josephojo/",
+					content: "LinkedIn"
+				})
+				span= " - "
+				+link({
+					href: "https://github.com/laoluojo",
+					content: "Github"
+				})
+				span= " - "
+				span(itemprop="email")
+					+link({
+						href: "mailto:laoluojo@gmail.com",
+						content: "Email"
+					})
