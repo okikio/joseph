@@ -1,6 +1,18 @@
 const { fetch } = window;
 const { body } = document;
 
+let loadImg = () => {
+    let slice = [].slice;
+    let _img = slice.call(document.getElementsByClassName("load-img"));
+    let _navbar = slice.call(document.getElementsByClassName("navbar"));
+    _navbar.forEach(function (nav) {
+        nav.classList.add("navbar-focus");
+    });
+    _img.forEach(function (img) {
+        img.classList.add("core-img-show");
+    });
+};
+
 try {
     let script = document.createElement("script");
     let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
@@ -15,6 +27,7 @@ try {
             .then(res => {
                 if (!res.ok) {
                     console.warn('Looks like there was a problem. Status Code: ', status);
+                    loadImg();
                     return;
                 }
 
@@ -27,21 +40,15 @@ try {
                 script.setAttribute("src", src);
                 body.appendChild(script);
                 console.error('Fetch Error: ', err);
+                loadImg();
             });
     } else {
         script.setAttribute("src", src);
         body.appendChild(script);
+        // loadImg();
     }
 } catch (e) {
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
     console.warn(err);
-
-    let _img = [...document.getElementsByClassName("load-animation")];
-    let _navbar = [...document.getElementsByClassName("navbar")];
-    _navbar.forEach(function (nav) {
-        nav.classList.add("navbar-focus");
-    });
-    _img.forEach(function (img) {
-        img.classList.remove("load-animation");
-    });
+    loadImg();
 }

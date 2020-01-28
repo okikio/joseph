@@ -172,7 +172,7 @@ task("js", () =>
                                 rollupBabel(babelConfig[type]) // Babelify file for uglifing
                             ],
                             onwarn
-                        }, gen ? 'umd' : 'es'),
+                        }, gen ? 'iife' : 'es'),
                         // Minify the file
                         debug ? null : terser(
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
@@ -287,7 +287,7 @@ task('inline-assets', () =>
                 debug ? () => {} : async tree => {
                     let warnings, promises = [];
                     tree.match({ tag: 'img' }, node => {
-                        if (promises.length >= 3) return node; // Don't inline everything
+                        if (promises.length >= 2) return node; // Don't inline everything
                         if (node.attrs && node.attrs.src && "inline" in node.attrs) {
                             const { inline, async, ..._attrs } = node.attrs;
                             const _src = _attrs.src;

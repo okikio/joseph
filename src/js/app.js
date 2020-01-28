@@ -30,7 +30,7 @@ on(_scrolldown, "click", () => {
 });
 
 let _images = [];
-let onload = ($load_img) => function () {
+let onload = $load_img => function () {
     addClass($load_img, "core-img-show");
 };
 

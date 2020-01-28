@@ -1,12 +1,12 @@
-export let { assign, keys, values } = Object;
-export let { isArray, from, of } = Array;
-// export let assign = Object.assign;
-// export let values = Object.values;
-// export let keys = Object.keys;
+// export let { assign, keys, values } = Object;
+// export let { isArray, from, of } = Array;
+export let assign = Object.assign;
+export let values = Object.values;
+export let keys = Object.keys;
 
-// export let isArray = Array.isArray;
-// export let from = Array.from;
-// export let of = Array.of;
+export let isArray = Array.isArray;
+export let from = Array.from;
+export let of = Array.of;
 
 // Remove certain properties
 export let _removeProps = (prop, obj) => {
