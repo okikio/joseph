@@ -13,19 +13,19 @@ let _backUp = '.back-to-top';
 let _actioncenter = ".layer-action-center";
 let _scrolldown = '.layer-hero-scroll-down';
 
+//  touchstart
+on(_menu, "click", () => {
+    toggleClass(_navbar, "navbar-show");
+});
+
+// touchstart
+on(_backUp, "click", () => {
+    scrollTo("0px", "1400ms");
+});
+
 let _load = () => {
 
     let _focusPt = height(_navbar) + 10;
-
-    //  touchstart
-    on(_menu, "click", () => {
-        toggleClass(_navbar, "navbar-show");
-    });
-
-    // touchstart
-    on(_backUp, "click", () => {
-        scrollTo("0px", "1400ms");
-    });
 
     // touchstart
     on(_scrolldown, "click", () => {
