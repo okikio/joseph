@@ -85,7 +85,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 		<![endif]-->
 
 		script(src="./js/ver-check.min.js" inline async)
-	body(data-barba="wrapper")
+	body
 		+link({
 			class: "skip-main",
 			href: "#main",
@@ -94,8 +94,9 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 		block navbar
 			+navbar(page)
 
-		main#main.main(data-barba="container" data-barba-namespace="home")
-			block content
+		main#main.main(data-barba="wrapper")
+			section(data-barba="container" data-barba-namespace="home")
+				block content
 
 		.layer-action-center.layer-action-center-show
 			article.layer-action-group

@@ -2,6 +2,7 @@ devDependencies:
   '@babel/core': 7.8.3
   '@babel/preset-env': 7.8.3_@babel+core@7.8.3
   '@barba/core': 2.9.7
+  '@barba/prefetch': 2.1.10
   '@fullhuman/postcss-purgecss': 2.0.5
   '@rollup/plugin-commonjs': 11.0.1_rollup@1.29.1
   '@rollup/plugin-json': 4.0.1_rollup@1.29.1
@@ -832,6 +833,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-GLtpty1fzWnd500AoUHd+hJoSCVElqth20P4W8Bf0IAA9nd1K5e8NbPnCegXC4KzOwV+JHk5DVofAZcoc+I54Q==
+  /@barba/prefetch/2.1.10:
+    dev: true
+    resolution:
+      integrity: sha512-5mdrn9uEL4FoBDRLl+C7o06NaYP7Xsu2AAoD8YLKrgPemJP5Hjq6++kG8DtYrvvTjPPhuFMxSjGJxnhOKYalnQ==
   /@fullhuman/postcss-purgecss/2.0.5:
     dependencies:
       postcss: 7.0.26
@@ -9607,6 +9612,7 @@ specifiers:
   '@babel/core': ^7.8.3
   '@babel/preset-env': ^7.8.3
   '@barba/core': ^2.9.7
+  '@barba/prefetch': ^2.1.10
   '@fullhuman/postcss-purgecss': ^2.0.5
   '@rollup/plugin-commonjs': ^11.0.1
   '@rollup/plugin-json': ^4.0.1

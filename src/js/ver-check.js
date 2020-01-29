@@ -40,7 +40,7 @@ if (/msie|trident|edge/g.test(userAgent.toLowerCase()) || !window.isModern) {
     _require("https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js");
     _require("https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.13/es5-shim.min.js");
 
-    _require("https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2Cperformance.now");
+    _require("https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2Ces7%2CHTMLPictureElement%2CObject.values%2Cfetch%2CgetComputedStyle%2CrequestAnimationFrame%2Cdocument.getElementsByClassName%2Cperformance.now%2CIntersectionObserver");
 
     _require("https://cdnjs.cloudflare.com/ajax/libs/picturefill/3.0.3/picturefill.min.js");
     // _require("https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.10/history.min.js");
