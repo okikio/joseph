@@ -118,6 +118,7 @@ barba.init({
         // do something with `current.container` for your leave transition
         // then return a promise or use `this.async()`
         const done = this.async();
+        scrollTo(0, "800ms");
         done();
       },
       enter({ current, next, trigger }) {
