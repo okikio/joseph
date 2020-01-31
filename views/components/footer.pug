@@ -1,7 +1,7 @@
 mixin footer(value = {})
 	- let _class = value.class;
-	footer.footer.transition-fade(itemprop="author" class=_class data-container)
-		.layout-contain
+	footer.footer(data-container itemprop="author")
+		.layout-contain.transition-fade(class=_class)
 			.layout-padding.style-center.style-font-weight-bold.style-font-title.style-spaceout-small(itemprop="publisher" itemscope itemtype="https://schema.org/Organization" itemid="https://www.josephojo.com")
 				span Made with ❤ by
 				span= " "
