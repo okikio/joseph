@@ -94,8 +94,9 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 		block navbar
 			+navbar(page)
 
-		main#main.main.transition-in-view(data-container)
-			block content
+		.transition-in-view(data-container)
+			main#main.main
+				block content
 
 		.layer-action-center.layer-action-center-show
 			article.layer-action-group
