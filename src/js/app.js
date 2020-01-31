@@ -1,9 +1,9 @@
 import { _is, _constrain, _map, _log } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-import barba from '@barba/core';
-import prefetch from '@barba/prefetch';
-// import anime from 'animejs';
+import swup from "swup";
+import preload from '@swup/preload-plugin';
+import scrollPlugin from "@swup/scroll-plugin";
 
 let _layer = ".layer";
 let _navbar = '.navbar';
@@ -13,22 +13,30 @@ let _backUp = '.back-to-top';
 let _actioncenter = ".layer-action-center";
 let _scrolldown = '.layer-hero-scroll-down';
 
-let ready, resize;
-let _focusPt = 70;
-let _images = [];
+let scroll, ready, resize, _images = [];
+let _focusPt = height(_navbar) + 10;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show");
 };
 
-resize = () => {
-    toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
-};
+//  touchstart
+on(_menu, "click", () => {
+    toggleClass(_navbar, "navbar-show");
+});
 
-ready = () => {
+// touchstart
+on(_backUp, "click", () => {
+    scrollTo("0px", "1400ms");
+});
+
+on(window, 'resize', resize = () => {
+    toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
+});
+
+on(window, 'scroll', scroll = () => {
     let _scrollTop = scrollTop(window);
     hasClass(_navbar, "banner-mode") && addClass(_navbar, "navbar-focus") || toggleClass(_navbar, "navbar-focus", _scrollTop >= 5);
     hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
-    resize();
 
     toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
     toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
@@ -51,88 +59,67 @@ ready = () => {
             }
         });
     }
-};
+});
 
-let _load = () => {
-    //  touchstart
-    on(_menu, "click", () => {
-        toggleClass(_navbar, "navbar-show");
-    });
-
-    // touchstart
-    on(_backUp, "click", () => {
-        scrollTo("0px", "1400ms");
-    });
-
+ready = () => {
     _focusPt = height(_navbar) + 10;
+    _images = [];
 
     // touchstart
     on(_scrolldown, "click", () => {
         scrollTo(height(_hero) - _focusPt, "800ms");
     });
 
-    _images = [];
     each(_layer, $layer => {
         let layer_image = find($layer, ".layer-image");
         let isHero = hasClass($layer, "layer-hero-id");
 
-        each(layer_image, ($img, i) => {
+        each(layer_image, $img => {
             let load_img = get(find($img, ".load-img"), 0);
             let overlay = get(find($img, ".layer-image-overlay"), 0);
             let clientRect = offset($img);
 
-            _images[i] = {
+            _images.push({
                 overlay, load_img,
                 target: $img,
                 clientRect,
                 isHero
-            };
+            });
 
             let _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
                 if (_core_img.complete && _core_img.naturalWidth !== 0) {
                     onload(load_img)();
+                } else if (!window.isModern) {
+                    let img = new Image(_core_img);
+                    img.src = attr(_core_img, "src");
+                    img.onload = onload(load_img);
                 } else {
-                    if (!window.isModern) {
-                        let img = new Image(_core_img);
-                        img.src = attr(_core_img, "src");
-                        img.onload = onload(load_img);
-                    } else {
-                        on(_core_img, "load", onload(load_img));
-                    }
+                    on(_core_img, "load", onload(load_img));
                 }
             }
         });
     });
 
-    ready();
+    resize();
+    scroll();
 };
-on(window, 'resize', resize);
-on(window, 'scroll', ready);
-_load();
 
-// tell Barba to use the prefetch module
-barba.use(prefetch);
+ready();
 
-// init Barba
-barba.init({
-    transitions: [{
-      leave({ current, next, trigger }) {
-        // do something with `current.container` for your leave transition
-        // then return a promise or use `this.async()`
-        const done = this.async();
-        scrollTo(0, "800ms");
-        done();
-      },
-      afterEnter({ current, next, trigger }) {
-        // do something with `next.container` for your enter transition
-        // then return a promise or use `this.async()`
-        const done = this.async();
-        _log(`Barba JS before: ${_images.length}`);
-        _load();
-        done();
+new swup({
+    animateHistoryBrowsing: true,
+    containers: ["[data-container]"],
+    plugins: [
+        new preload(),
+        new scrollPlugin({
+            doScrollingRightAway: false,
+            animateScroll: true,
+            scrollFriction: 0.3,
+            scrollAcceleration: 0.04,
+        })
+    ]
+})
 
-      }
-    }]
-  });
-  _log("Barba JS initialize");
+// This event runs for every page view after initial load
+.on('contentReplaced', ready);

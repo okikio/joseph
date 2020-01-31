@@ -48,15 +48,12 @@
     },
     "homepage": "https://github.com/okikio/joseph#readme",
     "devDependencies": {
-        "@babel/core": "^7.8.3",
-        "@babel/preset-env": "^7.8.3",
-        "@barba/core": "^2.9.7",
-        "@barba/prefetch": "^2.1.10",
+        "@babel/core": "^7.8.4",
+        "@babel/preset-env": "^7.8.4",
         "@fullhuman/postcss-purgecss": "^2.0.5",
         "@rollup/plugin-commonjs": "^11.0.1",
         "@rollup/plugin-json": "^4.0.1",
         "@rollup/plugin-node-resolve": "^7.0.0",
-        "animejs": "^3.1.0",
         "autoprefixer": "^9.7.4",
         "browser-sync": "^2.26.7",
         "cloudinary": "^1.19.0",
@@ -75,7 +72,7 @@
         "gulp-sourcemaps": "^2.6.5",
         "gulp-terser": "^1.2.0",
         "microicon": "^1.0.0-b.2",
-        "pnpm": "^4.8.0",
+        "pnpm": "^4.9.0",
         "postcss": "^7.0.26",
         "postcss-csso": "^4.0.0",
         "postcss-flexibility": "^2.0.0",
@@ -85,9 +82,14 @@
         "posthtml-lorem": "^1.0.0",
         "posthtml-match-helper": "^1.0.1",
         "posthtml-textr": "^1.0.5",
-        "rollup": "^1.29.1",
+        "rollup": "^1.31.0",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-node-builtins": "^2.1.2",
         "typographic-single-spaces": "^1.0.2"
+    },
+    "dependencies": {
+        "@swup/preload-plugin": "^1.0.3",
+        "@swup/scroll-plugin": "^1.0.6",
+        "swup": "^2.0.8"
     }
 }

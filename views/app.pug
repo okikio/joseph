@@ -86,31 +86,29 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 
 		script(src="./js/ver-check.min.js" inline async)
 	body
-		section(data-barba="wrapper")
-			section(data-barba="container" data-barba-namespace="home")
-				+link({
-					class: "skip-main",
-					href: "#main",
-					content: "Skip to main content"
-				})
-				block navbar
-					+navbar(page)
+		+link({
+			class: "skip-main",
+			href: "#main",
+			content: "Skip to main content"
+		})
+		block navbar
+			+navbar(page)
 
-				main#main.main
-					block content
+		main#main.main.transition-in-view(data-container)
+			block content
 
-				.layer-action-center.layer-action-center-show
-					article.layer-action-group
-						.layer-shadow.layer-round.layout-align-self-end.layout-margin-horz-small
-							button.back-to-top.action-btn.action-btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-dark-hover.layer-primary-light-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
-								span.action-btn-group
-									i.action-icon.style-font-size-24(inline) expand_less
-									span.action-btn-section
-										span.action-btn-spacer
-										span.action-btn-content Back To Top
-										span.action-btn-spacer
+		.layer-action-center.layer-action-center-show
+			article.layer-action-group
+				.layer-shadow.layer-round.layout-align-self-end.layout-margin-horz-small
+					button.back-to-top.action-btn.action-btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-dark-hover.layer-primary-light-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
+						span.action-btn-group
+							i.action-icon.style-font-size-24(inline) expand_less
+							span.action-btn-section
+								span.action-btn-spacer
+								span.action-btn-content Back To Top
+								span.action-btn-spacer
 
-				block footer
-					+footer
+		block footer
+			+footer
 
 		script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` inline async)

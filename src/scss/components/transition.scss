@@ -1,12 +1,23 @@
 /*! purgecss start ignore */
-.transition-fade {
-    transition: opacity .25s ease-out, transform .25s ease-out;
-    transform: translateY(0px);
-    opacity: 1;
+.transition {
+    &-fade {
+        transition: opacity 0.25s ease;
+        opacity: 1;
 
-    .is-animating & {
-        transform: translateY(35px) !important;
-        opacity: 0 !important;
+        .is-animating & {
+            opacity: 0 !important;
+        }
+    }
+
+    &-in-view {
+        transition: opacity 0.35s ease 0s, transform 0.45s ease 0.1s;
+        transform: translateY(0px);
+        opacity: 1;
+
+        .is-animating & {
+            transform: translateY(-20px) !important;
+            opacity: 0 !important;
+        }
     }
 }
 

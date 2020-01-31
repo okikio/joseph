@@ -8,7 +8,7 @@ mixin navbar(value = {})
 	- let tabs = ["about-me", "my-projects", "contact-me"];
 	- let focusIndex = tabs.indexOf(name.toLowerCase());
 
-	header.header
+	header.header(data-container)
 		nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement")
 			.layout-contain-large.navbar-layout
 				.navbar-head
@@ -28,7 +28,7 @@ mixin navbar(value = {})
 
 				.layout-spacer.navbar-desktop
 				.navbar-main
-					ul.navbar-list
+					ul.navbar-list.transition-fade
 						each tab, i in tabs
 							li
 								+link({
