@@ -1,7 +1,7 @@
 /*! purgecss start ignore */
 .transition {
     &-fade {
-        transition: opacity 0.25s ease;
+        transition: opacity 0.35s ease;
         opacity: 1;
 
         .is-animating & {

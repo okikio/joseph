@@ -15,7 +15,7 @@ mixin navbar(value = {})
 					+link({
 						href: "/",
 						class: "navbar-title style-primary-dark-hover style-primary-focus"
-					})(itemprop="url")
+					})(itemprop="url" data-swup-preload)
 						img.navbar-logo(src="/assets/gear-svg-icon-logo-color-2.svg" alt="Logo." inline)
 						span.navbar-title-line
 						span(itemprop="name") JOSEPH!
@@ -34,5 +34,5 @@ mixin navbar(value = {})
 								+link({
 									href: `/${tab}`,
 									class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
-								})(itemprop="url")
+								})(itemprop="url" data-swup-preload)
 									span.navbar-link-content(itemprop="name")= tab
