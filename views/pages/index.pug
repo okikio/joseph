@@ -11,7 +11,7 @@ include ../components/row.pug
 block content
 	//- Hero layer
 	+hero({
-		title: "Joseph Ojo, the one who could.",
+		title: "Joseph, the one who could.",
 		content: "Crafting the extrodinary is my passion.",
 		image: {
 			class: "effect-parallax hero-img",
@@ -64,16 +64,14 @@ block content
 					})
 						p.layout-margin-dull(lorem="1")
 
-			+main({
-				class: "layout-padding-vert-large"
-			})
-				//- span.layout-margin-horz-left.layout-inline-block= " "
-				+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
-				+link({
-					href: "/about-me",
-					class: "layout-margin-vert-dull layout-margin-left-mini",
-					content: "click here."
-				})
+				section.layout-padding-vert-large
+					//- span.layout-margin-horz-left.layout-inline-block= " "
+					+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
+					+link({
+						href: "/about-me",
+						class: "layout-margin-vert-dull layout-margin-left-mini",
+						content: "click here."
+					})
 
 	//- Banner layer
 	+layer({
