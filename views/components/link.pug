@@ -1,7 +1,7 @@
 mixin link(value = {})
-  - let { content, href } = value;
-  - let _class = value.class || "layout-inline";
-  - let _href = dev && href[0] === "/" ? (href === "/" ? "/index.html" : `${href}.html`) : href;
-
-  a(href=_href class=_class tabindex="0" title=content)&attributes(attributes)= content
-    block
+	- let { content, href } = value;
+	- let _class = value.class || "layout-inline";
+	- let _href = dev && href[0] === "/" ? (href === "/" ? "/index.html" : `${href}.html`) : href;
+	//- tabindex="0"
+	a(href=_href class=_class title=content)&attributes(attributes)= content
+		block

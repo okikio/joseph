@@ -139,7 +139,7 @@ li, .li {
 }
 
 a.skip-main {
-    position: fixed;
+    position: absolute;
     overflow: hidden;
     z-index: -999;
     left: -999px;
@@ -160,7 +160,7 @@ a.skip-main {
         overflow: auto;
         height: auto;
         padding: 5px;
-        z-index: 999;
+        z-index: 1999;
         width: 30%;
         left: auto;
         top: auto;
