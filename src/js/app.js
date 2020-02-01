@@ -6,7 +6,6 @@ import swup from "swup";
 import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
-
 let _layer = '.layer';
 let _navbar = '.navbar';
 let _hero = '.layer-hero';
@@ -127,7 +126,7 @@ try {
 
     // This event runs for every page view after initial load
     Swup.on('contentReplaced', ready);
-    Swup.on('willReplaceContent', function () {
+    Swup.on('willReplaceContent', () => {
         href = window.location.href;
         removeClass(_navLink, "navbar-link-focus");
         each(_navLink, _link => {
