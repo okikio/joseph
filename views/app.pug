@@ -91,12 +91,13 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 
 		+link({
 			class: "skip-main",
-			href: "#main",
+			href: "#content",
 			content: "Skip to main content"
 		})
 
-		main#main.main.transition-in-view(data-container tabindex="-1")
-			block content
+		main.main.transition-in-view(data-container tabindex="-1")
+			#content
+				block content
 
 		.layer-action-center.layer-action-center-show
 			article.layer-action-group
