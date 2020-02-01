@@ -1,7 +1,7 @@
 /*! purgecss start ignore */
 .transition {
     &-fade {
-        transition: opacity 0.35s ease;
+        transition: opacity 0.25s ease;
         opacity: 1;
 
         .is-animating & {
@@ -10,7 +10,7 @@
     }
 
     &-in-view {
-        transition: opacity 0.35s ease 0s, transform 0.45s ease 0.1s;
+        transition: opacity 0.25s ease 0s, transform 0.4s ease 0.1s;
         transform: translateY(0px);
         opacity: 1;
 
@@ -20,19 +20,4 @@
         }
     }
 }
-
-// .permanent {
-//     background-color: black !important;
-// }
-// .layer {
-    // transition: opacity .55s ease-out, transform .55s ease-out;
-    // transform: translateY(55px);
-    // opacity: 0;
-    // will-change: opacity, transform;
-
-    // &.transtion {
-    //     transform: translateY(0px) !important;
-    //     opacity: 1 !important;
-    // }
-// }
 /*! purgecss end ignore */

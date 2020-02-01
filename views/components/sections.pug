@@ -7,17 +7,17 @@ mixin head(value = {})
     block
 
 mixin main(value = {})
-  - let _class = typeof value != "string" ? value.class : "";
+  - let _class = typeof value != "string" ? value.class : "style-font-15--device-lt-tablet";
 
   .layer-main(class=_class)
     if typeof value == "string"
-      p.style-font-14--device-phone= value
+      p.style-font-15--device-lt-tablet= value
     block
 
 mixin foot(value = {})
-  - let _class = typeof value != "string" ? value.class : "";
+  - let _class = typeof value != "string" ? value.class : "style-font-15--device-lt-tablet";
 
   .layer-footer(class=_class)
     if typeof value == "string"
-      span.style-font-14--device-phone.style-bold= value
+      span.style-font-15--device-lt-tablet.style-bold= value
     block

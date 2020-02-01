@@ -74,13 +74,17 @@
         &-title {
             font-family: $bold-font;
             letter-spacing: 0.03em;
-            text-decoration: none;
             line-height: $height;
             padding-left: $size;
             position: relative;
             font-weight: 900;
             font-size: 17px;
             color: $dark;
+
+            &,
+            &:focus {
+                text-decoration: none;
+            }
 
             &-line {
                 transition: border-left-color linear .45s;
@@ -154,7 +158,9 @@
             }
 
             &-focus {
-                color: $primary-dark;
+                &, &:focus {
+                    color: $primary-dark;
+                }
 
                 &:before {
                     background-color: $primary-dark;

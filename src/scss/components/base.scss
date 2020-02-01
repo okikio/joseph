@@ -198,40 +198,12 @@ a.skip-main {
     }
 }
 
-.animate-in {
-    & .header a {
-        // transform: translateY(20px);
-        // visibility: hidden;
-        // opacity: 0;
-
-        // animation: appear 2s ease .35s;
-    }
-}
-
-@for $i from 1 through 5 {
-    .header a:nth-of-type(#{$i}) {
-        animation-delay: ($i * .35s);
-    }
-}
-
-@keyframes appear {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0px);
-        opacity: 1;
-    }
-}
-
 .layer, .footer {
     a {
         & {
             text-decoration: underline;
-            padding: 8px;
-            padding-left: 0;
+            // padding: 8px;
+            // padding-left: 0;
         }
 
         &:active,
@@ -248,7 +220,7 @@ a.skip-main {
 
 .footer {
     font-size: 16px;
-    line-height: 25px;
+    line-height: 35px;
 
     @media #{$screen-size-lt-tablet} {
         font-size: 15px;
