@@ -107,19 +107,24 @@ ready = () => {
 
 ready();
 
-new swup({
-    animateHistoryBrowsing: true,
-    containers: ["[data-container]"],
-    plugins: [
-        new preload(),
-        new scrollPlugin({
-            doScrollingRightAway: false,
-            animateScroll: true,
-            scrollFriction: 0.3,
-            scrollAcceleration: 0.04,
-        })
-    ]
-})
+try {
+    const Swup = new swup({
+        animateHistoryBrowsing: true,
+        containers: ["[data-container]"],
+        linkSelector: `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`,
+        plugins: [
+            new preload(),
+            new scrollPlugin({
+                doScrollingRightAway: false,
+                animateScroll: true,
+                scrollFriction: 0.3,
+                scrollAcceleration: 0.04,
+            })
+        ]
+    });
 
-// This event runs for every page view after initial load
-.on('contentReplaced', ready);
+    // This event runs for every page view after initial load
+    Swup.on('contentReplaced', ready);
+} catch (e) {
+    _log(`Swup Error: ${e.message}`);
+}
