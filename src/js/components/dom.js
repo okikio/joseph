@@ -453,7 +453,7 @@ let propMap = {
 export let prop = (_el, name, value) => {
     name = propMap[name] || name;
     return _is.str(name) && _is.undef(value) ?
-        (get(_el, 0) && get(_el, 0)[name]) : 
+        (get(_el, 0) && get(_el, 0)[name]) :
         each(_el, ($el, idx) => {
             if (_is.obj(name)) {
                 for (let key in name) {
@@ -755,8 +755,8 @@ export let off = ($el, evt, fn, opts) => {
         keys(evt).forEach(key => {
             $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
             useCapture = /blur|focus/g.test($evt);
-            opts = _is.usable(opts) ? opts : 
-                    useCapture ? { useCapture } : 
+            opts = _is.usable(opts) ? opts :
+                    useCapture ? { useCapture } :
                         (/touch|scroll/g.test($evt) ? { passive } : false);
             _el.removeEventListener($evt, fn, opts);
         });
@@ -778,5 +778,11 @@ export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, 
             mouseleave: fnOut || fnOver
         })
 });
+
+// Check if an Element is in `:focus`
+export let isFocus = _el => {
+    _el = _is.inst(_el, ele) ? _el[0] : _el;
+    return _el === document.activeElement && ( _el.type || _el.href );
+};
 
 export default el;

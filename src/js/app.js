@@ -2,6 +2,7 @@ import { _is, _constrain, _map, _log } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 import swup from "swup";
+import headPlugin from '@swup/head-plugin';
 import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
@@ -106,7 +107,6 @@ ready = () => {
 };
 
 ready();
-
 try {
     const Swup = new swup({
         animateHistoryBrowsing: true,
@@ -114,6 +114,7 @@ try {
         linkSelector: `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`,
         plugins: [
             new preload(),
+            new headPlugin(),
             new scrollPlugin({
                 doScrollingRightAway: false,
                 animateScroll: true,
