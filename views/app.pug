@@ -86,14 +86,14 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 
 		script(src="./js/ver-check.min.js" inline async)
 	body
-		block navbar
-			+navbar(page)
-
 		+link({
 			class: "skip-main",
 			href: "#content",
 			content: "Skip to main content"
 		})
+
+		block navbar
+			+navbar(page)
 
 		main.main.transition-in-view(data-container tabindex="-1")
 			#content
