@@ -3,7 +3,7 @@ mixin image(value = {})
 	- let src = value.src || "/assets/city";
 	- let alt = value.alt || "Alternate text";
 
-	.layer-image(class=_class data-aos="fade" data-aos-delay="300")
+	.layer-image(class=_class)
 		.layer-image-preview-img-card
 		figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
 			.img-contain

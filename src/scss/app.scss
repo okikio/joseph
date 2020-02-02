@@ -215,7 +215,6 @@ $sizes: (
     @include propertyList($property, $name, $colors, "focus");
 }
 
-
 @import "./components/base.scss";
 @import "./components/fonts.scss";
 @import "./components/navbar.scss";
@@ -224,8 +223,3 @@ $sizes: (
 @import "./components/layout.scss";
 @import "./components/layer.scss";
 @import "./components/transition.scss";
-
-/* purgecss start ignore */
-$aos-distance: 30px; // It has to be above import
-@import '../../node_modules/aos/src/sass/aos.scss';
-/* purgecss end ignore */

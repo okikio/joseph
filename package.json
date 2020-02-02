@@ -57,7 +57,6 @@
         "@swup/head-plugin": "^1.0.2",
         "@swup/preload-plugin": "^1.0.3",
         "@swup/scroll-plugin": "^1.0.6",
-        "aos": "^2.3.4",
         "autoprefixer": "^9.7.4",
         "browser-sync": "^2.26.7",
         "cloudinary": "^1.19.0",

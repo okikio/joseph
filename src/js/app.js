@@ -1,6 +1,5 @@
 
 // Imported external libraries
-import aos from "aos";
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
 import preload from '@swup/preload-plugin';
@@ -136,12 +135,6 @@ ready();
 
 // AOS library
 try {
-    // Animate on scroll library initialize
-    aos.init({
-        // delay: 500,
-        duration: 1200,
-        easing: 'ease', // default easing for AOS animations
-    });
 } catch (e) {
     _log(`AOS Error: ${e.message}`);
 }
