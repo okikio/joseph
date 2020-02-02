@@ -363,7 +363,7 @@ task('inline-js-css', () =>
             posthtml([
                 // Dom process
                 debug ? () => { } : require('posthtml-inline-assets')({
-                    transforms: { image: false, style: false }
+                    transforms: { image: false }
                 }),
             ])
         ]
