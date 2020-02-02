@@ -363,26 +363,7 @@ task('inline-js-css', () =>
             posthtml([
                 // Dom process
                 debug ? () => { } : require('posthtml-inline-assets')({
-                    transforms: {
-                        image: false,
-                        style: {
-                            resolve(node) {
-                                return node.tag === 'link' && node.attrs && node.attrs.rel === 'stylesheet' && node.attrs.href && ('inline' in node.attrs);
-                            },
-                            transform(node, data) {
-                                delete node.attrs.href;
-                                delete node.attrs.rel;
-                                delete node.attrs.inline;
-                                if ('async' in node.attrs)
-                                    delete node.attrs.async;
-
-                                node.tag = 'style';
-                                node.content = [
-                                    data.buffer.toString('utf8')
-                                ];
-                            }
-                        }
-                    }
+                    transforms: { image: false, style: false }
                 }),
             ])
         ]
