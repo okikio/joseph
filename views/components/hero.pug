@@ -11,11 +11,11 @@ mixin hero(value = {})
         .layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-sub-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center
           .layer-content.layout-contain
             .layer-header
-              h1.style-font-title.layer-title.style-white.style-font-weight-bolder(itemprop="headline")!= title
+              h1.style-font-title.layer-title.style-white.style-font-weight-bolder(itemprop="headline" data-aos="fade-down")= title
             .layer-main
-              h2.style-font-family-bold.style-font-weight-300.style-white.layer-main-text(itemprop="description")!= content
+              h2.style-font-family-bold.style-font-weight-300.style-white.layer-main-text(itemprop="description" data-aos="fade-up" data-aos-delay="500")!= content
             .layout-align-self-end
-              button.layer-footer.action-btn.action-btn-hover.layer-shadow.layer-round.layout-padding-smallest.layer-white.layer-secondary-light-hover.layer-secondary-focus.style-primary.style-surface-hover.style-surface-focus.layer-hero-scroll-down(type="button" tabindex="0")
+              button.layer-footer.action-btn.action-btn-hover.layer-shadow.layer-round.layout-padding-smallest.layer-white.layer-secondary-light-hover.layer-secondary-focus.style-primary.style-surface-hover.style-surface-focus.layer-hero-scroll-down(type="button" tabindex="0" data-aos="zoom-in" data-aos-delay="1300")
                 span.action-btn-group
                   i.action-icon.style-font-size-24(inline) expand_more
                   span.action-btn-section

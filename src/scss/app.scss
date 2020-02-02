@@ -225,4 +225,7 @@ $sizes: (
 @import "./components/layer.scss";
 @import "./components/transition.scss";
 
-@import "./library/aos.scss";
+/* purgecss start ignore */
+$aos-distance: 30px; // It has to be above import
+@import '../../node_modules/aos/src/sass/aos.scss';
+/* purgecss end ignore */

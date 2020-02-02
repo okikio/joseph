@@ -137,7 +137,11 @@ ready();
 // AOS library
 try {
     // Animate on scroll library initialize
-    aos.init();
+    aos.init({
+        // delay: 500,
+        duration: 1200,
+        easing: 'ease', // default easing for AOS animations
+    });
 } catch (e) {
     _log(`AOS Error: ${e.message}`);
 }
