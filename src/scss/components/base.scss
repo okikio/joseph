@@ -199,7 +199,7 @@ a.skip-main {
 }
 
 .layer, .footer {
-    a {
+    a.focus-box {
         & {
             text-decoration: underline;
             // padding: 8px;
