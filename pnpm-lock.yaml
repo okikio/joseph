@@ -25,7 +25,6 @@ devDependencies:
   gulp-sass: 4.0.2
   gulp-sourcemaps: 2.6.5
   gulp-terser: 1.2.0
-  lazysizes: 5.2.0
   microicon: 1.0.0-b.2
   pnpm: 4.9.0
   postcss: 7.0.26
@@ -5583,10 +5582,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-yUUKNj7N2i5vDHATKtTzf48G8rQ=
-  /lazysizes/5.2.0:
-    dev: true
-    resolution:
-      integrity: sha512-931KnHwsdCm7U7/S0GDj6FSkPvQ3ugGw65J5Plp2Mq1gBTPl9VShU+cIIX6uRr+dit+APDLmvx1FwjDll5bHLQ==
   /lazystream/1.0.0:
     dependencies:
       readable-stream: 2.3.7
@@ -9672,7 +9667,6 @@ specifiers:
   gulp-sass: ^4.0.2
   gulp-sourcemaps: ^2.6.5
   gulp-terser: ^1.2.0
-  lazysizes: ^5.2.0
   microicon: ^1.0.0-b.2
   pnpm: ^4.9.0
   postcss: ^7.0.26

@@ -74,7 +74,6 @@
         "gulp-sass": "^4.0.2",
         "gulp-sourcemaps": "^2.6.5",
         "gulp-terser": "^1.2.0",
-        "lazysizes": "^5.2.0",
         "microicon": "^1.0.0-b.2",
         "pnpm": "^4.9.0",
         "postcss": "^7.0.26",
