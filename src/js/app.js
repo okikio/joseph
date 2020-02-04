@@ -67,7 +67,7 @@ on(window, {
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                         let value = Math.round(_map(_constrain(dist, 0, height), 0, height, 0, 1) * 100) / 100;
 
-                        // isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.55, 0.15) });
+                        isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.85) });
                         style(load_img, {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
