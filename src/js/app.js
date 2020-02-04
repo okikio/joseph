@@ -1,5 +1,6 @@
 
 // Imported external libraries
+import 'lazysizes';
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
 // import preload from '@swup/preload-plugin';
