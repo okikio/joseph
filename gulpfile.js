@@ -281,7 +281,7 @@ task('inline-assets', () =>
                     };
 
                     tree.match(querySelector("[src^='/assets/']"), parse());
-                    tree.match(querySelector("[href^='/assets/']"), parse("href"));
+                    // tree.match(querySelector("[href^='/assets/']"), parse("href"));
                     tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
                 },
                 debug ? () => {} : async tree => {
