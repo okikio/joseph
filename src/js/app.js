@@ -1,9 +1,9 @@
 
 // Imported external libraries
-import 'lazysizes';
+// import 'lazysizes';
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
-// import preload from '@swup/preload-plugin';
+import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
@@ -68,7 +68,7 @@ on(window, {
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                         let value = Math.round(_map(_constrain(dist, 0, height), 0, height, 0, 1) * 100) / 100;
 
-                        isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.85) });
+                        isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.7) });
                         style(load_img, {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
@@ -144,7 +144,7 @@ try {
             animateHistoryBrowsing: true,
             containers: ["[data-container]"],
             plugins: [
-                // new preload(), // Preload pages
+                new preload(), // Preload pages
                 new headPlugin(), // Replace the contents of the head elements
 
                 // For every new page, scroll to the top smoothly

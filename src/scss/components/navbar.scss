@@ -67,7 +67,9 @@
         &-logo {
             transform: translateY(4px);
             display: inline-block;
+            line-height: normal;
             min-height: 20px;
+            display: inline;
             width: 20px;
         }
 
