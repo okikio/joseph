@@ -26,6 +26,7 @@
                 $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
                 background: $surface;
+                // background: #3b3c3e;
             }
 
             .navbar-title-line {
@@ -121,7 +122,7 @@
             font-weight: 600;
             padding: 0 28px;
             font-size: 14px;
-            color: $black;
+            color: $black; // #bbb8b8
             width: 100%;
 
             &-content {
@@ -147,7 +148,7 @@
             &:focus,
             &-focus {
                 text-decoration: none;
-                color: $black;
+                color: $black; // #e6e6e6
 
                 .navbar-link-content:before {
                     transform: translateY($height - 14px) scaleX(1) ;
@@ -183,7 +184,7 @@
         }
 
         // Mobile navbar settings
-        @media (max-width: #{$tablet}px) {
+        @media (max-width: #{$tablet + 50}px) {
             &-layout,
             &-list {
                 flex-direction: column;
@@ -207,7 +208,7 @@
             }
 
             &-list {
-                background: lighten($very-light, 2%);
+                background: lighten($very-light, 2%); // #292d33
                 position: relative;
                 overflow: hidden;
                 display: block;
@@ -234,7 +235,7 @@
 
                 .navbar-head,
                 .navbar-main {
-                    $border-color: darken($very-light, 8%);
+                    $border-color: darken($very-light, 8%); // #3b3c3e
                     box-shadow: 0 0 25px rgba(0, 0, 50, .12);
                     border-bottom-color: $border-color;
                     border-right-color: $border-color;
@@ -283,7 +284,7 @@
         }
 
         // Desktop navbar settings
-        @media (min-width: #{$tablet}px) {
+        @media (min-width: #{$tablet + 50}px) {
             &-layout {
                 padding: 0 $size;
                 display: flex;

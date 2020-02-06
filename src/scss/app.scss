@@ -39,7 +39,7 @@
 // Variables
 $primary-light: #6832ff;
 $primary: #4500ff;
-$primary-dark: #2d22ca;
+$primary-dark: #2d22ca; // #774bec
 $secondary-light: #ff3887;
 $secondary: #ff0266;
 $secondary-dark: #dc0057;
@@ -47,18 +47,23 @@ $tertiary-light: #ffe851;
 $tertiary: #ffde03;
 $tertiary-dark: #e5c702;
 
-$background: #ecf1f7;
-$surface: #fff;
+$background: #ecf1f7; // #202123
+$surface: #fff; //  #3b3c3e
 
 $white: #fff;
-$black: #000;
+$black: #000; // #bbb8b8
+// navbar-link:hover = #e6e6e6
 
 $very-light: #efefef;
-$light: #eee;
+// navbar-head/navbar-main border-color = #3b3c3e
+// navbar-list = #292d33
+// navbar-menu background-color = #2b2a2a
+
+$light: #eee; // #525252
 $mid-light: #ddd;
 $mid: #ccc;
 $mid-dark: #bbb;
-$dark: #222;
+$dark: #222; // #ddd
 
 $title-font: 'Frank Ruhl Libre', serif;
 $light-font: 'Varela Round', sans-serif;
