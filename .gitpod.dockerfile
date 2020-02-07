@@ -1,6 +1,6 @@
 FROM gitpod/workspace-full
 
-RUN nvm install 13 && nvm alias default 13 && nvm use default && npm install -g pnpm gulp
+# RUN nvm install 13 && nvm alias default 13 && nvm use default && npm install -g pnpm gulp
 
 
 ## bash -c ". .nvm/nvm.sh \ && 
