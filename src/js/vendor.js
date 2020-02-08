@@ -4,9 +4,9 @@ const { body } = document;
 let loadImg = () => {
     let slice = [].slice;
     let _img = slice.call(document.getElementsByClassName("load-img"));
-    let _navbar = slice.call(document.getElementsByClassName("navbar"));
+    let _navbar = slice.call(document.getElementsByClassName("n"));
     _navbar.forEach(function (nav) {
-        nav.classList.add("navbar-focus");
+        nav.classList.add("nfs");
     });
     _img.forEach(function (img) {
         img.classList.add("core-img-show");
