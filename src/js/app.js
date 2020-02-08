@@ -7,17 +7,17 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _is, _constrain, _map, _log } from "./components/util";
+import { _is, _constrain, _map, _log, optimize } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-const _layer = '.layer';
-const _navbar = '.navbar';
-const _hero = '.layer-hero';
-const _menu = '.navbar-menu';
-const _backUp = '.back-to-top';
-const _navLink = '.navbar-link';
-const _actioncenter = ".layer-action-center";
-const _scrolldown = '.layer-hero-scroll-down';
+const _layer = optimize('.layer');
+const _navbar = optimize('.navbar');
+const _hero = optimize('.layer-hero');
+const _menu = optimize('.navbar-menu');
+const _backUp = optimize('.back-to-top');
+const _navLink = optimize('.navbar-link');
+const _actioncenter = optimize(".layer-action-center");
+const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [];
