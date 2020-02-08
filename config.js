@@ -28,9 +28,9 @@ let _exports = {
         "title": "t",
         "font": "f",
         "device": "d",
-        "primary": "p",
+        "primary": "pp",
         "secondary": "s",
-        "tertiary": "t",
+        "tertiary": "ty",
         "icon": "i",
         "desktop": "dp",
         "laptop": "lp",
@@ -46,7 +46,14 @@ let _exports = {
         "bottom": "btm",
         "contain": "cc",
         "action": "a",
-        "dark": "dk"
+        "dark": "dk",
+        "huge": "hg",
+        "extra": "xx",
+        "sub": "sb",
+        "large": "lrg",
+        "default": "dlt",
+        "small": "sml",
+        "-": ""
     },
 };
 
