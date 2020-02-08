@@ -1,8 +1,3 @@
-let { env } = process;
-if (!('dev' in env)) require('dotenv').config();
-let dev = 'dev' in env && env.dev.toString() === "true";
-let debug = 'debug' in env && env.debug.toString() === "true";
-
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
 
@@ -16,10 +11,13 @@ const rollupBabel = require('rollup-plugin-babel');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
 const rollup = require('gulp-better-rollup');
+const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
+const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
 const imagemin = require('gulp-imagemin');
 const { html } = require('gulp-beautify');
+const postcssNative = require('postcss');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
@@ -30,8 +28,9 @@ const sass = require('gulp-sass');
 const pug = require('gulp-pug');
 const https = require('https');
 
-let { cloud_name, imageURLConfig } = config;
+let { cloud_name, imageURLConfig, class_map, dev, debug } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
+let class_keys = Object.keys(class_map);
 assets.config({ cloud_name, secure: true });
 
 // Rollup warnings are annoying
@@ -140,13 +139,13 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            // init(), // Sourcemaps init
+            init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
             rename(minSuffix), // Rename
-            // write(...srcMapsWrite) // Put sourcemap in public folder
+            write(...srcMapsWrite) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -155,13 +154,21 @@ task("css", () =>
 
 task("js", () =>
     streamList([
+        ['src/js/**/*.js', {
+            opts: { allowEmpty: true },
+            pipes: [
+                // Include enviroment variables in JS
+                nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
+            ],
+            dest: 'public/js' // Output
+        }],
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return ['src/js/app.js', {
+                return ['public/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        // dev ? null : init(), // Sourcemaps init
+                        dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -178,7 +185,7 @@ task("js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`${type}.min.js`), // Rename
-                        // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -186,7 +193,7 @@ task("js", () =>
             [['src/js/*.js', '!src/js/app.js'], {
             opts: { allowEmpty: true },
             pipes: [
-                // dev ? null : init(), // Sourcemaps init
+                dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -203,7 +210,7 @@ task("js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/js` // Output
         }]
@@ -372,6 +379,57 @@ task('inline-js-css', () =>
     })
 );
 
+task('optimize-class-names', () =>
+    streamList([
+        [`${publicDest}/css/*.css`, {
+            pipes: [
+                postcss([
+                    postcssNative.plugin('optimize-css-name', () => {
+                        let class_keys = Object.keys(class_map);
+                        return css => {
+                            css.walkRules(rule => {
+                                let { selector } = rule;
+
+                                for (let i = 0; i < class_keys.length; i ++) {
+                                    if (selector.includes(class_keys[i])) {
+                                        let regex = new RegExp(class_keys[i], 'g');
+                                        selector = selector.replace(regex, class_map[class_keys[i]]);
+                                    }
+                                }
+
+                                rule.selector = selector;
+                                return rule;
+                            });
+                        }
+                    })()
+                ])
+            ],
+            dest: `${publicDest}/css`, // Output
+        }],
+        [`${publicDest}/*.html`, {
+            pipes: [
+                posthtml([
+                    tree => {
+                        tree.walk(node => {
+                            let _attrs = node.attrs || {};
+                            let _class = _attrs && _attrs.class || "";
+
+                            for (let i = 0; i < class_keys.length; i ++) {
+                                if (_class.includes(class_keys[i])) {
+                                    let regex = new RegExp(class_keys[i], 'g');
+                                    _class = _class.replace(regex, class_map[class_keys[i]]);
+                                }
+                            }
+                            node.attrs = { ..._attrs, class: _class };
+                            return node;
+                        });
+                    },
+                ])
+            ]
+        }]
+    ])
+);
+
 task('reload', done =>
     stream('public/*.html', { })
         .then((...args) => {
@@ -384,7 +442,7 @@ task('reload', done =>
 task('dev', parallel("client", series(parallel("html", "js"), "css")));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', parallel(series("dev", "posthtml", "inline-assets", "inline-js-css")));
+task('default', parallel(series("dev", "posthtml", "inline-assets", "optimize-class-names", "inline-js-css")));
 
 // Gulp task to run before watching for file changes
 task('pre-watch', parallel(series("dev", "posthtml", "inline-assets")));

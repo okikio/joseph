@@ -1,4 +1,10 @@
-module.exports = {
+let { env } = process;
+if (!('dev' in env)) require('dotenv').config();
+let dev = 'dev' in env && env.dev.toString() === "true";
+let debug = 'debug' in env && env.debug.toString() === "true";
+
+let _exports = {
+    dev, debug,
     "cloud_name": "okikio-assets",
     "imageURLConfig": {
         "flags": "progressive:steep",
@@ -31,8 +37,8 @@ module.exports = {
         "tablet": "tt",
         "phone": "ph",
         "color": "c",
-        "hover": "hv",
-        "focus": "fs",
+        "-hover": "-hv",
+        "-focus": "-fs",
         "placeholder": "plh",
         "left": "lft",
         "right": "rght",
@@ -43,3 +49,5 @@ module.exports = {
         "dark": "dk"
     },
 };
+
+module.exports = _exports;

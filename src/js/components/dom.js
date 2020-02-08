@@ -1,4 +1,4 @@
-import { _is, _fnval, _capital, keys } from "./util";
+import { _is, _fnval, _capital, keys, optimize } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
@@ -549,6 +549,7 @@ let classcache = {};
 
 // Class name RegExp
 let _classRE = name => {
+    name = optimize(name);
     return name in classcache ? classcache[name] :
         (classcache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'));
 };
@@ -559,6 +560,8 @@ let getclass = (node, value) => {
     let svg  = name && !_is.undef(name.baseVal);
 
     if (_is.undef(value)) return svg ? name.baseVal : name;
+
+    value = optimize(value);
     svg ? (name.baseVal = value) : (node.className = value);
 };
 
@@ -574,6 +577,7 @@ export let hasClass = (_el, name) => {
 export let addClass = (_el, name) => {
     _el = el(_el);
     if (!name) return _el;
+    name = optimize(name);
     return each(_el, (el, idx) => {
         if (!('className' in el)) return;
 
@@ -588,6 +592,7 @@ export let addClass = (_el, name) => {
 
 // Remove the specified class name from all elements in the collection. When the class name isn’t given, remove all class names. Multiple class names can be given in a space-separated string.
 export let removeClass = (_el, name) => {
+    name = optimize(name);
     return each(_el, function (el, idx) {
         if (!('className' in el)) return;
         if (_is.undef(name)) return getclass(el, '');
@@ -605,6 +610,7 @@ export let removeClass = (_el, name) => {
 export let toggleClass = (_el, name, when) => {
     _el = el(_el);
     if (!name) return _el;
+    name = optimize(name);
     return each(_el, function (el, idx) {
         let $this = new ele(el);
         _fnval(name, [getclass(el), idx], el).split(/\s+/g)
