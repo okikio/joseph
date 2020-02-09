@@ -8,20 +8,20 @@ export let isArray = Array.isArray;
 export let from = Array.from;
 export let of = Array.of;
 {% if not dev %}
-    // These are all the major "classes" in use on any page
-    export const class_map = {{ class_map | safe }};
-    export const class_keys = {{ class_keys | safe }};
+// These are all the major "classes" in use on any page
+export const class_map = {{ class_map | safe }};
+export const class_keys = {{ class_keys | safe }};
 {% endif %}
 
 // During compilation I optimize classes in css and html, this is to compensate for that.
 export let optimize = val => {
     {% if not dev %}
-        for (let i = 0; i < class_keys.length; i ++) {
-            if (val.includes(class_keys[i])) {
-                let regex = new RegExp(class_keys[i], 'g');
-                val = val.replace(regex, class_map[class_keys[i]]);
-            }
+    for (let i = 0; i < class_keys.length; i ++) {
+        if (val.includes(class_keys[i])) {
+            let regex = new RegExp(class_keys[i], 'g');
+            val = val.replace(regex, class_map[class_keys[i]]);
         }
+    }
     {% endif %}
     return val;
 };

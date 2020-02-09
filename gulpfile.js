@@ -160,12 +160,12 @@ task("js", () =>
                 // Include enviroment variables in JS
                 nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
             ],
-            dest: 'public/js' // Output
+            dest: 'temp/js' // Output
         }],
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return ['public/js/app.js', {
+                return ['temp/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
                         dev ? null : init(), // Sourcemaps init
@@ -190,7 +190,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            [['public/js/*.js', '!public/js/*.min.js'], {
+            [['temp/js/*.js', '!temp/js/app.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 dev ? null : init(), // Sourcemaps init

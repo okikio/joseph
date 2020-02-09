@@ -98,3 +98,4 @@ core.node.*
 /public
 pnpm-debug.log
 *debug.log
+/temp
