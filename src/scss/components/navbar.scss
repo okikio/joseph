@@ -26,7 +26,8 @@
             .navbar-layout {
                 $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
-                background: $surface;
+                @include applyTheme(background, "surface");
+                // background: $surface;
                 // background: #3b3c3e;
             }
 
@@ -84,6 +85,7 @@
             font-weight: 900;
             font-size: 17px;
             color: $dark;
+            @include applyTheme(color, "dark");
 
             &,
             &:focus {
@@ -132,7 +134,8 @@
                 &:before {
                     transition: transform .25s cubic-bezier(.25, .46, .45, .94);
                     transform: translateY($height - 14px) scaleX(0);
-                    background-color: $primary;
+                    // background-color: $primary;
+                    @include applyTheme(background-color, "primary");
                     border: 1.5px solid transparent;
                     transform-origin: 100% 50%;
                     will-change: transform;
@@ -150,6 +153,7 @@
             &-focus {
                 text-decoration: none;
                 color: $black; // #e6e6e6
+                @include applyTheme(color, "black");
 
                 .navbar-link-content:before {
                     transform: translateY($height - 14px) scaleX(1) ;
@@ -159,15 +163,18 @@
 
             &:active {
                 color: $primary;
+                @include applyTheme(color, "primary");
             }
 
             &-focus {
                 &, &:focus {
                     color: $primary-dark;
+                    @include applyTheme(color, "primary-dark");
                 }
 
                 &:before {
-                    background-color: $primary-dark;
+                    // background-color: $primary-dark;
+                    @include applyTheme(background-color, "dark");
                 }
             }
         }
@@ -231,7 +238,8 @@
             &-focus,
             &-show {
                 .navbar-head {
-                    background: $surface;
+                    // background: $surface;
+                    @include applyTheme(background, "surface");
                 }
 
                 .navbar-head,

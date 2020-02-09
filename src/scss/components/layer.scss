@@ -49,7 +49,8 @@
 
         &-preview-img-card {
             position: absolute;
-            background: $dark;
+            @include applyTheme(background, "dark");
+            // background: $dark;
             display: block;
             height: 100%;
             width: 100%;
@@ -61,6 +62,7 @@
 
         &-overlay {
             background: darken(#53507c, 20%);
+            // @include applyTheme(background, "dark");
             position: absolute;
             display: block;
             opacity: 0.45;
@@ -121,7 +123,8 @@
         }
 
         &-scroll-down {
-            background: $white;
+            // background: $white;
+            @include applyTheme(background, "white");
             position: relative;
             z-index: 250;
 
@@ -243,6 +246,7 @@
         &-footer {
             position: absolute;
             color: $white;
+            @include applyTheme(color, "white");
             margin: 20px 25px;
             bottom: 0;
         }

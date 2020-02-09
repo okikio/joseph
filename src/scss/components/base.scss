@@ -19,7 +19,9 @@ html,
 body {
     text-rendering: optimizeLegibility;
     font-family: $regular-font;
-    background: $background;
+
+    @include applyTheme(background, "background");
+    // background: $background;
     word-wrap: break-word;
     line-height: 1.15;
     font-weight: 400;
@@ -27,6 +29,7 @@ body {
     // height: 100vh;
 
     color: $dark;
+    @include applyTheme(color, "dark");
     // color: #ddd;
 
     @media (max-width: 300px) {
@@ -152,8 +155,11 @@ a.skip-main {
     &:focus,
     &:active {
         border: 2px solid $secondary-light;
-        color: $secondary-light;
-        background-color: $dark;
+        border: 2px solid var(--secondary-light);
+        // color: $secondary-light;
+        @include applyTheme(color, "secondary-light");
+        @include applyTheme(background-color, "dark");
+        // background-color: $dark;
         border-radius: 6px;
         text-align: center;
         font-weight: 600;
@@ -167,7 +173,6 @@ a.skip-main {
         left: auto;
         top: auto;
     }
-
 }
 
 .placeholder-img {

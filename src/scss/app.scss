@@ -135,6 +135,32 @@ $colors: (
     "dark": $dark
 );
 
+$dark-colors: (
+    "primary-light": $primary-light,
+    "primary": $primary,
+    "primary-dark": #774bec,
+    "secondary-light": $secondary-light,
+    "secondary": $secondary,
+    "secondary-dark": $secondary-dark,
+    "tertiary-light": $tertiary-light,
+    "tertiary": $tertiary,
+    "tertiary-dark": $tertiary-dark,
+
+    "background": #202123,
+    "surface": #3b3c3e,
+    "transparent": transparent,
+
+    "white": $white,
+    "black": #bbb8b8,
+
+    "very-light": $very-light,
+    "light": #525252,
+    "mid-light": $mid-light,
+    "mid": $mid,
+    "mid-dark": $mid-dark,
+    "dark": #ddd
+);
+
 $fonts: (
     "title": $title-font,
     "light": $light-font,
@@ -195,7 +221,25 @@ $sizes: (
         }
     }
 }
-@mixin propertyList($property, $prefix, $list, $action: "") {
+
+:root {
+    @each $name, $value in $colors {
+        --#{$name}: #{$value};
+    }
+
+    @media (prefers-color-scheme: dark) {
+        @each $name, $value in $dark-colors {
+            --#{$name}: #{$value};
+        }
+    }
+}
+
+@mixin applyTheme($property: color, $value: "primary") {
+    #{$property}: map-get($colors, $value);
+    #{$property}: var(--#{$value});
+}
+
+@mixin propertyList($property, $prefix, $list, $themeable: false, $action: "") {
     @each $name, $value in $list {
         @if str-length($action) > 0 {
             &-#{$action}-#{$name}:#{$action},
@@ -203,21 +247,29 @@ $sizes: (
             &-#{$action}-#{$prefix}-#{$name}:#{$action},
             &-#{$prefix}-#{$action}-#{$name}:#{$action},
             &-#{$prefix}-#{$name}-#{$action}:#{$action} {
-                #{$property}: $value;
+                @if ($themeable) {
+                    @include applyTheme($property, $name);
+                } @else {
+                    #{$property}: $value;
+                }
             }
         } @else {
             &-#{$name},
             &-#{$prefix}-#{$name} {
-                #{$property}: $value;
+                @if ($themeable) {
+                    @include applyTheme($property, $name);
+                } @else {
+                    #{$property}: $value;
+                }
             }
         }
     }
 }
 
 @mixin colorList($property: color, $name: "color") {
-    @include propertyList($property, $name, $colors);
-    @include propertyList($property, $name, $colors, "hover");
-    @include propertyList($property, $name, $colors, "focus");
+    @include propertyList($property, $name, $colors, true);
+    @include propertyList($property, $name, $colors, true, "hover");
+    @include propertyList($property, $name, $colors, true, "focus");
 }
 
 @import "./components/base.scss";
