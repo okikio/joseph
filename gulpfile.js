@@ -23,6 +23,7 @@ const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
+const _debug = require('gulp-debug');
 const config = require('./config');
 const sass = require('gulp-sass');
 const pug = require('gulp-pug');
@@ -69,14 +70,18 @@ let stream = (_src, _opt = { }) => {
     let _end = _opt.end || [];
     let host = src(_src, _opt.opts), _pipes = _opt.pipes || [],
         _dest = _opt.dest || publicDest, _log = _opt.log || (() => {});
+
     return new Promise((resolve, reject) => {
         _pipes.forEach(val => {
             if (val !== undefined && val !== null)
-                { host = host.pipe(val).on('error', reject); }
+            { host = host.pipe(val).on('error', reject); }
         });
 
-        host = host.on('end', _log).pipe(dest(_dest))
-                   .on('error', reject).on('end', resolve); // Output
+        host.on('end', _log)
+            .on('error', reject)
+            .pipe(dest(_dest))
+            .on('end', resolve); // Output
+
         _end.forEach(val => {
             if (val !== undefined && val !== null)
                 { host = host.pipe(val); }
@@ -87,9 +92,9 @@ let stream = (_src, _opt = { }) => {
 // A list of streams
 let streamList = (...args) => {
     return Promise.all(
-        (Array.isArray(args[0]) ? args[0] : args).map(_stream =>
-            Array.isArray(_stream) ? stream(..._stream) : _stream
-        )
+        (Array.isArray(args[0]) ? args[0] : args).map(_stream => {
+            return Array.isArray(_stream) ? stream(..._stream) : _stream
+        })
     );
 };
 
@@ -152,19 +157,20 @@ task("css", () =>
     })
 );
 
-task("js", () =>
+task("env-js", () =>
+    stream('src/js/**/*.js', {
+        opts: { allowEmpty: true },
+        pipes: [
+            // Include enviroment variables in JS
+            nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
+            _debug({ title: "gulp-debug: " })
+        ],
+        dest: `${publicDest}/js`, // Output
+    })
+);
+
+task("web-js", () =>
     streamList([
-        ['src/js/**/*.js', {
-            opts: { allowEmpty: true },
-            pipes: [
-                // Include enviroment variables in JS
-                nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
-            ],
-            log: () => {
-                console.log("Nunjucks done.");
-            },
-            dest: 'public/js' // Output
-        }],
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
@@ -188,12 +194,13 @@ task("js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`${type}.min.js`), // Rename
-                        dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+                        _debug({ title: "gulp-debug: " })
                     ],
                     dest: 'public/js' // `${publicDest}/js` // Output
                 }];
             }),
-            [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+        [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 dev ? null : init(), // Sourcemaps init
@@ -213,12 +220,15 @@ task("js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+                _debug({ title: "gulp-debug: " })
             ],
             dest: 'public/js'// `${publicDest}/js` // Output
         }]
     ])
 );
+
+task("js", series("env-js", "web-js") );
 
 task("client", () =>
     streamList([
@@ -442,7 +452,7 @@ task('reload', done =>
 );
 
 // Gulp task to minify all files
-task('dev', parallel("client", series(parallel("html", "js"), "css")));
+task('dev', parallel("client", series("html", "js", "css")));
 
 // Gulp task to minify all files, and inline them in the pages
 task('default', parallel(series("dev", "posthtml", "inline-assets", "optimize-class-names", "inline-js-css")));
