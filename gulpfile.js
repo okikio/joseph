@@ -452,7 +452,7 @@ task('reload', done =>
 );
 
 // Gulp task to minify all files
-task('dev', parallel("client", series("html", "js", "css")));
+task('dev', parallel("client", series(parallel("html", "js"), "css")));
 
 // Gulp task to minify all files, and inline them in the pages
 task('default', parallel(series("dev", "posthtml", "inline-assets", "optimize-class-names", "inline-js-css")));
