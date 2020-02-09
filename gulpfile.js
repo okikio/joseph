@@ -190,7 +190,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            [['public/js/*.js', '!public/js/app.js'], {
+            [['public/js/*.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 dev ? null : init(), // Sourcemaps init

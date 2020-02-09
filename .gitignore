@@ -54,8 +54,8 @@ profile-*
 .idea
 
 # vscode
-.vscode
-*code-workspace
+#.vscode
+#*code-workspace
 
 # clinic
 profile*
