@@ -67,16 +67,16 @@ let { assign } = Object;
 // Streamline Gulp Tasks
 let stream = (_src, _opt = { }) => {
     let _end = _opt.end || [];
-    let host = src(_src, _opt.opts), _pipes = _opt.pipes || [], _dest = _opt.dest || publicDest;
+    let host = src(_src, _opt.opts), _pipes = _opt.pipes || [],
+        _dest = _opt.dest || publicDest, _log = _opt.log || (() => {});
     return new Promise((resolve, reject) => {
         _pipes.forEach(val => {
             if (val !== undefined && val !== null)
                 { host = host.pipe(val).on('error', reject); }
         });
 
-        host = host.pipe(dest(_dest))
-                   .on('error', reject)
-                   .on('end', resolve); // Output
+        host = host.on('end', _log).pipe(dest(_dest))
+                   .on('error', reject).on('end', resolve); // Output
         _end.forEach(val => {
             if (val !== undefined && val !== null)
                 { host = host.pipe(val); }
@@ -154,18 +154,21 @@ task("css", () =>
 
 task("js", () =>
     streamList([
-        // ['src/js/**/*.js', {
-        //     opts: { allowEmpty: true },
-        //     pipes: [
-        //         // Include enviroment variables in JS
-        //         nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
-        //     ],
-        //     dest: 'public/js' // Output
-        // }],
+        ['src/js/**/*.js', {
+            opts: { allowEmpty: true },
+            pipes: [
+                // Include enviroment variables in JS
+                nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
+            ],
+            log: () => {
+                console.log("Nunjucks done.");
+            },
+            dest: 'public/js' // Output
+        }],
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return ['src/js/app.js', {
+                return ['public/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
                         dev ? null : init(), // Sourcemaps init
@@ -187,10 +190,10 @@ task("js", () =>
                         rename(`${type}.min.js`), // Rename
                         dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
-                    dest: `${publicDest}/js` // Output
+                    dest: 'public/js' // `${publicDest}/js` // Output
                 }];
             }),
-            [['src/js/*.js', '!src/js/app.js', '!src/js/*.min.js'], {
+            [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 dev ? null : init(), // Sourcemaps init
@@ -212,7 +215,7 @@ task("js", () =>
                 rename(minSuffix), // Rename
                 dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
-            dest: `${publicDest}/js` // Output
+            dest: 'public/js'// `${publicDest}/js` // Output
         }]
     ])
 );
