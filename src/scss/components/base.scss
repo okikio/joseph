@@ -111,6 +111,7 @@ img {
 
 a {
     color: darken($secondary-dark, 2%);
+    color: var(--secondary, darken($secondary-dark, 2%));
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
@@ -119,6 +120,7 @@ a {
     &:focus {
         text-decoration: underline;
         color: $secondary;
+        color: var(--secondary-light, $secondary);
     }
 }
 
@@ -155,22 +157,23 @@ a.skip-main {
     &:focus,
     &:active {
         border: 2px solid $secondary-light;
-        border: 2px solid var(--secondary-light);
+        border-color: var(--secondary-light, $secondary-light);
         // color: $secondary-light;
         @include applyTheme(color, "secondary-light");
         @include applyTheme(background-color, "dark");
+        transform: translateX(-50%);
         // background-color: $dark;
         border-radius: 6px;
         text-align: center;
         font-weight: 600;
-        margin: 10px 35%;
+        margin: 80px auto;
         font-size: 1.2em;
         overflow: auto;
         height: auto;
         padding: 5px;
         z-index: 1999;
-        width: 30%;
-        left: auto;
+        width: 40%;
+        left: 50%;
         top: auto;
     }
 }

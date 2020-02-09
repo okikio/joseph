@@ -24,7 +24,7 @@
         &-show,
         &:hover {
             .navbar-layout {
-                $border-color: darken($very-light, 8%);
+                // $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
                 @include applyTheme(background, "surface");
                 // background: $surface;
@@ -33,6 +33,7 @@
 
             .navbar-title-line {
                 border-left-color: darken($background, 14%);
+                // border-left-color: var(--background);
             }
         }
 
@@ -97,6 +98,7 @@
 
                 border-left: 1px solid transparent;
                 border-left-color: darken($mid-light, 2%);
+                border-left-color: var(--mid-light, darken($mid-light, 2%));
 
                 margin-right: $size-smaller;
                 margin-left: $size-smaller;
@@ -126,6 +128,7 @@
             padding: 0 28px;
             font-size: 14px;
             color: $black; // #bbb8b8
+            @include applyTheme(color, "dark");
             width: 100%;
 
             &-content {
@@ -152,8 +155,8 @@
             &:focus,
             &-focus {
                 text-decoration: none;
-                color: $black; // #e6e6e6
-                @include applyTheme(color, "black");
+                // color: $black; // #e6e6e6
+                @include applyTheme(color, "dark");
 
                 .navbar-link-content:before {
                     transform: translateY($height - 14px) scaleX(1) ;
@@ -217,6 +220,7 @@
 
             &-list {
                 background: lighten($very-light, 2%); // #292d33
+                @include applyTheme(background, "very-light");
                 position: relative;
                 overflow: hidden;
                 display: block;
@@ -244,8 +248,13 @@
 
                 .navbar-head,
                 .navbar-main {
-                    $border-color: darken($very-light, 8%); // #3b3c3e
                     box-shadow: 0 0 25px rgba(0, 0, 50, .12);
+                    $border-color: darken($very-light, 8%); // #3b3c3e
+                    border-bottom-color: $border-color;
+                    border-right-color: $border-color;
+                    border-left-color: $border-color;
+
+                    $border-color: #3b3c3e; // var(--dark); // #3b3c3e
                     border-bottom-color: $border-color;
                     border-right-color: $border-color;
                     border-left-color: $border-color;

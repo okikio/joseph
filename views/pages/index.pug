@@ -31,10 +31,12 @@ block content
 			+main({
 					class: "layout-padding-top-large"
 			})
-				+row
+				+row({
+          class: "layout-margin-horz-dull"
+        })
 					//- 1st Column
 					+column({
-						class: "layout-col-2 layout-padding-bottom-small"
+						class: "layout-col-2 layout-padding-horz-dull layout-padding-bottom-small"
 					})
 						+p({
 							content: "03/03",
@@ -43,7 +45,7 @@ block content
 
 					//- 2nd Column
 					+column({
-						class: "layout-col-3 layout-padding-bottom"
+						class: "layout-col-3 layout-padding-horz-dull layout-padding-bottom"
 					})
 						+p({
 							content: "2018",
@@ -60,11 +62,11 @@ block content
 
 					//- 3rd Column
 					+column({
-						class: "layout-col-7"
+						class: "layout-col-7 layout-padding-horz-dull"
 					})
 						p.layout-margin-dull(lorem="1")
 
-				section.layout-padding-vert-large
+				section.layout-padding-top.layout-padding-bottom-large
 					//- span.layout-margin-horz-left.layout-inline-block= " "
 					+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
 					+link({

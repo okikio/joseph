@@ -138,7 +138,7 @@ $colors: (
 $dark-colors: (
     "primary-light": $primary-light,
     "primary": $primary,
-    "primary-dark": #774bec,
+    "primary-dark": #5031a0,
     "secondary-light": $secondary-light,
     "secondary": $secondary,
     "secondary-dark": $secondary-dark,
@@ -151,13 +151,13 @@ $dark-colors: (
     "transparent": transparent,
 
     "white": $white,
-    "black": #bbb8b8,
+    "black": $black,
 
-    "very-light": $very-light,
+    "very-light": #292d33,
     "light": #525252,
     "mid-light": $mid-light,
     "mid": $mid,
-    "mid-dark": $mid-dark,
+    "mid-dark": #bbb8b8,
     "dark": #ddd
 );
 
@@ -223,9 +223,9 @@ $sizes: (
 }
 
 :root {
-    @each $name, $value in $colors {
-        --#{$name}: #{$value};
-    }
+    // @each $name, $value in $colors {
+    //     --#{$name}: #{$value};
+    // }
 
     @media (prefers-color-scheme: dark) {
         @each $name, $value in $dark-colors {
@@ -236,7 +236,7 @@ $sizes: (
 
 @mixin applyTheme($property: color, $value: "primary") {
     #{$property}: map-get($colors, $value);
-    #{$property}: var(--#{$value});
+    #{$property}: var(--#{$value}, map-get($colors, $value));
 }
 
 @mixin propertyList($property, $prefix, $list, $themeable: false, $action: "") {

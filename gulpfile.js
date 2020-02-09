@@ -154,18 +154,18 @@ task("css", () =>
 
 task("js", () =>
     streamList([
-        ['src/js/**/*.js', {
-            opts: { allowEmpty: true },
-            pipes: [
-                // Include enviroment variables in JS
-                nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
-            ],
-            dest: 'temp/js' // Output
-        }],
+        // ['src/js/**/*.js', {
+        //     opts: { allowEmpty: true },
+        //     pipes: [
+        //         // Include enviroment variables in JS
+        //         nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
+        //     ],
+        //     dest: 'public/js' // Output
+        // }],
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return ['temp/js/app.js', {
+                return ['public/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
                         dev ? null : init(), // Sourcemaps init
@@ -190,7 +190,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            [['temp/js/*.js', '!temp/js/app.js'], {
+            [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 dev ? null : init(), // Sourcemaps init
