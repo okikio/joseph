@@ -165,7 +165,7 @@ task("js", () =>
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return ['public/js/app.js', {
+                return ['src/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
                         dev ? null : init(), // Sourcemaps init
@@ -190,7 +190,7 @@ task("js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+            [['src/js/*.js', '!src/js/app.js', '!src/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 dev ? null : init(), // Sourcemaps init
