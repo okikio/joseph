@@ -47,7 +47,7 @@
         "url": "https://github.com/okikio/joseph/issues"
     },
     "homepage": "https://github.com/okikio/joseph#readme",
-    "devDependencies": {
+    "dependencies": {
         "@babel/core": "^7.8.4",
         "@babel/preset-env": "^7.8.4",
         "@fullhuman/postcss-purgecss": "^2.0.6",
@@ -92,6 +92,7 @@
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-node-builtins": "^2.1.2",
         "swup": "^2.0.8",
-        "typographic-single-spaces": "^1.0.2"
+        "typographic-single-spaces": "^1.0.2",
+        "yarn": "^1.22.0"
     }
 }
