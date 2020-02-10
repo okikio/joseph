@@ -51,21 +51,6 @@ body {
     }
 }
 
-::-webkit-scrollbar {
-    display: block;
-    width: 6px;
-}
-
-::-webkit-scrollbar-track-piece {
-    background-color: $mid-dark;
-    background-color: var(--light, $mid-dark);
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: $light;
-    background-color: var(--mid-dark, $primary-light);
-}
-
 ::selection {
     background: $primary-dark;
     color: darken(#fff, 15%);

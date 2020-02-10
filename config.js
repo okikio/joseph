@@ -17,6 +17,12 @@ let _exports = {
     "websiteURL": "https://www.josephojo.com/",
     "class_map": {
         "-": "",
+        // Exceptions
+        "webkitscrollbar": "-webkit-scrollbar",
+        "trackpiece": "-track-piece",
+        "thumb": "-thumb",
+
+        // Continue...
         "layer": "lr",
         "layout": "ly",
         "justify": "jst",
