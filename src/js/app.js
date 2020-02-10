@@ -134,12 +134,12 @@ ready = () => {
 
     // Scrollbar hover effect
     if (body.style && body.style.getPropertyValue) {
-        requestAnimationFrame(scrollbar = () => {
-            // scrollbar_hover = body.style.getPropertyValue('--scrollbar-hover');
-            // body.style.setProperty('--scrollbar-size', scrollbar_hover == "1px" ? '0px' : scrollbar_size);
-            // _log(scrollbar_hover);
-            requestAnimationFrame(scrollbar);
-        });
+        // requestAnimationFrame(scrollbar = () => {
+        //     // scrollbar_hover = body.style.getPropertyValue('--scrollbar-hover');
+        //     // body.style.setProperty('--scrollbar-size', scrollbar_hover == "1px" ? '0px' : scrollbar_size);
+        //     // _log(scrollbar_hover);
+        //     requestAnimationFrame(scrollbar);
+        // });
     }
 
     init();
