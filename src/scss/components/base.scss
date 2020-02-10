@@ -29,7 +29,7 @@ body {
     @media (max-width: 300px) {
         word-break: break-all;
     }
-    
+
     &::-webkit-scrollbar {
         display: block;
         width: 6px;
@@ -49,6 +49,21 @@ body {
     &::-webkit-scrollbar-thumb {
         // border-radius: 5px;
     }
+}
+
+::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: $mid-dark;
+    background-color: var(--light, $mid-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $light;
+    background-color: var(--mid-dark, $primary-light);
 }
 
 ::selection {
