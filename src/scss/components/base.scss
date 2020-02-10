@@ -31,38 +31,25 @@ body {
     }
 }
 
-
 body {
-    // &:hover {
     &::-webkit-scrollbar {
         display: block;
-        width: 14px;
-
-        &:hover {
-            background-color: $light;
-            background-color: var(--light, $light);
-
-            & ::-webkit-scrollbar-track {
-                background-color: $light;
-                background-color: var(--light, $light);
-            }
-        }
+        width: 6px;
     }
 
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
+    &::-webkit-scrollbar-track-piece {
+        background-color: $mid-dark;
+        background-color: var(--light, $mid-dark);
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: $mid-dark;
-        background-color: var(--mid-dark, $mid-dark);
+        background-color: $light;
+        background-color: var(--mid-dark, $primary-light);
+    }
 
-        border: 6px solid $background;
-        border-color: var(--background, $background);
-
-        &:hover {
-            border: none;
-        }
+    &::-webkit-scrollbar-track-piece,
+    &::-webkit-scrollbar-thumb {
+        // border-radius: 5px;
     }
 }
 

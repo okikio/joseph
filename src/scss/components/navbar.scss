@@ -255,7 +255,7 @@
                     border-right-color: $border-color;
                     border-left-color: $border-color;
 
-                    $border-color: #3b3c3e; // var(--dark); // #3b3c3e
+                    $border-color: var(--surface, darken($very-light, 8%)); // var(--dark); // #3b3c3e
                     border-bottom-color: $border-color;
                     border-right-color: $border-color;
                     border-left-color: $border-color;
