@@ -1,7 +1,6 @@
 /* -- Presets & Resets -- */
 /* -- Elements -- */
 * {
-
     &,
     &:before,
     &:after {
@@ -30,11 +29,110 @@ body {
 
     color: $dark;
     @include applyTheme(color, "dark");
+    // scrollbar-color: var(--dark, $dark);
     // color: #ddd;
-
     @media (max-width: 300px) {
         word-break: break-all;
     }
+}
+
+::-webkit-scrollbar-track {
+    // background: transparent;
+    // width: 2px;
+
+    // &:hover {
+    //     background: var(--dark, $mid);
+    //     width: 8px;
+    // }
+}
+
+::-webkit-scrollbar-thumb {
+    // background-color: var(--dark, $dark);
+    // width: 2px;
+
+    // &:hover {
+    //     width: 8px;
+    // }
+    // border-radius: 6px;
+    // border: 3px solid var(--scrollbarBG);
+}
+
+body {
+    --scrollbar-size: 6px;
+    --scrollbar-hover: 0px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    // &:hover {
+    &::-webkit-scrollbar {
+        display: block;
+        width: 14px;
+        --scrollbar-hover: 0px;
+
+        &:hover {
+            background-color: $light;
+            background-color: var(--light, $light);
+            --scrollbar-hover: 1px;
+
+            & ::-webkit-scrollbar-track {
+                background-color: $light;
+                background-color: var(--light, $light);
+            }
+        }
+    }
+
+    &::-webkit-scrollbar-track {
+        --scrollbar-hover: 0px;
+
+        &:hover {
+            --scrollbar-hover: 1px;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $mid-dark;
+        background-color: var(--mid-dark, $mid-dark);
+
+        border: 6px solid $background;
+        border: var(--scrollbar-size, 6px) solid $background;
+        border-color: var(--background, $background);
+
+        &:hover {
+            border: none;
+        }
+    }
+    // }
+}
+
+// body::-webkit-scrollbar {
+//     width: 16px;
+//     height: 14px;
+//     background-color: #646464;
+// }
+
+// body::-webkit-scrollbar-button {
+//     background-color: #25353e;
+// }
+// body::-webkit-scrollbar-thumb {
+//     height: 50px;
+//     background-color: var(--mid-dark, $dark);
+//     border: 2px solid #3e4346;
+// }
+// body::-webkit-scrollbar-track {
+//     background-color: #646464;
+// }
+// body::-webkit-scrollbar-track-piece {
+//     background-color: #3e4346;
+// }
+
+::selection {
+    background: $primary-dark;
+    color: darken(#fff, 15%);
+}
+
+a::selection {
+    color: $secondary;
 }
 
 h1,

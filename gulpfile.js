@@ -195,7 +195,7 @@ task("web-js", () =>
                         ),
                         rename(`${type}.min.js`), // Rename
                         dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                        _debug({ title: "gulp-debug: " })
+                        _debug({ title: "gulp-debug:" })
                     ],
                     dest: 'public/js' // `${publicDest}/js` // Output
                 }];
@@ -221,7 +221,7 @@ task("web-js", () =>
                 ),
                 rename(minSuffix), // Rename
                 dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                _debug({ title: "gulp-debug: " })
+                _debug({ title: "gulp-debug:" })
             ],
             dest: 'public/js'// `${publicDest}/js` // Output
         }]

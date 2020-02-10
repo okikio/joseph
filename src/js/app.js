@@ -20,7 +20,10 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [];
+let scrollbar_size;
+let { body } = document;
+let scrollbar_hover = false;
+let scroll, ready, resize, href, init, _focusPt, scrollbar, _images = [];
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -118,6 +121,9 @@ init = () => {
 
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
+    if (body.style && body.style.getPropertyValue)
+        scrollbar_size = body.style.getPropertyValue('--scrollbar-size');
+
     _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
     _images = [];
 
@@ -125,6 +131,16 @@ ready = () => {
     on(_scrolldown, "click", () => {
         scrollTo(height(_hero), "800ms");
     });
+
+    // Scrollbar hover effect
+    if (body.style && body.style.getPropertyValue) {
+        requestAnimationFrame(scrollbar = () => {
+            // scrollbar_hover = body.style.getPropertyValue('--scrollbar-hover');
+            // body.style.setProperty('--scrollbar-size', scrollbar_hover == "1px" ? '0px' : scrollbar_size);
+            // _log(scrollbar_hover);
+            requestAnimationFrame(scrollbar);
+        });
+    }
 
     init();
     resize();

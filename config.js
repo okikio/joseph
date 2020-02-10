@@ -16,6 +16,7 @@ let _exports = {
     },
     "websiteURL": "https://www.josephojo.com/",
     "class_map": {
+        "-": "",
         "layer": "lr",
         "layout": "ly",
         "justify": "jst",
@@ -74,7 +75,7 @@ let _exports = {
         "large": "lrg",
         "default": "dlt",
         "small": "sml",
-        "-": ""
+        "isanimating": "is-animating"
     },
 };
 
