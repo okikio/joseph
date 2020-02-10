@@ -134,7 +134,7 @@ img {
 
 a {
     color: darken($secondary-dark, 2%);
-    color: var(--secondary, darken($secondary-dark, 2%));
+    color: var(--secondary-light, darken($secondary-dark, 2%));
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
@@ -143,7 +143,7 @@ a {
     &:focus {
         text-decoration: underline;
         color: $secondary;
-        color: var(--secondary-light, $secondary);
+        color: var(--secondary, $secondary);
     }
 }
 
