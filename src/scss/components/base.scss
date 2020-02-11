@@ -45,10 +45,10 @@ body {
         background-color: var(--mid-dark, $primary-light);
     }
 
-    &::-webkit-scrollbar-track-piece,
-    &::-webkit-scrollbar-thumb {
-        // border-radius: 5px;
-    }
+    // &::-webkit-scrollbar-track-piece,
+    // &::-webkit-scrollbar-thumb {
+    //     // border-radius: 5px;
+    // }
 }
 
 ::selection {
