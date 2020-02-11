@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
 
+const { name, author, version, homepage, license, copyright, github } = require("./package.json");
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
 const querySelector = require("posthtml-match-helper");
@@ -13,19 +14,26 @@ const { babelConfig } = require("./browserlist");
 const rollup = require('gulp-better-rollup');
 const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
+const gitRevSync = require('git-rev-sync');
 const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
 const imagemin = require('gulp-imagemin');
 const { html } = require('gulp-beautify');
 const postcssNative = require('postcss');
+const plumber = require('gulp-plumber');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
+// const fancyLog = require('fancy-log');
+// const favicons = require('gulp-favicons');
+const header = require('gulp-header');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const _debug = require('gulp-debug');
 const config = require('./config');
+const size = require('gulp-size');
 const sass = require('gulp-sass');
+const moment = require('moment');
 const pug = require('gulp-pug');
 const https = require('https');
 
@@ -33,6 +41,86 @@ let { cloud_name, imageURLConfig, class_map, dev, debug } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
 let class_keys = Object.keys(class_map);
 assets.config({ cloud_name, secure: true });
+
+/*
+{
+        appName: pkg.name,
+        appDescription: pkg.description,
+        developerName: pkg.author,
+        developerURL: pkg.urls.live,
+        background: "#FFFFFF",
+        path: pkg.paths.favicon.path,
+        url: pkg.site_url,
+        display: "standalone",
+        orientation: "portrait",
+        version: pkg.version,
+        logging: false,
+        online: false,
+        html: pkg.paths.build.html + "favicons.html",
+        replace: true,
+        icons: {
+            android: false, // Create Android homescreen icon. `boolean`
+            appleIcon: true, // Create Apple touch icons. `boolean`
+            appleStartup: false, // Create Apple startup images. `boolean`
+            coast: true, // Create Opera Coast icon. `boolean`
+            favicons: true, // Create regular favicons. `boolean`
+            firefox: true, // Create Firefox OS icons. `boolean`
+            opengraph: false, // Create Facebook OpenGraph image. `boolean`
+            twitter: false, // Create Twitter Summary Card image. `boolean`
+            windows: true, // Create Windows 8 tile icons. `boolean`
+            yandex: true // Create Yandex browser icon. `boolean`
+        }
+    }
+gulp
+  .src('./favicon.png')
+  .pipe(
+    favicons({
+      appName: 'My App',
+      appShortName: 'App',
+      appDescription: 'This is my application',
+      developerName: 'Hayden Bleasel',
+      developerURL: 'http://haydenbleasel.com/',
+      background: '#020307',
+      path: 'favicons/',
+      url: 'http://haydenbleasel.com/',
+      display: 'standalone',
+      orientation: 'portrait',
+      scope: '/',
+      start_url: '/?homescreen=1',
+      version: 1.0,
+      logging: false,
+      html: 'index.html',
+      pipeHTML: true,
+      replace: true,
+    })
+  )
+*/
+
+const bannerContent = [
+    ` * @project        ${name} - v${version}`,
+    ` * @author         ${author}`,
+    ` * @link           ${homepage}`,
+    ` * @github         ${github}`,
+    ` * @build          ${moment().format("llll")} ET`,
+    ` * @release        ${gitRevSync.long()} [${gitRevSync.branch()}]`,
+    ` * @license        ${license}`,
+    ` * @copyright      Copyright (c) ${moment().format("YYYY")}, ${copyright}.`,
+    ` *`,
+];
+
+const banner = [
+    "/**",
+    ...bannerContent,
+    ` */`,
+    "\n"
+].join("\n");
+
+const bannerHTML = [
+    "<!--",
+    ...bannerContent,
+    `-->`,
+    "\n"
+].join("\n");
 
 // Rollup warnings are annoying
 let ignoreLog = ["CIRCULAR_DEPENDENCY", "UNRESOLVED_IMPORT", 'EXTERNAL_DEPENDENCY', 'THIS_IS_UNDEFINED'];
@@ -123,6 +211,8 @@ let _execSeries = (...cmds) => {
 task('html', () => stream(
     'views/pages/*.pug', {
         pipes: [
+            // (() => { fancyLog("\n"); }) (),
+            plumber(),
             // Pug compiler
             pug({ locals: { cloud_name, dev, debug } }),
             // Rename
@@ -136,7 +226,11 @@ task('html', () => stream(
                 removeEmptyAttributes: false,
                 removeRedundantAttributes: true,
                 processScripts: ["application/ld+json"]
-            })
+            }),
+            plumber.stop(),
+            size({gzip: true, showFiles: true}),
+            header(bannerHTML),
+            // (() => { fancyLog("\n"); }) (),
         ]
     })
 );
@@ -144,13 +238,20 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            init(), // Sourcemaps init
+            plumber(),
+            header(banner),
+            // _debug({ title: " Initial files:" }),
+            dev ? null : init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
             rename(minSuffix), // Rename
-            write(...srcMapsWrite) // Put sourcemap in public folder
+            size({gzip: true, showFiles: true}),
+            dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+            plumber.stop(),
+            // header(banner),
+            // (() => { fancyLog("\n"); }) (),
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -161,9 +262,14 @@ task("env-js", () =>
     stream('src/js/**/*.js', {
         opts: { allowEmpty: true },
         pipes: [
+            // (() => { fancyLog("\n"); }) (),
+            plumber(),
+            // _debug({ title: " Initial files:" }),
             // Include enviroment variables in JS
             nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
-            _debug({ title: "gulp-debug: " })
+            // _debug({ title: "gulp-debug: " }),
+            plumber.stop(),
+            // (() => { fancyLog("\n"); }) (),
         ],
         dest: `${publicDest}/js`, // Output
     })
@@ -177,6 +283,9 @@ task("web-js", () =>
                 return ['public/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
+                        plumber(),
+                        _debug({ title: " Initial files:" }),
+                        header(banner),
                         dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
@@ -194,15 +303,20 @@ task("web-js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`${type}.min.js`), // Rename
+                        size({gzip: true, showFiles: true}),
                         dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                        _debug({ title: "gulp-debug:" })
+                        plumber.stop(),
+                        header(banner),
                     ],
-                    dest: 'public/js' // `${publicDest}/js` // Output
+                    dest: `${publicDest}/js` // Output
                 }];
             }),
         [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
+                plumber(),
+                _debug({ title: " Initial files:" }),
+                header(banner),
                 dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
@@ -220,10 +334,12 @@ task("web-js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
+                size({gzip: true, showFiles: true}),
                 dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                _debug({ title: "gulp-debug:" })
+                plumber.stop(),
+                header(banner)
             ],
-            dest: 'public/js'// `${publicDest}/js` // Output
+            dest: `${publicDest}/js` // Output
         }]
     ])
 );
@@ -237,7 +353,16 @@ task("client", () =>
         }],
         [["client/**/*.{png,ico,svg}"], {
             opts: { allowEmpty: true },
-            pipes: [ imagemin() ]
+            pipes: [
+                imagemin({
+                    progressive: true,
+                    interlaced: true,
+                    optimizationLevel: 7,
+                    svgoPlugins: [{removeViewBox: false}],
+                    verbose: false,
+                    use: []
+                })
+            ]
         }]
     ])
 );
@@ -263,13 +388,15 @@ task("git:pull", () =>
 task('posthtml', () =>
     stream('public/*.html', {
         pipes: [
+            plumber(),
             posthtml([
                 // Test processes
                 require('posthtml-textr')({}, [
                     require('typographic-single-spaces')
                 ]),
                 require('posthtml-lorem')(),
-            ])
+            ]),
+            plumber.stop(),
         ]
     })
 );
@@ -277,6 +404,7 @@ task('posthtml', () =>
 task('inline-assets', () =>
     stream('public/*.html', {
         pipes: [
+            plumber(),
             posthtml([
                 debug ? () => {} : tree => {
                     let parse = (_src = "src") => node => {
@@ -374,20 +502,8 @@ task('inline-assets', () =>
                         return node;
                     });
                 },
-            ])
-        ]
-    })
-);
-
-task('inline-js-css', () =>
-    stream('public/*.html', {
-        pipes: [
-            posthtml([
-                // Dom process
-                debug ? () => { } : require('posthtml-inline-assets')({
-                    transforms: { image: false }
-                }),
-            ])
+            ]),
+            plumber.stop(),
         ]
     })
 );
@@ -396,6 +512,7 @@ task('optimize-class-names', () =>
     streamList([
         [`${publicDest}/css/*.css`, {
             pipes: [
+                // plumber(),
                 postcss([
                     postcssNative.plugin('optimize-css-name', () => {
                         let class_keys = Object.keys(class_map);
@@ -404,7 +521,7 @@ task('optimize-class-names', () =>
                                 let { selector } = rule;
 
                                 for (let i = 0; i < class_keys.length; i ++) {
-                                    if (selector.includes(class_keys[i])) {
+                                    if (selector && selector.includes(class_keys[i])) {
                                         let regex = new RegExp(class_keys[i], 'g');
                                         selector = selector.replace(regex, class_map[class_keys[i]]);
                                     }
@@ -415,32 +532,53 @@ task('optimize-class-names', () =>
                             });
                         }
                     })()
-                ])
+                ]),
+                // plumber.stop(),
             ],
             dest: `${publicDest}/css`, // Output
         }],
         [`${publicDest}/*.html`, {
             pipes: [
+                plumber(),
                 posthtml([
                     tree => {
                         tree.walk(node => {
                             let _attrs = node.attrs || {};
-                            let _class = _attrs && _attrs.class || "";
+                            let _class = _attrs && _attrs.class;
 
                             for (let i = 0; i < class_keys.length; i ++) {
-                                if (_class.includes(class_keys[i])) {
+                                if (_class && _class.includes(class_keys[i])) {
                                     let regex = new RegExp(class_keys[i], 'g');
                                     _class = _class.replace(regex, class_map[class_keys[i]]);
                                 }
                             }
-                            node.attrs = { ..._attrs, class: _class };
+
+                            node.attrs = { ..._attrs };
+                            (_class && (node.attrs.class = _class));
                             return node;
                         });
                     },
-                ])
+                ]),
+                plumber.stop(),
             ]
         }]
     ])
+);
+
+task('inline-js-css', () =>
+    stream('public/*.html', {
+        pipes: [
+            plumber(),
+            posthtml([
+                // Dom process
+                debug ? () => { } : require('posthtml-inline-assets')({
+                    transforms: { image: false }
+                }),
+            ]),
+            plumber.stop(),
+            size({gzip: true, showFiles: true})
+        ]
+    })
 );
 
 task('reload', done =>
