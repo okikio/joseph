@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#202123",
     "theme_color": "#2d22ca",
-    "description": "A simply readable portfolio app.",
+    "description": "The Joseph Ojo portfolio website",
     "icons": [
         {
             "src": "/android-icon-36x36.png",
