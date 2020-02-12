@@ -242,9 +242,9 @@ task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
             // plumber(),
-            header(banner),
+            // header(banner),
             // _debug({ title: " Initial files:" }),
-            init(), // Sourcemaps init
+            // init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             rename(minSuffix), // Rename
@@ -252,7 +252,7 @@ task("css", () =>
             postcss(), // Rest of code is in postcss.config.js
             size({gzip: true, showFiles: true}),
             header(banner),
-            write(...srcMapsWrite), // Put sourcemap in public folder
+            // write(...srcMapsWrite), // Put sourcemap in public folder
             // plumber.stop(),
             // (() => { fancyLog("\n"); }) (),
         ],
