@@ -135,9 +135,9 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-let srcMapsWrite = ["../maps", {
+let srcMapsWrite = ["../", {
     sourceMappingURL: file => {
-        return `/maps/${file.relative}.map`;
+        return `/${file.relative}.map`;
     }
 }];
 
@@ -242,18 +242,18 @@ task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
             // plumber(),
-            header(banner),
+            // header(banner),
             // _debug({ title: " Initial files:" }),
-            dev ? null : init(), // Sourcemaps init
+            // init(), // Sourcemaps init
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
             rename(minSuffix), // Rename
             size({gzip: true, showFiles: true}),
-            dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+            header(banner),
+            // write(...srcMapsWrite), // Put sourcemap in public folder
             // plumber.stop(),
-            // header(banner),
             // (() => { fancyLog("\n"); }) (),
         ],
         dest: `${publicDest}/css`, // Output
@@ -287,7 +287,7 @@ task("web-js", () =>
                     opts: { allowEmpty: true },
                     pipes: [
                         // plumber(),
-                        _debug({ title: " Initial files:" }),
+                        // _debug({ title: " Initial files:" }),
                         header(banner),
                         dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
@@ -307,9 +307,9 @@ task("web-js", () =>
                         ),
                         rename(`${type}.min.js`), // Rename
                         size({gzip: true, showFiles: true}),
+                        header(banner),
                         dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
                         // plumber.stop(),
-                        header(banner),
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -318,7 +318,7 @@ task("web-js", () =>
             opts: { allowEmpty: true },
             pipes: [
                 // plumber(),
-                _debug({ title: " Initial files:" }),
+                // _debug({ title: " Initial files:" }),
                 header(banner),
                 dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
@@ -338,9 +338,9 @@ task("web-js", () =>
                 ),
                 rename(minSuffix), // Rename
                 size({gzip: true, showFiles: true}),
-                dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+                header(banner),
+                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                 // plumber.stop(),
-                header(banner)
             ],
             dest: `${publicDest}/js` // Output
         }]
@@ -356,16 +356,16 @@ task("client", () =>
         }],
         [["client/**/*.{png,ico,svg}"], {
             opts: { allowEmpty: true },
-            pipes: [
-                imagemin({
-                    progressive: true,
-                    interlaced: true,
-                    optimizationLevel: 7,
-                    svgoPlugins: [{removeViewBox: false}],
-                    verbose: false,
-                    use: []
-                })
-            ]
+            // pipes: [
+            //     imagemin({
+            //         progressive: true,
+            //         interlaced: true,
+            //         optimizationLevel: 7,
+            //         svgoPlugins: [{removeViewBox: false}],
+            //         verbose: false,
+            //         use: []
+            //     })
+            // ]
         }]
     ])
 );
@@ -432,12 +432,12 @@ task('inline-assets', () =>
                     };
 
                     tree.match(querySelector("[src^='/assets/']"), parse());
-                    tree.match(querySelector("[data-src^='/assets/']"), parse("data-src"));
+                    // tree.match(querySelector("[data-src^='/assets/']"), parse("data-src"));
                     // tree.match(querySelector("[href^='/assets/']"), parse("href"));
                     tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
-                    tree.match(querySelector("[data-srcset^='/assets/']"), parse("data-srcset"));
+                    // tree.match(querySelector("[data-srcset^='/assets/']"), parse("data-srcset"));
                 },
-                /* debug ? () => {} : async tree => {
+                debug ? () => {} : async tree => {
                     let warnings, promises = [];
                     tree.match({ tag: 'img' }, node => {
                         if (promises.length >= 2) return node; // Don't inline everything
@@ -482,7 +482,7 @@ task('inline-assets', () =>
 
                     // Return the ast
                     return tree;
-                }, */
+                },
                 debug ? () => {} : tree => {
                     let icons = require('microicon');
                     tree.match(querySelector("i.action-icon"), node => {
