@@ -288,7 +288,7 @@ task("web-js", () =>
                     pipes: [
                         // plumber(),
                         // _debug({ title: " Initial files:" }),
-                        header(banner),
+                        // header(banner),
                         dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
@@ -319,7 +319,7 @@ task("web-js", () =>
             pipes: [
                 // plumber(),
                 // _debug({ title: " Initial files:" }),
-                header(banner),
+                // header(banner),
                 dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
