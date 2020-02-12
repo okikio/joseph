@@ -1,10 +1,12 @@
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
 
-const { name, author, version, homepage, license, copyright, github } = require("./package.json");
+// name, version,
+const { author,  homepage, license, copyright, github } = require("./package.json");
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
 const querySelector = require("posthtml-match-helper");
+const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
 const commonJS = require('@rollup/plugin-commonjs');
 const { init, write } = require('gulp-sourcemaps');
@@ -20,7 +22,7 @@ const posthtml = require('gulp-posthtml');
 const imagemin = require('gulp-imagemin');
 const { html } = require('gulp-beautify');
 const postcssNative = require('postcss');
-const plumber = require('gulp-plumber');
+// const plumber = require('gulp-plumber');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
@@ -36,6 +38,7 @@ const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
 const https = require('https');
+// require('posthtml-inline-assets')
 
 let { cloud_name, imageURLConfig, class_map, dev, debug } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
@@ -97,7 +100,7 @@ gulp
 */
 
 const bannerContent = [
-    ` * @project        ${name} - v${version}`,
+    // ` * @project        ${name} - v${version}`,
     ` * @author         ${author}`,
     ` * @link           ${homepage}`,
     ` * @github         ${github}`,
@@ -212,7 +215,7 @@ task('html', () => stream(
     'views/pages/*.pug', {
         pipes: [
             // (() => { fancyLog("\n"); }) (),
-            plumber(),
+            // plumber(),
             // Pug compiler
             pug({ locals: { cloud_name, dev, debug } }),
             // Rename
@@ -227,7 +230,7 @@ task('html', () => stream(
                 removeRedundantAttributes: true,
                 processScripts: ["application/ld+json"]
             }),
-            plumber.stop(),
+            // plumber.stop(),
             size({gzip: true, showFiles: true}),
             header(bannerHTML),
             // (() => { fancyLog("\n"); }) (),
@@ -238,7 +241,7 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            plumber(),
+            // plumber(),
             header(banner),
             // _debug({ title: " Initial files:" }),
             dev ? null : init(), // Sourcemaps init
@@ -249,7 +252,7 @@ task("css", () =>
             rename(minSuffix), // Rename
             size({gzip: true, showFiles: true}),
             dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-            plumber.stop(),
+            // plumber.stop(),
             // header(banner),
             // (() => { fancyLog("\n"); }) (),
         ],
@@ -263,12 +266,12 @@ task("env-js", () =>
         opts: { allowEmpty: true },
         pipes: [
             // (() => { fancyLog("\n"); }) (),
-            plumber(),
+            // plumber(),
             // _debug({ title: " Initial files:" }),
             // Include enviroment variables in JS
             nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
             // _debug({ title: "gulp-debug: " }),
-            plumber.stop(),
+            // plumber.stop(),
             // (() => { fancyLog("\n"); }) (),
         ],
         dest: `${publicDest}/js`, // Output
@@ -283,7 +286,7 @@ task("web-js", () =>
                 return ['public/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        plumber(),
+                        // plumber(),
                         _debug({ title: " Initial files:" }),
                         header(banner),
                         dev ? null : init(), // Sourcemaps init
@@ -305,7 +308,7 @@ task("web-js", () =>
                         rename(`${type}.min.js`), // Rename
                         size({gzip: true, showFiles: true}),
                         dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                        plumber.stop(),
+                        // plumber.stop(),
                         header(banner),
                     ],
                     dest: `${publicDest}/js` // Output
@@ -314,7 +317,7 @@ task("web-js", () =>
         [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
-                plumber(),
+                // plumber(),
                 _debug({ title: " Initial files:" }),
                 header(banner),
                 dev ? null : init(), // Sourcemaps init
@@ -336,7 +339,7 @@ task("web-js", () =>
                 rename(minSuffix), // Rename
                 size({gzip: true, showFiles: true}),
                 dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                plumber.stop(),
+                // plumber.stop(),
                 header(banner)
             ],
             dest: `${publicDest}/js` // Output
@@ -388,7 +391,7 @@ task("git:pull", () =>
 task('posthtml', () =>
     stream('public/*.html', {
         pipes: [
-            plumber(),
+            // plumber(),
             posthtml([
                 // Test processes
                 require('posthtml-textr')({}, [
@@ -396,7 +399,7 @@ task('posthtml', () =>
                 ]),
                 require('posthtml-lorem')(),
             ]),
-            plumber.stop(),
+            // plumber.stop(),
         ]
     })
 );
@@ -404,7 +407,7 @@ task('posthtml', () =>
 task('inline-assets', () =>
     stream('public/*.html', {
         pipes: [
-            plumber(),
+            // plumber(),
             posthtml([
                 debug ? () => {} : tree => {
                     let parse = (_src = "src") => node => {
@@ -434,13 +437,15 @@ task('inline-assets', () =>
                     tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
                     tree.match(querySelector("[data-srcset^='/assets/']"), parse("data-srcset"));
                 },
-                debug ? () => {} : async tree => {
+                /* debug ? () => {} : async tree => {
                     let warnings, promises = [];
                     tree.match({ tag: 'img' }, node => {
                         if (promises.length >= 2) return node; // Don't inline everything
                         if (node.attrs && node.attrs.src && "inline" in node.attrs) {
-                            const { inline, async, ..._attrs } = node.attrs;
+                            const _attrs = node.attrs;
                             const _src = _attrs.src;
+                            delete _attrs['inline'];
+                            delete _attrs['async'];
                             if (!_src.includes("data:image/")) {
                                 promises.push(
                                     new Promise((resolve, reject) => {
@@ -477,13 +482,15 @@ task('inline-assets', () =>
 
                     // Return the ast
                     return tree;
-                },
+                }, */
                 debug ? () => {} : tree => {
                     let icons = require('microicon');
                     tree.match(querySelector("i.action-icon"), node => {
                         if ("inline" in node.attrs) {
-                            const { inline, async, ..._attrs } = node.attrs;
+                            const _attrs = node.attrs;
                             const _content = node.content;
+                            delete _attrs['inline'];
+                            delete _attrs['async'];
                             node = {
                                 tag: 'svg',
                                 attrs: {
@@ -503,7 +510,7 @@ task('inline-assets', () =>
                     });
                 },
             ]),
-            plumber.stop(),
+            // plumber.stop(),
         ]
     })
 );
@@ -539,7 +546,7 @@ task('optimize-class-names', () =>
         }],
         [`${publicDest}/*.html`, {
             pipes: [
-                plumber(),
+                // plumber(),
                 posthtml([
                     tree => {
                         tree.walk(node => {
@@ -559,7 +566,7 @@ task('optimize-class-names', () =>
                         });
                     },
                 ]),
-                plumber.stop(),
+                // plumber.stop(),
             ]
         }]
     ])
@@ -568,14 +575,18 @@ task('optimize-class-names', () =>
 task('inline-js-css', () =>
     stream('public/*.html', {
         pipes: [
-            plumber(),
+            // plumber(),
             posthtml([
                 // Dom process
-                debug ? () => { } : require('posthtml-inline-assets')({
+                debug ? () => { } : phTransformer({
+                    root: `${publicDest}`,
+                    minifyJS: false, minifyCSS: false
+                })
+                /*require('posthtml-inline-assets')({
                     transforms: { image: false }
-                }),
+                })*/,
             ]),
-            plumber.stop(),
+            // plumber.stop(),
             size({gzip: true, showFiles: true})
         ]
     })

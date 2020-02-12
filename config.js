@@ -81,6 +81,7 @@ let _exports = {
         "large": "lrg",
         "default": "dlt",
         "small": "sml",
+        "coreimgshow": "core-img-show",
         "isanimating": "is-animating"
     },
 };

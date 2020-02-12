@@ -33,6 +33,7 @@ try {
 
                 res.text().then(data => {
                     script.innerHTML = data;
+                    script.setAttribute("data-src", src);
                     body.appendChild(script);
                 });
             })

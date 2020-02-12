@@ -20,7 +20,8 @@ mixin image(value = {})
 					source(media='(min-width: 1200px)' srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
 					img.core-img(src!=`${src}.jpg` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
 				picture
-					img.placeholder-img(src!=`${src}.jpg?w=60&quality=70&effect=blur:120` sizes="100vw" width="100vw" alt=alt loading="lazy" itemprop="url" inline)
+					//-  inline
+					img.placeholder-img(src!=`${src}.jpg?w=60&quality=70&effect=blur:120` sizes="100vw" width="100vw" alt=alt loading="lazy" itemprop="url")
 				noscript Javascript is necesscary for this sites awesome experience.
 					picture
 						source(srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')

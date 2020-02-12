@@ -96,6 +96,7 @@
         "posthtml-lorem": "^1.0.0",
         "posthtml-match-helper": "^1.0.1",
         "posthtml-textr": "^1.0.5",
+        "posthtml-transformer": "^0.1.2",
         "rollup": "^1.31.0",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-node-builtins": "^2.1.2",
