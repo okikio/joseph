@@ -14,7 +14,7 @@ let _exports = {
         "quality": 30,
         "dpr": "auto"
     },
-    "websiteURL": "https://www.josephojo.com/",
+    "websiteURL": "https://josephojo.com/",
     "class_map": {
         "-": "",
         // Exceptions

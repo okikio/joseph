@@ -1,2 +1,2 @@
-Sitemap: https://www.josephojo.com/sitemap.xml
+Sitemap: https://josephojo.com/sitemap.xml
 User-agent: *
