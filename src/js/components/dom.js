@@ -1,4 +1,4 @@
-import { _is, _fnval, _capital, keys, optimize } from "./util";
+import { _is, _fnval, _capital, keys, optimize, _log } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
@@ -683,6 +683,7 @@ export let scrollLeft = (_el, val) => {
 };
 
 // Animates the scrolling of the window in the y-axis
+let _raf; // Stores scroll animation frame
 export let scrollTo = (to, dur, ease) => {
     to = parseInt(to); dur = parseInt(dur);
     let start = window.pageYOffset, change = to - start, time = 0;
@@ -696,17 +697,20 @@ export let scrollTo = (to, dur, ease) => {
 
     let scroll, startTime = performance.now();
     return new Promise(resolve => {
-        requestAnimationFrame((scroll = newTime => {
-            time = newTime - startTime;
-            window.scroll(0, $ease(time, start, change, dur));
+        if (!_raf) {
+            _raf = requestAnimationFrame((scroll = newTime => {
+                time = newTime - startTime;
+                window.scroll(0, $ease(time, start, change, dur));
 
-            if (time < dur) {
-                requestAnimationFrame(scroll);
-            } else {
-                window.scroll(0, to);
-                resolve();
-            }
-        }));
+                if (time < dur) {
+                    _raf = requestAnimationFrame(scroll);
+                } else {
+                    window.scroll(0, to);
+                    window.cancelAnimationFrame(_raf);
+                    resolve();
+                }
+            }));
+        }
     });
 };
 
@@ -721,9 +725,9 @@ try {
     window.removeEventListener("PassiveEventsTest", noop, opts);
 } catch (e) { console.warn("Passive Events aren't supported in this browser, performance may suffer."); }
 
-// Alias for the addEventListener; supports multiple elements
+// Alias for the addEventListener; supports multiple elements, and multiple way of defining an event
 export let on = ($el, evt, fn, opts) => {
-    let $evt, useCapture, _opts, _fn;
+    let $evt, useCapture, _opts, _fn, handler;
     if (_is.undef(evt)) { return; } // If there is no event break
     if (_is.str(evt)) { evt = evt.split(/\s/g); }
     if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
@@ -736,15 +740,19 @@ export let on = ($el, evt, fn, opts) => {
             _fn = _is.obj(evt) && !_is.arr(evt) ? evt[$evt] : fn;
 
             if (/ready/.test($evt)) {
-                if (!/in/.test(document.readyState)) {
-                    fn({ preventDefault: () => {} });
+                if (!(/in/.test(document.readyState))) {
+                    window.setTimeout(() => {
+                        _fn({ preventDefault: () => {} });
+                    }, 0);
                 } else if (document.addEventListener) {
-                    document.addEventListener('DOMContentLoaded', fn);
-                } else {
-                    // Support for IE
-                    document.attachEvent('onreadystatechange', e => {
-                        if (!/in/.test(document.readyState)) fn(e);
-                    });
+                    handler = (...args) => {
+                        document.removeEventListener("DOMContentLoaded", handler);
+                        window.removeEventListener("load", handler);
+                        _fn(...args);
+                    };
+
+                    document.addEventListener("DOMContentLoaded", handler);
+                    window.addEventListener("load", handler);
                 }
             } else {
                 useCapture = /blur|focus|touch/.test($evt);

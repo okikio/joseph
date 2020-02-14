@@ -9,15 +9,12 @@ mixin image(value = {})
 			.img-contain
 				picture
 					each n in [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-						- let val = n > 5 && n <= 8 ? 70 : 100;
+						- let val = n > 5 && n <= 8 ? 70 : 40;
 						source(media=`(max-width: ${n}00px)` srcset!=`${src}.webp?w=${n}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00px` width=`${n}00px` type='image/webp')
 						source(media=`(max-width: ${n}00px)` srcset!=`${src}.jpg?w=${n}00&quality=${val}` sizes=`(max-width: ${n}00px) ${n}00px` width=`${n}00px` type='image/jpeg')
 
-					source(media='(max-width: 1200px)' srcset!=`${src}.webp` sizes="90vw" width="90vw" type='image/webp')
-					source(media='(max-width: 1200px)' srcset!=`${src}.jpg` sizes="90vw" width="90vw" type='image/jpeg')
-
-					source(media='(min-width: 1200px)' srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
-					source(media='(min-width: 1200px)' srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
+					source(media='(min-width: 1200px)' srcset!=`${src}.webp?quality=45` sizes="100vw" width="100vw" type='image/webp')
+					//- source(media='(min-width: 1200px)' srcset!=`${src}.jpg?quality=60` sizes="100vw" width="100vw" type='image/jpeg')
 					img.core-img(src!=`${src}.jpg` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
 				picture
 					//-  inline

@@ -134,44 +134,48 @@ ready = () => {
 // Ready to get started
 ready();
 
-// SWUP library
-try {
-    // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features is defined
-    if (window.isModern) {
-        // Page transition manager SWUP for faster page loads
-        const Swup = new swup({
-            linkSelector,
-            animateHistoryBrowsing: true,
-            containers: ["[data-container]"],
-            plugins: [
-                new preload(), // Preload pages
-                new headPlugin(), // Replace the contents of the head elements
+on(document, "ready", () => {
+    _log("Document loaded, SWUP starting...");
 
-                // For every new page, scroll to the top smoothly
-                new scrollPlugin({
-                    doScrollingRightAway: false,
-                    animateScroll: true,
-                    scrollFriction: 0.3,
-                    scrollAcceleration: 0.04,
-                })
-            ]
-        });
+    // SWUP library
+    try {
+        // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features is defined
+        if (window.isModern) {
+            // Page transition manager SWUP for faster page loads
+            const Swup = new swup({
+                linkSelector,
+                animateHistoryBrowsing: true,
+                containers: ["[data-container]"],
+                plugins: [
+                    new preload(), // Preload pages
+                    new headPlugin(), // Replace the contents of the head elements
 
-        // This event runs for every page view after initial load
-        Swup.on('contentReplaced', ready);
-        Swup.on('willReplaceContent', () => {
-            href = window.location.href;
-            removeClass(_navLink, "navbar-link-focus");
-            each(_navLink, _link => {
-                href == _link.href && addClass(_link, "navbar-link-focus");
+                    // For every new page, scroll to the top smoothly
+                    new scrollPlugin({
+                        doScrollingRightAway: false,
+                        animateScroll: true,
+                        scrollFriction: 0.3,
+                        scrollAcceleration: 0.04,
+                    })
+                ]
             });
-        });
-    }
-} catch (e) {
-    // Swup isn't very good at handling errors in page transitions, so to avoid errors blocking the site from working properly; if the Swup crashes it should fallback to normal page linking
-    on(linkSelector, 'click', e => {
-        window.location.href = e.currentTarget.href;
-    });
 
-    _log(`Swup Error: ${e.message}`);
-}
+            // This event runs for every page view after initial load
+            Swup.on('contentReplaced', ready);
+            Swup.on('willReplaceContent', () => {
+                href = window.location.href;
+                removeClass(_navLink, "navbar-link-focus");
+                each(_navLink, _link => {
+                    href == _link.href && addClass(_link, "navbar-link-focus");
+                });
+            });
+        }
+    } catch (e) {
+        // Swup isn't very good at handling errors in page transitions, so to avoid errors blocking the site from working properly; if the Swup crashes it should fallback to normal page linking
+        on(linkSelector, 'click', e => {
+            window.location.href = e.currentTarget.href;
+        });
+
+        _log(`Swup Error: ${e.message}`);
+    }
+});
