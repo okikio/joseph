@@ -1,15 +1,15 @@
 const { fetch } = window;
 const { body } = document;
+let slice = [].slice;
 
 let loadImg = () => {
-    let slice = [].slice;
-    let _img = slice.call(document.getElementsByClassName("load-img"));
+    let _img = slice.call(document.getElementsByClassName("loadimg"));
     let _navbar = slice.call(document.getElementsByClassName("n"));
     _navbar.forEach(function (nav) {
         nav.classList.add("nfs");
     });
     _img.forEach(function (img) {
-        img.classList.add("core-img-show");
+        img.classList.add("coreimgshow");
     });
 };
 

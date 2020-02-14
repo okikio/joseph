@@ -16,11 +16,13 @@ const _hero = optimize('.layer-hero');
 const _menu = optimize('.navbar-menu');
 const _backUp = optimize('.back-to-top');
 const _navLink = optimize('.navbar-link');
+const _layer_img = optimize(".layer-image");
 const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid;
+let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid, $core_img;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -41,20 +43,22 @@ on(window, {
         toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
 
         // Find the layer-images in each layer
-        each(_layer, ($layer, layrNum) => {
-            layer_image = find($layer, ".layer-image");
+        each(_layer_img, ($img, layrNum) => {
             highSrcWid[layrNum] = [];
+            $core_img = get(find($img, ".core-img"), 0);
 
-            // Make sure the image that is loaded is the same size as its container
-            each(el("source", $layer), ($src, i) => {
-                _highSrcWid = highSrcWid[layrNum][i] || 0;
-                tempSrc = attr($src, "srcset");
-                srcWid = width(layer_image);
-                if (_highSrcWid < srcWid) {
-                    highSrcWid[layrNum][i] = srcWid;
-                    attr($src, "srcset", tempSrc.replace(/w_[\d]+/, `w_${srcWid}`));
-                }
-            });
+            if (_is.def($core_img) && !$core_img.complete && $core_img.naturalWidth == 0) {
+                // Make sure the image that is loaded is the same size as its container
+                each(el("source.webp", $img), ($src, i) => {
+                    _highSrcWid = highSrcWid[layrNum][i] || 0;
+                    tempSrc = attr($src, "srcset");
+                    srcWid = width($img);
+                    if (_highSrcWid < srcWid) {
+                        highSrcWid[layrNum][i] = srcWid;
+                        attr($src, "srcset", tempSrc.replace(/w_[\d]+/, `w_${srcWid}`));
+                    }
+                });
+            }
         });
     },
 
@@ -97,7 +101,6 @@ on(window, {
 });
 
 // Initialize images
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, tempSrc, srcWid;
 init = () => {
     // Find the layer-images in each layer
     each(_layer, $layer => {
@@ -118,16 +121,15 @@ init = () => {
             });
 
             // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
+            $src = get(find($img, "source.webp"), 0);
             _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
                 if (_core_img.complete && _core_img.naturalWidth !== 0) {
                     onload(load_img)();
-                } else if (!window.isModern) {
-                    img = new Image(_core_img);
-                    img.src = attr(_core_img, "src");
-                    img.onload = onload(load_img);
                 } else {
-                    on(_core_img, "load", onload(load_img));
+                    img = new Image(_core_img);
+                    img.src = attr($src, "srcset").replace(/w_[\d]+/, `w_${width($img)}`);
+                    img.onload = onload(load_img);
                 }
             }
         });
