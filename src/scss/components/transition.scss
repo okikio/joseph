@@ -10,12 +10,13 @@
     }
 
     &-in-view {
-        transition: opacity 0.25s ease 0s, transform 0.4s ease 0.1s;
-        transform: translateY(0px);
+        transition: opacity 0.25s ease 0s;
+        // , transform 0.4s ease 0.1s
+        // transform: translateY(0px);
         opacity: 1;
 
         .is-animating & {
-            transform: translateY(-20px) !important;
+            // transform: translateY(-20px) !important;
             opacity: 0 !important;
         }
     }
