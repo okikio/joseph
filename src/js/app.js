@@ -8,7 +8,7 @@ import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
 import { _is, _constrain, _map, _log, optimize } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
@@ -20,7 +20,7 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [];
+let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -39,6 +39,23 @@ on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
     'resize': resize = () => {
         toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
+
+        // Find the layer-images in each layer
+        each(_layer, ($layer, layrNum) => {
+            layer_image = find($layer, ".layer-image");
+            highSrcWid[layrNum] = [];
+
+            // Make sure the image that is loaded is the same size as its container
+            each(el("source", $layer), ($src, i) => {
+                _highSrcWid = highSrcWid[layrNum][i] || 0;
+                tempSrc = attr($src, "srcset");
+                srcWid = width(layer_image);
+                if (_highSrcWid < srcWid) {
+                    highSrcWid[layrNum][i] = srcWid;
+                    attr($src, "srcset", tempSrc.replace(/w_[\d]+/, `w_${srcWid}`));
+                }
+            });
+        });
     },
 
     // On scroll accomplish a set of tasks
@@ -80,17 +97,18 @@ on(window, {
 });
 
 // Initialize images
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, tempSrc, srcWid;
 init = () => {
     // Find the layer-images in each layer
     each(_layer, $layer => {
-        let layer_image = find($layer, ".layer-image");
-        let isHero = hasClass($layer, "layer-hero-id");
+        layer_image = find($layer, ".layer-image");
+        isHero = hasClass($layer, "layer-hero-id");
 
         // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
         each(layer_image, $img => {
-            let load_img = get(find($img, ".load-img"), 0);
-            let overlay = get(find($img, ".layer-image-overlay"), 0);
-            let clientRect = offset($img);
+            load_img = get(find($img, ".load-img"), 0);
+            overlay = get(find($img, ".layer-image-overlay"), 0);
+            clientRect = offset($img);
 
             _images.push({
                 overlay, load_img,
@@ -100,12 +118,12 @@ init = () => {
             });
 
             // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
-            let _core_img = get(find($img, ".core-img"), 0);
+            _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
                 if (_core_img.complete && _core_img.naturalWidth !== 0) {
                     onload(load_img)();
                 } else if (!window.isModern) {
-                    let img = new Image(_core_img);
+                    img = new Image(_core_img);
                     img.src = attr(_core_img, "src");
                     img.onload = onload(load_img);
                 } else {
@@ -119,7 +137,8 @@ init = () => {
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
     _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
-    _images = [];
+    _images = []; highSrcWid = [];
+    _highSrcWid = 0
 
     // On scroll down button click animate scroll to the height of the hero layer
     on(_scrolldown, "click", () => {

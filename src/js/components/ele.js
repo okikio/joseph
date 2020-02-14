@@ -1,24 +1,29 @@
-import { _is } from "./util";
+import { _is, _log } from "./util";
 
 let ele;
 let tagRE = /^\s*<(\w+|!)[^>]*>/;
 let tagExpandRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig;
 export let _qsa = (dom = document, sel) => {
-    let classes;
+    let classes, _dom = dom;
+    _is.str(dom) && (_dom = _qsa(document, dom)[0]);
+    _is.inst(dom, ele) && (_dom = dom[0]);
     if (!_is.str(sel) || sel.length === 0) return [];
     if (/^(#?[\w-]+|\.[\w-.]+)$/.test(sel)) {
         switch (sel.charAt(0)) {
             case '#':
-                return [dom.getElementById(sel.substr(1))];
+                return [_dom.getElementById(sel.substr(1))];
             case '.':
-                classes = sel.substr(1).replace(/\./g, ' ');
-                return [...dom.getElementsByClassName(classes)];
+                classes = sel.substr(1);
+                if (/^[\w-]*$/.test(classes)) {
+                    return [..._dom.getElementsByClassName(classes)];
+                }
+                break;
             default:
-                return [...dom.getElementsByTagName(sel)];
+                return [..._dom.getElementsByTagName(sel)];
         }
     }
 
-    return [...dom.querySelectorAll(sel)];
+    return [..._dom.querySelectorAll(sel)];
 };
 
 // Create an Element List from a HTML string

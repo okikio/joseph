@@ -314,7 +314,7 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+        dev ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 // plumber(),
