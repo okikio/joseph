@@ -707,6 +707,7 @@ export let scrollTo = (to, dur, ease) => {
                 } else {
                     window.scroll(0, to);
                     window.cancelAnimationFrame(_raf);
+                    _raf = undefined;
                     resolve();
                 }
             }));
