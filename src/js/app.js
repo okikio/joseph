@@ -121,15 +121,17 @@ init = () => {
             });
 
             // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
-            $src = get(find($img, "source.webp"), 0);
             _core_img = get(find($img, ".core-img"), 0);
             if (_is.def(_core_img)) {
                 if (_core_img.complete && _core_img.naturalWidth !== 0) {
                     onload(load_img)();
-                } else {
+                } else if (!window.isModern) {
+                    $src = get(find($img, "source.webp"), 0);
                     img = new Image(_core_img);
                     img.src = attr($src, "srcset").replace(/w_[\d]+/, `w_${width($img)}`);
                     img.onload = onload(load_img);
+                } else {
+                    on(_core_img, "load", onload(load_img));
                 }
             }
         });
