@@ -9,7 +9,7 @@ let loadImg = () => {
         nav.classList.add("nfs");
     });
     _img.forEach(function (img) {
-        img.classList.add("coreimgshow");
+        img.classList.add("core-img-show");
     });
 };
 

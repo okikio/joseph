@@ -7,7 +7,7 @@ mixin image(value = {})
 		.layer-image-preview-img-card
 		figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
 			.img-contain
-				picture
+				picture.plchldr-pic
 					//-  inline
 					img.placeholder-img(src!=`${src}.jpg?w=60&quality=70&effect=blur:120` sizes="100vw" width="100vw" alt=alt loading="lazy" itemprop="url")
 				picture

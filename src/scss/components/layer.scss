@@ -45,6 +45,10 @@
             width: 100%;
             left: 0;
             top: 0;
+
+            &.plchldr-pic {
+                z-index: 500;
+            }
         }
 
         &-preview-img-card {

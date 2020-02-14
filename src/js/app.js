@@ -158,7 +158,7 @@ ready = () => {
 ready();
 
 on(document, "ready", () => {
-    _log("Document loaded, SWUP starting...");
+    console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
 
     // SWUP library
     try {
@@ -199,6 +199,6 @@ on(document, "ready", () => {
             window.location.href = e.currentTarget.href;
         });
 
-        _log(`Swup Error: ${e.message}`);
+        console.error(`Swup Error: ${e.message}`);
     }
 });
