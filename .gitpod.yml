@@ -16,6 +16,7 @@ tasks:
       nvm use 13 &&
       npm install -g gulp yarn &&
       yarn &&
+      echo "dev=true" > .env &&
       yarn update &&
       yarn watch
 
