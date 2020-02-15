@@ -14,10 +14,10 @@ tasks:
       nvm install 13 &&
       nvm alias default 13 &&
       nvm use 13 &&
-      npm install -g gulp pnpm &&
-      pnpm install &&
-      pnpm update &&
-      pnpm run watch
+      npm install -g gulp yarn &&
+      yarn &&
+      yarn update &&
+      yarn watch
 
 vscode:
   extensions:

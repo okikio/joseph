@@ -1,16 +1,17 @@
 <h1 align="center">
-  <a style="font-style: italic" href="https://app-web.netlify.com/">Template</a> Website
+  <a style="font-style: italic" href="https://josephojo.com/">Joseph Ojo's</a> Website 
 </h1>
 
-<h4 align="center">Template Website | <a href="https://app-web.netlify.com/" target="_blank">app-web.netlify.com</a></h4>
+<h4 align="center"><span style="font-weight: 400; background: #409aff; color: white; padding: 2px 8px; border-radius: 2px"><strong>Built Using:</strong> Template Website</span> - <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph"> Gitpod Ready-to-Code </a></h4>
 
 <blockquote align="center">
   <em style="font-weight: bold">Template Website</em> is a lightweight, fast, and efficient website template that is hosted on <a href="netlify.com">netlify</a>, and optimized for desktops, mobile phones, and tablets. It is designed for present ideas, dreams and passions, let's persue yours together.
-</blockquote>
+</blockquote> 
 
 <p align="center">
   <a href="#getting-started">Getting started</a>&nbsp;|&nbsp;<a href="#documentation">Documentation</a>&nbsp;|&nbsp;<a href="#demos-and-examples">Demos and examples</a>&nbsp;|&nbsp;<a href="#browser-support">Browser support</a>
-</p>
+</p> 
+
 
 ## Getting started
 
@@ -23,7 +24,7 @@ If you don't want to do all this work you can leave it to me to design and post 
 ---
 
 ### *Edit Online*
-Click [Gitpod](https://www.gitpod.io/#https://github.com/okikio/okikio) and sign up, to edit online and have everything you need to start editing all ready for you, if you use this option **skip** the download section and go straight to the [Start](#start) portion of the **Usage** section, of **Getting Started**.
+Click <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph">Gitpod Ready-to-Code</a> and sign in with your Github account to edit online. Everything you need to start editing are ready for you. If you use this option ***skip*** the download section and go straight to [editing](#editing) portion of the **Usage** section, of **Getting Started**.
 
 --- 
 
@@ -57,7 +58,7 @@ The command on all major OS's (Operating Systems) is the same, open your command
 ```bash
 $ npm install yarn -g
 ```
-(don't type the $, it indicates that you’re doing this at the command line)
+(don't type the $, it indicates that you’re doing this in the command line)
 
 or manual [download](https://yarnpkg.com/en/docs/install#windows-stable).
 
@@ -71,7 +72,7 @@ Once git is installed you need to login to work on the website, so open your com
 $ git config --global user.name "Your name here"
 $ git config --global user.email "your_email@example.com"
 ```
-(don't type the $, it indicates that you’re doing this at the command line, and remember to replace the values in `"quotes"` with your [Github](github.com) account info)
+(don't type the $, it indicates that you’re doing this in the command line, and remember to replace the values in `"quotes"` with your [Github](github.com) account info)
 
 
 **Install Visual Studio Code**
@@ -85,7 +86,7 @@ Open the command prompt. In the command prompt type the command **git clone `url
 ```bash
 $ git clone https://github.com/okikio/app-web.git
 ```
-(don't type the $, it indicates that you’re doing this at the command line, and remember to replace the url with your repository info) 
+(don't type the $, it indicates that you’re doing this in the command line, and remember to replace the url with your repository info) 
 
 **Launch**
 
@@ -105,7 +106,7 @@ In the command prompt type the command **yarn**, this will start installing the 
 ```bash
 $ yarn
 ```
-(don't type the $, it indicates that you’re doing this at the command line) 
+(don't type the $, it indicates that you’re doing this in the command line) 
 
 Once **yarn** is done you should be able to now start editing your site, but first to see how your site looks, type into the command prompt:
 ```bash
@@ -121,7 +122,7 @@ $ yarn watch
 $ yarn develop
 $ yarn build
 ```
-(don't type the $, it indicates that you’re doing this at the command line) 
+(don't type the $, it indicates that you’re doing this in the command line) 
 
 Each command has their use case and their reasons for existing, the most important command is
 ```bash
@@ -155,7 +156,7 @@ is meant for testing, testing how the website will react if it were published to
 ---
 
 ### *Editing*
-You will most likely only need to change some text and maybe an image here and there, but I added the ability for you to change how the website looks completely, while still making it easy for you to understand, to reach this objects I created **containers**. Containers are components in the website that can be tweaked and edited easily while keeping the website design clean. The list of containers can be found in the [containers.js](./containers.js) file. All editing you will ever do is in one easy file the [config.js](./config.js) file. The **config.js** is very busy but easy to tweak. When you first open the file type the shortcuts to fold all code (to make code easy to read),
+You will most likely only change some text and an image here and there. To add new pages and edit old ones you need to navigate to [views/pages](/view/pages) re  When you first open the file type the shortcuts to fold all code (to make code easy to read),
 The beauty of Visual Studio Code is
 
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>
