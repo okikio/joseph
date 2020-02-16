@@ -6,7 +6,7 @@ mixin banner(value = {})
   .layer.layer-hero-id
     article.layout-padding-bottom.layout-padding-dull-top
       .layer-hero.banner-mode
-        +image(image)
+        +image({ class: "effect-parallax hero-img", ...image })
 
         .layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-sub-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center
           .layer-content.layout-contain

@@ -1,16 +1,17 @@
 <h1 align="center">
-  <a style="font-style: italic" href="https://app-web.netlify.com/">Template</a> Website
+  <a style="font-style: italic" href="https://josephojo.com/">Joseph Ojo's</a> Website 
 </h1>
 
-<h4 align="center">Template Website | <a href="https://app-web.netlify.com/" target="_blank">app-web.netlify.com</a></h4>
+<h4 align="center"><span style="font-weight: 400; background: #409aff; color: white; padding: 2px 8px; border-radius: 2px"><strong>Built Using:</strong> Template Website</span> - <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph"> Gitpod Ready-to-Code </a></h4>
 
 <blockquote align="center">
   <em style="font-weight: bold">Template Website</em> is a lightweight, fast, and efficient website template that is hosted on <a href="netlify.com">netlify</a>, and optimized for desktops, mobile phones, and tablets. It is designed for present ideas, dreams and passions, let's persue yours together.
-</blockquote>
+</blockquote> 
 
 <p align="center">
   <a href="#getting-started">Getting started</a>&nbsp;|&nbsp;<a href="#documentation">Documentation</a>&nbsp;|&nbsp;<a href="#demos-and-examples">Demos and examples</a>&nbsp;|&nbsp;<a href="#browser-support">Browser support</a>
-</p>
+</p> 
+
 
 ## Getting started
 
@@ -23,7 +24,7 @@ If you don't want to do all this work you can leave it to me to design and post 
 ---
 
 ### *Edit Online*
-Click [Gitpod](https://www.gitpod.io/#https://github.com/okikio/okikio) and sign up, to edit online and have everything you need to start editing all ready for you, if you use this option **skip** the download section and go straight to the [Start](#start) portion of the **Usage** section, of **Getting Started**.
+Click <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph">Gitpod Ready-to-Code</a> and sign in with your Github account to edit online. Everything you need to start editing are ready for you. If you use this option ***skip*** the download section and go straight to [editing](#editing) portion of the **Usage** section, of **Getting Started**.
 
 --- 
 
@@ -57,7 +58,7 @@ The command on all major OS's (Operating Systems) is the same, open your command
 ```bash
 $ npm install yarn -g
 ```
-(don't type the $, it indicates that you’re doing this at the command line)
+(don't type the $, it indicates that you’re doing this in the command line)
 
 or manual [download](https://yarnpkg.com/en/docs/install#windows-stable).
 
@@ -71,7 +72,7 @@ Once git is installed you need to login to work on the website, so open your com
 $ git config --global user.name "Your name here"
 $ git config --global user.email "your_email@example.com"
 ```
-(don't type the $, it indicates that you’re doing this at the command line, and remember to replace the values in `"quotes"` with your [Github](github.com) account info)
+(don't type the $, it indicates that you’re doing this in the command line, and remember to replace the values in `"quotes"` with your [Github](github.com) account info)
 
 
 **Install Visual Studio Code**
@@ -85,7 +86,7 @@ Open the command prompt. In the command prompt type the command **git clone `url
 ```bash
 $ git clone https://github.com/okikio/app-web.git
 ```
-(don't type the $, it indicates that you’re doing this at the command line, and remember to replace the url with your repository info) 
+(don't type the $, it indicates that you’re doing this in the command line, and remember to replace the url with your repository info) 
 
 **Launch**
 
@@ -105,7 +106,7 @@ In the command prompt type the command **yarn**, this will start installing the 
 ```bash
 $ yarn
 ```
-(don't type the $, it indicates that you’re doing this at the command line) 
+(don't type the $, it indicates that you’re doing this in the command line) 
 
 Once **yarn** is done you should be able to now start editing your site, but first to see how your site looks, type into the command prompt:
 ```bash
@@ -121,7 +122,7 @@ $ yarn watch
 $ yarn develop
 $ yarn build
 ```
-(don't type the $, it indicates that you’re doing this at the command line) 
+(don't type the $, it indicates that you’re doing this in the command line) 
 
 Each command has their use case and their reasons for existing, the most important command is
 ```bash
@@ -155,7 +156,202 @@ is meant for testing, testing how the website will react if it were published to
 ---
 
 ### *Editing*
-You will most likely only need to change some text and maybe an image here and there, but I added the ability for you to change how the website looks completely, while still making it easy for you to understand, to reach this objects I created **containers**. Containers are components in the website that can be tweaked and edited easily while keeping the website design clean. The list of containers can be found in the [containers.js](./containers.js) file. All editing you will ever do is in one easy file the [config.js](./config.js) file. The **config.js** is very busy but easy to tweak. When you first open the file type the shortcuts to fold all code (to make code easy to read),
+You will most likely only change some text and an image here and there. To add new pages and edit old ones you need to navigate to [views/pages](/views/pages), right click on the folder and create a new file, make sure it ends in a `.pug`. You can call it whatever you want (Note: the name of the file is the name you use to access it, for example, `blog-for-october.pug` will be accessed using this `[website-domain.com]/blog-for-october`. You can also create folders, `2020/cool-things.pug` => `[website-domain.com]/2020/cool-things`). Once you have created your new webpage copy this to it,
+```pug
+extends ../app.pug
+include ../components/sections.pug
+include ../components/layout.pug
+include ../components/column.pug
+include ../components/banner.pug
+include ../components/layer.pug
+include ../components/text.pug
+include ../components/tile.pug
+include ../components/hero.pug
+include ../components/row.pug
+
+block pageInfo
+	-
+		let page = {
+            //- Put page url here
+            url: "/my-projects",
+            
+            //- Put page name here
+            name: "my-projects",
+            
+            //- Put page title here
+            title: "A showcase of some of the projects I have taken on.",
+            
+            //- Put short description here
+			description: "A potfolio of projects I have completed, and even some that are still on-going..."
+		};
+
+block content
+	//- Hero layer
+	+hero({
+		title: "Title of hero",
+		content: "Description over here...",
+		image: {
+            //- Don't cha
+			class: "effect-parallax hero-img",
+			src: "/assets/closeup-stones",
+			alt: "A city Image"
+		}
+	})
+
+	//- Intro layer
+	+layer({
+		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
+	})
+		+layout({
+			class: "layout-shorten layout-contain"
+		})
+			+head("About me")
+			+main({
+					class: "layout-padding-top-large"
+			})
+				+row({
+          class: "layout-margin-horz-dull"
+        })
+					//- 1st Column
+					+column({
+						class: "layout-col-2 layout-padding-horz-dull layout-padding-bottom-small"
+					})
+						+p({
+							content: "03/03",
+							class: "style-font-17--device-phone style-font-20 style-bold"
+						})
+
+					//- 2nd Column
+					+column({
+						class: "layout-col-3 layout-padding-horz-dull layout-padding-bottom"
+					})
+						+p({
+							content: "2018",
+							class: "layout-block style-font-17--device-phone style-font-20 style-bold"
+						})
+						+p({
+							content: "E-commerse",
+							class: "layout-block style-font-16--device-phone style-font-18"
+						})
+						+p({
+							content: "Design Executive",
+							class: "layout-block style-font-16--device-phone style-font-18"
+						})
+
+					//- 3rd Column
+					+column({
+						class: "layout-col-7 layout-padding-horz-dull"
+					})
+						p.layout-margin-dull(lorem="1")
+
+				section.layout-padding-top.layout-padding-bottom-large
+					//- span.layout-margin-horz-left.layout-inline-block= " "
+					+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
+					+link({
+						href: "/about-me",
+						class: "layout-margin-vert-dull layout-margin-left-mini",
+						content: "click here."
+					})
+
+	//- Banner layer
+	+layer({
+		class: "layer-color-primary"
+	})
+		+layout({
+			class: "layout-contain-large layout"
+		})
+			+head({
+					class: "style-center"
+			})
+				h3.layout-padding-vert.style-bold-font.style-600.style-color-white.style-font-40--device-lt-tablet.style-font-size-larger--device-gt-phone Projects
+					span.style-color-tertiary-dark .
+
+	//- Breakthrough layer
+	+layer
+		+layout({
+			class: "layout-contain-large layout-padding-large"
+		})
+			+main({
+					class: "layout-padding-vert"
+			})
+				+row
+					//- 1st Column
+					+column({
+						class: "layout-col-6 layout-padding-bottom-small layout-padding-right-large"
+					})
+						+p({
+							content: "Breakthrough<br>Limits!",
+							class: "style-color-primary style-bold-font style-600 style-font-30 style-line-height"
+						})
+
+					//- 2nd Column
+					+column({
+						class: "layout-col-6"
+					})
+						p.layout-block.layout-margin-dull(lorem="1")
+
+	//- Image Column layer
+	+layer
+		+layout({
+			class: "layout-contain-large"
+		})
+			+main({
+					class: "layout-shorten-vert"
+			})
+				//- 1st Row
+				+row({
+					class: "layout-margin-dull"
+				})
+					//- Empty alignment Column
+					+column({
+						class: "layout-col-3 layout-block"
+					})
+
+					//- 1st Column
+					+column({
+						class: "layout-col-9 layout-padding-small"
+					})
+						+link({
+							href: "/about-me",
+							class: "layout-block"
+						}, true)
+							+tile({
+								title: "Google Designs About",
+								class: "layer-box layer-surface layout-block",
+								image: {
+									class: "effect-parallax",
+									src: "/assets/city",
+									alt: "City Alt",
+								}
+							})
+
+				//- 2nd Row
+				+row({
+					class: "layout-margin-dull"
+				})
+					//- 1st Column
+					+column({
+						class: "layout-col-9 layout-padding-small layout-padding-vert-large"
+					})
+						+link({
+							href: "/my-projects",
+							class: "layout-block"
+						}, true)
+							+tile({
+								title: "Google Designs Project",
+								class: "layer-box layer-surface layout-block",
+								image: {
+									src: "/assets/blue-sky",
+									alt: "Blue sky Alt",
+								}
+							})
+
+					//- Empty alignment Column
+					+column({
+						class: "layout-col-3"
+					})
+```
+When you first open the file type the shortcuts to fold all code (to make code easy to read),
 The beauty of Visual Studio Code is
 
 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>
