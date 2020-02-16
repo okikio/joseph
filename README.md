@@ -1,16 +1,16 @@
 <h1 align="center">
-  <a style="font-style: italic" href="https://josephojo.com/">Joseph Ojo's</a> Website 
+  <a style="font-style: italic" href="https://josephojo.com/">Joseph Ojo's</a> Website
 </h1>
 
 <h4 align="center"><span style="font-weight: 400; background: #409aff; color: white; padding: 2px 8px; border-radius: 2px"><strong>Built Using:</strong> Template Website</span> - <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph"> Gitpod Ready-to-Code </a></h4>
 
 <blockquote align="center">
   <em style="font-weight: bold">Template Website</em> is a lightweight, fast, and efficient website template that is hosted on <a href="netlify.com">netlify</a>, and optimized for desktops, mobile phones, and tablets. It is designed for present ideas, dreams and passions, let's persue yours together.
-</blockquote> 
+</blockquote>
 
 <p align="center">
   <a href="#getting-started">Getting started</a>&nbsp;|&nbsp;<a href="#documentation">Documentation</a>&nbsp;|&nbsp;<a href="#demos-and-examples">Demos and examples</a>&nbsp;|&nbsp;<a href="#browser-support">Browser support</a>
-</p> 
+</p>
 
 
 ## Getting started
@@ -26,7 +26,7 @@ If you don't want to do all this work you can leave it to me to design and post 
 ### *Edit Online*
 Click <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph">Gitpod Ready-to-Code</a> and sign in with your Github account to edit online. Everything you need to start editing are ready for you. If you use this option ***skip*** the download section and go straight to [editing](#editing) portion of the **Usage** section, of **Getting Started**.
 
---- 
+---
 
 ### *Download*
 
@@ -86,11 +86,11 @@ Open the command prompt. In the command prompt type the command **git clone `url
 ```bash
 $ git clone https://github.com/okikio/app-web.git
 ```
-(don't type the $, it indicates that you’re doing this in the command line, and remember to replace the url with your repository info) 
+(don't type the $, it indicates that you’re doing this in the command line, and remember to replace the url with your repository info)
 
 **Launch**
 
-Once the repository has been cloned, open VS Code, once VS Code has been opened click the `File` tab at the very top of the VS Code window, then click the **Open Folder** option, when this is clicked a folder selection window should appear, in there you select the folder that was cloned from the **git** command; select the folder and it should appear on VS Code. In the top left tabs your should see the `Terminal` tab, click on it and select the **New Terminal** option, this will function as your command prompt. 
+Once the repository has been cloned, open VS Code, once VS Code has been opened click the `File` tab at the very top of the VS Code window, then click the **Open Folder** option, when this is clicked a folder selection window should appear, in there you select the folder that was cloned from the **git** command; select the folder and it should appear on VS Code. In the top left tabs your should see the `Terminal` tab, click on it and select the **New Terminal** option, this will function as your command prompt.
 
 If you are not using **Gitpod** to edit your website do this. Once the terminal tab opens it should give you a set of icons and a dropdown menu near the middle right, click on the dropdown, it should give you the option to `Select Default Shell`,
 
@@ -106,7 +106,7 @@ In the command prompt type the command **yarn**, this will start installing the 
 ```bash
 $ yarn
 ```
-(don't type the $, it indicates that you’re doing this in the command line) 
+(don't type the $, it indicates that you’re doing this in the command line)
 
 Once **yarn** is done you should be able to now start editing your site, but first to see how your site looks, type into the command prompt:
 ```bash
@@ -116,18 +116,18 @@ $ yarn watch
 ## Documentation
 
 ### *Commands*
-There are a total of 3 different commands. 
+There are a total of 3 different commands.
 ```bash
-$ yarn watch 
+$ yarn watch
 $ yarn develop
 $ yarn build
 ```
-(don't type the $, it indicates that you’re doing this in the command line) 
+(don't type the $, it indicates that you’re doing this in the command line)
 
 Each command has their use case and their reasons for existing, the most important command is
 ```bash
-$ yarn watch 
-``` 
+$ yarn watch
+```
 
 It runs the website on the browser and automatically updates as you tweak the websites code. On some OS's it automatically opens it up in the default browser, but if it doesn't just type [http://localhost:3000](http://localhost:3000) into a browser.
 
@@ -141,17 +141,17 @@ $ yarn develop
 Is for debugging, if an error occurs, it does the same thing,
 
 ```bash
-$ yarn watch 
+$ yarn watch
 ```
-does, it treats the code like you are currently in developement, so you can change code without automatically reloading the browser. 
+does, it treats the code like you are currently in developement, so you can change code without automatically reloading the browser.
 
 <br>
 
-On the other hand 
+On the other hand
 ```bash
 $ yarn build
 ```
-is meant for testing, testing how the website will react if it were published to the web. 
+is meant for testing, testing how the website will react if it were published to the web.
 
 ---
 
@@ -170,186 +170,186 @@ include ../components/hero.pug
 include ../components/row.pug
 
 block pageInfo
-	-
-		let page = {
-            //- Put page url here
-            url: "/my-projects",
-            
-            //- Put page name here
-            name: "my-projects",
-            
-            //- Put page title here
-            title: "A showcase of some of the projects I have taken on.",
-            
-            //- Put short description here
-			description: "A potfolio of projects I have completed, and even some that are still on-going..."
-		};
+  -
+    let page = {
+      //- Put page url here
+      url: "/my-projects",
+
+      //- Put page name here
+      name: "my-projects",
+
+      //- Put page title here
+      title: "A showcase of some of the projects I have taken on.",
+
+      //- Put short description here
+      description: "A potfolio of projects I have completed, and even some that are still on-going..."
+    };
 
 block content
-	//- Hero layer
-	+hero({
-		title: "Title of hero",
-		content: "Description over here...",
-		image: {
-            //- Don't cha
-			class: "effect-parallax hero-img",
-			src: "/assets/closeup-stones",
-			alt: "A city Image"
-		}
-	})
+  //- Hero layer
+  +hero({
+    title: "Title of hero",
+    content: "Description over here...",
+    image: {
+      //- Don't cha
+      class: "effect-parallax hero-img",
+      src: "/assets/closeup-stones",
+      alt: "A city Image"
+    }
+  })
 
-	//- Intro layer
-	+layer({
-		class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
-	})
-		+layout({
-			class: "layout-shorten layout-contain"
-		})
-			+head("About me")
-			+main({
-					class: "layout-padding-top-large"
-			})
-				+row({
+  //- Intro layer
+  +layer({
+    class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
+  })
+    +layout({
+      class: "layout-shorten layout-contain"
+    })
+      +head("About me")
+      +main({
+        class: "layout-padding-top-large"
+      })
+        +row({
           class: "layout-margin-horz-dull"
         })
-					//- 1st Column
-					+column({
-						class: "layout-col-2 layout-padding-horz-dull layout-padding-bottom-small"
-					})
-						+p({
-							content: "03/03",
-							class: "style-font-17--device-phone style-font-20 style-bold"
-						})
+          //- 1st Column
+          +column({
+            class: "layout-col-2 layout-padding-horz-dull layout-padding-bottom-small"
+          })
+            +p({
+              content: "03/03",
+              class: "style-font-17--device-phone style-font-20 style-bold"
+            })
 
-					//- 2nd Column
-					+column({
-						class: "layout-col-3 layout-padding-horz-dull layout-padding-bottom"
-					})
-						+p({
-							content: "2018",
-							class: "layout-block style-font-17--device-phone style-font-20 style-bold"
-						})
-						+p({
-							content: "E-commerse",
-							class: "layout-block style-font-16--device-phone style-font-18"
-						})
-						+p({
-							content: "Design Executive",
-							class: "layout-block style-font-16--device-phone style-font-18"
-						})
+          //- 2nd Column
+          +column({
+            class: "layout-col-3 layout-padding-horz-dull layout-padding-bottom"
+          })
+            +p({
+              content: "2018",
+              class: "layout-block style-font-17--device-phone style-font-20 style-bold"
+            })
+            +p({
+              content: "E-commerse",
+              class: "layout-block style-font-16--device-phone style-font-18"
+            })
+            +p({
+              content: "Design Executive",
+              class: "layout-block style-font-16--device-phone style-font-18"
+            })
 
-					//- 3rd Column
-					+column({
-						class: "layout-col-7 layout-padding-horz-dull"
-					})
-						p.layout-margin-dull(lorem="1")
+          //- 3rd Column
+          +column({
+            class: "layout-col-7 layout-padding-horz-dull"
+          })
+            p.layout-margin-dull(lorem="1")
 
-				section.layout-padding-top.layout-padding-bottom-large
-					//- span.layout-margin-horz-left.layout-inline-block= " "
-					+p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
-					+link({
-						href: "/about-me",
-						class: "layout-margin-vert-dull layout-margin-left-mini",
-						content: "click here."
-					})
+        section.layout-padding-top.layout-padding-bottom-large
+          //- span.layout-margin-horz-left.layout-inline-block= " "
+          +p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
+          +link({
+            href: "/about-me",
+            class: "layout-margin-vert-dull layout-margin-left-mini",
+            content: "click here."
+          })
 
-	//- Banner layer
-	+layer({
-		class: "layer-color-primary"
-	})
-		+layout({
-			class: "layout-contain-large layout"
-		})
-			+head({
-					class: "style-center"
-			})
-				h3.layout-padding-vert.style-bold-font.style-600.style-color-white.style-font-40--device-lt-tablet.style-font-size-larger--device-gt-phone Projects
-					span.style-color-tertiary-dark .
+  //- Banner layer
+  +layer({
+    class: "layer-color-primary"
+  })
+    +layout({
+      class: "layout-contain-large layout"
+    })
+      +head({
+        class: "style-center"
+      })
+        h3.layout-padding-vert.style-bold-font.style-600.style-color-white.style-font-40--device-lt-tablet.style-font-size-larger--device-gt-phone Projects
+          span.style-color-tertiary-dark .
 
-	//- Breakthrough layer
-	+layer
-		+layout({
-			class: "layout-contain-large layout-padding-large"
-		})
-			+main({
-					class: "layout-padding-vert"
-			})
-				+row
-					//- 1st Column
-					+column({
-						class: "layout-col-6 layout-padding-bottom-small layout-padding-right-large"
-					})
-						+p({
-							content: "Breakthrough<br>Limits!",
-							class: "style-color-primary style-bold-font style-600 style-font-30 style-line-height"
-						})
+  //- Breakthrough layer
+  +layer
+    +layout({
+      class: "layout-contain-large layout-padding-large"
+    })
+      +main({
+        class: "layout-padding-vert"
+      })
+        +row
+          //- 1st Column
+          +column({
+            class: "layout-col-6 layout-padding-bottom-small layout-padding-right-large"
+          })
+            +p({
+              content: "Breakthrough<br>Limits!",
+              class: "style-color-primary style-bold-font style-600 style-font-30 style-line-height"
+            })
 
-					//- 2nd Column
-					+column({
-						class: "layout-col-6"
-					})
-						p.layout-block.layout-margin-dull(lorem="1")
+          //- 2nd Column
+          +column({
+            class: "layout-col-6"
+          })
+            p.layout-block.layout-margin-dull(lorem="1")
 
-	//- Image Column layer
-	+layer
-		+layout({
-			class: "layout-contain-large"
-		})
-			+main({
-					class: "layout-shorten-vert"
-			})
-				//- 1st Row
-				+row({
-					class: "layout-margin-dull"
-				})
-					//- Empty alignment Column
-					+column({
-						class: "layout-col-3 layout-block"
-					})
+  //- Image Column layer
+  +layer
+    +layout({
+      class: "layout-contain-large"
+    })
+      +main({
+        class: "layout-shorten-vert"
+      })
+        //- 1st Row
+        +row({
+          class: "layout-margin-dull"
+        })
+          //- Empty alignment Column
+          +column({
+            class: "layout-col-3 layout-block"
+          })
 
-					//- 1st Column
-					+column({
-						class: "layout-col-9 layout-padding-small"
-					})
-						+link({
-							href: "/about-me",
-							class: "layout-block"
-						}, true)
-							+tile({
-								title: "Google Designs About",
-								class: "layer-box layer-surface layout-block",
-								image: {
-									class: "effect-parallax",
-									src: "/assets/city",
-									alt: "City Alt",
-								}
-							})
+          //- 1st Column
+          +column({
+            class: "layout-col-9 layout-padding-small"
+          })
+            +link({
+              href: "/about-me",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Google Designs About",
+                class: "layer-box layer-surface layout-block",
+                image: {
+                  class: "effect-parallax",
+                  src: "/assets/city",
+                  alt: "City Alt",
+                }
+              })
 
-				//- 2nd Row
-				+row({
-					class: "layout-margin-dull"
-				})
-					//- 1st Column
-					+column({
-						class: "layout-col-9 layout-padding-small layout-padding-vert-large"
-					})
-						+link({
-							href: "/my-projects",
-							class: "layout-block"
-						}, true)
-							+tile({
-								title: "Google Designs Project",
-								class: "layer-box layer-surface layout-block",
-								image: {
-									src: "/assets/blue-sky",
-									alt: "Blue sky Alt",
-								}
-							})
+        //- 2nd Row
+        +row({
+          class: "layout-margin-dull"
+        })
+          //- 1st Column
+          +column({
+            class: "layout-col-9 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/my-projects",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Google Designs Project",
+                class: "layer-box layer-surface layout-block",
+                image: {
+                  src: "/assets/blue-sky",
+                  alt: "Blue sky Alt",
+                }
+              })
 
-					//- Empty alignment Column
-					+column({
-						class: "layout-col-3"
-					})
+          //- Empty alignment Column
+          +column({
+            class: "layout-col-3"
+          })
 ```
 When you first open the file type the shortcuts to fold all code (to make code easy to read),
 The beauty of Visual Studio Code is
@@ -362,7 +362,7 @@ In your case, hit <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and type `Fo
 
 **Adding Pages**
 
-To unfold a block of code you click the toggle arrow to the left of the code, well in order to create a new page you new to unfold,  
+To unfold a block of code you click the toggle arrow to the left of the code, well in order to create a new page you new to unfold,
 ```js
 module.exports = {...
 ```
@@ -389,7 +389,7 @@ in `"routes"`
     "/projects": "project",
 }
 ```
-add 
+add
 ```js
 "/new-page": "new-page",
 ```
@@ -402,9 +402,9 @@ add
     "/new-page": "new-page",
 }
 ```
-you have now created the url for your new page. 
+you have now created the url for your new page.
 
 
-## Demos and examples 
+## Demos and examples
 
 ## Browser support
