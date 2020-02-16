@@ -166,13 +166,14 @@
 
             &:active {
                 color: $primary;
-                @include applyTheme(color, "primary");
+                @include applyTheme(color, "primary-dark");
             }
 
             &-focus {
                 &, &:focus {
                     color: $primary-dark;
-                    color: var(--primary-light, $primary-dark);
+                    // color: var(--primary-light, $primary-dark);
+                    @include applyTheme(color, "primary-dark");
                     // @include applyTheme(color, "primary");
                 }
 
@@ -290,7 +291,16 @@
             }
 
             &-menu {
-                cursor: pointer;
+                & {
+                    @include applyTheme(color, "primary");
+                }
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    // color: $primary-dark;
+                    // color: var(--primary-dark, $primary-dark);
+                    @include applyTheme(color, "primary-light");
+                }
             }
 
             &-desktop {
