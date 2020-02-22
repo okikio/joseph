@@ -1,6 +1,5 @@
 
 // Imported external libraries
-// import 'lazysizes';
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
 import preload from '@swup/preload-plugin';
@@ -22,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid, $core_img;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid, header, main;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -81,7 +80,7 @@ on(window, {
             _images.forEach(data => {
                 // On scroll turn on parallax effect for images with the class "effect-parallax"
                 if (hasClass(data.target, "effect-parallax")) {
-                    let { clientRect, load_img, overlay, isHero } = data;
+                    let { clientRect, load_img, overlay, isHero, header, main } = data;
                     let { top, height } = clientRect;
                     let dist = _scrollTop - top + _focusPt * 2;
 
@@ -93,6 +92,22 @@ on(window, {
                         style(load_img, {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
+
+                        // let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
+                        // let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
+
+                        if (header) {
+                            style(header, {
+                                transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`,
+                                // opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.70, 1, 0), 0, 1)
+                            });
+                        }
+                        if (main) {
+                            style(main, {
+                                transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`,
+                                opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1)
+                            });
+                        }
                     }
                 }
             });
@@ -107,6 +122,11 @@ init = () => {
         layer_image = find($layer, ".layer-image");
         isHero = hasClass($layer, "layer-hero-id");
 
+        if (isHero) {
+            header = get(find($layer, ".layer-header"), 0);
+            main = get(find($layer, ".layer-main"), 0);
+        }
+
         // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
         each(layer_image, $img => {
             load_img = get(find($img, ".load-img"), 0);
@@ -117,7 +137,9 @@ init = () => {
                 overlay, load_img,
                 target: $img,
                 clientRect,
-                isHero
+                header,
+                isHero,
+                main,
             });
 
             // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
