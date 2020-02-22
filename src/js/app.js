@@ -98,8 +98,7 @@ on(window, {
 
                         if (header) {
                             style(header, {
-                                transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`,
-                                // opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.70, 1, 0), 0, 1)
+                                transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`
                             });
                         }
                         if (main) {
