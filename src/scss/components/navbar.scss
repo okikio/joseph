@@ -24,9 +24,10 @@
         &-show,
         &:hover {
             .navbar-layout {
+                transition: background-color .5s ease, border-color .5s ease;
                 // $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
-                @include applyTheme(background, "surface");
+                @include applyTheme(background-color, "surface");
                 // background: $surface;
                 // background: #3b3c3e;
             }
@@ -51,17 +52,19 @@
         }
 
         &-layout {
+            transition: border-color .5s ease;
             border-bottom: 1px solid transparent;
             border-right: 1px solid transparent;
             border-left: 1px solid transparent;
             border-radius: 0 0 $radius $radius;
-            background: transparent;
+            background-color: transparent;
             height: $height;
             margin: 0 auto;
         }
 
         &-head {
             border-bottom: 1px solid transparent;
+            transition: background-color .45s ease, border-color .45s ease;
             flex-direction: row;
             align-items: center;
             flex-wrap: nowrap;
@@ -78,6 +81,7 @@
         }
 
         &-title {
+            transition: color .45s ease;
             font-family: $bold-font;
             letter-spacing: 0.03em;
             line-height: $height;
@@ -94,7 +98,7 @@
             }
 
             &-line {
-                transition: border-left-color linear .45s;
+                transition: border-left-color .45s ease 0s;
 
                 border-left: 1px solid transparent;
                 border-left-color: darken($mid-light, 2%);
@@ -119,6 +123,7 @@
         }
 
         &-link {
+            transition: color .45s ease;
             text-transform: uppercase;
             font-family: $bold-font;
             text-decoration: none;
@@ -135,13 +140,13 @@
                 display: inline-block;
 
                 &:before {
-                    transition: transform .25s cubic-bezier(.25, .46, .45, .94);
+                    transition: transform .25s cubic-bezier(.25, .46, .45, .94),
+                                background-color .45s ease;
                     transform: translateY($height - 14px) scaleX(0);
                     // background-color: $primary;
                     @include applyTheme(background-color, "primary");
                     border: 1.5px solid transparent;
                     transform-origin: 100% 50%;
-                    will-change: transform;
                     transition-delay: 70ms;
                     border-radius: 10px;
                     display: block;
@@ -178,6 +183,7 @@
                 }
 
                 &:before {
+                    transition: background-color .45s ease;
                     // background-color: $primary-dark;
                     @include applyTheme(background-color, "dark");
                 }
@@ -213,7 +219,7 @@
             &-main {
                 border-bottom: 1px solid transparent;
                 box-shadow: 0 5px 25px transparent;
-                transition: transform .55s ease;
+                transition: transform .55s ease, border-color .5s ease;
                 transform: translateY(-150%);
                 display: block;
                 width: 100%;
@@ -221,8 +227,9 @@
             }
 
             &-list {
-                background: lighten($very-light, 2%); // #292d33
-                @include applyTheme(background, "very-light");
+                transition: background-color .45s ease;
+                background-color: lighten($very-light, 2%); // #292d33
+                @include applyTheme(background-color, "very-light");
                 position: relative;
                 overflow: hidden;
                 display: block;
@@ -245,7 +252,7 @@
             &-show {
                 .navbar-head {
                     // background: $surface;
-                    @include applyTheme(background, "surface");
+                    @include applyTheme(background-color, "surface");
                 }
 
                 .navbar-head,
@@ -292,6 +299,7 @@
 
             &-menu {
                 & {
+                    transition: color .45s ease;
                     @include applyTheme(color, "primary");
                 }
 

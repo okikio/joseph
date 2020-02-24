@@ -6,7 +6,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   Accept-CH: DPR, Viewport-Width, Width
-  Content-Security-Policy: default-src 'self'; font-src 'self' data: https:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/okikio-assets/;
+  Content-Security-Policy: default-src 'self'; font-src 'self' data: https:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/okikio-assets/;
 
 /fonts/*
   Cache-Control: public, immutable, max-age=31536000

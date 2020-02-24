@@ -16,10 +16,11 @@
 
 html,
 body {
+    transition: background-color .5s ease, color .45s ease;
     text-rendering: optimizeLegibility;
     font-family: $regular-font;
 
-    @include applyTheme(background, "background");
+    @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
     word-wrap: break-word;
     line-height: 1.15;
@@ -51,8 +52,15 @@ body {
     // }
 }
 
+html {
+    @supports (overflow-y: overlay) {
+        overflow-y: overlay;
+        padding-right: 6px;
+    }
+}
+
 ::selection {
-    background: $primary-dark;
+    background-color: $primary-dark;
     color: darken(#fff, 15%);
 }
 
@@ -169,6 +177,7 @@ li, .li {
 }
 
 a.skip-main {
+    transition: background-color .5s ease, color .45s ease, border-color .35s ease;
     position: absolute;
     overflow: hidden;
     z-index: -999;
@@ -204,7 +213,6 @@ a.skip-main {
 .placeholder-img {
     transition: opacity .9s ease;
     image-rendering: smooth;
-    will-change: transform;
     transform: scale(1.2);
     opacity: 1;
 }

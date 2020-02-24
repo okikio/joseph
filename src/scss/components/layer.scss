@@ -52,8 +52,10 @@
         }
 
         &-preview-img-card {
+            transition: background-color .5s ease;
             position: absolute;
-            @include applyTheme(background, "dark");
+            background-color: $dark;
+            background-color: var(--light, $dark);
             // background: $dark;
             display: block;
             height: 100%;
@@ -65,22 +67,17 @@
         }
 
         &-overlay {
-            background: darken(#53507c, 20%);
+            transition: background-color .5s ease;
+            background-color: darken(#252072, 20%);
             // @include applyTheme(background, "dark");
             position: absolute;
             display: block;
-            opacity: 0.45;
-            z-index: 250;
+            opacity: 0.55;
+            z-index: 505;
             height: 100%;
             width: 100%;
             left: 0;
             top: 0;
-
-            @at-root {
-                .effect-parallax .layer-image-overlay {
-                    opacity: 0.55;
-                }
-            }
         }
 
         &-blur {
@@ -130,8 +127,9 @@
         }
 
         &-scroll-down {
+            transition: background-color .5s ease;
             // background: $white;
-            @include applyTheme(background, "white");
+            @include applyTheme(background-color, "white");
             position: relative;
             z-index: 250;
 
@@ -251,6 +249,7 @@
         }
 
         &-footer {
+            transition: color .45s ease;
             position: absolute;
             color: $white;
             @include applyTheme(color, "white");

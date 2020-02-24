@@ -107,7 +107,7 @@ const bannerContent = [
     ` * @build          ${moment().format("llll")} ET`,
     ` * @release        ${gitRevSync.long()} [${gitRevSync.branch()}]`,
     ` * @license        ${license}`,
-    ` * @copyright      Copyright (c) ${moment().format("YYYY")}, ${copyright}.`,
+    ` * @copyright      Copyright (c) ${copyright}, ${moment().format("YYYY")}.`,
     ` *`,
 ];
 
