@@ -90,7 +90,7 @@ export let each = (_el, fn) => {
 export let filter = (_el, sel) => {
     _el = el(_el);
     if (_is.undef(sel)) return _el;
-    return el([].filter.call(_el, _is.fn(sel) ? sel : ele => _matches(ele, optimize(sel)), _el));
+    return el([].filter.call(_el, _is.fn(sel) ? sel : ele => _matches(ele, _is.str(sel) ? optimize(sel) : sel), _el));
 };
 
 // Check if the parent node contains the given DOM node. Returns false if both are the same node.

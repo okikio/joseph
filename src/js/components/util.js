@@ -16,10 +16,12 @@ export const class_keys = {{ class_keys | safe }};
 // During compilation I optimize classes in css and html, this is to compensate for that.
 export let optimize = val => {
     {% if not dev %}
-    for (let i = 0; i < class_keys.length; i ++) {
-        if (val.includes(class_keys[i])) {
-            let regex = new RegExp(class_keys[i], 'g');
-            val = val.replace(regex, class_map[class_keys[i]]);
+    if (val && val.includes) {
+        for (let i = 0; i < class_keys.length; i ++) {
+            if (val.includes(class_keys[i])) {
+                let regex = new RegExp(class_keys[i], 'g');
+                val = val.replace(regex, class_map[class_keys[i]]);
+            }
         }
     }
     {% endif %}
@@ -59,30 +61,54 @@ let _type = type => { // Tweak of _is
     return val => _is(val, type);
 };
 
-assign(_is, {
-    el: el => _isInst(el, Element) || _isInst(el, Document),
-    arrlike (obj) {
-        let len = _is(obj.length, "number") && obj.length;
-        return len === 0 || len > 0 && (len - 1) in obj;
-    },
-    num: val => !isNaN(val) && _type("number") (val),
-    usable: v => !_is(v, "undefined") && v !== null,
-    class: obj => obj && obj._method && obj._class,
-    not: (type, ...args) => !_is[type](...args),
-    doc: ctor => _isInst(ctor, Document),
-    def: v => !_is(v, "undefined"),
-    undef: _type("undefined"),
-    win: v => v && v.window,
-    bool: _type("boolean"),
-    fn: _type("function"),
-    null: v => v === null,
-    str: _type("string"),
-    obj: _type("object"),
-    nul: v => v === null,
-    inst: _isInst,
-    arr: isArray,
-    _type
-});
+/* This caused some errors in IE */
+// assign(_is, {
+//     el: el => _isInst(el, Element) || _isInst(el, Document),
+//     arrlike (obj) {
+//         let len = _is(obj.length, "number") && obj.length;
+//         return len === 0 || len > 0 && (len - 1) in obj;
+//     },
+//     num: val => !isNaN(val) && _type("number") (val),
+//     usable: v => !_is(v, "undefined") && v !== null,
+//     class: obj => obj && obj._method && obj._class,
+//     not: (type, ...args) => !_is[type](...args),
+//     doc: ctor => _isInst(ctor, Document),
+//     def: v => !_is(v, "undefined"),
+//     undef: _type("undefined"),
+//     win: v => v && v.window,
+//     bool: _type("boolean"),
+//     fn: _type("function"),
+//     null: v => v === null,
+//     str: _type("string"),
+//     obj: _type("object"),
+//     nul: v => v === null,
+//     inst: _isInst,
+//     arr: isArray,
+//     _type
+// });
+
+_is.el = el => _isInst(el, Element) || _isInst(el, Document);
+_is.arrlike = obj => {
+    let len = _is(obj.length, "number") && obj.length;
+    return len === 0 || len > 0 && (len - 1) in obj;
+};
+_is.usable = v => !_is(v, "undefined") && v !== null;
+// _is.class = obj => obj && obj._method && obj._class;
+_is.num = val => !isNaN(val) && _type("number") (val);
+_is.not = (type, ...args) => !_is[type](...args);
+_is.doc = ctor => _isInst(ctor, Document);
+_is.def = v => !_is(v, "undefined");
+_is.undef = _type("undefined");
+_is.win = v => v && v.window;
+_is.bool = _type("boolean");
+_is.fn = _type("function");
+_is.null = v => v === null;
+_is.str = _type("string");
+_is.obj = _type("object");
+_is.nul = v => v === null;
+_is.inst = _isInst;
+_is.arr = isArray;
+_is.type = _type;
 
 /**
  * @param  {Function} fn

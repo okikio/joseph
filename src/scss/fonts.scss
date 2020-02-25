@@ -4,7 +4,7 @@
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(/fonts/frank-ruhl-libre--medium_hebrew.woff2) format('woff2');
+    src: local('Frank Ruhl Libre Medium'), local('FrankRuhlLibre-Medium'), url(/fonts/frank-ruhl-libre--medium_hebrew.woff2) format('woff2'), url(/fonts/frank-ruhl-libre--medium_hebrew.woff) format('woff');
     unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 
@@ -34,7 +34,7 @@
     font-style: normal;
     font-weight: 900;
     font-display: swap;
-    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(/fonts/frank-ruhl-libre--black_hebrew.woff2) format('woff2');
+    src: local('Frank Ruhl Libre Black'), local('FrankRuhlLibre-Black'), url(/fonts/frank-ruhl-libre--black_hebrew.woff2) format('woff2'), url(/fonts/frank-ruhl-libre--black_hebrew.woff) format('woff');
     unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
 }
 

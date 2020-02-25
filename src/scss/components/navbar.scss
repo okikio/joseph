@@ -24,12 +24,15 @@
         &-show,
         &:hover {
             .navbar-layout {
-                transition: background-color .5s ease, border-color .5s ease;
                 // $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
                 @include applyTheme(background-color, "surface");
                 // background: $surface;
                 // background: #3b3c3e;
+
+                &:before {
+                    @include applyTheme(background-color, "surface");
+                }
             }
 
             .navbar-title-line {
@@ -40,9 +43,12 @@
 
         &:hover .navbar-layout {
             $border-color: $primary;
-            border-bottom-color: $border-color;
-            border-right-color: $border-color;
-            border-left-color: $border-color;
+
+            &, &:before {
+                border-bottom-color: $border-color;
+                border-right-color: $border-color;
+                border-left-color: $border-color;
+            }
         }
 
         &-fixed {
@@ -52,7 +58,7 @@
         }
 
         &-layout {
-            transition: border-color .5s ease;
+            // transition: border-color .5s ease;
             border-bottom: 1px solid transparent;
             border-right: 1px solid transparent;
             border-left: 1px solid transparent;
@@ -60,6 +66,24 @@
             background-color: transparent;
             height: $height;
             margin: 0 auto;
+
+            &:before {
+                @extend .layout-contain-large;
+                transition: background-color .5s ease, border-color .5s ease;
+                border-bottom: 1px solid transparent;
+                border-right: 1px solid transparent;
+                border-left: 1px solid transparent;
+                border-radius: 0 0 $radius $radius;
+                background-color: transparent;
+                position: absolute;
+                display: block;
+                height: 100%;
+                width: 100%;
+                content: "";
+                right: 0;
+                left: 0;
+                top: 0;
+            }
         }
 
         &-head {
@@ -109,6 +133,10 @@
                 display: inline-block;
                 height: 14px;
             }
+        }
+
+        &-main {
+            z-index: 10;
         }
 
         &-list {
@@ -242,9 +270,13 @@
 
             .navbar-layout {
                 $border-color: none;
-                border-bottom: $border-color;
-                border-right: $border-color;
-                border-left: $border-color;
+
+                &, &:before {
+                    border-bottom: $border-color;
+                    border-right: $border-color;
+                    border-left: $border-color;
+                    border-radius: 0;
+                }
             }
 
             &:hover,
