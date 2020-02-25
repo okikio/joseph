@@ -99,7 +99,7 @@ on(window, {
 
                         isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.7) });
                         style(load_img, {
-                            transform: `translate3d(0, ${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px, 0)`,
+                            transform: `translate3d(0, ${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 2, 0, height / 2)}px, 0)`,
                         });
 
                         let transform = `translate3d(0, ${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
