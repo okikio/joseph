@@ -41,24 +41,27 @@ on(window, {
     'resize': resize = () => {
         toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
 
-        // Find the layer-images in each layer
-        each(_layer_img, ($img, layrNum) => {
-            highSrcWid[layrNum] = [];
-            $core_img = get(find($img, ".core-img"), 0);
+        // Only on modern browsers
+        if (window.isModern) {
+            // Find the layer-images in each layer
+            each(_layer_img, ($img, layrNum) => {
+                highSrcWid[layrNum] = [];
+                $core_img = get(find($img, ".core-img"), 0);
 
-            if (_is.def($core_img) && !$core_img.complete && $core_img.naturalWidth == 0) {
-                // Make sure the image that is loaded is the same size as its container
-                each(el("source.webp", $img), ($src, i) => {
-                    _highSrcWid = highSrcWid[layrNum][i] || 0;
-                    tempSrc = attr($src, "srcset");
-                    srcWid = width($img);
-                    if (_highSrcWid < srcWid) {
-                        highSrcWid[layrNum][i] = srcWid;
-                        attr($src, "srcset", tempSrc.replace(/w_[\d]+/, `w_${srcWid}`));
-                    }
-                });
-            }
-        });
+                if (_is.def($core_img) && !$core_img.complete && $core_img.naturalWidth == 0) {
+                    // Make sure the image that is loaded is the same size as its container
+                    each(el("source.webp", $img), ($src, i) => {
+                        _highSrcWid = highSrcWid[layrNum][i] || 0;
+                        tempSrc = attr($src, "srcset");
+                        srcWid = width($img);
+                        if (_highSrcWid < srcWid) {
+                            highSrcWid[layrNum][i] = srcWid;
+                            attr($src, "srcset", tempSrc.replace(/w_[\d]+/, `w_${srcWid}`));
+                        }
+                    });
+                }
+            });
+        }
     },
 
     // On scroll accomplish a set of tasks
@@ -94,19 +97,15 @@ on(window, {
                             transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
                         });
 
-                        // let translate = _constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16);
-                        // let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
+                        let transform = `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`;
+                        let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
 
                         if (header) {
-                            style(header, {
-                                transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`
-                            });
+                            style(header, { transform });
                         }
+                        
                         if (main) {
-                            style(main, {
-                                transform: `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`,
-                                opacity: _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1)
-                            });
+                            style(main, { transform, opacity });
                         }
                     }
                 }

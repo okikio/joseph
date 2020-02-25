@@ -1,16 +1,6 @@
-<h1 align="center">
-  <a style="font-style: italic" href="https://josephojo.com/">Joseph Ojo's</a> Website
-</h1>
+# [**Joseph Ojo**](https://josephojo.com/) 
 
-<h4 align="center"><span style="font-weight: 400; background: #409aff; color: white; padding: 2px 8px; border-radius: 2px"><strong>Built Using:</strong> Template Website</span> - <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph"> Gitpod Ready-to-Code </a></h4>
-
-<blockquote align="center">
-  <em style="font-weight: bold">Template Website</em> is a lightweight, fast, and efficient website template that is hosted on <a href="netlify.com">netlify</a>, and optimized for desktops, mobile phones, and tablets. It is designed for present ideas, dreams and passions, let's persue yours together.
-</blockquote>
-
-<p align="center">
-  <a href="#getting-started">Getting started</a>&nbsp;|&nbsp;<a href="#documentation">Documentation</a>&nbsp;|&nbsp;<a href="#demos-and-examples">Demos and examples</a>&nbsp;|&nbsp;<a href="#browser-support">Browser support</a>
-</p>
+[Getting started](#getting-started) | [Documentation](#documentation) | [Demos and examples](#demos-and-examples) | [Browser support](#browser-support)
 
 
 ## Getting started
@@ -24,33 +14,25 @@ If you don't want to do all this work you can leave it to me to design and post 
 ---
 
 ### *Edit Online*
-Click <a style="background: #0366d6; text-decoration: underline; color: white; padding: 2px 8px; border-radius: 2px" href="https://gitpod.io/#https://github.com/okikio/joseph">Gitpod Ready-to-Code</a> and sign in with your Github account to edit online. Everything you need to start editing are ready for you. If you use this option ***skip*** the download section and go straight to [editing](#editing) portion of the **Usage** section, of **Getting Started**.
+Click **Open in Gitpod** and sign in with your Github account to edit online. Everything you need to start editing are ready for you. If you use this option ***skip*** the download section and go straight to [editing](#editing) portion of the **Usage** section, of **Getting Started**.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/okikio/joseph)
 
 ---
 
-### *Download*
+### **Download**
 
-**Install Node.js**
-
+### *Install Node.js*
 Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. For more information on using Node.js, see the [Node.js Website](https://nodejs.org/en/about/).
 
-<p>
-<strong>On Windows</strong><br>
-To install node on Windows go here: <a href="https://blog.teamtreehouse.com/install-node-js-npm-windows">https://blog.teamtreehouse.com/install-node-js-npm-windows</a>
-</p>
+- *On Windows* <br> To install node on Windows go here: <a href="https://blog.teamtreehouse.com/install-node-js-npm-windows">https://blog.teamtreehouse.com/install-node-js-npm-windows</a>
 
-<p>
-<strong>On Mac OS</strong><br>
-To install node on Mac OS go here: <a href="https://blog.teamtreehouse.com/install-node-js-npm-mac">https://blog.teamtreehouse.com/install-node-js-npm-mac</a>
-</p>
+- *On Mac OS* <br> To install node on Mac OS go here: <a href="https://blog.teamtreehouse.com/install-node-js-npm-mac">https://blog.teamtreehouse.com/install-node-js-npm-mac</a>
 
-<p>
-<strong>On Linux</strong><br>
-To install node on Linux go here: <a href="https://blog.teamtreehouse.com/install-node-js-npm-linux">https://blog.teamtreehouse.com/install-node-js-npm-linux</a>
-</p>
+- *On Linux* <br> To install node on Linux go here: <a href="https://blog.teamtreehouse.com/install-node-js-npm-linux">https://blog.teamtreehouse.com/install-node-js-npm-linux</a>
 
 
-**Install Yarn**
+### *Install Yarn*
 
 Yarn is a fast, reliable, and secure dependency manager. Node.js automatically comes with one, it called npm ([Node Package Manager](https://www.npmjs.com/)) but I prefer yarn for it's speed and ease of use, for more information about [yarn](https://yarnpkg.com/en/). To install yarn you can go to it's site or install it using **npm** (ironically, using a package manager to install a package manager).
 
@@ -63,7 +45,7 @@ $ npm install yarn -g
 or manual [download](https://yarnpkg.com/en/docs/install#windows-stable).
 
 
-**Install Git**
+### *Install Git*
 
 Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. Git is what allows you to publish your website online to be viewed, and also what allows you to rollback to a previous version if an error occurs. To install **git** you go to it's [site](https://git-scm.com/), you should see a download button for your operating system, click it and install git, for more information about [Git](https://git-scm.com/about).
 
@@ -75,12 +57,12 @@ $ git config --global user.email "your_email@example.com"
 (don't type the $, it indicates that you’re doing this in the command line, and remember to replace the values in `"quotes"` with your [Github](github.com) account info)
 
 
-**Install Visual Studio Code**
+### *Install Visual Studio Code*
 In order to edit your website you need a code editor, I suggest VS Code (Visual Studio Code). VS Code is what I used in the creation of this project, and what will make the process of editing your website easy. To install VS Code go [here](https://code.visualstudio.com/). It has everything required for easy use built-in.
 
 ---
 
-### *Usage*
+### **Usage**
 
 Open the command prompt. In the command prompt type the command **git clone `url`**, this will download the website from online, note this may take a couple seconds to a few minutes depending on the speed of your internet connection and the performance of your computer. The `url` can be determined by going to the repository url link I will give you. When typed into your command prompt it should look like this:
 ```bash
@@ -88,7 +70,7 @@ $ git clone https://github.com/okikio/app-web.git
 ```
 (don't type the $, it indicates that you’re doing this in the command line, and remember to replace the url with your repository info)
 
-**Launch**
+### *Launch*
 
 Once the repository has been cloned, open VS Code, once VS Code has been opened click the `File` tab at the very top of the VS Code window, then click the **Open Folder** option, when this is clicked a folder selection window should appear, in there you select the folder that was cloned from the **git** command; select the folder and it should appear on VS Code. In the top left tabs your should see the `Terminal` tab, click on it and select the **New Terminal** option, this will function as your command prompt.
 
@@ -100,7 +82,7 @@ If you are not using **Gitpod** to edit your website do this. Once the terminal 
 
 ![alt text](./assets/bash-select-prompt.png "Logo Title Text 1")
 
-<h4 style="font-weight: bold" id="start">Start</h4>
+<h3 style="font-style: italic;" id="start">Start</h4>
 
 In the command prompt type the command **yarn**, this will start installing the packages required for the website, note this may take a couple seconds to a few minutes depending on the speed of your internet connection and the performance of your computer.
 ```bash
@@ -113,7 +95,7 @@ Once **yarn** is done you should be able to now start editing your site, but fir
 $ yarn watch
 ```
 
-## Documentation
+## **Documentation**
 
 ### *Commands*
 There are a total of 3 different commands.
