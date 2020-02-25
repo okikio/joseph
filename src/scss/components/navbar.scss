@@ -332,14 +332,13 @@
             &-menu {
                 & {
                     transition: color .45s ease;
-                    @include applyTheme(color, "primary");
+                    @include applyTheme(color, "dark");
+                    // @include applyTheme(color, "primary");
                 }
 
                 &:hover, &:focus {
                     cursor: pointer;
-                    // color: $primary-dark;
-                    // color: var(--primary-dark, $primary-dark);
-                    @include applyTheme(color, "primary-light");
+                    @include applyTheme(color, "dark");
                 }
             }
 

@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid, $core_img;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid, header, main;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -63,8 +63,9 @@ on(window, {
 
     // On scroll accomplish a set of tasks
     'scroll': scroll = () => {
-        let _scrollTop = scrollTop(window);
-        let isBanner = hasClass(_hero, "banner-mode");
+        _scrollTop = scrollTop(window);
+        isBanner = hasClass(_hero, "banner-mode");
+
         // If the current page uses a banner ensure the navbar is still visible
         toggleClass(_navbar, "navbar-focus", isBanner || _scrollTop >= 5);
 
