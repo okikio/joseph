@@ -9,7 +9,7 @@ const querySelector = require("posthtml-match-helper");
 const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
 const commonJS = require('@rollup/plugin-commonjs');
-const { init, write } = require('gulp-sourcemaps');
+// const { init, write } = require('gulp-sourcemaps');
 const rollupBabel = require('rollup-plugin-babel');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
@@ -289,7 +289,7 @@ task("web-js", () =>
                         // plumber(),
                         // _debug({ title: " Initial files:" }),
                         // header(banner),
-                        dev ? null : init(), // Sourcemaps init
+                        // dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -308,7 +308,7 @@ task("web-js", () =>
                         rename(`${type}.min.js`), // Rename
                         size({gzip: true, showFiles: true}),
                         header(banner),
-                        dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+                        // dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
                         // plumber.stop(),
                     ],
                     dest: `${publicDest}/js` // Output
@@ -320,7 +320,7 @@ task("web-js", () =>
                 // plumber(),
                 // _debug({ title: " Initial files:" }),
                 // header(banner),
-                dev ? null : init(), // Sourcemaps init
+                // dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -339,7 +339,7 @@ task("web-js", () =>
                 rename(minSuffix), // Rename
                 size({gzip: true, showFiles: true}),
                 header(banner),
-                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                 // plumber.stop(),
             ],
             dest: `${publicDest}/js` // Output

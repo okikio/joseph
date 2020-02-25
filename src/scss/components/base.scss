@@ -37,11 +37,13 @@ body {
     }
 
     &::-webkit-scrollbar-track-piece {
+        transition: background-color .5s ease;
         background-color: $mid-dark;
         background-color: var(--light, $mid-dark);
     }
 
     &::-webkit-scrollbar-thumb {
+        transition: background-color .5s ease;
         background-color: $light;
         background-color: var(--mid-dark, $primary-light);
     }
@@ -60,7 +62,9 @@ html {
 }
 
 ::selection {
+    transition: background-color .5s ease;
     background-color: $primary-dark;
+    background-color: var(--primary-dark, $primary-dark);
     color: darken(#fff, 15%);
 }
 
