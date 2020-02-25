@@ -95,7 +95,7 @@ on(window, {
 
                     // Some complex math, I can't explain it very well but it works
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
-                        let value = Math.round(_map(_constrain(dist - _focusPt, 0, height), 0, height, 0, 1) * 100) / 100;
+                        let value = Math.round(_map(_constrain(dist - _focusPt, 0, height), 0, height, 0, 1) * 10000) / 10000;
 
                         isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.7) });
                         style(load_img, {
