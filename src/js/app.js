@@ -9,6 +9,8 @@ import scrollPlugin from "@swup/scroll-plugin";
 import { _is, _constrain, _map, _log, optimize } from "./components/util";
 import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
+const _is_anim = optimize(".is-animating");
+const _html = `html:not(${_is_anim})`;
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
 const _hero = optimize('.layer-hero');
@@ -18,7 +20,7 @@ const _navLink = optimize('.navbar-link');
 const _layer_img = optimize(".layer-image");
 const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
-const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-transition]), a[href^="/"]:not([data-no-transition])`;
+const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid, $core_img;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid, header, main, _scrollTop, isBanner;
@@ -75,6 +77,9 @@ on(window, {
         // On mobile if the window is scrolled remove main navbar menu from view
         hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
+        // To avoid jarring animation, it checks to see it scrolling is at the top
+        toggleClass(_html, "at-top", _scrollTop < 10)
+
         // Hide and show the action-center if the window has been scrolled 10px past the height of the navbar
         toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
         toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
@@ -94,16 +99,16 @@ on(window, {
 
                         isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.7) });
                         style(load_img, {
-                            transform: `translateY(${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px)`,
+                            transform: `translate3d(0, ${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 1, 0, height / 2)}px, 0)`,
                         });
 
-                        let transform = `translateY(${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px)`;
+                        let transform = `translate3d(0, ${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
                         let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
 
                         if (header) {
                             style(header, { transform });
                         }
-                        
+
                         if (main) {
                             style(main, { transform, opacity });
                         }

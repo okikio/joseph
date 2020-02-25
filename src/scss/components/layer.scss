@@ -249,7 +249,7 @@
         }
 
         &-footer {
-            transition: color .45s ease;
+            transition: color .5s ease;
             position: absolute;
             color: $white;
             @include applyTheme(color, "white");
@@ -293,7 +293,8 @@
     }
 
     &-action-center {
-        transition: opacity .5s ease 0s;
+        transition: opacity .5s ease-in-out;
+        pointer-events: auto;
         font-size: 24px;
         position: fixed;
         bottom: 15px;
@@ -302,6 +303,7 @@
         right: 0;
 
         &-hide {
+            pointer-events: none;
             opacity: 0;
         }
 

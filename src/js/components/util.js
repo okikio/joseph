@@ -28,6 +28,27 @@ export let optimize = val => {
     return val;
 };
 
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+// From davidwalsh: davidwalsh.name/javascript-debounce-function
+export let debounce = (fn, wait, immediate) => {
+	let timeout, later, context, callNow;
+	return function (...args) {
+		context = this;
+		later = () => {
+			timeout = null;
+			if (!immediate) fn.apply(context, args);
+        };
+
+		callNow = immediate && !timeout;
+		window.clearTimeout(timeout);
+		timeout = window.setTimeout(later, wait);
+		if (callNow) fn.apply(context, args);
+	};
+};
+
 // Remove certain properties
 export let _removeProps = (prop, obj) => {
     let newObj = { ...obj };

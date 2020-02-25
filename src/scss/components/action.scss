@@ -70,7 +70,7 @@
         &-hover,
         &-expand {
             .action-btn-section {
-                transition: max-width .6s ease 0s, opacity .4s ease 0s;
+                transition: width .6s ease 0s, opacity .4s ease 0.1s;
                 overflow-wrap: normal;
                 word-break: keep-all;
                 white-space: nowrap;
@@ -81,13 +81,13 @@
         }
 
         &-hover .action-btn-section {
-            max-width: 0;
             opacity: 0;
+            width: 0;
         }
 
         &-expand .action-btn-section,
         &-hover:hover .action-btn-section {
-            max-width: 200px;
+            width: 135px;
             opacity: 1;
         }
     }

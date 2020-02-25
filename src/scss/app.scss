@@ -248,7 +248,7 @@ $sizes: (
             &-#{$prefix}-#{$action}-#{$name}:#{$action},
             &-#{$prefix}-#{$name}-#{$action}:#{$action} {
                 @if ($themeable) {
-                    transition: #{$property} .45s ease;
+                    transition: #{$property} .5s ease;
                     @include applyTheme($property, $name);
                 } @else {
                     #{$property}: $value;
@@ -258,7 +258,7 @@ $sizes: (
             &-#{$name},
             &-#{$prefix}-#{$name} {
                 @if ($themeable) {
-                    transition: #{$property} .45s ease;
+                    transition: #{$property} .5s ease;
                     @include applyTheme($property, $name);
                 } @else {
                     #{$property}: $value;

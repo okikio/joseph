@@ -16,7 +16,7 @@
 
 html,
 body {
-    transition: background-color .5s ease, color .45s ease;
+    transition: background-color .5s ease, color .5s ease;
     text-rendering: optimizeLegibility;
     font-family: $regular-font;
 
@@ -55,9 +55,10 @@ body {
 }
 
 html {
+    /* The browser is wostlikely a chromium based browser if it supports overlay */
     @supports (overflow-y: overlay) {
-        overflow-y: overlay;
-        padding-right: 6px;
+        width: calc(100% - 6px);
+        // scroll-behavior: smooth;
     }
 }
 
@@ -181,7 +182,7 @@ li, .li {
 }
 
 a.skip-main {
-    transition: background-color .5s ease, color .45s ease, border-color .35s ease;
+    transition: background-color .5s ease, color .5s ease, border-color .35s ease;
     position: absolute;
     overflow: hidden;
     z-index: -999;
@@ -197,7 +198,7 @@ a.skip-main {
         // color: $secondary-light;
         @include applyTheme(color, "secondary-light");
         @include applyTheme(background-color, "dark");
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
         // background-color: $dark;
         border-radius: 6px;
         text-align: center;
