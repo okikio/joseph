@@ -204,6 +204,9 @@ on(document, "ready", () => {
                 ]
             });
 
+            // Remove initial cache
+            Swup.cache.remove('/');
+
             // This event runs for every page view after initial load
             Swup.on('contentReplaced', ready);
             Swup.on('willReplaceContent', () => {
