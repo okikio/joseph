@@ -3,10 +3,10 @@ const { body } = document;
 let slice = [].slice;
 
 let loadImg = () => {
-    let _img = slice.call(document.getElementsByClassName("loadimg"));
+    let _img = slice.call(document.getElementsByClassName("load-img"));
     let _navbar = slice.call(document.getElementsByClassName("n"));
     _navbar.forEach(function (nav) {
-        nav.classList.add("nfs");
+        nav.classList.add("n-f-s");
     });
     _img.forEach(function (img) {
         img.classList.add("core-img-show");

@@ -250,7 +250,7 @@ task("css", () =>
             rename(minSuffix), // Rename
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
-            size({gzip: true, showFiles: true}),
+            // size({gzip: true, showFiles: true}),
             header(banner),
             // write(...srcMapsWrite), // Put sourcemap in public folder
             // plumber.stop(),
@@ -289,7 +289,6 @@ task("web-js", () =>
                         // plumber(),
                         // _debug({ title: " Initial files:" }),
                         // header(banner),
-                        dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -305,6 +304,7 @@ task("web-js", () =>
                         debug ? null : terser(
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
+                        dev ? null : init(), // Sourcemaps init
                         rename(`${type}.min.js`), // Rename
                         // size({gzip: true, showFiles: true}),
                         header(banner),
@@ -527,10 +527,12 @@ task('optimize-class-names', () =>
                             css.walkRules(rule => {
                                 let { selector } = rule;
 
-                                for (let i = 0; i < class_keys.length; i ++) {
-                                    if (selector && selector.includes(class_keys[i])) {
-                                        let regex = new RegExp(class_keys[i], 'g');
-                                        selector = selector.replace(regex, class_map[class_keys[i]]);
+                                if (selector && selector[0] !== ":" && !selector.includes("::")) {
+                                    for (let i = 0; i < class_keys.length; i ++) {
+                                        if (selector.includes(class_keys[i])) {
+                                            let regex = new RegExp(class_keys[i], 'g');
+                                            selector = selector.replace(regex, class_map[class_keys[i]]);
+                                        }
                                     }
                                 }
 
@@ -550,18 +552,22 @@ task('optimize-class-names', () =>
                 posthtml([
                     tree => {
                         tree.walk(node => {
-                            let _attrs = node.attrs || {};
-                            let _class = _attrs && _attrs.class;
+                            if (node.tag != 'html') {
+                                let _attrs = node.attrs || {};
+                                let _class;
+                                if (typeof _attrs.class == 'string') {
+                                    _class = _attrs.class;
+                                    for (let i = 0; i < class_keys.length; i ++) {
+                                        if (_class.includes(class_keys[i])) {
+                                            let regex = new RegExp(class_keys[i], 'g');
+                                            _class = _class.replace(regex, class_map[class_keys[i]]);
+                                        }
+                                    }
 
-                            for (let i = 0; i < class_keys.length; i ++) {
-                                if (_class && _class.includes(class_keys[i])) {
-                                    let regex = new RegExp(class_keys[i], 'g');
-                                    _class = _class.replace(regex, class_map[class_keys[i]]);
+                                    node.attrs = { ..._attrs };
+                                    node.attrs.class = _class;
                                 }
                             }
-
-                            node.attrs = { ..._attrs };
-                            (_class && (node.attrs.class = _class));
                             return node;
                         });
                     },
@@ -587,7 +593,7 @@ task('inline-js-css', () =>
                 })*/,
             ]),
             // plumber.stop(),
-            size({gzip: true, showFiles: true})
+            // size({gzip: true, showFiles: true})
         ]
     })
 );
