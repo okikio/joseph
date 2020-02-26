@@ -15,7 +15,7 @@ export const class_keys = {{ class_keys | safe }};
 
 // During compilation I optimize classes in css and html, this is to compensate for that.
 export let optimize = val => {
-    {% if not dev %}
+    {% if not dev and not dontOptimize %}
     if (val && val.includes) {
         for (let i = 0; i < class_keys.length; i ++) {
             if (val.includes(class_keys[i])) {

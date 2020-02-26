@@ -2,9 +2,10 @@ let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
+let dontOptimize = 'dontOptimize' in env && env.dontOptimize.toString() === "true";
 
 let _exports = {
-    dev, debug,
+    dev, debug, dontOptimize,
     "cloud_name": "okikio-assets",
     "imageURLConfig": {
         "flags": "progressive:steep",
@@ -16,12 +17,6 @@ let _exports = {
     },
     "websiteURL": "https://josephojo.com/",
     "class_map": {
-        "-": "",
-        // Exceptions
-        "webkitscrollbar": "-webkit-scrollbar",
-        "trackpiece": "-track-piece",
-        "thumb": "-thumb",
-
         // Continue...
         "layer": "lr",
         "layout": "ly",
@@ -81,8 +76,6 @@ let _exports = {
         "large": "lrg",
         "default": "dlt",
         "small": "sml",
-        "coreimgshow": "core-img-show",
-        "isanimating": "is-animating"
     },
 };
 

@@ -243,6 +243,11 @@
         display: block;
         width: 100%;
 
+        &-outline:hover .layer-image-overlay {
+            border: 3px solid $secondary-light;
+            border-radius: 8px;
+        }
+
         &,
         .layer-image {
             overflow: hidden;

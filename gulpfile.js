@@ -9,7 +9,7 @@ const querySelector = require("posthtml-match-helper");
 const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
 const commonJS = require('@rollup/plugin-commonjs');
-// const { init, write } = require('gulp-sourcemaps');
+const { init, write } = require('gulp-sourcemaps');
 const rollupBabel = require('rollup-plugin-babel');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
@@ -40,7 +40,7 @@ const pug = require('gulp-pug');
 const https = require('https');
 // require('posthtml-inline-assets')
 
-let { cloud_name, imageURLConfig, class_map, dev, debug } = config;
+let { cloud_name, imageURLConfig, class_map, dev, debug, dontOptimize } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
 let class_keys = Object.keys(class_map);
 assets.config({ cloud_name, secure: true });
@@ -107,7 +107,7 @@ const bannerContent = [
     ` * @build          ${moment().format("llll")} ET`,
     ` * @release        ${gitRevSync.long()} [${gitRevSync.branch()}]`,
     ` * @license        ${license}`,
-    ` * @copyright      Copyright (c) ${copyright}, ${moment().format("YYYY")}.`,
+    ` * @copyright      Copyright (c) ${moment().format("YYYY")}, ${copyright}.`,
     ` *`,
 ];
 
@@ -269,7 +269,7 @@ task("env-js", () =>
             // plumber(),
             // _debug({ title: " Initial files:" }),
             // Include enviroment variables in JS
-            nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev }),
+            nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev, dontOptimize }),
             // _debug({ title: "gulp-debug: " }),
             // plumber.stop(),
             // (() => { fancyLog("\n"); }) (),
@@ -288,8 +288,8 @@ task("web-js", () =>
                     pipes: [
                         // plumber(),
                         // _debug({ title: " Initial files:" }),
-                        // header(banner),
-                        // dev ? null : init(), // Sourcemaps init
+                        header(banner),
+                        dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -308,7 +308,7 @@ task("web-js", () =>
                         rename(`${type}.min.js`), // Rename
                         size({gzip: true, showFiles: true}),
                         header(banner),
-                        // dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
+                        dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
                         // plumber.stop(),
                     ],
                     dest: `${publicDest}/js` // Output
@@ -517,7 +517,7 @@ task('inline-assets', () =>
 
 task('optimize-class-names', () =>
     streamList([
-        [`${publicDest}/css/*.css`, {
+        dontOptimize ? null : [`${publicDest}/css/*.css`, {
             pipes: [
                 // plumber(),
                 postcss([
@@ -544,7 +544,7 @@ task('optimize-class-names', () =>
             ],
             dest: `${publicDest}/css`, // Output
         }],
-        [`${publicDest}/*.html`, {
+        dontOptimize ? null : [`${publicDest}/*.html`, {
             pipes: [
                 // plumber(),
                 posthtml([
