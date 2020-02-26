@@ -95,14 +95,14 @@ on(window, {
 
                     // Some complex math, I can't explain it very well but it works
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
-                        let value = Math.round(_map(_constrain(dist - _focusPt, 0, height), 0, height, 0, 1) * 10000) / 10000;
+                        let value = _map(_constrain(dist - _focusPt, 0, height), 0, height, 0, 1);
 
                         isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.7) });
                         style(load_img, {
-                            transform: `translate3d(0, ${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 2, 0, height / 2)}px, 0)`,
+                            transform: `translate3d(0, ${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 0.65, 0, height / 2)}px, 0)`,
                         });
 
-                        let transform = `translate3d(0, ${_constrain(_map(value, 0, 0.75, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
+                        let transform = `translate3d(0, ${_constrain(_map(value, 0, 0.85, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
                         let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
 
                         if (header) {
