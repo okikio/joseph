@@ -145,11 +145,11 @@ let minifyOpts = {
     keep_fnames: false, // change to true here
     toplevel: true,
     compress: {
-        dead_code: true,
-        pure_getters: true
+        // dead_code: true,
+        pure_getters: false
     },
     ecma: 8,
-    safari10: true
+    safari10: false
 };
 let minSuffix = { suffix: ".min" };
 let watchDelay = { delay: 1000 };
@@ -288,7 +288,7 @@ task("web-js", () =>
                     pipes: [
                         // plumber(),
                         // _debug({ title: " Initial files:" }),
-                        header(banner),
+                        // header(banner),
                         dev ? null : init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
@@ -306,7 +306,7 @@ task("web-js", () =>
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
                         rename(`${type}.min.js`), // Rename
-                        size({gzip: true, showFiles: true}),
+                        // size({gzip: true, showFiles: true}),
                         header(banner),
                         dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
                         // plumber.stop(),
