@@ -77,7 +77,7 @@ on(window, {
         hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
 
         // To avoid jarring animation, it checks to see it scrolling is at the top
-        // toggleClass(_html, "at-top", _scrollTop < 10);
+        toggleClass(_html, "at-top", _scrollTop < 10);
 
         // Hide and show the action-center if the window has been scrolled 10px past the height of the navbar
         toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
@@ -177,7 +177,6 @@ ready = () => {
     init();
     resize();
     scroll();
-    _log("New content loaded!");
 };
 
 // Ready to get started
