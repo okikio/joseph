@@ -213,6 +213,10 @@ on(document, "ready", () => {
 
             // This event runs for every page view after initial load
             Swup.on('contentReplaced', ready);
+            Swup.on('animationInStart', () => {
+                _log("Animation In Start.")
+            });
+
             Swup.on('willReplaceContent', () => {
                 href = window.location.href;
                 removeClass(_navLink, "navbar-link-focus");
