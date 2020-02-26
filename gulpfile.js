@@ -280,7 +280,7 @@ task("env-js", () =>
 
 task("web-js", () =>
     streamList([
-        ...["modern"].concat(!dev ? "general" : [])
+        ...["modern"].concat(!dev && !dontOptimize ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
                 return ['public/js/app.js', {
@@ -314,7 +314,7 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        dev ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+        dev && !dontOptimize ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 // plumber(),

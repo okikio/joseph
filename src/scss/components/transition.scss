@@ -4,7 +4,7 @@
         transition: opacity 0.5s ease;
         opacity: 1;
 
-        .isanimating & {
+        .is-animating & {
             opacity: 0 !important;
         }
     }

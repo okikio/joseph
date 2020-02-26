@@ -75,7 +75,7 @@ let _exports = {
         "sub": "sb",
         "large": "lrg",
         "default": "dlt",
-        "small": "sml",
+        "small": "sml"
     },
 };
 
