@@ -41,15 +41,15 @@
             }
         }
 
-        &:hover .navbar-layout {
-            $border-color: $primary;
+        // &:hover .navbar-layout {
+        //     $border-color: $primary;
 
-            &, &:before {
-                border-bottom-color: $border-color;
-                border-right-color: $border-color;
-                border-left-color: $border-color;
-            }
-        }
+        //     &, &:before {
+        //         border-bottom-color: $border-color;
+        //         border-right-color: $border-color;
+        //         border-left-color: $border-color;
+        //     }
+        // }
 
         &-fixed {
             position: fixed;
