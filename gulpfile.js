@@ -77,6 +77,7 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
+let srcmapPath = "../";
 let minifyOpts = {
     keep_fnames: false, // change to true here
     toplevel: true,
@@ -181,7 +182,7 @@ task("css", () =>
             postcss(), // Rest of code is in postcss.config.js
             header(banner),
             dev ? null : init(), // Sourcemaps init
-            dev ? null : write() // Put sourcemap in public folder
+            dev ? null : write(srcmapPath) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -229,7 +230,7 @@ task("web-js", () =>
                         rename(`${type}.min.js`), // Rename
                         header(banner),
                         dev ? null : init(), // Sourcemaps init
-                        dev ? null : write() // Put sourcemap in public folder
+                        dev ? null : write(srcmapPath) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -456,7 +457,7 @@ task('optimize-class-names', () =>
                     })()
                 ]),
                 dev ? null : init(), // Sourcemaps init
-                dev ? null : write() // Put sourcemap in public folder
+                dev ? null : write(srcmapPath) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/css`, // Output
         }],
