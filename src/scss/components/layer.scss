@@ -67,7 +67,7 @@
         }
 
         &-overlay {
-            transition: background-color .5s ease;
+            transition: background-color .5s ease, border-color .25s ease;
             background-color: darken(#252072, 20%);
             // @include applyTheme(background, "dark");
             position: absolute;
@@ -243,9 +243,13 @@
         display: block;
         width: 100%;
 
-        &-outline:hover .layer-image-overlay {
-            border: 3px solid $secondary-light;
+        &-outline.layer-image-overlay {
+            border: 4px solid transparent;
             border-radius: 8px;
+        }
+
+        &-outline:hover .layer-image-overlay {
+            border-color: $secondary-light;
         }
 
         &,
