@@ -1,7 +1,7 @@
 /*! purgecss start ignore */
 .transition {
     &-fade {
-        transition: opacity .5s ease;
+        transition: opacity .3s ease;
         opacity: 1;
 
         .is-animating & {
@@ -10,7 +10,7 @@
     }
 
     &-in-view {
-        transition: opacity .5s ease, transform .4s ease 0.1s;
+        transition: opacity .2s ease, transform .3s ease;
         transform: translate3d(0, 0, 0);
         opacity: 1;
 
@@ -18,8 +18,12 @@
             opacity: 0 !important;
         }
 
-        html.is-animating.at-top & {
-            transform: translate3d(0, -25px, 0) !important;
+        .is-animating & {
+            transform: translate3d(0, 60px, 0) !important;
+        }
+
+        html.is-animating.is-leaving & {
+            transform: translate3d(0, -60px, 0) !important;
         }
     }
 }

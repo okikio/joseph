@@ -1,118 +1,123 @@
 doctype html
 html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
-	head
-		include ./components/navbar.pug
-		include ./components/footer.pug
-		include ./components/link.pug
-		include ./components/seo.pug
+  head
+    include ./components/navbar.pug
+    include ./components/footer.pug
+    include ./components/link.pug
+    include ./components/seo.pug
 
-		block pageInfo
-			-
-				let page = {
-					url: "/",
-					name: "index",
-					title: "Joseph, the mechatronics engineer who could.",
-					description: "Hello, my name is Joseph Ojo and this is my portfolio website. This website contains all my projects, my resume and ways to contact me."
-				};
+    block pageInfo
+      -
+        let page = {
+          url: "/",
+          websiteURL,
+          name: "index",
+          title: "The love of the Craft.",
+          description: "Hey, my name is Joseph Ojo and you are currently visiting my portfolio website. This website contains my projects, resume and ways to contact me."
+        };
 
-		link(rel="preconnect" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
-		link(rel="dns-prefetch" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
+    link(rel="preconnect" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
+    link(rel="dns-prefetch" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
 
-		link(rel="preconnect" href="https://josephojo.com/" crossorigin)
-		link(rel="dns-prefetch" href="https://josephojo.com/" crossorigin)
+    link(rel="preconnect" href=websiteURL crossorigin)
+    link(rel="dns-prefetch" href=websiteURL crossorigin)
 
-		meta(charset="utf-8")
-		meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
-		meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+    if !dev
+      link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+      link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
 
-		//- if dev
-			meta(http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self' * blob: ws:; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/okikio-assets/;")
+    meta(charset="utf-8")
+    meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
 
-		meta(name="robots" content="index, follow")
-		meta(name="copyright" content="Joseph Ojo")
+    //- if dev
+      meta(http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self' * blob: ws:; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/okikio-assets/;")
 
-		meta(name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes")
-		meta(name="keywords" content="Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, mech, robots, UOIT, OntarioTech, tech, website, netlify, resume, projects, contact")
+    meta(name="robots" content="index, follow")
+    meta(name="copyright" content="Joseph Ojo")
 
-		meta(property="og:type" content="website")
-		meta(name="twitter:site", content="@jo-ojo")
-		meta(property="article:author" content="Joseph Ojo")
-		meta(property="og:site_name" content="josephojo.com")
-		meta(itemprop="image" content="https://josephojo.com/favicon/android-icon-512x512.png")
-		meta(property="og:image" content="https://josephojo.com/favicon/android-icon-512x512.png")
-		meta(name="twitter:image" content="https://josephojo.com/favicon/android-icon-512x512.png")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes")
+    meta(name="keywords" content="Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, mech, robots, UOIT, OntarioTech, tech, website, netlify, resume, projects, contact")
 
-		block seo
-			+seo(page)
+    meta(property="og:type" content="website")
+    meta(name="twitter:site", content="@jo-ojo")
+    meta(property="article:author" content="Joseph Ojo")
+    meta(property="og:site_name" content=websiteURL.replace("https://", ""))
+    meta(itemprop="image" content=`${websiteURL}favicon/android-icon-512x512.png`)
+    meta(property="og:image" content=`${websiteURL}favicon/android-icon-512x512.png`)
+    meta(name="twitter:image" content=`${websiteURL}favicon/android-icon-512x512.png`)
 
-		link(rel="apple-touch-icon", sizes="57x57", href="/favicon/apple-icon-57x57.png")
-		link(rel="apple-touch-icon", sizes="60x60", href="/favicon/apple-icon-60x60.png")
-		link(rel="apple-touch-icon", sizes="72x72", href="/favicon/apple-icon-72x72.png")
-		link(rel="apple-touch-icon", sizes="76x76", href="/favicon/apple-icon-76x76.png")
-		link(rel="apple-touch-icon", sizes="114x114", href="/favicon/apple-icon-114x114.png")
-		link(rel="apple-touch-icon", sizes="120x120", href="/favicon/apple-icon-120x120.png")
-		link(rel="apple-touch-icon", sizes="144x144", href="/favicon/apple-icon-144x144.png")
-		link(rel="apple-touch-icon", sizes="152x152", href="/favicon/apple-icon-152x152.png")
-		link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-icon-180x180.png")
-		link(rel="mask-icon", href="/favicon/favicon.svg", color="#000000")
+    block seo
+      +seo(page)
 
-		link(rel="icon", type="image/png", sizes="512x512", href="/favicon/android-icon-512x512.png")
-		link(rel="icon", type="image/png", sizes="192x192", href="/favicon/android-icon-192x192.png")
-		link(rel="icon", type="image/png", sizes="144x144", href="/favicon/android-icon-144x144.png")
-		link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
-		link(rel="icon", type="image/png", sizes="96x96", href="/favicon/favicon-96x96.png")
-		link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
-		link(rel="shortcut icon", href="/favicon/favicon.ico", type="image/x-icon")
-		link(rel="manifest", href="manifest.webmanifest")
-		link(rel="home", href="https://josephojo.com/")
+    link(rel="apple-touch-icon", sizes="57x57", href="/favicon/apple-icon-57x57.png")
+    link(rel="apple-touch-icon", sizes="60x60", href="/favicon/apple-icon-60x60.png")
+    link(rel="apple-touch-icon", sizes="72x72", href="/favicon/apple-icon-72x72.png")
+    link(rel="apple-touch-icon", sizes="76x76", href="/favicon/apple-icon-76x76.png")
+    link(rel="apple-touch-icon", sizes="114x114", href="/favicon/apple-icon-114x114.png")
+    link(rel="apple-touch-icon", sizes="120x120", href="/favicon/apple-icon-120x120.png")
+    link(rel="apple-touch-icon", sizes="144x144", href="/favicon/apple-icon-144x144.png")
+    link(rel="apple-touch-icon", sizes="152x152", href="/favicon/apple-icon-152x152.png")
+    link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-icon-180x180.png")
+    link(rel="mask-icon", href="/favicon/favicon.svg", color="#000000")
 
-		meta(name="theme-color", content="#2d22ca")
-		meta(name="twitter:card", content="summary")
-		meta(name="msapplication-TileColor", content="#3b3c3e")
-		meta(name="apple-mobile-web-app-capable", content="yes")
-		meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")
-		meta(name="msapplication-TileImage", content="/favicon/ms-icon-144x144.png")
+    link(rel="icon", type="image/png", sizes="512x512", href="/favicon/android-icon-512x512.png")
+    link(rel="icon", type="image/png", sizes="192x192", href="/favicon/android-icon-192x192.png")
+    link(rel="icon", type="image/png", sizes="144x144", href="/favicon/android-icon-144x144.png")
+    link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="96x96", href="/favicon/favicon-96x96.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
+    link(rel="shortcut icon", href="/favicon/favicon.ico", type="image/x-icon")
+    link(rel="manifest", href="manifest.webmanifest")
+    link(rel="home", href=websiteURL)
 
-		link(rel="stylesheet" href="./css/fonts.min.css" ph-inline async)
-		//- link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
-		//- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
-		//- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
-		//- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
-		//- link(rel="preload" href="./maps/app.min.css.map" as="fetch" crossorigin)
-		link(rel="stylesheet" href="./css/app.min.css" ph-inline async)
+    meta(name="theme-color", content="#2d22ca")
+    meta(name="twitter:card", content="summary")
+    meta(name="msapplication-TileColor", content="#3b3c3e")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")
+    meta(name="msapplication-TileImage", content="/favicon/ms-icon-144x144.png")
 
-		<!--[if lt IE 9]>
-			link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
-			link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
-		<![endif]-->
+    link(rel="stylesheet" href="./css/fonts.min.css" ph-inline async)
+    //- link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
+    //- link(rel="preload" href="./maps/app.min.css.map" as="fetch" crossorigin)
+    link(rel="stylesheet" href="./css/app.min.css" ph-inline async)
 
-		script(src="./js/ver-check.min.js" ph-inline async)
-	body
-		+link({
-			class: "skip-main",
-			href: "#content",
-			content: "Skip to main content"
-		})
+    <!--[if lt IE 9]>
+      link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
+      link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
+    <![endif]-->
 
-		block navbar
-			+navbar(page)
+    script(src="./js/ver-check.min.js" ph-inline async)
+  body
+    +link({
+      class: "skip-main",
+      href: "#content",
+      content: "Skip to main content"
+    })
 
-		main.main.transition-in-view(data-container tabindex="-1")
-			#content
-				block content
+    block navbar
+      +navbar(page)
 
-		.layer-action-center.layer-action-center-hide
-			article.layer-action-group
-				.layer-shadow--1.layer-round.layout-align-self-end.layout-margin-horz-small
-					button.back-to-top.action-btn.action-btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-dark-hover.layer-primary-light-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
-						span.action-btn-group
-							span.action-btn-section
-								span.action-btn-spacer
-								span.action-btn-spacer
-								span.action-btn-content Back To Top
-							i.action-icon.style-font-size-24(inline) expand_less
+    main.main.transition-in-view(data-container tabindex="-1")
+      #content
+        block content
 
-		block footer
-			+footer
+    .layer-action-center.layer-action-center-hide
+      article.layer-action-group
+        .layer-shadow--1.layer-round.layout-align-self-end.layout-margin-horz-small
+          button.back-to-top.action-btn.action-btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-dark-hover.layer-primary-light-focus.style-tertiary.style-hover-tertiary.style-focus-tertiary(type="button")
+            span.action-btn-group
+              span.action-btn-section
+                span.action-btn-spacer
+                span.action-btn-spacer
+                span.action-btn-content Back To Top
+              i.action-icon.style-font-size-24(inline) expand_less
 
-		script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` ph-inline async)
+    block footer
+      +footer
+
+    script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` ph-inline async)

@@ -9,7 +9,7 @@ import scrollPlugin from "@swup/scroll-plugin";
 import { _is, _constrain, _map, _log, optimize } from "./components/util";
 import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-const _html = `html:not(.is-animating)`;
+const _html = "html";
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
 const _hero = optimize('.layer-hero');
@@ -75,9 +75,6 @@ on(window, {
 
         // On mobile if the window is scrolled remove main navbar menu from view
         hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
-
-        // To avoid jarring animation, it checks to see it scrolling is at the top
-        toggleClass(_html, "at-top", _scrollTop < 10);
 
         // Hide and show the action-center if the window has been scrolled 10px past the height of the navbar
         toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);

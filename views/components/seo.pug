@@ -1,5 +1,5 @@
 mixin seo(value = {})
-	- let { title, url, description } = value;
+	- let { title, url, description, websiteURL } = value;
 
 	title= title
 	meta(name='title' content=title)
@@ -8,11 +8,11 @@ mixin seo(value = {})
 	meta(name='twitter:title' content=title)
 	meta(name="apple-mobile-web-app-title", content=title)
 
-	meta(name="shortlink" content=`https://josephojo.com${url}`)
-	meta(itemprop='url' content=`https://josephojo.com${url}`)
-	meta(name="canonical" content=`https://josephojo.com${url}`)
-	meta(property='og:url' content=`https://josephojo.com${url}`)
-	meta(name='twitter:url' content=`https://josephojo.com${url}`)
+	meta(name="shortlink" content=`${websiteURL}${url}`)
+	meta(itemprop='url' content=`${websiteURL}${url}`)
+	meta(name="canonical" content=`${websiteURL}${url}`)
+	meta(property='og:url' content=`${websiteURL}${url}`)
+	meta(name='twitter:url' content=`${websiteURL}${url}`)
 
 	meta(name='description' content=description)
 	meta(itemprop='description' content=description)

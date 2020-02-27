@@ -1,8 +1,11 @@
 const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
 
-// name, version,
-const { author,  homepage, license, copyright, github } = require("./package.json");
+const {
+    cloud_name, imageURLConfig, websiteURL,
+    class_map, dev, debug, dontOptimize
+} = require('./config');
+const { author, homepage, license, copyright, github } = require("./package.json");
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
 const querySelector = require("posthtml-match-helper");
@@ -22,85 +25,25 @@ const posthtml = require('gulp-posthtml');
 // const imagemin = require('gulp-imagemin');
 const { html } = require('gulp-beautify');
 const postcssNative = require('postcss');
-// const plumber = require('gulp-plumber');
 const htmlmin = require('gulp-htmlmin');
 const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
 // const fancyLog = require('fancy-log');
-// const favicons = require('gulp-favicons');
+const sitemap = require('gulp-sitemap');
 const header = require('gulp-header');
 const terser = require('gulp-terser');
 const rename = require('gulp-rename');
-// const _debug = require('gulp-debug');
-const config = require('./config');
 const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
 const https = require('https');
-// require('posthtml-inline-assets')
 
-let { cloud_name, imageURLConfig, class_map, dev, debug, dontOptimize } = config;
 let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
 let class_keys = Object.keys(class_map);
 assets.config({ cloud_name, secure: true });
 
-/*
-{
-        appName: pkg.name,
-        appDescription: pkg.description,
-        developerName: pkg.author,
-        developerURL: pkg.urls.live,
-        background: "#FFFFFF",
-        path: pkg.paths.favicon.path,
-        url: pkg.site_url,
-        display: "standalone",
-        orientation: "portrait",
-        version: pkg.version,
-        logging: false,
-        online: false,
-        html: pkg.paths.build.html + "favicons.html",
-        replace: true,
-        icons: {
-            android: false, // Create Android homescreen icon. `boolean`
-            appleIcon: true, // Create Apple touch icons. `boolean`
-            appleStartup: false, // Create Apple startup images. `boolean`
-            coast: true, // Create Opera Coast icon. `boolean`
-            favicons: true, // Create regular favicons. `boolean`
-            firefox: true, // Create Firefox OS icons. `boolean`
-            opengraph: false, // Create Facebook OpenGraph image. `boolean`
-            twitter: false, // Create Twitter Summary Card image. `boolean`
-            windows: true, // Create Windows 8 tile icons. `boolean`
-            yandex: true // Create Yandex browser icon. `boolean`
-        }
-    }
-gulp
-  .src('./favicon.png')
-  .pipe(
-    favicons({
-      appName: 'My App',
-      appShortName: 'App',
-      appDescription: 'This is my application',
-      developerName: 'Hayden Bleasel',
-      developerURL: 'http://haydenbleasel.com/',
-      background: '#020307',
-      path: 'favicons/',
-      url: 'http://haydenbleasel.com/',
-      display: 'standalone',
-      orientation: 'portrait',
-      scope: '/',
-      start_url: '/?homescreen=1',
-      version: 1.0,
-      logging: false,
-      html: 'index.html',
-      pipeHTML: true,
-      replace: true,
-    })
-  )
-*/
-
 const bannerContent = [
-    // ` * @project        ${name} - v${version}`,
     ` * @author         ${author}`,
     ` * @link           ${homepage}`,
     ` * @github         ${github}`,
@@ -108,7 +51,6 @@ const bannerContent = [
     ` * @release        ${gitRevSync.long()} [${gitRevSync.branch()}]`,
     ` * @license        ${license}`,
     ` * @copyright      Copyright (c) ${moment().format("YYYY")}, ${copyright}.`,
-    ` *`,
 ];
 
 const banner = [
@@ -135,18 +77,12 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-let srcMapsWrite = ["../", {
-    sourceMappingURL: file => {
-        return `/${file.relative}.map`;
-    }
-}];
-
 let minifyOpts = {
     keep_fnames: false, // change to true here
     toplevel: true,
     compress: {
-        // dead_code: true,
-        pure_getters: false
+        dead_code: true,
+        pure_getters: true
     },
     ecma: 8,
     safari10: false
@@ -214,10 +150,8 @@ let _execSeries = (...cmds) => {
 task('html', () => stream(
     'views/pages/*.pug', {
         pipes: [
-            // (() => { fancyLog("\n"); }) (),
-            // plumber(),
             // Pug compiler
-            pug({ locals: { cloud_name, dev, debug } }),
+            pug({ locals: { cloud_name, dev, debug, websiteURL } }),
             // Rename
             rename({ extname: ".html" }),
             // Minify or Beautify html
@@ -230,10 +164,8 @@ task('html', () => stream(
                 removeRedundantAttributes: true,
                 processScripts: ["application/ld+json"]
             }),
-            // plumber.stop(),
             size({gzip: true, showFiles: true}),
             header(bannerHTML),
-            // (() => { fancyLog("\n"); }) (),
         ]
     })
 );
@@ -241,20 +173,15 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            // plumber(),
-            // header(banner),
-            // _debug({ title: " Initial files:" }),
-            // init(), // Sourcemaps init
             // Minify scss to css
-            sass({ outputStyle: dev ? 'expanded' : 'compressed' }).on('error', sass.logError),
+            sass({ outputStyle: dev ? 'expanded' : 'compressed' })
+                .on('error', sass.logError),
             rename(minSuffix), // Rename
             // Autoprefix &  Remove unused CSS
             postcss(), // Rest of code is in postcss.config.js
-            // size({gzip: true, showFiles: true}),
             header(banner),
-            // write(...srcMapsWrite), // Put sourcemap in public folder
-            // plumber.stop(),
-            // (() => { fancyLog("\n"); }) (),
+            dev ? null : init(), // Sourcemaps init
+            dev ? null : write() // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -265,14 +192,12 @@ task("env-js", () =>
     stream('src/js/**/*.js', {
         opts: { allowEmpty: true },
         pipes: [
-            // (() => { fancyLog("\n"); }) (),
-            // plumber(),
-            // _debug({ title: " Initial files:" }),
             // Include enviroment variables in JS
-            nunjucks.compile({ class_keys: stringify(class_keys), class_map: stringify(class_map), dev, dontOptimize }),
-            // _debug({ title: "gulp-debug: " }),
-            // plumber.stop(),
-            // (() => { fancyLog("\n"); }) (),
+            nunjucks.compile({
+                class_keys: stringify(class_keys),
+                class_map: stringify(class_map),
+                dev, dontOptimize
+            })
         ],
         dest: `${publicDest}/js`, // Output
     })
@@ -286,9 +211,6 @@ task("web-js", () =>
                 return ['public/js/app.js', {
                     opts: { allowEmpty: true },
                     pipes: [
-                        // plumber(),
-                        // _debug({ title: " Initial files:" }),
-                        // header(banner),
                         // Bundle Modules
                         rollup({
                             plugins: [
@@ -304,12 +226,10 @@ task("web-js", () =>
                         debug ? null : terser(
                             assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                         ),
-                        dev ? null : init(), // Sourcemaps init
                         rename(`${type}.min.js`), // Rename
-                        // size({gzip: true, showFiles: true}),
                         header(banner),
-                        dev ? null : write(...srcMapsWrite), // Put sourcemap in public folder
-                        // plumber.stop(),
+                        dev ? null : init(), // Sourcemaps init
+                        dev ? null : write() // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
@@ -317,10 +237,6 @@ task("web-js", () =>
         dev && !dontOptimize ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
-                // plumber(),
-                // _debug({ title: " Initial files:" }),
-                // header(banner),
-                // dev ? null : init(), // Sourcemaps init
                 // Bundle Modules
                 rollup({
                     plugins: [
@@ -337,10 +253,7 @@ task("web-js", () =>
                     assign({}, minifyOpts, { ie8: true, ecma: 5 })
                 ),
                 rename(minSuffix), // Rename
-                size({gzip: true, showFiles: true}),
-                header(banner),
-                // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
-                // plumber.stop(),
+                header(banner)
             ],
             dest: `${publicDest}/js` // Output
         }]
@@ -391,15 +304,21 @@ task("git:pull", () =>
 task('posthtml', () =>
     stream('public/*.html', {
         pipes: [
-            // plumber(),
             posthtml([
                 // Test processes
                 require('posthtml-textr')({}, [
                     require('typographic-single-spaces')
                 ]),
-                require('posthtml-lorem')(),
+                require('posthtml-lorem')()
             ]),
-            // plumber.stop(),
+        ]
+    })
+);
+
+task('sitemap', () =>
+    stream('public/*.html', {
+        pipes: [
+            sitemap({ siteUrl: websiteURL })
         ]
     })
 );
@@ -407,7 +326,6 @@ task('posthtml', () =>
 task('inline-assets', () =>
     stream('public/*.html', {
         pipes: [
-            // plumber(),
             posthtml([
                 debug ? () => {} : tree => {
                     let parse = (_src = "src") => node => {
@@ -432,10 +350,7 @@ task('inline-assets', () =>
                     };
 
                     tree.match(querySelector("[src^='/assets/']"), parse());
-                    // tree.match(querySelector("[data-src^='/assets/']"), parse("data-src"));
-                    // tree.match(querySelector("[href^='/assets/']"), parse("href"));
                     tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
-                    // tree.match(querySelector("[data-srcset^='/assets/']"), parse("data-srcset"));
                 },
                 debug ? () => {} : async tree => {
                     let warnings, promises = [];
@@ -510,7 +425,6 @@ task('inline-assets', () =>
                     });
                 },
             ]),
-            // plumber.stop(),
         ]
     })
 );
@@ -519,7 +433,6 @@ task('optimize-class-names', () =>
     streamList([
         dontOptimize ? null : [`${publicDest}/css/*.css`, {
             pipes: [
-                // plumber(),
                 postcss([
                     postcssNative.plugin('optimize-css-name', () => {
                         let class_keys = Object.keys(class_map);
@@ -542,13 +455,13 @@ task('optimize-class-names', () =>
                         }
                     })()
                 ]),
-                // plumber.stop(),
+                dev ? null : init(), // Sourcemaps init
+                dev ? null : write() // Put sourcemap in public folder
             ],
             dest: `${publicDest}/css`, // Output
         }],
         dontOptimize ? null : [`${publicDest}/*.html`, {
             pipes: [
-                // plumber(),
                 posthtml([
                     tree => {
                         tree.walk(node => {
@@ -572,7 +485,6 @@ task('optimize-class-names', () =>
                         });
                     },
                 ]),
-                // plumber.stop(),
             ]
         }]
     ])
@@ -581,19 +493,13 @@ task('optimize-class-names', () =>
 task('inline-js-css', () =>
     stream('public/*.html', {
         pipes: [
-            // plumber(),
             posthtml([
                 // Dom process
                 debug ? () => { } : phTransformer({
                     root: `${publicDest}`,
                     minifyJS: false, minifyCSS: false
                 })
-                /*require('posthtml-inline-assets')({
-                    transforms: { image: false }
-                })*/,
             ]),
-            // plumber.stop(),
-            // size({gzip: true, showFiles: true})
         ]
     })
 );
@@ -610,12 +516,12 @@ task('reload', done =>
 task('dev', parallel("client", series(parallel("html", "js"), "css")));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', parallel(series("dev", "posthtml", "inline-assets", "optimize-class-names", "inline-js-css")));
+task('default', series("dev", parallel("posthtml", "sitemap"), "inline-assets", "optimize-class-names", "inline-js-css"));
 
 // Gulp task to run before watching for file changes
-task('pre-watch', parallel(series("dev", "posthtml", "inline-assets")));
+task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-names"));
 
-// Gulp task to check to make sure a file has changed before minify that file files
+// Gulp task to check to make sure a file has changed before minify that file
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
@@ -625,4 +531,11 @@ task('watch', () => {
     watch('src/**/*.scss', watchDelay, series('css'));
     watch('src/**/*.js', watchDelay, series('js', 'reload'));
     watch(['client/**/*'], watchDelay, series('client', "inline-assets", 'reload'));
+});
+
+// Gulp task to check to make sure a css file has changed before minify that file
+task('watch-frontend', () => {
+    watch('views/**/*.pug', watchDelay, series("html", "css", "posthtml", "inline-assets", "optimize-class-names"));
+    watch('src/**/*.scss', watchDelay, series("css", "optimize-class-names"));
+    watch('src/**/*.js', watchDelay, series('js', "optimize-class-names"));
 });
