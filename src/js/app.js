@@ -198,7 +198,7 @@ on(document, "ready", () => {
                     // For every new page, scroll to the top smoothly
                     new scrollPlugin({
                         doScrollingRightAway: false,
-                        animateScroll: true,
+                        animateScroll: false,
                         scrollFriction: 0.3,
                         scrollAcceleration: 0.04,
                     })
