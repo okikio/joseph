@@ -3,10 +3,9 @@ if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
 let dontOptimize = 'dontOptimize' in env && env.dontOptimize.toString() === "true";
-let pausePolyfilling = 'pausePolyfilling' in env && env.pausePolyfilling.toString() === "true";
 
 let _exports = {
-    dev, debug, dontOptimize, pausePolyfilling,
+    dev, debug, dontOptimize,
     "cloud_name": "okikio-assets",
     "imageURLConfig": {
         "flags": "progressive:steep",

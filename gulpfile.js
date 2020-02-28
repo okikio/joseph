@@ -3,7 +3,7 @@ const { src, task, series, parallel, dest, watch } = gulp;
 
 const {
     cloud_name, imageURLConfig, websiteURL,
-    class_map, dev, debug, dontOptimize, pausePolyfilling
+    class_map, dev, debug, dontOptimize
 } = require('./config');
 const { author, homepage, license, copyright, github } = require("./package.json");
 const nodeResolve = require('@rollup/plugin-node-resolve');
@@ -211,7 +211,7 @@ task("env-js", () =>
 
 task("web-js", () =>
     streamList([
-        ...["modern"].concat(!dev && !dontOptimize ? "general" : [])
+        ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
                 return ['public/js/app.js', {
@@ -240,7 +240,7 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        dev || !dontOptimize || pausePolyfilling ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+        dev ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 // Bundle Modules
