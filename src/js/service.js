@@ -23,24 +23,24 @@ if ('serviceWorker' in navigator) {
         });
     };
 
-    window.addEventListener('load', () => {
+    window.addEventListener("load", () => {
         if (navigator.serviceWorker.controller) {
             console.log("[PWA] active service worker found, no need to register");
         } else {
             // Register the service worker
             navigator.serviceWorker
-                .register('./worker.min.js')
+                .register('./js/worker.min.js')
                 .then(({ scope }) => {
                     console.log(`[PWA] Service worker has been registered for scope: ${scope}`);
                     return navigator.serviceWorker.ready;
                 })
                 .then(() => {
-                    window.setInterval(() => {
-                        sendMessage({ command: 'message' })
+                    window.setTimeout(() => {
+                        sendMessage({ command: 'refresh' })
                             .then(() => {
                                 console.log("[PWA Client] Refreshed Cache");
                             }).catch(console.error); // If the promise rejects, show the error.
-                    }, 36000000);
+                    }, 1000 * 60 * 2);
                 })
                 .catch(err => {
                     console.warn(`Error: ${err}, Service Worker registration failed. Something went wrong during registration. The worker.js file might be unavailable or contain a syntax error.`);

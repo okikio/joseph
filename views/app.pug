@@ -129,4 +129,4 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 
     script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` ph-inline async)
     if !dev
-      script(src="./js/service.min.js" defer)
+      script(src="./js/service.min.js" ph-inline async)
