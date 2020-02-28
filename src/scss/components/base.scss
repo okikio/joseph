@@ -16,12 +16,8 @@
 
 html,
 body {
-    transition: background-color .5s ease, color .5s ease;
     text-rendering: optimizeLegibility;
     font-family: $regular-font;
-
-    @include applyTheme(background-color, "background");
-    @include applyTheme(color, "dark");
     word-wrap: break-word;
     line-height: 1.15;
     font-weight: 400;
@@ -55,6 +51,10 @@ body {
 }
 
 html {
+    transition: background-color .5s ease, color .5s ease;
+    @include applyTheme(background-color, "background");
+    @include applyTheme(color, "dark");
+
     /* The browser is wostlikely a chromium based browser if it supports overlay */
     @supports (overflow-y: overlay) {
         // width: calc(100% - 6px);

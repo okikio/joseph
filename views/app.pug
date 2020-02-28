@@ -23,8 +23,8 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="dns-prefetch" href=websiteURL crossorigin)
 
     if !dev
-      link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
-      link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+      //- link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+      //- link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
 
     meta(charset="utf-8")
     meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
@@ -36,6 +36,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     meta(name="robots" content="index, follow")
     meta(name="copyright" content="Joseph Ojo")
 
+    meta(name="mobile-web-app-capable" content="yes")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes")
     meta(name="keywords" content="Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, mech, robots, UOIT, OntarioTech, tech, website, netlify, resume, projects, contact")
 
@@ -59,7 +60,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="apple-touch-icon", sizes="144x144", href="/favicon/apple-icon-144x144.png")
     link(rel="apple-touch-icon", sizes="152x152", href="/favicon/apple-icon-152x152.png")
     link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-icon-180x180.png")
-    link(rel="mask-icon", href="/favicon/favicon.svg", color="#000000")
+    link(rel="mask-icon", href="/favicon/favicon.svg", size="any", color="#000000")
 
     link(rel="icon", type="image/png", sizes="512x512", href="/favicon/android-icon-512x512.png")
     link(rel="icon", type="image/png", sizes="192x192", href="/favicon/android-icon-192x192.png")
@@ -67,13 +68,19 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
     link(rel="icon", type="image/png", sizes="96x96", href="/favicon/favicon-96x96.png")
     link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
+
+    <!--[if IE]>
     link(rel="shortcut icon", href="/favicon/favicon.ico", type="image/x-icon")
+    <![endif]-->
+
     link(rel="manifest", href="manifest.webmanifest")
+    link(type="text/plain" rel="author" href="/humans.txt")
     link(rel="home", href=websiteURL)
 
     meta(name="theme-color", content="#2d22ca")
     meta(name="twitter:card", content="summary")
     meta(name="msapplication-TileColor", content="#3b3c3e")
+    meta(name="apple-mobile-web-app-title" content="jo-ojo")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")
     meta(name="msapplication-TileImage", content="/favicon/ms-icon-144x144.png")
@@ -87,8 +94,8 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="stylesheet" href="./css/app.min.css" ph-inline async)
 
     <!--[if lt IE 9]>
-      link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
-      link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
+    link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
+    link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
     <![endif]-->
 
     script(src="./js/ver-check.min.js" ph-inline async)
@@ -121,3 +128,5 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
       +footer
 
     script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` ph-inline async)
+    if !dev
+      script(src="./js/service.min.js" defer)
