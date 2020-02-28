@@ -3,7 +3,7 @@ const { src, task, series, parallel, dest, watch } = gulp;
 
 const {
     cloud_name, imageURLConfig, websiteURL,
-    class_map, dev, debug, dontOptimize
+    class_map, dev, debug, dontOptimize, pausePolyfilling
 } = require('./config');
 const { author, homepage, license, copyright, github } = require("./package.json");
 const nodeResolve = require('@rollup/plugin-node-resolve');
@@ -77,7 +77,12 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-let srcmapPath = "../";
+let srcMapsWrite = ["../", {
+    sourceMappingURL: file => {
+        return `/${file.relative}.map`;
+    }
+}];
+
 let minifyOpts = {
     keep_fnames: false, // change to true here
     toplevel: true,
@@ -182,7 +187,7 @@ task("css", () =>
             postcss(), // Rest of code is in postcss.config.js
             header(banner),
             dev ? null : init(), // Sourcemaps init
-            dev ? null : write(srcmapPath) // Put sourcemap in public folder
+            dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -230,12 +235,12 @@ task("web-js", () =>
                         rename(`${type}.min.js`), // Rename
                         header(banner),
                         dev ? null : init(), // Sourcemaps init
-                        dev ? null : write(srcmapPath) // Put sourcemap in public folder
+                        dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        dev && !dontOptimize ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+        dev || !dontOptimize || pausePolyfilling ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 // Bundle Modules
@@ -457,7 +462,7 @@ task('optimize-class-names', () =>
                     })()
                 ]),
                 dev ? null : init(), // Sourcemaps init
-                dev ? null : write(srcmapPath) // Put sourcemap in public folder
+                dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
             ],
             dest: `${publicDest}/css`, // Output
         }],

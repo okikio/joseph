@@ -9,7 +9,6 @@ import scrollPlugin from "@swup/scroll-plugin";
 import { _is, _constrain, _map, _log, optimize } from "./components/util";
 import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-const _html = "html";
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
 const _hero = optimize('.layer-hero');
@@ -21,7 +20,9 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [], highSrcWid = [], _highSrcWid, $core_img;
+let scroll, ready, resize, href, init, _focusPt, _images = [],
+    highSrcWid = [], highestWid, highQuality = [], highestQuality,
+    srcset, srcQuality, $core_img;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
@@ -31,6 +32,14 @@ let onload = $load_img => function () {
 on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
 });
+
+if (width(window) <= 500) {
+    on(_navLink, "click", () => {
+        if (width(window) <= 500) {
+            removeClass(_navbar, "navbar-show");
+        }
+    });
+}
 
 // On backup button click animate back to the top
 on(_backUp, "click", () => {
@@ -46,19 +55,46 @@ on(window, {
         if (window.isModern) {
             // Find the layer-images in each layer
             each(_layer_img, ($img, layrNum) => {
-                highSrcWid[layrNum] = [];
                 $core_img = get(find($img, ".core-img"), 0);
 
-                if (_is.def($core_img) && !$core_img.complete && $core_img.naturalWidth == 0) {
+                if (_is.def($core_img) && (!$core_img.complete && $core_img.naturalWidth == 0)) {
                     // Make sure the image that is loaded is the same size as its container
-                    each(el("source.webp", $img), ($src, i) => {
-                        _highSrcWid = highSrcWid[layrNum][i] || 0;
-                        tempSrc = attr($src, "srcset");
+                    each(el("source.webp", $img), $src => {
+                        // For each layer, store the largest width an image has held, just in case the page gets resized
+                        highestWid = highSrcWid[layrNum] || 0;
+                        highestQuality = highQuality[layrNum] || 30;
+
+                        tempSrc = srcset = attr($src, "srcset");
                         srcWid = width($img);
-                        if (_highSrcWid < srcWid) {
-                            highSrcWid[layrNum][i] = srcWid;
-                            attr($src, "srcset", tempSrc.replace(/w_[\d]+/, `w_${srcWid}`));
+
+                        // To avoid loading more images when going from a larger screen to a smaller screen
+                        srcQuality = srcset.match(/q_[\d]+/)[0].replace("q_", "");
+                        if (highestQuality < +srcQuality) {
+                            highestQuality = +srcQuality;
+                            srcset = srcset.replace(/q_[\d]+/, `q_${srcQuality}`);
                         }
+
+                        if (highestWid < srcWid) {
+                            highestWid = srcWid;
+
+                            tempSrc = srcset
+                                .replace(/w_[\d]+/, `w_${srcWid}${
+                                    !(/w_[\d]+,h_[\d]+/).test(srcset) ?
+                                        ",h_" + height($core_img) : "" }`);
+
+                            attr($src, "srcset", tempSrc);
+                        }
+
+                        // Just in case the height of the core image isn't large enough to fit the layer
+                        if (height($img) > height($core_img) && srcWid > height($img)) {
+                            // Scale the image so it fits and retains its aspect ratio
+                            highestWid = Math.round((height($img) * srcWid) / height($core_img));
+                            tempSrc = srcset
+                                .replace(/w_[\d]+,h_[\d]+/, `w_${highestWid},h_${height($img)}`);
+                        }
+
+                        highSrcWid[layrNum] = highestWid;
+                        highQuality[layrNum] = highestQuality;
                     });
                 }
             });
@@ -89,7 +125,7 @@ on(window, {
                     let { top, height } = clientRect;
                     let dist = _scrollTop - top + _focusPt * 2;
 
-                    // Some complex math, I can't explain it very well but it works
+                    // Some complex math, I can't explain it very well, but it works
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                         let value = _map(_constrain(dist - _focusPt, 0, height), 0, height, 0, 1);
 
@@ -139,7 +175,7 @@ init = () => {
                 clientRect,
                 header,
                 isHero,
-                main,
+                main
             });
 
             // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
@@ -150,7 +186,7 @@ init = () => {
                 } else if (!window.isModern) {
                     $src = get(find($img, "source.webp"), 0);
                     img = new Image(_core_img);
-                    img.src = attr($src, "srcset").replace(/w_[\d]+/, `w_${width($img)}`);
+                    img.src = attr($src, "srcset");
                     img.onload = onload(load_img);
                 } else {
                     on(_core_img, "load", onload(load_img));
@@ -164,7 +200,7 @@ init = () => {
 ready = () => {
     _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
     _images = []; highSrcWid = [];
-    _highSrcWid = 0;
+    highestWid = 0;
 
     // On scroll down button click animate scroll to the height of the hero layer
     on(_scrolldown, "click", () => {
@@ -205,15 +241,11 @@ on(document, "ready", () => {
                 ]
             });
 
-            // Remove initial cache
-            Swup.cache.remove('/');
+            // Remove initial cache, the inital cache is always incomplete
+            Swup.cache.remove(window.location.href);
 
             // This event runs for every page view after initial load
             Swup.on('contentReplaced', ready);
-            Swup.on('animationInStart', () => {
-                _log("Animation In Start.")
-            });
-
             Swup.on('willReplaceContent', () => {
                 href = window.location.href;
                 removeClass(_navLink, "navbar-link-focus");
