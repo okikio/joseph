@@ -78,21 +78,11 @@ on(window, {
                             highestWid = srcWid;
 
                             tempSrc = srcset
-                                .replace(/w_[\d]+/, `w_${srcWid}${
-                                    !(/w_[\d]+,h_[\d]+/).test(srcset) ?
-                                        ",h_" + height($core_img) : "" }`);
+                                .replace(/w_[\d]+/, `w_${srcWid}`);
 
                             attr($src, "srcset", tempSrc);
                         }
-
-                        // Just in case the height of the core image isn't large enough to fit the layer
-                        if (height($img) > height($core_img) && srcWid > height($img)) {
-                            // Scale the image so it fits and retains its aspect ratio
-                            highestWid = Math.round((height($img) * srcWid) / height($core_img));
-                            tempSrc = srcset
-                                .replace(/w_[\d]+,h_[\d]+/, `w_${highestWid},h_${height($img)}`);
-                        }
-
+                        
                         highSrcWid[layrNum] = highestWid;
                         highQuality[layrNum] = highestQuality;
                     });
