@@ -217,12 +217,14 @@ a.skip-main {
 
 .placeholder-img {
     transition: opacity .9s ease;
+    image-rendering: auto;
     image-rendering: smooth;
     transform: scale(1.2);
     opacity: 1;
 }
 
 .core-img, .no-script-img {
+    image-rendering: auto;
     image-rendering: high-quality;
     position: absolute;
     left: 0;

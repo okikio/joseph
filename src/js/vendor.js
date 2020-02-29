@@ -35,7 +35,7 @@ try {
             slice.call(img.querySelectorAll("source.webp")).forEach(el => {
                 srcset = el.getAttribute("srcset");
                 el.setAttribute("srcset",
-                    srcset.replace(/w_[\d]+/, `w_${box.width}`)
+                    srcset.replace(/w_[\d]+/, `w_${Math.round(box.width)}`)
                 );
             });
         });

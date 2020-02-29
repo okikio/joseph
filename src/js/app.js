@@ -20,9 +20,8 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [],
-    highSrcWid = [], highestWid, srcset, $core_img;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, tempSrc, srcWid, header, main, _scrollTop, isBanner;
+let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, $core_img;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -51,33 +50,27 @@ on(window, {
         // Only on modern browsers
         if (window.isModern) {
             // Find the layer-images in each layer
-            each(_layer_img, ($img, layrNum) => {
+            each(_layer_img, $img => {
                 $core_img = get(find($img, ".core-img"), 0);
 
                 if (_is.def($core_img) && (!$core_img.complete && $core_img.naturalWidth == 0)) {
+                    srcWid = Math.round(width($img));
+
                     // Make sure the image that is loaded is the same size as its container
                     each(el("source.webp", $img), $src => {
-                        // For each layer, store the largest width an image has held, just in case the page gets resized
-                        highestWid = highSrcWid[layrNum] || 0;
+                        srcset = attr($src, "srcset");
 
-                        tempSrc = srcset = attr($src, "srcset");
-                        srcWid = width($img);
-
-                        if (highestWid < srcWid) {
-                            highestWid = srcWid;
-
-                            tempSrc = srcset
-                                .replace(/w_[\d]+/, `w_${srcWid}`);
-                            attr($src, "srcset", tempSrc);
-                            highSrcWid[layrNum] = highestWid;
-                        }
+                        attr($src, "srcset",
+                            srcset.replace(/w_[\d]+/, `w_${srcWid}`)
+                        );
                     });
 
                     // Just in case the image has a smaller height than the box
-                    if (height($core_img) < height($img)) {
+                        _log(height($img) / height($core_img));
+                    if (height($img) / height($core_img) > 1) {
                         width($core_img,
-                            Math.round(highSrcWid[layrNum] * height($img) / height($core_img)) + "px");
-                    }
+                            Math.round(srcWid * height($img) / height($core_img)) + "px");
+                    } else { width($core_img, "100%"); }
                 }
             });
         }
