@@ -78,11 +78,15 @@ on(window, {
                             highestWid = srcWid;
 
                             tempSrc = srcset
-                                .replace(/w_[\d]+/, `w_${srcWid}`);
+                                .replace(/w_[\d]+/, `w_${
+                                    height($core_img) < height($img) ?
+                                        // Just in case the image has a smaller height than the box
+                                        srcWid * height($img) / height($core_img) :
+                                        srcWid}`);
 
                             attr($src, "srcset", tempSrc);
                         }
-                        
+
                         highSrcWid[layrNum] = highestWid;
                         highQuality[layrNum] = highestQuality;
                     });

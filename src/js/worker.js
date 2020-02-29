@@ -27,54 +27,61 @@ self.clients.matchAll().then(clients => {
 });
 
 // The index page key is a /, to a avoid bug change it to index.html
-// let parseURL = (url, page = "index.html") => {
-//     let newURL = new URL(url);
-//     if ("/" === newURL.pathname.slice(-1))
-//         newURL.pathname += page;
-//     return newURL.toString();
-// };
+let parseURL = (url, page = "index.html") => {
+    let newURL = new URL(url);
+    if ("/" === newURL.pathname.slice(-1))
+        newURL.pathname += page;
+    return newURL.toString();
+};
 
 // Install stage sets up the offline page, and assets in the cache and opens a new cache
-// self.addEventListener("activate", event => {
-//     console.log("[PWA] Activate Event processing");
-
-//     event.waitUntil(
-//         caches.open(CACHE).then(cache => {
-//             console.log("[PWA] Cached offline page during install");
-//             return cache.addAll(offlineAssets);
-//         })
-//     );
-// });
+self.addEventListener("install", event => {
+    const offlineRequest = new Request(offlinePage, {
+        headers: { 'Content-Type': 'text/html' }
+    });
+    console.log("[PWA] Install Event processing");
+    event.waitUntil(
+        fetch(offlineRequest).then(response => {
+            return caches.open(CACHE).then(cache => {
+                console.log('[PWA] Cached offline page during install: ', response.url);
+                return cache.put(offlineRequest, response);
+            });
+        })
+    );
+});
 
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", event => {
-    // let { request } = event, url = new URL(request.url);
-    // console.log(`[PWA] Fetched resource ${url}`);
-    // url = parseURL(url);
+    let { request } = event, url = new URL(request.url);
+    console.log(`[PWA] Fetched resource ${url}`);
+    url = parseURL(url);
 
-    // if (!url.match(/^(http|https):\/\//i))
-    //     return;
-    // if (url.origin !== location.origin)
-    //     return;
-    // if (request.method !== 'GET') return;
-    // if (request.mode === 'navigate' && !navigator.onLine) {
-    //     event.respondWith(
-    //         caches.match(request)
-    //             .then(response => {
-    //                 console.warn(`[PWA] Either Network request Failed or you are currently offline. Serving offline page.`);
-    //                 return response || fetch(request).then(async response => {
-    //                     const cache = await caches.open(CACHE);
-    //                     cache.put(request, response.clone());
-    //                     return response;
-    //                 });
-    //             })
-    //             .catch(() => {
-    //                 return caches.match(offlinePage);
-    //             })
-    //     );
-    //     return;
-    // }
+    if (!url.match(/^(http|https):\/\//i))
+        return;
+    if (url.origin !== location.origin)
+        return;
+    if (request.method !== 'GET') return;
+    if (request.mode === 'navigate' && !navigator.onLine) {
+        event.respondWith(
+            fetch(request).catch(error => {
+                console.error('[PWA] Network request Failed. Serving offline page. ', error);
+                return caches.open(CACHE).then((cache) => {
+                    return cache.match(offlinePage);
+                });
+            })
+        );
+        return;
+    }
 });
+
+// This is an event that can be fired from your page to tell the Service Worker to update the offline page
+self.addEventListener('refreshOffline', response => {
+    return caches.open('pwabuilder-offline').then(cache => {
+        console.log("[PWA] Offline page updated from refreshOffline event: ", response.url);
+        return cache.put(offlinePage, response);
+    });
+});
+
 
 self.addEventListener('message', event => {
     console.log('Handling message event:', event);
