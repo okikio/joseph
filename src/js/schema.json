@@ -1,0 +1,8 @@
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https://josephojo.com",
+    "name": "Joseph Ojo",
+    "description": "Hey, my name is Joseph Ojo and you are currently visiting my portfolio website. This website contains my projects, resume and ways to contact me.",
+
+}

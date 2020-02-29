@@ -1,5 +1,6 @@
 mixin seo(value = {})
 	- let { title, url, description, websiteURL } = value;
+  meta(property="og:type" content="website")
 
 	title= title
 	meta(name='title' content=title)

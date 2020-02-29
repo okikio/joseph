@@ -248,10 +248,11 @@ a.skip-main {
     a.focus-box {
         & {
             text-decoration: underline;
+            padding: 3px;
             // padding-left: 0;
 
             @media #{$screen-size-lt-tablet} {
-                padding: 3px;
+                padding: 5px;
             }
         }
 

@@ -12,8 +12,8 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
           url: "/",
           websiteURL,
           name: "index",
-          title: "The love of the Craft.",
-          description: "Hey, my name is Joseph Ojo and you are currently visiting my portfolio website. This website contains my projects, resume and ways to contact me."
+          title: "Joseph Ojo — Mechatronics Engineer / Portfolio",
+          description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. Experienced with multiple forms of technology, and an alumni of Ontario Tech."
         };
 
     link(rel="preconnect" href=`https://res.cloudinary.com/${cloud_name}/` crossorigin)
@@ -23,12 +23,27 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="dns-prefetch" href=websiteURL crossorigin)
 
     if !dev
-      //- link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
-      //- link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+      link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+      link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
 
     meta(charset="utf-8")
     meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+
+    script(type="application/ld+json").
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "#{page.websiteURL}",
+        "name": "Joseph Ojo",
+        "description": #{page.description},
+        "image": "#{websiteURL}/favicon/android-icon-512x512.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/o-josephojo/",
+          "https://github.com/laoluojo"
+        ]
+      }
+
 
     //- if dev
       meta(http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/okikio-assets/ https://josephojo.com; script-src 'self' https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self' * blob: ws:; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; child-src 'none'; frame-src 'none'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/okikio-assets/;")
@@ -38,15 +53,15 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 
     meta(name="mobile-web-app-capable" content="yes")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes")
-    meta(name="keywords" content="Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, mech, robots, UOIT, OntarioTech, tech, website, netlify, resume, projects, contact")
+    meta(name="keywords" content="Joseph Ojo, josephojo, josephojo.com, joseph, ojo, portfolio, engineer, web, mechatronics, mech, robots, UOIT, OntarioTech, tech, website, netlify, resume, projects, contact, about, oshawa, ontario, canada")
 
     meta(property="og:type" content="website")
-    meta(name="twitter:site", content="@jo-ojo")
+    //- meta(name="twitter:site", content="@jo-ojo")
     meta(property="article:author" content="Joseph Ojo")
     meta(property="og:site_name" content=websiteURL.replace("https://", ""))
-    meta(itemprop="image" content=`${websiteURL}favicon/android-icon-512x512.png`)
-    meta(property="og:image" content=`${websiteURL}favicon/android-icon-512x512.png`)
-    meta(name="twitter:image" content=`${websiteURL}favicon/android-icon-512x512.png`)
+    meta(itemprop="image" content=`${websiteURL}/favicon/android-icon-512x512.png`)
+    meta(property="og:image" content=`${websiteURL}/favicon/android-icon-512x512.png`)
+    meta(name="twitter:image" content=`${websiteURL}/favicon/android-icon-512x512.png`)
 
     block seo
       +seo(page)
