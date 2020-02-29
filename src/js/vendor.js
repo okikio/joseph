@@ -21,21 +21,21 @@ try {
        and a general one that uses the ecmascript 5 standard by default.
        The modern js file is much smaller because it follows newer echmascript standards */
     if (window.isModern) {
-        let srcset, box, coreImg;
+        let srcset, box, coreImg, image, css;
         let _img = slice.call(document.getElementsByClassName("load-img"));
         _img.forEach(function (img) {
             box = img.getBoundingClientRect();
             coreImg = img.querySelector(".core-img")
-                         .getBoundingClientRect();
+            image = coreImg.getBoundingClientRect();
+            if (image.height < box.height) {
+                css = 'width: ' + Math.round(box.width * box.height / image.height) + "px;";
+                coreImg.style.cssText += css;
+            }
+
             slice.call(img.querySelectorAll("source.webp")).forEach(el => {
                 srcset = el.getAttribute("srcset");
                 el.setAttribute("srcset",
-                    srcset.replace(/w_[\d]+/, `w_${
-                        coreImg.height < box.height ?
-                            // Just in case the image has a smaller height than the box
-                            Math.round(box.width * box.height / coreImg.height) :
-                            box.width
-                    }`)
+                    srcset.replace(/w_[\d]+/, `w_${box.width}`)
                 );
             });
         });

@@ -334,16 +334,16 @@ export let style = (_el, ...args) => {
 let _size = sz => {
     let prop = _capital(sz);
     return (_el, value) => {
-        let _offset, el = get(_el, 0);
+        let _offset, $$el = get(_el, 0);
         if (_is.undef(value)) {
-            if (_is.win(el)) {
-                return el[`inner${prop}`];
-            } else if (_is.doc(el)) {
-                return el.documentElement[`scroll${prop}`];
+            if (_is.win($$el)) {
+                return $$el[`inner${prop}`];
+            } else if (_is.doc($$el)) {
+                return $$el.documentElement[`scroll${prop}`];
             } else { return (_offset = offset(_el)) && _offset[sz]; }
         } else {
             return each(_el, ($el, idx) => {
-                style($el, sz, _fnval(value, [el[sz](), idx], $el));
+                style($el, sz, _fnval(value, [$$el[sz](), idx], $el));
             });
         }
     };

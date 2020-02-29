@@ -69,17 +69,17 @@ on(window, {
                             highestWid = srcWid;
 
                             tempSrc = srcset
-                                .replace(/w_[\d]+/, `w_${
-                                    height($core_img) < height($img) ?
-                                    // Just in case the image has a smaller height than the box
-                                    Math.round(highestWid * height($img) / height($core_img)) :
-                                    srcWid
-                                }`);
-
+                                .replace(/w_[\d]+/, `w_${srcWid}`);
                             attr($src, "srcset", tempSrc);
                             highSrcWid[layrNum] = highestWid;
                         }
                     });
+
+                    // Just in case the image has a smaller height than the box
+                    if (height($core_img) < height($img)) {
+                        width($core_img,
+                            Math.round(highSrcWid[layrNum] * height($img) / height($core_img)) + "px");
+                    }
                 }
             });
         }
@@ -216,12 +216,12 @@ on(document, "ready", () => {
                     new headPlugin(), // Replace the contents of the head elements
 
                     // For every new page, scroll to the top smoothly
-                    new scrollPlugin({
+                    width(window) > 500 ? new scrollPlugin({
                         doScrollingRightAway: false,
                         animateScroll: false,
                         scrollFriction: 0.3,
                         scrollAcceleration: 0.04,
-                    })
+                    }) : undefined
                 ]
             });
 
