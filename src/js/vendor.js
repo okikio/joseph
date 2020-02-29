@@ -33,7 +33,7 @@ try {
                     srcset.replace(/w_[\d]+/, `w_${
                         coreImg.height < box.height ?
                             // Just in case the image has a smaller height than the box
-                            box.width * box.height / coreImg.height :
+                            Math.round(box.width * box.height / coreImg.height) :
                             box.width
                     }`)
                 );

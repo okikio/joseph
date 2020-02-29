@@ -53,7 +53,7 @@ self.addEventListener("install", event => {
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", event => {
     let { request } = event, url = new URL(request.url);
-    console.log(`[PWA] Fetched resource ${url}`);
+    console.log(`[PWA] Fetched resource ${url}, ${request.mode}`);
     url = parseURL(url);
 
     if (!url.match(/^(http|https):\/\//i))
@@ -76,12 +76,11 @@ self.addEventListener("fetch", event => {
 
 // This is an event that can be fired from your page to tell the Service Worker to update the offline page
 self.addEventListener('refreshOffline', response => {
-    return caches.open('pwabuilder-offline').then(cache => {
+    return caches.open(CACHE).then(cache => {
         console.log("[PWA] Offline page updated from refreshOffline event: ", response.url);
         return cache.put(offlinePage, response);
     });
 });
-
 
 self.addEventListener('message', event => {
     console.log('Handling message event:', event);

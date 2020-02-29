@@ -107,12 +107,11 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     //- link(rel="preload" href="./maps/app.min.css.map" as="fetch" crossorigin)
     link(rel="stylesheet" href="./css/app.min.css" ph-inline async)
 
-    <!--[if lt IE 9]>
-    link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
-    link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
-    <![endif]-->
+    //- <!--[if lt IE 9]>
+    //- link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
+    //- link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
+    //- <![endif]-->
 
-    script(src="https://res.cloudinary.com/okikio-assets/raw/upload/polyfill.min.js" async)
     script(src="./js/ver-check.min.js" ph-inline async)
   body
     +link({

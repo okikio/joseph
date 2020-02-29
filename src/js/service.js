@@ -29,7 +29,7 @@ if ('serviceWorker' in navigator) {
         } else {
             // Register the service worker
             navigator.serviceWorker
-                .register('./js/worker.min.js', {
+                .register('./worker.js', {
                     scope: "/"
                 })
                 .then(({ scope }) => {
