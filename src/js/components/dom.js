@@ -343,7 +343,7 @@ let _size = sz => {
             } else { return (_offset = offset(_el)) && _offset[sz]; }
         } else {
             return each(_el, ($el, idx) => {
-                style($el, sz, _fnval(value, [$$el[sz](), idx], $el));
+                style($el, sz, _fnval(value, [$$el[sz], idx], $el));
             });
         }
     };

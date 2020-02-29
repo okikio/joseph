@@ -32,13 +32,11 @@ on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
 });
 
-if (width(window) <= 500) {
-    on(_navLink, "click", () => {
-        if (width(window) <= 500) {
-            removeClass(_navbar, "navbar-show");
-        }
-    });
-}
+on(_navLink, "click", () => {
+    if (width(window) <= 700) {
+        removeClass(_navbar, "navbar-show");
+    }
+});
 
 // On backup button click animate back to the top
 on(_backUp, "click", () => {
@@ -100,8 +98,8 @@ on(window, {
         toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
         toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
 
-        // If device width is greater than 500px
-        if (width(window) > 500) {
+        // If device width is greater than 700px
+        if (width(window) > 700) {
             _images.forEach(data => {
                 // On scroll turn on parallax effect for images with the class "effect-parallax"
                 if (hasClass(data.target, "effect-parallax")) {
@@ -213,16 +211,16 @@ on(document, "ready", () => {
                 containers: ["[data-container]"],
                 plugins: [
                     new preload(), // Preload pages
-                    new headPlugin(), // Replace the contents of the head elements
-
+                    new headPlugin() // Replace the contents of the head elements
+                ].concat(
                     // For every new page, scroll to the top smoothly
-                    width(window) > 500 ? new scrollPlugin({
+                    width(window) > 700 ? new scrollPlugin({
                         doScrollingRightAway: false,
                         animateScroll: false,
                         scrollFriction: 0.3,
                         scrollAcceleration: 0.04,
-                    }) : undefined
-                ]
+                    }) : []
+                )
             });
 
             // Remove initial cache, the inital cache is always incomplete

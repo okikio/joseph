@@ -81,18 +81,17 @@ self.addEventListener("fetch", event => {
         return;
     if (request.method !== 'GET') return;
     if (!navigator.onLine) {
-        event.respondWith(
+        return event.respondWith(
             fromCache(request)
             .catch(cache => {
                 console.warn('[PWA] Client not online. Serving offline page.');
                 return cache.match(offlinePage);
             })
         );
-        return;
     }
 
     // The following validates that the request was for a navigation to a new document
-    event.respondWith(
+    return event.respondWith(
         fromCache(request)
             .then(response => {
                 // The response was found in the cache so we respond with it and update the entry
@@ -117,9 +116,8 @@ self.addEventListener("fetch", event => {
                     });
             })
     );
-    return;
 
-        // if (request.destination === "document" || request.mode === "navigate") {}
+    // if (request.destination === "document" || request.mode === "navigate") {}
 });
 
 // This is an event that can be fired from your page to tell the Service Worker to update the offline page
