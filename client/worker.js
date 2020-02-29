@@ -120,12 +120,41 @@ self.addEventListener("fetch", event => {
     // if (request.destination === "document" || request.mode === "navigate") {}
 });
 
+/*
+
+
+self.addEventListener('fetch', function(event) {
+	if (event.request.mode == 'navigate') {
+		console.log(`Handling fetch event for ${ event.request.url }`);
+		event.respondWith(
+			fetch(event.request).catch(function(exception) {
+				// The `catch` is only triggered if `fetch()` throws an exception,
+				// which most likely happens due to the server being unreachable.
+				console.error(
+					'Fetch failed; returning offline page instead.',
+					exception
+				);
+				return caches.open(OFFLINE_CACHE).then(function(cache) {
+					return cache.match(OFFLINE_URL);
+				});
+			})
+		);
+	} else {
+		// It’s not a request for an HTML document, but rather for a CSS or SVG
+		// file or whatever…
+		event.respondWith(
+			caches.match(event.request).then(function(response) {
+				return response || fetch(event.request);
+			})
+		);
+	}
+
+});
+*/
 // This is an event that can be fired from your page to tell the Service Worker to update the offline page
 self.addEventListener('refreshOffline', response => {
-    return caches.open(CACHE).then(cache => {
-        console.log("[PWA] Offline page updated from refreshOffline event: ", response.url);
-        return cache.put(offlinePage, response);
-    });
+    console.log("[PWA] Offline page updated from refreshOffline event: ", response.url);
+    return updateCache(offlinePage, response);
 });
 
 self.addEventListener('message', event => {

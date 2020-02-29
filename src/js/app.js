@@ -66,8 +66,8 @@ on(window, {
                     });
 
                     // Just in case the image has a smaller height than the box
-                        _log(height($img) / height($core_img));
-                    if (height($img) / height($core_img) > 1) {
+                    _log("layer_image:" + height($img), " Core_image:" + height($core_img));
+                    if (height($img) > height($core_img)) {
                         width($core_img,
                             Math.round(srcWid * height($img) / height($core_img)) + "px");
                     } else { width($core_img, "100%"); }

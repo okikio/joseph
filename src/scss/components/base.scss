@@ -27,6 +27,12 @@ body {
         word-break: break-all;
     }
 
+    @media #{$screen-size-lt-tablet} {
+        -webkit-overflow-scrolling: touch;
+        -webkit-tap-highlight-color: transparent;
+        // -webkit-touch-callout: none;
+    }
+
     &::-webkit-scrollbar {
         display: block;
         width: 6px;
