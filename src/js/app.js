@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, $core_img;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner, _coreOffset, _layrOffset;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner, _layrOffset;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -51,29 +51,16 @@ on(window, {
         if (window.isModern) {
             // Find the layer-images in each layer
             each(_layer_img, $img => {
-                $core_img = get(find($img, ".core-img-pic"), 0);
+                srcWid = Math.round(width($img));
 
-                if (_is.def($core_img)) {
-                    _coreOffset = offset($core_img);
-                    _layrOffset = offset($img);
-                    srcWid = Math.round(_layrOffset.width);
+                // Make sure the image that is loaded is the same size as its container
+                each(el("source.webp", $img), $src => {
+                    srcset = attr($src, "srcset");
 
-                    // Make sure the image that is loaded is the same size as its container
-                    each(el("source.webp", $img), $src => {
-                        srcset = attr($src, "srcset");
-
-                        attr($src, "srcset",
-                            srcset.replace(/w_[\d]+/, `w_${srcWid}`)
-                        );
-                    });
-
-                    // Just in case the image has a smaller height than the box
-                    _log("layer_image:" + _layrOffset.height, " Core_image:" + _coreOffset.height);
-                    if (_layrOffset.height > _coreOffset.height) {
-                        width($core_img,
-                            Math.round(srcWid * _layrOffset.height / _coreOffset.height) + "px");
-                    } else { width($core_img, "100%"); }
-                }
+                    attr($src, "srcset",
+                        srcset.replace(/w_[\d]+/, `w_${srcWid}`)
+                    );
+                });
             });
         }
     },
@@ -176,8 +163,7 @@ init = () => {
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
     _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
-    _images = []; highSrcWid = [];
-    highestWid = 0;
+    _images = [];
 
     // On scroll down button click animate scroll to the height of the hero layer
     on(_scrolldown, "click", () => {

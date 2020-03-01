@@ -149,6 +149,10 @@ img {
     display: block;
     border: none;
     width: 100%;
+
+    @media #{$screen-size-phone} {
+        height: inherit;
+    }
 }
 
 a {
