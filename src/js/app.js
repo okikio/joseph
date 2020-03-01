@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, $core_img;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner, _coreOffset, _layrOffset;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -51,10 +51,12 @@ on(window, {
         if (window.isModern) {
             // Find the layer-images in each layer
             each(_layer_img, $img => {
-                $core_img = get(find($img, ".core-img"), 0);
+                $core_img = get(find($img, ".core-img-pic"), 0);
 
-                if (_is.def($core_img) && (!$core_img.complete && $core_img.naturalWidth == 0)) {
-                    srcWid = Math.round(width($img));
+                if (_is.def($core_img)) {
+                    _coreOffset = offset($core_img);
+                    _layrOffset = offset($img);
+                    srcWid = Math.round(_layrOffset.width);
 
                     // Make sure the image that is loaded is the same size as its container
                     each(el("source.webp", $img), $src => {
@@ -66,10 +68,10 @@ on(window, {
                     });
 
                     // Just in case the image has a smaller height than the box
-                    _log("layer_image:" + height($img), " Core_image:" + height($core_img));
-                    if (height($img) > height($core_img)) {
+                    _log("layer_image:" + _layrOffset.height, " Core_image:" + _coreOffset.height);
+                    if (_layrOffset.height > _coreOffset.height) {
                         width($core_img,
-                            Math.round(srcWid * height($img) / height($core_img)) + "px");
+                            Math.round(srcWid * _layrOffset.height / _coreOffset.height) + "px");
                     } else { width($core_img, "100%"); }
                 }
             });

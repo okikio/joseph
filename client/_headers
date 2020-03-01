@@ -1,5 +1,5 @@
 /*
-  Cache-Control: public, immutable, max-age=31536000
+  Cache-Control: public, max-age=1800
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
@@ -13,12 +13,10 @@
   Access-Control-Allow-Origin: *
 
 /fonts/*.woff2
-  Cache-Control: public, immutable, max-age=31536000
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff2
 
 /fonts/*.woff
-  Cache-Control: public, immutable, max-age=31536000
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff
 
@@ -32,6 +30,9 @@
   Content-Type: text/css; charset=utf-8
 
 /*.js
+  Content-Type: text/javascript; charset=utf-8
+
+/js/*.js
   Content-Type: text/javascript; charset=utf-8
 
 /*.webmanifest
