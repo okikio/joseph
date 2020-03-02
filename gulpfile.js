@@ -77,7 +77,11 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-let srcMapsWrite = ["/app"];
+let srcMapsWrite = ["../", {
+    sourceMappingURL: file => {
+        return `/${file.relative}.map`;
+    }
+}];
 
 let minifyOpts = {
     keep_fnames: false, // change to true here
