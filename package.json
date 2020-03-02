@@ -4,7 +4,7 @@
     "description": "The porfolio of Joseph ojo, it contains all his amazing projects etc...",
     "scripts": {
         "test": "gulp",
-        "watch": "gulp pre-watch && gulp watch",
+        "watch": "gulp && gulp watch",
         "develop": "gulp dev",
         "build": "gulp",
         "publish": "gulp git:push",
