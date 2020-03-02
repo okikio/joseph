@@ -151,7 +151,7 @@ img {
     border: none;
     width: 100%;
 
-    @media #{$screen-size-phone} {
+    @media #{$screen-size-lt-tablet} {
         height: inherit;
     }
 }
