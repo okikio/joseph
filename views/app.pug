@@ -141,12 +141,6 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     block footer
       +footer
 
-<<<<<<< HEAD
-    script(src="./js/vendor.min.js" async)
-    //- script(nomodule src="./js/general.min.js" defer)
-    //- script(id="modern-js" type="module" src="./js/modern.min.js" defer)
-=======
     script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` async)
->>>>>>> SWUP-branch
     //- if !dev
       script(src="./js/service.min.js" ph-inline async)
