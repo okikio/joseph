@@ -1,33 +1,28 @@
-const { Symbol, Set, Map, navigator } = window;
+const { Symbol, navigator } = window;
 const { userAgent } = navigator;
 
 // Check if the browser supports modern ecmascript standards
 export let isModern = () => {
     "use strict";
-    if (typeof Symbol == "undefined" ||
-        typeof Set == "undefined" ||
-        typeof Map == "undefined") {
-        return false;
-    }
+    if (typeof Symbol == "undefined") return false;
 
-    /*
-    'unsafe-eval';
+    // 'unsafe-eval';
     try {
-    //     new Function("'use strict'; class Foo {}")();
-    //     new Function("'use strict'; let bar = x => x+1;")();
-    //     new Function("'use strict'; let bez = { a: 'b' }; let box = { b: 'a', ...bez };")();
-    // } catch (e) { return false; } */
+        new Function("class Foo {}")();
+        new Function("let bar = x => x+1;")();
+        new Function("let bez = { a: 'b' }; let box = { b: 'a', ...bez };")();
+    } catch (e) { return false; }
     return true;
 };
 
 window.debugCheck = isModern;
-window.isModern = window.debugCheck();
+window.isModern = isModern();
 
 // Add scripts to be reqested to the head tag
 export let _require = (src, fn) => {
     let head = document.getElementsByTagName('head')[0];
     let script = document.createElement('script');
-    script.setAttribute("async", "");
+    // script.setAttribute("async", "");
     script.setAttribute("crossorigin", "");
     script.type = 'text/javascript';
     script.onload = fn;
