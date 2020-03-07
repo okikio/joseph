@@ -44,7 +44,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
         ]
       }
 
-    if !dev
+    if dev
       meta(http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' data: https:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://res.cloudinary.com/ https://josephojo.com; script-src 'self' https://res.cloudinary.com/ https://polyfill.io/ https://cdnjs.cloudflare.com/ 'unsafe-inline'; connect-src 'self'; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/; form-action 'self'; frame-ancestors 'self';")
       meta(http-equiv="Feature-Policy" content="microphone 'none'; geolocation 'none'; usb 'none'; display-capture 'none'; sync-xhr 'self'; camera 'none'; battery 'none'")
 
