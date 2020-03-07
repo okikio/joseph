@@ -78,9 +78,9 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-let srcMapsWrite = ["../", {
+let srcMapsWrite = ["../app", {
     sourceMappingURL: file => {
-        return `/${file.relative}.map`;
+        return `/app/${file.relative}.map`;
     }
 }];
 
