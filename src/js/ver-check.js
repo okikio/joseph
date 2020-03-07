@@ -15,7 +15,7 @@ export let isModern = () => {
 };
 
 window.debugCheck = isModern;
-window.isModern = isModern();
+window.isModern = window.debugCheck();
 
 // Add scripts to be reqested to the head tag
 export let _require = (src, fn) => {
