@@ -1,16 +1,22 @@
-const { Symbol, IntersectionObserver, navigator } = window;
+const { Symbol, Set, Map, navigator } = window;
 const { userAgent } = navigator;
 
 // Check if the browser supports modern ecmascript standards
 export let isModern = () => {
     "use strict";
     if (typeof Symbol == "undefined" ||
-        typeof IntersectionObserver == "undefined") return false;
+        typeof Set == "undefined" ||
+        typeof Map == "undefined") {
+        return false;
+    }
+
+    /*
+    'unsafe-eval';
     try {
-        Function("class Foo {}")();
-        Function("let bar = x => x+1;")();
-        Function("let bez = { a: 'b' }; let box = { b: 'a', ...bez };")();
-    } catch (e) { return false; }
+    //     new Function("'use strict'; class Foo {}")();
+    //     new Function("'use strict'; let bar = x => x+1;")();
+    //     new Function("'use strict'; let bez = { a: 'b' }; let box = { b: 'a', ...bez };")();
+    // } catch (e) { return false; } */
     return true;
 };
 

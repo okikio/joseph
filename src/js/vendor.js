@@ -1,8 +1,9 @@
-const { fetch } = window;
-const { body } = document;
+import './components/ver-check';
+
+// const { fetch } = window;
+// const { body } = document;
 let slice = [].slice;
 
-let sha_ = 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
 let loadImg = () => {
     let _img = slice.call(document.getElementsByClassName("load-img"));
     let _navbar = slice.call(document.getElementsByClassName("n"));
@@ -15,11 +16,8 @@ let loadImg = () => {
 };
 
 try {
-    let script = document.createElement("script");
-    let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
-
-    console.log(window.isModern);
-    if (window.debugCheck) console.log(window.debugCheck());
+    // let script = document.createElement("script");
+    // let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
 
     /* Depending on the browser load two different type of js file, one that supports all the new ecmascript standards,
        and a general one that uses the ecmascript 5 standard by default.
@@ -42,32 +40,33 @@ try {
             console.warn("Error setting image width in vendor.js.");
         }
 
-        fetch(src, {
-            headers: new Headers({'content-type': 'text/javascript; charset=utf-8'})
-        })
-            .then(res => {
-                if (!res.ok) {
-                    console.warn('Looks like there was a problem. Status Code: ', status);
-                    loadImg();
-                    return;
-                }
+        // fetch(src, {
+        //     headers: new Headers({'content-type': 'text/javascript; charset=utf-8'})
+        // })
+        //     .then(res => {
+        //         if (!res.ok) {
+        //             console.warn('Looks like there was a problem. Status Code: ', status);
+        //             loadImg();
+        //             return;
+        //         }
 
-                res.text().then(data => {
-                    script.innerHTML = data;
-                    script.setAttribute('integrity', sha_);
-                    script.setAttribute("data-src", src);
-                    body.appendChild(script);
-                });
-            })
-            .catch(err => {
-                script.setAttribute("src", src);
-                body.appendChild(script);
-                console.error('Fetch Error: ', err);
-                loadImg();
-            });
+        //         res.text().then(data => {
+        //             script.innerHTML = data;
+        //             script.setAttribute("data-src", src);
+        //             body.appendChild(script);
+        //         });
+        //     })
+        //     .catch(err => {
+        //         script.setAttribute("src", src);
+        //         body.appendChild(script);
+        //         console.error('Fetch Error: ', err);
+        //         loadImg();
+        //     });
     } else {
-        script.setAttribute("src", src);
-        body.appendChild(script);
+        let modernScript = document.getElementById("modern-js");
+        document.body.removeChild(modernScript);
+        // script.setAttribute("src", src);
+        // body.appendChild(script);
         // loadImg();
     }
 } catch (e) {

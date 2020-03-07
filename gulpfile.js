@@ -22,7 +22,7 @@ const { spawn } = require('child_process');
 const gitRevSync = require('git-rev-sync');
 const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
-const sriHash = require('gulp-sri-hash');
+// const sriHash = require('gulp-sri-hash');
 // const imagemin = require('gulp-imagemin');
 const { html } = require('gulp-beautify');
 const postcssNative = require('postcss');
@@ -317,8 +317,7 @@ task('posthtml', () =>
                     require('typographic-single-spaces')
                 ]),
                 require('posthtml-lorem')()
-            ]),
-            sriHash()
+            ])
         ]
     })
 );
@@ -508,6 +507,7 @@ task('inline-js-css', () =>
                     minifyJS: false, minifyCSS: false
                 })
             ]),
+            // sriHash()
         ]
     })
 );
