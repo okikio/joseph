@@ -142,6 +142,6 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     block footer
       +footer
 
-    script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` async)
+    script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}`)
     //- if !dev
       script(src="./js/service.min.js" ph-inline async)
