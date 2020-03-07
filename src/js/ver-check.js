@@ -14,6 +14,7 @@ export let isModern = () => {
     return true;
 };
 
+window.debugCheck = isModern;
 window.isModern = isModern();
 
 // Add scripts to be reqested to the head tag
