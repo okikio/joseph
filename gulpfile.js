@@ -318,7 +318,7 @@ task('posthtml', () =>
                 ]),
                 require('posthtml-lorem')()
             ]),
-            // sriHash()
+            sriHash()
         ]
     })
 );
