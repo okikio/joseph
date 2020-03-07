@@ -1,7 +1,7 @@
 /*! purgecss start ignore */
 .transition {
     &-fade {
-        transition: opacity .3s ease;
+        transition: opacity .2s ease;
         opacity: 1;
 
         .is-animating & {
@@ -10,7 +10,7 @@
     }
 
     &-in-view {
-        transition: opacity .2 ease, transform .3s ease;
+        transition: opacity .1s ease, transform .2s ease;
         transform: translate3d(0, 0, 0);
         opacity: 1;
 

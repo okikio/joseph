@@ -6966,9 +6966,9 @@ posthtml-doctype@^1.1.1:
   integrity sha1-0+QgS2VRyc5eHUU2W0ZWR4W6O5s=
 
 posthtml-link-noreferrer@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/posthtml-link-noreferrer/-/posthtml-link-noreferrer-1.0.5.tgz#2cb3b8a22721df5392e7e2b861d5c3c37eec151a"
-  integrity sha512-oYB7oZ4WeqhAchy3temsYkQtslxyqVO2k8mTfZ+M+x2bx110rbzazM3ViCr+ypAvaugzSyahyKe9siJvcuBvHQ==
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/posthtml-link-noreferrer/-/posthtml-link-noreferrer-1.0.6.tgz#39294c48a3840c373c7df5c3074310802dfed28d"
+  integrity sha512-hHSkEUGNr8oAuYu5V4GQylrPA1kk6elEajQU1ZDmuh6+nW5Ctabn5CJmd6ornP3b4rddql9cXsDD/JVSUt1nrw==
   dependencies:
     posthtml "^0.12.0"
 
