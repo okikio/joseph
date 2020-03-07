@@ -1,4 +1,4 @@
-import './components/ver-check';
+// import './components/ver-check';
 
 // const { fetch } = window;
 // const { body } = document;
@@ -64,7 +64,7 @@ try {
         //     });
     } else {
         let modernScript = document.getElementById("modern-js");
-        document.body.removeChild(modernScript);
+        modernScript.remove(modernScript);
         // script.setAttribute("src", src);
         // body.appendChild(script);
         // loadImg();
