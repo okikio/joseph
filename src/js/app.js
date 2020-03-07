@@ -20,8 +20,8 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, $core_img;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner, _layrOffset;
+let scroll, ready, resize, href, init, _focusPt, _images = [], srcset;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };

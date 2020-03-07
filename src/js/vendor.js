@@ -1,7 +1,7 @@
 // import './components/ver-check';
 
 // const { fetch } = window;
-// const { body } = document;
+const { body } = document;
 let slice = [].slice;
 
 let loadImg = () => {
@@ -16,8 +16,8 @@ let loadImg = () => {
 };
 
 try {
-    // let script = document.createElement("script");
-    // let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
+    let script = document.createElement("script");
+    let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
 
     /* Depending on the browser load two different type of js file, one that supports all the new ecmascript standards,
        and a general one that uses the ecmascript 5 standard by default.
@@ -62,9 +62,9 @@ try {
         //         console.error('Fetch Error: ', err);
         //         loadImg();
         //     });
+        script.setAttribute("src", src);
+        body.appendChild(script);
     } else {
-        let modernScript = document.getElementById("modern-js");
-        modernScript.remove(modernScript);
         // script.setAttribute("src", src);
         // body.appendChild(script);
         // loadImg();
