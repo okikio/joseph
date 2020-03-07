@@ -2,6 +2,7 @@ const { fetch } = window;
 const { body } = document;
 let slice = [].slice;
 
+let sha_ = 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
 let loadImg = () => {
     let _img = slice.call(document.getElementsByClassName("load-img"));
     let _navbar = slice.call(document.getElementsByClassName("n"));
@@ -50,6 +51,7 @@ try {
 
                 res.text().then(data => {
                     script.innerHTML = data;
+                    script.setAttribute('integrity', sha_);
                     script.setAttribute("data-src", src);
                     body.appendChild(script);
                 });

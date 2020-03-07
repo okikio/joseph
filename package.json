@@ -83,6 +83,7 @@
         "gulp-sitemap": "^7.6.0",
         "gulp-size": "^3.0.0",
         "gulp-sourcemaps": "^2.6.5",
+        "gulp-sri-hash": "^2.2.1",
         "gulp-terser": "^1.2.0",
         "microicon": "^1.0.0-b.2",
         "moment": "^2.24.0",
