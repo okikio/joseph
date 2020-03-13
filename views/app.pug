@@ -6,15 +6,18 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     include ./components/link.pug
     include ./components/seo.pug
 
+    -
+      let defaults = {
+        url: "/",
+        websiteURL,
+        name: "index",
+        title: "Joseph Ojo — Mechatronics Engineer / Portfolio",
+        description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. Experienced with multiple forms of technology, and an alumni of Ontario Tech."
+      };
+
     block pageInfo
       -
-        let page = {
-          url: "/",
-          websiteURL,
-          name: "index",
-          title: "Joseph Ojo — Mechatronics Engineer / Portfolio",
-          description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. Experienced with multiple forms of technology, and an alumni of Ontario Tech."
-        };
+        let page = Object.assign({}, defaults);
 
     link(rel="preconnect" href='https://res.cloudinary.com/' crossorigin)
     link(rel="dns-prefetch" href='https://res.cloudinary.com/' crossorigin)
@@ -32,15 +35,58 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
 
     script(type="application/ld+json").
       {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "url": "#{page.websiteURL}",
-        "name": "Joseph Ojo",
-        "description": "#{page.description}",
-        "image": "#{websiteURL}/favicon/android-icon-512x512.png",
-        "sameAs": [
-          "https://www.linkedin.com/in/o-josephojo/",
-          "https://github.com/laoluojo"
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "#{page.websiteURL}/#person",
+            "name": "Joseph Ojo",
+            "url": "#{page.websiteURL}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/laoluojo"
+            ],
+            "description": "#{defaults.description}",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "#{page.websiteURL}/#logo",
+              "url": "#{page.websiteURL}/favicon/android-icon-512x512.png",
+              "width": 512,
+              "height": 512,
+              "caption": "Joseph Ojo's Logo"
+            },
+            "image": {
+              "@id": "#{page.websiteURL}/#logo"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "#{page.websiteURL}/#website",
+            "url": "#{page.websiteURL}",
+            "description": "#{defaults.description}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/laoluojo"
+            ],
+            "name": "Joseph Ojo",
+            "publisher": {
+              "@id": "#{page.websiteURL}/#person"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "#{page.websiteURL}/#webpage",
+            "url": "#{page.websiteURL}",
+            "description": "#{page.description}",
+            "inLanguage": "en-US",
+            "name": "#{page.title}",
+            "isPartOf": {
+              "@id": "#{page.websiteURL}/#website"
+            },
+            "about": {
+              "@id": "#{page.websiteURL}/#person"
+            }
+          }
         ]
       }
 
