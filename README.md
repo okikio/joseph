@@ -175,7 +175,7 @@ block content
     image: {
       //- Don't cha
       class: "effect-parallax hero-img",
-      src: "/assets/closeup-stones",
+      src: "cloudinary/closeup-stones",
       alt: "A city Image"
     }
   })
@@ -302,7 +302,7 @@ block content
                 class: "layer-box layer-surface layout-block",
                 image: {
                   class: "effect-parallax",
-                  src: "/assets/city",
+                  src: "cloudinary/city",
                   alt: "City Alt",
                 }
               })
@@ -323,7 +323,7 @@ block content
                 title: "Google Designs Project",
                 class: "layer-box layer-surface layout-block",
                 image: {
-                  src: "/assets/blue-sky",
+                  src: "cloudinary/blue-sky",
                   alt: "Blue sky Alt",
                 }
               })

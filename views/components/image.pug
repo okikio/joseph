@@ -1,7 +1,12 @@
 mixin image(value = {})
   - let _class = value.class;
-  - let src = value.src || "/assets/city";
+  - let src = value.src || "cloudinary/city";
   - let alt = value.alt || "Alternate text";
+
+  - let cloudinaryTest = /^cloudinary\//.test(src);
+  - let basicURL = "https://res.cloudinary.com/okikio-assets/image/upload/dpr_auto,f_auto,fl_progressive:steep";
+  -
+    let urlParse = (url = "") => cloudinaryTest ? `${basicURL + url}/${src.replace(/^cloudinary\//, "")}` : src;
 
   .layer-image(class=_class)
     .layer-image-preview-img-card
@@ -9,15 +14,15 @@ mixin image(value = {})
       .img-contain
         picture.plchldr-pic
           //-  inline
-          img.placeholder-img(src!=`${src}.jpg?w=60&quality=90&effect=blur:120` sizes="100vw" width="100vw" alt=alt loading="lazy" itemprop="url")
+          img.placeholder-img(src!=`${urlParse(",w_60,q_90,e_blur:120")}.jpg` sizes="100vw" width="100vw" alt=alt loading="lazy" itemprop="url")
         picture.core-img-pic
-          source.webp(media=`(max-width: 600px)` srcset!=`${src}.webp?w=600&quality=100` sizes=`600px` width=`600px` type='image/webp')
-          source.webp(media='(max-width: 900px)' srcset!=`${src}.webp?w=900&quality=80` sizes="100vw" width="100vw" type='image/webp')
-          source.webp(media='(min-width: 900px)' srcset!=`${src}.webp?w=950&quality=90` sizes="100vw" width="100vw" type='image/webp')
-          img.core-img(src!=`${src}.jpg?w=1100&quality=100` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
+          source.webp(media=`(max-width: 600px)` srcset!=`${urlParse(",w_600,q_100")}.webp` sizes=`600px` width=`600px` type='image/webp')
+          source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
+          source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
+          img.core-img(src!=`${urlParse(",w_1100,q_100")}.jpg` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
         noscript Javascript is necesscary for this sites awesome experience.
           picture
-            source(srcset!=`${src}.webp` sizes="100vw" width="100vw" type='image/webp')
-            source(srcset!=`${src}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
-            img.no-script-img(src!=`${src}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
+            source(srcset!=`${urlParse()}.webp` sizes="100vw" width="100vw" type='image/webp')
+            source(srcset!=`${urlParse()}.jpg` sizes="100vw" width="100vw" type='image/jpeg')
+            img.no-script-img(src!=`${urlParse()}.jpg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
     .layer-image-overlay

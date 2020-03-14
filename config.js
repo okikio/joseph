@@ -6,15 +6,6 @@ let dontOptimize = 'dontOptimize' in env && env.dontOptimize.toString() === "tru
 
 let _exports = {
     dev, debug, dontOptimize,
-    "cloud_name": "okikio-assets",
-    "imageURLConfig": {
-        "flags": "progressive:steep",
-        "fetch_format": "auto",
-        "client_hints": true,
-        "crop": "scale",
-        "quality": 30,
-        "dpr": "auto"
-    },
     "websiteURL": "https://josephojo.com",
     "class_map": {
         // Continue...

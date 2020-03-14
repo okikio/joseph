@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const { src, task, series, parallel, dest, watch } = gulp;
 
 const {
-    cloud_name, imageURLConfig, websiteURL,
+    cloud_name, websiteURL,
     class_map, dev, debug, dontOptimize
 } = require('./config');
 const { author, homepage, license, copyright, github } = require("./package.json");
@@ -27,7 +27,6 @@ const posthtml = require('gulp-posthtml');
 const { html } = require('gulp-beautify');
 const postcssNative = require('postcss');
 const htmlmin = require('gulp-htmlmin');
-const assets = require("cloudinary").v2;
 const postcss = require('gulp-postcss');
 // const fancyLog = require('fancy-log');
 const sitemap = require('gulp-sitemap');
@@ -38,11 +37,6 @@ const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
-const https = require('https');
-
-let assetURL = `https://res.cloudinary.com/${cloud_name}/`;
-let class_keys = Object.keys(class_map);
-assets.config({ cloud_name, secure: true });
 
 const bannerContent = [
     ` * @author         ${author}`,
@@ -78,7 +72,7 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-
+let class_keys = Object.keys(class_map);
 let srcMapsWrite = ["../maps/", {
     sourceMappingURL: file => {
         return `maps/${file.relative}.map`;
@@ -335,77 +329,6 @@ task('inline-assets', () =>
     stream('public/*.html', {
         pipes: [
             posthtml([
-                debug ? () => {} : tree => {
-                    let parse = (_src = "src") => node => {
-                        let url = node.attrs[_src].replace(/&amp;/g, "&");
-                        let URLObj = new URL(`${assetURL + url}`.replace("/assets/", ""));
-                        let query = URLObj.searchParams;
-                        let queryString = URLObj.search;
-
-                        let height = query.get("h");
-                        let width = query.get("w") || 'auto';
-                        let crop = query.get("crop");
-                        let effect = query.get("effect");
-                        let quality = query.get("quality");
-                        let _imgURLConfig = assign({ ...imageURLConfig, width, height, quality, crop, effect },
-                                /svg/g.test(url) ? { fetch_format: null } : {});
-
-                        node.attrs[_src] = (/\/raw\/[^\s"']+/.test(url) ?
-                            `${assetURL + url.replace(queryString, '')}` :
-                            assets.url(url.replace(queryString, ''), _imgURLConfig)
-                        ).replace("/assets/", "");
-                        return node;
-                    };
-
-                    tree.match(querySelector("[src^='/assets/']"), parse());
-                    tree.match(querySelector("[srcset^='/assets/']"), parse("srcset"));
-                },
-                debug ? () => {} : async tree => {
-                    let warnings, promises = [];
-                    tree.match({ tag: 'img' }, node => {
-                        if (promises.length >= 2) return node; // Don't inline everything
-                        if (node.attrs && node.attrs.src && "inline" in node.attrs) {
-                            const _attrs = node.attrs;
-                            const _src = _attrs.src;
-                            delete _attrs['inline'];
-                            delete _attrs['async'];
-                            if (!_src.includes("data:image/")) {
-                                promises.push(
-                                    new Promise((resolve, reject) => {
-                                        https.get(_src, res => {
-                                            let contentType = res.headers["content-type"];
-                                            let body = `data:${contentType};base64,`;
-
-                                            res.setEncoding('base64');
-                                            res.on('data', data => { body += data });
-                                            res.on('end', () => {
-                                                node.attrs = { ..._attrs, src: body };
-                                                resolve(node);
-                                            });
-                                        }).on('error', err => {
-                                            console.error(`The image with the src: ${_src} `, err);
-                                            reject(node);
-                                        });
-                                    })
-                                );
-                            }
-                        }
-
-                        return node;
-                    });
-
-                    await Promise.all(promises);
-
-                    // Filter errors from messages as warnings
-                    warnings = tree.messages.filter(msg => msg instanceof Error);
-                    if (warnings.length) {
-                        // Conditionally warn the user about any issues
-                        console.warn(`\nWarnings (${warnings.length}):\n${warnings.map(msg => `  ${msg.message}`).join('\n')}\n`);
-                    }
-
-                    // Return the ast
-                    return tree;
-                },
                 debug ? () => {} : tree => {
                     let icons = require('microicon');
                     tree.match(querySelector("i.action-icon"), node => {
