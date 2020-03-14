@@ -1,11 +1,8 @@
 const gulp = require('gulp');
-const { src, task, series, parallel, dest, watch } = gulp;
+const { src, task, series, dest, watch } = gulp;
 
-const {
-    cloud_name, websiteURL,
-    class_map, dev, debug, dontOptimize
-} = require('./config');
 const { author, homepage, license, copyright, github } = require("./package.json");
+const { websiteURL, class_map, dev, debug } = require('./config');
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const builtins = require("rollup-plugin-node-builtins");
 const querySelector = require("posthtml-match-helper");
@@ -13,30 +10,31 @@ const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
 const commonJS = require('@rollup/plugin-commonjs');
 const { init, write } = require('gulp-sourcemaps');
+const { terser } = require('rollup-plugin-terser');
 const rollupBabel = require('rollup-plugin-babel');
 const rollupJSON = require("@rollup/plugin-json");
 const { babelConfig } = require("./browserlist");
+const buble = require('@rollup/plugin-buble');
 const rollup = require('gulp-better-rollup');
 const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
 const gitRevSync = require('git-rev-sync');
 const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
-// const sriHash = require('gulp-sri-hash');
 // const imagemin = require('gulp-imagemin');
-const { html } = require('gulp-beautify');
 const postcssNative = require('postcss');
 const htmlmin = require('gulp-htmlmin');
 const postcss = require('gulp-postcss');
-// const fancyLog = require('fancy-log');
 const sitemap = require('gulp-sitemap');
 const header = require('gulp-header');
-const terser = require('gulp-terser');
 const rename = require('gulp-rename');
 const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
+
+let icons;
+(!debug) && (icons = require('microicon'));
 
 const bannerContent = [
     ` * @author         ${author}`,
@@ -153,11 +151,11 @@ task('html', () => stream(
     'views/pages/*.pug', {
         pipes: [
             // Pug compiler
-            pug({ locals: { cloud_name, dev, debug, websiteURL } }),
+            pug({ locals: { dev, debug, websiteURL } }),
             // Rename
             rename({ extname: ".html" }),
             // Minify or Beautify html
-            dev ? html({ indent_size: 4 }) : htmlmin({
+            dev ? null : htmlmin({
                 minifyJS: true,
                 minifyCSS: true,
                 removeComments: true,
@@ -198,7 +196,7 @@ task("env-js", () =>
             nunjucks.compile({
                 class_keys: stringify(class_keys),
                 class_map: stringify(class_map),
-                dev, dontOptimize
+                dev 
             })
         ],
         dest: `${publicDest}/js`, // Output
@@ -220,14 +218,18 @@ task("web-js", () =>
                                 rollupJSON(), // Parse JSON Exports
                                 commonJS(), // Use CommonJS to compile the program
                                 nodeResolve(), // Bundle all Modules
-                                rollupBabel(babelConfig[type]) // Babelify file for uglifing
-                            ],
+                                gen ? buble({
+                                    // custom `Object.assign` (used in object spread)
+                                    objectAssign: 'Object.assign',
+                                }) : rollupBabel(babelConfig[type]) // Babelify file for uglifing
+                            ].concat(
+                                // Minify the file
+                                debug ? [] : terser(
+                                    assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
+                                )
+                            ),
                             onwarn
                         }, gen ? 'iife' : 'es'),
-                        // Minify the file
-                        debug ? null : terser(
-                            assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
-                        ),
                         rename(`${type}.min.js`), // Rename
                         header(banner),
                         dev ? null : init(), // Sourcemaps init
@@ -246,14 +248,20 @@ task("web-js", () =>
                         rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
-                        rollupBabel(babelConfig.general) // Babelify file for uglifing
-                    ],
+                        // Babelify file for uglifing
+                        buble({
+                            // custom `Object.assign` (used in object spread)
+                            objectAssign: 'Object.assign',
+                        })
+                        // rollupBabel(babelConfig.general) 
+                    ].concat(
+                        // Minify the file
+                        debug ? [] : terser(
+                            assign({}, minifyOpts, { ie8: true, ecma: 5 })
+                        )
+                    ),
                     onwarn
                 }, 'iife'),
-                // Minify the file
-                debug ? null : terser(
-                    assign({}, minifyOpts, { ie8: true, ecma: 5 })
-                ),
                 rename(minSuffix), // Rename
                 header(banner)
             ],
@@ -330,7 +338,6 @@ task('inline-assets', () =>
         pipes: [
             posthtml([
                 debug ? () => {} : tree => {
-                    let icons = require('microicon');
                     tree.match(querySelector("i.action-icon"), node => {
                         if ("inline" in node.attrs) {
                             const _attrs = node.attrs;
@@ -362,7 +369,7 @@ task('inline-assets', () =>
 
 task('optimize-class-names', () =>
     streamList([
-        dontOptimize ? null : [`${publicDest}/css/*.css`, {
+        [`${publicDest}/css/*.css`, {
             pipes: [
                 postcss([
                     postcssNative.plugin('optimize-css-name', () => {
@@ -391,7 +398,7 @@ task('optimize-class-names', () =>
             ],
             dest: `${publicDest}/css`, // Output
         }],
-        dontOptimize ? null : [`${publicDest}/*.html`, {
+        [`${publicDest}/*.html`, {
             pipes: [
                 posthtml([
                     tree => {
@@ -445,10 +452,10 @@ task('reload', done =>
 );
 
 // Gulp task to minify all files
-task('dev', parallel("client", series(parallel("html", "js"), "css")));
+task('dev', series("client", "html", "js", "css"));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', series("dev", parallel("posthtml", "sitemap"), "inline-assets", "optimize-class-names", "inline-js-css"));
+task('default', series("dev", "posthtml", "sitemap", "inline-assets", "optimize-class-names", "inline-js-css"));
 
 // Gulp task to run before watching for file changes
 task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-names"));

@@ -1,5 +1,5 @@
 let browserlist = {
-    "modern": ["> 10%"],
+    "modern": ["> 2%"],
     "general": ["defaults, IE 8"]
 };
 
