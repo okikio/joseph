@@ -213,6 +213,7 @@ task("web-js", () =>
                     pipes: [
                         // Bundle Modules
                         rollup({
+                            treeshake: true,
                             plugins: [
                                 builtins(), // Access to builtin Modules
                                 rollupJSON(), // Parse JSON Exports
@@ -243,6 +244,7 @@ task("web-js", () =>
             pipes: [
                 // Bundle Modules
                 rollup({
+                    treeshake: true,
                     plugins: [
                         builtins(), // Access to builtin Modules
                         rollupJSON(), // Parse JSON Exports
