@@ -15,8 +15,8 @@ tasks:
       nvm alias default 13 &&
       nvm use 13 &&
       npm install -g gulp yarn &&
-      yarn &&
       echo "dev=true" > .env &&
+      yarn &&
       yarn upgrade &&
       yarn watch
 

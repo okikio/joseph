@@ -4,7 +4,7 @@ const { src, task, series, dest, watch } = gulp;
 const { author, homepage, license, copyright, github } = require("./package.json");
 const { websiteURL, class_map, dev, debug } = require('./config');
 const nodeResolve = require('@rollup/plugin-node-resolve');
-const builtins = require("rollup-plugin-node-builtins");
+const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
 const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
@@ -12,9 +12,8 @@ const commonJS = require('@rollup/plugin-commonjs');
 const { init, write } = require('gulp-sourcemaps');
 const { terser } = require('rollup-plugin-terser');
 const rollupBabel = require('rollup-plugin-babel');
-const rollupJSON = require("@rollup/plugin-json");
-const { babelConfig } = require("./browserlist");
 const buble = require('@rollup/plugin-buble');
+const autoprefixer = require('autoprefixer');
 const rollup = require('gulp-better-rollup');
 const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
@@ -28,6 +27,7 @@ const postcss = require('gulp-postcss');
 const sitemap = require('gulp-sitemap');
 const header = require('gulp-header');
 const rename = require('gulp-rename');
+const csso = require("postcss-csso");
 const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
@@ -35,6 +35,19 @@ const pug = require('gulp-pug');
 
 let icons;
 (!debug) && (icons = require('microicon'));
+
+const modernConfig = {
+    "babelrc": false,
+    "presets": [
+        ["@babel/preset-env", {
+            "useBuiltIns": false,
+            "modules": 'false',
+            "targets": {
+                "browsers": ["> 2%"]
+            }
+        }]
+    ]
+};
 
 const bannerContent = [
     ` * @author         ${author}`,
@@ -177,8 +190,19 @@ task("css", () =>
             sass({ outputStyle: dev ? 'expanded' : 'compressed' })
                 .on('error', sass.logError),
             rename(minSuffix), // Rename
-            // Autoprefix &  Remove unused CSS
-            postcss(), // Rest of code is in postcss.config.js
+            // Autoprefix, Remove unused CSS & Compress CSS
+            postcss([
+                purgecss({
+                    content: ['public/**/*.html'],
+                    whitelistPatterns: [/-show$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
+                    keyframes: false,
+                    fontFace: false
+                }),
+                autoprefixer({
+                    overrideBrowserslist: ["defaults, IE 8"]
+                }),
+                csso({ sourceMap: true })
+            ]),
             header(banner),
             dev ? null : init(), // Sourcemaps init
             dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
@@ -196,7 +220,7 @@ task("env-js", () =>
             nunjucks.compile({
                 class_keys: stringify(class_keys),
                 class_map: stringify(class_map),
-                dev 
+                dev
             })
         ],
         dest: `${publicDest}/js`, // Output
@@ -215,14 +239,14 @@ task("web-js", () =>
                         rollup({
                             treeshake: true,
                             plugins: [
-                                builtins(), // Access to builtin Modules
-                                rollupJSON(), // Parse JSON Exports
+                                // rollupJSON(), // Parse JSON Exports
                                 commonJS(), // Use CommonJS to compile the program
                                 nodeResolve(), // Bundle all Modules
                                 gen ? buble({
+                                    transforms: { asyncAwait: false },
                                     // custom `Object.assign` (used in object spread)
                                     objectAssign: 'Object.assign',
-                                }) : rollupBabel(babelConfig[type]) // Babelify file for uglifing
+                                }) : rollupBabel(modernConfig) // Babelify file for uglifing
                             ].concat(
                                 // Minify the file
                                 debug ? [] : terser(
@@ -239,23 +263,23 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        dev ? null : [['public/js/*.js', '!public/js/app.js', '!public/js/*.min.js'], {
+        [[`public/js/${dev ? "vendor" : "*"}.js`, '!public/js/app.js', '!public/js/*.min.js'], {
             opts: { allowEmpty: true },
             pipes: [
                 // Bundle Modules
                 rollup({
                     treeshake: true,
                     plugins: [
-                        builtins(), // Access to builtin Modules
-                        rollupJSON(), // Parse JSON Exports
+                        // rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
                         // Babelify file for uglifing
                         buble({
+                            transforms: { asyncAwait: false },
                             // custom `Object.assign` (used in object spread)
                             objectAssign: 'Object.assign',
                         })
-                        // rollupBabel(babelConfig.general) 
+                        // rollupBabel(babelConfig.general)
                     ].concat(
                         // Minify the file
                         debug ? [] : terser(
@@ -294,11 +318,6 @@ task("client", () =>
         }]
     ])
 );
-
-task("gulp:reload", () => {
-    _execSeries("gulp pre-watch", "gulp watch");
-    process.exit();
-});
 
 task("git:push", () => {
     let commit = process.argv[3] || 'Upgrade';
@@ -371,7 +390,7 @@ task('inline-assets', () =>
 
 task('optimize-class-names', () =>
     streamList([
-        [`${publicDest}/css/*.css`, {
+        dev ? null : [`${publicDest}/css/*.css`, {
             pipes: [
                 postcss([
                     postcssNative.plugin('optimize-css-name', () => {
@@ -400,7 +419,7 @@ task('optimize-class-names', () =>
             ],
             dest: `${publicDest}/css`, // Output
         }],
-        [`${publicDest}/*.html`, {
+        dev ? null : [`${publicDest}/*.html`, {
             pipes: [
                 posthtml([
                     tree => {
@@ -466,10 +485,8 @@ task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-name
 task('watch', () => {
     browserSync.init({ server: "./public" });
 
-    watch(['gulpfile.js', 'postcss.config.js'], watchDelay, series('gulp:reload', 'reload'));
-
     watch('views/**/*.pug', watchDelay, series('html', 'css', "posthtml", "inline-assets", 'reload'));
-    watch('src/**/*.scss', watchDelay, series('css'));
+    watch('src/**/*.scss', watchDelay, series('css', "inline-assets"));
     watch('src/**/*.js', watchDelay, series('js', 'reload'));
     watch(['client/**/*'], watchDelay, series('client', "inline-assets", 'reload'));
 });

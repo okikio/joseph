@@ -51,18 +51,16 @@
         "url": "https://github.com/okikio/joseph/issues"
     },
     "dependencies": {
-        "@babel/core": "^7.8.4",
-        "@babel/preset-env": "^7.8.4",
-        "@fullhuman/postcss-purgecss": "^2.0.6",
+        "@babel/core": "^7.8.7",
+        "@babel/preset-env": "^7.8.7",
+        "@fullhuman/postcss-purgecss": "^2.1.0",
         "@rollup/plugin-buble": "^0.21.1",
         "@rollup/plugin-commonjs": "^11.0.2",
-        "@rollup/plugin-json": "^4.0.2",
         "@rollup/plugin-node-resolve": "^7.1.1",
         "@swup/head-plugin": "^1.0.2",
         "@swup/preload-plugin": "^1.0.3",
         "@swup/scroll-plugin": "^1.0.6",
         "autoprefixer": "^9.7.4",
-        "browser-sync": "^2.26.7",
         "dotenv": "^8.2.0",
         "eslint": "^6.8.0",
         "fast-stringify": "^2.0.0",
@@ -83,20 +81,22 @@
         "gulp-sourcemaps": "^2.6.5",
         "microicon": "^1.0.0-b.2",
         "moment": "^2.24.0",
-        "postcss": "^7.0.26",
+        "postcss": "^7.0.27",
         "postcss-csso": "^4.0.0",
         "posthtml-doctype": "^1.1.1",
-        "posthtml-link-noreferrer": "^1.0.5",
+        "posthtml-link-noreferrer": "^1.0.6",
         "posthtml-lorem": "^1.0.0",
         "posthtml-match-helper": "^1.0.1",
         "posthtml-textr": "^1.0.5",
         "posthtml-transformer": "^0.1.2",
-        "rollup": "^1.31.1",
-        "rollup-plugin-babel": "^4.3.3",
-        "rollup-plugin-node-builtins": "^2.1.2",
+        "rollup": "^2.0.6",
+        "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-terser": "^5.3.0",
-        "swup": "^2.0.8",
+        "swup": "^2.0.9",
         "typographic-single-spaces": "^1.0.2",
-        "yarn": "^1.22.0"
+        "yarn": "^1.22.4"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.26.7"
     }
 }

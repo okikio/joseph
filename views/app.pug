@@ -148,19 +148,20 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")
     meta(name="msapplication-TileImage", content="/favicon/ms-icon-144x144.png")
 
-    link(rel="stylesheet" href="./css/fonts.min.css" ph-inline async)
+    //- link(rel="stylesheet" href="./css/fonts.min.css" ph-inline)
     //- link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
     //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
     //- link(rel="preload" href="./maps/app.min.css.map" as="fetch" crossorigin)
-    link(rel="stylesheet" href="./css/app.min.css" ph-inline async)
+    link(rel="stylesheet" href="./css/app.min.css" ph-inline)
+    link(rel="prefetch" href="/favicon/favicon.svg" as="image" crossorigin)
 
     //- <!--[if lt IE 9]>
     //- link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- <![endif]-->
-    script(src="./js/ver-check.min.js" async)
+    script(src="./js/ver-check.min.js" ph-inline)
   body
     +link({
       class: "skip-main",
@@ -189,6 +190,6 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     block footer
       +footer
 
-    script(src=`${dev ? "./js/modern.min.js" : "./js/vendor.min.js"}` async)
+    script(src="./js/vendor.min.js" ph-inline)
     //- if !dev
       script(src="./js/service.min.js" ph-inline async)
