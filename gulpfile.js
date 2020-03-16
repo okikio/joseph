@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const { src, task, series, dest, watch } = gulp;
 
 const { author, homepage, license, copyright, github } = require("./package.json");
-const { websiteURL, class_map, dev, debug } = require('./config');
+const { websiteURL, class_map, dev, debug, githubPages } = require('./config');
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
@@ -100,9 +100,9 @@ let minifyOpts = {
     ecma: 8,
     safari10: false
 };
+let publicDest = githubPages ? 'docs' : 'public';
 let minSuffix = { suffix: ".min" };
 let watchDelay = { delay: 1000 };
-let publicDest = 'public';
 let { assign } = Object;
 
 // Streamline Gulp Tasks
@@ -193,7 +193,7 @@ task("css", () =>
             // Autoprefix, Remove unused CSS & Compress CSS
             postcss([
                 purgecss({
-                    content: ['public/**/*.html'],
+                    content: [`${publicDest}/**/*.html`],
                     whitelistPatterns: [/-show$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
                     keyframes: false,
                     fontFace: false
@@ -232,7 +232,7 @@ task("web-js", () =>
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return ['public/js/app.js', {
+                return [`${publicDest}/js/app.js`, {
                     opts: { allowEmpty: true },
                     pipes: [
                         // Bundle Modules
@@ -263,7 +263,7 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        [[`public/js/${dev ? "vendor" : "*"}.js`, '!public/js/app.js', '!public/js/*.min.js'], {
+        [[`${publicDest}/js/${dev ? "vendor" : "*"}.js`, `!${publicDest}/js/app.js`, `!${publicDest}/js/*.min.js`], {
             opts: { allowEmpty: true },
             pipes: [
                 // Bundle Modules
@@ -333,7 +333,7 @@ task("git:pull", () =>
 );
 
 task('posthtml', () =>
-    stream('public/*.html', {
+    stream(`${publicDest}/*.html`, {
         pipes: [
             posthtml([
                 // Test processes
@@ -347,7 +347,7 @@ task('posthtml', () =>
 );
 
 task('sitemap', () =>
-    stream('public/*.html', {
+    stream(`${publicDest}/*.html`, {
         pipes: [
             sitemap({ siteUrl: websiteURL })
         ]
@@ -355,7 +355,7 @@ task('sitemap', () =>
 );
 
 task('inline-assets', () =>
-    stream('public/*.html', {
+    stream(`${publicDest}/*.html`, {
         pipes: [
             posthtml([
                 debug ? () => {} : tree => {
@@ -450,7 +450,7 @@ task('optimize-class-names', () =>
 );
 
 task('inline-js-css', () =>
-    stream('public/*.html', {
+    stream(`${publicDest}/*.html`, {
         pipes: [
             posthtml([
                 // Dom process
@@ -465,7 +465,7 @@ task('inline-js-css', () =>
 );
 
 task('reload', done =>
-    stream('public/*.html', { })
+    stream(`${publicDest}/*.html`, { })
         .then((...args) => {
             browserSync.reload();
             done(...args);
@@ -483,7 +483,7 @@ task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-name
 
 // Gulp task to check to make sure a file has changed before minify that file
 task('watch', () => {
-    browserSync.init({ server: "./public" });
+    browserSync.init({ server: `./${publicDest}` });
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', "posthtml", "inline-assets", 'reload'));
     watch('src/**/*.scss', watchDelay, series('css', "inline-assets"));

@@ -2,10 +2,10 @@ let { env } = process;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
-let dontOptimize = 'dontOptimize' in env && env.dontOptimize.toString() === "true";
+let githubPages = 'github_pages' in env && env.github_pages.toString() === "true";
 
 let _exports = {
-    dev, debug, dontOptimize,
+    dev, debug, githubPages,
     "websiteURL": "https://josephojo.com",
     "class_map": {
         // Continue...
