@@ -257,8 +257,8 @@ task("web-js", () =>
                         }, gen ? 'iife' : 'es'),
                         rename(`${type}.min.js`), // Rename
                         header(banner),
-                        dev ? null : init(), // Sourcemaps init
-                        dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
+                        // dev ? null : init(), // Sourcemaps init
+                        // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
                     ],
                     dest: `${publicDest}/js` // Output
                 }];

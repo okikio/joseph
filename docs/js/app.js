@@ -6,7 +6,7 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _is, _constrain, _map, _log, optimize } from "./components/util";
+import { _is, _constrain, _map, optimize } from "./components/util";
 import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
