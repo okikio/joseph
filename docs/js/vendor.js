@@ -17,7 +17,7 @@ let loadImg = () => {
 
 try {
     let script = document.createElement("script");
-    let src = `/js/${window.isModern ? "modern" : "general"}.min.js`;
+    let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
 
     /* Depending on the browser load two different type of js file, one that supports all the new ecmascript standards,
        and a general one that uses the ecmascript 5 standard by default.
