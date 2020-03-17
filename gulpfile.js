@@ -163,7 +163,7 @@ task('html', () => stream(
     'views/pages/**/*.pug', {
         pipes: [
             // Pug compiler
-            pug({ locals: { dev, debug, websiteURL }, basedir: 'views' }),
+            pug({ locals: { dev, debug, websiteURL, githubPages }, basedir: 'views' }),
             // Rename
             rename({ extname: ".html" }),
             // Minify or Beautify html

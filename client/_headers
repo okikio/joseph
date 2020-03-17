@@ -11,7 +11,7 @@
   Link: </favicon/favicon.svg> rel=preload as=image
 
 /fonts/*
-  Cache-Control: public, immutable, max-age=31536000
+  Cache-Control: public, max-age=31536000
   Access-Control-Allow-Origin: *
 
 /fonts/*.woff2
@@ -38,8 +38,8 @@
   Content-Type: text/javascript; charset=utf-8
 
 /*.webmanifest
-  Cache-Control: public, immutable, max-age=31536000
+  Cache-Control: public, max-age=31536000
   Content-Type: application/manifest+json; charset=utf-8
 
 /favicon.ico
-  Cache-Control: public, immutable, max-age=31536000
+  Cache-Control: public, max-age=31536000
