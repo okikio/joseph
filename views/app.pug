@@ -35,7 +35,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="preconnect" href=websiteURL crossorigin)
     link(rel="dns-prefetch" href=websiteURL crossorigin)
 
-    if !dev
+    if !dev && !githubPages
       link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
       link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
 
@@ -127,11 +127,11 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
       +seo(page)
 
     <!--[if IE]>
-    link(rel="shortcut icon", href="/favicon/favicon.ico", type="image/x-icon")
+    link(rel="shortcut icon", href="../favicon/favicon.ico", type="image/x-icon")
     <![endif]-->
 
-    link(rel="manifest", href="/manifest.webmanifest")
-    link(type="text/plain" rel="author" href="/humans.txt")
+    link(rel="manifest", href="../manifest.webmanifest")
+    link(type="text/plain" rel="author" href="../humans.txt")
     link(rel="home", href=websiteURL)
 
     meta(name="theme-color", content="#2d22ca")
@@ -140,13 +140,13 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     meta(name="msapplication-TileColor", content="#2d22ca")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-title", content="Joseph Ojo")
-    meta(name="msapplication-config", content="/browserconfig.xml")
+    meta(name="msapplication-config", content="../browserconfig.xml")
     meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")
-    meta(name="msapplication-TileImage", content="/favicon/ms-icon-144x144.png")
-    link(rel="mask-icon", href="/favicon/safari-pinned-tab.svg", color="#2d22ca")
-    link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-touch-icon.png")
-    link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
-    link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
+    meta(name="msapplication-TileImage", content="../favicon/ms-icon-144x144.png")
+    link(rel="mask-icon", href="../favicon/safari-pinned-tab.svg", color="#2d22ca")
+    link(rel="apple-touch-icon", sizes="180x180", href="../favicon/apple-touch-icon.png")
+    link(rel="icon", type="image/png", sizes="32x32", href="../favicon/favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="../favicon/favicon-16x16.png")
 
     link(rel="stylesheet" href="/css/app.min.css" ph-inline)
 
