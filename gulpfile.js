@@ -20,7 +20,6 @@ const { spawn } = require('child_process');
 const gitRevSync = require('git-rev-sync');
 const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
-// const imagemin = require('gulp-imagemin');
 const postcssNative = require('postcss');
 const htmlmin = require('gulp-htmlmin');
 const postcss = require('gulp-postcss');
@@ -161,10 +160,10 @@ let _execSeries = (...cmds) => {
 };
 
 task('html', () => stream(
-    'views/pages/*.pug', {
+    'views/pages/**/*.pug', {
         pipes: [
             // Pug compiler
-            pug({ locals: { dev, debug, websiteURL } }),
+            pug({ locals: { dev, debug, websiteURL }, basedir: 'views' }),
             // Rename
             rename({ extname: ".html" }),
             // Minify or Beautify html
@@ -263,7 +262,7 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        [[`${publicDest}/js/${dev ? "vendor" : "*"}.js`, `!${publicDest}/js/app.js`, `!${publicDest}/js/*.min.js`], {
+        [[`${publicDest}/js/${dev ? "{vendor,ver-check}" : "*"}.js`, `!${publicDest}/js/app.js`, `!${publicDest}/js/*.min.js`], {
             opts: { allowEmpty: true },
             pipes: [
                 // Bundle Modules
@@ -304,17 +303,7 @@ task("client", () =>
             opts: { allowEmpty: true }
         }],
         [["client/**/*.{png,ico,svg}"], {
-            opts: { allowEmpty: true },
-            // pipes: [
-            //     imagemin({
-            //         progressive: true,
-            //         interlaced: true,
-            //         optimizationLevel: 7,
-            //         svgoPlugins: [{removeViewBox: false}],
-            //         verbose: false,
-            //         use: []
-            //     })
-            // ]
+            opts: { allowEmpty: true }
         }]
     ])
 );
@@ -333,7 +322,7 @@ task("git:pull", () =>
 );
 
 task('posthtml', () =>
-    stream(`${publicDest}/*.html`, {
+    stream(`${publicDest}/**/*.html`, {
         pipes: [
             posthtml([
                 // Test processes
@@ -347,7 +336,7 @@ task('posthtml', () =>
 );
 
 task('sitemap', () =>
-    stream(`${publicDest}/*.html`, {
+    stream(`${publicDest}/**/*.html`, {
         pipes: [
             sitemap({ siteUrl: websiteURL })
         ]
@@ -355,7 +344,7 @@ task('sitemap', () =>
 );
 
 task('inline-assets', () =>
-    stream(`${publicDest}/*.html`, {
+    stream(`${publicDest}/**/*.html`, {
         pipes: [
             posthtml([
                 debug ? () => {} : tree => {
@@ -419,7 +408,7 @@ task('optimize-class-names', () =>
             ],
             dest: `${publicDest}/css`, // Output
         }],
-        dev ? null : [`${publicDest}/*.html`, {
+        dev ? null : [`${publicDest}/**/*.html`, {
             pipes: [
                 posthtml([
                     tree => {
@@ -450,12 +439,25 @@ task('optimize-class-names', () =>
 );
 
 task('inline-js-css', () =>
-    stream(`${publicDest}/*.html`, {
+    stream(`${publicDest}/**/*.html`, {
         pipes: [
             posthtml([
+                tree => {
+                    tree.walk(node => {
+                        if (node.tag != 'html') {
+                            let _attrs = node.attrs || {}, key;
+                            if ('ph-inline' in _attrs) {
+                                node.attrs = { ..._attrs };
+                                key = node.tag == "link" ? "href" : "src";
+                                node.attrs[key] = node.attrs[key].slice(1);
+                            }
+                        }
+                        return node;
+                    });
+                },
                 // Dom process
                 debug ? () => { } : phTransformer({
-                    root: `${publicDest}`,
+                    root: `./${publicDest}`,
                     minifyJS: false, minifyCSS: false
                 })
             ]),
@@ -465,7 +467,7 @@ task('inline-js-css', () =>
 );
 
 task('reload', done =>
-    stream(`${publicDest}/*.html`, { })
+    stream(`${publicDest}/**/*.html`, { })
         .then((...args) => {
             browserSync.reload();
             done(...args);
@@ -483,11 +485,21 @@ task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-name
 
 // Gulp task to check to make sure a file has changed before minify that file
 task('watch', () => {
-    browserSync.init({ server: `./${publicDest}` });
+    browserSync.init({ 
+        server: `./${publicDest}`,
+    }, (err, $this) => {
+        $this.addMiddleware("*", (req, res) => {
+            res.writeHead(302, {
+                location: "/404.html"
+            });
+
+            res.end("Redirecting!");
+        });
+    });
 
     watch('views/**/*.pug', watchDelay, series('html', 'css', "posthtml", "inline-assets", 'reload'));
-    watch('src/**/*.scss', watchDelay, series('css', "inline-assets"));
-    watch('src/**/*.js', watchDelay, series('js', 'reload'));
+    watch('src/**/*.scss', watchDelay, series('css'));
+    watch('src/**/*.js', watchDelay, series('js', "inline-assets", 'reload'));
     watch(['client/**/*'], watchDelay, series('client', "inline-assets", 'reload'));
 });
 

@@ -1,9 +1,4 @@
-extends ../app.pug
-include ../components/sections.pug
-include ../components/layout.pug
-include ../components/banner.pug
-include ../components/layer.pug
-include ../components/text.pug
+extends /app.pug
 
 block pageInfo
   -
@@ -48,18 +43,99 @@ block content
             content: "Click here"
           })
 
-  //- Next page layer
-  +layer({
-    class: "layout-padding-horz layer-black"
-  })
+  //- Image Column layer
+  +layer
     +layout({
-      class: "layout-contain layout-padding-horz layout-padding-top"
+      class: "layout-contain-large"
     })
-      section.layout-shorten
-        +head
-          h3.style-center.style-white.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "style-center"
+      +main({
+        class: "layout-shorten-vert"
+      })
+        //- 1st Row
+        +row({
+          class: "layout-margin-dull"
         })
-          h2.style-bold.style-tertiary.style-500.style-font-large--device-gt-tablet.style-font-62 NASA
-      .layer-box.layer-box-flat.layer-tertiary-dark.layer-shadow--2.layout-margin-vert-top-larger.layout-block
+          //- 1st Column
+          +column({
+            class: "layout-col-12 layout-padding-small"
+          })
+            +link({
+              href: "/projects/google-designs",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Google Design",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/engineer-piping",
+                  alt: "An image of large pipes for a Power Plant from Unsplash.",
+                }
+              })
+
+        //- 2nd Row
+        +row({
+          class: "layout-margin-dull"
+        })
+          //- 1st Column
+          +column({
+            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/nasa",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Nasa",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+                }
+              })
+
+        //- 3rd Row
+        +row({
+          class: "layout-margin-dull"
+        })
+          //- 1st Column
+          +column({
+            class: "layout-col-12 layout-padding-small"
+          })
+            +link({
+              href: "/projects/google-designs",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Google Design",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/engineer-piping",
+                  alt: "An image of large pipes for a Power Plant from Unsplash.",
+                }
+              })
+
+
+        //- 4th Row
+        +row({
+          class: "layout-margin-dull"
+        })
+          //- 1st Column
+          +column({
+            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/nasa",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Nasa",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+                }
+              })

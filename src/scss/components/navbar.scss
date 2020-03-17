@@ -100,8 +100,9 @@
             // display: inline-block;
             line-height: normal;
             min-height: 20px;
-            display: inline;
-            width: 20px;
+            display: inline; 
+            height: 20px;
+            width: auto;
         }
 
         &-title {
@@ -172,7 +173,7 @@
                                 background-color .5s ease;
                     transform: translate3d(0, $height - 14px, 0) scaleX(0);
                     // background-color: $primary;
-                    @include applyTheme(background-color, "primary");
+                    @include applyTheme(background-color, "primary-dark");
                     border: 1.5px solid transparent;
                     transform-origin: 100% 50%;
                     transition-delay: 70ms;
@@ -333,14 +334,14 @@
                 & {
                     transition: color .5s ease;
                     color: $primary;
-                    color: var(--dark, primary);
+                    color: var(--dark, $primary);
                     // @include applyTheme(color, "primary");
                 }
 
                 &:hover, &:focus {
                     cursor: pointer;
                     color: $primary;
-                    color: var(--dark, primary);
+                    color: var(--dark, $primary);
                 }
             }
 

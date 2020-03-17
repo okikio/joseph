@@ -140,7 +140,7 @@ is meant for testing, testing how the website will react if it were published to
 ### *Editing*
 You will most likely only change some text and an image here and there. To add new pages and edit old ones you need to navigate to [views/pages](/views/pages), right click on the folder and create a new file, make sure it ends in a `.pug`. You can call it whatever you want (Note: the name of the file is the name you use to access it, for example, `blog-for-october.pug` will be accessed using this `[website-domain.com]/blog-for-october`. You can also create folders, `2020/cool-things.pug` => `[website-domain.com]/2020/cool-things`). Once you have created your new webpage copy this to it,
 ```pug
-extends ../app.pug
+extends /app.pug
 include ../components/sections.pug
 include ../components/layout.pug
 include ../components/column.pug

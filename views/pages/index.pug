@@ -1,12 +1,4 @@
-extends ../app.pug
-include ../components/sections.pug
-include ../components/layout.pug
-include ../components/column.pug
-include ../components/layer.pug
-include ../components/text.pug
-include ../components/tile.pug
-include ../components/hero.pug
-include ../components/row.pug
+extends /app.pug
 
 block content
   //- Hero layer
@@ -134,16 +126,16 @@ block content
             class: "layout-col-9 layout-padding-small"
           })
             +link({
-              href: "/about-me",
+              href: "/projects/google-designs",
               class: "layout-block"
             }, true)
               +tile({
-                title: "Google Designs About",
+                title: "Google Design",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
                   class: "effect-parallax",
-                  src: "cloudinary/white_car",
-                  alt: "An image of what looks to be a turquoise Chevrolet, from Unsplash.",
+                  src: "cloudinary/engineer-piping",
+                  alt: "An image of large pipes for a Power Plant from Unsplash.",
                 }
               })
 
@@ -156,19 +148,27 @@ block content
             class: "layout-col-9 layout-padding-small layout-padding-vert-large"
           })
             +link({
-              href: "/my-projects",
-              class: "layout-block layer-tile-outline"
+              href: "/projects/nasa",
+              class: "layout-block"
             }, true)
               +tile({
-                title: "Google Designs Project",
-                class: "layer-box layer-surface layout-block",
+                title: "Nasa",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  src: "cloudinary/blue-sky",
-                  alt: "An image of a bright blue sky with small patches of clouds over two appartment high rises that are just barely in frame, from Unsplash.",
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
                 }
               })
 
           //- Empty alignment Column
           +column({
             class: "layout-col-3"
+          })
+        
+        div.layout-block.style-center
+          +link({
+            href: "/my-projects",
+            class: "style-500 style-font-30 style-font-title layout-padding layout-padding-horz-large layout-margin-top-larger",
+            content: "More..."
           })

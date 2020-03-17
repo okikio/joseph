@@ -1,3 +1,26 @@
 {
-   "editor.autoSave": "true"
+   "editor.autoSave": "true",
+   "pugbeautify.tabSize": 2,
+   "editor.suggestSelection": "first",
+   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+   "git.autofetch": true,
+   "git.confirmSync": false,
+   "explorer.confirmDelete": false,
+   "editor.fontSize": 13,
+   "[javascript]": {
+       "editor.defaultFormatter": "vscode.typescript-language-features"
+   },
+   "javascript.updateImportsOnFileMove.enabled": "always",
+   "[jsonc]": {
+       "editor.defaultFormatter": "vscode.json-language-features"
+   },
+   "liveServer.settings.root": "/docs",
+   "editor.columnSelection": false,
+   "editor.multiCursorModifier": "ctrlCmd",
+   "files.watcherExclude": {
+       "**/.git/objects/**": true,
+       "**/.git/subtree-cache/**": true,
+       "**/node_modules/*/**": true
+   },
+   "liveServer.settings.file": "/404.html"
 }

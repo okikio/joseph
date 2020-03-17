@@ -16,13 +16,6 @@
 
         .is-animating & {
             opacity: 0 !important;
-        }
-
-        .is-animating & {
-            transform: translate3d(0, 60px, 0) !important;
-        }
-
-        html.is-animating.is-leaving & {
             transform: translate3d(0, -60px, 0) !important;
         }
     }

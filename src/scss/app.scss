@@ -29,20 +29,20 @@
 
 /* -- Fonts -- */
 /*
-    * font-family: 'Montserrat', sans-serif;
-    * font-family: 'Varela Round', sans-serif;
-    * font-family: 'Bungee Inline', sans-serif;
-    * font-family: 'Material Icons', sans-serif;
     * font-family: 'Roboto', sans-serif;
+    * font-family: 'Montserrat', sans-serif;
+    * font-family: 'Frank Ruhl Libre', serif;
+    * font-family: 'Varela Round', sans-serif;
+    * font-family: 'Material Icons', sans-serif;
 */
 
 // Variables
-$primary-light: #6832ff;
-$primary: #4500ff;
-$primary-dark: #2d22ca; // #774bec
-$secondary-light: #ff3887;
-$secondary: #ff0266;
-$secondary-dark: #dc0057;
+$primary-light: #4e41ff;
+$primary: #2d22ca;
+$primary-dark: #271daf; // #774bec
+$secondary-light: #ff4d79;
+$secondary: #e93461;
+$secondary-dark: #ce2952;
 $tertiary-light: #ffe851;
 $tertiary: #ffde03;
 $tertiary-dark: #e5c702;
@@ -136,12 +136,14 @@ $colors: (
 );
 
 $dark-colors: (
-    "primary-light": $primary-light,
-    "primary": $primary,
-    "primary-dark": #7860b7,
-    "secondary-light": $secondary-light,
-    "secondary": $secondary,
-    "secondary-dark": $secondary-dark,
+    "primary-light": lighten($primary-dark, 5%),
+    "primary": lighten($primary, 15%),
+    "primary-dark": lighten($primary-light, 15%),
+
+    "secondary-light": lighten($secondary-dark, 15%),
+    "secondary": lighten($secondary, 5%),
+    "secondary-dark": lighten($secondary-light, 15%),
+
     "tertiary-light": $tertiary-light,
     "tertiary": $tertiary,
     "tertiary-dark": $tertiary-dark,

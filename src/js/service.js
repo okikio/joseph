@@ -28,8 +28,8 @@ if ('serviceWorker' in navigator) {
     } else {
         // Register the service worker
         navigator.serviceWorker
-            .register('./worker.js', {
-                scope: "./"
+            .register('/worker.js', {
+                scope: "/"
             })
             .then(({ scope }) => {
                 console.log(`[PWA] Service worker has been registered for scope: ${scope}`);

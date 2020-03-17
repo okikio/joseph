@@ -1,4 +1,4 @@
-include ./image.pug
+include /components/image.pug
 
 mixin hero(value = {})
 	- let { content, title, image } = value;
@@ -16,7 +16,7 @@ mixin hero(value = {})
 						.layer-main
 							h2.style-font-family-bold.style-font-weight-300.style-white.layer-main-text(itemprop="description")!= content
 						.layout-align-self-end
-							button.layer-footer.action-btn.action-btn-hover.layer-shadow--1.layer-round.layout-padding-smallest.layer-secondary.layer-secondary-light-hover.layer-secondary-light-focus.style-white.style-white-hover.style-white-focus.layer-hero-scroll-down(type="button" tabindex="0")
+							button.layer-footer.action-btn.action-btn-hover.layer-shadow--1.layer-round.layout-padding-smallest.style-white.style-white-hover.style-white-focus.layer-hero-scroll-down(type="button" tabindex="0")
 								span.action-btn-group
 									i.action-icon.style-font-size-24(inline) expand_more
 									span.action-btn-section

@@ -13,7 +13,7 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "liveServer.settings.root": "/public",
+    "liveServer.settings.root": "/docs",
     "editor.columnSelection": false,
     "editor.multiCursorModifier": "ctrlCmd",
     "files.watcherExclude": {

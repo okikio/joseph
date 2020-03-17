@@ -1,5 +1,5 @@
-include ./link.pug
-include ./image.pug
+include /components/link.pug
+include /components/image.pug
 
 mixin navbar(value = {})
   - let { name } = value;
@@ -16,7 +16,7 @@ mixin navbar(value = {})
             href: "/",
             class: "navbar-title style-primary-dark-hover style-primary-dark-focus"
           })(itemprop="url")
-            img.navbar-logo(src="./favicon/favicon.svg" alt="Logo." inline)
+            img.navbar-logo(src="/favicon/favicon.svg" alt="Logo.")
             span.navbar-title-line
             span.layout-inline-block(itemprop="name") JOSEPH!
           .layout-spacer

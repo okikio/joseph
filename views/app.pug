@@ -1,10 +1,20 @@
 doctype html
 html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
   head
-    include ./components/navbar.pug
-    include ./components/footer.pug
-    include ./components/link.pug
-    include ./components/seo.pug
+    include /components/sections.pug
+    include /components/layout.pug
+    include /components/banner.pug
+    include /components/column.pug
+    include /components/navbar.pug
+    include /components/footer.pug
+    include /components/image.pug
+    include /components/layer.pug
+    include /components/text.pug
+    include /components/tile.pug
+    include /components/hero.pug
+    include /components/link.pug
+    include /components/seo.pug
+    include /components/row.pug
 
     -
       let defaults = {
@@ -32,6 +42,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     meta(charset="utf-8")
     meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+    //- base(href="/joseph/")
 
     script(type="application/ld+json").
       {
@@ -51,7 +62,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
             "logo": {
               "@type": "ImageObject",
               "@id": "#{page.websiteURL}/#logo",
-              "url": "#{page.websiteURL}/favicon/android-icon-512x512.png",
+              "url": "#{page.websiteURL}/favicon/android-chrome-512x512.png",
               "width": 512,
               "height": 512,
               "caption": "Joseph Ojo's Logo"
@@ -107,61 +118,42 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     //- meta(name="twitter:site", content="@jo-ojo")
     meta(property="article:author" content="Joseph Ojo")
     meta(property="og:site_name" content=websiteURL.replace("https://", ""))
-    meta(itemprop="image" content=`${websiteURL}/favicon/android-icon-512x512.png`)
-    meta(property="og:image" content=`${websiteURL}/favicon/android-icon-512x512.png`)
-    meta(name="twitter:image" content=`${websiteURL}/favicon/android-icon-512x512.png`)
+    meta(itemprop="image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+    meta(property="og:image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+    meta(name="twitter:image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
 
     block seo
       +seo(page)
 
-    link(rel="apple-touch-icon", sizes="57x57", href="./favicon/apple-icon-57x57.png")
-    link(rel="apple-touch-icon", sizes="60x60", href="./favicon/apple-icon-60x60.png")
-    link(rel="apple-touch-icon", sizes="72x72", href="./favicon/apple-icon-72x72.png")
-    link(rel="apple-touch-icon", sizes="76x76", href="./favicon/apple-icon-76x76.png")
-    link(rel="apple-touch-icon", sizes="114x114", href="./favicon/apple-icon-114x114.png")
-    link(rel="apple-touch-icon", sizes="120x120", href="./favicon/apple-icon-120x120.png")
-    link(rel="apple-touch-icon", sizes="144x144", href="./favicon/apple-icon-144x144.png")
-    link(rel="apple-touch-icon", sizes="152x152", href="./favicon/apple-icon-152x152.png")
-    link(rel="apple-touch-icon", sizes="180x180", href="./favicon/apple-icon-180x180.png")
-    link(rel="mask-icon", href="./favicon/favicon.svg", size="any", color="#000000")
-
-    link(rel="icon", type="image/png", sizes="512x512", href="./favicon/android-icon-512x512.png")
-    link(rel="icon", type="image/png", sizes="192x192", href="./favicon/android-icon-192x192.png")
-    link(rel="icon", type="image/png", sizes="144x144", href="./favicon/android-icon-144x144.png")
-    link(rel="icon", type="image/png", sizes="32x32", href="./favicon/favicon-32x32.png")
-    link(rel="icon", type="image/png", sizes="96x96", href="./favicon/favicon-96x96.png")
-    link(rel="icon", type="image/png", sizes="16x16", href="./favicon/favicon-16x16.png")
-
     <!--[if IE]>
-    link(rel="shortcut icon", href="./favicon/favicon.ico", type="image/x-icon")
+    link(rel="shortcut icon", href="/favicon/favicon.ico", type="image/x-icon")
     <![endif]-->
 
-    link(rel="manifest", href="manifest.webmanifest")
+    link(rel="manifest", href="/manifest.webmanifest")
     link(type="text/plain" rel="author" href="/humans.txt")
     link(rel="home", href=websiteURL)
 
     meta(name="theme-color", content="#2d22ca")
     meta(name="twitter:card", content="summary")
-    meta(name="msapplication-TileColor", content="#3b3c3e")
-    meta(name="apple-mobile-web-app-title" content="jo-ojo")
+    meta(name="application-name", content="Joseph Ojo")
+    meta(name="msapplication-TileColor", content="#2d22ca")
     meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(name="apple-mobile-web-app-title", content="Joseph Ojo")
+    meta(name="msapplication-config", content="/browserconfig.xml")
     meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")
-    meta(name="msapplication-TileImage", content="./favicon/ms-icon-144x144.png")
+    meta(name="msapplication-TileImage", content="/favicon/ms-icon-144x144.png")
+    link(rel="mask-icon", href="/favicon/safari-pinned-tab.svg", color="#2d22ca")
+    link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-touch-icon.png")
+    link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
+    link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
 
-    //- link(rel="stylesheet" href="./css/fonts.min.css" ph-inline)
-    //- link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
-    //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
-    //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" type="font/woff2" crossorigin)
-    //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" type="font/woff2" crossorigin)
-    //- link(rel="preload" href="./maps/app.min.css.map" as="fetch" crossorigin)
-    link(rel="stylesheet" href="./css/app.min.css" ph-inline)
-    //- link(rel="prefetch" href="./favicon/favicon.svg" as="image" crossorigin)
+    link(rel="stylesheet" href="/css/app.min.css" ph-inline)
 
     //- <!--[if lt IE 9]>
     //- link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- <![endif]-->
-    script(src="./js/ver-check.min.js" ph-inline)
+    script(src="/js/ver-check.min.js" ph-inline)
   body
     +link({
       class: "skip-main",
@@ -190,6 +182,6 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     block footer
       +footer
 
-    script(src="./js/vendor.min.js" ph-inline)
+    script(src="/js/vendor.min.js" ph-inline)
     //- if !dev
-      script(src="./js/service.min.js" ph-inline async)
+      script(src="/js/service.min.js" ph-inline async)

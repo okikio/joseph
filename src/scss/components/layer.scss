@@ -130,7 +130,9 @@
         &-scroll-down {
             transition: background-color .5s ease;
             // background: $white;
-            @include applyTheme(background-color, "white");
+            // @include applyTheme(background-color, "secondary");
+            background-color: $secondary;
+            background-color: var(--secondary-light, $secondary);
             position: relative;
             z-index: 250;
 
@@ -144,6 +146,11 @@
 
             @media #{$screen-size-desktop} {
                 margin-bottom: -270px;
+            }
+
+            &:hover, &:focus {
+                background-color: $secondary-light;
+                background-color: var(--secondary, $secondary-light);
             }
         }
 
@@ -281,7 +288,8 @@
 
         &-flat {
             &,
-            & .layer-image {
+            & .layer-image,
+            & .layer-image-overlay {
                 border-radius: 0 !important;
             }
         }

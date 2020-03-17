@@ -70,14 +70,16 @@ html {
 
 ::selection {
     transition: background-color .5s ease;
-    background-color: $primary-dark;
-    background-color: var(--primary-dark, $primary-dark);
-    color: darken(#fff, 15%);
+    background-color: lighten($primary-dark, 15%);
+    background-color: var(--primary-dark, lighten($primary-dark, 15%));
+    color: $white;
 }
 
-a::selection {
-    color: $secondary;
-}
+// a::selection {
+//     background-color: $secondary-dark;
+//     background-color: var(--secondary-dark, $secondary-dark);
+//     color: $white;
+// }
 
 h1,
 h2,
@@ -157,8 +159,8 @@ img {
 }
 
 a {
-    color: darken($secondary-dark, 2%);
-    color: var(--secondary-light, darken($secondary-dark, 2%));
+    color: $secondary-dark;
+    color: var(--secondary-light, $secondary-dark);
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
@@ -166,8 +168,8 @@ a {
     &:hover,
     &:focus {
         text-decoration: underline;
-        color: $secondary;
-        color: var(--secondary, $secondary);
+        color: lighten($secondary, 15%);
+        color: var(--secondary, lighten($secondary, 15%));
     }
 }
 
@@ -260,7 +262,6 @@ a.skip-main {
 .layer, .footer {
     a.focus-box {
         & {
-            text-decoration: underline;
             padding: 3px;
             // padding-left: 0;
 

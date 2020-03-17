@@ -4,7 +4,7 @@
     "description": "The porfolio of Joseph ojo, it contains all his amazing projects etc...",
     "scripts": {
         "test": "gulp",
-        "watch": "gulp && gulp watch",
+        "watch": "gulp default  && gulp watch",
         "develop": "gulp dev",
         "build": "gulp",
         "publish": "gulp git:push",
@@ -69,7 +69,6 @@
         "gulp-better-rollup": "^4.0.1",
         "gulp-header": "^2.0.9",
         "gulp-htmlmin": "^5.0.1",
-        "gulp-imagemin": "^7.1.0",
         "gulp-nunjucks": "^5.0.1",
         "gulp-postcss": "^8.0.0",
         "gulp-posthtml": "^3.0.4",

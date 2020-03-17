@@ -1,0 +1,72 @@
+extends /app.pug
+
+block pageInfo
+  -
+    let page = {
+      websiteURL,
+      url: "/projects/google-designs",
+      name: "google-designs",
+      title: "Google Designs - Yes that Google?",
+      description: "I worked with the Google Designs team to... Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
+    };
+
+block content
+  //- Banner layer
+  +banner({
+    title: "A project I did with Google.",
+    content: "I worked with the Google Designs team to... Lorem Ipsium dolor sit amet, tempor...",
+    image: {
+      class: "effect-parallax hero-img",
+      src: "cloudinary/engineer-piping",
+      alt: "An image of large pipes for a Power Plant from Unsplash."
+    }
+  })
+
+  //- Intro layer
+  +layer({
+    class: "layout-padding-horz"
+  })
+    +layout({
+      class: "layout-shorten layout-contain"
+    })
+      +head("What did I do?")
+      +main({
+        class: "layout-padding-vert-small"
+      })
+        +p(" ")
+          span.layout-margin-horz-left-large.layout-inline-block= " "
+          span.layout-inline.layout-margin-dull(lorem="1") 
+          p.layout-inline.layout-margin-dull(lorem="3")
+          +link({
+            href: "/",
+            class: "layout-margin-horz-left-mini",
+            content: "Click here"
+          })
+
+  //- Next page layer
+  +layer({
+    class: "layout-padding-horz layer-black"
+  })
+    +layout({
+      class: "layout-contain layout-padding-horz layout-padding-top"
+    })
+      section.layout-shorten
+        +head
+          h3.style-center.style-white.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
+        +main({
+          class: "style-center"
+        })
+          h2.style-bold.style-tertiary.style-500.style-font-large--device-gt-tablet.style-font-62 Nasa
+
+      +link({
+        href: "/projects/nasa",
+        class: "layout-block"
+      }, true)
+        +tile({
+          class: "layer-box layer-box-flat layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+          image: {
+            class: "effect-parallax",
+            src: "cloudinary/aerial-photo-of-brown-mountains",
+            alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+          }
+        })
