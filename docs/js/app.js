@@ -192,8 +192,8 @@ on(document, "ready", () => {
                 containers: ["[data-container]"],
                 plugins: [
                     new preload(), // Preload pages
-                    new headPlugin() // Replace the contents of the head elements
-                ].concat(
+                    new headPlugin(), // Replace the contents of the head elements
+
                     // For every new page, scroll to the top smoothly
                     new scrollPlugin({
                         doScrollingRightAway: false,
@@ -201,7 +201,7 @@ on(document, "ready", () => {
                         scrollFriction: 0.3,
                         scrollAcceleration: 0.04,
                     })
-                )
+                ]
             });
 
             // Remove initial cache, the inital cache is always incomplete
