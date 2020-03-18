@@ -276,11 +276,11 @@ $sizes: (
     @include propertyList($property, $name, $colors, true, "focus");
 }
 
-@import "./components/fonts.scss";
-@import "./components/base.scss";
-@import "./components/navbar.scss";
-@import "./components/style.scss";
-@import "./components/action.scss";
-@import "./components/layout.scss";
-@import "./components/layer.scss";
-@import "./components/transition.scss";
+@import "/components/fonts.scss";
+@import "/components/base.scss";
+@import "/components/navbar.scss";
+@import "/components/style.scss";
+@import "/components/action.scss";
+@import "/components/layout.scss";
+@import "/components/layer.scss";
+@import "/components/transition.scss";
