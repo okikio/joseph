@@ -449,7 +449,7 @@ task('inline-js-css', () =>
                             if ('ph-inline' in _attrs) {
                                 node.attrs = { ..._attrs };
                                 key = node.tag == "link" ? "href" : "src";
-                                node.attrs[key] = node.attrs[key].slice(2);
+                                node.attrs[key] = node.attrs[key].slice(1);
                             }
                         }
                         return node;
