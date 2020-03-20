@@ -128,7 +128,7 @@
         }
 
         &-scroll-down {
-            transition: background-color .5s ease;
+            transition: background-color .5s ease, color .5s ease;
             // background: $white;
             // @include applyTheme(background-color, "secondary");
             background-color: $secondary;
@@ -151,6 +151,11 @@
             &:hover, &:focus {
                 background-color: $secondary-light;
                 background-color: var(--secondary, $secondary-light);
+            }
+
+            &, &:hover {
+                color: $white;
+                color: var(--black, $white);
             }
         }
 
