@@ -153,7 +153,7 @@
                 background-color: var(--secondary, $secondary-light);
             }
 
-            &, &:hover {
+            &, &:hover, &:focus {
                 color: $white;
                 color: var(--black, $white);
             }
