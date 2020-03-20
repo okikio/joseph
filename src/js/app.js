@@ -31,11 +31,11 @@ on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
 });
 
-on(_navLink, "click", () => {
-    if (width(window) <= 700) {
-        removeClass(_navbar, "navbar-show");
-    }
-});
+// on(_navLink, "click", () => {
+//     if (width(window) >= 700) {
+//         removeClass(_navbar, "navbar-show");
+//     }
+// });
 
 // On backup button click animate back to the top
 on(_backUp, "click", () => {
@@ -214,6 +214,10 @@ on(document, "ready", () => {
                 removeClass(_navLink, "navbar-link-focus");
                 each(_navLink, _link => {
                     href == _link.href && addClass(_link, "navbar-link-focus");
+                    
+                    if (width(window) <= 700) {
+                        removeClass(_navbar, "navbar-show");
+                    }
                 });
             });
         }
