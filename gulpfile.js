@@ -17,7 +17,6 @@ const autoprefixer = require('autoprefixer');
 const rollup = require('gulp-better-rollup');
 const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
-const gitRevSync = require('git-rev-sync');
 const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
 const postcssNative = require('postcss');
@@ -53,7 +52,6 @@ const bannerContent = [
     ` * @link           ${homepage}`,
     ` * @github         ${github}`,
     ` * @build          ${moment().format("llll")} ET`,
-    ` * @release        ${gitRevSync.long()} [${gitRevSync.branch()}]`,
     ` * @license        ${license}`,
     ` * @copyright      Copyright (c) ${moment().format("YYYY")}, ${copyright}.`,
 ];
@@ -485,7 +483,7 @@ task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-name
 
 // Gulp task to check to make sure a file has changed before minify that file
 task('watch', () => {
-    browserSync.init({ 
+    browserSync.init({
         server: `./${publicDest}`,
     }, (err, $this) => {
         $this.addMiddleware("*", (req, res) => {
