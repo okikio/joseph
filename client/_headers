@@ -1,5 +1,5 @@
 /*
-  Cache-Control: public, max-age=1800
+  Cache-Control: public, max-age=18000
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
