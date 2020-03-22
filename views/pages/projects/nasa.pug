@@ -24,7 +24,7 @@ block content
 
   //- Intro layer
   +layer({
-    class: "layout-padding-horz"
+    class: "layout-padding-horz-default--device-gt-tablet"
   })
     +layout({
       class: "layout-shorten layout-contain"
@@ -45,18 +45,19 @@ block content
 
   //- Next page layer
   +layer({
-    class: "layout-padding-horz layer-black"
+    class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
   })
-    +layout({
-      class: "layout-contain layout-padding-horz layout-padding-top"
+    +head({
+      class: "layout-padding-top-default"
     })
-      section.layout-shorten
-        +head
-          h3.style-center.style-white.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "style-center"
-        })
-          h2.style-bold.style-tertiary.style-500.style-font-large--device-gt-tablet.style-font-62 Googe Designs
+      h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
+    +layout({
+      class: "layout-contain layout-padding-horz--device-gt-tablet"
+    })
+      +main({
+        class: "layout-padding-vert-sub-large--device-gt-tablet"
+      })
+        p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Google Designs
 
       +link({
         href: "/projects/google-designs",

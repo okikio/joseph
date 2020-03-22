@@ -24,11 +24,7 @@
         &-show,
         &:hover {
             .navbar-layout {
-                // $border-color: darken($very-light, 8%);
                 box-shadow: 0 5px 25px rgba(0, 0, 50, .12);
-                @include applyTheme(background-color, "surface");
-                // background: $surface;
-                // background: #3b3c3e;
 
                 &:before {
                     @include applyTheme(background-color, "surface");
@@ -37,19 +33,8 @@
 
             .navbar-title-line {
                 border-left-color: darken($background, 14%);
-                // border-left-color: var(--background);
             }
         }
-
-        // &:hover .navbar-layout {
-        //     $border-color: $primary;
-
-        //     &, &:before {
-        //         border-bottom-color: $border-color;
-        //         border-right-color: $border-color;
-        //         border-left-color: $border-color;
-        //     }
-        // }
 
         &-fixed {
             position: fixed;
@@ -58,23 +43,18 @@
         }
 
         &-layout {
-            // transition: border-color .5s ease;
-            border-bottom: 1px solid transparent;
-            border-right: 1px solid transparent;
-            border-left: 1px solid transparent;
-            border-radius: 0 0 $radius $radius;
-            background-color: transparent;
             height: $height;
             margin: 0 auto;
 
+            &, &:before {
+                border-radius: 0 0 $radius $radius;
+
+            }
+
             &:before {
                 @extend .layout-contain-large;
-                transition: background-color .5s ease, border-color .5s ease;
-                border-bottom: 1px solid transparent;
-                border-right: 1px solid transparent;
-                border-left: 1px solid transparent;
-                border-radius: 0 0 $radius $radius;
-                background-color: transparent;
+                transition: background-color .5s ease;
+                @include applyTheme(background-color, "background");
                 position: absolute;
                 display: block;
                 height: 100%;
@@ -87,8 +67,8 @@
         }
 
         &-head {
-            border-bottom: 1px solid transparent;
-            transition: background-color .5s ease, border-color .5s ease;
+            transition: background-color .5s ease;
+            @include applyTheme(background-color, "background");
             flex-direction: row;
             align-items: center;
             flex-wrap: nowrap;
@@ -97,10 +77,9 @@
 
         &-logo {
             transform: translate3d(0, 4px, 0);
-            // display: inline-block;
             line-height: normal;
             min-height: 20px;
-            display: inline; 
+            display: inline;
             height: 20px;
             width: auto;
         }
@@ -172,7 +151,6 @@
                     transition: transform .25s cubic-bezier(.25, .46, .45, .94),
                                 background-color .5s ease;
                     transform: translate3d(0, $height - 14px, 0) scaleX(0);
-                    // background-color: $primary;
                     @include applyTheme(background-color, "primary-dark");
                     border: 1.5px solid transparent;
                     transform-origin: 100% 50%;
@@ -189,7 +167,6 @@
             &:focus,
             &-focus {
                 text-decoration: none;
-                // color: $black; // #e6e6e6
                 @include applyTheme(color, "dark");
 
                 .navbar-link-content:before {
@@ -205,16 +182,7 @@
 
             &-focus {
                 &, &:focus {
-                    color: $primary-dark;
-                    // color: var(--primary-light, $primary-dark);
                     @include applyTheme(color, "primary-dark");
-                    // @include applyTheme(color, "primary");
-                }
-
-                &:before {
-                    transition: background-color .5s ease;
-                    // background-color: $primary-dark;
-                    @include applyTheme(background-color, "dark");
                 }
             }
         }
@@ -238,6 +206,12 @@
                 flex-direction: column;
             }
 
+            &-layout {
+                &, &:before {
+                    border-radius: 0;
+                }
+            }
+
             &-head {
                 padding-right: $size-small;
                 position: relative;
@@ -246,12 +220,12 @@
             }
 
             &-main {
-                border-bottom: 1px solid transparent;
                 box-shadow: 0 5px 25px transparent;
-                transition: transform .55s ease, border-color .5s ease;
-                transform: translate3d(0, -150%, 0);
+                transition: transform .45s ease, opacity .35s ease;
+                transform: translate3d(0, calc(-100% - 60px), 0);
                 display: block;
                 width: 100%;
+                opacity: 0;
                 z-index: 0;
             }
 
@@ -269,37 +243,16 @@
                 }
             }
 
-            .navbar-layout {
-                $border-color: none;
-
-                &, &:before {
-                    border-bottom: $border-color;
-                    border-right: $border-color;
-                    border-left: $border-color;
-                    border-radius: 0;
-                }
-            }
-
             &:hover,
             &-focus,
             &-show {
                 .navbar-head {
-                    // background: $surface;
                     @include applyTheme(background-color, "surface");
                 }
 
                 .navbar-head,
                 .navbar-main {
                     box-shadow: 0 0 25px rgba(0, 0, 50, .12);
-                    $border-color: darken($very-light, 8%); // #3b3c3e
-                    border-bottom-color: $border-color;
-                    border-right-color: $border-color;
-                    border-left-color: $border-color;
-
-                    $border-color: var(--surface, darken($very-light, 8%)); // var(--dark); // #3b3c3e
-                    border-bottom-color: $border-color;
-                    border-right-color: $border-color;
-                    border-left-color: $border-color;
                 }
             }
 
@@ -310,6 +263,7 @@
 
                 .navbar-main {
                     transform: translate3d(0, 0, 0);
+                    opacity: 1;
                 }
             }
 
@@ -333,13 +287,13 @@
             &-menu {
                 & {
                     transition: color .5s ease;
-                    color: $primary;
-                    color: var(--dark, $primary);
-                    // @include applyTheme(color, "primary");
                 }
 
                 &:hover, &:focus {
                     cursor: pointer;
+                }
+
+                &, &:hover, &:focus {
                     color: $primary;
                     color: var(--dark, $primary);
                 }

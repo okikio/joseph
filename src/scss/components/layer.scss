@@ -129,10 +129,7 @@
 
         &-scroll-down {
             transition: background-color .5s ease, color .5s ease;
-            // background: $white;
-            // @include applyTheme(background-color, "secondary");
-            background-color: $secondary;
-            background-color: var(--secondary-light, $secondary);
+            @include applyTheme(background-color, "secondary-light");
             position: relative;
             z-index: 250;
 
@@ -149,8 +146,7 @@
             }
 
             &:hover, &:focus {
-                background-color: $secondary-light;
-                background-color: var(--secondary, $secondary-light);
+                @include applyTheme(background-color, "secondary");
             }
 
             &, &:hover, &:focus {
@@ -191,7 +187,7 @@
 
             @media (max-width: 500px) {
                 line-height: 1.5;
-                font-size: 20px;
+                font-size: 18px;
             }
 
             @media (min-width: 500px) {
@@ -263,6 +259,7 @@
 
         &-outline:hover .layer-image-overlay {
             border-color: $secondary-light;
+            border-color: var(--secondary-light, $tertiary);
         }
 
         &,
@@ -332,6 +329,28 @@
 
         &-show {
             opacity: 1;
+        }
+    }
+
+    &-next {
+        background-color: $white;
+
+        @media (prefers-color-scheme: dark) {
+            background-color: darken(#292d33, 5%);
+        }
+
+        .layer-title,
+        .layer-content {
+            color: var(--tertiary, $primary);
+            text-align: center;
+        }
+
+        @media #{$screen-size-gt-tablet} {
+            margin-bottom: $size-extra-large;
+
+            .layer-tile {
+                margin-bottom: -$size-extra-large;
+            }
         }
     }
 }

@@ -40,14 +40,14 @@
 $primary-light: #4e41ff;
 $primary: #2d22ca;
 $primary-dark: #271daf; // #774bec
-$secondary-light: #ff4d79;
-$secondary: #e93461;
-$secondary-dark: #ce2952;
+$secondary-light: #ff3164;
+$secondary: #ff1751;
+$secondary-dark: #ef1f53;
 $tertiary-light: #ffe851;
 $tertiary: #ffde03;
 $tertiary-dark: #e5c702;
 
-$background: #ecf1f7; // #202123
+$background: #e2ebf5; // #202123
 $surface: #fff; //  #3b3c3e
 
 $white: #fff;
@@ -148,7 +148,7 @@ $dark-colors: (
     "tertiary": $tertiary,
     "tertiary-dark": $tertiary-dark,
 
-    "background": #202123,
+    "background": #161618,
     "surface": #3b3c3e,
     "transparent": transparent,
 
@@ -166,7 +166,7 @@ $dark-colors: (
 $fonts: (
     "title": $title-font,
     "light": $light-font,
-    "icon": $icon-font,
+    // "icon": $icon-font,
     "regular": $regular-font,
     "bold": $bold-font
 );
@@ -225,10 +225,6 @@ $sizes: (
 }
 
 :root {
-    // @each $name, $value in $colors {
-    //     --#{$name}: #{$value};
-    // }
-
     @media (prefers-color-scheme: dark) {
         @each $name, $value in $dark-colors {
             --#{$name}: #{$value};

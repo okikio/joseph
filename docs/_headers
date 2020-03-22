@@ -1,5 +1,5 @@
 /*
-  Cache-Control: public, max-age=1800
+  Cache-Control: public, max-age=18000
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
@@ -16,11 +16,11 @@
 
 /fonts/*.woff2
   Access-Control-Allow-Origin: *
-  Content-Type: application/font-woff2
+  Content-Type: application/font-woff2; charset=utf-8
 
 /fonts/*.woff
   Access-Control-Allow-Origin: *
-  Content-Type: application/font-woff
+  Content-Type: application/font-woff; charset=utf-8
 
 /*.html
   Link: </css/app.min.css> rel=preload as=stylesheet
