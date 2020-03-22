@@ -7,7 +7,7 @@ import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
 import { _is, _constrain, _map, optimize } from "./components/util";
-import { el, on, _matches, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
@@ -30,59 +30,6 @@ let onload = $load_img => function () {
 on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
 });
-
-// on(_navbar, "touchstart", () => {
-//     if (width(window) <= 700) {
-//         addClass(_navbar, "navbar-show");
-//     }
-// });
-// let xInit = null;
-// let yInit = null;
-// let xDiff = null;
-// let yDiff = null;
-// let timeDown = null;
-// let startEl = null;
-
-// // Based on [github.com/john-doherty/swiped-events/]
-// on(document, {
-//     'touchstart': e => {
-//         startEl = e.target;
-
-//         if (_matches(startEl, _navbar)) {
-//             timeDown = Date.now();
-//             xInit = e.touches[0].clientX;
-//             yInit = e.touches[0].clientY;
-//             xDiff = 0;
-//             yDiff = 0;
-//         }
-//     },
-//     'touchend': () => {
-//         let swipeThreshold = 20;    // default 10px
-//         let swipeTimeout = 500;      // default 1000ms
-//         let timeDiff = Date.now() - timeDown;
-
-//         if (Math.abs(xDiff) < Math.abs(yDiff)) {
-//             if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
-//                 // Swipe down
-//                 if (yDiff < 0) {
-//                     addClass(_navbar, "navbar-show");
-//                 }
-//             }
-//         }
-
-//         // reset values
-//         xInit = null;
-//         yInit = null;
-//         timeDown = null;
-//     },
-//     'touchmove': e => {
-//         if (!xInit || !yInit) return;
-//         let { clientX, clientY } = e.touches[0];
-
-//         xDiff = xInit - clientX;
-//         yDiff = yInit - clientY;
-//     },
-// });
 
 // On backup button click animate back to the top
 on(_backUp, "click", () => {

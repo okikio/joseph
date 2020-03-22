@@ -15,13 +15,26 @@
     }
 
     &-vert-centered-box {
-        margin-top: $size-huge;
-        @media (min-width: #{$tablet}px) {
+        @media #{$screen-size-gt-tablet} {
+            margin-top: $size-huge;
             align-items: center;
             position: relative;
             height: 100vh;
             display: flex;
             margin-top: 0;
+        }
+
+        @media #{$screen-size-lt-laptop} {
+            margin-top: 60px + $size;
+        }
+
+        @media #{$screen-size-lt-tablet} {
+            margin-top: 60px + $size-huge;
+            margin-bottom: $size-huge;
+        }
+
+        @media #{$screen-size-phone} {
+            margin-top: 60px + $size-large;
         }
     }
 

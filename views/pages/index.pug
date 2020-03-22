@@ -14,7 +14,7 @@ block content
 
   //- Intro layer
   +layer({
-    class: "layout-padding-horz layout-padding-vert-top-default--device-phone"
+    class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
   })
     +layout({
       class: "layout-shorten layout-contain"
@@ -32,7 +32,7 @@ block content
           })
             +p({
               content: "03/03",
-              class: "style-font-17--device-phone style-font-20 style-bold"
+              class: "style-font-17--device-lt-tablet style-font-20 style-bold"
             })
 
           //- 2nd Column
@@ -41,15 +41,15 @@ block content
           })
             +p({
               content: "2018",
-              class: "layout-block style-font-17--device-phone style-font-20 style-bold"
+              class: "layout-block style-font-16--device-lt-tablet style-font-18--device-gt-tablet style-600  layout-padding-bottom-smaller"
             })
             +p({
               content: "E-commerse",
-              class: "layout-block style-font-16--device-phone style-font-18"
+              class: "layout-block style-font-15--device-lt-tablet style-font-17--device-gt-tablet"
             })
             +p({
               content: "Design Executive",
-              class: "layout-block style-font-16--device-phone style-font-18"
+              class: "layout-block style-font-15--device-lt-tablet style-font-17--device-gt-tablet"
             })
 
           //- 3rd Column
@@ -64,7 +64,7 @@ block content
           +link({
             href: "/about-me",
             class: "layout-margin-vert-dull layout-margin-left-mini",
-            content: "Learn more about me."
+            content: "learn more about me."
           })
 
   //- Banner layer
@@ -83,7 +83,7 @@ block content
   //- Breakthrough layer
   +layer
     +layout({
-      class: "layout-contain-large layout-padding-large"
+      class: "layout-contain-large layout-padding-vert-large layout-padding-horz-large--device-gt-tablet layout-padding-horz-default--device-lt-tablet"
     })
       +main({
           class: "layout-padding-vert"
@@ -91,7 +91,7 @@ block content
         +row
           //- 1st Column
           +column({
-            class: "layout-col-6 layout-padding-bottom-small layout-padding-right-large"
+            class: "layout-col-6 layout-padding-bottom-small layout-padding-right-large--device-gt-tablet"
           })
             +p({
               content: "Breakthrough<br>Limits!",
