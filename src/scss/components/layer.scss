@@ -335,7 +335,7 @@
         background-color: $white;
 
         @media (prefers-color-scheme: dark) {
-            background-color: darken(#292d33, 5%);
+            background-color: #292d33;
         }
 
         .layer-title,
