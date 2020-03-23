@@ -1,6 +1,7 @@
 /* -- Action (represents elements that request direct interaction) -- */
 .action {
     &-btn {
+        transition: width .6s ease 0s;
         justify-content: center;
         vertical-align: middle;
         text-decoration: none;
@@ -69,8 +70,6 @@
 
         &-hover,
         &-expand {
-            transition: width .6s ease 0s;
-
             .action-btn-section {
                 transition: opacity .4s ease 0.1s;
                 overflow-wrap: normal;
@@ -84,7 +83,7 @@
         }
 
         &-hover {
-            width: 40px;
+            width: 40px !important;
             
             .action-btn-section {
                 opacity: 0;
