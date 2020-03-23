@@ -208,7 +208,7 @@ let traverseDF = (_node, fn) => {
     let recurse;
     // This is a recurse and immediately-invoking function
     recurse = node => { // Step 2
-        node.childNodes && [...node.childNodes].forEach(recurse, node); // Step 3
+        node.childNodes && [].slice.call(node.childNodes).forEach(recurse, node); // Step 3
         fn.call(node, node); // Step 4
     };
     recurse(_node); // Step 1

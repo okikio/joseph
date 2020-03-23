@@ -345,6 +345,7 @@
 
         .layer-title,
         .layer-content {
+            color: $primary;
             color: var(--tertiary, $primary);
             text-align: center;
         }

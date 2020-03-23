@@ -1,6 +1,7 @@
-import { _is, _log } from "./util";
+import { _is } from "./util";
 
 let ele;
+let slice = [].slice;
 let tagRE = /^\s*<(\w+|!)[^>]*>/;
 let tagExpandRE = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/ig;
 export let _qsa = (dom = document, sel) => {
@@ -8,6 +9,7 @@ export let _qsa = (dom = document, sel) => {
     _is.str(dom) && (_dom = _qsa(document, dom)[0]);
     _is.inst(dom, ele) && (_dom = dom[0]);
     if (!_is.str(sel) || sel.length === 0) return [];
+    if (_is.inst(_dom, HTMLCollection)) return slice.call(_dom);
     if (/^(#?[\w-]+|\.[\w-.]+)$/.test(sel)) {
         switch (sel.charAt(0)) {
             case '#':
@@ -15,15 +17,15 @@ export let _qsa = (dom = document, sel) => {
             case '.':
                 classes = sel.substr(1);
                 if (/^[\w-]*$/.test(classes)) {
-                    return [..._dom.getElementsByClassName(classes)];
+                    return slice.call(_dom.getElementsByClassName(classes));
                 }
                 break;
             default:
-                return [..._dom.getElementsByTagName(sel)];
+                return slice.call(_dom.getElementsByTagName(sel));
         }
     }
 
-    return [..._dom.querySelectorAll(sel)];
+    return slice.call(_dom.querySelectorAll(sel));
 };
 
 // Create an Element List from a HTML string
@@ -31,7 +33,7 @@ export let _createElem = html => {
     let dom, container;
     container = document.createElement('div');
     container.innerHTML = '' + html.replace(tagExpandRE, "<$1></$2>");
-    dom = [].slice.call(container.childNodes);
+    dom = slice.call(container.childNodes);
     dom.forEach(el => {
         container.removeChild(el);
     });
@@ -47,7 +49,7 @@ export let _elem = (sel, ctxt) => {
         else { return _qsa(ctxt, sel); }
     } else if (_is.inst(sel, ele)) { return sel; }
     else if (_is.arr(sel) || _is.inst(sel, NodeList))
-        { return [...sel].filter(item => _is.def(item)); }
+        { return slice.call(sel).filter(item => _is.def(item)); }
     else if (_is.obj(sel) || _is.el(sel)) { return [sel]; }
     else if (_is.fn(sel)) { return _elem(sel()); }
     return [];

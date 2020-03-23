@@ -15,26 +15,27 @@ let loadImg = () => {
 try {
     let script = document.createElement("script");
     let src = `/js/${window.isModern ? "modern" : "general"}.min.js`;
-    
-    if (window.isModern) {
+
+    if (!window.isModern) {
         try {
             let srcset, box;
             let _img = slice.call(document.getElementsByClassName("load-img"));
             _img.forEach(function (img) {
                 box = img.getBoundingClientRect();
 
-                slice.call(img.querySelectorAll("source.webp")).forEach(el => {
-                    srcset = el.getAttribute("data-srcset");
-                    el.setAttribute("data-srcset",
+                slice.call(img.querySelectorAll(".core-img")).forEach(el => {
+                    srcset = el.getAttribute("data-src");
+                    el.setAttribute("src",
                         srcset.replace(/w_[\d]+/, `w_${Math.round(box.width)}`)
                     );
                 });
             });
         } catch (e) {
             console.warn("Error setting image width in vendor.js.");
-            loadImg();
         }
-    } 
+
+        loadImg();
+    }
 
     /* Depending on the browser load two different type of js file, one that supports all the new ecmascript standards,
     and a general one that uses the ecmascript 5 standard by default.
