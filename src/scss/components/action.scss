@@ -1,20 +1,22 @@
 /* -- Action (represents elements that request direct interaction) -- */
 .action {
     &-btn {
-        transition: width .6s ease 0s;
         justify-content: center;
         vertical-align: middle;
         text-decoration: none;
         display: inline-flex;
         word-break: initial;
-        position: relative;
         align-items: center;
+        position: relative;
         user-select: none;
         cursor: pointer;
         line-height: 1;
 
-        min-height: 20px;
-        width: auto;
+        &-layout {
+            min-height: 20px;
+            width: auto;
+
+        }
 
         &:focus,
         &:hover {
@@ -46,9 +48,8 @@
         }
 
         &-group {
-            justify-content: inherit;
-            align-items: inherit;
-            display: inherit;
+            justify-content: center;
+            display: inline-flex;
             width: 100%;
 
             .action-icon {
@@ -64,12 +65,14 @@
             letter-spacing: 0.02857em;
             font-family: $bold-font;
             font-size: 0.875rem;
+            line-height: 24px;
             font-weight: 500;
-            line-height: 1;
         }
 
-        &-hover,
-        &-expand {
+        &-hover &-layout,
+        &-expand &-layout {
+            transition: width .6s ease 0s;
+
             .action-btn-section {
                 transition: opacity .4s ease 0.1s;
                 overflow-wrap: normal;
@@ -82,17 +85,18 @@
             }
         }
 
-        &-hover {
+        &-hover &-layout {
             width: 40px !important;
-            
+            height: 40px;
+
             .action-btn-section {
                 opacity: 0;
             }
         }
 
-        &-expand,
-        &-hover:hover {
-            width: 176px;
+        &-expand &-layout,
+        &-hover:hover &-layout {
+            width: 165px !important;
 
             .action-btn-section {
                 opacity: 1;
