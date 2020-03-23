@@ -126,7 +126,7 @@
                 color: transparent;
                 min-width: 500px;
             }
-            
+
             figcaption {
                 padding: $size-small;
             }
@@ -345,6 +345,7 @@
 
         .layer-title,
         .layer-content {
+            color: $primary;
             color: var(--tertiary, $primary);
             text-align: center;
         }

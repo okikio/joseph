@@ -7,7 +7,7 @@ import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
 import { _constrain, _map, optimize } from "./components/util";
-import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, srcWid, header, main, _scrollTop, isBanner;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -52,7 +52,7 @@ on(window, {
                 _core_img = get(find(load_img, ".core-img"), 0);
 
                 // Make sure the image that is loaded is the same size as its container
-                srcset = attr(el("source.webp", load_img), "data-srcset");
+                srcset = attr(get(find(load_img, "source.webp"), 0), "data-srcset");
 
                 // Ensure the image has loaded, then replace the small preview
                 attr(_core_img, "src",
@@ -79,7 +79,7 @@ on(window, {
         toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
 
         // If device width is greater than 700px
-        if (width(window) > 700) {
+        if (width(window) > 700 && window.isModern) {
             _images.forEach(data => {
                 // On scroll turn on parallax effect for images with the class "effect-parallax"
                 if (hasClass(data.target, "effect-parallax")) {
@@ -139,15 +139,6 @@ init = () => {
                 isHero,
                 main
             });
-
-
-            // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
-            _core_img = get(find($img, ".core-img"), 0);
-            if (!window.isModern) {
-                img = new Image(_core_img);
-                img.src = attr(_core_img, "data-src");
-                img.onload = onload(load_img);
-            }
         });
     });
 };
@@ -171,12 +162,12 @@ ready = () => {
 ready();
 
 on(document, "ready", () => {
-    console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
-
     // SWUP library
     try {
-        // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features is defined
+        // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features
         if (window.isModern) {
+            console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
+
             // Page transition manager SWUP for faster page loads
             const Swup = new swup({
                 linkSelector,

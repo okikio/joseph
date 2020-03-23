@@ -38,7 +38,7 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     if !dev && !githubPages
       link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
       link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
-    
+
     //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" crossorigin)
@@ -177,13 +177,14 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     .layer-action-center.layer-action-center-hide
       article.layer-action-group
         .layer-shadow--1.layer-round.layout-align-self-end.layout-margin-horz-small
-          button.back-to-top.action-btn.action-btn-hover.layer-round.layout-padding-smallest.layer-primary.layer-primary-light-hover.layer-primary-light-focus.style-white.style-hover-white.style-focus-white(type="button")
-            span.action-btn-group
-              span.action-btn-section
-                span.action-btn-spacer
-                span.action-btn-spacer
-                span.action-btn-content Back To Top
-              i.action-icon.style-font-size-24(inline) expand_less
+          button.back-to-top.action-btn.action-btn-hover.layer-round.layer-primary.layer-primary-light-hover.layer-primary-light-focus.style-white.style-hover-white.style-focus-white(type="button")
+            section.action-btn-layout.layout-padding-smallest
+              span.action-btn-group
+                span.action-btn-section
+                  span.action-btn-spacer
+                  span.action-btn-spacer
+                  span.action-btn-content Back To Top
+                i.action-icon.style-font-size-24(inline) expand_less
 
     block footer
       +footer
