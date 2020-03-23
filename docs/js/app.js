@@ -20,7 +20,7 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [], srcset;
+let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, src;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
@@ -52,12 +52,17 @@ on(window, {
                 _core_img = get(find(load_img, ".core-img"), 0);
 
                 // Make sure the image that is loaded is the same size as its container
-                srcset = attr(get(find(load_img, "source.webp"), 0), "data-srcset");
+                srcset = attr(get(find(load_img, ".webp"), 0), "data-srcset");
+                src = srcset.replace(/w_[\d]+/, `w_${srcWid}`);
+
+                // Safari still doesn't support WebP
+                if (!window.WebpSupport) {
+                    src = src.replace(".webp", ".jpg");
+                    console.log("Using JPG instead, of WEBP");
+                }
 
                 // Ensure the image has loaded, then replace the small preview
-                attr(_core_img, "src",
-                    srcset.replace(/w_[\d]+/, `w_${srcWid}`)
-                );
+                attr(_core_img, "src", src);
                 on(_core_img, "load", onload(load_img));
             });
         }

@@ -33,6 +33,28 @@ export let _require = (src, fn) => {
     head.appendChild(script);
 };
 
+// Test for webp support
+(() => {
+    // If the browser doesn't has the method createImageBitmap, you can't display webp format
+    if (!window.createImageBitmap) {
+        window.WebpSupport = false;
+        return;
+    }
+
+    // Base64 representation of a white point image
+    let webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+
+    // Retrieve the Image in Blob Format
+    fetch(webpdata)
+        .then(response => response.blob())
+        .then(blob => {
+            // If the createImageBitmap method succeeds, return true, otherwise false
+            createImageBitmap(blob)
+                .then(() => { window.WebpSupport = true; })
+                .catch(() => { window.WebpSupport = false;  });
+        });
+}) ();
+
 // Test for IE and older versions of Edge
 if (/msie|trident|edge/g.test(userAgent.toLowerCase()) || !window.isModern) {
     // _require("https://cdnjs.cloudflare.com/ajax/libs/nwmatcher/1.4.2/nwmatcher.min.js");

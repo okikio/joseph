@@ -23,6 +23,7 @@ try {
             _img.forEach(function (img) {
                 box = img.getBoundingClientRect();
 
+                // No need to convert to JPG, data-src by default uses JPG
                 slice.call(img.querySelectorAll(".core-img")).forEach(el => {
                     srcset = el.getAttribute("data-src");
                     el.setAttribute("src",
