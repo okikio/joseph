@@ -514,9 +514,7 @@
     &-contain:after,
     &-contain:before,
     &-contain-small:after,
-    &-contain-small:before,
-    &-row:after,
-    &-row:before {
+    &-contain-small:before {
         display: table;
         content: "";
         clear: both;
