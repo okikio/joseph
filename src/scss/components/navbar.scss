@@ -69,6 +69,7 @@
         &-head {
             transition: background-color .5s ease;
             @include applyTheme(background-color, "background");
+            vertical-align: middle;
             flex-direction: row;
             align-items: center;
             flex-wrap: nowrap;
@@ -76,10 +77,11 @@
         }
 
         &-logo {
-            transform: translate3d(0, 4px, 0);
+            // transform: translate3d(0, 4px, 0);
+            vertical-align: middle;
+            display: inline-block;
             line-height: normal;
             min-height: 20px;
-            display: inline;
             height: 20px;
             width: auto;
         }
@@ -110,6 +112,7 @@
 
                 margin-right: $size-smaller;
                 margin-left: $size-smaller;
+                vertical-align: middle;
                 display: inline-block;
                 height: 14px;
             }

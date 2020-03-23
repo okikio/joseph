@@ -8,7 +8,7 @@ mixin image(value = {})
   -
     let urlParse = (url = "") => cloudinaryTest ? `${basicURL + url}/${src.replace(/^cloudinary\//, "")}` : src;
 
-  .layer-image(class=_class)
+  .layer-image(class=_class title=alt)
     .layer-image-preview-img-card
     figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
       .img-contain
@@ -20,6 +20,7 @@ mixin image(value = {})
           //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
           //- source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
           img.core-img(data-src!=`${urlParse(",w_1100,q_100")}.jpg` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
+          figcaption(aria-hidden="true")= alt
         noscript Javascript is necesscary for this sites awesome experience.
           picture
             source(srcset!=`${urlParse()}.webp` sizes="100vw" width="100vw" type='image/webp')

@@ -265,6 +265,11 @@ a.skip-main {
     }
 }
 
+.core-img, .no-script-img, .placeholder-img {
+    color: transparent;
+}
+
+
 .list {
     list-style: circle;
     display: list-item;

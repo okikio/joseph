@@ -123,8 +123,12 @@
         .layer-image {
             img {
                 transform: scale(1.2);
+                color: transparent;
                 min-width: 500px;
-                padding: 10%;
+            }
+            
+            figcaption {
+                padding: $size-small;
             }
         }
 

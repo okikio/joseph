@@ -69,26 +69,35 @@
 
         &-hover,
         &-expand {
+            transition: width .6s ease 0s;
+
             .action-btn-section {
-                transition: width .6s ease 0s, opacity .4s ease 0.1s;
+                transition: opacity .4s ease 0.1s;
                 overflow-wrap: normal;
                 word-break: keep-all;
                 white-space: nowrap;
                 word-wrap: normal;
                 overflow: hidden;
                 display: flex;
+                width: 100%;
             }
         }
 
-        &-hover .action-btn-section {
-            opacity: 0;
-            width: 0;
+        &-hover {
+            width: 40px;
+            
+            .action-btn-section {
+                opacity: 0;
+            }
         }
 
-        &-expand .action-btn-section,
-        &-hover:hover .action-btn-section {
+        &-expand,
+        &-hover:hover {
             width: 125px;
-            opacity: 1;
+
+            .action-btn-section {
+                opacity: 1;
+            }
         }
     }
 
