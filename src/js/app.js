@@ -7,7 +7,7 @@ import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
 import { _constrain, _map, optimize } from "./components/util";
-import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, srcWid, header, main, _scrollTop, isBanner;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
