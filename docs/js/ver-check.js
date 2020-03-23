@@ -35,7 +35,9 @@ export let _require = (src, fn) => {
 
 // Test for webp support
 try {
-    window.WebpSupport = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') == 0;
+    window.WebpSupport = document.createElement('canvas')
+                                 .toDataURL('image/webp')
+                                 .indexOf('data:image/webp') == 0;
 } catch (e) {
     window.WebpSupport = false;
 }
