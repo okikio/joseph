@@ -29,21 +29,25 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
       -
         let page = Object.assign({}, defaults);
 
-    link(rel="preconnect" href='https://res.cloudinary.com/' crossorigin)
     link(rel="dns-prefetch" href='https://res.cloudinary.com/' crossorigin)
+    link(rel="preconnect" href='https://res.cloudinary.com/' crossorigin)
 
-    link(rel="preconnect" href=websiteURL crossorigin)
     link(rel="dns-prefetch" href=websiteURL crossorigin)
+    link(rel="preconnect" href=websiteURL crossorigin)
 
     if !dev && !githubPages
-      link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
       link(rel="dns-prefetch" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+      link(rel="preconnect" href="https://d33wubrfki0l68.cloudfront.net/" crossorigin)
+    
+    //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" crossorigin)
+    //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" crossorigin)
+    //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" crossorigin)
+    //- link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" crossorigin)
+    link(rel="stylesheet" href="/css/fonts.min.css" ph-inline)
 
     meta(charset="utf-8")
     meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
-    //- if !dev && githubPages
-    //-   base(href="/joseph/")
 
     script(type="application/ld+json").
       {
@@ -149,8 +153,6 @@ html(lang="en" itemscope="" itemtype="https://schema.org/WebPage")
     link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
     link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
 
-    link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font")
-    link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font")
     link(rel="stylesheet" href="/css/app.min.css" ph-inline)
 
     //- <!--[if lt IE 9]>

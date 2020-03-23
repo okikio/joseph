@@ -1,4 +1,4 @@
-import { _is, _fnval, _capital, keys, optimize, _log } from "./util";
+import { _is, _fnval, _capital, keys, optimize } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object

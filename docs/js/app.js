@@ -6,7 +6,7 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _is, _constrain, _map, optimize } from "./components/util";
+import { _constrain, _map, optimize } from "./components/util";
 import { el, on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, $src, srcWid, header, main, _scrollTop, isBanner;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, img, srcWid, header, main, _scrollTop, isBanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -45,16 +45,20 @@ on(window, {
         if (window.isModern) {
             // Find the layer-images in each layer
             each(_layer_img, $img => {
+                load_img = get(find($img, ".load-img"), 0);
                 srcWid = Math.round(width($img));
 
-                // Make sure the image that is loaded is the same size as its container
-                each(el("source.webp", $img), $src => {
-                    srcset = attr($src, "srcset");
+                // Find the core-img in the layer-image container
+                _core_img = get(find(load_img, ".core-img"), 0);
 
-                    attr($src, "srcset",
-                        srcset.replace(/w_[\d]+/, `w_${srcWid}`)
-                    );
-                });
+                // Make sure the image that is loaded is the same size as its container
+                srcset = attr(el("source.webp", load_img), "data-srcset");
+
+                // Ensure the image has loaded, then replace the small preview
+                attr(_core_img, "src",
+                    srcset.replace(/w_[\d]+/, `w_${srcWid}`)
+                );
+                on(_core_img, "load", onload(load_img));
             });
         }
     },
@@ -113,7 +117,7 @@ on(window, {
 init = () => {
     // Find the layer-images in each layer
     each(_layer, $layer => {
-        layer_image = find($layer, ".layer-image");
+        layer_image = find($layer, _layer_img);
         isHero = hasClass($layer, "layer-hero-id");
 
         if (isHero) {
@@ -136,19 +140,13 @@ init = () => {
                 main
             });
 
+
             // Find the core-img in the load-img container, ensure the image has loaded, then replace the small preview
             _core_img = get(find($img, ".core-img"), 0);
-            if (_is.def(_core_img)) {
-                if (_core_img.complete && _core_img.naturalWidth !== 0) {
-                    onload(load_img)();
-                } else if (!window.isModern) {
-                    $src = get(find($img, "source.webp"), 0);
-                    img = new Image(_core_img);
-                    img.src = attr($src, "srcset");
-                    img.onload = onload(load_img);
-                } else {
-                    on(_core_img, "load", onload(load_img));
-                }
+            if (!window.isModern) {
+                img = new Image(_core_img);
+                img.src = attr(_core_img, "data-src");
+                img.onload = onload(load_img);
             }
         });
     });
@@ -208,7 +206,7 @@ on(document, "ready", () => {
                     removeClass(_navbar, "navbar-show");
                 }
             });
-            Swup.on('transitionEnd', () => {
+            Swup.on('willReplaceContent', () => {
                 href = window.location.href;
                 removeClass(_navLink, "navbar-link-focus");
                 each(_navLink, _link => {
