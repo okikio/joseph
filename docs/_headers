@@ -9,23 +9,26 @@
   Content-Security-Policy: default-src 'self'; font-src 'self' data: https:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://d33wubrfki0l68.cloudfront.net/ https://res.cloudinary.com/ https://josephojo.com; script-src 'self' https://res.cloudinary.com/ https://polyfill.io/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/; form-action 'self'; frame-ancestors 'self';
   Feature-Policy: microphone 'none'; geolocation 'none'; usb 'none'; display-capture 'none'; sync-xhr 'self'; camera 'none'; battery 'none';
   Link: </favicon/favicon.svg> rel=preload as=image
+  Link: </js/modern.min.js> rel=preload as=script
 
 /fonts/*
-  Cache-Control: public, max-age=31536000
+  Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
 
 /fonts/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff2; charset=utf-8
 
 /fonts/*.woff
+  Cache-Control: public, max-age=31536000, immutable
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff; charset=utf-8
 
 /*.html
   Link: </css/app.min.css> rel=preload as=stylesheet
   Link: </js/modern.min.js> rel=preload as=script
-  Cache-Control: public, max-age=1800
+  Cache-Control: public, max-age=18000
   Content-Type: text/html; charset=utf-8
 
 /*.css
