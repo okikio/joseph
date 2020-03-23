@@ -275,7 +275,7 @@
 
         &-outline:hover .layer-image-overlay {
             border-color: $secondary-light;
-            border-color: var(--secondary-light, $tertiary);
+            border-color: var(--secondary-light, $secondary-light);
         }
 
         &,
@@ -285,9 +285,9 @@
 
         &-footer {
             transition: color .5s ease;
-            position: absolute;
             color: $white;
             @include applyTheme(color, "white");
+            position: absolute;
             margin: 20px 25px;
             bottom: 0;
         }

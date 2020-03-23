@@ -4,12 +4,9 @@ let slice = [].slice;
 let _img = slice.call(document.getElementsByClassName("load-img"));
 let _navbar = slice.call(document.getElementsByClassName("navbar"));
 
-let loadImg = () => {
+let navFocus = () => {
     _navbar.forEach(function (nav) {
         nav.classList.add("n-fs");
-    });
-    _img.forEach(function (img) {
-        img.classList.add("core-img-show");
     });
 };
 
@@ -42,7 +39,9 @@ try {
             console.warn("Error setting image width in vendor.js.");
         }
 
-        loadImg();
+        _img.forEach(function (img) {
+            img.classList.add("core-img-show");
+        });
     }
 
     /* Depending on the browser load two different type of js file, one that supports all the new ecmascript standards,
@@ -53,5 +52,5 @@ try {
 } catch (e) {
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
     console.warn(err);
-    loadImg();
+    navFocus();
 }
