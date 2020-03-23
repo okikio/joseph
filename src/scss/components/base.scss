@@ -173,6 +173,21 @@ a {
     }
 }
 
+// For touch screen devices
+a, button {
+    -webkit-tap-highlight-color: transparent;
+    background-image: none; 
+    outline: 0;
+
+    @media #{$screen-size-lt-tablet} {
+        user-select: none;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+}
+
 ul, .ul,
 ol, .ol {
     list-style-type: disc;
