@@ -7,7 +7,6 @@
 
     &-top-spot {
         padding-top: $height + $size;
-        // background: $background;
     }
 
     /* -- Navigation -- */
@@ -19,6 +18,10 @@
         height: $height;
         z-index: 1200;
         width: 100%;
+
+        &-initial .navbar-layout:before {
+            @include applyTheme(background-color, "background");
+        }
 
         &-focus,
         &-show,
@@ -54,7 +57,7 @@
             &:before {
                 @extend .layout-contain-large;
                 transition: background-color .5s ease;
-                @include applyTheme(background-color, "background");
+                background-color: transparent;
                 position: absolute;
                 display: block;
                 height: 100%;
@@ -67,8 +70,6 @@
         }
 
         &-head {
-            transition: background-color .5s ease;
-            @include applyTheme(background-color, "background");
             vertical-align: middle;
             flex-direction: row;
             align-items: center;
@@ -215,7 +216,12 @@
                 }
             }
 
+            &-initial &-head {
+                @include applyTheme(background-color, "background");
+            }
+
             &-head {
+                transition: background-color .5s ease;
                 padding-right: $size-small;
                 position: relative;
                 width: 100%;

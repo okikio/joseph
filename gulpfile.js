@@ -191,7 +191,7 @@ task("css", () =>
             postcss([
                 purgecss({
                     content: [`${publicDest}/**/*.html`],
-                    whitelistPatterns: [/-show$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
+                    whitelistPatterns: [/-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
                     keyframes: false,
                     fontFace: false
                 }),

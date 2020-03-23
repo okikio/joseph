@@ -1,11 +1,12 @@
 const { body } = document;
 let slice = [].slice;
 
+let _img = slice.call(document.getElementsByClassName("load-img"));
+let _navbar = slice.call(document.getElementsByClassName("navbar"));
+
 let loadImg = () => {
-    let _img = slice.call(document.getElementsByClassName("load-img"));
-    let _navbar = slice.call(document.getElementsByClassName("n"));
     _navbar.forEach(function (nav) {
-        nav.classList.add("n-f-s");
+        nav.classList.add("n-fs");
     });
     _img.forEach(function (img) {
         img.classList.add("core-img-show");
@@ -15,6 +16,12 @@ let loadImg = () => {
 try {
     let script = document.createElement("script");
     let src = `/js/${window.isModern ? "modern" : "general"}.min.js`;
+
+    try {
+        _navbar.forEach(function (nav) {
+            nav.classList.add("ninitial");
+        });
+    } catch (e) { console.warn(e); }
 
     if (!window.isModern) {
         try {

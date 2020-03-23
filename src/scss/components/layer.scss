@@ -120,6 +120,11 @@
             border-radius: 15px;
         }
 
+        &.banner-mode .layer-image figcaption {
+            padding: $size;
+            padding-top: $size-small + 60px;
+        }
+
         .layer-image {
             img {
                 transform: scale(1.2);
@@ -129,6 +134,12 @@
 
             figcaption {
                 padding: $size-small;
+            }
+        }
+
+        .load-img.img-show {
+            figcaption {
+                color: transparent;
             }
         }
 

@@ -46,25 +46,25 @@ block content
           })
 
   //- Next page layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
-  })
-    +head({
-      class: "layout-padding-top-default"
+  +link({
+    href: "/projects/google-designs",
+    class: "layout-block"
+  }, true)
+    +layer({
+      class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
     })
-      h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-    +layout({
-      class: "layout-contain layout-padding-horz--device-gt-tablet"
-    })
-      +main({
-        class: "layout-padding-vert-sub-large--device-gt-tablet"
+      +head({
+        class: "layout-padding-top-default"
       })
-        p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Google Designs
+        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
+      +layout({
+        class: "layout-contain layout-padding-horz--device-gt-tablet"
+      })
+        +main({
+          class: "layout-padding-vert-sub-large--device-gt-tablet"
+        })
+          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Google Designs
 
-      +link({
-        href: "/projects/google-designs",
-        class: "layout-block"
-      }, true)
         +tile({
           class: "layer-box layer-box-flat layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
           image: {
