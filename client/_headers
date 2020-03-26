@@ -12,36 +12,45 @@
   Expires: Thu Mar 26 2020 00:00:00 GMT-0400
 
 /fonts/*
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Cache-Control: public, max-age=31536000
   Access-Control-Allow-Origin: *
 
 /fonts/*.woff2
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Cache-Control: public, max-age=31536000
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff2; charset=utf-8
 
 /fonts/*.woff
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Cache-Control: public, max-age=31536000
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff; charset=utf-8
 
 /*.html
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Link: </css/app.min.css> rel=preload as=stylesheet
   Link: </js/modern.min.js> rel=preload as=script
   Content-Type: text/html; charset=utf-8
 
 /*.css
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Content-Type: text/css; charset=utf-8
 
 /*.js
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Content-Type: text/javascript; charset=utf-8
 
 /js/*.js
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Content-Type: text/javascript; charset=utf-8
 
 /*.webmanifest
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Cache-Control: public, max-age=31536000
   Content-Type: application/manifest+json; charset=utf-8
 
 /favicon.ico
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Cache-Control: public, max-age=31536000
