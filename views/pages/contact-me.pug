@@ -6,21 +6,21 @@ block pageInfo
       websiteURL,
       url: "/contact-me",
       name: "contact-me",
-      title: "Let's talk. I'm ready to create something awesome, are you?",
+      title: "Contact me — Let's talk. I'm ready to create something awesome, are you?",
       description: "Do you have a project that requires passion and dedication, then let's talk. Let's create something extrodinary."
     };
 
 block content
   //- Intro layer
   +layer({
-    class: "layout-padding-horz-default"
+    class: "layout-padding-horz-default header-top-spot"
   })
     +layout({
       class: "layout-contain-small layout-vert-centered-box"
     })
       section
         +head
-          h1.style-font-30--device-phone.style-primary-dark.style-bold.style-uppercase Say Hello
+          h1.style-font-30--device-phone.style-primary-dark.style-bold.style-uppercase Say Hello — Lets talk
         +main
           span(itemprop='author') Hey, I am Joseph Ojo, the man, the myth, the legend, let's talk.
           span.layout-margin-vert-bottom(itemprop='description')
@@ -48,5 +48,5 @@ block content
 
 block footer
   +footer({
-    class: "footer-stuck layout-margin-vert-top"
+    class: "layout-margin-vert-top"
   })

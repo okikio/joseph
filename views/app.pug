@@ -22,7 +22,7 @@ html(lang="en")
         websiteURL,
         name: "index",
         title: "Joseph Ojo — Mechatronics Engineer / Portfolio",
-        description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. Experienced with multiple forms of technology, and an alumni of Ontario Tech."
+        description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. Experienced with multiple forms of technology, and an alumni of Ontario Tech. This is my portfolio site, it holds my resume and ways to contact me."
       };
 
     block pageInfo
@@ -65,6 +65,12 @@ html(lang="en")
               "https://www.f6s.com/olaoluwajosephojo"
             ],
             "description": "#{defaults.description}",
+            "jobTitle": "Mechatronics Engineer",
+            "hasOccupation": {
+              "@type": "Occupation",
+              "name": "Mechatronics Engineer",
+              "educationRequirements": "Bachlors of Mechatronics Engineering"
+            },
             "logo": {
               "@type": "ImageObject",
               "@id": "#{defaults.websiteURL}/#logo",
@@ -80,7 +86,7 @@ html(lang="en")
               {
                 "@type" : "ContactPoint",
                 "url" : "#{defaults.websiteURL}",
-                "email" : "laoluojo@gmail.com",
+                "email" : "mailto:laoluojo@gmail.com",
                 "contactType" : "customer service"
               }
             ]

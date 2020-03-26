@@ -34,7 +34,10 @@
 
         &-round {
             @extend .layer-round;
-            padding: 16px;
+        }
+
+        &-smooth {
+            border-radius: 8px;
         }
 
         &-spacer {
@@ -53,6 +56,7 @@
             width: 100%;
 
             .action-icon {
+                vertical-align: middle;
                 display: inline-block;
                 user-select: none;
                 overflow: hidden;

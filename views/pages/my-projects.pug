@@ -6,7 +6,7 @@ block pageInfo
       websiteURL,
       url: "/my-projects",
       name: "my-projects",
-      title: "My projects — A showcase of some of the projects I have taken on.",
+      title: "My projects — A showcase of some of my portfolio of projects I have taken on.",
       description: "A potfolio of projects I have completed, and even some that are still on-going..."
     };
 
@@ -29,16 +29,16 @@ block content
     +layout({
       class: "layout-shorten layout-contain"
     })
-      +head("My projects")
+      +head("A porfolio of projects.")
       +main({
         class: "layout-padding-vert-small"
       })
         +p(" ")
           span.layout-margin-horz-left-large.layout-inline-block= " "
-          span.layout-inline.layout-margin-dull As a mechatronics engineer I am adept at electrical, mechanical, and robotics, this allows me to take on a variety of projects, some more electrical, some robotic, etc...
+          span.layout-inline.layout-margin-dull As a mechatronics engineer I am adept at electrical, mechanical, and robotics, this allows me to take on a variety of projects, some more electrical, some robotic. I am often wonderstruck by mechatronics, and I like to create things that will leave others as wonderstruck as me when I see an amazing project.
+          +p("<br> <br>")
           p.layout-inline.layout-margin-dull(lorem="3")
-          span.layout-inline.layout-margin-dull  Some more electrical, lorem ipsum dolor,
-          span.layout-inline.layout-margin-dull= " "
+          +p("<br> <br> I am a curious person, so, I take on the most intresting projects. I love to explore new ways to approach problems and to solve them in a manner that lets me push myself to new heights. My dream is to work on a project that revelutionizes the world, and some day I believe I will achieve my goal. How about that,")
           +link({
             href: "/",
             class: "layout-margin-horz-left-mini",

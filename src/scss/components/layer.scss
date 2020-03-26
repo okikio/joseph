@@ -144,8 +144,6 @@
         }
 
         &-scroll-down {
-            transition: background-color .5s ease, color .5s ease;
-            @include applyTheme(background-color, "secondary-light");
             position: relative;
             z-index: 250;
 
@@ -159,15 +157,6 @@
 
             @media #{$screen-size-desktop} {
                 margin-bottom: -270px;
-            }
-
-            &:hover, &:focus {
-                @include applyTheme(background-color, "secondary");
-            }
-
-            &, &:hover, &:focus {
-                color: $white;
-                color: var(--black, $white);
             }
         }
 
@@ -213,6 +202,20 @@
             @media (min-width: 900px) {
                 font-size: 26px;
             }
+        }
+    }
+
+    &-secondary-btn {
+        transition: background-color .5s ease, color .5s ease;
+        @include applyTheme(background-color, "secondary-light");
+
+        &:hover, &:focus {
+            @include applyTheme(background-color, "secondary");
+        }
+
+        &, &:hover, &:focus {
+            color: $white;
+            color: var(--black, $white);
         }
     }
 
