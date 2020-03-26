@@ -6,14 +6,14 @@ block pageInfo
       websiteURL,
       url: "/my-projects",
       name: "my-projects",
-      title: "A showcase of some of the projects I have taken on.",
+      title: "My projects — A showcase of some of the projects I have taken on.",
       description: "A potfolio of projects I have completed, and even some that are still on-going..."
     };
 
 block content
   //- Banner layer
   +banner({
-    title: "A showcase of my projects.",
+    title: "My projects — A showcase of wonders.",
     content: "A potfolio of projects I have completed, and even some that are still on-going.",
     image: {
       class: "effect-parallax hero-img",
@@ -79,52 +79,7 @@ block content
         +row({
           class: "layout-margin-dull"
         })
-          //- 1st Column
-          +column({
-            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/nasa",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Nasa",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "effect-parallax",
-                  src: "cloudinary/aerial-photo-of-brown-mountains",
-                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
-                }
-              })
-
-        //- 3rd Row
-        +row({
-          class: "layout-margin-dull"
-        })
-          //- 1st Column
-          +column({
-            class: "layout-col-12 layout-padding-small"
-          })
-            +link({
-              href: "/projects/google-designs",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Google Design",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "effect-parallax",
-                  src: "cloudinary/engineer-piping",
-                  alt: "An image of large pipes for a Power Plant from Unsplash.",
-                }
-              })
-
-
-        //- 4th Row
-        +row({
-          class: "layout-margin-dull"
-        })
-          //- 1st Column
+          //- 2nd Column
           +column({
             class: "layout-col-12 layout-padding-small layout-padding-vert-large"
           })

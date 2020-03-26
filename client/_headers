@@ -1,5 +1,5 @@
 /*
-  Cache-Control: public, max-age=18000
+  Cache-Control: no-cache, no-store
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
@@ -15,17 +15,18 @@
   Access-Control-Allow-Origin: *
 
 /fonts/*.woff2
+  Cache-Control: public, max-age=31536000
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff2; charset=utf-8
 
 /fonts/*.woff
+  Cache-Control: public, max-age=31536000
   Access-Control-Allow-Origin: *
   Content-Type: application/font-woff; charset=utf-8
 
 /*.html
   Link: </css/app.min.css> rel=preload as=stylesheet
   Link: </js/modern.min.js> rel=preload as=script
-  Cache-Control: public, max-age=1800
   Content-Type: text/html; charset=utf-8
 
 /*.css

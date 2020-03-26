@@ -6,27 +6,28 @@ block pageInfo
       websiteURL,
       url: "/my-resume",
       name: "my-resume",
-      title: "My professional resume, have a look.",
+      title: "My resume — My professional resume, have a look.",
       description: "The resume of Joseph Ojo, a collection of all the professional work accomplished by Joseph Ojo."
     };
 
 block content
   //- Intro layer
   +layer({
-    class: "layout-padding-horz-default"
+    class: "layout-padding-horz-default header-top-spot"
   })
     +layout({
-      class: "layout-contain-small layout-vert-centered-box"
+      class: "layout-contain-small"
     })
       section
         +head
-          h1.style-font-30--device-phone.style-primary-dark.style-bold.style-uppercase My resume.
+          h1.style-font-30--device-phone.style-primary-dark.style-bold.style-uppercase My resume — My professional resume.
         +main
           span(itemprop='author') Hey, I am Joseph Ojo, and this is my resume.
           span.layout-margin-vert-bottom(itemprop='description')
+            +p("<br> <br> As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). So, I pursed this as a career choice in university, at Ontario Tech in Oshawa, Ontario (formally UOIT; it's near Toronto, Canada). I graduated with honors with a Bachlor of mechatronic engineering, and went straight into my masters. I am finishing up my masters this year and am available for any projects that requires inovative and creative thinking, as well as dedication. <br> <br> In case you are wondering, my skills outside engineering are problem-solving, leadership, communication and conflict resolution. <br> <br>")
             p.layout-inline.layout-margin-dull(lorem="2")
 
 block footer
   +footer({
-    class: "footer-stuck layout-margin-vert-top"
+    class: "layout-margin-vert-top"
   })
