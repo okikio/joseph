@@ -4,7 +4,7 @@ mixin p(value = {})
 			block
 
 	else
-		- let { content, type } = value;
+		- let { content } = value;
 		- let _class = value.class || "style-font-15--device-lt-tablet style-font-17--device-gt-tablet";
 
 		p.layout-margin-dull(class=_class) !{content}

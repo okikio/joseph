@@ -359,6 +359,12 @@
         flex: 1;
     }
 
+    &-display-none {
+        display: none;
+        @include deviceList(display, none);
+
+    }
+
     &-inline {
         display: inline !important;
 
@@ -371,6 +377,7 @@
     &-left {
         position: relative;
         float: left;
+        @include deviceList(float, left);
     }
 
     &-center {
@@ -382,6 +389,7 @@
     &-right {
         position: relative;
         float: right;
+        @include deviceList(float, right);
     }
 
     /* -- Container (keep the page focused and content central) -- */

@@ -205,6 +205,64 @@
         }
     }
 
+    &-center-line {
+        padding: $size-large;
+        width: 100%;
+
+        &:before {
+            transition: border-left-color .5s ease 0s;
+
+            border-left: 1px solid transparent;
+            border-left-color: lighten($dark, 35%);
+            border-left-color: var(--mid-light, lighten($dark, 35%));
+
+            transform: translateX(100%);
+            vertical-align: middle;
+            display: inline-block;
+            height: 50px;
+            content: "";
+            width: 50%;
+        }
+    }
+
+    &-joseph-img {
+        position: relative;
+        max-width: 300px;
+        height: 300px;
+        width: 300px;
+
+        .layer-image-overlay {
+            background-color: transparent !important;
+        }
+
+        &.layout-left {
+            display: block !important;
+            margin-bottom: $size;
+            margin-right: $size;
+        }
+
+        &.layout-right {
+            display: none !important;
+            margin-top: $size-small;
+        }
+
+        @media #{$screen-size-lt-tablet} {
+            max-width: 100%;
+
+            &.layout-left {
+                display: none !important;
+            }
+
+            &.layout-right {
+                display: block !important;
+            }
+        }
+
+        .placeholder-img {
+            transform: scale(1) !important;
+        }
+    }
+
     &-secondary-btn {
         transition: background-color .5s ease, color .5s ease;
         @include applyTheme(background-color, "secondary-light");

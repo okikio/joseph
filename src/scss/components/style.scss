@@ -152,5 +152,13 @@
 		}
 	}
 
+    &-letter-head {
+        letter-spacing: 2.54px;
+        line-height: 68px;
+        font-weight: 900;
+        font-size: 98px;
+        margin: 0;
+    }
+
 	@include colorList;
 }

@@ -21,15 +21,24 @@ block content
       section
         +head
           h1.style-font-30--device-phone.style-primary-dark.style-bold.style-uppercase My resume — My professional resume.
-        +main
-          span(itemprop='author') Hey, I am Joseph Ojo, and this is my resume.
+        +main({
+          class: "layout-clearfix"
+        })
+          //- span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left H
+          span.style-color-dim.layout-right
+            i by
+            i(itemprop='author')  Joseph Ojo
           span.layout-margin-vert-bottom(itemprop='description')
-            +p("<br> <br> As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). So, I pursed this as a career choice in university, at Ontario Tech in Oshawa, Ontario (formally UOIT; it's near Toronto, Canada). I graduated with honors with a Bachlor of mechatronic engineering, and went straight into my masters. I am finishing up my masters this year and am available for any projects that requires inovative and creative thinking, as well as dedication. <br> <br> In case you are wondering, my skills outside engineering are problem-solving, leadership, communication and conflict resolution. <br> <br>")
+            br
+            br
+            span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left A
+            +p("s a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). So, I pursed this as a career choice in university, at Ontario Tech in Oshawa, Ontario (formally UOIT; it's near Toronto, Canada). I graduated with honors with a Bachlor of mechatronic engineering, and went straight into my masters. I am finishing up my masters this year and am available for any projects that requires inovative and creative thinking, as well as dedication. <br> <br> In case you are wondering, my skills outside engineering are problem-solving, leadership, communication and conflict resolution. <br> <br>")
             p.layout-inline.layout-margin-dull(lorem="2")
-            +p("<br> <br> I have lots of experience working in professional work enviroments and would love the oppertunity to display my experience. If you want my cover-letter and resume click <br> <br>")
+            +p("<br> <br> I have lots of experience working in professional work enviroments and would love the oppertunity to display my experience. If you want my cover-letter and resume click the button below. <br> <br>")
             a.action-btn.action-btn-expand.action-btn-smooth.layer-shadow--1.layer-secondary-btn(_download="josephojo-resume.pdf")
               section.action-btn-layout
-                span.action-btn-group.layout-padding-smallest
+                span.layout-padding-nano
+                span.action-btn-group.layout-padding-smaller
                   i.action-icon.style-font-size-24(inline) get_app
                   span.action-btn-section
                     span.action-btn-spacer
