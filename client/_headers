@@ -9,6 +9,7 @@
   Content-Security-Policy: default-src 'self'; font-src 'self' data: https:; style-src 'self' 'unsafe-inline'; img-src data: 'self' https://d33wubrfki0l68.cloudfront.net/ https://res.cloudinary.com/ https://josephojo.com; script-src 'self' https://res.cloudinary.com/ https://polyfill.io/ 'unsafe-inline' 'unsafe-eval'; connect-src 'self'; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/; form-action 'self'; frame-ancestors 'self';
   Feature-Policy: microphone 'none'; geolocation 'none'; usb 'none'; display-capture 'none'; sync-xhr 'self'; camera 'none'; battery 'none';
   Link: </favicon/favicon.svg> rel=preload as=image
+  Expires: Thu Mar 26 2020 00:00:00 GMT-0400
 
 /fonts/*
   Cache-Control: public, max-age=31536000
