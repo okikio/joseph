@@ -251,7 +251,7 @@ a.skip-main {
 .placeholder-img {
     image-rendering: auto;
     image-rendering: smooth;
-    transform: scale(1.2);
+    transform: scale(1.3);
     position: absolute;
     filter: blur(5px);
     left: 0;
@@ -280,7 +280,7 @@ a.skip-main {
             opacity: 1;
 
             & .core-img {
-                transform: scale(1);
+                transform: scale(1.1);
             }
         }
     }
