@@ -110,7 +110,7 @@
         overflow: hidden;
     }
 
-    &:not(.banner-mode) .layer-image {
+    &:not(.banner-mode) &-hero .layer-image {
         border-radius: 15px;
     }
 

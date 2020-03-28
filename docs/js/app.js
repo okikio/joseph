@@ -101,7 +101,7 @@ on(window, {
                             transform: `translate3d(0, ${_map(_constrain(value - (_isBanner ? _focusPt * 2 : _focusPt + 10), 0, height), 0, height * 0.75, 0, height / 2)}px, 0)`,
                         });
 
-                        let transform = `translate3d(0, ${_constrain(_map(value, 0, height * 0.85, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
+                        let transform = `translate3d(0, ${_constrain(_map(value - (_isBanner ? _focusPt + 10 : 0), 0, height * 0.85, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
                         let opacity = _constrain(_map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0), 0, 1);
 
                         if (header) {
