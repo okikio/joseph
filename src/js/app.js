@@ -6,7 +6,7 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, optimize } from "./components/util";
+import { _constrain, _map, optimize, debounce } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
@@ -21,7 +21,7 @@ const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, src;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner;
+let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -38,7 +38,7 @@ on(_backUp, "click", () => {
 
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
-    'resize': resize = () => {
+    'resize': resize = debounce(() => {
         toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
 
         // Only on modern browsers
@@ -66,12 +66,12 @@ on(window, {
                 on(_core_img, "load", onload(load_img));
             });
         }
-    },
+    }, 500),
 
     // On scroll accomplish a set of tasks
     'scroll': scroll = () => {
         _scrollTop = scrollTop(window);
-        isBanner = hasClass(_hero, "banner-mode");
+        isBanner = hasClass(_layer, "banner-mode");
 
         // If the current page uses a banner ensure the navbar is still visible
         toggleClass(_navbar, "navbar-focus", isBanner || _scrollTop >= 5);
@@ -84,25 +84,25 @@ on(window, {
         toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
 
         // If device width is greater than 700px
-        if (width(window) > 700 && window.isModern) {
+        if (width(window) > 300 && window.isModern) {
             _images.forEach(data => {
                 // On scroll turn on parallax effect for images with the class "effect-parallax"
                 if (hasClass(data.target, "effect-parallax")) {
-                    let { clientRect, load_img, overlay, isHero, header, main } = data;
+                    let { clientRect, load_img, overlay, isHero, _isBanner, header, main } = data;
                     let { top, height } = clientRect;
                     let dist = _scrollTop - top + _focusPt * 2;
 
                     // Some complex math, I can't explain it very well, but it works
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
-                        let value = _map(_constrain(dist - _focusPt, 0, height), 0, height, 0, 1);
+                        let value = _constrain(dist - _focusPt, 0, height);
 
-                        isHero && style(overlay, { opacity: _map(value, 0, 0.75, 0.45, 0.7) });
+                        isHero && style(overlay, { opacity: _map(value, 0, height * 0.75, 0.45, 0.7) });
                         style(load_img, {
-                            transform: `translate3d(0, ${_map(_constrain(value - _map(60, 0, height, 0, 1), 0, 1), 0, 0.65, 0, height / 2)}px, 0)`,
+                            transform: `translate3d(0, ${_map(_constrain(value - (_isBanner ? _focusPt * 2 : _focusPt + 10), 0, height), 0, height * 0.75, 0, height / 2)}px, 0)`,
                         });
 
-                        let transform = `translate3d(0, ${_constrain(_map(value, 0, 0.85, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
-                        let opacity = _constrain(_map(_constrain(value - 0.15, 0, 1), 0, 0.40, 1, 0), 0, 1);
+                        let transform = `translate3d(0, ${_constrain(_map(value, 0, height * 0.85, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
+                        let opacity = _constrain(_map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0), 0, 1);
 
                         if (header) {
                             style(header, { transform });
@@ -124,6 +124,7 @@ init = () => {
     each(_layer, $layer => {
         layer_image = find($layer, _layer_img);
         isHero = hasClass($layer, "layer-hero-id");
+        _isbanner = hasClass($layer, "banner-mode");
 
         if (isHero) {
             header = get(find($layer, ".layer-header"), 0);
@@ -137,6 +138,7 @@ init = () => {
             clientRect = offset($img);
 
             _images.push({
+                _isBanner: _isbanner,
                 overlay, load_img,
                 target: $img,
                 clientRect,

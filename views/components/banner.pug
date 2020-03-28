@@ -4,9 +4,9 @@ mixin banner(value = {})
   - let { content, title, image } = value;
   - Object.assign(image, { class: "effect-parallax hero-img" });
 
-  .layer.layer-hero-id
+  .layer.layer-hero-id.banner-mode
     article.layout-padding-bottom.layout-padding-dull-top
-      .layer-hero.banner-mode
+      .layer-hero
         +image(image)
 
         .layout-padding-horz-default--device-lt-tablet.layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-sub-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center

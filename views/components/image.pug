@@ -13,13 +13,13 @@ mixin image(value = {})
     figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
       .img-contain
         picture.plchldr-pic
-          img.placeholder-img(src!=`${urlParse(",w_60,q_90,e_blur:120")}.jpg` sizes="100vw" width="100vw" alt=alt loading="lazy" itemprop="url")
+          figcaption(aria-hidden="true")= alt
+          img.placeholder-img(src!=`${urlParse(",w_100,q_100,e_blur:150")}.jpg` sizes="100vw" width="100vw" alt=alt loading="eager" itemprop="url")
         picture.core-img-pic
           .webp(data-srcset!=`${urlParse(",w_600,q_100")}.webp`)
           //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
           //- source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
           img.core-img(data-src!=`${urlParse(",w_1100,q_100")}.jpg` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
-          figcaption(aria-hidden="true")= alt
         noscript Javascript is necesscary for this sites awesome experience.
           picture
             source(srcset!=`${urlParse()}.webp` sizes="100vw" width="100vw" type='image/webp')

@@ -176,7 +176,7 @@ a {
 // For touch screen devices
 a, button {
     -webkit-tap-highlight-color: transparent;
-    background-image: none; 
+    background-image: none;
     outline: 0;
 
     @media #{$screen-size-lt-tablet} {
@@ -243,12 +243,29 @@ a.skip-main {
     }
 }
 
+.load-img {
+    transform: translate3d(0, 0, 0);
+    height: 100%;
+}
+
 .placeholder-img {
-    transition: opacity .9s ease;
     image-rendering: auto;
     image-rendering: smooth;
     transform: scale(1.2);
-    opacity: 1;
+    position: absolute;
+    filter: blur(5px);
+    left: 0;
+    top: 0;
+}
+
+.core-img-pic {
+    transition: opacity .9s ease;
+    opacity: 0;
+
+    & .core-img {
+        transition: transform .9s ease;
+        transform: scale(1.2);
+    }
 }
 
 .core-img, .no-script-img {
@@ -259,8 +276,12 @@ a.skip-main {
     top: 0;
 
     &-show {
-        & .placeholder-img {
-            opacity: 0;
+        & .core-img-pic {
+            opacity: 1;
+
+            & .core-img {
+                transform: scale(1);
+            }
         }
     }
 }
