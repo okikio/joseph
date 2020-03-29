@@ -6,7 +6,7 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, optimize, debounce } from "./components/util";
+import { _constrain, _map, optimize, debounce, toFixed } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
@@ -69,7 +69,7 @@ on(window, {
     }, 500),
 
     // On scroll accomplish a set of tasks
-    'scroll': scroll = debounce(() => {
+    'scroll': scroll = () => {
         _scrollTop = scrollTop(window);
         isBanner = hasClass(_layer, "banner-mode");
 
@@ -85,6 +85,8 @@ on(window, {
 
         // If device width is greater than 700px
         if (width(window) > 300 && window.isModern) {
+            let _isMobile = width(window) < 650;
+            let _fixedPt = _isMobile ? 4 : undefined;
             _images.forEach(data => {
                 // On scroll turn on parallax effect for images with the class "effect-parallax"
                 if (hasClass(data.target, "effect-parallax")) {
@@ -96,17 +98,17 @@ on(window, {
                     if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                         let value = _constrain(dist - _focusPt, 0, height);
 
-                        isHero && style(overlay, { opacity: _map(value, 0, height * 0.75, 0.45, 0.7) });
+                        isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _fixedPt) });
                         style(load_img, {
-                            transform: `translate3d(0, ${_map(
-                                    _constrain(value - (_isBanner ? _focusPt * 2 : _focusPt + 10), 0, height),
-                                0, height * 0.75, 0, height / 2).toFixed(2)}px, 0)`,
+                            transform: `translate3d(0, ${toFixed(_map(
+                                _constrain(value - (_isBanner ? _focusPt * 2 : 20), 0, height),
+                            0, height * 0.75, 0, height / 2), _fixedPt)}px, 0)`,
                         });
 
-                        let transform = `translate3d(0, ${_constrain(
-                                _map(value - (_isBanner ? _focusPt + 10 : 0), 0, height * 0.85, 0, height * 5 / 16),
-                            0, height * 5 / 16).toFixed(2)}px, 0)`;
-                        let opacity = _constrain(_map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0), 0, 1);
+                        let transform = `translate3d(0, ${toFixed(_constrain(
+                            _map(value, 0, height * 0.85, 0, height * 5 / 16),
+                        0, height * 5 / 16), _fixedPt)}px, 0)`;
+                        let opacity = toFixed(_constrain(_map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0), 0, 1), _fixedPt);
 
                         if (header) {
                             style(header, { transform });
@@ -119,7 +121,7 @@ on(window, {
                 }
             });
         }
-    }, 8)
+    }
 });
 
 // Initialize images

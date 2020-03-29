@@ -118,6 +118,9 @@ _is.inst = _isInst;
 _is.arr = isArray;
 _is.type = _type;
 
+// The native .toFixed method, but if the digits parameter is either undefined or null, return the initial value
+export let toFixed = (num, digits) => _is.usable(digits) ? num.toFixed(digits) : num;
+
 /**
  * @param  {Function} fn
  * @param  {Array<any>} args
