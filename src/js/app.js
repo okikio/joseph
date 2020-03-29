@@ -69,7 +69,7 @@ on(window, {
     }, 500),
 
     // On scroll accomplish a set of tasks
-    'scroll': scroll = () => {
+    'scroll': scroll = debounce(() => {
         _scrollTop = scrollTop(window);
         isBanner = hasClass(_layer, "banner-mode");
 
@@ -98,10 +98,14 @@ on(window, {
 
                         isHero && style(overlay, { opacity: _map(value, 0, height * 0.75, 0.45, 0.7) });
                         style(load_img, {
-                            transform: `translate3d(0, ${_map(_constrain(value - (_isBanner ? _focusPt * 2 : _focusPt + 10), 0, height), 0, height * 0.75, 0, height / 2)}px, 0)`,
+                            transform: `translate3d(0, ${_map(
+                                    _constrain(value - (_isBanner ? _focusPt * 2 : _focusPt + 10), 0, height),
+                                0, height * 0.75, 0, height / 2).toFixed(2)}px, 0)`,
                         });
 
-                        let transform = `translate3d(0, ${_constrain(_map(value - (_isBanner ? _focusPt + 10 : 0), 0, height * 0.85, 0, height * 5 / 16), 0, height * 5 / 16)}px, 0)`;
+                        let transform = `translate3d(0, ${_constrain(
+                                _map(value - (_isBanner ? _focusPt + 10 : 0), 0, height * 0.85, 0, height * 5 / 16),
+                            0, height * 5 / 16).toFixed(2)}px, 0)`;
                         let opacity = _constrain(_map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0), 0, 1);
 
                         if (header) {
@@ -115,7 +119,7 @@ on(window, {
                 }
             });
         }
-    }
+    }, 8)
 });
 
 // Initialize images
