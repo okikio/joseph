@@ -22,14 +22,14 @@ block content
         +head
           h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center The Sitemap — Lets find you a destination!
         +main
-          ul
+          ul(itemscope itemtype="https://schema.org/SiteNavigationElement")
             //- Index
             li
               +link({
                 href: "/",
-                class: "style-italic style-underline layout-margin-right-mini",
-                content: "Home"
-              })
+                class: "style-italic style-underline layout-margin-right-mini"
+              })(itemprop="url")
+                span(itemprop="name") Home
               +p("- Homepage galor, its the begining of our little adventure. Do you want to go back?")
               br
 
@@ -37,27 +37,27 @@ block content
             li
               +link({
                 href: "/about-me",
-                class: "style-italic style-underline layout-margin-right-mini",
-                content: "About Me"
-              })
+                class: "style-italic style-underline layout-margin-right-mini"
+              })(itemprop="url")
+                span(itemprop="name") About Me
               +p("- The story of me, myself and I. Shall we begin?")
               ul
                 //- Resume
                 li
                   +link({
                     href: "/my-resume",
-                    class: "style-italic style-underline layout-margin-right-mini",
-                    content: "My Resume"
-                  })
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") My Resume
                   +p("- All the qualifications I have aquired over my life time, in readable, bite sized, format.")
 
             //- Projects
             li
               +link({
                 href: "/my-projects",
-                class: "style-italic style-underline layout-margin-right-mini",
-                content: "My Projects"
-              })
+                class: "style-italic style-underline layout-margin-right-mini"
+              })(itemprop="url")
+                span(itemprop="name") My Projects
               +p("- Hardwork and perseverance, hear all about it.")
               br
               ul
@@ -65,18 +65,18 @@ block content
                 li
                   +link({
                     href: "/projects/nasa",
-                    class: "style-italic style-underline layout-margin-right-mini",
-                    content: "Nasa"
-                  })
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") Nasa
                   +p("- Yes that Nasa, find out more.")
                   br
                 //- Google Designs
                 li
                   +link({
                     href: "/projects/google-designs",
-                    class: "style-italic style-underline layout-margin-right-mini",
-                    content: "Google Designs"
-                  })
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") Google Designs
                   +p("- I Also worked with Google, specifically their Design team.")
                   br
 
@@ -84,8 +84,8 @@ block content
             li
               +link({
                 href: "/contact-me",
-                class: "style-italic style-underline layout-margin-right-mini",
-                content: "Contact Me"
-              })
+                class: "style-italic style-underline layout-margin-right-mini"
+              })(itemprop="url")
+                span(itemprop="name") Contact Me
               +p("- Do you have a project that demands perservance and passion? Then, lets talk.")
               br

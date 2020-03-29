@@ -11,12 +11,12 @@ mixin navbar(value = {})
   header.header
     nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement")
       .layout-contain-large.navbar-layout
-        .navbar-head
+        .navbar-head(itemscope itemtype="http://schema.org/Organization")
           +link({
             href: "/",
             class: "navbar-title style-primary-dark-hover style-primary-dark-focus"
           })(itemprop="url")
-            img.navbar-logo(src="/favicon/favicon.svg" alt="Logo.")
+            img.navbar-logo(src="/favicon/favicon.svg" alt="Logo." itemprop="logo")
             span.navbar-title-line
             span.layout-inline-block(itemprop="name") JOSEPH!
           .layout-spacer

@@ -55,8 +55,38 @@ html(lang="en")
         "@context": "https://schema.org",
         "@graph": [
           {
+            "@type": "Organization",
+            "@id": "#{defaults.websiteURL}/#organization",
+            "name": "Joseph Ojo",
+            "url": "#{defaults.websiteURL}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/laoluojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo",
+              "https://ca.alumnius.net/university_of_ontario_institute_of_technology-33082-10#id436734411"
+            ],
+            "description": "#{defaults.description}",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "#{defaults.websiteURL}/#logo",
+              "url": "#{defaults.websiteURL}/favicon/android-chrome-512x512.png",
+              "width": 512,
+              "height": 512,
+              "caption": "Joseph Ojo's Logo"
+            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "url": "#{defaults.websiteURL}",
+                "email": "mailto:laoluojo@gmail.com",
+                "contactType": "customer service"
+              }
+            ]
+          },
+          {
             "@type": "Person",
-            "@id": "#{defaults.websiteURL}/#person",
+            "@id": "#{defaults.websiteURL}/about-me.html#person",
             "name": "Joseph Ojo",
             "url": "#{defaults.websiteURL}",
             "sameAs": [
@@ -68,14 +98,6 @@ html(lang="en")
             ],
             "description": "#{defaults.description}",
             "jobTitle": "Mechatronics Engineer",
-            "logo": {
-              "@type": "ImageObject",
-              "@id": "#{defaults.websiteURL}/#logo",
-              "url": "#{defaults.websiteURL}/favicon/android-chrome-512x512.png",
-              "width": 512,
-              "height": 512,
-              "caption": "Joseph Ojo's Logo"
-            },
             "image": {
               "@type": "ImageObject",
               "@id": "#{defaults.websiteURL}/#image",
@@ -84,12 +106,12 @@ html(lang="en")
               "height": 512,
               "caption": "An image of Joseph Ojo."
             },
-            "contactPoint" : [
+            "contactPoint": [
               {
-                "@type" : "ContactPoint",
-                "url" : "#{defaults.websiteURL}",
-                "email" : "mailto:laoluojo@gmail.com",
-                "contactType" : "customer service"
+                "@type": "ContactPoint",
+                "url": "#{defaults.websiteURL}",
+                "email": "mailto:laoluojo@gmail.com",
+                "contactType": "customer service"
               }
             ]
           },
@@ -97,32 +119,29 @@ html(lang="en")
             "@type": "WebSite",
             "@id": "#{defaults.websiteURL}/#website",
             "url": "#{defaults.websiteURL}",
-            "logo": {
-              "@id": "#{defaults.websiteURL}/#logo"
-            },
             "description": "#{defaults.description}",
             "sameAs": [
               "https://www.linkedin.com/in/o-josephojo/",
               "https://github.com/laoluojo",
               "https://github.com/okikio/joseph",
-              "https://www.f6s.com/olaoluwajosephojo",
+              "https://www.f6s.com/olaoluwajosephojo"
             ],
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "#{defaults.websiteURL}/my-projects.html",
+              "@id": "#{defaults.websiteURL}/my-projects.html#mainentity",
               "lastReviewed": "Thu Mar 26 2020 15:35:01 GMT-0400"
             },
             "about": {
-              "@id": "#{defaults.websiteURL}/#person"
+              "@id": "#{defaults.websiteURL}/about-me.html#person"
             },
             "name": "Joseph Ojo",
             "publisher": {
-              "@id": "#{defaults.websiteURL}/#person"
+              "@id": "#{defaults.websiteURL}/about-me.html#person"
             },
-            "copyrightYear" : "2020",
-            "copyrightHolder" : [
+            "copyrightYear": "2020",
+            "copyrightHolder": [
               {
-                "@id": "#{defaults.websiteURL}/#person"
+                "@id": "#{defaults.websiteURL}/about-me.html#person"
               }
             ]
           },
@@ -137,7 +156,7 @@ html(lang="en")
               "@id": "#{defaults.websiteURL}/#website"
             },
             "about": {
-              "@id": "#{defaults.websiteURL}/#person"
+              "@id": "#{defaults.websiteURL}/about-me.html#person"
             }
           }
         ]

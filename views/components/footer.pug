@@ -11,20 +11,21 @@ mixin footer(value = {})
           content: "Okiki Ojo"
         })(target="_blank" rel="noreferrer noopener")
         span= " | "
-        span.action-btn.pointer-default
-          .action-btn-group
-            i.action-icon(inline) copyright
-            span.action-btn-section
-              span.action-btn-spacer
-              span 2019
-              span  Joseph Ojo
-              span.layout-padding-left-smaller -
-              span.action-btn-spacer
-        +link({
-          href: "/sitemap",
-          class: "layout-inline-block",
-          content: "Sitemap"
-        })
+        span(itemscope itemtype="https://schema.org/SiteNavigationElement")
+          span.action-btn.pointer-default
+            .action-btn-group
+              i.action-icon(inline) copyright
+              span.action-btn-section
+                span.action-btn-spacer
+                span 2019
+                span  Joseph Ojo
+                span.layout-padding-left-smaller -
+                span.action-btn-spacer
+          +link({
+            href: "/sitemap",
+            class: "layout-inline-block",
+          })(itemprop="url")
+            span(itemprop="name") Sitemap
         span= " | "
         +link({
           href: "https://www.linkedin.com/in/o-josephojo/",
@@ -38,9 +39,9 @@ mixin footer(value = {})
           content: "Github"
         })(target="_blank" rel="noreferrer noopener")
         span= " - "
-        span(itemprop="email")
+        span
           +link({
             href: "mailto:laoluojo@gmail.com",
             class: "layout-margin-left-mini",
             content: "Email"
-          })(target="_blank" rel="noreferrer noopener")
+          })(target="_blank" rel="noreferrer noopener" itemprop="email")
