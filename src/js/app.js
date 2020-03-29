@@ -6,7 +6,7 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, optimize, debounce, toFixed } from "./components/util";
+import { _constrain, _map, optimize, toFixed } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = optimize('.layer');
@@ -38,38 +38,42 @@ on(_backUp, "click", () => {
 
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
-    'resize': resize = debounce(() => {
-        toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
+    'resize': resize = () => {
+        // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
+        requestAnimationFrame(() => {
+            toggleClass(_scrolldown, "action-btn-expand", width(window) <= 650);
 
-        // Only on modern browsers
-        if (window.isModern) {
-            // Find the layer-images in each layer
-            each(_layer_img, $img => {
-                load_img = get(find($img, ".load-img"), 0);
-                srcWid = Math.round(width($img));
+            // Only on modern browsers
+            if (window.isModern) {
+                // Find the layer-images in each layer
+                each(_layer_img, $img => {
+                    load_img = get(find($img, ".load-img"), 0);
+                    srcWid = Math.round(width($img));
 
-                // Find the core-img in the layer-image container
-                _core_img = get(find(load_img, ".core-img"), 0);
+                    // Find the core-img in the layer-image container
+                    _core_img = get(find(load_img, ".core-img"), 0);
 
-                // Make sure the image that is loaded is the same size as its container
-                srcset = attr(get(find(load_img, ".webp"), 0), "data-srcset");
-                src = srcset.replace(/w_[\d]+/, `w_${srcWid}`);
+                    // Make sure the image that is loaded is the same size as its container
+                    srcset = attr(get(find(load_img, ".webp"), 0), "data-srcset");
+                    src = srcset.replace(/w_[\d]+/, `w_${srcWid}`);
 
-                // Safari still doesn't support WebP
-                if (!window.WebpSupport) {
-                    src = src.replace(".webp", ".jpg");
-                    console.log("Using JPG instead, of WEBP");
-                }
+                    // Safari still doesn't support WebP
+                    if (!window.WebpSupport) {
+                        src = src.replace(".webp", ".jpg");
+                        console.log("Using JPG instead, of WEBP");
+                    }
 
-                // Ensure the image has loaded, then replace the small preview
-                attr(_core_img, "src", src);
-                on(_core_img, "load", onload(load_img));
-            });
-        }
-    }, 500),
+                    // Ensure the image has loaded, then replace the small preview
+                    attr(_core_img, "src", src);
+                    on(_core_img, "load", onload(load_img));
+                });
+            }
+        });
+    },
 
     // On scroll accomplish a set of tasks
     'scroll': scroll = () => {
+        // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
         requestAnimationFrame(() => {
             _scrollTop = scrollTop(window);
             isBanner = hasClass(_layer, "banner-mode");
@@ -87,7 +91,7 @@ on(window, {
             // If device width is greater than 700px
             if (width(window) > 300 && window.isModern) {
                 let _isMobile = width(window) < 650;
-                let _fixedPt = _isMobile ? 2 : undefined;
+                let _fixedPt = _isMobile ? 6 : undefined;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (hasClass(data.target, "effect-parallax")) {
@@ -128,31 +132,34 @@ on(window, {
 
 // Initialize images
 init = () => {
-    // Find the layer-images in each layer
-    each(_layer, $layer => {
-        layer_image = find($layer, _layer_img);
-        isHero = hasClass($layer, "layer-hero-id");
-        _isbanner = hasClass($layer, "banner-mode");
+    // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
+    requestAnimationFrame(() => {
+        // Find the layer-images in each layer
+        each(_layer, $layer => {
+            layer_image = find($layer, _layer_img);
+            isHero = hasClass($layer, "layer-hero-id");
+            _isbanner = hasClass($layer, "banner-mode");
 
-        if (isHero) {
-            header = get(find($layer, ".layer-header"), 0);
-            main = get(find($layer, ".layer-main"), 0);
-        }
+            if (isHero) {
+                header = get(find($layer, ".layer-header"), 0);
+                main = get(find($layer, ".layer-main"), 0);
+            }
 
-        // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
-        each(layer_image, $img => {
-            load_img = get(find($img, ".load-img"), 0);
-            overlay = get(find($img, ".layer-image-overlay"), 0);
-            clientRect = offset($img);
+            // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
+            each(layer_image, $img => {
+                load_img = get(find($img, ".load-img"), 0);
+                overlay = get(find($img, ".layer-image-overlay"), 0);
+                clientRect = offset($img);
 
-            _images.push({
-                _isBanner: _isbanner,
-                overlay, load_img,
-                target: $img,
-                clientRect,
-                header,
-                isHero,
-                main
+                _images.push({
+                    _isBanner: _isbanner,
+                    overlay, load_img,
+                    target: $img,
+                    clientRect,
+                    header,
+                    isHero,
+                    main
+                });
             });
         });
     });
@@ -160,17 +167,20 @@ init = () => {
 
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
-    _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
-    _images = [];
+    // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
+    requestAnimationFrame(() => {
+        _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
+        _images = [];
 
-    // On scroll down button click animate scroll to the height of the hero layer
-    on(_scrolldown, "click", () => {
-        scrollTo(height(_hero), "800ms");
+        // On scroll down button click animate scroll to the height of the hero layer
+        on(_scrolldown, "click", () => {
+            scrollTo(height(_hero), "800ms");
+        });
+
+        init();
+        resize();
+        scroll();
     });
-
-    init();
-    resize();
-    scroll();
 };
 
 // Ready to get started
