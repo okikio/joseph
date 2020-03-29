@@ -360,8 +360,9 @@
     }
 
     &-display-none {
-        display: none;
-        @include deviceList(display, none);
+        // display: none;
+        visibility: hidden;
+        // @include deviceList(display, none);
 
     }
 

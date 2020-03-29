@@ -196,11 +196,13 @@
         }
 
         &-mobile {
-            display: none;
+            // display: none;
+            visibility: hidden;
         }
 
         &-desktop {
-            display: block;
+            // display: block;
+            visibility: visible;
         }
 
         // Mobile navbar settings
@@ -309,11 +311,13 @@
             }
 
             &-desktop {
-                display: none;
+                visibility: hidden;
+                // display: none;
             }
 
             &-mobile {
-                display: block;
+                // display: block;
+                visibility: visible;
             }
         }
 
