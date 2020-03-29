@@ -120,7 +120,7 @@ _is.type = _type;
 
 // The (I was using the native .toFixed method, now I am using Math.floor "~~"), but if the digits parameter is either undefined or null, return the initial value
 // I am using ~~ instead of Math.round because it's faster [measurethat.net/Benchmarks/Show/7756/0/tofixed-vs-toprecision-vs-mathround-vs-mathfloorfast-vs]
-export let toFixed = (num, digits) => _is.usable(digits) ? ~~(num * (10 ** digits)) / (10 ** digits) : num;
+export let toFixed = (num, digits) => _is.usable(digits) ? ~~(num * Math.pow(10, digits)) / Math.pow(10, digits) : num;
 
 /**
  * @param  {Function} fn

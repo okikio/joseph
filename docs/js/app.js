@@ -87,7 +87,7 @@ on(window, {
             // If device width is greater than 700px
             if (width(window) > 300 && window.isModern) {
                 let _isMobile = width(window) < 650;
-                let _fixedPt = _isMobile ? 8 : undefined;
+                let _fixedPt = _isMobile ? 6 : undefined;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (hasClass(data.target, "effect-parallax")) {
