@@ -10,7 +10,8 @@ const minifyJSON = require('gulp-minify-inline-json');
 const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
 const commonJS = require('@rollup/plugin-commonjs');
-const { init, write } = require('gulp-sourcemaps');
+const { terser } = require('rollup-plugin-terser');
+// const { init, write } = require('gulp-sourcemaps');
 const rollupBabel = require('rollup-plugin-babel');
 const buble = require('@rollup/plugin-buble');
 const autoprefixer = require('autoprefixer');
@@ -25,7 +26,6 @@ const postcss = require('gulp-postcss');
 const sitemap = require('gulp-sitemap');
 const header = require('gulp-header');
 const rename = require('gulp-rename');
-const terser = require('gulp-terser');
 const csso = require("postcss-csso");
 const size = require('gulp-size');
 const sass = require('gulp-sass');
@@ -84,11 +84,11 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
 };
 
 let class_keys = Object.keys(class_map);
-let srcMapsWrite = ["../maps/", {
-    sourceMappingURL: file => {
-        return `/maps/${file.relative}.map`;
-    }
-}];
+// let srcMapsWrite = ["../maps/", {
+//     sourceMappingURL: file => {
+//         return `/maps/${file.relative}.map`;
+//     }
+// }];
 
 let minifyOpts = {
     keep_fnames: false, // change to true here
@@ -164,7 +164,11 @@ task('html', () => stream(
     'views/pages/**/*.pug', {
         pipes: [
             // Pug compiler
-            pug({ locals: { dev, debug, websiteURL, githubPages }, basedir: 'views' }),
+            pug({
+                locals: { dev, debug, websiteURL, githubPages },
+                basedir: 'views',
+                self: true
+            }),
             minifyJSON(), // Minify application/ld+json
             // Rename
             rename({ extname: ".html" }),
@@ -249,17 +253,18 @@ task("web-js", () =>
                                     // custom `Object.assign` (used in object spread)
                                     objectAssign: 'Object.assign',
                                 }) : rollupBabel(modernConfig) // Babelify file for uglifing
-                            ],
+                            ].concat(
+                                // Minify the file
+                                debug ? [] : terser(
+                                    assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
+                                )
+                            ),
                             onwarn
                         }, gen ? 'iife' : 'es'),
                         rename(`${type}.min.js`), // Rename
                         header(banner),
-                        init(), // Sourcemaps init
-                        // Minify the file
-                        debug ? null : terser(
-                            assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
-                        ),
-                        write(...srcMapsWrite), // Put sourcemap in public folder
+                        // init(), // Sourcemaps init
+                        // write(...srcMapsWrite), // Put sourcemap in public folder
 
                     ],
                     dest: `${publicDest}/js` // Output
@@ -282,14 +287,14 @@ task("web-js", () =>
                             objectAssign: 'Object.assign',
                         })
                         // rollupBabel(babelConfig.general)
-                    ],
+                    ].concat(
+                        // Minify the file
+                        debug ? [] : terser(
+                            assign({}, minifyOpts, { ie8: true, ecma: 5 })
+                        )
+                    ),
                     onwarn
                 }, 'iife'),
-
-                // Minify the file
-                debug ? null : terser(
-                    assign({}, minifyOpts, { ie8: true, ecma: 5 })
-                ),
 
                 rename(minSuffix) // Rename
                 // header(banner)

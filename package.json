@@ -82,7 +82,6 @@
         "gulp-sitemap": "^7.6.0",
         "gulp-size": "^3.0.0",
         "gulp-sourcemaps": "^2.6.5",
-        "gulp-terser": "^1.2.0",
         "microicon": "^1.0.0-b.2",
         "moment": "^2.24.0",
         "postcss": "^7.0.27",
@@ -95,6 +94,7 @@
         "posthtml-transformer": "^0.1.2",
         "rollup": "^2.3.0",
         "rollup-plugin-babel": "^4.4.0",
+        "rollup-plugin-terser": "^5.3.0",
         "typographic-single-spaces": "^1.0.2"
     }
 }

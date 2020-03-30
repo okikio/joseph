@@ -12,7 +12,7 @@ let navFocus = () => {
 
 try {
     let script = document.createElement("script");
-    let src = `./js/${window.isModern ? "modern" : "general"}.min.js`;
+    let src = `/js/${window.isModern ? "modern" : "general"}.min.js`;
 
     try {
         _navbar.forEach(function (nav) {
