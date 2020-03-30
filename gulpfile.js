@@ -172,7 +172,7 @@ task('html', () => stream(
             dev ? null : htmlmin({
                 minifyJS: true,
                 minifyCSS: true,
-                // minifyURLs: true, -- Doesn't work well on github pages
+                minifyURLs: true,
                 removeComments: true,
                 collapseWhitespace: true,
                 removeEmptyAttributes: false,
