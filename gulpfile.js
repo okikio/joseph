@@ -31,8 +31,8 @@ const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
-const path = require("path");
-const fs = require('fs');
+// const path = require("path");
+// const fs = require('fs');
 
 let icons;
 (!debug) && (icons = require('microicon'));
@@ -172,7 +172,7 @@ task('html', () => stream(
             dev ? null : htmlmin({
                 minifyJS: true,
                 minifyCSS: true,
-                minifyURLs: true,
+                // minifyURLs: true, -- Doesn't work well on github pages
                 removeComments: true,
                 collapseWhitespace: true,
                 removeEmptyAttributes: false,
