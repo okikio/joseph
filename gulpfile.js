@@ -349,7 +349,8 @@ task('sitemap', () =>
 
 task('inline-assets', () =>
     streamList([
-        [`${publicDest}/css/fonts.min.css`, {
+        // Inline fonts don't enhance performance
+        /* [`${publicDest}/css/fonts.min.css`, {
             pipes: [
                 postcss([
                     postcssNative.plugin('inline-fonts', () => {
@@ -389,22 +390,10 @@ task('inline-assets', () =>
                             });
                         }
                     })()
-                    /* inlineFonts({
-                        name: 'Montserrat',
-                        weight: 900,
-                        display: 'swap',
-                        formats: ['woff2']
-                    }),
-                    inlineFonts({
-                        name: 'Frank Ruhl Libre',
-                        weight: 900,
-                        display: 'swap',
-                        formats: ['woff2']
-                    }), */
                 ]),
             ],
             dest: `${publicDest}/css`, // Output
-        }],
+        }],*/
         [`${publicDest}/**/*.html`, {
             pipes: [
                 posthtml([
