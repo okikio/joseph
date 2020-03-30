@@ -259,13 +259,9 @@ a.skip-main {
 }
 
 .core-img-pic {
-    transition: opacity .9s ease;
+    transition: opacity .9s ease, transform .8s ease;
+    transform: scale(1.2);
     opacity: 0;
-
-    & .core-img {
-        transition: transform .9s ease;
-        transform: scale(1.2);
-    }
 }
 
 .core-img, .no-script-img {
@@ -277,11 +273,8 @@ a.skip-main {
 
     &-show {
         & .core-img-pic {
+            transform: scale(1.1);
             opacity: 1;
-
-            & .core-img {
-                transform: scale(1.1);
-            }
         }
     }
 }

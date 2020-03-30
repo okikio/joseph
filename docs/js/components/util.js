@@ -8,22 +8,9 @@ export let isArray = Array.isArray;
 export let from = Array.from;
 export let of = Array.of;
 
-// These are all the major "classes" in use on any page
-export const class_map = {"layer-":"lr","layout-":"ly","align-":"aln","-hero":"hr","-shorten":"shrt","-size":"sz","style-":"st","margin-":"m","padding-":"p","-main":"mn","-vert":"v","-horz":"h","-btn":"b","navbar-":"n","-title":"t","-font":"f","-device":"d","-primary":"pp","-secondary":"s","-tertiary":"ty","-icon":"i","-desktop":"dp","-laptop":"lp","-tablet":"tt","-family":"fam","-bold":"em","-phone":"ph","-color":"c","-hover":"-hv","-focus":"-fs","-placeholder":"plh","-left":"lft","-right":"rght","-top":"tp","-bottom":"btm","-contain":"cc","-center":"ctr","action-":"a","-huge":"hg","-extra":"ex","-large":"lrg","-default":"dlt","-small":"sml"};
-export const class_keys = ["layer-","layout-","align-","-hero","-shorten","-size","style-","margin-","padding-","-main","-vert","-horz","-btn","navbar-","-title","-font","-device","-primary","-secondary","-tertiary","-icon","-desktop","-laptop","-tablet","-family","-bold","-phone","-color","-hover","-focus","-placeholder","-left","-right","-top","-bottom","-contain","-center","action-","-huge","-extra","-large","-default","-small"];
-
 
 // During compilation I optimize classes in css and html, this is to compensate for that.
 export let optimize = val => {
-    
-    if (val && val.includes) {
-        for (let i = 0; i < class_keys.length; i ++) {
-            if (val.includes(class_keys[i])) {
-                let regex = new RegExp(class_keys[i], 'g');
-                val = val.replace(regex, class_map[class_keys[i]]);
-            }
-        }
-    }
     
     return val;
 };
