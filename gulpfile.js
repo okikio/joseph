@@ -31,6 +31,8 @@ const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
+const path = require("path");
+const fs = require('fs');
 
 let icons;
 (!debug) && (icons = require('microicon'));
@@ -202,7 +204,7 @@ task("css", () =>
                     overrideBrowserslist: ["defaults, IE 8"]
                 }),
                 csso() // { sourceMap: true }
-            ]),
+            ])
             // header(banner),
             // init(), // Sourcemaps init
             // write(...srcMapsWrite) // Put sourcemap in public folder
@@ -346,37 +348,95 @@ task('sitemap', () =>
 );
 
 task('inline-assets', () =>
-    stream(`${publicDest}/**/*.html`, {
-        pipes: [
-            posthtml([
-                debug ? () => {} : tree => {
-                    tree.match(querySelector("i.action-icon"), node => {
-                        if ("inline" in node.attrs) {
-                            const _attrs = node.attrs;
-                            const _content = node.content;
-                            delete _attrs['inline'];
-                            delete _attrs['async'];
-                            node = {
-                                tag: 'svg',
-                                attrs: {
-                                    width: '24', height: '24',
-                                    viewBox: '0 0 24 24',
-                                    fill: 'currentcolor',
-                                    ..._attrs
-                                },
-                                content: [{
-                                    tag: 'path',
-                                    attrs: { d: icons[_content] },
-                                }]
-                            };
-                        }
+    streamList([
+        [`${publicDest}/css/fonts.min.css`, {
+            pipes: [
+                postcss([
+                    postcssNative.plugin('inline-fonts', () => {
+                        let fonts = [
+                            ['Montserrat', 800],
+                            ['Frank Ruhl Libre', 900]
+                        ];
+                        let fontFamily = fonts.map(font => font[0]);
+                        let fontWeight = fonts.map(font => font[1]);
+                        let _escape = str => str.replace(/"|'/g, "");
+                        return root => {
+                            root.walkAtRules(rule => {
+                                if (rule.name == "font-face") {
+                                    let checkCounter = 0;
+                                    rule.each(i => {
+                                        if ((i.prop == "font-family" && fontFamily.includes( _escape(i.value) )) ||
+                                            (i.prop == "font-weight" && fontWeight.includes( +i.value )) ||
+                                             i.prop == "--latin")
+                                                checkCounter ++;
+                                    });
 
-                        return node;
-                    });
-                },
-            ]),
-        ]
-    })
+                                    rule.walkDecls(decl => {
+                                        if (decl.prop == "--latin") decl.remove();
+                                        if (decl.prop == "src" && checkCounter == 3) {
+                                            let value = decl.value;
+                                            let src = value.match(/url\((.+\.woff2)\)/)[1];
+                                            let data = fs.readFileSync(path.join(publicDest, src)).toString('base64');
+                                            // Transform each property declaration here
+                                            decl.value = value.replace(/url\((.+\.woff2)\)/, `url(data:application/font-woff2;charset=utf-8;base64,${data})`);
+                                        }
+
+                                        return decl;
+                                    });
+                                }
+
+                                return rule;
+                            });
+                        }
+                    })()
+                    /* inlineFonts({
+                        name: 'Montserrat',
+                        weight: 900,
+                        display: 'swap',
+                        formats: ['woff2']
+                    }),
+                    inlineFonts({
+                        name: 'Frank Ruhl Libre',
+                        weight: 900,
+                        display: 'swap',
+                        formats: ['woff2']
+                    }), */
+                ]),
+            ],
+            dest: `${publicDest}/css`, // Output
+        }],
+        [`${publicDest}/**/*.html`, {
+            pipes: [
+                posthtml([
+                    debug ? () => {} : tree => {
+                        tree.match(querySelector("i.action-icon"), node => {
+                            if ("inline" in node.attrs) {
+                                const _attrs = node.attrs;
+                                const _content = node.content;
+                                delete _attrs['inline'];
+                                delete _attrs['async'];
+                                node = {
+                                    tag: 'svg',
+                                    attrs: {
+                                        width: '24', height: '24',
+                                        viewBox: '0 0 24 24',
+                                        fill: 'currentcolor',
+                                        ..._attrs
+                                    },
+                                    content: [{
+                                        tag: 'path',
+                                        attrs: { d: icons[_content] },
+                                    }]
+                                };
+                            }
+
+                            return node;
+                        });
+                    },
+                ]),
+            ]
+        }]
+    ])
 );
 
 task('optimize-class-names', () =>
@@ -386,8 +446,8 @@ task('optimize-class-names', () =>
                 postcss([
                     postcssNative.plugin('optimize-css-name', () => {
                         let class_keys = Object.keys(class_map);
-                        return css => {
-                            css.walkRules(rule => {
+                        return root => {
+                            root.walkRules(rule => {
                                 let { selector } = rule;
 
                                 if (selector && selector[0] !== ":" && !selector.includes("::")) {
