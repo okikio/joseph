@@ -1,5 +1,5 @@
 // Serviceworkers file. This code gets installed in users browsers and runs code before the request is made.
-const CACHE = "pwa-page-1.2";
+const CACHE = "pwa-1.5";
 const errPage = "/404.html"; // Offline page
 const offlinePage = "/offline.html"; // Offline page
 const offlineAssets = [
@@ -12,6 +12,96 @@ const offlineAssets = [
     "/fonts/montserrat--bold_latin.woff2",
     "/fonts/frank-ruhl-libre--black_latin.woff2",
 ];
+
+// Install stage sets up the offline page, and assets in the cache and opens a new cache
+self.addEventListener("install", event => {
+    console.log("[PWA] Install Event processing");
+
+    event.waitUntil(
+        caches.open(CACHE).then(cache => {
+            console.log('[PWA] Cached offline assets during install: ', offlineAssets);
+            return cache.addAll(
+                offlineAssets.map(url => new Request(url, { mode: 'no-cors' }) )
+            ).then(() => {
+                console.log('[PWA] All resources have been fetched and cached.');
+                console.log("[PWA] Skip waiting on install");
+                return self.skipWaiting();
+            });
+        })
+    );
+});
+
+// Check to see if you have it in the cache, return response
+// If not in the cache, then reject promise
+let fromCache = request => {
+    return caches.open(CACHE).then(cache => {
+        return cache.match(request).then(matching => {
+            if (!matching || matching.status === 404) {
+                return Promise.reject("[PWA] An error occured when fetching from cache.");
+            }
+
+            return matching;
+        });
+    }).catch(console.warn);
+};
+
+// Allow service-worker.js to control of current page
+self.addEventListener('activate', event => {
+    console.log("[PWA] Service worker activated, claiming clients for current page");
+    event.waitUntil(self.clients.claim());
+});
+
+// If any fetch fails, it will show the offline page.
+self.addEventListener("fetch", event => {
+    let { request } = event;
+    let url = new URL(request.url);
+
+    // Ignore non-get request
+    if (request.method !== 'GET') return;
+
+    // Don't try to store resourses from external origins
+    if (url.origin !== location.origin) return;
+
+    try {
+        // Is request already cached, if so then use that cached version and refresh the cache for the next time
+        if (offlineAssets.includes(url.pathname)) {
+            event.respondWith( fromCache(request) );
+
+            // Only bother refreshing cache if you are sure there is a network connection
+            if (navigator.onLine) {
+                event.waitUntil(
+                    fetch(request)
+                        .then(response => {
+                            // Check if we received a valid response
+                            if (!response || response.status !== 200 ||
+                                response.type !== 'basic' || !response.ok) return response;
+                            caches.open(CACHE).then(cache => {
+                                cache.put(request, response.clone());
+                            });
+                            return response;
+                        }).catch(() => {
+                            console.warn(`[PWA] Error refreshing cache. `);
+                        })
+                );
+            }
+        }
+
+        // If network is offline serve the offline page
+        else if (!navigator.onLine) {
+            console.warn(`[PWA] No offline asset found, serving offline page. `);
+            event.respondWith(
+                fromCache(offlinePage)
+            );
+        }
+    } catch (e) {
+        // If a major error occurs serve the error page
+        console.warn(`[PWA] An error occurred, serving error page. `, e);
+        event.respondWith(
+            fromCache(errPage)
+        );
+    }
+});
+/*
 
 // This is a somewhat contrived example of using client.postMessage() to originate a message from
 // the service worker to each client (i.e. controlled page).
@@ -32,87 +122,27 @@ const offlineAssets = [
 //     return newURL.toString();
 // };
 
-// Install stage sets up the offline page, and assets in the cache and opens a new cache
-self.addEventListener("install", event => {
-    console.log("[PWA] Install Event processing");
-
-    // console.log("[PWA] Skip waiting on install");
-    // self.skipWaiting();
-    event.waitUntil(
-        caches.open(CACHE).then(cache => {
-            console.log('[PWA] Cached offline assets during install: ', offlineAssets);
-            return cache.addAll(offlineAssets);
-        })
-    );
-});
-
-// Check to see if you have it in the cache, return response
-// If not in the cache, then reject promise
-let fromCache = request => {
-    return caches.open(CACHE).then(cache => {
-        return cache.match(request).then(matching => {
-            if (!matching || matching.status === 404) {
-                return Promise.reject(cache);
-            }
-
-            return matching;
-        });
-    });
-};
-
-// Allow service-worker.js to control of current page
-self.addEventListener('activate', event => {
-    console.log("[PWA] Service worker activated, claiming clients for current page");
-    /*event.waitUntil(
-        caches.keys()
-            .then(keys => {
-                return Promise.all(
-                    keys.map(key => caches.delete(key))
-                );
-            })
-            .then(() => self.clients.claim() )
-    );*/
-    event.waitUntil(self.clients.claim());
-});
-
 let updateCache = (request, response) => {
-    caches.open(CACHE).then(cache => {
+    return caches.open(CACHE).then(cache => {
         cache.put(request, response);
     });
 };
 
-// If any fetch fails, it will show the offline page.
-self.addEventListener("fetch", event => {
-    let { request } = event;
-    let url = new URL(request.url);
-    // console.log(`[PWA] Fetched resource ${url}, ${request.mode}`);
-
-    event.respondWith(
-        fetch(request)
-            .then(response => {
-                // Check if we received a valid response
-                if (!offlineAssets.includes(url.pathname) || !response || response.status !== 200 || response.type !== 'basic') return response;
-                if (response.ok)
-                    updateCache(request, response.clone());
-              return response;
-            })
-            .catch(() => {
-                console.log("[PWA] Network request failed, serving offline asset.");
-                return fromCache(request)
-                    .catch(err => {
-                        console.log(`[PWA] No offline asset found, serving offline page. `, err);
-                        return fromCache(offlinePage);
-                    });
-            })
-    );
-});
-/*
-
 // Allow service-worker.js to control of current page
-// self.addEventListener("activate", event => {
-//     console.log("[PWA] Claiming clients for current page");
-//     event.waitUntil(self.clients.claim());
-// });
+self.addEventListener("activate", event => {
+    console.log("[PWA] Claiming clients for current page");
+
+    // event.waitUntil(
+    //     caches.keys()
+    //         .then(keys => {
+    //             return Promise.all(
+    //                 keys.map(key => caches.delete(key))
+    //             );
+    //         })
+    //         .then(() => self.clients.claim() )
+    // );
+    event.waitUntil(self.clients.claim());
+});
 
 // This is an event that can be fired from your page to tell the Service Worker to update the offline page
 self.addEventListener('refreshOffline', response => {

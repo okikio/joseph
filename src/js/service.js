@@ -53,7 +53,7 @@ if ('serviceWorker' in navigator) {
     // The service worker is set to post a message to all its clients once it's run its activation
     // handler and taken control of the page, so you should see this message event fire once.
     // You can force it to fire again by visiting this page in an Incognito window.
-    navigator.serviceWorker.addEventListener('message', event => {
-        console.log(event.data);
-    });
+    // navigator.serviceWorker.addEventListener('message', event => {
+    //     console.log(event.data);
+    // });
 }
