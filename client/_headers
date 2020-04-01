@@ -46,7 +46,7 @@
   Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Content-Type: text/javascript; charset=utf-8
 
-/*.webmanifest
+/*.json
   Expires: Thu Mar 26 2020 00:00:00 GMT-0400
   Cache-Control: public, max-age=31536000
   Content-Type: application/manifest+json; charset=utf-8
