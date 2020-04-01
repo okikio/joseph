@@ -1,4 +1,4 @@
-// Serviceworkers file. This code gets installed in users browsers and runs code before the request is made.
+// This code gets installed in users browsers and runs code before the request is made.
 const CACHE = "pwa-1.5";
 const errPage = "/404.html"; // Offline page
 const offlinePage = "/offline.html"; // Offline page
