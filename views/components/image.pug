@@ -14,7 +14,7 @@ mixin image(value = {})
       .img-contain
         picture.plchldr-pic
           figcaption(aria-hidden="true")= alt
-          img.placeholder-img(src!=`${urlParse(",w_50,q_100,e_blur:150")}.jpg` sizes="100vw" width="100vw" alt=alt loading="eager")
+          img.placeholder-img(src!=`${urlParse(",w_50,q_100,e_blur:150")}.jpg` sizes="100vw" width="100vw" alt=alt loading="lazy")
         picture.core-img-pic
           .webp(data-srcset!=`${urlParse(",w_600,q_100")}.webp`)
           //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
