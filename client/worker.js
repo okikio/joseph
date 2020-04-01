@@ -36,8 +36,8 @@ const offlineAssets = [
 self.addEventListener("install", event => {
     console.log("[PWA] Install Event processing");
 
-    console.log("[PWA] Skip waiting on install");
-    self.skipWaiting();
+    // console.log("[PWA] Skip waiting on install");
+    // self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE).then(cache => {
             console.log('[PWA] Cached offline assets during install: ', offlineAssets);
@@ -63,7 +63,7 @@ let fromCache = request => {
 // Allow service-worker.js to control of current page
 self.addEventListener('activate', event => {
     console.log("[PWA] Service worker activated, claiming clients for current page");
-    event.waitUntil(
+    /*event.waitUntil(
         caches.keys()
             .then(keys => {
                 return Promise.all(
@@ -71,25 +71,29 @@ self.addEventListener('activate', event => {
                 );
             })
             .then(() => self.clients.claim() )
-    );
+    );*/
+    event.waitUntil(self.clients.claim());
 });
 
 let updateCache = (request, response) => {
-    return caches.open(CACHE).then(cache => {
-        return cache.put(request, response);
+    caches.open(CACHE).then(cache => {
+        cache.put(request, response);
     });
 };
 
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", event => {
     let { request } = event;
+    let url = new URL(request.url);
     // console.log(`[PWA] Fetched resource ${url}, ${request.mode}`);
 
     event.respondWith(
         fetch(request)
             .then(response => {
+                // Check if we received a valid response
+                if (!offlineAssets.includes(url.pathname) || !response || response.status !== 200 || response.type !== 'basic') return response;
                 if (response.ok)
-                    updateCache(request, response);
+                    updateCache(request, response.clone());
               return response;
             })
             .catch(() => {
