@@ -222,8 +222,6 @@ html(lang="en")
     //- link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- <![endif]-->
     script(src="/js/ver-check.min.js" ph-inline)
-    if !dev
-      script(src="/js/service.min.js" ph-inline)
   body(itemscope="" itemtype="https://schema.org/WebPage")
     +link({
       class: "skip-main",
@@ -254,3 +252,5 @@ html(lang="en")
       +footer
 
     script(src="/js/vendor.min.js" ph-inline)
+    if !dev
+      script(src="/js/service.min.js" ph-inline)
