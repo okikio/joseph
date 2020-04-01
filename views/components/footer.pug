@@ -1,10 +1,11 @@
 mixin footer(value = {})
   - let _class = value.class;
-  footer.footer(data-container itemprop="author")
+  footer.footer(data-container)
     .layout-contain.transition-fade(class=_class)
-      .layout-padding.style-center.style-font-weight-bold.style-font-title.style-spaceout-small(itemprop="publisher" itemscope itemtype="https://schema.org/Organization" itemid="https://josephojo.com")
+      .layout-padding.style-center.style-font-weight-bold.style-font-title.style-spaceout-small
         span Made with ❤ by
         span= " "
+        span(itemprop="author")
         +link({
           href: "https://github.com/okikio",
           class: "layout-margin-left-mini",
@@ -39,7 +40,7 @@ mixin footer(value = {})
           content: "Github"
         })(target="_blank" rel="noreferrer noopener")
         span= " - "
-        span
+        span(itemprop="publisher" itemscope itemtype="https://schema.org/Organization" itemid="https://josephojo.com")
           +link({
             href: "mailto:laoluojo@gmail.com",
             class: "layout-margin-left-mini",

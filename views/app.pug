@@ -232,9 +232,8 @@ html(lang="en")
     block navbar
       +navbar(page)
 
-    main.main.transition-in-view(data-container tabindex="-1" itemscope itemprop="mainContentOfPage")
-      #content
-        block content
+    main.main.transition-in-view(data-container tabindex="-1")
+      block content
 
     .layer-action-center.layer-action-center-hide
       article.layer-action-group

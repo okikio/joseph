@@ -11,26 +11,27 @@ block pageInfo
     };
 
 block content
-  //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default"
-  })
-    +layout({
-      class: "layout-contain-small layout-vert-centered-box"
+  section(id="content" itemtype="http://schema.org/WebPageElement" itemscope itemprop="mainEntity")
+    //- Intro layer
+    +layer({
+      class: "layout-padding-horz-default"
     })
-      section
-        +head
-          h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center 404, Page Not Found.
-        +main({
-          class: "style-center",
-        })
-          +p("Sorry, the page you are looking for doesn't exist. How about going back")
-          +link({
-            href: "/",
-            class: "style-italic style-underline layout-margin-left-mini",
-            content: "home"
+      +layout({
+        class: "layout-contain-small layout-vert-centered-box"
+      })
+        section
+          +head
+            h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center 404, Page Not Found.
+          +main({
+            class: "style-center",
           })
-          +p(".")
+            +p("Sorry, the page you are looking for doesn't exist. How about going back")
+            +link({
+              href: "/",
+              class: "style-italic style-underline layout-margin-left-mini",
+              content: "home"
+            })
+            +p(".")
 
 block footer
   +footer({

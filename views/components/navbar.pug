@@ -31,9 +31,9 @@ mixin navbar(value = {})
           ul.navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
             each tab, i in tabs
               li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
-                span(itemprop="item")
-                  +link({
-                    href: `/${tab}`,
-                    class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" tabindex="-1" data-swup-preload title=`${tab[0].toUpperCase() + tab.slice(1)} page link`)
-                    span.navbar-link-content(itemprop="name")= tab
+                +link({
+                  href: `/${tab}`,
+                  class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
+                })(itemprop="url" tabindex="-1" data-swup-preload title=`${tab[0].toUpperCase() + tab.slice(1)} page link`)
+                  span.navbar-link-content(itemprop="name")= tab
+                  meta(itemprop="position" content="1")
