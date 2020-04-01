@@ -3,7 +3,6 @@ const CACHE = "pwa-page-1.2";
 const errPage = "/404.html"; // Offline page
 const offlinePage = "/offline.html"; // Offline page
 const offlineAssets = [
-    "/",
     errPage,
     offlinePage,
     "/js/modern.min.js",
@@ -37,8 +36,8 @@ const offlineAssets = [
 self.addEventListener("install", event => {
     console.log("[PWA] Install Event processing");
 
-    // console.log("[PWA] Skip waiting on install");
-    // self.skipWaiting();
+    console.log("[PWA] Skip waiting on install");
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE).then(cache => {
             console.log('[PWA] Cached offline assets during install: ', offlineAssets);
@@ -61,6 +60,26 @@ let fromCache = request => {
     });
 };
 
+// Allow service-worker.js to control of current page
+self.addEventListener('activate', event => {
+    console.log("[PWA] Service worker activated, claiming clients for current page");
+    event.waitUntil(
+        caches.keys()
+            .then(keys => {
+                return Promise.all(
+                    keys.map(key => caches.delete(key))
+                );
+            })
+            .then(() => self.clients.claim() )
+    );
+});
+
+let updateCache = (request, response) => {
+    return caches.open(CACHE).then(cache => {
+        return cache.put(request, response);
+    });
+};
+
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", event => {
     let { request } = event;
@@ -68,6 +87,11 @@ self.addEventListener("fetch", event => {
 
     event.respondWith(
         fetch(request)
+            .then(response => {
+                if (response.ok)
+                    updateCache(request, response);
+              return response;
+            })
             .catch(() => {
                 console.log("[PWA] Network request failed, serving offline asset.");
                 return fromCache(request)
@@ -79,11 +103,6 @@ self.addEventListener("fetch", event => {
     );
 });
 /*
-let updateCache = (request, response) => {
-    return caches.open(CACHE).then(cache => {
-        return cache.put(request, response);
-    });
-};
 
 // Allow service-worker.js to control of current page
 // self.addEventListener("activate", event => {
