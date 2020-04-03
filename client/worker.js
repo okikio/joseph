@@ -17,42 +17,43 @@ const offlineAssets = [
 self.addEventListener("install", event => {
     console.log("[PWA] Install Event processing");
 
-    event.waitUntil(
-        caches.open(CACHE).then(cache => {
-            console.log('[PWA] Cached offline assets during install: ', offlineAssets);
-            return cache.addAll(
-                offlineAssets.map(url => new Request(url, { mode: 'no-cors' }) )
-            ).then(() => {
-                console.log('[PWA] All resources have been fetched and cached.');
-                console.log("[PWA] Skip waiting on install");
-                return self.skipWaiting();
-            });
-        })
-    );
+    // event.waitUntil(
+    //     caches.open(CACHE).then(cache => {
+    //         console.log('[PWA] Cached offline assets during install: ', offlineAssets);
+    //         return cache.addAll(
+    //             offlineAssets.map(url => new Request(url, { mode: 'no-cors' }) )
+    //         ).then(() => {
+    //             console.log('[PWA] All resources have been fetched and cached.');
+    //             console.log("[PWA] Skip waiting on install");
+    //             return self.skipWaiting();
+    //         });
+    //     })
+    // );
 });
 
 // Check to see if you have it in the cache, return response
 // If not in the cache, then reject promise
-let fromCache = request => {
-    return caches.open(CACHE).then(cache => {
-        return cache.match(request).then(matching => {
-            if (!matching || matching.status === 404) {
-                return Promise.reject("[PWA] An error occured when fetching from cache.");
-            }
+// let fromCache = request => {
+//     return caches.open(CACHE).then(cache => {
+//         return cache.match(request).then(matching => {
+//             if (!matching || matching.status === 404) {
+//                 return Promise.reject("[PWA] An error occured when fetching from cache.");
+//             }
 
-            return matching;
-        });
-    }).catch(console.warn);
-};
+//             return matching;
+//         });
+//     }).catch(console.warn);
+// };
 
 // Allow service-worker.js to control of current page
 self.addEventListener('activate', event => {
     console.log("[PWA] Service worker activated, claiming clients for current page");
-    event.waitUntil(self.clients.claim());
+    // event.waitUntil(self.clients.claim());
 });
 
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", event => {
+   /*
     let { request } = event;
     let url = new URL(request.url);
 
@@ -99,10 +100,10 @@ self.addEventListener("fetch", event => {
         event.respondWith(
             fromCache(errPage)
         );
-    }
+    }*/
 });
-/*
 
+/*
 // This is a somewhat contrived example of using client.postMessage() to originate a message from
 // the service worker to each client (i.e. controlled page).
 // Here, we send a message when the service worker starts up, prior to when it's ready to start
