@@ -36,6 +36,12 @@
         left: 0;
         top: 0;
 
+        &.effect-parallax {
+            .layer-main {
+                opacity: 1;
+            }
+        }
+
         & picture {
             position: absolute;
             // // overflow: hidden;

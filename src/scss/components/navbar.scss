@@ -232,7 +232,7 @@
 
             &-main {
                 box-shadow: 0 5px 25px transparent;
-                transition: transform .45s ease, opacity .35s ease;
+                transition: transform .5s ease, opacity .35s ease;
                 transform: translate3d(0, calc(-100% - 60px), 0);
                 display: block;
                 width: 100%;

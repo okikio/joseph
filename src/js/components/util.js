@@ -49,12 +49,30 @@ export let debounce = (fn, wait, immediate) => {
 	};
 };
 
+// Based on [growingwiththeweb.com/2017/12/fast-simple-js-fps-counter.html]
+// Determines the maximum frame rate the current device can reach
+// For determining when to use cool animations
+let fps = 0;
+const times = [];
+export let fpsCounter = () => {
+    window.requestAnimationFrame(() => {
+        const now = performance.now();
+        while (times.length > 0 && times[0] <= now - 1000) {
+            times.shift();
+        }
+        times.push(now);
+        fps = times.length;
+        if (fps > (fpsCounter.fps || 0)) fpsCounter.fps = fps;
+        fpsCounter();
+    });
+};
+
 // Remove certain properties
 export let _removeProps = (prop, obj) => {
     let newObj = { ...obj };
     prop.forEach(key => delete newObj[key]);
     return newObj;
- };
+};
 
 // Limits a number to a max, and a min value
 export let _constrain = (v, a, b) => (v > b ? b : v < a ? a : v);

@@ -10,13 +10,20 @@
     }
 
     &-in-view {
-        transition: opacity .15s ease, transform .25s ease;
-        transform: translate3d(0, 0, 0);
+        transition: opacity .45s ease;
         opacity: 1;
 
         .is-animating & {
             opacity: 0 !important;
-            transform: translate3d(0, -60px, 0) !important;
+        }
+
+        @media #{$screen-size-gt-tablet} {
+            transition: opacity .35s ease, transform .45s ease;
+            transform: translate3d(0, 0, 0);
+
+            .is-animating & {
+                transform: translate3d(0, -60px, 0) !important;
+            }
         }
     }
 }

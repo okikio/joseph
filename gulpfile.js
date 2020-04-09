@@ -42,7 +42,7 @@ const modernConfig = {
     "presets": [
         ["@babel/preset-env", {
             "useBuiltIns": false,
-            "modules": 'false',
+            "modules": 'auto',
             "targets": {
                 "browsers": ["> 2%"]
             }
