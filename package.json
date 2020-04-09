@@ -11,7 +11,7 @@
         "reload": "gulp git:pull"
     },
     "engines": {
-        "node": ">=12",
+        "node": ">=10",
         "npm": ">=6",
         "yarn": ">=1"
     },
