@@ -14,12 +14,6 @@ try {
     let script = document.createElement("script");
     let src = `/js/${window.isModern ? "modern" : "general"}.min.js`;
 
-    try {
-        _navbar.forEach(function (nav) {
-            nav.classList.add("ninitial");
-        });
-    } catch (e) { console.warn(e); }
-
     if (!window.isModern) {
         try {
             let srcset, box;

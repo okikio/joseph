@@ -19,19 +19,16 @@
         z-index: 1200;
         width: 100%;
 
-        &-initial .navbar-layout:before {
+        .navbar-layout {
+            transition: background-color .5s ease;
             @include applyTheme(background-color, "background");
         }
 
         &-focus,
         &-show,
         &:hover {
-            .navbar-layout {
-                box-shadow: 0 5px 25px rgba(0, 0, 50, .08);
-
-                &:before {
-                    @include applyTheme(background-color, "surface");
-                }
+            .navbar-layout:before {
+                opacity: 1;
             }
 
             .navbar-title-line {
@@ -51,18 +48,19 @@
 
             &, &:before {
                 border-radius: 0 0 $radius $radius;
-
             }
 
             &:before {
                 @extend .layout-contain-large;
-                transition: background-color .5s ease;
-                background-color: transparent;
+                transition: background-color .5s ease, opacity .25s ease-out;
+                box-shadow: 0 5px 15px rgba(0, 0, 50, .08);
+                @include applyTheme(background-color, "surface");
                 position: absolute;
                 display: block;
                 height: 100%;
                 width: 100%;
                 content: "";
+                opacity: 0;
                 right: 0;
                 left: 0;
                 top: 0;
@@ -105,7 +103,7 @@
             }
 
             &-line {
-                transition: border-left-color .5s ease 0s;
+                transition: border-left-color .5s ease;
 
                 border-left: 1px solid transparent;
                 border-left-color: darken($mid-light, 2%);
@@ -218,22 +216,23 @@
                 }
             }
 
-            &-initial &-head {
-                @include applyTheme(background-color, "background");
+            &-layout:before, &-head {
+                z-index: 15;
+            }
+
+            &-layout:before, &-main {
+                box-shadow: 0 2px 15px rgba(0, 0, 50, .08);
             }
 
             &-head {
-                transition: background-color .5s ease;
                 padding-right: $size-small;
                 position: relative;
                 width: 100%;
-                z-index: 5;
             }
 
             &-main {
-                box-shadow: 0 5px 25px transparent;
-                transition: transform .5s ease, opacity .35s ease;
-                transform: translate3d(0, calc(-100% - 60px), 0);
+                transition: transform .5s ease-out, opacity .3s ease .1s;
+                transform: translate3d(0, -100%, 0);
                 display: block;
                 width: 100%;
                 opacity: 0;
@@ -251,19 +250,6 @@
                 li {
                     display: block;
                     width: 100%;
-                }
-            }
-
-            &:hover,
-            &-focus,
-            &-show {
-                .navbar-head {
-                    @include applyTheme(background-color, "surface");
-                }
-
-                .navbar-head,
-                .navbar-main {
-                    box-shadow: 0 5px 25px rgba(0, 0, 50, .08);
                 }
             }
 

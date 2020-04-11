@@ -219,7 +219,7 @@
         width: 100%;
 
         &:before {
-            transition: border-left-color .5s ease 0s;
+            transition: border-left-color .5s ease;
 
             border-left: 1px solid transparent;
             border-left-color: lighten($dark, 35%);

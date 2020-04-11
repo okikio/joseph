@@ -259,7 +259,7 @@ a.skip-main {
 }
 
 .core-img-pic {
-    transition: opacity .9s ease, transform .9s ease;
+    transition: opacity .9s ease-out, transform .9s ease-out;
     transform: scale(1.2);
     opacity: 0;
 }
