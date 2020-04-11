@@ -6,10 +6,10 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, optimize, toFixed, fpsCounter } from "./components/util";
+import { _constrain, _map, optimize, toFixed } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-fpsCounter();
+// fpsCounter();
 const _layer = optimize('.layer');
 const _navbar = optimize('.navbar');
 const _hero = optimize('.layer-hero');
@@ -109,7 +109,8 @@ on(window, {
                             isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _fixedPt) });
 
                             // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
-                            if (!(fpsCounter.fps < 24 && windowWid < 500)) {
+                            // FPS Counter test: !(fpsCounter.fps < 24 && windowWid < 500)
+                            if (!_isMobile) {
                                 style(load_img, {
                                     transform: `translate3d(0, ${toFixed(_map(
                                         _constrain(value - (_isBanner ? _focusPt * 2 : 20), 0, height),
