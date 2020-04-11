@@ -35,7 +35,8 @@ const pug = require('gulp-pug');
 // const fs = require('fs');
 
 let icons;
-(!debug) && (icons = require('microicon'));
+// (!debug) && (icons = require('microicon'));
+(!debug) && (icons = require('./material-design-icons'));
 
 const modernConfig = {
     "babelrc": false,

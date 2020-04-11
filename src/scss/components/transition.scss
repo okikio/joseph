@@ -10,7 +10,7 @@
     }
 
     &-in-view {
-        transition: opacity .35s ease-out;
+        transition: opacity .25s ease-out;
         opacity: 1;
 
         .is-animating & {
@@ -18,7 +18,7 @@
         }
 
         @media #{$screen-size-gt-tablet} {
-            transition: opacity .35s ease-out, transform .35s ease-out;
+            transition: opacity .25s ease-out, transform .35s ease-out;
             transform: translate3d(0, 0, 0);
 
             .is-animating & {

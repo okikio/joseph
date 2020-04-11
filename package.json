@@ -82,7 +82,6 @@
         "gulp-sitemap": "^7.6.0",
         "gulp-size": "^3.0.0",
         "gulp-sourcemaps": "^2.6.5",
-        "microicon": "^1.0.0-b.2",
         "moment": "^2.24.0",
         "postcss": "^7.0.27",
         "postcss-csso": "^4.0.0",
