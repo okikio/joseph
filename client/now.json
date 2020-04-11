@@ -1,6 +1,7 @@
 {
     "build": {
         "env": {
+            "dev": "false",
             "github_pages": "true"
         }
     }
