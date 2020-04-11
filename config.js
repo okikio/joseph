@@ -1,11 +1,13 @@
-let { env } = process;
+let env = process.env;
 if (!('dev' in env)) require('dotenv').config();
 let dev = 'dev' in env && env.dev.toString() === "true";
 let debug = 'debug' in env && env.debug.toString() === "true";
 let githubPages = 'github_pages' in env && env.github_pages.toString() === "true";
 
+let env_vars = { dev, debug, githubPages };
+console.log("Enviroment Variables: ", env_vars);
 let _exports = {
-    dev, debug, githubPages,
+    ...env_vars,
     "websiteURL": "https://josephojo.com",
     "class_map": {
         // Continue...
