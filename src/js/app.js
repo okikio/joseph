@@ -7,7 +7,7 @@ import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
 import { _constrain, _map, optimize, toFixed } from "./components/util";
-import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { on, off, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 // fpsCounter();
 const _layer = optimize('.layer');
@@ -21,11 +21,13 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, src;
+let scroll, resize, href, init, _focusPt, _images = [], srcset, src, goDown;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner, windowWid;
 let _isMobile, _fixedPt, dist, value, maxMove, transform, opacity;
 
 _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
+windowWid = width(window); // Window Width should stay pretty constant
+
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -38,11 +40,6 @@ on(_menu, "click", () => {
 // On backup button click animate back to the top
 on(_backUp, "click", () => {
     scrollTo("0px", "1400ms");
-});
-
-// On scroll down button click animate scroll to the height of the hero layer
-on(_scrolldown, "click", () => {
-    scrollTo(height(_hero), "800ms");
 });
 
 on(window, {
@@ -152,10 +149,21 @@ on(window, {
     }
 });
 
+// Method to run on scroll down button click
+goDown = () => {
+    scrollTo(height(_hero), "800ms");
+};
+
 // Initialize images
 init = () => {
+    // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
+    while (_images.length > 0) _images.pop();
+
     // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
     requestAnimationFrame(() => {
+        // On scroll down button click animate scroll to the height of the hero layer
+        on(_scrolldown, "click", goDown);
+
         // Find the layer-images in each layer
         each(_layer, $layer => {
             layer_image = find($layer, _layer_img);
@@ -188,16 +196,9 @@ init = () => {
 };
 
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
-ready = () => {
-    while (_images.length > 0) _images.pop(); // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
-
-    init();
-    resize();
-    scroll();
-};
-
-// Ready to get started
-ready();
+init();
+scroll();
+resize();
 
 on(document, "ready", () => {
     // SWUP library
@@ -229,7 +230,13 @@ on(document, "ready", () => {
             Swup.cache.remove(window.location.href);
 
             // This event runs for every page view after initial load
-            Swup.on('contentReplaced', ready);
+            Swup.on("clickLink", () => {
+                // Remove click event from scroll down button
+                off(_scrolldown, "click", goDown);
+            });
+            Swup.on('contentReplaced', () => {
+                init(); scroll();
+            });
             Swup.on('animationInStart', () => {
                 requestAnimationFrame(() => {
                     if (width(window) <= 700) {
