@@ -28,6 +28,11 @@ export let optimize = val => {
     return val;
 };
 
+// Fastest way to clear an array and use less memory: [stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript]
+export let clear = arr => {
+	while (a.length) a.pop();
+};
+
 // Returns a function, that, as long as it continues to be invoked, will not
 // be triggered. The function will be called after it stops being called for
 // N milliseconds. If `immediate` is passed, trigger the function on the
@@ -184,4 +189,4 @@ export let _argNames = fn => {
     }
 };
 
-export default { _capital, _is, _constrain, _map, _fnval, _argNames, assign, keys, values, from, of, _log };
+export default { _capital, _is, _constrain, _map, _fnval, _argNames, assign, keys, values, from, of, _log, clear };
