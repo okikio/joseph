@@ -62,6 +62,8 @@ on(window, {
 
                     // Make sure the image that is loaded is the same size as its container
                     srcset = attr(get(find(load_img, ".webp"), 0), "data-srcset");
+
+                    // On larger screens load smaller images, for faster image load times
                     src = srcset.replace(/w_[\d]+/, `w_${srcWid > 550 ? srcWid - 200 : srcWid}`);
 
                     // Safari still doesn't support WebP
