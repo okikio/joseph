@@ -23,6 +23,7 @@ const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), 
 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, src;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner, windowWid;
+let _isMobile, _fixedPt, dist, value, maxMove, transform, opacity;
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -35,6 +36,11 @@ on(_menu, "click", () => {
 // On backup button click animate back to the top
 on(_backUp, "click", () => {
     scrollTo("0px", "1400ms");
+});
+
+// On scroll down button click animate scroll to the height of the hero layer
+on(_scrolldown, "click", () => {
+    scrollTo(height(_hero), "800ms");
 });
 
 on(window, {
@@ -93,19 +99,18 @@ on(window, {
 
             // If device width is greater than 700px
             if (windowWid > 300 && window.isModern) {
-                let _isMobile = windowWid < 650;
-                let _fixedPt = _isMobile ? 2 : 6;
+                _isMobile = windowWid < 650;
+                _fixedPt = _isMobile ? 2 : 6;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (hasClass(data.target, "effect-parallax")) {
                         let { clientRect, load_img, overlay, isHero, _isBanner, header, main } = data;
                         let { top, height } = clientRect;
-                        let dist = _scrollTop - top + _focusPt * 2;
+                        dist = _scrollTop - top + _focusPt * 2;
 
                         // Some complex math, I can't explain it very well, but it works
                         if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
-                            let value = _constrain(dist - _focusPt, 0, height);
-
+                            value = _constrain(dist - _focusPt, 0, height);
                             isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _fixedPt) });
 
                             // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
@@ -118,11 +123,17 @@ on(window, {
                                 });
                             }
 
-                            let maxMove = _isBanner ? 6 : 5;
-                            let transform = `translate3d(0, ${toFixed(_constrain(
-                                _map(value - (_isBanner ? _focusPt : 0), 0, height * 0.65, 0, height * maxMove / 16),
-                                0, height * maxMove / 16), _fixedPt)}px, 0)`;
-                            let opacity = toFixed(_constrain(_map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0), 0, 1), _fixedPt);
+                            maxMove = _isBanner ? 6 : 5;
+                            transform = `translate3d(0, ${toFixed(
+                                _constrain(
+                                    _map(value - (_isBanner ? _focusPt : 0), 0, height * 0.65, 0, height * maxMove / 16),
+                                0, height * maxMove / 16),
+                            _fixedPt)}px, 0)`;
+                            opacity = toFixed(
+                                _constrain(
+                                    _map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0),
+                                0, 1),
+                            _fixedPt);
 
                             if (header) {
                                 style(header, { transform });
@@ -177,12 +188,7 @@ init = () => {
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
     _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
-    while (_images.length) _images.pop(); // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
-
-    // On scroll down button click animate scroll to the height of the hero layer
-    on(_scrolldown, "click", () => {
-        scrollTo(height(_hero), "800ms");
-    });
+    while (_images.length > 0) _images.pop(); // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
 
     init();
     resize();
