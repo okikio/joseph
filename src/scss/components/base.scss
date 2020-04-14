@@ -315,11 +315,11 @@ a.skip-main {
 }
 
 .footer {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 35px;
 
     @media #{$screen-size-lt-tablet} {
-        font-size: 15px;
+        font-size: 13px;
     }
 
     @media #{$screen-size-lt-laptop} {

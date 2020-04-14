@@ -2,9 +2,10 @@ mixin footer(value = {})
   - let _class = value.class;
   footer.footer(data-container)
     .layout-contain.transition-fade(class=_class)
-      .layout-padding.style-center.style-font-weight-bold.style-font-title.style-spaceout-small
-        span Made with ❤ by
-        span= " "
+      .layout-padding.style-center.style-font-weight-bold.style-font-bold.style-spaceout-small
+        span Made with
+        span.style-primary  ❤
+        span= " by "
         span(itemprop="author")
         +link({
           href: "https://github.com/okikio",

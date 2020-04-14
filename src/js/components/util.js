@@ -15,22 +15,22 @@ export const class_keys = {{ class_keys | safe }};
 
 // During compilation I optimize classes in css and html, this is to compensate for that.
 export let optimize = val => {
-    {% if not dev %}
-    if (val && val.includes) {
-        for (let i = 0; i < class_keys.length; i ++) {
-            if (val.includes(class_keys[i])) {
-                let regex = new RegExp(class_keys[i], 'g');
-                val = val.replace(regex, class_map[class_keys[i]]);
-            }
-        }
-    }
-    {% endif %}
-    return val;
+	{% if not dev %}
+	if (val && val.includes) {
+		for (let i = 0; i < class_keys.length; i ++) {
+			if (val.includes(class_keys[i])) {
+				let regex = new RegExp(class_keys[i], 'g');
+				val = val.replace(regex, class_map[class_keys[i]]);
+			}
+		}
+	}
+	{% endif %}
+	return val;
 };
 
 // Fastest way to clear an array and use less memory: [stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript]
 export let clear = arr => {
-    while (a.length) a.pop();
+	while (a.length) a.pop();
 };
 
 // Returns a function, that, as long as it continues to be invoked, will not
@@ -45,7 +45,7 @@ export let debounce = (fn, wait, immediate) => {
 		later = () => {
 			timeout = null;
 			if (!immediate) fn.apply(context, args);
-        };
+		};
 
 		callNow = immediate && !timeout;
 		window.clearTimeout(timeout);
@@ -60,23 +60,23 @@ export let debounce = (fn, wait, immediate) => {
 let fps = 0;
 const times = [];
 export let fpsCounter = () => {
-    window.requestAnimationFrame(() => {
-        const now = performance.now();
-        while (times.length > 0 && times[0] <= now - 1000) {
-            times.shift();
-        }
-        times.push(now);
-        fps = times.length;
-        if (fps > (fpsCounter.fps || 0)) fpsCounter.fps = fps;
-        fpsCounter();
-    });
+	window.requestAnimationFrame(() => {
+		const now = performance.now();
+		while (times.length > 0 && times[0] <= now - 1000) {
+			times.shift();
+		}
+		times.push(now);
+		fps = times.length;
+		if (fps > (fpsCounter.fps || 0)) fpsCounter.fps = fps;
+		fpsCounter();
+	});
 };
 
 // Remove certain properties
 export let _removeProps = (prop, obj) => {
-    let newObj = { ...obj };
-    prop.forEach(key => delete newObj[key]);
-    return newObj;
+	let newObj = { ...obj };
+	prop.forEach(key => delete newObj[key]);
+	return newObj;
 };
 
 // Limits a number to a max, and a min value
@@ -96,13 +96,13 @@ export let _is = (val, type) => (typeof val === type);
 
 // Does the object contain the given key ? Identical to object.hasOwnProperty(key), but uses a safe reference to the hasOwnProperty function, in case it's been overridden
 export let has = (obj, path) => {
-    return obj != null && ({}).hasOwnProperty.call(obj, path);
+	return obj != null && ({}).hasOwnProperty.call(obj, path);
 };
 
 // Is Instance Of
 let _isInst = (ctor, obj) => (ctor instanceof obj);
 let _type = type => { // Tweak of _is
-    return val => _is(val, type);
+	return val => _is(val, type);
 };
 
 /* This caused some errors in IE */
@@ -133,8 +133,8 @@ let _type = type => { // Tweak of _is
 
 _is.el = el => _isInst(el, Element) || _isInst(el, Document);
 _is.arrlike = obj => {
-    let len = _is(obj.length, "number") && obj.length;
-    return len === 0 || len > 0 && (len - 1) in obj;
+	let len = _is(obj.length, "number") && obj.length;
+	return len === 0 || len > 0 && (len - 1) in obj;
 };
 _is.usable = v => !_is(v, "undefined") && v !== null;
 // _is.class = obj => obj && obj._method && obj._class;
@@ -164,10 +164,10 @@ export let toFixed = (num, digits) => _is.usable(digits) ? ~~(num * Math.pow(10,
  * @param  {Object} ctxt
  */
 export let _fnval = (fn, args, ctxt) => {
-    if (!_is.fn(fn) ||
-        keys(fn.prototype || {}).length > 0)
-        { return fn; }
-    return fn.apply(ctxt, args);
+	if (!_is.fn(fn) ||
+		keys(fn.prototype || {}).length > 0)
+		{ return fn; }
+	return fn.apply(ctxt, args);
 };
 
 let STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
@@ -175,18 +175,18 @@ let ARGUMENT_NAMES = /(?:^|,)\s*([^\s,=]+)/g;
 
 // Argument names
 export let _argNames = fn => {
-    let fnStr = fn.toString().replace(STRIP_COMMENTS, '');
-    let argsList = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')'));
-    let result = argsList.match( ARGUMENT_NAMES ), stripped = [];
+	let fnStr = fn.toString().replace(STRIP_COMMENTS, '');
+	let argsList = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')'));
+	let result = argsList.match( ARGUMENT_NAMES ), stripped = [];
 
-    if (_is.nul(result)) return [];
-    else {
-        for (let i = 0; i < result.length; i ++) {
-            stripped.push( result[i].replace(/[\s,]/g, '') );
-        }
+	if (_is.nul(result)) return [];
+	else {
+		for (let i = 0; i < result.length; i ++) {
+			stripped.push( result[i].replace(/[\s,]/g, '') );
+		}
 
-        return stripped;
-    }
+		return stripped;
+	}
 };
 
 export default { _capital, _is, _constrain, _map, _fnval, _argNames, assign, keys, values, from, of, _log, clear };
