@@ -24,6 +24,8 @@ const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), 
 let scroll, ready, resize, href, init, _focusPt, _images = [], srcset, src;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner, windowWid;
 let _isMobile, _fixedPt, dist, value, maxMove, transform, opacity;
+
+_focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -158,9 +160,9 @@ init = () => {
         each(_layer, $layer => {
             layer_image = find($layer, _layer_img);
             isHero = hasClass($layer, "layer-hero-id");
-            _isbanner = hasClass($layer, "banner-mode");
 
             if (isHero) {
+                _isbanner = hasClass($layer, "banner-mode");
                 header = get(find($layer, ".layer-header"), 0);
                 main = get(find($layer, ".layer-main"), 0);
             }
@@ -187,7 +189,6 @@ init = () => {
 
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
-    _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
     while (_images.length > 0) _images.pop(); // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
 
     init();
