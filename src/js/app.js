@@ -24,7 +24,7 @@ const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), 
 
 let scroll, resize, href, init, _focusPt, _images = [], srcset, src, goDown;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner, windowWid;
-let _isMobile, _fixedPt, dist, value, maxMove, transform, opacity;
+let _isMobile, dist, value, maxMove, transform, opacity;
 
 _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
 windowWid = width(window); // Window Width should stay pretty constant
@@ -109,7 +109,6 @@ on(window, {
             // If device width is greater than 700px
             if (windowWid > 300 && window.isModern) {
                 _isMobile = windowWid < 650;
-                _fixedPt = _isMobile ? 2 : 4;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (hasClass(data.target, "effect-parallax")) {
@@ -120,7 +119,7 @@ on(window, {
                         // Some complex math, I can't explain it very well, but it works
                         if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                             value = _constrain(dist - _focusPt, 0, height);
-                            isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _fixedPt) });
+                            isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _isMobile ? 2 : 4) });
 
                             // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
                             // FPS Counter test: !(fpsCounter.fps < 24 && windowWid < 500)
@@ -128,7 +127,7 @@ on(window, {
                                 style(load_img, {
                                     transform: `translate3d(0, ${toFixed(_map(
                                         _constrain(value - (_isBanner ? _focusPt * 2 : 20), 0, height),
-                                    0, height * 0.75, 0, height / 2), _fixedPt)}px, 0)`,
+                                    0, height * 0.75, 0, height / 2), 2)}px, 0)`,
                                 });
                             }
 
@@ -137,12 +136,12 @@ on(window, {
                                 _constrain(
                                     _map(value - (_isBanner ? _focusPt : 0), 0, height * 0.65, 0, height * maxMove / 16),
                                 0, height * maxMove / 16),
-                            _fixedPt)}px, 0)`;
+                            _isMobile ? 1 : 2)}px, 0)`;
                             opacity = toFixed(
                                 _constrain(
                                     _map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0),
                                 0, 1),
-                            _fixedPt + 2);
+                            _isMobile ? 1 : 4);
 
                             if (header) {
                                 style(header, { transform });
@@ -166,7 +165,7 @@ goDown = () => {
 
 // Initialize images
 init = () => {
-    // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
+    // Clear images array efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
     while (_images.length > 0) _images.pop();
 
     // On scroll down button click animate scroll to the height of the hero layer
