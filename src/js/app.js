@@ -15,6 +15,7 @@ const _navbar = optimize('.navbar');
 const _hero = optimize('.layer-hero');
 const _menu = optimize('.navbar-menu');
 const _backUp = optimize('.back-to-top');
+const _skipMain = optimize(".skip-main");
 const _navLink = optimize('.navbar-link');
 const _layer_img = optimize(".layer-image");
 const _actioncenter = optimize(".layer-action-center");
@@ -43,7 +44,7 @@ on(_backUp, "click", () => {
 });
 
 // On skip main button click, animate to the main content
-on(".skip-main", "click", () => {
+on(_skipMain, "click", () => {
     let { top } = offset("#content");
     scrollTo(top, "1400ms");
 });
