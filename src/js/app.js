@@ -44,7 +44,8 @@ on(_backUp, "click", () => {
 });
 
 // On skip main button click, animate to the main content
-on(_skipMain, "click", () => {
+on(_skipMain, "click", e => {
+    e.preventDefault();
     let { top } = offset("#content");
     scrollTo(top, "1400ms");
 });
