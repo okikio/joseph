@@ -2,11 +2,11 @@
 // Imported external libraries
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
-import preload from '@swup/preload-plugin';
+// import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, optimize, toFixed } from "./components/util";
+import { _constrain, _map, optimize, toFixed, clear } from "./components/util";
 import { on, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 // fpsCounter();
@@ -177,7 +177,7 @@ init = () => {
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 ready = () => {
     _focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
-    _images = [];
+    clear(_images); // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
 
     // On scroll down button click animate scroll to the height of the hero layer
     on(_scrolldown, "click", () => {
@@ -205,7 +205,7 @@ on(document, "ready", () => {
                 animateHistoryBrowsing: true,
                 containers: ["[data-container]"],
                 plugins: [
-                    new preload(), // Preload pages
+                    // new preload(), // Preload pages
                     new headPlugin(), // Replace the contents of the head elements
 
                     // For every new page, scroll to the top smoothly
