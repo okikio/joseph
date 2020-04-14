@@ -119,7 +119,7 @@ on(window, {
                         // Some complex math, I can't explain it very well, but it works
                         if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                             value = _constrain(dist - _focusPt, 0, height);
-                            isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _isMobile ? 2 : 4) });
+                            isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _isMobile ? 1 : 4) });
 
                             // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
                             // FPS Counter test: !(fpsCounter.fps < 24 && windowWid < 500)
