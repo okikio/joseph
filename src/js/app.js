@@ -42,6 +42,13 @@ on(_backUp, "click", () => {
     scrollTo("0px", "1400ms");
 });
 
+// On skip main button click, animate to the main content
+on(".skip-main", "click", e => {
+    e.preventDefault();
+    let { top } = offset("#content");
+    scrollTo(top, "1400ms");
+});
+
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
     'resize': resize = () => {
