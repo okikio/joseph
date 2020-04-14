@@ -101,7 +101,7 @@ on(window, {
             // If device width is greater than 700px
             if (windowWid > 300 && window.isModern) {
                 _isMobile = windowWid < 650;
-                _fixedPt = _isMobile ? 2 : 6;
+                _fixedPt = _isMobile ? 2 : 4;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (hasClass(data.target, "effect-parallax")) {
@@ -134,7 +134,7 @@ on(window, {
                                 _constrain(
                                     _map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0),
                                 0, 1),
-                            _fixedPt);
+                            _fixedPt + 2);
 
                             if (header) {
                                 style(header, { transform });
