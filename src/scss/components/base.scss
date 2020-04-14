@@ -13,13 +13,17 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, main, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video, svg {
-    box-sizing: border-box;
-    font-size: 100%;
-    outline: none;
-    resize: none;
-    border: none;
-    padding: 0;
-    margin: 0;
+    &,
+    &:before,
+    &:after {
+        box-sizing: border-box;
+        font-size: 100%;
+        outline: none;
+        resize: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 /**
