@@ -43,8 +43,7 @@ on(_backUp, "click", () => {
 });
 
 // On skip main button click, animate to the main content
-on(".skip-main", "click", e => {
-    e.preventDefault();
+on(".skip-main", "click", () => {
     let { top } = offset("#content");
     scrollTo(top, "1400ms");
 });
@@ -168,11 +167,11 @@ init = () => {
     // Clear images efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
     while (_images.length > 0) _images.pop();
 
+    // On scroll down button click animate scroll to the height of the hero layer
+    on(_scrolldown, "click", goDown);
+
     // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
     requestAnimationFrame(() => {
-        // On scroll down button click animate scroll to the height of the hero layer
-        on(_scrolldown, "click", goDown);
-
         // Find the layer-images in each layer
         each(_layer, $layer => {
             layer_image = find($layer, _layer_img);
