@@ -237,7 +237,7 @@ on(document, "ready", () => {
                 off(_scrolldown, "click", goDown);
             });
             Swup.on('contentReplaced', () => {
-                init(); scroll();
+                init(); scroll(); resize();
             });
             Swup.on('animationInStart', () => {
                 requestAnimationFrame(() => {
