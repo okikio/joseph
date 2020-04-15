@@ -7,9 +7,9 @@
 
 ### *Prerequisites*
 * Github Account (go to [github](github.com) to create an account)
-* Website Repository (I would have already provided you with this)
+* Website Repository (I should have already provided you with this)
 
-If you don't want to do all this work you can leave it to me to design and post your website.
+If you would rather not do all of this, you can leave it to me to design and post your website.
 
 ---
 
