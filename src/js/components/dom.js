@@ -72,8 +72,8 @@ export let map = (_el, fn) => {
 // Functions the same way Array.forEach does
 export let forEach = (_el, fn, ctxt) => {
     _el = el(_el);
-    [].forEach.call(_el, function (el, idx)
-        { fn.call(ctxt, el, idx); }, ctxt);
+    for (let i = 0; i < _el.length; i ++)
+        fn.call(ctxt, _el[i], i);
     return _el;
 };
 
@@ -81,8 +81,10 @@ export let forEach = (_el, fn, ctxt) => {
    it allows the iterators return value to stop the iteration just like Array.every */
 export let each = (_el, fn) => {
     _el = el(_el);
-    [].every.call(_el, function (el, idx)
-        { return fn.call(el, el, idx) !== false; });
+    for (let i = 0; i < _el.length; i ++) {
+        let value = _el[i];
+        if (fn.call(value, value, i) == false) break;
+    }
     return _el;
 };
 

@@ -2,7 +2,7 @@
 // Imported external libraries
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
-// import preload from '@swup/preload-plugin';
+import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
@@ -22,40 +22,37 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, resize, href, init, _focusPt, _images = [], srcset, src, goDown;
+let scroll, resize, href, init, _focusPt, _images = [], srcset, src, goDown, heroHeight;
 let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner, windowWid;
 let _isMobile, dist, value, maxMove, transform, opacity;
-
-_focusPt = height(_navbar) + 10; // The focus pt., 10px past the height of the navbar
-windowWid = width(window); // Window Width should stay pretty constant
 
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
 
-// On navbar menu click (this will only occur on mobile), show navbar
-on(_menu, "click", () => {
+// On navbar menu click (this will only occur on mobile; mouseup is a tiny bit more efficient), show navbar
+on(_menu, "mouseup", () => {
     toggleClass(_navbar, "navbar-show");
 });
 
-// On backup button click animate back to the top
-on(_backUp, "click", () => {
+// On backup button click (mouseup is a tiny bit more efficient) animate back to the top
+on(_backUp, "mouseup", () => {
     scrollTo("0px", "1400ms");
 });
 
-// On skip main button click, animate to the main content
-on(_skipMain, "click", e => {
+// On skip main button click (mouseup is a tiny bit more efficient), animate to the main content
+on(_skipMain, "mouseup", e => {
     e.preventDefault();
-    let { top } = offset("#content");
-    scrollTo(top, "1400ms");
+    scrollTo(heroHeight, "1400ms");
 });
 
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
     'resize': resize = () => {
+        windowWid = width(window);
+
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
         requestAnimationFrame(() => {
-            windowWid = width(window);
             toggleClass(_scrolldown, "action-btn-expand", windowWid <= 650);
 
             // Only on modern browsers
@@ -90,12 +87,12 @@ on(window, {
 
     // On scroll accomplish a set of tasks
     'scroll': scroll = () => {
+        // windowWid = width(window);
+        _scrollTop = scrollTop(window);
+        isBanner = hasClass(_layer, "banner-mode");
+
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
         requestAnimationFrame(() => {
-            windowWid = width(window);
-            _scrollTop = scrollTop(window);
-            isBanner = hasClass(_layer, "banner-mode");
-
             // If the current page uses a banner ensure the navbar is still visible
             toggleClass(_navbar, "navbar-focus", isBanner || _scrollTop >= 5);
 
@@ -119,7 +116,7 @@ on(window, {
                         // Some complex math, I can't explain it very well, but it works
                         if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
                             value = _constrain(dist - _focusPt, 0, height);
-                            isHero && style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _isMobile ? 1 : 4) });
+                            if (isHero && !_isMobile) style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _isMobile ? 1 : 4) });
 
                             // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
                             // FPS Counter test: !(fpsCounter.fps < 24 && windowWid < 500)
@@ -160,45 +157,48 @@ on(window, {
 
 // Method to run on scroll down button click
 goDown = () => {
-    scrollTo(height(_hero), "800ms");
+    scrollTo(heroHeight, "800ms");
 };
+
+// The focus pt., 10px past the height of the navbar
+_focusPt = height(_navbar) + 10;
 
 // Initialize images
 init = () => {
     // Clear images array efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
     while (_images.length > 0) _images.pop();
 
-    // On scroll down button click animate scroll to the height of the hero layer
-    on(_scrolldown, "click", goDown);
+    // On scroll down button click (mouseup is a tiny bit more efficient) animate scroll to the height of the hero layer
+    on(_scrolldown, "mouseup", goDown);
 
-    // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
-    requestAnimationFrame(() => {
-        // Find the layer-images in each layer
-        each(_layer, $layer => {
-            layer_image = find($layer, _layer_img);
-            isHero = hasClass($layer, "layer-hero-id");
+    // Determine the height of the hero
+    heroHeight = height(_hero);
 
-            if (isHero) {
-                _isbanner = hasClass($layer, "banner-mode");
-                header = get(find($layer, ".layer-header"), 0);
-                main = get(find($layer, ".layer-main"), 0);
-            }
+    // Find the layer-images in each layer
+    each(_layer, $layer => {
+        layer_image = find($layer, _layer_img);
+        isHero = hasClass($layer, "layer-hero-id");
 
-            // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
-            each(layer_image, $img => {
-                load_img = get(find($img, ".load-img"), 0);
-                overlay = get(find($img, ".layer-image-overlay"), 0);
-                clientRect = offset($img);
+        if (isHero) {
+            _isbanner = hasClass($layer, "banner-mode");
+            header = get(find($layer, ".layer-header"), 0);
+            main = get(find($layer, ".layer-main"), 0);
+        }
 
-                _images.push({
-                    _isBanner: _isbanner,
-                    overlay, load_img,
-                    target: $img,
-                    clientRect,
-                    header,
-                    isHero,
-                    main
-                });
+        // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
+        each(layer_image, $img => {
+            load_img = get(find($img, ".load-img"), 0);
+            overlay = get(find($img, ".layer-image-overlay"), 0);
+            clientRect = offset($img);
+
+            _images.push({
+                _isBanner: _isbanner,
+                overlay, load_img,
+                target: $img,
+                clientRect,
+                header,
+                isHero,
+                main
             });
         });
     });
@@ -206,8 +206,8 @@ init = () => {
 
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
 init();
-scroll();
 resize();
+scroll();
 
 on(document, "ready", () => {
     // SWUP library
@@ -222,7 +222,7 @@ on(document, "ready", () => {
                 animateHistoryBrowsing: true,
                 containers: ["[data-container]"],
                 plugins: [
-                    // new preload(), // Preload pages
+                    new preload(), // Preload pages
                     new headPlugin(), // Replace the contents of the head elements
 
                     // For every new page, scroll to the top smoothly
@@ -236,27 +236,27 @@ on(document, "ready", () => {
             });
 
             // Remove initial cache, the inital cache is always incomplete
-            Swup.cache.remove(window.location.href);
+            Swup.cache.remove(window.location.pathname);
 
             // This event runs for every page view after initial load
             Swup.on("clickLink", () => {
-                // Remove click event from scroll down button
-                off(_scrolldown, "click", goDown);
+                // Remove click (mouseup is a tiny bit more efficient) event from scroll down button
+                off(_scrolldown, "mouseup", goDown);
             });
             Swup.on('contentReplaced', () => {
-                init(); scroll(); resize();
+                init(); resize(); scroll();
             });
             Swup.on('animationInStart', () => {
-                requestAnimationFrame(() => {
-                    if (width(window) <= 700) {
+                if (windowWid <= 700) {
+                    requestAnimationFrame(() => {
                         removeClass(_navbar, "navbar-show");
-                    }
-                });
+                    });
+                }
             });
             Swup.on('transitionStart', () => {
-                requestAnimationFrame(() => {
-                    href = window.location.href;
+                href = window.location.href;
 
+                requestAnimationFrame(() => {
                     removeClass(_navLink, "navbar-link-focus");
                     each(_navLink, _link => {
                         href == _link.href && addClass(_link, "navbar-link-focus");
@@ -266,7 +266,7 @@ on(document, "ready", () => {
         }
     } catch (e) {
         // Swup isn't very good at handling errors in page transitions, so to avoid errors blocking the site from working properly; if SWUP crashes it should fallback to normal page linking
-        on(linkSelector, 'click', e => {
+        on(linkSelector, 'mouseup', e => {
             window.location.href = e.currentTarget.href;
         });
 
