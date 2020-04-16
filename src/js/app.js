@@ -253,13 +253,14 @@ on(document, "ready", () => {
                     });
                 }
             });
-            Swup.on('transitionStart', () => {
+            Swup.on('willReplaceContent', () => {
                 href = window.location.href;
 
                 requestAnimationFrame(() => {
                     removeClass(_navLink, "navbar-link-focus");
                     each(_navLink, _link => {
                         href == _link.href && addClass(_link, "navbar-link-focus");
+                        console.log(href, _link.href)
                     });
                 });
             });
