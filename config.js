@@ -1,7 +1,7 @@
 let env = process.env;
 console.log("Process ENV: ", env.dev);
 if (!('dev' in env) || !('github_pages' in env)) require('dotenv').config();
-let dev = 'dev' in env && env.dev.toString() === "true";
+let dev = 'dev' in env ? (env.dev.toString() === "false" ? false : true) : true;
 let debug = 'debug' in env && env.debug.toString() === "true";
 let githubPages = 'github_pages' in env && env.github_pages.toString() === "true";
 

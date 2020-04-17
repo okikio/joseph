@@ -242,16 +242,15 @@ on(document, "ready", () => {
             Swup.on("clickLink", () => {
                 // Remove click (mouseup is a tiny bit more efficient) event from scroll down button
                 off(_scrolldown, "mouseup", goDown);
-            });
-            Swup.on('contentReplaced', () => {
-                init(); resize(); scroll();
-            });
-            Swup.on('animationInStart', () => {
+
                 if (windowWid <= 700) {
                     requestAnimationFrame(() => {
                         removeClass(_navbar, "navbar-show");
                     });
                 }
+            });
+            Swup.on('contentReplaced', () => {
+                init(); resize(); scroll();
             });
             Swup.on('willReplaceContent', () => {
                 href = window.location.href;

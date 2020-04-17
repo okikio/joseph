@@ -71,19 +71,25 @@ git clone https://github.com/okikio/joseph.git
 
 ### *Launch*
 
+This part is only necessary if this is the first time setup you are doing for your computer. If this isn't the first time setup skip to the [start](#start) section.
+
 Once the repository has been cloned, open VS Code, once VS Code has been opened click the `File` tab at the very top of the VS Code window, then click the **Open Folder** option, when this is clicked a folder selection window should appear, in there you select the folder that was cloned from the **git** command; select the folder and it should appear on VS Code. In the top left tabs your should see the `Terminal` tab, click on it and select the **New Terminal** option, this will function as your command prompt.
 
-If you are not using **Gitpod** to edit your website do this. 
+If you are not using **Gitpod** to edit your website do this.
 
-First install Powershell 7, this will teach you how to install it [https://www.howtogeek.com/663684/how-to-install-powershell-7-on-windows-10/](https://www.howtogeek.com/663684/how-to-install-powershell-7-on-windows-10/). 
+First install Powershell 7, this will teach you how to install it [https://www.howtogeek.com/663684/how-to-install-powershell-7-on-windows-10/](https://www.howtogeek.com/663684/how-to-install-powershell-7-on-windows-10/).
 
 Then go back to VS Code (Visual Studio Code). Once VS Code opens go to the terminal tab. It should give you a set of icons and a dropdown menu near the middle right, click on the dropdown, it should give you the option to `Select Default Shell`,
 
-![alt text](./assets/git-bash.png "Logo Title Text 1")
+![teminal prompt](./assets/git-bash.png "Logo Title Text 1")
 
- select that option, another popup should appear stating all the command prompts available, select `Git Bash`.
+ select that option, another popup should appear stating all the command prompts available, select `Powershell Core`.
 
-![alt text](./assets/bash-select-prompt.png "Logo Title Text 1")
+![select default prompt](./assets/powershell-select-prompt.png "Logo Title Text 1")
+
+Then click the plus icon in the bottom panel,
+
+![select default prompt](./assets/new-terminal.png "Logo Title Text 1")
 
 <h3 style="font-style: italic;" id="start">Start</h4>
 
@@ -122,13 +128,12 @@ The other 2 commands are for debugging errors, and for testing purposes.
 ```powershell
 yarn develop
 ```
-
-Is for debugging, if an error occurs, it does the same thing,
+is for debugging, if an error occurs, it does the same thing,
 
 ```powershell
 yarn watch
 ```
-does, it treats the code like you are currently in developement, so you can change code without automatically reloading the browser.
+does, it treats the code like you are currently in developement, so you can change code and it will automatically reload the browser.
 
 <br>
 
@@ -136,12 +141,12 @@ On the other hand
 ```powershell
 yarn build
 ```
-is meant for testing, testing how the website will react if it were published to the web.
+is meant for testing, testing how the website will react if it were published to the web, it won't be used often.
 
 ---
 
 ### *Editing*
-You will most likely only change some text and an image here and there. To add new pages and edit old ones you need to navigate to [views/pages](/views/pages), right click on the folder and create a new file, make sure it ends in a `.pug`. You can call it whatever you want (Note: the name of the file is the name you use to access it, for example, `blog-for-october.pug` will be accessed using this `[website-domain.com]/blog-for-october`. You can also create folders, `2020/cool-things.pug` => `[website-domain.com]/2020/cool-things`). Once you have created your new webpage copy this to it,
+You will most likely only change some text and an image here and there. To add new pages and edit old ones you need to navigate to views/pages for example if you want to edit the homepage you have to edit the [index.pug](./views/pages/index.pug) file. Right click on *pages* folder in the *views* folder, click create a new file, make sure it ends in `.pug`. You can call it whatever you want (Note: the name of the file is the name you use to access it, for example, `blog-for-october.pug` will be accessed using this `[website-domain.com]/blog-for-october`. You can also create folders, `2020/cool-things.pug` => `[website-domain.com]/2020/cool-things`). Once you have created your new webpage copy this to it,
 ```pug
 extends /app.pug
 
@@ -162,7 +167,7 @@ block pageInfo
     };
 
 block content
-  //- Hero layer
+  //- Hero layer / Banner layer
   +hero({
     title: "Title of hero",
     content: "Description over here...",
@@ -336,51 +341,9 @@ Hit it and search anything you want.
 
 In your case, hit <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and type `Fold All`. Click on the `Fold All` option, everything should now make more sense.
 
-**Adding Pages**
+Take it slow and gradual, I am still working on creating indept instructions for editing, and making complex style changes, but for now edit only text and maybe images.
 
-To unfold a block of code you click the toggle arrow to the left of the code, well in order to create a new page you new to unfold,
-```js
-module.exports = {...
-```
-
-![alt text](./assets/unfold.png "Logo Title Text 1")
-
-once it's unfolded you should now, unfold routes
-```js
-// Edit this to change your site
-module.exports = {
-    ...config,
-    "websiteURL": "https://app-fast.herokuapp.com/",
-    "pages": {...
-    },
-    "routes": {...
-    }
-};
-```
-in `"routes"`
-```js
-"routes": {
-    "/": "index",
-    "/about": "about",
-    "/projects": "project",
-}
-```
-add
-```js
-"/new-page": "new-page",
-```
-(the comma is necessary), so it looks like this
-```js
-"routes": {
-    "/": "index",
-    "/about": "about",
-    "/projects": "project",
-    "/new-page": "new-page",
-}
-```
-you have now created the url for your new page.
-
-
-## Demos and examples
+Contact me if you have any issues.
 
 ## Browser support
+A lot of them, I designed this website to support as many browsers as practical, including IE 11.
