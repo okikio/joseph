@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const { src, task, series, dest, watch } = gulp;
 
-const { websiteURL, class_map, dev, debug, githubPages } = require('./config');
+const { websiteURL, dev, debug, githubPages } = require('./config'); // class_map,
 const { author, homepage, license, copyright, github } = require("./package");
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
@@ -11,16 +11,16 @@ const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
 const commonJS = require('@rollup/plugin-commonjs');
 const { terser } = require('rollup-plugin-terser');
-// const { init, write } = require('gulp-sourcemaps');
+const { init, write } = require('gulp-sourcemaps');
 const rollupBabel = require('rollup-plugin-babel');
 const buble = require('@rollup/plugin-buble');
 const autoprefixer = require('autoprefixer');
 const rollup = require('gulp-better-rollup');
-const stringify = require('fast-stringify');
+// const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
 const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
-const postcssNative = require('postcss');
+// const postcssNative = require('postcss');
 const htmlmin = require('gulp-htmlmin');
 const postcss = require('gulp-postcss');
 const sitemap = require('gulp-sitemap');
@@ -85,12 +85,12 @@ let onwarn = ({ loc, message, code, frame }, warn) => {
     } else warn(message);
 };
 
-let class_keys = Object.keys(class_map);
-// let srcMapsWrite = ["../maps/", {
-//     sourceMappingURL: file => {
-//         return `/maps/${file.relative}.map`;
-//     }
-// }];
+// let class_keys = Object.keys(class_map);
+let srcMapsWrite = ["../maps/", {
+    sourceMappingURL: file => {
+        return `/maps/${file.relative}.map`;
+    }
+}];
 
 let minifyOpts = {
     keep_fnames: false, // change to true here
@@ -228,8 +228,8 @@ task("env-js", () =>
         pipes: [
             // Include enviroment variables in JS
             nunjucks.compile({
-                class_keys: stringify(class_keys),
-                class_map: stringify(class_map),
+                // class_keys: stringify(class_keys),
+                // class_map: stringify(class_map),
                 dev
             })
         ],
@@ -245,6 +245,7 @@ task("web-js", () =>
                 return [`${publicDest}/js/app.js`, {
                     opts: { allowEmpty: true },
                     pipes: [
+                        init(), // Sourcemaps init
                         // Bundle Modules
                         rollup({
                             treeshake: true,
@@ -267,8 +268,7 @@ task("web-js", () =>
                         }, gen ? 'iife' : 'es'),
                         rename(`${type}.min.js`), // Rename
                         header(banner),
-                        // init(), // Sourcemaps init
-                        // write(...srcMapsWrite), // Put sourcemap in public folder
+                        write(...srcMapsWrite), // Put sourcemap in public folder
 
                     ],
                     dest: `${publicDest}/js` // Output
@@ -441,6 +441,7 @@ task('inline-assets', () =>
     ])
 );
 
+/*
 task('optimize-class-names', () =>
     streamList([
         dev ? null : [`${publicDest}/css/*.css`, {
@@ -472,7 +473,7 @@ task('optimize-class-names', () =>
             ],
             dest: `${publicDest}/css`, // Output
         }],
-        dev ? null : [`${publicDest}/**/*.html`, {
+        dev ? null : [`${publicDest}/** /*.html`, {
             pipes: [
                 posthtml([
                     tree => {
@@ -501,6 +502,7 @@ task('optimize-class-names', () =>
         }]
     ])
 );
+*/
 
 task('inline-js-css', () =>
     stream(`${publicDest}/**/*.html`, {
@@ -543,10 +545,12 @@ task('reload', done =>
 task('dev', series("client", "html", "js", "css"));
 
 // Gulp task to minify all files, and inline them in the pages
-task('default', series("dev", "posthtml", "sitemap", "inline-assets", "optimize-class-names", "inline-js-css"));
+// "optimize-class-names",
+task('default', series("dev", "posthtml", "sitemap", "inline-assets", "inline-js-css"));
 
 // Gulp task to run before watching for file changes
-task('frontend', series("dev", "posthtml", "inline-assets", "optimize-class-names"));
+// , "optimize-class-names"
+task('frontend', series("dev", "posthtml", "inline-assets"));
 
 // Gulp task to check to make sure a file has changed before minify that file
 task('watch', () => {
@@ -570,7 +574,8 @@ task('watch', () => {
 
 // Gulp task to check to make sure a css file has changed before minify that file
 task('watch-frontend', () => {
-    watch('views/**/*.pug', watchDelay, series("html", "css", "posthtml", "inline-assets", "optimize-class-names"));
-    watch('src/**/*.scss', watchDelay, series("css", "optimize-class-names"));
-    watch('src/**/*.js', watchDelay, series('js', "optimize-class-names"));
+    // , "optimize-class-names"
+    watch('views/**/*.pug', watchDelay, series("html", "css", "posthtml", "inline-assets"));
+    watch('src/**/*.scss', watchDelay, series("css")); // , "optimize-class-names"
+    watch('src/**/*.js', watchDelay, series('js')); // , "optimize-class-names"
 });

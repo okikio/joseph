@@ -6,7 +6,7 @@ let _navbar = slice.call(document.getElementsByClassName("navbar"));
 
 let navFocus = () => {
     _navbar.forEach(function (nav) {
-        nav.classList.add("n-fs");
+        nav.classList.add("navbar-focus");
     });
 };
 

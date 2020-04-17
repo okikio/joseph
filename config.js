@@ -1,15 +1,13 @@
 let env = process.env;
-console.log("Process ENV: ", env.dev);
 if (!('dev' in env) || !('github_pages' in env)) require('dotenv').config();
 let dev = 'dev' in env ? (env.dev.toString() === "false" ? false : true) : true;
 let debug = 'debug' in env && env.debug.toString() === "true";
 let githubPages = 'github_pages' in env && env.github_pages.toString() === "true";
 
-let env_vars = { dev, debug, githubPages };
-console.log("Enviroment Variables: ", env_vars);
 let _exports = {
-    ...env_vars,
-    "websiteURL": "https://josephojo.com",
+    dev, debug, githubPages,
+    "websiteURL": "https://josephojo.com"
+    /*,
     "class_map": {
         // Continue...
         "layer-": "lr",
@@ -55,7 +53,7 @@ let _exports = {
         "-large": "lrg",
         "-default": "dlt",
         "-small": "sml"
-    },
+    },*/
 };
 
 module.exports = _exports;
