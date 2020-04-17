@@ -27,6 +27,7 @@ const sitemap = require('gulp-sitemap');
 const header = require('gulp-header');
 const rename = require('gulp-rename');
 const csso = require("postcss-csso");
+const cache = require('gulp-cached');
 const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
@@ -164,6 +165,7 @@ let _execSeries = (...cmds) => {
 task('html', () => stream(
     'views/pages/**/*.pug', {
         pipes: [
+            cache('pug'),
             // Pug compiler
             pug({
                 locals: { dev, debug, websiteURL, githubPages },
@@ -193,6 +195,7 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
+            cache('sass'),
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' })
                 .on('error', sass.logError),
@@ -278,6 +281,7 @@ task("web-js", () =>
                 rollup({
                     treeshake: true,
                     plugins: [
+                        cache('web-js'),
                         // rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
@@ -334,6 +338,7 @@ task("git:pull", () =>
 task('posthtml', () =>
     stream(`${publicDest}/**/*.html`, {
         pipes: [
+            cache('posthtml'),
             posthtml([
                 // Test processes
                 require('posthtml-textr')({}, [
@@ -348,6 +353,7 @@ task('posthtml', () =>
 task('sitemap', () =>
     stream(`${publicDest}/**/*.html`, {
         pipes: [
+            cache('sitemap'),
             sitemap({ siteUrl: websiteURL })
         ]
     })
@@ -402,6 +408,7 @@ task('inline-assets', () =>
         }],*/
         [`${publicDest}/**/*.html`, {
             pipes: [
+                cache('inline-assets'),
                 posthtml([
                     debug ? () => {} : tree => {
                         tree.match(querySelector("i.action-icon"), node => {
@@ -498,6 +505,7 @@ task('optimize-class-names', () =>
 task('inline-js-css', () =>
     stream(`${publicDest}/**/*.html`, {
         pipes: [
+            cache('inline-js-css'),
             posthtml([
                 tree => {
                     tree.walk(node => {
