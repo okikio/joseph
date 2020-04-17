@@ -9,8 +9,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, main, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, main, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video, svg {
     &,
@@ -45,7 +45,10 @@ template {
 html,
 body {
     text-rendering: optimizeSpeed;
+    scrollbar-color: $primary-light lighten($mid-dark, 5%);
+    scrollbar-color: var(--mid-dark, $primary-light) var(--light, lighten($mid-dark, 5%));
     font-family: $regular-font;
+    scrollbar-width: thin;
     word-wrap: break-word;
     line-height: 1.15;
     font-weight: 400;
@@ -69,12 +72,12 @@ body {
     &::-webkit-scrollbar-track-piece {
         transition: background-color .5s ease;
         background-color: $mid-dark;
-        background-color: var(--light, $mid-dark);
+        background-color: var(--light, lighten($mid-dark, 5%));
     }
 
     &::-webkit-scrollbar-thumb {
         transition: background-color .5s ease;
-        background-color: $light;
+        background-color: $primary-light;
         background-color: var(--mid-dark, $primary-light);
     }
 
