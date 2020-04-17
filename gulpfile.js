@@ -269,7 +269,6 @@ task("web-js", () =>
                         rename(`${type}.min.js`), // Rename
                         header(banner),
                         write(...srcMapsWrite), // Put sourcemap in public folder
-
                     ],
                     dest: `${publicDest}/js` // Output
                 }];
