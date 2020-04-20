@@ -11,7 +11,7 @@ mixin footer(value = {})
           href: "https://github.com/okikio",
           class: "layout-margin-left-mini",
           content: "Okiki Ojo"
-        })(target="_blank" rel="noreferrer noopener")
+        })(target="_blank" rel="noreferrer noopener" title="The github link to the Web Developer who designed this site, Okiki Ojo.")
         span= " | "
         span(itemscope itemtype="https://schema.org/SiteNavigationElement")
           span.action-btn.pointer-default
@@ -26,24 +26,24 @@ mixin footer(value = {})
           +link({
             href: "/sitemap",
             class: "layout-inline-block",
-          })(itemprop="url")
+          })(itemprop="url" title="The Joseph Ojo sitemap.")
             span(itemprop="name") Sitemap
         span= " | "
         +link({
           href: "https://www.linkedin.com/in/o-josephojo/",
           class: "layout-margin-left-mini",
           content: "LinkedIn"
-        })(target="_blank" rel="noreferrer noopener")
+        })(target="_blank" rel="noreferrer noopener" title="My LinkedIn page.")
         span= " - "
         +link({
           href: "https://github.com/laoluojo",
           class: "layout-margin-left-mini",
           content: "Github"
-        })(target="_blank" rel="noreferrer noopener")
+        })(target="_blank" rel="noreferrer noopener" title="The official Joseph Ojo github link.")
         span= " - "
         span(itemprop="publisher" itemscope itemtype="https://schema.org/Organization" itemid="https://josephojo.com")
           +link({
-            href: "mailto:laoluojo@gmail.com",
+            href: "mailto:laoluojo&#64;gmail&#46;com",
             class: "layout-margin-left-mini",
             content: "Email"
-          })(target="_blank" rel="noreferrer noopener" itemprop="email")
+          })(target="_blank" rel="noreferrer noopener" itemprop="email" title="An email you can contact me with.")

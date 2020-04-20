@@ -15,7 +15,7 @@ mixin navbar(value = {})
           +link({
             href: "/",
             class: "navbar-title style-primary-dark-hover style-primary-dark-focus"
-          })(itemprop="url" data-swup-preload)
+          })(itemprop="url" data-swup-preload title="The Joseph Ojo Logo.")
             img.navbar-logo(src="/favicon/favicon.svg" alt="Logo." itemprop="logo" loading="eager")
             span.navbar-title-line
             span.layout-inline-block(itemprop="name") JOSEPH!
@@ -34,6 +34,6 @@ mixin navbar(value = {})
                 +link({
                   href: `/${tab}`,
                   class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
-                })(itemprop="url" tabindex="-1" data-swup-preload title=`${tab[0].toUpperCase() + tab.slice(1)} page link`)
+                })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
                   span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                   meta(itemprop="position" content="1")
