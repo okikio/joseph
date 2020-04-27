@@ -22,10 +22,6 @@ const _actioncenter = optimize(".layer-action-center");
 const _scrolldown = optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let scroll, resize, href, init, _focusPt, _images = [], srcset, src, goDown, heroHeight;
-let layer_image, isHero, load_img, overlay, clientRect, _core_img, srcWid, header, main, _scrollTop, isBanner, _isbanner, windowWid;
-let _isMobile, dist, value, maxMove, transform, opacity;
-
 let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
@@ -41,14 +37,20 @@ on(_backUp, "mouseup", () => {
 });
 
 // On skip main button click (mouseup is a tiny bit more efficient), animate to the main content
+let heroHeight;
 on(_skipMain, "mouseup", e => {
     e.preventDefault();
     scrollTo(heroHeight, "1400ms");
 });
 
+// The focus pt., 10px past the height of the navbar
+let _focusPt = height(_navbar) + 10;
+let _images = [], windowWid;
+let resize, scroll;
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
     'resize': resize = () => {
+        let srcset, src, _core_img, srcWid, load_img;
         windowWid = width(window);
 
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
@@ -87,9 +89,9 @@ on(window, {
 
     // On scroll accomplish a set of tasks
     'scroll': scroll = () => {
-        // windowWid = width(window);
-        _scrollTop = scrollTop(window);
-        isBanner = hasClass(_layer, "banner-mode");
+        let _isMobile = windowWid < 650;
+        let _scrollTop = scrollTop(window);
+        let isBanner = hasClass(_layer, "banner-mode");
 
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
         requestAnimationFrame(() => {
@@ -104,8 +106,8 @@ on(window, {
             toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
 
             // If device width is greater than 700px
-            if (windowWid > 650 && window.isModern) {
-                _isMobile = windowWid < 650;
+            if (!_isMobile && window.isModern) {
+                let dist, value, maxMove, transform, opacity;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (hasClass(data.target, "effect-parallax")) {
@@ -156,15 +158,12 @@ on(window, {
 });
 
 // Method to run on scroll down button click
-goDown = () => {
+let goDown = () => {
     scrollTo(heroHeight, "800ms");
 };
 
-// The focus pt., 10px past the height of the navbar
-_focusPt = height(_navbar) + 10;
-
 // Initialize images
-init = () => {
+let init = () => {
     // Clear images array efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
     while (_images.length > 0) _images.pop();
 
@@ -175,6 +174,7 @@ init = () => {
     heroHeight = height(_hero);
 
     // Find the layer-images in each layer
+    let layer_image, isHero, overlay, load_img, clientRect, header, main, _isbanner;
     each(_layer, $layer => {
         layer_image = find($layer, _layer_img);
         isHero = hasClass($layer, "layer-hero-id");
@@ -249,11 +249,16 @@ on(document, "ready", () => {
                     });
                 }
             });
+            Swup.on("samePage", () => {
+                // If on the same page reinvigorate the scroll down button click event
+                // On scroll down button click (mouseup is a tiny bit more efficient) animate scroll to the height of the hero layer
+                on(_scrolldown, "mouseup", goDown);
+            });
             Swup.on('contentReplaced', () => {
                 init(); resize(); scroll();
             });
             Swup.on('willReplaceContent', () => {
-                href = window.location.href;
+                let href = window.location.href;
 
                 requestAnimationFrame(() => {
                     removeClass(_navLink, "navbar-link-focus");

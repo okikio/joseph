@@ -1,4 +1,4 @@
-import { _is, _fnval, _capital, keys, optimize } from "./util";
+import { _is, _fnval, _capital, optimize } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
@@ -72,7 +72,7 @@ export let map = (_el, fn) => {
 // Functions the same way Array.forEach does
 export let forEach = (_el, fn, ctxt) => {
     _el = el(_el);
-    for (let i = 0; i < _el.length; i ++)
+    for (let i = 0, len = _el.length; i < len; i ++)
         fn.call(ctxt, _el[i], i);
     return _el;
 };
@@ -81,7 +81,7 @@ export let forEach = (_el, fn, ctxt) => {
    it allows the iterators return value to stop the iteration just like Array.every */
 export let each = (_el, fn) => {
     _el = el(_el);
-    for (let i = 0; i < _el.length; i ++) {
+    for (let i = 0, len = _el.length; i < len; i ++) {
         let value = _el[i];
         if (fn.call(value, value, i) == false) break;
     }
@@ -728,63 +728,97 @@ try {
     window.removeEventListener("PassiveEventsTest", noop, opts);
 } catch (e) { console.warn("Passive Events aren't supported in this browser, performance may suffer."); }
 
+/**
+ * Adds a listener for a given event
+ *
+ * @param {String|Object|Array} events
+ * @param {Function*} callback
+ * @param {Object*} scope
+ */
 // Alias for the addEventListener; supports multiple elements, and multiple way of defining an event
-export let on = ($el, evt, fn, opts) => {
-    let $evt, useCapture, _opts, _fn, handler;
-    if (_is.undef(evt)) { return; } // If there is no event break
-    if (_is.str(evt)) { evt = evt.split(/\s/g); }
-    if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
+export let on = (elems, events, callback, scope) => {
+    // If there is no event break
+    if (typeof events == "undefined") return this;
 
-    _opts = _is.obj(evt) && !_is.arr(evt) ? fn : opts;
-    return each($el, _el => {
-        // Loop through the list of events
-        keys(evt).forEach(key => {
-            $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
-            _fn = _is.obj(evt) && !_is.arr(evt) ? evt[$evt] : fn;
+     // Create a new event every space
+    if (typeof events == "string") events = events.split(/\s/g);
 
-            if (/ready/.test($evt)) {
-                if (!(/in/.test(document.readyState))) {
-                    window.setTimeout(() => {
-                        _fn({ preventDefault: () => {} });
-                    }, 0);
-                } else if (document.addEventListener) {
-                    handler = (...args) => {
-                        document.removeEventListener("DOMContentLoaded", handler);
-                        window.removeEventListener("load", handler);
-                        _fn(...args);
-                    };
+    let event;
+    // Loop through the list of events
+    Object.keys(events).forEach(key => {
+        // Select the name of the event from the list
+        // Remember events can be {String | Object | Array}
+        event = events[key];
 
-                    document.addEventListener("DOMContentLoaded", handler);
-                    window.addEventListener("load", handler);
-                }
-            } else {
-                useCapture = /blur|focus|touch/.test($evt);
-                _opts = _is.usable(_opts) ? _opts : ($evt === "scroll" ? passive || {} : { useCapture });
-                _el.addEventListener($evt, _fn, _opts);
+        // Check If events is an Object (JSON like Object, and not an Array)
+        if (typeof events == "object" && !Array.isArray(events)) {
+            scope = callback; callback = event; event = key;
+        }
+
+        if (!_is.usable(scope)) {
+            let useCapture = /blur|focus|touch/.test(event);
+            scope = event === "scroll" ? passive || {} : { useCapture };
+        }
+
+        if (/ready/.test(event)) {
+            if (!(/in/.test(document.readyState))) {
+                window.setTimeout(() => callback(), 0);
+            } else if (document.addEventListener) {
+                let handler = () => {
+                    document.removeEventListener("DOMContentLoaded", handler);
+                    window.removeEventListener("load", handler);
+                    callback();
+                };
+
+                document.addEventListener("DOMContentLoaded", handler);
+                window.addEventListener("load", handler);
             }
-        });
-    });
+        } else {
+            each(elems, elem => {
+                elem.addEventListener(event, callback, scope);
+            });
+        }
+    }, this);
 };
 
-// Alias for the removeEventListener; supports multiple elements
-export let off = ($el, evt, fn, opts) => {
-    let $evt, useCapture, _opts, _fn;
-    if (_is.undef(evt)) { return; } // If there is no event break
-    if (_is.str(evt)) { evt = evt.split(/\s/g); }
-    if (!_is.arr(evt) && !_is.obj(evt)) { evt = [evt]; } // Set evt to an array
 
-    _opts = _is.obj(evt) && !_is.arr(evt) ? fn : opts;
-    return each($el, _el => {
-        // Loop through the list of events
-        keys(evt).forEach(key => {
-            $evt = _is.obj(evt) && !_is.arr(evt) ? key : evt[key];
-            _fn = _is.obj(evt) && !_is.arr(evt) ? evt[$evt] : fn;
+/**
+ * Removes a listener for a given event
+ *
+ * @param {String|Object|Array} events
+ * @param {Function*} callback
+ * @param {Object*} scope
+ */
+export let off = (elems, events, callback, scope) => {
+    // If there is no event break
+    if (typeof events == "undefined") return this;
 
-            useCapture = /blur|focus|touch/.test($evt);
-            _opts = _is.usable(_opts) ? _opts : ($evt === "scroll" ? passive || {} : { useCapture });
-            _el.removeEventListener($evt, _fn, _opts);
-        });
-    });
+     // Create a new event every space
+    if (typeof events == "string") events = events.split(/\s/g);
+
+    let event;
+    // Loop through the list of events
+    Object.keys(events).forEach(key => {
+        // Select the name of the event from the list
+        // Remember events can be {String | Object | Array}
+        event = events[key];
+
+        // Check If events is an Object (JSON like Object, and not an Array)
+        if (typeof events == "object" && !Array.isArray(events)) {
+            scope = callback; callback = event; event = key;
+        }
+
+        if (!_is.usable(scope)) {
+            let useCapture = /blur|focus|touch/.test(event);
+            scope = event === "scroll" ? passive || {} : { useCapture };
+        }
+
+        if (/ready/.test(event)) { console.warn("Cannot remove the 'ready' event."); } else {
+            each(elems, elem => {
+                elem.removeEventListener(event, callback, scope);
+            });
+        }
+    }, this);
 };
 
 // Generate shortforms for events eg. onclick(), onhover(), etc...

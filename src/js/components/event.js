@@ -1,5 +1,5 @@
-import { _is, keys, _argNames } from "./util";
-
+// import { _is, keys, _argNames } from "./util";
+/*
 // A small event emitter
 export default class _event {
     constructor() {
@@ -159,4 +159,360 @@ export default class _event {
 
     // Alias for the `listeners` method
     callbacks(...args) { return this.listeners(...args); }
+}*/
+
+/**
+ * Represents a new event listener consisting of properties like: callback, scope, name
+ *
+ * @export
+ * @class Listener
+ * @extends {BasicClass}
+ */
+export class Listener {
+    /**
+     * Creates a new instance of a Listener
+     *
+     * @param    {Object}
+     *    - callback = [Function]
+     *    - scope = [Object*]
+     *    - name = [String]
+     * @memberof Listener
+     * @constructor
+     */
+    constructor ({ callback = null, scope = null, name = null }) {
+
+        /**
+         * The current listener data
+         *
+         * @type {Object}
+         */
+        this.listener = { callback, scope, name };
+    }
+
+    /**
+     * Returns the callback Function of the Listener
+     *
+     * @public
+     * @return {Function}
+     */
+    getCallback () {
+        return this.listener.callback;
+    }
+
+    /**
+     * Returns the scope as an Object, from the Listener
+     *
+     * @public
+     * @return {Function}
+     */
+    getScope () {
+        return this.listener.scope;
+    }
+
+    /**
+     * Returns the event as a String, from the Listener
+     *
+     * @public
+     * @return {Function}
+     */
+    getEventName () {
+        return this.listener.name;
+    }
+
+    /**
+     * Returns the listener as an Object
+     *
+     * @public
+     * @return {Object}
+     */
+    toJSON () {
+        return this.listener;
+    }
+}
+
+/**
+ * An event emitter
+ *
+ * @export
+ * @class EventEmitter
+ * @extends {Manager}
+ */
+// A small event emitter
+export default class EventEmitter {
+    /**
+     * Creates an instance of an EventEmitter
+     *
+     * @memberof EventEmitter
+     * @constructor
+     */
+    constructor() {
+        /**
+         * The complex list of named data, to which the EventEmitter controls
+         *
+         * @type {Map}
+         */
+        this.list = new Map();
+    }
+
+    /**
+     * Get the value stored in the EventEmitters
+     *
+     * @public
+     * @param  {any*} key
+     * @return {Array}
+     */
+    get (key) {
+        return this.list.get(key);
+    }
+
+    /**
+     * Set a value stored in the EventEmitters
+     *
+     * @public
+     * @param  {any*} key
+     * @param  {any*} value
+     * @return {EventEmitters}
+     */
+    set (key, value) {
+        this.list.set(key, value);
+        return this;
+    }
+
+    /**
+     * Returns the keys of all items stored in the EventEmitters
+     *
+     * @public
+     * @return {Array}
+     */
+    keys () {
+        return this.list.keys();
+    }
+
+    /**
+     * Returns the total number of events stored in the EventEmitters
+     *
+     * @public
+     * @return {Number}
+     */
+    size () {
+        return this.list.size;
+    }
+
+    /**
+     * Removes a value stored in the EventEmitters, via the key
+     *
+     * @public
+     * @param  {any*} key
+     * @return {EventEmitters}
+     */
+    remove (key) {
+        this.list.delete(key);
+        return this;
+    }
+
+    /**
+     * Clear the EventEmitters of all its contents
+     *
+     * @public
+     * @return {EventEmitters}
+     */
+    clear () {
+        this.list.clear();
+        return this;
+    }
+
+    /**
+     * Checks if the EventEmitters contains a certain key
+     *
+     * @public
+     * @param {any*} key
+     * @return {Boolean}
+     */
+    has (key) {
+        return this.list.has(key);
+    }
+
+    /**
+     * Iterates through the EventEmitters contents, calling a function every iteration
+     *
+     * @public
+     * @param {Function} fn
+     * @param {Object* | EventEmitters} [context=this]
+     * @return {EventEmitters}
+     */
+    each (fn, context = this) {
+        this.list.forEach(fn, context);
+        return this;
+    }
+
+    /**
+     * Gets events, if event doesn't exist create a new Array for the event
+     *
+     * @public
+     * @param {String} name
+     * @return {Array}
+     */
+    // Get event, ensure event is valid
+    getEvent (name) {
+        let event = this.get(name);
+        if (!Array.isArray(event)) {
+            this.set(name, []);
+            return this.get(name);
+        }
+
+        return event;
+    }
+
+    /**
+     * Creates a new listener and adds it to the event
+     *
+     * @public
+     * @param {String} name
+     * @param {Function} callback
+     * @param {Object*} scope
+     * @return {Array}
+     */
+    // New event listener
+    newListener (name, callback, scope) {
+        let event = this.getEvent(name);
+        event.push(new Listener({ name, callback, scope }));
+        return event;
+    }
+
+    /**
+     * Adds a listener for a given event
+     *
+     * @param {String|Object|Array} events
+     * @param {Function*} callback
+     * @param {Object*} scope
+     */
+    on (events, callback, scope) {
+        // If there is no event break
+        if (typeof events == "undefined") return this;
+
+         // Create a new event every space
+        if (typeof events == "string") events = events.split(/\s/g);
+
+        let event;
+        // Loop through the list of events
+        Object.keys(events).forEach(key => {
+            // Select the name of the event from the list
+            // Remember events can be {String | Object | Array}
+            event = events[key];
+
+            // Check If events is an Object (JSON like Object, and not an Array)
+            if (typeof events == "object" && !Array.isArray(events)) {
+                this.newListener(key, event, callback);
+            } else {
+                this.newListener(event, callback, scope);
+            }
+        }, this);
+        return this;
+    }
+
+    /**
+     * Removes an event listener from an event
+     *
+     * @public
+     * @param {String} name
+     * @param {Function} callback
+     * @param {Object*} scope
+     * @return {Array}
+     */
+    // Remove an event listener
+    removeListener (name, callback, scope) {
+        let event = this.getEvent(name);
+
+        if (callback) {
+            let i = 0, len = event.length, value;
+            let listener = new Listener({ name, callback, scope });
+            for (; i < len; i ++) {
+                value = event[i];
+                if (value.callback === listener.callback &&
+                    value.scope === listener.scope)
+                    break;
+            }
+
+            event.splice(i, 1);
+        } else this.remove(name);
+        return event;
+    }
+
+    /**
+     * Removes a listener for a given event
+     *
+     * @param {String|Object|Array} events
+     * @param {Function*} callback
+     * @param {Object*} scope
+     */
+    off (events, callback, scope) {
+        // If there is no event break
+        if (typeof events == "undefined") return this;
+
+         // Create a new event every space
+        if (typeof events == "string") events = events.split(/\s/g);
+
+        let event;
+        // Loop through the list of events
+        Object.keys(events).forEach(key => {
+            // Select the name of the event from the list
+            // Remember events can be {String | Object | Array}
+            event = events[key];
+
+            // Check If events is an Object (JSON like Object, and not an Array)
+            if (typeof events == "object" && !Array.isArray(events)) {
+                this.removeListener(key, event, callback);
+            } else {
+                this.removeListener(event, callback, scope);
+            }
+        }, this);
+        return this;
+    }
+
+    /**
+     * Adds a one time event listener for an event
+     *
+     * @param {String|Object|Array} events
+     * @param {Function*} callback
+     * @param {Object*} scope
+     */
+    once (events, callback, scope) {
+        // If there is no event break
+        if (typeof events == "undefined") return this;
+
+         // Create a new event every space
+        if (typeof events == "string") events = events.split(/\s/g);
+
+        let onceFn = (...args) => {
+            this.off(events, onceFn, scope);
+            callback.apply(scope, args);
+        };
+
+        this.on(events, onceFn, scope);
+        return this;
+    }
+
+    /**
+     * Call all listener within an event
+     *
+     * @param {String|Array} events
+     * @param {Array} [args = []]
+     */
+    emit (events, args = []) {
+        // If there is no event break
+        if (typeof events == "undefined") return this;
+
+         // Create a new event every space
+        if (typeof events == "string") events = events.split(/\s/g);
+
+        // Loop through the list of events
+        events.forEach(event => {
+            let listeners = this.getEvent(event);
+            listeners.forEach(listener => {
+                let { callback, scope } = listener.toJSON();
+                callback.apply(scope, args);
+            });
+        }, this);
+        return this;
+    }
 }
