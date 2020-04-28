@@ -1,6 +1,6 @@
 {
     "name": "josephojo",
-    "version": "2.5.0",
+    "version": "2.5.2",
     "description": "The porfolio of Joseph ojo, it contains all his amazing projects etc...",
     "scripts": {
         "test": "gulp",
@@ -79,7 +79,7 @@
         "gulp-posthtml": "^3.0.4",
         "gulp-pug": "^4.0.1",
         "gulp-rename": "^2.0.0",
-        "gulp-sass": "^4.0.2",
+        "gulp-sass": "^4.1.0",
         "gulp-sitemap": "^7.6.0",
         "gulp-size": "^3.0.0",
         "gulp-sourcemaps": "^2.6.5",
@@ -87,12 +87,12 @@
         "postcss": "^7.0.27",
         "postcss-csso": "^4.0.0",
         "posthtml-doctype": "^1.1.1",
-        "posthtml-link-noreferrer": "^1.0.6",
+        "posthtml-link-noreferrer": "^1.0.7",
         "posthtml-lorem": "^1.0.0",
         "posthtml-match-helper": "^1.0.1",
         "posthtml-textr": "^1.0.5",
         "posthtml-transformer": "^0.1.2",
-        "rollup": "^2.6.1",
+        "rollup": "^2.7.3",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-terser": "^5.3.0",
         "typographic-single-spaces": "^1.0.2"
