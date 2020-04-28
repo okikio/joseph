@@ -29,6 +29,7 @@ export let optimize = val => {
 };
 
 // Fastest way to clear an array and use less memory: [stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript]
+// Clear images array efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
 export let clear = arr => {
 	while (arr.length) arr.pop();
 };

@@ -6,20 +6,20 @@ import headPlugin from '@swup/head-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, optimize, toFixed } from "./components/util";
+import { _constrain, _map, toFixed } from "./components/util"; // optimize,
 import { on, off, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 // fpsCounter();
-const _layer = optimize('.layer');
-const _navbar = optimize('.navbar');
-const _hero = optimize('.layer-hero');
-const _menu = optimize('.navbar-menu');
-const _backUp = optimize('.back-to-top');
-const _skipMain = optimize(".skip-main");
-const _navLink = optimize('.navbar-link');
-const _layer_img = optimize(".layer-image");
-const _actioncenter = optimize(".layer-action-center");
-const _scrolldown = optimize('.layer-hero-scroll-down');
+const _layer = '.layer'; // optimize('.layer');
+const _navbar = '.navbar'; // optimize('.navbar');
+const _hero = '.layer-hero'; // optimize('.layer-hero');
+const _menu = '.navbar-menu'; // optimize('.navbar-menu');
+const _backUp = '.back-to-top'; // optimize('.back-to-top');
+const _skipMain = ".skip-main"; // optimize(".skip-main");
+const _navLink = '.navbar-link'; // optimize('.navbar-link');
+const _layer_img = ".layer-image"; // optimize(".layer-image");
+const _actioncenter = ".layer-action-center"; // optimize(".layer-action-center");
+const _scrolldown = '.layer-hero-scroll-down'; // optimize('.layer-hero-scroll-down');
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let onload = $load_img => function () {
@@ -45,7 +45,7 @@ on(_skipMain, "mouseup", e => {
 
 // The focus pt., 10px past the height of the navbar
 let _focusPt = height(_navbar) + 10;
-let _images = [], windowWid;
+let _images = new Set(), windowWid;
 let resize, scroll;
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
@@ -164,8 +164,7 @@ let goDown = () => {
 
 // Initialize images
 let init = () => {
-    // Clear images array efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
-    while (_images.length > 0) _images.pop();
+    _images.clear();
 
     // On scroll down button click (mouseup is a tiny bit more efficient) animate scroll to the height of the hero layer
     on(_scrolldown, "mouseup", goDown);
@@ -191,7 +190,7 @@ let init = () => {
             overlay = get(find($img, ".layer-image-overlay"), 0);
             clientRect = offset($img);
 
-            _images.push({
+            _images.add({
                 _isBanner: _isbanner,
                 overlay, load_img,
                 target: $img,

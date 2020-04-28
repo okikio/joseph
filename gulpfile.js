@@ -17,7 +17,7 @@ const autoprefixer = require('autoprefixer');
 const rollup = require('gulp-better-rollup');
 // const stringify = require('fast-stringify');
 const { spawn } = require('child_process');
-const nunjucks = require('gulp-nunjucks');
+// const nunjucks = require('gulp-nunjucks');
 const posthtml = require('gulp-posthtml');
 // const postcssNative = require('postcss');
 const htmlmin = require('gulp-htmlmin');
@@ -220,9 +220,9 @@ task("css", () =>
         end: [browserSync.stream()]
     })
 );
-
+/*
 task("env-js", () =>
-    stream('src/js/**/*.js', {
+    stream('src/js/** /*.js', {
         opts: { allowEmpty: true },
         pipes: [
             // Include enviroment variables in JS
@@ -234,7 +234,7 @@ task("env-js", () =>
         ],
         dest: `${publicDest}/js`, // Output
     })
-);
+);*/
 
 task("web-js", () =>
     streamList([
@@ -307,7 +307,8 @@ task("web-js", () =>
     ])
 );
 
-task("js", series("env-js", "web-js") );
+// "env-js",
+task("js", series("web-js") );
 
 task("client", () =>
     streamList([
