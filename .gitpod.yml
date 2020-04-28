@@ -12,7 +12,7 @@ ports:
 tasks:
   - command: >
       npm install -g gulp &&
-      echo -e "dev=true\ngithub_pages=true" > .env &&
+      echo -e "dev=true" > .env &&
       yarn &&
       yarn upgrade &&
       yarn watch
