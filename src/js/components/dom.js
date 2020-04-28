@@ -1,9 +1,8 @@
-import { _is, _fnval, _capital, optimize } from "./util";
+import { _is, _fnval, _capital } from "./util";
 import ele, { _qsa, _elem, _createElem } from './ele';
 
 // Quick access to a new ele object
 export let el = (sel, ctxt) => {
-    if (_is.str(sel)) optimize(sel);
     return _is.inst(sel, ele) && !_is.usable(ctxt) ? sel : new ele(sel, ctxt);
 };
 
@@ -39,7 +38,6 @@ export let last = _el => {
 // The matches() method checks to see if the Element would be selected by the provided selectorString -- in other words -- checks if the element "is" the selector.
 export let _matches = (ele, sel) => {
     if (_is.undef(ele)) return;
-    if (_is.str(sel)) optimize(sel);
     let matchSel = _is.el(sel) ? el => {
         var matches = [el], i = matches.length;
         while (--i >= 0 && matches[i] !== ele);
@@ -92,7 +90,7 @@ export let each = (_el, fn) => {
 export let filter = (_el, sel) => {
     _el = el(_el);
     if (_is.undef(sel)) return _el;
-    return el([].filter.call(_el, _is.fn(sel) ? sel : ele => _matches(ele, _is.str(sel) ? optimize(sel) : sel), _el));
+    return el([].filter.call(_el, _is.fn(sel) ? sel : ele => _matches(ele, sel), _el));
 };
 
 // Check if the parent node contains the given DOM node. Returns false if both are the same node.
@@ -107,7 +105,6 @@ let _contains = (parent, node) => {
 export let find = (_el, sel) => {
     let result;
     _el = el(_el);
-    if (_is.str(sel)) sel = optimize(sel);
     if (!sel) result = el();
     else if (_is.obj(sel)) {
         result = filter(sel, el => {
@@ -554,7 +551,6 @@ let classcache = {};
 
 // Class name RegExp
 let _classRE = name => {
-    name = optimize(name);
     return name in classcache ? classcache[name] :
         (classcache[name] = new RegExp('(^|\\s)' + name + '(\\s|$)'));
 };
@@ -565,8 +561,6 @@ let getclass = (node, value) => {
     let svg  = name && !_is.undef(name.baseVal);
 
     if (_is.undef(value)) return svg ? name.baseVal : name;
-
-    value = optimize(value);
     svg ? (name.baseVal = value) : (node.className = value);
 };
 
@@ -582,7 +576,6 @@ export let hasClass = (_el, name) => {
 export let addClass = (_el, name) => {
     _el = el(_el);
     if (!name) return _el;
-    name = optimize(name);
     return each(_el, (el, idx) => {
         if (!('className' in el)) return;
 
@@ -597,7 +590,6 @@ export let addClass = (_el, name) => {
 
 // Remove the specified class name from all elements in the collection. When the class name isn’t given, remove all class names. Multiple class names can be given in a space-separated string.
 export let removeClass = (_el, name) => {
-    name = optimize(name);
     return each(_el, (el, idx) => {
         if (!('className' in el)) return;
         if (_is.undef(name)) return getclass(el, '');
@@ -615,7 +607,6 @@ export let removeClass = (_el, name) => {
 export let toggleClass = (_el, name, when) => {
     _el = el(_el);
     if (!name) return _el;
-    name = optimize(name);
     return each(_el, function (el, idx) {
         let $this = new ele(el);
         _fnval(name, [getclass(el), idx], el).split(/\s+/g)
