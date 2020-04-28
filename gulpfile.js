@@ -550,8 +550,8 @@ task('reload', done =>
 task('dev', series(parallel("client", "html", "js"), "css"));
 
 // Gulp task to minify all files, and inline them in the pages
-// "optimize-class-names", "sitemap",
-task('default', series("dev", "posthtml", "inline-assets", "inline-js-css"));
+// "optimize-class-names",
+task('default', series("dev", "posthtml", parallel("sitemap", "inline-assets"), "inline-js-css"));
 
 // Gulp task to run before watching for file changes
 // , "optimize-class-names"
