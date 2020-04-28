@@ -202,6 +202,12 @@ task("css", () =>
             rename(minSuffix), // Rename
             // Autoprefix, Remove unused CSS & Compress CSS
             postcss([
+                purgecss({
+                    content: [`${publicDest}/**/*.html`],
+                    whitelistPatterns: [/-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
+                    keyframes: false,
+                    fontFace: false
+                }),
                 autoprefixer({
                     overrideBrowserslist: ["defaults, IE 8"]
                 }),
@@ -503,19 +509,6 @@ task('optimize-class-names', () =>
 
 task('inline-js-css', () =>
     streamList([
-        [`${publicDest}/css/*.css`, {
-            pipes: [
-                cache('purge-css'),
-                postcss([
-                    purgecss({
-                        content: [`${publicDest}/**/*.html`],
-                        whitelistPatterns: [/-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
-                        keyframes: false,
-                        fontFace: false
-                    }),
-                ])
-            ]
-        }],
         [`${publicDest}/**/*.html`, {
             pipes: [
                 cache('inline-js-css'),
@@ -578,7 +571,7 @@ task('watch', () => {
         });
     });
 
-    watch('views/**/*.pug', watchDelay, series(parallel('html', 'css'), "posthtml", "inline-assets", 'reload'));
+    watch('views/**/*.pug', watchDelay, series('html', 'css', "posthtml", "inline-assets", 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));
     watch('src/**/*.js', watchDelay, series('js', "inline-assets", 'reload'));
     watch(['client/**/*'], watchDelay, series('client', "inline-assets", 'reload'));
