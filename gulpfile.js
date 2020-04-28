@@ -101,7 +101,7 @@ let minifyOpts = {
     ecma: 8,
     safari10: false
 };
-let publicDest = githubPages ? 'docs' : 'public';
+let publicDest = 'public';
 let minSuffix = { suffix: ".min" };
 let watchDelay = { delay: 1000 };
 let { assign } = Object;
@@ -221,6 +221,7 @@ task("css", () =>
     })
 );
 
+/*
 task("env-js", () =>
     stream('src/js/** /*.js', {
         opts: { allowEmpty: true },
@@ -234,14 +235,15 @@ task("env-js", () =>
         ],
         dest: `${publicDest}/js`, // Output
     })
-);
+);*/
 
-task("web-js", () =>
+let webJS;
+task("web-js", webJS = () =>
     streamList([
         ...["modern"].concat(!dev ? "general" : [])
             .map(type => {
                 let gen = type === 'general';
-                return [`${publicDest}/js/app.js`, {
+                return [`src/js/app.js`, {
                     opts: { allowEmpty: true },
                     pipes: [
                         init(), // Sourcemaps init
@@ -272,14 +274,16 @@ task("web-js", () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-        [[`${publicDest}/js/${dev ? "{vendor,ver-check}" : "*"}.js`, `!${publicDest}/js/app.js`, `!${publicDest}/js/*.min.js`], {
+            // , `!${publicDest}/js/*.min.js`
+        [["src/js/*.js", "!src/js/app.js"], {
+            // , `!${publicDest}/js/.js`
             opts: { allowEmpty: true },
             pipes: [
+                cache('web-js'),
                 // Bundle Modules
                 rollup({
                     treeshake: true,
                     plugins: [
-                        cache('web-js'),
                         // rollupJSON(), // Parse JSON Exports
                         commonJS(), // Use CommonJS to compile the program
                         nodeResolve(), // Bundle all Modules
@@ -307,7 +311,7 @@ task("web-js", () =>
     ])
 );
 
-task("js", series("env-js", "web-js") );
+task("js", webJS); //series("env-js", "web-js")
 
 task("client", () =>
     streamList([

@@ -8,7 +8,7 @@ let githubPages = 'github_pages' in env && env.github_pages.toString() === "true
 let _exports = {
     dev, debug, githubPages,
     author, homepage, license, copyright, github,
-    "websiteURL": "https://josephojo.com",
+    "websiteURL": "https://josephojo.com"
 };
 
 module.exports = _exports;
