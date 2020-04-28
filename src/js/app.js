@@ -1,4 +1,3 @@
-
 // Imported external libraries
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
@@ -6,20 +5,19 @@ import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
-import { _constrain, _map, toFixed } from "./components/util"; // optimize,
+import { _constrain, _map, toFixed } from "./components/util";
 import { on, off, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-// fpsCounter();
-const _layer = '.layer'; // optimize('.layer');
-const _navbar = '.navbar'; // optimize('.navbar');
-const _hero = '.layer-hero'; // optimize('.layer-hero');
-const _menu = '.navbar-menu'; // optimize('.navbar-menu');
-const _backUp = '.back-to-top'; // optimize('.back-to-top');
-const _skipMain = ".skip-main"; // optimize(".skip-main");
-const _navLink = '.navbar-link'; // optimize('.navbar-link');
-const _layer_img = ".layer-image"; // optimize(".layer-image");
-const _actioncenter = ".layer-action-center"; // optimize(".layer-action-center");
-const _scrolldown = '.layer-hero-scroll-down'; // optimize('.layer-hero-scroll-down');
+const _layer = '.layer';
+const _navbar = '.navbar';
+const _hero = '.layer-hero';
+const _menu = '.navbar-menu';
+const _backUp = '.back-to-top';
+const _skipMain = ".skip-main";
+const _navLink = '.navbar-link';
+const _layer_img = ".layer-image";
+const _actioncenter = ".layer-action-center";
+const _scrolldown = '.layer-hero-scroll-down';
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
 let onload = $load_img => function () {
@@ -263,7 +261,6 @@ on(document, "ready", () => {
                     removeClass(_navLink, "navbar-link-focus");
                     each(_navLink, _link => {
                         href == _link.href && addClass(_link, "navbar-link-focus");
-                        console.log(href, _link.href)
                     });
                 });
             });

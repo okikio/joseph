@@ -1,32 +1,8 @@
-// export let { assign, keys, values } = Object;
-// export let { isArray, from, of } = Array;
 export let assign = Object.assign;
 export let values = Object.values;
 export let keys = Object.keys;
 
 export let isArray = Array.isArray;
-export let from = Array.from;
-export let of = Array.of;
-// {% if not dev %}
-// // These are all the major "classes" in use on any page
-// export const class_map = {{ class_map | safe }};
-// export const class_keys = {{ class_keys | safe }};
-// {% endif %}
-
-// During compilation I optimize classes in css and html, this is to compensate for that.
-export let optimize = val => {
-	// {% if not dev %}
-	// if (val && val.includes) {
-	// 	for (let i = 0; i < class_keys.length; i ++) {
-	// 		if (val.includes(class_keys[i])) {
-	// 			let regex = new RegExp(class_keys[i], 'g');
-	// 			val = val.replace(regex, class_map[class_keys[i]]);
-	// 		}
-	// 	}
-	// }
-	// {% endif %}
-	return val;
-};
 
 // Fastest way to clear an array and use less memory: [stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript]
 // Clear images array efficiently [smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/]
@@ -106,39 +82,12 @@ let _type = type => { // Tweak of _is
 	return val => _is(val, type);
 };
 
-/* This caused some errors in IE */
-// assign(_is, {
-//     el: el => _isInst(el, Element) || _isInst(el, Document),
-//     arrlike (obj) {
-//         let len = _is(obj.length, "number") && obj.length;
-//         return len === 0 || len > 0 && (len - 1) in obj;
-//     },
-//     num: val => !isNaN(val) && _type("number") (val),
-//     usable: v => !_is(v, "undefined") && v !== null,
-//     class: obj => obj && obj._method && obj._class,
-//     not: (type, ...args) => !_is[type](...args),
-//     doc: ctor => _isInst(ctor, Document),
-//     def: v => !_is(v, "undefined"),
-//     undef: _type("undefined"),
-//     win: v => v && v.window,
-//     bool: _type("boolean"),
-//     fn: _type("function"),
-//     null: v => v === null,
-//     str: _type("string"),
-//     obj: _type("object"),
-//     nul: v => v === null,
-//     inst: _isInst,
-//     arr: isArray,
-//     _type
-// });
-
 _is.el = el => _isInst(el, Element) || _isInst(el, Document);
 _is.arrlike = obj => {
 	let len = _is(obj.length, "number") && obj.length;
 	return len === 0 || len > 0 && (len - 1) in obj;
 };
 _is.usable = v => !_is(v, "undefined") && v !== null;
-// _is.class = obj => obj && obj._method && obj._class;
 _is.num = val => !isNaN(val) && _type("number") (val);
 _is.not = (type, ...args) => !_is[type](...args);
 _is.doc = ctor => _isInst(ctor, Document);
@@ -171,23 +120,4 @@ export let _fnval = (fn, args, ctxt) => {
 	return fn.apply(ctxt, args);
 };
 
-let STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
-let ARGUMENT_NAMES = /(?:^|,)\s*([^\s,=]+)/g;
-
-// Argument names
-export let _argNames = fn => {
-	let fnStr = fn.toString().replace(STRIP_COMMENTS, '');
-	let argsList = fnStr.slice(fnStr.indexOf('(') + 1, fnStr.indexOf(')'));
-	let result = argsList.match( ARGUMENT_NAMES ), stripped = [];
-
-	if (_is.nul(result)) return [];
-	else {
-		for (let i = 0; i < result.length; i ++) {
-			stripped.push( result[i].replace(/[\s,]/g, '') );
-		}
-
-		return stripped;
-	}
-};
-
-export default { _capital, _is, _constrain, _map, _fnval, _argNames, assign, keys, values, from, of, _log, clear };
+export default { _capital, _is, _constrain, _map, _fnval, assign, keys, values, _log, clear };
