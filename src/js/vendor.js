@@ -42,6 +42,7 @@ try {
     and a general one that uses the ecmascript 5 standard by default.
     The modern js file is much smaller because it follows newer echmascript standards */
     script.setAttribute("src", src);
+    script.setAttribute("async", "");
     body.appendChild(script);
 } catch (e) {
     let err = "Your browser is outdated, I suggest updating or upgrading to a new one.";
