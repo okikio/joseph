@@ -2,7 +2,7 @@
 // Imported external libraries
 import swup from "swup";
 import headPlugin from '@swup/head-plugin';
-// import preload from '@swup/preload-plugin';
+import preload from '@swup/preload-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
 
 // Internal use components
@@ -221,7 +221,7 @@ on(document, "ready", () => {
                 animateHistoryBrowsing: true,
                 containers: ["[data-container]"],
                 plugins: [
-                    // new preload(), // Preload pages
+                    new preload(), // Preload pages
                     new headPlugin(), // Replace the contents of the head elements
 
                     // For every new page, scroll to the top smoothly
