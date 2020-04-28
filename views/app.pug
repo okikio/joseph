@@ -15,7 +15,6 @@ html(lang="en")
     include /components/link.pug
     include /components/seo.pug
     include /components/row.pug
-    - let githubPages = self.githubPages;
     - let websiteURL = self.websiteURL;
     - let debug = self.debug;
     - let dev = self.dev;
@@ -251,5 +250,5 @@ html(lang="en")
       +footer
 
     script(src="/js/vendor.min.js" ph-inline)
-    //- if !dev && !githubPages
+    //- if !dev
       script(src="/js/service.min.js" ph-inline)

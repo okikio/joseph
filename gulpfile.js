@@ -1,7 +1,7 @@
 const gulp = require('gulp');
-const { src, task, series, dest, watch } = gulp;
+const { src, task, series, dest, watch, parallel } = gulp;
 
-const { websiteURL, dev, debug, githubPages, author, homepage, license, copyright, github } = require('./config'); // class_map,
+const { websiteURL, dev, debug, author, homepage, license, copyright, github } = require('./config'); // class_map,
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
@@ -27,7 +27,7 @@ const header = require('gulp-header');
 const rename = require('gulp-rename');
 const csso = require("postcss-csso");
 const cache = require('gulp-cached');
-const size = require('gulp-size');
+// const size = require('gulp-size');
 const sass = require('gulp-sass');
 const moment = require('moment');
 const pug = require('gulp-pug');
@@ -168,7 +168,7 @@ task('html', () => stream(
             cache('pug'),
             // Pug compiler
             pug({
-                locals: { dev, debug, websiteURL, githubPages },
+                locals: { dev, debug, websiteURL },
                 basedir: 'views',
                 self: true
             }),
@@ -186,7 +186,7 @@ task('html', () => stream(
                 removeRedundantAttributes: true,
                 processScripts: ["application/ld+json"]
             }),
-            size({gzip: true, showFiles: true}),
+            // size({gzip: true, showFiles: true}),
             header(bannerHTML),
         ]
     })
@@ -202,12 +202,6 @@ task("css", () =>
             rename(minSuffix), // Rename
             // Autoprefix, Remove unused CSS & Compress CSS
             postcss([
-                purgecss({
-                    content: [`${publicDest}/**/*.html`],
-                    whitelistPatterns: [/-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
-                    keyframes: false,
-                    fontFace: false
-                }),
                 autoprefixer({
                     overrideBrowserslist: ["defaults, IE 8"]
                 }),
@@ -508,32 +502,47 @@ task('optimize-class-names', () =>
 */
 
 task('inline-js-css', () =>
-    stream(`${publicDest}/**/*.html`, {
-        pipes: [
-            cache('inline-js-css'),
-            posthtml([
-                tree => {
-                    tree.walk(node => {
-                        if (node.tag != 'html') {
-                            let _attrs = node.attrs || {}, key;
-                            if ('ph-inline' in _attrs) {
-                                node.attrs = { ..._attrs };
-                                key = node.tag == "link" ? "href" : "src";
-                                node.attrs[key] = node.attrs[key].slice(1);
+    streamList([
+        [`${publicDest}/css/*.css`, {
+            pipes: [
+                cache('purge-css'),
+                postcss([
+                    purgecss({
+                        content: [`${publicDest}/**/*.html`],
+                        whitelistPatterns: [/-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
+                        keyframes: false,
+                        fontFace: false
+                    }),
+                ])
+            ]
+        }],
+        [`${publicDest}/**/*.html`, {
+            pipes: [
+                cache('inline-js-css'),
+                posthtml([
+                    tree => {
+                        tree.walk(node => {
+                            if (node.tag != 'html') {
+                                let _attrs = node.attrs || {}, key;
+                                if ('ph-inline' in _attrs) {
+                                    node.attrs = { ..._attrs };
+                                    key = node.tag == "link" ? "href" : "src";
+                                    node.attrs[key] = node.attrs[key].slice(1);
+                                }
                             }
-                        }
-                        return node;
-                    });
-                },
-                // Dom process
-                debug ? () => { } : phTransformer({
-                    root: `./${publicDest}`,
-                    minifyJS: false, minifyCSS: false
-                })
-            ]),
-            // sriHash()
-        ]
-    })
+                            return node;
+                        });
+                    },
+                    // Dom process
+                    debug ? () => { } : phTransformer({
+                        root: `./${publicDest}`,
+                        minifyJS: false, minifyCSS: false
+                    })
+                ]),
+                // sriHash()
+            ]
+        }]
+    ])
 );
 
 task('reload', done =>
@@ -545,11 +554,11 @@ task('reload', done =>
 );
 
 // Gulp task to minify all files
-task('dev', series("client", "html", "js", "css"));
+task('dev', series(parallel("client", "html", "js"), "css"));
 
 // Gulp task to minify all files, and inline them in the pages
 // "optimize-class-names",
-task('default', series("dev", "posthtml", "sitemap", "inline-assets", "inline-js-css"));
+task('default', series(parallel("dev", "sitemap"), "posthtml", "inline-assets", "inline-js-css"));
 
 // Gulp task to run before watching for file changes
 // , "optimize-class-names"
@@ -569,7 +578,7 @@ task('watch', () => {
         });
     });
 
-    watch('views/**/*.pug', watchDelay, series('html', 'css', "posthtml", "inline-assets", 'reload'));
+    watch('views/**/*.pug', watchDelay, series(parallel('html', 'css'), "posthtml", "inline-assets", 'reload'));
     watch('src/**/*.scss', watchDelay, series('css'));
     watch('src/**/*.js', watchDelay, series('js', "inline-assets", 'reload'));
     watch(['client/**/*'], watchDelay, series('client', "inline-assets", 'reload'));
@@ -578,7 +587,7 @@ task('watch', () => {
 // Gulp task to check to make sure a css file has changed before minify that file
 task('watch-frontend', () => {
     // , "optimize-class-names"
-    watch('views/**/*.pug', watchDelay, series("html", "css", "posthtml", "inline-assets"));
+    watch('views/**/*.pug', watchDelay, series(parallel("html", "css"), "posthtml", "inline-assets"));
     watch('src/**/*.scss', watchDelay, series("css")); // , "optimize-class-names"
     watch('src/**/*.js', watchDelay, series('js')); // , "optimize-class-names"
 });
