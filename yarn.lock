@@ -824,15 +824,6 @@
   resolved "https://registry.yarnpkg.com/@swup/plugin/-/plugin-1.0.1.tgz#10606322508724a5beaed6a09326d8c30c7041fa"
   integrity sha512-QrTGn1DLx+50CNsk6oGzUFnyNyLkDK6iLb032qKImmAXS+0Dd1cwa8cSGvJ+I27J4qR8y6oJNurgHIEc6ZCTrg==
 
-"@swup/preload-plugin@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@swup/preload-plugin/-/preload-plugin-1.0.3.tgz#f9522d7e223a6aa264a6178cd82af116fb0ab14a"
-  integrity sha512-Au2v5kwwrY2WFYEmRoHa8FXMq7S/7KgO+iG2n5IOS7CZfVilIpqTIEQQ8y7TZsQuL6+Pk/57aycYywVLZ8tc3w==
-  dependencies:
-    "@swup/plugin" "^1.0.0"
-    delegate "^3.2.0"
-    swup "^2.0.0"
-
 "@swup/scroll-plugin@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@swup/scroll-plugin/-/scroll-plugin-1.0.6.tgz#9a0b28a7f47750c6d5e69e988e42da31264e385e"
@@ -6363,7 +6354,7 @@ sver-compat@^1.5.0:
     es6-iterator "^2.0.1"
     es6-symbol "^3.1.1"
 
-swup@^2.0.0, swup@^2.0.9:
+swup@^2.0.9:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/swup/-/swup-2.0.9.tgz#1930fa969e833ba630f7c1ff12bd601eb2f40461"
   integrity sha512-hgrhKEKvWyxjXxKcumJozNWn6kvK8CyzujSk61mSb5FJDJAWjcw23gXgPhZMpJgdQNtjKKZZR42xCYPdP34xkA==

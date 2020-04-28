@@ -52,8 +52,8 @@
     },
     "dependencies": {
         "@swup/head-plugin": "^1.0.2",
-        "@swup/preload-plugin": "^1.0.3",
         "@swup/scroll-plugin": "^1.0.6",
+        "delegate": "^3.2.0",
         "swup": "^2.0.9"
     },
     "devDependencies": {
