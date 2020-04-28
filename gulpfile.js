@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const { src, task, series, dest, watch, parallel } = gulp;
 
-const { websiteURL, dev, debug, author, homepage, license, copyright, github } = require('./config'); // class_map,
+const { websiteURL, dev, debug, author, homepage, license, copyright, github, netlify } = require('./config'); // class_map,
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
@@ -168,7 +168,7 @@ task('html', () => stream(
             cache('pug'),
             // Pug compiler
             pug({
-                locals: { dev, debug, websiteURL },
+                locals: { dev, debug, websiteURL, netlify },
                 basedir: 'views',
                 self: true
             }),

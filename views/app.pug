@@ -16,6 +16,7 @@ html(lang="en")
     include /components/seo.pug
     include /components/row.pug
     - let websiteURL = self.websiteURL;
+    - let netlify = self.netlify;
     - let debug = self.debug;
     - let dev = self.dev;
     -
@@ -34,8 +35,8 @@ html(lang="en")
     link(rel="dns-prefetch" href='https://res.cloudinary.com' crossorigin)
     link(rel="preconnect" href='https://res.cloudinary.com' crossorigin)
 
-    link(rel="dns-prefetch" href='https://d33wubrfki0l68.cloudfront.net' crossorigin)
-    link(rel="preconnect" href='https://d33wubrfki0l68.cloudfront.net' crossorigin)
+    //- link(rel="dns-prefetch" href='https://d33wubrfki0l68.cloudfront.net' crossorigin)
+    //- link(rel="preconnect" href='https://d33wubrfki0l68.cloudfront.net' crossorigin)
 
     link(rel="dns-prefetch" href=websiteURL crossorigin)
     link(rel="preconnect" href=websiteURL crossorigin)
