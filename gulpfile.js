@@ -165,7 +165,7 @@ let _execSeries = (...cmds) => {
 task('html', () => stream(
     'views/pages/**/*.pug', {
         pipes: [
-            cache('pug'),
+            // cache('pug'),
             // Pug compiler
             pug({
                 locals: { dev, debug, websiteURL, netlify },

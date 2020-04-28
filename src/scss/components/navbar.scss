@@ -87,15 +87,20 @@
 
         &-title {
             transition: color .5s ease;
-            font-family: $bold-font;
             letter-spacing: 0.03em;
             line-height: $height;
             padding-left: $size;
             position: relative;
-            font-weight: 800;
             font-size: 17px;
             color: $dark;
             @include applyTheme(color, "dark");
+
+            & .name {
+                position: absolute;
+                font-family: $bold-font;
+                font-weight: 800;
+                top: 0;
+            }
 
             &,
             &:focus {
