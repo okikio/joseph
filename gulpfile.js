@@ -64,14 +64,12 @@ const banner = [
     "/**",
     ...bannerContent,
     ` */`,
-    "\n"
 ].join("\n");
 
 const bannerHTML = [
     "<!--",
     ...bannerContent,
     `-->`,
-    "\n"
 ].join("\n");
 
 // Rollup warnings are annoying
@@ -98,7 +96,10 @@ let minifyOpts = {
         dead_code: true,
         pure_getters: true
     },
-    ecma: 8,
+    output: {
+      comments: /^!/
+    },
+    ecma: 2017,
     safari10: false
 };
 let publicDest = 'public';
