@@ -195,7 +195,6 @@ task('html', () => stream(
 task("css", () =>
     stream('src/scss/*.scss', {
         pipes: [
-            cache('sass'),
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' })
                 .on('error', sass.logError),

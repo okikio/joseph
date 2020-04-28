@@ -10,6 +10,9 @@ block pageInfo
       description: "Sorry, the page you are looking for doesn't exist. How about going back home."
     };
 
+block preload
+  link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+
 block content
   section(id="content" itemtype="http://schema.org/WebPageElement" itemscope itemprop="mainEntity")
     //- Intro layer
