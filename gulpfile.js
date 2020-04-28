@@ -220,21 +220,21 @@ task("css", () =>
         end: [browserSync.stream()]
     })
 );
-/*
+
 task("env-js", () =>
     stream('src/js/** /*.js', {
         opts: { allowEmpty: true },
         pipes: [
             // Include enviroment variables in JS
-            nunjucks.compile({
-                // class_keys: stringify(class_keys),
-                // class_map: stringify(class_map),
-                dev
-            })
+            // nunjucks.compile({
+            //     // class_keys: stringify(class_keys),
+            //     // class_map: stringify(class_map),
+            //     dev
+            // })
         ],
         dest: `${publicDest}/js`, // Output
     })
-);*/
+);
 
 task("web-js", () =>
     streamList([
@@ -307,8 +307,7 @@ task("web-js", () =>
     ])
 );
 
-// "env-js",
-task("js", series("web-js") );
+task("js", series("env-js", "web-js") );
 
 task("client", () =>
     streamList([
