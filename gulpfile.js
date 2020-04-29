@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const { src, task, series, dest, watch, parallel } = gulp;
 
 const { websiteURL, dev, debug, author, homepage, license, copyright, github, netlify } = require('./config'); // class_map,
+// const closure = require('@ampproject/rollup-plugin-closure-compiler');
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
@@ -263,7 +264,8 @@ task("web-js", webJS = () =>
                                 // Minify the file
                                 debug ? [] : terser(
                                     assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
-                                )
+                                ),
+                                // closure()
                             ),
                             onwarn
                         }, gen ? 'iife' : 'es'),
