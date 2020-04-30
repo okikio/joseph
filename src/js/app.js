@@ -209,9 +209,9 @@ on(_backUp, "mouseup", () => {
     scrollTo("0px", "1400ms");
 });
 
-// On skip main button click (mouseup is a tiny bit more efficient), animate to the main content
+// On skip main button click animate to the main content
 let heroHeight;
-on(_skipMain, "mouseup", e => {
+on(_skipMain, "click", e => {
     e.preventDefault();
     scrollTo(heroHeight, "1400ms");
 });
