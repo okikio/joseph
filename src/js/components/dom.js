@@ -772,7 +772,6 @@ export let on = (elems, events, callback, scope) => {
     }, this);
 };
 
-
 /**
  * Removes a listener for a given event
  *
@@ -813,20 +812,45 @@ export let off = (elems, events, callback, scope) => {
 };
 
 // Generate shortforms for events eg. onclick(), onhover(), etc...
-export let { onready, onload, onblur, onfocus, onfocusin, onfocusout, onresize, onclick, onscroll, ondblclick, onmousedown, onmouseup, onmousemove, onmouseover, onmouseout, onmouseenter, onmouseleave, onchange, onselect, onsubmit, onkeydown, onkeypress, onkeyup, oncontextmenu, onorientationchange, ontouchstart, ontouchmove, ontouchend, ontouchcancel } = `ready load blur focus focusin focusout resize click scroll dblclick mousedown
-    mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit
-    keydown keypress keyup contextmenu orientationchange touchstart touchmove touchend touchcancel`.split(/[\s\n]+/g)
-.reduce((acc, name) => {
-    // Handle event binding
-    acc[`on${name}`] = (_el, ...args) => on(_el, name, ...args);
-    return acc;
-}, {
-    onhover: (_el, fnOver, fnOut) =>
-        on(_el, {
-            mouseenter: fnOver,
-            mouseleave: fnOut || fnOver
-        })
-});
+// A closure function for the events
+let _event = name => {
+    return (_el, ...args) => on(_el, name, ...args);
+};
+
+export let onready = _event("ready");
+export let onload = _event("load");
+export let onblur = _event("blur");
+export let onfocus = _event("focus");
+export let onfocusin = _event("focusin");
+export let onfocusout = _event("focusout");
+export let onresize = _event("resize");
+export let onclick = _event("click");
+export let onscroll = _event("scroll");
+export let ondblclick = _event("dblclick");
+export let onmousedown = _event("mousedown");
+export let onmouseup = _event("mouseup");
+export let onmousemove = _event("mousemove");
+export let onmouseover = _event("mouseover");
+export let onmouseout = _event("mouseout");
+export let onmouseenter = _event("mouseenter");
+export let onmouseleave = _event("mouseleave");
+export let onchange = _event("change");
+export let onselect = _event("select");
+export let onsubmit = _event("submit");
+export let onkeydown = _event("keydown");
+export let onkeypress = _event("keypress");
+export let onkeyup = _event("keyup");
+export let oncontextmenu = _event("contextmenu");
+export let onorientationchange = _event("orientationchange");
+export let ontouchstart = _event("touchstart");
+export let ontouchmove = _event("touchmove");
+export let ontouchend = _event("touchend");
+export let ontouchcancel = _event("touchcancel");
+export let onhover = (_el, fnOver, fnOut) =>
+    on(_el, {
+        mouseenter: fnOver,
+        mouseleave: fnOut || fnOver
+    });
 
 // Check if an Element is in `:focus`
 export let isFocus = _el => {

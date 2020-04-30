@@ -48,7 +48,7 @@ $tertiary: #ffde03;
 $tertiary-dark: #e5c702;
 $off-blue: #d7d4ff;
 
-$background: #e2ebf5; // #202123
+$background: #eaeef1; // #e2ebf5
 $surface: #fff; //  #3b3c3e
 
 $white: #fff;
@@ -151,8 +151,8 @@ $dark-colors: (
     "tertiary": $tertiary,
     "tertiary-dark": $tertiary-dark,
 
-    "background": #252529,
-    "surface": #3b3c3e,
+    "background": #000000, // #252529
+    "surface": #212124, // #2c2d2e
     "transparent": transparent,
 
     "white": $white,
