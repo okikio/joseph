@@ -153,6 +153,7 @@ const _backUp = '.back-to-top';
 const _skipMain = ".skip-main";
 const _navLink = '.navbar-link';
 const _layer_img = ".layer-image";
+const _themeSwitcher = ".theme-switcher";
 const _actioncenter = ".layer-action-center";
 const _scrolldown = '.layer-hero-scroll-down';
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
@@ -165,6 +166,36 @@ let onload = $load_img => function () {
 on(_menu, "mouseup", () => {
     toggleClass(_navbar, "navbar-show");
 });
+
+try {
+    //! This code comes from the theme.js file
+    // Control localStorage storage of theme
+    const { setTheme, getTheme } = window;
+    const html = document.querySelector("html");
+
+    // Get theme from html tag, if it has a theme or get it from localStorage
+    let themeGet = () => {
+        let themeAttr = attr(html, "theme");
+        if (themeAttr && themeAttr.length) {
+            return themeAttr;
+        }
+
+        return getTheme();
+    };
+
+    // Set theme in localStorage, as well as in the html tag
+    let themeSet = theme => {
+        attr(html, "theme", theme);
+        setTheme("dark");
+    };
+
+    // On theme switcher button click (mouseup is a tiny bit more efficient) toggle the theme between dark and light mode
+    on(_themeSwitcher, "mouseup", () => {
+        themeSet(themeGet() == "light" ? "dark" : "light");
+    });
+} catch (e) {
+    console.warn("Theme switcher button broke, :(.");
+}
 
 // On backup button click (mouseup is a tiny bit more efficient) animate back to the top
 on(_backUp, "mouseup", () => {

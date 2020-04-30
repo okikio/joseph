@@ -228,13 +228,24 @@ $sizes: (
     }
 }
 
-:root {
+// :root,
+/*! purgecss start ignore */
+html[theme=dark] {
     @media (prefers-color-scheme: dark) {
         @each $name, $value in $dark-colors {
             --#{$name}: #{$value};
         }
     }
 }
+
+html[theme=light] {
+    @media (prefers-color-scheme: light) {
+        @each $name, $value in $colors {
+            --#{$name}: #{$value};
+        }
+    }
+}
+/*! purgecss end ignore */
 
 @mixin applyTheme($property: color, $value: "primary") {
     #{$property}: map-get($colors, $value);

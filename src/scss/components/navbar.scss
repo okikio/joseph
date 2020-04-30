@@ -198,6 +198,21 @@
             text-decoration: none;
         }
 
+        &-menu, &-btn {
+            & {
+                transition: color .5s ease;
+            }
+
+            &:hover, &:focus {
+                cursor: pointer;
+            }
+
+            &, &:hover, &:focus {
+                color: $primary;
+                color: var(--dark, $primary);
+            }
+        }
+
         &-mobile {
             // display: none;
             visibility: hidden;
@@ -206,6 +221,14 @@
         &-desktop {
             // display: block;
             visibility: visible;
+        }
+
+        &-mobile-display {
+            display: none;
+        }
+
+        &-desktop-display {
+            display: block;
         }
 
         // Mobile navbar settings
@@ -286,21 +309,6 @@
                 }
             }
 
-            &-menu {
-                & {
-                    transition: color .5s ease;
-                }
-
-                &:hover, &:focus {
-                    cursor: pointer;
-                }
-
-                &, &:hover, &:focus {
-                    color: $primary;
-                    color: var(--dark, $primary);
-                }
-            }
-
             &-desktop {
                 visibility: hidden;
                 // display: none;
@@ -309,6 +317,14 @@
             &-mobile {
                 // display: block;
                 visibility: visible;
+            }
+
+            &-desktop-display {
+                display: none;
+            }
+
+            &-mobile-display {
+                display: block;
             }
         }
 

@@ -225,7 +225,8 @@ html(lang="en")
     //- link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- <![endif]-->
-    script(src="/js/ver-check.min.js" ph-inline)
+    script(src="/js/ver-check.min.js" ph-inline ph-concat-start)
+    script(src="/js/theme.min.js" ph-inline ph-concat-end)
   body(itemscope="" itemtype="https://schema.org/WebPage")
     +link({
       class: "skip-main",

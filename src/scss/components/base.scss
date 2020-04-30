@@ -42,13 +42,19 @@ template {
   display: none;
 }
 
-html,
-body {
-    text-rendering: optimizeSpeed;
+html {
+    transition: scrollbar-color .5s ease;
     scrollbar-color: $primary-light lighten($mid-dark, 5%);
     scrollbar-color: var(--mid-dark, $primary-light) var(--light, lighten($mid-dark, 5%));
-    font-family: $regular-font;
     scrollbar-width: thin;
+}
+body {
+    transition: background-color .5s ease, color .5s ease, scrollbar-color .5s ease;
+    @include applyTheme(background-color, "background");
+    @include applyTheme(color, "dark");
+
+    text-rendering: optimizeSpeed;
+    font-family: $regular-font;
     word-wrap: break-word;
     line-height: 1.15;
     font-weight: 400;
@@ -85,18 +91,6 @@ body {
     // &::-webkit-scrollbar-thumb {
     //     // border-radius: 5px;
     // }
-}
-
-html {
-    transition: background-color .5s ease, color .5s ease;
-    @include applyTheme(background-color, "background");
-    @include applyTheme(color, "dark");
-
-    /* The browser is wostlikely a chromium based browser if it supports overlay */
-    @supports (overflow-y: overlay) {
-        // width: calc(100% - 6px);
-        // scroll-behavior: smooth;
-    }
 }
 
 ::selection {
