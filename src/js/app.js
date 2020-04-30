@@ -170,8 +170,9 @@ on(_menu, "mouseup", () => {
 try {
     //! This code comes from the theme.js file
     // Control localStorage storage of theme
-    const { setTheme, getTheme } = window;
+    const { setTheme, getTheme, matchMedia } = window;
     const html = document.querySelector("html");
+    // const meta = document.querySelector("meta[name=theme-color]");
 
     // Get theme from html tag, if it has a theme or get it from localStorage
     let themeGet = () => {
@@ -185,6 +186,8 @@ try {
 
     // Set theme in localStorage, as well as in the html tag
     let themeSet = theme => {
+        // let primaryColor = getComputedStyle(html).getPropertyValue('--primary');
+        // meta.setAttribute("content", primaryColor);
         attr(html, "theme", theme);
         setTheme("dark");
     };
@@ -192,6 +195,10 @@ try {
     // On theme switcher button click (mouseup is a tiny bit more efficient) toggle the theme between dark and light mode
     on(_themeSwitcher, "mouseup", () => {
         themeSet(themeGet() == "light" ? "dark" : "light");
+    });
+
+    matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+        themeSet(e.matches ? "dark" : "light");
     });
 } catch (e) {
     console.warn("Theme switcher button broke, :(.");
