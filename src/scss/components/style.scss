@@ -153,11 +153,16 @@
 	}
 
     &-letter-head {
-        letter-spacing: 2.54px;
-        line-height: 68px;
+        // letter-spacing: 2.54px;
+        line-height: 5.42rem;
+        font-size: 6.15rem;
         font-weight: 900;
-        font-size: 98px;
         margin: 0;
+
+        @media #{$screen-size-phone} {
+            line-height: 3.80rem;
+            font-size: 4.85rem;
+        }
     }
 
 	@include colorList;
