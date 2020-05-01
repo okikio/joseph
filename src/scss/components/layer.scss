@@ -11,6 +11,19 @@
     width: 100%;
     z-index: 0;
 
+    /*! purgecss start ignore */
+    .text-go-home {
+        font-size: 12px;
+        letter-spacing: 0.035em;
+        @include applyTheme(color, "primary");
+        visibility: hidden;
+
+        &-show {
+            visibility: visible;
+        }
+    }
+    /*! purgecss end ignore */
+
     @media #{$screen-size-lt-tablet} {
         line-height: 1.15;
         font-weight: 400;

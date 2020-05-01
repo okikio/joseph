@@ -147,12 +147,14 @@ class customPreload extends Plugin {
 
 const _layer = '.layer';
 const _navbar = '.navbar';
+const _goHome = '.go-home';
 const _hero = '.layer-hero';
 const _menu = '.navbar-menu';
 const _backUp = '.back-to-top';
 const _skipMain = ".skip-main";
 const _navLink = '.navbar-link';
 const _layer_img = ".layer-image";
+const _goHomeText = '.text-go-home';
 const _themeSwitcher = ".theme-switcher";
 const _actioncenter = ".layer-action-center";
 const _scrolldown = '.layer-hero-scroll-down';
@@ -338,6 +340,12 @@ let goDown = () => {
 // Initialize images
 let init = () => {
     _images.clear();
+
+    // This is for the under construction page
+    // On go home button click (mouseup is a tiny bit more efficient) show the punch line to the joke
+    on(_goHome, "mouseup", () => {
+        addClass(_goHomeText, `${_goHomeText.slice(1)}-show`);
+    });
 
     // On scroll down button click (mouseup is a tiny bit more efficient) animate scroll to the height of the hero layer
     on(_scrolldown, "mouseup", goDown);

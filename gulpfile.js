@@ -13,6 +13,7 @@ const commonJS = require('@rollup/plugin-commonjs');
 const { terser } = require('rollup-plugin-terser');
 const { init, write } = require('gulp-sourcemaps');
 const rollupBabel = require('rollup-plugin-babel');
+const icons = require('./material-design-icons');
 const buble = require('@rollup/plugin-buble');
 const autoprefixer = require('autoprefixer');
 const rollup = require('gulp-better-rollup');
@@ -34,10 +35,6 @@ const moment = require('moment');
 const pug = require('gulp-pug');
 // const path = require("path");
 // const fs = require('fs');
-
-let icons;
-// (!debug) && (icons = require('microicon'));
-(!debug) && (icons = require('./material-design-icons'));
 
 const modernConfig = {
     "babelrc": false,
@@ -262,7 +259,7 @@ task("web-js", webJS = () =>
                                 }) : rollupBabel(modernConfig) // Babelify file for uglifing
                             ].concat(
                                 // Minify the file
-                                debug ? [] : terser(
+                                terser(
                                     assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                                 ),
                                 // closure()
@@ -298,7 +295,7 @@ task("web-js", webJS = () =>
                         // rollupBabel(babelConfig.general)
                     ].concat(
                         // Minify the file
-                        debug ? [] : terser(
+                        terser(
                             assign({}, minifyOpts, { ie8: true, ecma: 5 })
                         )
                     ),
@@ -414,7 +411,7 @@ task('inline-assets', () =>
             pipes: [
                 cache('inline-assets'),
                 posthtml([
-                    debug ? () => {} : tree => {
+                    tree => {
                         tree.match(querySelector("i.action-icon"), node => {
                             if ("inline" in node.attrs) {
                                 const _attrs = node.attrs;
@@ -528,7 +525,7 @@ task('inline-js-css', () =>
                         });
                     },
                     // Dom process
-                    debug ? () => { } : phTransformer({
+                    phTransformer({
                         root: `./${publicDest}`,
                         minifyJS: false, minifyCSS: false
                     })

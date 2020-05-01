@@ -29,21 +29,23 @@ mixin navbar(value = {})
           .layout-spacer
           .navbar-foot.navbar-mobile
             +themeSwitcher
-            .layout-inline-block
-              a.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.layer-mid-dark-focus(title="Menu Button" name="Menu Button")
-                span.action-btn-group
-                  i.action-icon.style-font-family-bold.style-font-size-24(inline) menu
+            if !debug
+              .layout-inline-block
+                a.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.layer-mid-dark-focus(title="Menu Button" name="Menu Button")
+                  span.action-btn-group
+                    i.action-icon.style-font-family-bold.style-font-size-24(inline) menu
 
         .layout-spacer.navbar-desktop
         .navbar-main
           ul.navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
-            each tab, i in tabs
-              li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
-                +link({
-                  href: `/${tab}`,
-                  class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
-                })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
-                  span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
-                  meta(itemprop="position" content="1")
+            if !debug
+              each tab, i in tabs
+                li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+                  +link({
+                    href: `/${tab}`,
+                    class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
+                  })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
+                    span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
+                    meta(itemprop="position" content="1")
             .navbar-desktop-display
               +themeSwitcher
