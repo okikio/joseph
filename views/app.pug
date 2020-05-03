@@ -44,8 +44,11 @@ html(lang="en")
     //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" crossorigin)
-    block preload
-      link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    if !debug
+      block preload
+        link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    else
+      link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
 
     link(rel="stylesheet" href="/css/fonts.min.css" ph-inline)
     link(rel="stylesheet" href="/css/app.min.css" ph-inline)
