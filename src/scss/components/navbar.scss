@@ -79,7 +79,7 @@
             // transform: translate3d(0, 4px, 0);
             vertical-align: middle;
             display: inline-block;
-            line-height: normal;
+            line-height: $height;
             min-height: 20px;
             height: 20px;
             width: auto;
@@ -99,7 +99,7 @@
                 position: absolute;
                 font-family: $bold-font;
                 font-weight: 800;
-                top: 0;
+                top: 1.5px;
             }
 
             &,

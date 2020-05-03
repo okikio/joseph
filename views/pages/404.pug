@@ -16,25 +16,24 @@ block preload
 block content
   section(id="content" itemtype="http://schema.org/WebPageElement" itemscope itemprop="mainEntity")
     //- Intro layer
-    +layer({
-      class: "layout-padding-horz-default"
-    })
+    +layer
       +layout({
-        class: "layout-contain-small layout-vert-centered-box"
+        class: "layout-contain layer-overflow-hide"
       })
-        section
-          +head
-            h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center 404, Page Not Found.
-          +main({
-            class: "style-center",
-          })
-            +p("Sorry, the page you are looking for doesn't exist. How about going back")
-            +link({
-              href: "/",
-              class: "style-italic style-underline layout-margin-left-mini",
-              content: "home"
+        section(class="layout-shorten layout-max-height-limited layout-flex layout-align-items-center layout-justify-content-center")
+          section.style-center.layout-margin-top-larger--device-phone
+            +head({
+              class: "layout-margin-bottom"
             })
-            +p(".")
+              h1.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull 404, Page Not Found.
+            +main
+              +p("Sorry, the page you are looking for doesn't exist. How about going back")
+              +link({
+                href: "/",
+                class: "style-italic style-underline layout-margin-left-mini",
+                content: "home"
+              })
+              +p(".")
 
 block footer
   +footer({

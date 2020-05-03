@@ -10,28 +10,16 @@
     width: 100%;
 
     &-max-height {
-        position: relative;
-        height: 100vh;
-    }
-
-    &-vert-centered-box {
-        @media #{$screen-size-gt-tablet} {
-            margin-top: $size-huge;
-            align-items: center;
+        &,
+        &-limited {
             position: relative;
             height: 100vh;
-            display: flex;
-            margin-top: 0;
         }
 
-        @media #{$screen-size-lt-tablet} {
-            margin-top: calc(60px + 3vw);
-            margin-bottom: 3vw;
-        }
-
-        @media #{$screen-size-lt-tablet} {
-            margin-bottom: 60px;
-            margin-top: 120px;
+        @media #{$screen-size-phone} {
+            &-limited {
+                height: initial;
+            }
         }
     }
 
@@ -499,6 +487,7 @@
                         &-#{$dir} {
                             & {
                                 #{$spacing}-#{$dir}: $size;
+                                @include deviceList(#{$spacing}-#{$dir}, $size);
                             }
 
                             @each $type, $val in $sizes {

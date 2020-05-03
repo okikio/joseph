@@ -230,6 +230,13 @@ $sizes: (
 
 // :root,
 /*! purgecss start ignore */
+// :root[theme=dark] {
+//     @media (prefers-color-scheme: dark) {
+//         @each $name, $value in $dark-colors {
+//             --#{$name}: #{$value};
+//         }
+//     }
+// }
 html[theme=dark] {
     // @media (prefers-color-scheme: dark) {
         @each $name, $value in $dark-colors {
