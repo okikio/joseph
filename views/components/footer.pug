@@ -1,37 +1,26 @@
 mixin footer(value = {})
   - let _class = value.class;
   footer.footer(data-container)
-    .layout-contain.transition-fade(class=_class)
-      .layout-padding.style-center.style-font-weight-bold.style-font-bold.style-spaceout-small
-        span Made with
-        span.style-primary  ❤
-        span= " by "
-        span(itemprop="author")
-        +link({
-          href: "https://github.com/okikio",
-          class: "layout-margin-left-mini",
-          content: "Okiki Ojo"
-        })(target="_blank" rel="noreferrer noopener" title="The github link to the Web Developer who designed this site, Okiki Ojo.")
-        span= " | "
-        span(itemscope itemtype="https://schema.org/SiteNavigationElement")
-          span.action-btn.pointer-default
-            .action-btn-group
+    .layout-contain-large.layout-padding.style-font-weight-bold.style-font-bold.style-spaceout-small.transition-fade.footer-layout(class=_class)
+      div
+        span.action-btn.action-btn-pointer-default(title="Copyright")
+          .action-btn-group
+            span.action-btn-spacer
+            i.action-icon(inline) copyright
+            span.action-btn-section
               span.action-btn-spacer
-              i.action-icon(inline) copyright
-              span.action-btn-section
-                span.action-btn-spacer
-                span 2019
-                span  Joseph Ojo
-                if !debug
-                  span.layout-padding-left-smaller -
-                span.action-btn-spacer
-          if !debug
+              span 2019
+              span  Joseph Ojo
+              span.action-btn-spacer
+      div
+        if !debug
+          span(itemscope itemtype="https://schema.org/SiteNavigationElement")
             +link({
               href: "/sitemap",
-              class: "layout-inline-block",
+              class: "layout-margin-left-mini",
             })(itemprop="url" title="The Joseph Ojo sitemap.")
               span(itemprop="name") Sitemap
-        span= " | "
+          span= " - "
         +link({
           href: "https://www.linkedin.com/in/o-josephojo/",
           class: "layout-margin-left-mini",
@@ -50,3 +39,15 @@ mixin footer(value = {})
             class: "layout-margin-left-mini",
             content: "Email"
           })(target="_blank" rel="noreferrer noopener" itemprop="email" title="An email you can contact me with.")
+      div
+        span
+          span Made with
+          span.action-btn-spacer
+          span.style-secondary ❤
+          span.action-btn-spacer
+          span by
+          span(itemprop="author")
+            +link({
+              href: "https://github.com/okikio",
+              content: "Okiki Ojo"
+            })(target="_blank" rel="noreferrer noopener" title="The github link to the Web Developer who designed this site, Okiki Ojo.")

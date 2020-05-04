@@ -1,7 +1,7 @@
 /*! purgecss start ignore */
 .transition {
     &-fade {
-        transition: opacity .2s ease-out;
+        transition: opacity .3s ease-out;
         opacity: 1;
 
         .is-animating & {
@@ -10,7 +10,7 @@
     }
 
     &-in-view {
-        transition: opacity .25s ease-out;
+        transition: opacity .3s ease-out;
         opacity: 1;
 
         .is-animating & {
@@ -18,7 +18,7 @@
         }
 
         @media #{$screen-size-gt-tablet} {
-            transition: opacity .225s ease-out, transform .225s ease-out;
+            transition: opacity .3s ease-out, transform .3s ease-out;
             transform: translate3d(0, 0, 0);
 
             .is-animating & {

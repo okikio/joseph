@@ -360,6 +360,17 @@ a.skip-main {
     }
 }
 
+.footer-layout {
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @media #{$screen-size-lt-laptop} {
+        flex-direction: column;
+    }
+}
+
 .back-to-top {
     z-index: 500;
 }
