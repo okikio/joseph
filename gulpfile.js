@@ -6,6 +6,7 @@ const { websiteURL, dev, debug, author, homepage, license, copyright, github, ne
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
+const inlineAssets = require('posthtml-inline-assets');
 const minifyJSON = require('gulp-minify-inline-json');
 const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
@@ -163,7 +164,6 @@ let _execSeries = (...cmds) => {
 task('html', () => stream(
     'views/pages/**/*.pug', {
         pipes: [
-            // cache('pug'),
             // Pug compiler
             pug({
                 locals: { dev, debug, websiteURL, netlify },
@@ -184,7 +184,6 @@ task('html', () => stream(
                 removeRedundantAttributes: true,
                 processScripts: ["application/ld+json"]
             }),
-            // size({gzip: true, showFiles: true}),
             header(bannerHTML),
         ]
     })
@@ -208,11 +207,8 @@ task("css", () =>
                 autoprefixer({
                     overrideBrowserslist: ["defaults, IE 8"]
                 }),
-                csso() // { sourceMap: true }
+                csso()
             ])
-            // header(banner),
-            // init(), // Sourcemaps init
-            // write(...srcMapsWrite) // Put sourcemap in public folder
         ],
         dest: `${publicDest}/css`, // Output
         end: [browserSync.stream()]
@@ -262,7 +258,6 @@ task("web-js", webJS = () =>
                                 terser(
                                     assign({}, minifyOpts, gen ? { ie8: true, ecma: 5 } : {})
                                 ),
-                                // closure()
                             ),
                             onwarn
                         }, gen ? 'iife' : 'es'),
@@ -273,9 +268,7 @@ task("web-js", webJS = () =>
                     dest: `${publicDest}/js` // Output
                 }];
             }),
-            // , `!${publicDest}/js/*.min.js`
         [["src/js/*.js", "!src/js/app.js"], {
-            // , `!${publicDest}/js/.js`
             opts: { allowEmpty: true },
             pipes: [
                 cache('web-js'),
@@ -310,7 +303,7 @@ task("web-js", webJS = () =>
     ])
 );
 
-task("js", webJS); //series("env-js", "web-js")
+task("js", webJS);
 
 task("client", () =>
     streamList([
@@ -362,51 +355,6 @@ task('sitemap', () =>
 
 task('inline-assets', () =>
     streamList([
-        // Inline fonts don't enhance performance
-        /* [`${publicDest}/css/fonts.min.css`, {
-            pipes: [
-                postcss([
-                    postcssNative.plugin('inline-fonts', () => {
-                        let fonts = [
-                            ['Montserrat', 800],
-                            ['Frank Ruhl Libre', 900]
-                        ];
-                        let fontFamily = fonts.map(font => font[0]);
-                        let fontWeight = fonts.map(font => font[1]);
-                        let _escape = str => str.replace(/"|'/g, "");
-                        return root => {
-                            root.walkAtRules(rule => {
-                                if (rule.name == "font-face") {
-                                    let checkCounter = 0;
-                                    rule.each(i => {
-                                        if ((i.prop == "font-family" && fontFamily.includes( _escape(i.value) )) ||
-                                            (i.prop == "font-weight" && fontWeight.includes( +i.value )) ||
-                                             i.prop == "--latin")
-                                                checkCounter ++;
-                                    });
-
-                                    rule.walkDecls(decl => {
-                                        if (decl.prop == "--latin") decl.remove();
-                                        if (decl.prop == "src" && checkCounter == 3) {
-                                            let value = decl.value;
-                                            let src = value.match(/url\((.+\.woff2)\)/)[1];
-                                            let data = fs.readFileSync(path.join(publicDest, src)).toString('base64');
-                                            // Transform each property declaration here
-                                            decl.value = value.replace(/url\((.+\.woff2)\)/, `url(data:application/font-woff2;charset=utf-8;base64,${data})`);
-                                        }
-
-                                        return decl;
-                                    });
-                                }
-
-                                return rule;
-                            });
-                        }
-                    })()
-                ]),
-            ],
-            dest: `${publicDest}/css`, // Output
-        }],*/
         [`${publicDest}/**/*.html`, {
             pipes: [
                 cache('inline-assets'),
@@ -436,74 +384,26 @@ task('inline-assets', () =>
                             return node;
                         });
                     },
-                ]),
+                    inlineAssets({
+                        transforms: {
+                            image: {
+                                resolve(node) {
+                                    return node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.inline;
+                                }
+                            },
+                            // any non-object will work
+                            script: false,
+                            favicon: false,
+                            style: false
+                        },
+
+                        errors: 'warn' // the options are to 'throw', 'warn', or 'ignore' errors
+                    })
+                ])
             ]
         }]
     ])
 );
-
-/*
-task('optimize-class-names', () =>
-    streamList([
-        dev ? null : [`${publicDest}/css/*.css`, {
-            pipes: [
-                postcss([
-                    postcssNative.plugin('optimize-css-name', () => {
-                        let class_keys = Object.keys(class_map);
-                        return root => {
-                            root.walkRules(rule => {
-                                let { selector } = rule;
-
-                                if (selector && selector[0] !== ":" && !selector.includes("::")) {
-                                    for (let i = 0; i < class_keys.length; i ++) {
-                                        if (selector.includes(class_keys[i])) {
-                                            let regex = new RegExp(class_keys[i], 'g');
-                                            selector = selector.replace(regex, class_map[class_keys[i]]);
-                                        }
-                                    }
-                                }
-
-                                rule.selector = selector;
-                                return rule;
-                            });
-                        }
-                    })()
-                ]),
-                // dev ? null : init(), // Sourcemaps init
-                // dev ? null : write(...srcMapsWrite) // Put sourcemap in public folder
-            ],
-            dest: `${publicDest}/css`, // Output
-        }],
-        dev ? null : [`${publicDest}/** /*.html`, {
-            pipes: [
-                posthtml([
-                    tree => {
-                        tree.walk(node => {
-                            if (node.tag != 'html') {
-                                let _attrs = node.attrs || {};
-                                let _class;
-                                if (typeof _attrs.class == 'string') {
-                                    _class = _attrs.class;
-                                    for (let i = 0; i < class_keys.length; i ++) {
-                                        if (_class.includes(class_keys[i])) {
-                                            let regex = new RegExp(class_keys[i], 'g');
-                                            _class = _class.replace(regex, class_map[class_keys[i]]);
-                                        }
-                                    }
-
-                                    node.attrs = { ..._attrs };
-                                    node.attrs.class = _class;
-                                }
-                            }
-                            return node;
-                        });
-                    },
-                ]),
-            ]
-        }]
-    ])
-);
-*/
 
 task('inline-js-css', () =>
     streamList([
@@ -530,7 +430,6 @@ task('inline-js-css', () =>
                         minifyJS: false, minifyCSS: false
                     })
                 ]),
-                // sriHash()
             ]
         }]
     ])

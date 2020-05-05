@@ -54,6 +54,7 @@
         "@swup/head-plugin": "^1.0.2",
         "@swup/scroll-plugin": "^1.0.6",
         "delegate": "^3.2.0",
+        "posthtml-inline-assets": "^3.1.0",
         "swup": "^2.0.9"
     },
     "devDependencies": {
