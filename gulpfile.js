@@ -6,7 +6,7 @@ const { websiteURL, dev, debug, author, homepage, license, copyright, github, ne
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
 const querySelector = require("posthtml-match-helper");
-const inlineAssets = require('posthtml-inline-assets');
+// const inlineAssets = require('posthtml-inline-assets');
 const minifyJSON = require('gulp-minify-inline-json');
 const phTransformer = require('posthtml-transformer');
 const browserSync = require('browser-sync').create();
@@ -383,22 +383,7 @@ task('inline-assets', () =>
 
                             return node;
                         });
-                    },
-                    inlineAssets({
-                        transforms: {
-                            image: {
-                                resolve(node) {
-                                    return node.tag === 'img' && node.attrs && node.attrs.src && node.attrs.inline;
-                                }
-                            },
-                            // any non-object will work
-                            script: false,
-                            favicon: false,
-                            style: false
-                        },
-
-                        errors: 'warn' // the options are to 'throw', 'warn', or 'ignore' errors
-                    })
+                    }
                 ])
             ]
         }]
