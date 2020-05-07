@@ -37,8 +37,8 @@ mixin navbar(value = {})
 
         .layout-spacer.navbar-desktop
         .navbar-main
-          ul.navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
-            if !debug
+          if !debug
+            ul.navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
               each tab, i in tabs
                 li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
                   +link({
@@ -47,5 +47,9 @@ mixin navbar(value = {})
                   })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
                     span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                     meta(itemprop="position" content="1")
-            .navbar-desktop-display
-              +themeSwitcher
+              .navbar-desktop-display
+                +themeSwitcher
+          else
+            .navbar-list
+              .navbar-desktop-display
+                +themeSwitcher
