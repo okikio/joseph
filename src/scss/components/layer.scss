@@ -58,7 +58,7 @@
         }
 
         &-preview-img-card {
-            transition: background-color .5s ease;
+            transition: background-color #{$transitionDuration} ease;
             position: absolute;
             background-color: $dark;
             background-color: var(--light, $dark);
@@ -73,7 +73,7 @@
         }
 
         &-overlay {
-            transition: background-color .5s ease, border-color .25s ease;
+            transition: background-color #{$transitionDuration} ease, border-color .25s ease;
             background-color: darken(#252072, 20%);
             // @include applyTheme(background, "dark");
             position: absolute;
@@ -219,7 +219,7 @@
         width: 100%;
 
         &:before {
-            transition: border-left-color .5s ease;
+            // transition: border-left-color #{$transitionDuration} ease;
 
             border-left: 1px solid transparent;
             border-left-color: lighten($dark, 35%);
@@ -259,7 +259,7 @@
     }
 
     &-secondary-btn {
-        transition: background-color .5s ease;
+        transition: background-color #{$transitionDuration} ease;
         @include applyTheme(background-color, "secondary-light");
 
         &:hover, &:focus {
@@ -335,7 +335,7 @@
         }
 
         &-footer {
-            transition: color .5s ease;
+            transition: color #{$transitionDuration} ease;
             color: $white;
             @include applyTheme(color, "white");
             position: absolute;
@@ -379,7 +379,7 @@
     }
 
     &-action-center {
-        transition: opacity .5s ease-in-out;
+        transition: opacity .4s ease-in-out;
         pointer-events: auto;
         font-size: 24px;
         position: fixed;

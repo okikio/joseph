@@ -77,6 +77,8 @@ $laptop: 1080;
 $tablet: 680;
 $phone: 480;
 
+$transitionDuration: .4s;
+
 $screen-size-desktop: "(min-width: #{$laptop}px)";
 
 $screen-size-gt-laptop: "(min-width: #{$laptop}px)"; // Greater Than
@@ -268,7 +270,7 @@ html[theme=dark] {
             &-#{$prefix}-#{$action}-#{$name}:#{$action},
             &-#{$prefix}-#{$name}-#{$action}:#{$action} {
                 @if ($themeable) {
-                    transition: #{$property} .5s ease;
+                    transition: #{$property} #{$transitionDuration} ease;
                     @include applyTheme($property, $name);
                 } @else {
                     #{$property}: $value;
@@ -278,7 +280,7 @@ html[theme=dark] {
             &-#{$name},
             &-#{$prefix}-#{$name} {
                 @if ($themeable) {
-                    transition: #{$property} .5s ease;
+                    transition: #{$property} #{$transitionDuration} ease;
                     @include applyTheme($property, $name);
                 } @else {
                     #{$property}: $value;

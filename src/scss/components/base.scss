@@ -43,13 +43,13 @@ template {
 }
 
 html {
-    transition: scrollbar-color .5s ease;
+    transition: scrollbar-color #{$transitionDuration} ease;
     scrollbar-color: $primary-light lighten($mid-dark, 5%);
     scrollbar-color: var(--mid-dark, $primary-light) var(--light, lighten($mid-dark, 5%));
     scrollbar-width: thin;
 }
 body {
-    transition: background-color .5s ease, color .5s ease, scrollbar-color .5s ease;
+    transition: background-color #{$transitionDuration} ease, color #{$transitionDuration} ease, scrollbar-color #{$transitionDuration} ease;
     @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
 
@@ -76,13 +76,13 @@ body {
     }
 
     &::-webkit-scrollbar-track-piece {
-        transition: background-color .5s ease;
+        transition: background-color #{$transitionDuration} ease;
         background-color: $mid-dark;
         background-color: var(--light, lighten($mid-dark, 5%));
     }
 
     &::-webkit-scrollbar-thumb {
-        transition: background-color .5s ease;
+        transition: background-color #{$transitionDuration} ease;
         background-color: $primary-light;
         background-color: var(--mid-dark, $primary-light);
     }
@@ -94,7 +94,7 @@ body {
 }
 
 ::selection {
-    transition: background-color .5s ease;
+    transition: background-color #{$transitionDuration} ease;
     background-color: lighten($primary-dark, 15%);
     background-color: var(--primary-dark, lighten($primary-dark, 15%));
     color: $white;
@@ -235,7 +235,7 @@ li, .li {
 }
 
 a.skip-main {
-    transition: background-color .5s ease, color .5s ease, border-color .35s ease;
+    transition: background-color #{$transitionDuration} ease, color #{$transitionDuration} ease, border-color .35s ease;
     border: 2px solid $secondary-light;
     border-color: var(--secondary-light, $secondary-light);
     // color: $secondary-light;
