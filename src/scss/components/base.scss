@@ -248,6 +248,7 @@ a.skip-main {
     text-align: center;
     font-weight: 600;
     margin: 80px auto;
+    contain: content;
     font-size: 1.2em;
     overflow: auto;
     height: auto;
@@ -307,6 +308,9 @@ a.skip-main {
     color: transparent;
 }
 
+main {
+    contain: content;
+}
 
 .list {
     list-style: circle;
@@ -324,6 +328,7 @@ a.skip-main {
             border-radius: 3px;
             padding: 3px 5px;
             line-height: 1.5;
+            contain: paint;
             // padding-left: 0;
 
             @media #{$screen-size-lt-tablet} {

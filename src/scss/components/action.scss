@@ -3,6 +3,7 @@
     &-btn {
         justify-content: center;
         vertical-align: middle;
+        contain: content;
         text-decoration: none;
         display: inline-flex;
         word-break: initial;
@@ -15,7 +16,6 @@
         &-layout {
             min-height: 20px;
             width: auto;
-
         }
 
         &:focus,

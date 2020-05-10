@@ -4,6 +4,11 @@
      * horz = horizontal
 */
 .layout {
+    %contain {
+        contain: strict;
+    }
+
+    @extend %contain;
     position: relative;
     display: block;
     margin: 0 auto;
@@ -26,83 +31,6 @@
             }
         }
     }
-
-    // $dimension: ("width", "height");
-    //    @each $axis in $dimension {
-    //       $screenSizes: (
-    //          "desktop": $screen-size-desktop,
-    //          "laptop": $screen-size-laptop,
-    //          "tablet": $screen-size-tablet,
-    //          "phone": $screen-size-phone
-    //       );
-
-    //       $screenSizesPX: (
-    //          "desktop": $desktop,
-    //          "laptop": $laptop,
-    //          "tablet": $tablet,
-    //          "phone": $phone
-    //       );
-
-    //     @for $sz from 0 through $desktop / 10 {
-    //         &-#{$axis}-#{$sz * 10} {
-    //             #{$axis}: #{$sz * 10}px;
-    //         }
-
-    //         &-max-#{$axis}-#{$sz * 10} {
-    //             max-#{$axis}: #{$sz * 10}px;
-    //         }
-    //     }
-
-    //     @for $sz from 0 through 100 {
-    //         &-#{$axis}%-#{$sz} {
-    //             #{$axis}: percentage($sz / 100);
-    //         }
-
-    //         &-max-#{$axis}%-#{$sz} {
-    //             max-#{$axis}: percentage($sz / 100);
-    //         }
-    //     }
-
-    //       @each $device-type, $screen-size in $screenSizes {
-    //          &-#{$axis}-#{$device-type} {
-    //             #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-    //          }
-
-    //          &-max-#{$axis}-#{$device-type} {
-    //             max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-    //          }
-
-    //          @media #{$screen-size} {
-    //             &-resize-#{$axis}-#{$device-type} {
-    //                #{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-    //             }
-
-    //             &-resize-max-#{$axis}-#{$device-type} {
-    //                 max-#{$axis}: #{map-get($screenSizesPX, $device-type)}px;
-    //             }
-
-    //             @for $sz from 0 through $desktop / 10 {
-    //                &-resize-#{$axis}-#{$device-type}-#{$sz * 10} {
-    //                   #{$axis}: #{$sz * 10}px;
-    //                }
-
-    //                &-resize-max-#{$axis}-#{$device-type}-#{$sz} {
-    //                   max-#{$axis}: #{$sz * 10}px;
-    //                }
-    //             }
-
-    //             @for $sz from 0 through 100 {
-    //                 &-resize-#{$axis}%-#{$device-type}-#{$sz} {
-    //                     #{$axis}: percentage($sz / 100);
-    //                 }
-
-    //                 &-resize-max-#{$axis}%-#{$device-type}-#{$sz} {
-    //                     max-#{$axis}: percentage($sz / 100);
-    //                 }
-    //             }
-    //          }
-    //       }
-    //    }
 
     &,
     &-vert {
@@ -388,11 +316,13 @@
         &,
         &-larger,
         &-enlarge,
+        &-slim,
         &-large,
         &-small {
             margin-right: auto;
             margin-left: auto;
             width: 100%;
+            @extend %contain;
         }
 
         &-small {
@@ -514,6 +444,7 @@
     &-contain:before,
     &-contain-small:after,
     &-contain-small:before {
+        @extend %contain;
         display: table;
         content: "";
         clear: both;

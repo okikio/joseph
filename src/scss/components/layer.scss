@@ -6,6 +6,7 @@
     font-family: $regular-font;
     line-height: 1.85;
     position: static;
+    contain: content;
     font-size: 17px;
     display: block;
     width: 100%;
@@ -29,6 +30,7 @@
     &-image {
         position: absolute;
         overflow: hidden;
+        contain: strict;
         display: block;
         height: 100%;
         width: 100%;
@@ -383,6 +385,7 @@
         pointer-events: auto;
         font-size: 24px;
         position: fixed;
+        contain: content;
         bottom: 15px;
         z-index: 250;
         // width: 100%;
@@ -401,6 +404,7 @@
     &-next {
         background-color: $white;
         background-color: var(--very-light, $white);
+        contain: layout !important;
 
         .layer-title,
         .layer-content {

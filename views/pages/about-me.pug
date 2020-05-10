@@ -10,7 +10,7 @@ block pageInfo
       description: "What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering."
     };
 
-block content
+block hero
   //- Hero layer
   +hero({
     title: "About me — The story of Joseph Ojo, the engineer who could.",
@@ -21,32 +21,33 @@ block content
     }
   })
 
-  section(id="content" itemtype="http://schema.org/WebPageElement" itemscope itemprop="mainEntity")
-    //- Intro layer
-    +layer({
-      class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
-    })
-      +layout({
-        class: "layout-shorten layout-contain"
-      })
-        +head("The story of Joseph Ojo.")
-        +main({
-          class: "layout-padding-top layout-padding-bottom-large layout-clearfix"
-        })
-          +tile({
-            class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img layout-left layer-shadow--1",
-            image: {
-              src: "cloudinary/josephs_image",
-              alt: "An image of Joseph Ojo",
-            }
-          })
 
-          section(itemscope itemtype="https://schema.org/SiteNavigationElement")
-            //- span.layout-margin-horz-left.layout-inline-block= " "
-            span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
-            +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes. <br> <br> As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). So, I pursed this as a career choice in university, at Ontario Tech in Oshawa, Ontario (formally UOIT; it's near Toronto, Canada). I graduated with honors with a Bachlor of mechatronic engineering, and went straight into my masters. I am finishing up my masters this year and am available for any projects that requires inovative and creative thinking, as well as dedication. <br> <br> In case you are wondering, my skills outside engineering are problem-solving, leadership, communication and conflict resolution. For more information check out")
-            +link({
-              href: "/my-resume",
-              class: "layout-margin-vert-dull layout-margin-left-mini"
-            })(data-swup-preload itemprop="url")
-              span(itemprop="name") my resume.
+block content
+  //- Intro layer
+  +layer({
+    class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
+  })
+    +layout({
+      class: "layout-shorten layout-contain"
+    })
+      +head("The story of Joseph Ojo.")
+      +main({
+        class: "layout-padding-top layout-padding-bottom-large layout-clearfix"
+      })
+        +tile({
+          class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img layout-left layer-shadow--1",
+          image: {
+            src: "cloudinary/josephs_image",
+            alt: "An image of Joseph Ojo",
+          }
+        })
+
+        section(itemscope itemtype="https://schema.org/SiteNavigationElement")
+          //- span.layout-margin-horz-left.layout-inline-block= " "
+          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
+          +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes. <br> <br> As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). So, I pursed this as a career choice in university, at Ontario Tech in Oshawa, Ontario (formally UOIT; it's near Toronto, Canada). I graduated with honors with a Bachlor of mechatronic engineering, and went straight into my masters. I am finishing up my masters this year and am available for any projects that requires inovative and creative thinking, as well as dedication. <br> <br> In case you are wondering, my skills outside engineering are problem-solving, leadership, communication and conflict resolution. For more information check out")
+          +link({
+            href: "/my-resume",
+            class: "layout-margin-vert-dull layout-margin-left-mini"
+          })(data-swup-preload itemprop="url")
+            span(itemprop="name") my resume.
