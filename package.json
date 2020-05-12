@@ -1,6 +1,6 @@
 {
     "name": "josephojo",
-    "version": "2.5.2",
+    "version": "2.5.5",
     "description": "The porfolio of Joseph ojo, it contains all his amazing projects etc...",
     "scripts": {
         "test": "gulp",
@@ -11,7 +11,7 @@
         "reload": "gulp git:pull"
     },
     "engines": {
-        "node": ">=10",
+        "node": ">=12",
         "npm": ">=6",
         "yarn": ">=1"
     },

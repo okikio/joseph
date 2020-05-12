@@ -193,7 +193,7 @@ export class Listener {
      * Returns the callback Function of the Listener
      *
      * @public
-     * @return {Function}
+     * @returns Function
      */
     getCallback () {
         return this.listener.callback;
@@ -203,7 +203,7 @@ export class Listener {
      * Returns the scope as an Object, from the Listener
      *
      * @public
-     * @return {Function}
+     * @returns Function
      */
     getScope () {
         return this.listener.scope;
@@ -213,7 +213,7 @@ export class Listener {
      * Returns the event as a String, from the Listener
      *
      * @public
-     * @return {Function}
+     * @returns Function
      */
     getEventName () {
         return this.listener.name;
@@ -223,7 +223,7 @@ export class Listener {
      * Returns the listener as an Object
      *
      * @public
-     * @return {Object}
+     * @returns Object
      */
     toJSON () {
         return this.listener;
@@ -259,7 +259,7 @@ export default class EventEmitter {
      *
      * @public
      * @param  {any*} key
-     * @return {Array}
+     * @returns Array
      */
     get (key) {
         return this.list.get(key);
@@ -271,7 +271,7 @@ export default class EventEmitter {
      * @public
      * @param  {any*} key
      * @param  {any*} value
-     * @return {EventEmitters}
+     * @returns EventEmitters
      */
     set (key, value) {
         this.list.set(key, value);
@@ -282,7 +282,7 @@ export default class EventEmitter {
      * Returns the keys of all items stored in the EventEmitters
      *
      * @public
-     * @return {Array}
+     * @returns Array
      */
     keys () {
         return this.list.keys();
@@ -292,7 +292,7 @@ export default class EventEmitter {
      * Returns the total number of events stored in the EventEmitters
      *
      * @public
-     * @return {Number}
+     * @returns Number
      */
     size () {
         return this.list.size;
@@ -303,7 +303,7 @@ export default class EventEmitter {
      *
      * @public
      * @param  {any*} key
-     * @return {EventEmitters}
+     * @returns EventEmitters
      */
     remove (key) {
         this.list.delete(key);
@@ -314,7 +314,7 @@ export default class EventEmitter {
      * Clear the EventEmitters of all its contents
      *
      * @public
-     * @return {EventEmitters}
+     * @returns EventEmitters
      */
     clear () {
         this.list.clear();
@@ -326,7 +326,7 @@ export default class EventEmitter {
      *
      * @public
      * @param {any*} key
-     * @return {Boolean}
+     * @returns Boolean
      */
     has (key) {
         return this.list.has(key);
@@ -338,7 +338,7 @@ export default class EventEmitter {
      * @public
      * @param {Function} fn
      * @param {Object* | EventEmitters} [context=this]
-     * @return {EventEmitters}
+     * @returns EventEmitters
      */
     each (fn, context = this) {
         this.list.forEach(fn, context);
@@ -350,7 +350,7 @@ export default class EventEmitter {
      *
      * @public
      * @param {String} name
-     * @return {Array}
+     * @returns Array
      */
     // Get event, ensure event is valid
     getEvent (name) {
@@ -370,7 +370,7 @@ export default class EventEmitter {
      * @param {String} name
      * @param {Function} callback
      * @param {Object*} scope
-     * @return {Array}
+     * @returns Array
      */
     // New event listener
     newListener (name, callback, scope) {
@@ -417,7 +417,7 @@ export default class EventEmitter {
      * @param {String} name
      * @param {Function} callback
      * @param {Object*} scope
-     * @return {Array}
+     * @returns Array
      */
     // Remove an event listener
     removeListener (name, callback, scope) {
