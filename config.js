@@ -1,14 +1,12 @@
-let env = process.env;
-const { author, homepage, license, copyright, github } = require("./package");
-if (!('dev' in env) || !('github_pages' in env)) require('dotenv').config();
-let dev = 'dev' in env ? (env.dev.toString() === "false" ? false : true) : true;
-let netlify = 'netlify' in env && env.netlify.toString() === "true";
-let debug = 'debug' in env && env.debug.toString() === "true";
+import dotenv from 'dotenv';
 
-let _exports = {
-    dev, debug, netlify,
-    author, homepage, license, copyright, github,
-    "websiteURL": "https://josephojo.com"
-};
+if (process.env.NODE_ENV === "development") {
+    dotenv.config();
+}
 
-module.exports = _exports;
+export const env = process.env;
+export const dev = 'dev' in env ? env.dev !== "true" : true;
+export const netlify = 'netlify' in env && env.netlify === "true";
+export const debug = 'debug' in env && env.debug === "true";
+export const websiteURL = "https://josephojo.com";
+export { author, homepage, license, copyright, github } from "./package";

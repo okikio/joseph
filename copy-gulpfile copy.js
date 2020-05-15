@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const { src, task, series, dest, watch, parallel } = gulp;
 
-const { websiteURL, dev, debug, author, homepage, license, copyright, github, netlify } = require('./config'); // class_map,
+const { websiteURL, dev, debug, author, homepage, license, copyright, github, netlify } = require('./config').default; // class_map,
 // const closure = require('@ampproject/rollup-plugin-closure-compiler');
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const purgecss = require('@fullhuman/postcss-purgecss');
