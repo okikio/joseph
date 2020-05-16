@@ -189,12 +189,12 @@ try {
         // let primaryColor = getComputedStyle(html).getPropertyValue('--primary');
         // meta.setAttribute("content", primaryColor);
         attr(html, "theme", theme);
-        setTheme("dark");
+        setTheme(theme);
     };
 
     // On theme switcher button click (mouseup is a tiny bit more efficient) toggle the theme between dark and light mode
     on(_themeSwitcher, "mouseup", () => {
-        themeSet(themeGet() == "light" ? "dark" : "light");
+        themeSet(themeGet() === "dark" ? "light" : "dark");
     });
 
     matchMedia('(prefers-color-scheme: dark)').addListener(e => {
