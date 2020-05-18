@@ -52,8 +52,7 @@
         "@swup/head-plugin": "^1.0.2",
         "@swup/scroll-plugin": "^1.0.6",
         "delegate": "^3.2.0",
-        "swup": "^2.0.9",
-        "yarn": "^1.22.4"
+        "swup": "^2.0.9"
     },
     "devDependencies": {
         "@babel/core": "^7.9.6",
@@ -97,6 +96,7 @@
         "rollup": "^2.10.3",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-terser": "^5.3.0",
-        "typographic-single-spaces": "^1.0.2"
+        "typographic-single-spaces": "^1.0.2",
+        "yarn": "^1.22.4"
     }
 }
