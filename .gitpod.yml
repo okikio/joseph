@@ -14,8 +14,8 @@ tasks:
       npm install -g gulp &&
       echo -e "dev=true" > .env &&
       yarn &&
-      yarn upgrade &&
-      yarn watch
+      yarn up &&
+      npm run watch
 
 vscode:
   extensions:
