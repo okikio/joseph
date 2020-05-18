@@ -51,9 +51,9 @@
     "dependencies": {
         "@swup/head-plugin": "^1.0.2",
         "@swup/scroll-plugin": "^1.0.6",
-        "@yarnpkg/pnpify": "^2.0.0-rc.22",
         "delegate": "^3.2.0",
-        "swup": "^2.0.9"
+        "swup": "^2.0.9",
+        "yarn": "^1.22.4"
     },
     "devDependencies": {
         "@babel/core": "^7.9.6",
