@@ -45,7 +45,7 @@ const modernConfig = {
 };
 
 const bannerContent = [
-    ` * @author         ${author}`,
+    ` * @author         ${author.name} (${author.url})`,
     ` * @link           ${homepage}`,
     ` * @github         ${github}`,
     ` * @build          ${moment().format("llll")} ET`,
