@@ -40,7 +40,11 @@
         "site",
         "js"
     ],
-    "author": "Okiki Ojo (okikio)",
+    "author": {
+        "name": "Okiki Ojo",
+        "email": "hey@okikio.dev",
+        "url": "okikio.dev"
+    },
     "copyright": "Joseph Ojo",
     "homepage": "https://josephojo.com/",
     "developerURL": "https://github.com/okikio/",
