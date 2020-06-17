@@ -4,7 +4,6 @@ import { websiteURL, dev, debug, author, homepage, license, copyright, github, n
 import nodeResolve from '@rollup/plugin-node-resolve';
 import purgecss from '@fullhuman/postcss-purgecss';
 import querySelector from "posthtml-match-helper";
-// const inlineAssets = require('posthtml-inline-assets');
 import minifyJSON from 'gulp-minify-inline-json';
 import phTransformer from 'posthtml-transformer';
 import singleSpaces from "typographic-single-spaces";
@@ -21,22 +20,15 @@ import buble from '@rollup/plugin-buble';
 import sitemapModule from 'gulp-sitemap';
 import autoprefixer from 'autoprefixer';
 import rollup from 'gulp-better-rollup';
-// const stringify = require('fast-stringify');
 import { spawn } from 'child_process';
-// const nunjucks = require('gulp-nunjucks');
 import posthtml from 'gulp-posthtml';
-// const postcssModule = require('postcss');
 import htmlmin from 'gulp-htmlmin';
 import postcss from 'gulp-postcss';
 import header from 'gulp-header';
 import rename from 'gulp-rename';
 import csso from "postcss-csso";
-// import cache from 'gulp-cached';
-// const size = require('gulp-size');
 import moment from 'moment';
 import pug from 'gulp-pug';
-// const path = require("path");
-// const fs = require('fs');
 
 const browserSync = browserSyncModule.create();
 const modernConfig = {
@@ -98,7 +90,7 @@ let minifyOpts = {
         pure_getters: true
     },
     output: {
-      comments: /^!/
+        comments: /^!/
     },
     ecma: 2017,
     safari10: false
@@ -109,15 +101,14 @@ let watchDelay = { delay: 1000 };
 let { assign } = Object;
 
 // Streamline Gulp Tasks
-let stream = (_src, _opt = { }) => {
+let stream = (_src, _opt = {}) => {
     let _end = _opt.end || [];
     let host = src(_src, _opt.opts), _pipes = _opt.pipes || [],
-        _dest = _opt.dest || publicDest, _log = _opt.log || (() => {});
+        _dest = _opt.dest || publicDest, _log = _opt.log || (() => { });
 
     return new Promise((resolve, reject) => {
         _pipes.forEach(val => {
-            if (val !== undefined && val !== null)
-            { host = host.pipe(val).on('error', reject); }
+            if (val !== undefined && val !== null) { host = host.pipe(val).on('error', reject); }
         });
 
         host.on('end', _log)
@@ -126,8 +117,7 @@ let stream = (_src, _opt = { }) => {
             .on('end', resolve); // Output
 
         _end.forEach(val => {
-            if (val !== undefined && val !== null)
-                { host = host.pipe(val); }
+            if (val !== undefined && val !== null) { host = host.pipe(val); }
         });
     });
 };
@@ -144,11 +134,11 @@ let streamList = (...args) => {
 // Based on: [https://gist.github.com/millermedeiros/4724047]
 let _exec = cmd => {
     var parts = cmd.toString().split(/\s+/g);
-    return new Promise((resolve = () => {}) => {
+    return new Promise((resolve = () => { }) => {
         spawn(parts[0], parts.slice(1), { shell: true, stdio: 'inherit' })
             .on('data', data => process.stdout.write(data))
             .on('error', err => console.error(err))
-            .on('close', () => (resolve || function () {}) ());
+            .on('close', () => (resolve || function () { })());
     });
 };
 

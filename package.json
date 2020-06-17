@@ -4,6 +4,7 @@
     "description": "The porfolio of Joseph ojo, it contains all his amazing projects etc...",
     "scripts": {
         "test": "gulp",
+        "workspace": "echo -e 'dev=true' > .env && yarn && yarn upgrade",
         "watch": "npx cross-env NODE_ENV=development gulp doWatchFiles",
         "develop": "npx cross-env NODE_ENV=development gulp develop",
         "build": "gulp"
