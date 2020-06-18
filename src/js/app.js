@@ -14,7 +14,7 @@ import { Link, getCurrentUrl, fetch } from 'swup/lib/helpers';
 
 // Swups plugin class
 class Plugin {
-    constructor () {
+    constructor() {
         // this is here so we can tell if plugin was created by extending this class
         this.isSwupPlugin = true;
     }
@@ -40,7 +40,7 @@ class Plugin {
 
 // Slight tweaks to the nature of the preload plugin class
 class customPreload extends Plugin {
-    constructor (...args) {
+    constructor(...args) {
         super(...args);
         this.name = "PreloadPlugin";
     }
@@ -83,11 +83,11 @@ class customPreload extends Plugin {
         swup.off('contentReplaced', this.onContentReplaced.bind(this));
     }
 
-    onContentReplaced () {
+    onContentReplaced() {
         this.swup.preloadPages();
     };
 
-    onMouseover (event) {
+    onMouseover(event) {
         const swup = this.swup;
         swup.triggerEvent('hoverLink', event);
 
@@ -106,7 +106,7 @@ class customPreload extends Plugin {
         }
     }
 
-    preloadPage (pathname) {
+    preloadPage(pathname) {
         const swup = this.swup;
 
         let link = new Link(pathname);
@@ -136,7 +136,7 @@ class customPreload extends Plugin {
         });
     }
 
-    preloadPages () {
+    preloadPages() {
         if (width(window) < 730) {
             queryAll('[data-swup-preload]').forEach((element) => {
                 this.swup.preloadPage(element.href);
@@ -248,7 +248,7 @@ on(window, {
                     // Safari still doesn't support WebP
                     if (!window.WebpSupport) {
                         src = src.replace(".webp", ".jpg");
-                        console.log("Using JPG instead, of WEBP");
+                        console.info("Using JPG instead, of WEBP");
                     }
 
                     // Ensure the image has loaded, then replace the small preview
@@ -298,7 +298,7 @@ on(window, {
                                 style(load_img, {
                                     transform: `translate3d(0, ${toFixed(_map(
                                         _constrain(value - (_isBanner ? _focusPt * 2 : 20), 0, height),
-                                    0, height * 0.75, 0, height / 2), 2)}px, 0)`,
+                                        0, height * 0.75, 0, height / 2), 2)}px, 0)`,
                                 });
                             }
 
@@ -306,13 +306,13 @@ on(window, {
                             transform = `translate3d(0, ${toFixed(
                                 _constrain(
                                     _map(value - (_isBanner ? _focusPt : 0), 0, height * 0.65, 0, height * maxMove / 16),
-                                0, height * maxMove / 16),
-                            _isMobile ? 1 : 2)}px, 0)`;
+                                    0, height * maxMove / 16),
+                                _isMobile ? 1 : 2)}px, 0)`;
                             opacity = toFixed(
                                 _constrain(
                                     _map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0),
-                                0, 1),
-                            _isMobile ? 1 : 4);
+                                    0, 1),
+                                _isMobile ? 1 : 4);
 
                             if (header) {
                                 style(header, { transform });

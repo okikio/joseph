@@ -6,18 +6,19 @@ block pageInfo
       websiteURL,
       url: "/about-me",
       name: "about-me",
-      title: "About me — The story of Joseph Ojo.",
+      title: "About me",
       description: "What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering."
     };
 
 block hero
   //- Hero layer
   +hero({
-    title: "About me — The story of Joseph Ojo, the engineer who could.",
-    content: "What drove me to become a Mechatronics Engineer and why?",
+    title: "Who am I?",
+    content: "...",
+    class: "wall-e",
     image: {
-      src: "cloudinary/assorted-color-flowers",
-      alt: "An image of an assortment of flower of different colors, shapes and size; beautiful red, cream, white, and pink shades of flowers. By @pcristina18 on Unsplash."
+      src: "cloudinary/wall-e",
+      alt: "An image of Wall-E , looking up at the sky (Wall-E is the property of Disney). By @lenin33 on unsplash."
     }
   })
 
@@ -30,7 +31,6 @@ block content
     +layout({
       class: "layout-shorten layout-contain"
     })
-      +head("The story of Joseph Ojo.")
       +main({
         class: "layout-padding-top layout-padding-bottom-large layout-clearfix"
       })
@@ -42,10 +42,10 @@ block content
           }
         })
 
-        section(itemscope itemtype="https://schema.org/SiteNavigationElement")
+        section.style-justify(itemscope itemtype="https://schema.org/SiteNavigationElement")
           //- span.layout-margin-horz-left.layout-inline-block= " "
-          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
-          +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes. <br> <br> As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). So, I pursed this as a career choice in university, at Ontario Tech in Oshawa, Ontario (formally UOIT; it's near Toronto, Canada). I graduated with honors with a Bachlor of mechatronic engineering, and went straight into my masters. I am finishing up my masters this year and am available for any projects that requires inovative and creative thinking, as well as dedication. <br> <br> In case you are wondering, my skills outside engineering are problem-solving, leadership, communication and conflict resolution. For more information check out")
+          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left H
+          +p("Hello. Glad to have you here. My name is Olaoluwa (if you’re trying to pronounce it, the trick is to take it 3 letters at a time). You might have noticed the name on the site is not Olaoluwa, and the reason is that it turns out Joseph is a lot easier on the tongue.   <br> <br>  As the eldest of 4 children, I have picked up on several skills and philosophies including the natural ability to lead, a keen sense of responsibility, a strong inclination to maintain peaceful interactions, and the continuous need to improve oneself and surroundings. Unsurprisingly, a recent professional development assessment (developed by Plum.io) places adaptation, teamwork, conflict resolution and innovation as some of my top talents. This, and many other projects I have led or collaborated on are evident of the skilled I have accrued thus far.  <br> <br>  Although I don’t talk about nor like to brag about it, I have been quite fortunate in my educational career, graduating with a High Distinction from Ontario Tech University in a Mechanical (specifically Mechatronics) Engineering program. I am currently working towards my master’s degree under the supervision of two of the smartest people at Ontario Tech University, Drs. Xianke Lin and Haoxiang Lang. My thesis is set to combine the use of neural networks and predictive control algorithms to ensure that robotic and automotive battery systems are safe, and last long while being fast charged. This is a very exciting and fulfilling research project due to its necessity for future economic growth and sustainability.  <br> <br>  In case you haven’t noticed, I am majorly enthusiastic about all things Mechatronics. The sheer brilliance of how mechanical, electronics and software components cohesively mesh together in a harmonious synergy is absolutely fascinating to me. This fascination from a very young age has always meant that I was unwavered in what I knew I was born to do. One of my now software engineer friends used to joke about creating the Terminators and Skynet together, you know, the whole “I’ll be back” and all. Thankfully, we haven’t fallen to the dark side. My goal now is to create assistive Mechatronic technologies to improve the lives of many.  <br> <br>  As far as I can remember, my personal motto has always been to leave things better than I found it. This has helped motivate most of my life choices up till now. My recent experiences have even further solidified this philosophy. After completing a 16-month internship as a photovoltaic designer and New Product Introduction (NPI) coordinator at Celestica, my approach to problem solving and continuous improvement has been revamped. I now understand the value of Kaizen and asking why. My observation of problems is now unequivocally from the top-down in order to effectively solve them. And so far, that need to continuously learn, and improve the tools and people around me has established opportunities and allowed for more efficient processes.  <br> <br>  So now that you know one or two things about me, why don’t you peek at some of the work under my belt? Or better yet, get in touch? Maybe we’ll grab a coffee and talk about our visions for the future and how I can be of service. For more information check out")
           +link({
             href: "/my-resume",
             class: "layout-margin-vert-dull layout-margin-left-mini"

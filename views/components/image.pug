@@ -20,7 +20,7 @@ mixin image(value = {})
           //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
           //- source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
           img.core-img(data-src!=`${urlParse(",w_1100,q_100")}.jpeg` sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" alt=alt loading="lazy" width="100vw" itemprop="url")
-        noscript Javascript is necesscary for this sites awesome experience.
+        noscript Javascript is necessary for this sites awesome experience.
           picture
             source(srcset!=`${urlParse()}.webp` sizes="100vw" width="100vw" type='image/webp')
             img.no-script-img(src!=`${urlParse()}.jpeg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")

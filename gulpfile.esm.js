@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-const { src, series, dest, watch, parallel, lastRun } = gulp;
+const { src, series, dest, watch, parallel } = gulp;
 import { websiteURL, dev, debug, author, homepage, license, copyright, github, netlify } from './config';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import purgecss from '@fullhuman/postcss-purgecss';
@@ -155,7 +155,7 @@ let _execSeries = (...cmds) => {
 
 export const html = () => {
     return stream('views/pages/**/*.pug', {
-        opts: { since: lastRun(html) },
+        // opts: { since: lastRun(html) },
         pipes: [
             // Pug compiler
             pug({
@@ -184,7 +184,7 @@ export const html = () => {
 
 export const css = () => {
     return stream('src/scss/*.scss', {
-        opts: { since: lastRun(css) },
+        // opts: { since: lastRun(css) },
         pipes: [
             // Minify scss to css
             sass({ outputStyle: dev ? 'expanded' : 'compressed' })
@@ -228,7 +228,7 @@ export const envJS = () => {
 const coreJS_Stream = (type, task) => {
     let gen = type === 'general';
     return stream(`src/js/app.js`, {
-        opts: typeof task === "function" ? { since: lastRun(task) } : {},
+        // opts: typeof task === "function" ? { since: lastRun(task) } : {},
         pipes: [
             init(), // Sourcemaps init
             // Bundle Modules
@@ -269,7 +269,7 @@ export const generalJS = done => {
 export const coreJS = series(modernJS, generalJS);
 export const otherJS = () => {
     return stream(["src/js/*.js", "!src/js/app.js"], {
-        opts: { since: lastRun(otherJS) },
+        // opts: { since: lastRun(otherJS) },
         pipes: [
             // Bundle Modules
             rollup({
@@ -302,13 +302,13 @@ export const otherJS = () => {
 export const js = series(coreJS, otherJS);
 export const client = () => {
     return stream("client/**/*", {
-        opts: { since: lastRun(client) }
+        // opts: { since: lastRun(client) }
     });
 };
 
 export const posthtmlFn = () => {
     return stream(`${publicDest}/**/*.html`, {
-        opts: { since: lastRun(posthtmlFn) },
+        // opts: { since: lastRun(posthtmlFn) },
         pipes: [
             posthtml([
                 // Test processes
@@ -321,7 +321,7 @@ export const posthtmlFn = () => {
 
 export const sitemap = () => {
     return stream(`${publicDest}/**/*.html`, {
-        opts: { since: lastRun(sitemap) },
+        // opts: { since: lastRun(sitemap) },
         pipes: [
             sitemapModule({
                 siteUrl: websiteURL
@@ -332,7 +332,7 @@ export const sitemap = () => {
 
 export const inlineAssets = () => {
     return stream(`${publicDest}/**/*.html`, {
-        opts: { since: lastRun(inlineAssets) },
+        // opts: { since: lastRun(inlineAssets) },
         pipes: [
             posthtml([
                 tree => {
@@ -368,7 +368,7 @@ export const inlineAssets = () => {
 export const inlineJS_CSS = () => {
     return streamList([
         [`${publicDest}/**/*.html`, {
-            opts: { since: lastRun(inlineJS_CSS) },
+            // opts: { since: lastRun(inlineJS_CSS) },
             pipes: [
                 // cache('inline-js-css'),
                 posthtml([
