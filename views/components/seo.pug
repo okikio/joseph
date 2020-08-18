@@ -9,7 +9,7 @@ mixin seo(value = {})
   meta(name='twitter:title' content=title)
   meta(name="apple-mobile-web-app-title", content=title)
 
-  link(rel="canonical" href=`${websiteURL}${url}`)
+  link(rel="canonical" href=`${url}`)
   meta(itemprop='url' content=`${websiteURL}${url}`)
   meta(name="shortlink" content=`${websiteURL}${url}`)
   meta(property='og:url' content=`${websiteURL}${url}`)

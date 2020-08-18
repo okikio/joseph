@@ -1,5 +1,5 @@
 {
-   "editor.autoSave": "true",
+   "editor.autoSave": "on",
    "pugbeautify.tabSize": 2,
    "editor.suggestSelection": "first",
    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
