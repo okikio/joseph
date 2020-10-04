@@ -46,9 +46,9 @@ html(lang="en")
     //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" crossorigin)
     if !debug
       block preload
-        link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+        //- link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
     else
-      link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+      //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
 
     link(rel="stylesheet" href="/css/fonts.min.css" ph-inline)
     link(rel="stylesheet" href="/css/app.min.css" ph-inline)
@@ -95,7 +95,7 @@ html(lang="en")
           },
           {
             "@type": "Person",
-            "@id": "#{defaults.websiteURL}/about-me.html#person",
+            "@id": "#{defaults.websiteURL}/about.html#person",
             "name": "Joseph Ojo",
             "url": "#{defaults.websiteURL}",
             "sameAs": [
@@ -137,20 +137,20 @@ html(lang="en")
             ],
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "#{defaults.websiteURL}/my-projects.html#mainentity",
+              "@id": "#{defaults.websiteURL}/projects.html#mainentity",
               "lastReviewed": "Thu Mar 26 2020 15:35:01 GMT-0400"
             },
             "about": {
-              "@id": "#{defaults.websiteURL}/about-me.html#person"
+              "@id": "#{defaults.websiteURL}/about.html#person"
             },
             "name": "Joseph Ojo",
             "publisher": {
-              "@id": "#{defaults.websiteURL}/about-me.html#person"
+              "@id": "#{defaults.websiteURL}/about.html#person"
             },
             "copyrightYear": "2020",
             "copyrightHolder": [
               {
-                "@id": "#{defaults.websiteURL}/about-me.html#person"
+                "@id": "#{defaults.websiteURL}/about.html#person"
               }
             ]
           },
@@ -165,7 +165,7 @@ html(lang="en")
               "@id": "#{defaults.websiteURL}/#website"
             },
             "about": {
-              "@id": "#{defaults.websiteURL}/about-me.html#person"
+              "@id": "#{defaults.websiteURL}/about.html#person"
             }
           }
         ]

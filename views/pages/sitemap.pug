@@ -15,7 +15,7 @@ block pageInfo
     //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" crossorigin)
     //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" crossorigin)
 block preload
-  link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+  //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
 
 block content
   //- Intro layer
@@ -43,10 +43,10 @@ block content
             //- About
             li
               +link({
-                href: "/about-me",
+                href: "/about",
                 class: "style-italic style-underline layout-margin-right-mini"
               })(itemprop="url")
-                span(itemprop="name") About Me
+                span(itemprop="name") About
               +p("- The story of me, myself and I. Shall we begin?")
               ul
                 //- Resume
@@ -59,12 +59,12 @@ block content
                   +p("- All the qualifications I have aquired over my life time, in readable, bite sized, format.")
 
             //- Projects
-            li
+            //- li
               +link({
-                href: "/my-projects",
+                href: "/projects",
                 class: "style-italic style-underline layout-margin-right-mini"
               })(itemprop="url")
-                span(itemprop="name") My Projects
+                span(itemprop="name") Projects
               +p("- Hardwork and perseverance, hear all about it.")
               br
               ul
@@ -90,9 +90,9 @@ block content
             //- Contact
             li
               +link({
-                href: "/contact-me",
+                href: "/contact",
                 class: "style-italic style-underline layout-margin-right-mini"
               })(itemprop="url")
-                span(itemprop="name") Contact Me
+                span(itemprop="name") Contact
               +p("- Do you have a project that demands perservance and passion? Then, lets talk.")
               br

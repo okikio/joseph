@@ -10,7 +10,7 @@ import singleSpaces from "typographic-single-spaces";
 import commonJS from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import { init, write } from 'gulp-sourcemaps';
-import rollupBabel from 'rollup-plugin-babel';
+import rollupBabel from '@rollup/plugin-babel';
 import browserSyncModule from 'browser-sync';
 import icons from './material-design-icons';
 import postHTMLTextr from "posthtml-textr";

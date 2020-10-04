@@ -154,10 +154,10 @@ block pageInfo
   -
     let page = {
       //- Put page url here
-      url: "/my-projects",
+      url: "/projects",
 
       //- Put page name here
-      name: "my-projects",
+      name: "projects",
 
       //- Put page title here
       title: "A showcase of some of the projects I have taken on.",
@@ -229,7 +229,7 @@ block content
           //- span.layout-margin-horz-left.layout-inline-block= " "
           +p("One of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... For more info")
           +link({
-            href: "/about-me",
+            href: "/about",
             class: "layout-margin-vert-dull layout-margin-left-mini",
             content: "click here."
           })
@@ -293,7 +293,7 @@ block content
             class: "layout-col-9 layout-padding-small"
           })
             +link({
-              href: "/about-me",
+              href: "/about",
               class: "layout-block"
             }, true)
               +tile({
@@ -315,7 +315,7 @@ block content
             class: "layout-col-9 layout-padding-small layout-padding-vert-large"
           })
             +link({
-              href: "/my-projects",
+              href: "/projects",
               class: "layout-block"
             }, true)
               +tile({

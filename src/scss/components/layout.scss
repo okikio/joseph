@@ -206,7 +206,28 @@
     /* -- Layout Type (block, inline-block, inline, flex) -- */
     &-block {
         display: block !important;
+
+        @include deviceList(display, block !important);
     }
+
+    &-display-none {
+        // display: none;
+        visibility: hidden;
+        // @include deviceList(display, none);
+
+    }
+
+    &-inline {
+        display: inline !important;
+
+        @include deviceList(display, inline !important);
+
+        &-block {
+            display: inline-block !important;
+        @include deviceList(display, inline-block !important);
+        }
+    }
+
 
     &-flex {
         display: flex ;
@@ -274,21 +295,6 @@
         -ms-flex: 1;
         /* IE 10 */
         flex: 1;
-    }
-
-    &-display-none {
-        // display: none;
-        visibility: hidden;
-        // @include deviceList(display, none);
-
-    }
-
-    &-inline {
-        display: inline !important;
-
-        &-block {
-            display: inline-block !important;
-        }
     }
 
     /* -- Position (horizontal - left, center, right) -- */

@@ -153,11 +153,13 @@
 	}
 
     &-letter-head {
-        letter-spacing: 2.54px;
-        line-height: 5.42rem;
-        font-size: 6.15rem;
+		letter-spacing: 2.54px;
+        line-height: 1.62rem;
+        font-size: 5.15rem;
         font-weight: 900;
         margin: 0;
+		padding-top: 1.25rem;
+		padding-bottom: 2px;
 
         @media #{$screen-size-phone} {
             line-height: 3.80rem;
