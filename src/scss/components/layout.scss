@@ -228,7 +228,6 @@
         }
     }
 
-
     &-flex {
         display: flex ;
 
@@ -244,10 +243,13 @@
 
         &-row {
             flex-direction: row;
+            @include deviceList(flex-direction, row);
         }
 
         &-col {
             flex-direction: column;
+
+            @include deviceList(flex-direction, column);
         }
     }
 

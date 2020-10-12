@@ -17,7 +17,7 @@ mixin image(value = {})
           //- source.webp(srcset!=`${urlParse(",w_50,q_auto,e_blur:150")}.webp`)
           img.placeholder-img(src!=`${urlParse(",w_50,q_auto,e_blur:150")}.jpeg` sizes="100vw" width="100vw" alt=alt loading="lazy")
         picture.core-img-pic
-          .webp(data-srcset!=`${urlParse(",w_600,q_auto")}.webp`)
+          .webp(data-srcset!=`${urlParse(",w_600,q_100")}.webp`)
           //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
           //- source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
           img.core-img(data-src!=`${urlParse(",w_1100,q_auto")}.jpeg` alt=alt loading="lazy" width="100vw" itemprop="url")

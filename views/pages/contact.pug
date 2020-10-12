@@ -19,14 +19,22 @@ block content
     +layout({
       class: "layout-contain layer-overflow-hide"
     })
-      section(class="layout-shorten layout-max-height-limited layout-flex layout-align-items-center layout-justify-content-center")
-        section.style-center.layout-margin-top-larger--device-phone.layout-padding-vert-huge--device-lt-tablet.layout-padding-bottom-large--device-phone
+      section(class="layout-shorten layout-max-height-limited layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
+        +tile({
+          class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layout-left layer-shadow--1",
+          image: {
+            src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-portrait",
+            alt: "An image of Joseph Ojo in a suit on a boat.",
+          }
+        })
+        section.layout-contain-large.style-left.layout-margin-top-larger--device-tablet
           +head({
             class: "layout-margin-bottom"
           })
             h1.h3.h3.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull Contact
+
           +main
-            spam.layout-block--device-lt-tablet You can find me at:
+            spam You can find me at:
             +link({
               href: "https://www.linkedin.com/in/o-josephojo/",
               content: "LinkedIn"

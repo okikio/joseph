@@ -33,6 +33,7 @@ import pug from 'gulp-pug';
 const browserSync = browserSyncModule.create();
 const modernConfig = {
     "babelrc": false,
+    "babelHelpers": "bundled",
     "presets": [
         ["@babel/preset-env", {
             "useBuiltIns": false,

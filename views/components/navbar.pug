@@ -12,7 +12,7 @@ mixin navbar(value = {})
   - let { name } = value;
   - let _class = value.class;
 
-  - let tabs = ["about", "contact"]; // "projects", 
+  - let tabs = ["about", self.dev ? "projects" : null, "contact"]; //
   - let focusIndex = tabs.indexOf(name.toLowerCase());
 
   header.header
@@ -40,13 +40,14 @@ mixin navbar(value = {})
           if !debug
             ul.navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
               each tab, i in tabs
-                li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
-                  +link({
-                    href: `/${tab}`,
-                    class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
-                    span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
-                    meta(itemprop="position" content="1")
+                if typeof tab == "string"
+                  li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+                    +link({
+                      href: `/${tab}`,
+                      class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
+                    })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
+                      span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
+                      meta(itemprop="position" content="1")
               .navbar-desktop-display
                 +themeSwitcher
           else

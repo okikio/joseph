@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const env = process.env;
-export const dev = 'dev' in env ? env.dev !== "true" : true;
+export const dev = 'dev' in env ? env.dev === "true" : false;
 export const netlify = 'netlify' in env && env.netlify === "true";
 export const debug = 'debug' in env && env.debug === "true";
 export const websiteURL = "https://josephojo.com";
