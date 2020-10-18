@@ -52,7 +52,7 @@
             }
 
             &:before {
-                @extend .layout-contain-large;
+                @extend .layout-contain-enlarge;
                 transition: background-color #{$transitionDuration} ease, opacity .25s ease-out;
                 box-shadow: 0 5px 15px rgba(0, 0, 50, .08);
                 @include applyTheme(background-color, "surface");

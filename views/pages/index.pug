@@ -3,8 +3,8 @@ extends /app.pug
 block hero
   //- Hero layer
   +hero({
-    title: "Joseph Ojo — Tenacious & Astute",
-    content: "Crafting the extraordinary is my passion, and my inspiration.",
+    title: "Bridging the Gap",
+    content: "Bringing Hardware and Software to life. *Morgan Freeman's voice here*",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/suspension-bridge",
@@ -21,17 +21,19 @@ block content
     +layout({
       class: "layout-shorten layout-contain"
     })
-      +head("About me.")
+      //- +head("About me.")
       +main
         section.layout-padding-top.layout-padding-bottom-large.layout-clearfix
           //- span.layout-margin-horz-left.layout-inline-block= " "
-          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
-          +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). <br> <br> I am Tenacious & Astute I aim to create only the best, I stop at nothing till the image I have in my mind has been captured in the project. I make sure that in all acts I commit too, I am ready to follow through even if the going gets difficult. I make sure to think things through thoroughly so as to avoid inefficienies. The definition of Astute by the Oxford dictionary is, ​very clever and quick at seeing what to do in a particular situation, especially how to get an advantage. I believe I enbody these traits when working on projects and I would love the oppertunity to show you. <br> <br> I created my portfolio site as a place to display some of the projects I have worked on, and as an easy source to access my resume. For more information")
-          +link({
-            href: "/about",
-            class: "layout-margin-vert-dull layout-margin-left-mini",
-            content: "learn more about me."
-          })
+          //- span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
+          //- +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). <br> <br> I am Tenacious & Astute I aim to create only the best, I stop at nothing till the image I have in my mind has been captured in the project. I make sure that in all acts I commit too, I am ready to follow through even if the going gets difficult. I make sure to think things through thoroughly so as to avoid inefficienies. The definition of Astute by the Oxford dictionary is, ​very clever and quick at seeing what to do in a particular situation, especially how to get an advantage. I believe I enbody these traits when working on projects and I would love the oppertunity to show you. <br> <br> I created my portfolio site as a place to display some of the projects I have worked on, and as an easy source to access my resume. For more information")
+          h3.h5.style-font-30--device-phone.style-primary-dark.style-bold.layout-padding-vert-bottom Hi, I’m Joseph. Nice to meet you.
+          p(lorem="2" class="layout-margin-dull")
+          //- +link({
+          //-   href: "/about",
+          //-   class: "layout-margin-vert-dull layout-margin-left-mini",
+          //-   content: "learn more about me."
+          //- })
 
 
   //- Static Banner layer
@@ -109,16 +111,20 @@ block content
           })
             p.layout-margin-dull(lorem="1")
 
-
   //- Image Column layer
-  +layer
+  +layer({
+    class: "layer-contrast style-primary"
+  })
     +layout({
       class: "layout-contain-large"
     })
-      div.layer-center-line
       +main({
           class: "layout-shorten-vert"
       })
+        div.layout-padding-vert-bottom.layout-contain-small.layout-shorten-horz.layout-contain
+          h3.style-font-30.style-bold.layout-padding-vert-bottom Recent work.
+          p(lorem="2" class="layout-margin-horz-dull")
+        //- div.layer-center-line
         //- 1st Row
         +row({
           class: "layout-margin-dull"
@@ -177,5 +183,39 @@ block content
           +link({
             href: "/projects",
             class: "style-font-weight-bold style-font-30 style-font-title layout-padding layout-padding-horz-large layout-margin-top-larger",
-            content: "More..."
+            content: "See more projects..."
           })
+
+  //- Intro layer
+  +layer({
+    class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
+  })
+    +layout({
+      class: "layout-shorten layout-contain"
+    })
+      section.layout-shorten
+        section(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
+          +tile({
+            class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layout-left layer-shadow--1",
+            image: {
+              src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-portrait",
+              alt: "An image of Joseph Ojo in a suit on a boat.",
+            }
+          })
+          section.layout-contain-large.style-left.layout-margin-top-larger--device-tablet
+            +head({
+              class: "layout-margin-bottom"
+            })
+              //- h1.h3.h3.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull Contact
+              //- p.style-font-size-large "
+              p.layout-margin-horz-right-dull(lorem="2")
+              p.style-center.style-italic.layout-padding-vert-top Signature
+
+              //- span.layout-margin-horz-left.layout-inline-block= " "
+              //- span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
+              //- +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). <br> <br> I am Tenacious & Astute I aim to create only the best, I stop at nothing till the image I have in my mind has been captured in the project. I make sure that in all acts I commit too, I am ready to follow through even if the going gets difficult. I make sure to think things through thoroughly so as to avoid inefficienies. The definition of Astute by the Oxford dictionary is, ​very clever and quick at seeing what to do in a particular situation, especially how to get an advantage. I believe I enbody these traits when working on projects and I would love the oppertunity to show you. <br> <br> I created my portfolio site as a place to display some of the projects I have worked on, and as an easy source to access my resume. For more information")
+              //- +link({
+              //-   href: "/about",
+              //-   class: "layout-margin-vert-dull layout-margin-left-mini",
+              //-   content: "learn more about me."
+              //- })

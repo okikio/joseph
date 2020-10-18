@@ -163,11 +163,7 @@
                 margin-bottom: -176px;
             }
 
-            @media #{$screen-size-laptop} {
-                margin-bottom: -276px;
-            }
-
-            @media #{$screen-size-desktop} {
+            @media #{$screen-size-gt-tablet} {
                 margin-bottom: -270px;
             }
         }
@@ -417,6 +413,17 @@
             }
         }
 
+        @media #{$screen-size-lt-tablet} {
+
+        &-flat-mobile {
+            &,
+            & .layer-image,
+            & .layer-image-overlay {
+                border-radius: 0 !important;
+            }
+        }
+    }
+
         &-mid {
             // max-height: 600px;
         }
@@ -472,6 +479,19 @@
             .layer-tile {
                 margin-bottom: -$size-extra-large;
             }
+        }
+    }
+
+    &-contrast {
+        background-color: $white;
+        background-color: var(--very-light, $white);
+        contain: layout !important;
+
+        .layer-title,
+        .layer-content {
+            color: $primary;
+            color: var(--tertiary, $primary);
+            text-align: center;
         }
     }
 }
