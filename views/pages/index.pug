@@ -113,7 +113,7 @@ block content
 
   //- Image Column layer
   +layer({
-    class: "layer-contrast style-primary"
+    class: "layer-contrast layout-padding-horz-default--device-gt-tablet "
   })
     +layout({
       class: "layout-contain-large"
@@ -121,22 +121,18 @@ block content
       +main({
           class: "layout-shorten-vert"
       })
-        div.layout-padding-vert-bottom.layout-contain-small.layout-shorten-horz.layout-contain
-          h3.style-font-30.style-bold.layout-padding-vert-bottom Recent work.
+        div.layout-padding-vert-bottom.layout-contain.layout-shorten-horz
+          h3.style-primary.style-font-30.style-bold Recent work.
           p(lorem="2" class="layout-margin-horz-dull")
+          //- a
         //- div.layer-center-line
         //- 1st Row
         +row({
           class: "layout-margin-dull"
         })
-          //- Empty alignment Column
-          +column({
-            class: "layout-col-3 layout-block"
-          })
 
-          //- 1st Column
           +column({
-            class: "layout-col-9 layout-padding-small"
+            class: "layout-col-4 layout-padding-small"
           })
             +link({
               href: "/projects/google-designs",
@@ -152,13 +148,8 @@ block content
                 }
               })
 
-        //- 2nd Row
-        +row({
-          class: "layout-margin-dull"
-        })
-          //- 1st Column
           +column({
-            class: "layout-col-9 layout-padding-small layout-padding-vert-large"
+            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
           })
             +link({
               href: "/projects/nasa",
@@ -174,12 +165,57 @@ block content
                 }
               })
 
-          //- Empty alignment Column
           +column({
-            class: "layout-col-3"
+            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
           })
+            +link({
+              href: "/projects/nasa",
+              class: "layout-block"
+            }, true)(title="The link to the Nasa project page.")
+              +tile({
+                title: "Nasa",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+                }
+              })
 
-        div.layout-block.style-center
+          +column({
+            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/nasa",
+              class: "layout-block"
+            }, true)(title="The link to the Nasa project page.")
+              +tile({
+                title: "Nasa",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+                }
+              })
+
+          +column({
+            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/nasa",
+              class: "layout-block"
+            }, true)(title="The link to the Nasa project page.")
+              +tile({
+                title: "Nasa",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+                }
+              })
+        //- div.layout-block.style-center
           +link({
             href: "/projects",
             class: "style-font-weight-bold style-font-30 style-font-title layout-padding layout-padding-horz-large layout-margin-top-larger",
@@ -193,8 +229,10 @@ block content
     +layout({
       class: "layout-shorten layout-contain"
     })
-      section.layout-shorten
-        section(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
+      +main({
+        class: "layout-shorten-horz layout-shorten-vert-top"
+      })
+        section(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center")
           +tile({
             class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layout-left layer-shadow--1",
             image: {
@@ -202,14 +240,15 @@ block content
               alt: "An image of Joseph Ojo in a suit on a boat.",
             }
           })
-          section.layout-contain-large.style-left.layout-margin-top-larger--device-tablet
+          section.layout-contain-large.style-left
             +head({
-              class: "layout-margin-bottom"
+              class: ""
             })
               //- h1.h3.h3.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull Contact
               //- p.style-font-size-large "
-              p.layout-margin-horz-right-dull(lorem="2")
-              p.style-center.style-italic.layout-padding-vert-top Signature
+              +p
+                span.layout-margin-horz-right-dull(lorem="2")
+              p.style-center.style-italic.layout-padding-vert-top-large Signature
 
               //- span.layout-margin-horz-left.layout-inline-block= " "
               //- span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
