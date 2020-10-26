@@ -5702,11 +5702,7 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-L1zP0dk7vGweZME2i+EeakvUNqSrdiI3F91TwEoYiGrAfUXmVv6fJIq4g82PAXxNsWOp0J7ZqQy/3Szz0ajTxA==
-<<<<<<< Updated upstream
   /pnpm/5.10.1:
-=======
-  /pnpm/5.10.2:
->>>>>>> Stashed changes
     dev: true
     engines:
       node: '>=10.16'
@@ -7919,11 +7915,7 @@ specifiers:
   gulp-size: ^3.0.0
   gulp-sourcemaps: ^2.6.5
   moment: ^2.29.1
-<<<<<<< Updated upstream
   pnpm: ^5.10.1
-=======
-  pnpm: ^5.10.2
->>>>>>> Stashed changes
   postcss: ^7.0.35
   postcss-csso: ^4.0.0
   posthtml-doctype: ^1.1.1
