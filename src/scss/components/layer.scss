@@ -273,8 +273,6 @@
         }
     }
 
-
-
     &-joseph-img2 {
         position: relative;
         max-width: 300px;
@@ -414,15 +412,14 @@
         }
 
         @media #{$screen-size-lt-tablet} {
-
-        &-flat-mobile {
-            &,
-            & .layer-image,
-            & .layer-image-overlay {
-                border-radius: 0 !important;
+            &-flat-mobile {
+                &,
+                & .layer-image,
+                & .layer-image-overlay {
+                    border-radius: 0 !important;
+                }
             }
         }
-    }
 
         &-mid {
             // max-height: 600px;
@@ -482,6 +479,19 @@
         }
     }
 
+    &-capsule {
+        z-index: 25;
+        position: relative;
+
+        &-push {
+            padding-top: 12rem;
+        }
+
+        &-pull {
+            margin-top: -12rem;
+        }
+    }
+
     &-contrast {
         background-color: $white;
         background-color: var(--very-light, $white);
@@ -492,6 +502,102 @@
             color: $primary;
             color: var(--tertiary, $primary);
             text-align: center;
+        }
+    }
+
+    &-fieldset {
+        $padding-horz: 1.2em;
+        // border: 1px solid gray;
+        // @include applyTheme(border-color, "mid-light");
+        position: relative;
+        // border-radius: 4px;
+        // padding: 0.8em 0.8em;
+        vertical-align: middle;
+        // height: 3em;
+        width: 100%;
+        margin-bottom: 2em;
+
+        label {
+            @include applyTheme(background-color, "invert-white");
+            transition: transform ease 0.5s;
+            position: absolute;
+            display: block;
+            top: 50%;
+            align-self: center;
+            line-height: 100%;
+            transform: translateY(-50%) scale(1);
+            margin-left: $padding-horz - 0.25em * 2;
+            padding: 0 0.25em;
+
+            font-family: $bold-font;
+            // letter-spacing: 0.0525em;
+            font-size: 0.8rem;
+            @include applyTheme(color, "mid-dark");
+            // bottom: 38px;
+        }
+
+        input {
+            border: 2px solid;
+            @include applyTheme(border-color, "mid-dark");
+            position: relative;
+            border-radius: 3px;
+            padding: 0.8em $padding-horz;
+            vertical-align: middle;
+            width: 100%;
+
+            // @include applyTheme(background-color, "background");
+            @include applyTheme(background-color, "invert-white");
+            @include applyTheme(color, "invert-black");
+            outline: none;
+
+            &:hover {
+                @include applyTheme(border-color, "dark");
+                & ~ label {
+                    @include applyTheme(color, "dark");
+                }
+            }
+
+            &[type="email"]:invalid {
+                // :not(:placeholder-shown)
+                color: red;
+                border-color: red;
+
+                & ~ label {
+                    transform: translateY(-200%) scale(0.8);
+                    color: red;
+                }
+            }
+            &:valid ~ label,
+            &.focused ~ label,
+            &:focus ~ label {
+                transform: translateY(-200%) scale(0.8);
+                // top: 0;
+            }
+
+            &:focus ~ label {
+                @include applyTheme(color, "primary");
+            }
+
+            &:focus {
+                @include applyTheme(border-color, "primary");
+            }
+
+            &:valid ~ label,
+            &.focused ~ label {
+                // text-transform: uppercase;
+                // font-style: italic;
+            }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+                // -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+                // background: transparent;
+                -webkit-box-shadow: 0 0 0 50px var(--invert-white) inset; /* Change the color to your own background color */
+                // @include applyTheme(background-color, "invert-white");
+                @include applyTheme(-webkit-text-fill-color, "primary-light");
+            }
         }
     }
 }

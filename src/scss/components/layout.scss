@@ -318,6 +318,10 @@
         @include deviceList(float, right);
     }
 
+    &-full-width {
+        width: 100%;
+    }
+
     /* -- Container (keep the page focused and content central) -- */
     &-contain {
 

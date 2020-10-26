@@ -60,6 +60,7 @@ $very-light: #efefef;
 // navbar-list = #292d33
 // navbar-menu background-color = #2b2a2a
 
+$invert-white: #fff;
 $light: #eee; // #525252
 $mid-light: #ddd;
 $mid: #ccc;
@@ -131,13 +132,15 @@ $colors: (
     "white": $white,
     "black": $black,
 
+    "invert-white": $white,
     "very-light": $very-light,
     "light": $light,
     "mid-light": $mid-light,
     "mid": $mid,
     "dim": #77709e,
     "mid-dark": $mid-dark,
-    "dark": $dark
+    "dark": $dark,
+    "invert-black": $black,
 );
 
 $dark-colors: (
@@ -160,13 +163,15 @@ $dark-colors: (
     "white": $white,
     "black": $black,
 
+    "invert-white": $black,
     "very-light": #1d2125,
     "light": #525252,
     "mid-light": $mid-light,
     "mid": $mid,
     "dim": #696873,
     "mid-dark": #bbb8b8,
-    "dark": #ddd
+    "dark": #ddd,
+    "invert-black": $white,
 );
 
 $fonts: (

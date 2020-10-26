@@ -17,9 +17,9 @@ block content
   //- Intro layer
   +layer
     +layout({
-      class: "layout-contain layer-overflow-hide"
+      class: "layout-contain layout-padding-vert-top-larger"
     })
-      section(class="layout-shorten layout-max-height-limited layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
+      section(class="layout-shorten layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
         +tile({
           class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layout-left layer-shadow--1",
           image: {
@@ -50,6 +50,42 @@ block content
                 href: "mailto:laoluojo@gmail.com",
                 content: "Email"
               })(target="_blank" rel="noopener")
+
+  //- Contact Form layer
+  //- +layer({
+  //-   class: "layer-contrast layout-padding-horz-default--device-gt-tablet"
+  //- })
+    +layout({
+      class: "layout-contain-large"
+    })
+      +main({
+          class: "layout-shorten-vert"
+      })
+        div.layout-padding-vert-bottom.layout-contain.layout-shorten-horz
+          h4.style-primary.style-font-25.style-bold.style-center Leave you name and number, and I'll get back to you.
+          //- p(lorem="2" class="layout-margin-horz-dull")
+          //- a
+        //- div.layer-center-line
+        //- 1st Row
+
+        //- https://haerfest.com/pages/contact
+        form.layout-contain-small.layout-padding-horz(action='')
+          fieldset.layer-fieldset.layout-flex.layout-center
+            input.layout-full-width#name(type='text', name='name', placeholder="" required)
+            label(for='name') Name
+          fieldset.layer-fieldset.layout-flex.layout-center
+            input#email(type='email', name='email', placeholder="gra" required)
+            label(for='name') Email
+          fieldset.style-center
+            button.action-btn.action-btn-smooth.layer-secondary-btn(type='submit')
+              span.layout-padding-nano
+              section.action-btn-layout.layout-padding-horz-right-smaller
+                span.action-btn-group.layout-padding-smaller
+                  i.action-icon.style-font-size-24(inline) launch
+                  span.action-btn-section
+                    span.action-btn-spacer
+                    span.action-btn-spacer
+                    span.action-btn-content Submit
 
   //- Intro layer
   //- +layer({
@@ -94,6 +130,6 @@ block content
 
 block footer
   +footer({
-    class: "footer-stuck layout-margin-vert-top",
-    noSocials: true
+    class: "layout-margin-vert-top",
+    noSocials: false
   })
