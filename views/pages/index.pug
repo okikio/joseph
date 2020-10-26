@@ -4,7 +4,7 @@ block hero
   //- Hero layer
   +hero({
     title: "Bridging the Gap",
-    content: "Bringing Hardware and Software to life. *Morgan Freeman's voice here*",
+    content: "Bringing Hardware and Software to life.",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/suspension-bridge",
@@ -34,6 +34,41 @@ block content
           //-   class: "layout-margin-vert-dull layout-margin-left-mini",
           //-   content: "learn more about me."
           //- })
+
+  div.layout-margin-horz-small.layer-capsule
+    //- Skills Column layer
+    +layer({
+      class: "layout-contain-large layer-border-radius-12"
+    })
+      +layout({
+        class: "layer-primary-dark layout-padding-horz-default--device-gt-tablet"
+      })
+        +main({
+            class: "layout-shorten-vert style-invert-white"
+        })
+          div.layout-shorten-horz
+            h3.style-font-30.style-bold.layout-margin-vert-botttom-dull Skills
+            //- a
+          //- div.layer-center-line
+          //- 1st Row
+          +row({
+            class: "layout-margin-dull layout-padding-small"
+          })
+            +column({
+              class: "layout-col-6"
+            })
+              ul.layout-margin-vert-dull
+                - for (let i = 0; i < 5; i ++) {
+                  li= i
+                - }
+
+            +column({
+              class: "layout-col-6"
+            })
+              ul.layout-margin-vert-dull
+                - for (let i = 0; i < 5; i ++) {
+                  li= i
+                - }
 
 
   //- Static Banner layer
@@ -113,7 +148,7 @@ block content
 
   //- Image Column layer
   +layer({
-    class: "layer-contrast layout-padding-horz-default--device-gt-tablet "
+    class: "layer-contrast layout-padding-horz-default--device-gt-tablet layer-capsule-push layer-capsule-pull"
   })
     +layout({
       class: "layout-contain-large"
@@ -222,7 +257,7 @@ block content
             content: "See more projects..."
           })
 
-  //- Intro layer
+  //- Quote and Signature layer
   +layer({
     class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
   })
