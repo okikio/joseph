@@ -1,7 +1,7 @@
 {
     "build": {
         "env": {
-            "dev": "false"
+            "dev": "true"
         }
     }
 }
