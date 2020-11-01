@@ -1,12 +1,14 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
+const { author, homepage, license, copyright, github } = require("./package");
 
 if (process.env.NODE_ENV === "development") {
     dotenv.config();
 }
 
-export const env = process.env;
-export const dev = 'dev' in env ? env.dev === "true" : false;
-export const netlify = 'netlify' in env && env.netlify === "true";
-export const debug = 'debug' in env && env.debug === "true";
-export const websiteURL = "https://josephojo.com";
-export { author, homepage, license, copyright, github } from "./package";
+const env = process.env;
+const dev = 'dev' in env ? env.dev === "true" : false;
+const netlify = 'netlify' in env && env.netlify === "true";
+const debug = 'debug' in env && env.debug === "true";
+const websiteURL = "https://josephojo.com";
+
+module.exports = { author, homepage, license, copyright, github, env, dev, netlify, debug, websiteURL };

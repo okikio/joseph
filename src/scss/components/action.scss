@@ -74,11 +74,12 @@
         }
 
         &-hover &-layout,
-        &-expand &-layout {
-            transition: width .6s ease 0s;
+        &-expand &-layout,
+        &-expand-scale &-layout {
+            transition: width 0.6s ease 0s;
 
             .action-btn-section {
-                transition: opacity .4s ease 0.1s;
+                transition: opacity 0.4s ease 0.1s;
                 overflow-wrap: normal;
                 word-break: keep-all;
                 white-space: nowrap;
@@ -109,13 +110,21 @@
         }
     }
 
+    &-expand-scale &-layout {
+        width: 100% !important;
+
+        .action-btn-section {
+            opacity: 1;
+        }
+    }
+
     &-pointer-default {
         cursor: default;
     }
 
     &-icon,
     &-material-icons {
-        -webkit-font-feature-settings: "liga"off, "dlig";
+        -webkit-font-feature-settings: "liga" off, "dlig";
         /* Ch 16-26, BB 10, And 18.0 */
         -moz-font-feature-settings: "liga=0, dlig=1";
         /* Fx 4-21 */

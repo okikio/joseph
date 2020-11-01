@@ -52,7 +52,6 @@
        -- Base Layouts (these tamper with all the layout setting and provide a great start for a layer) --
    */
     &-enlarge {
-
         &,
         &-vert {
             padding: {
@@ -71,7 +70,6 @@
     }
 
     &-shorten {
-
         &,
         &-vert {
             padding: {
@@ -90,7 +88,6 @@
     }
 
     @media (max-width: 500px) {
-
         &,
         &-vert {
             padding: {
@@ -108,7 +105,6 @@
         }
 
         &-enlarge {
-
             &,
             &-vert {
                 padding: {
@@ -127,7 +123,6 @@
         }
 
         &-shorten {
-
             &,
             &-vert {
                 padding: {
@@ -146,57 +141,54 @@
         }
 
         &-shrink {
-
             &,
             &-vert {
                 padding: {
-                    bottom: $size-sub-large ;
-                    top: $size-sub-large ;
+                    bottom: $size-sub-large;
+                    top: $size-sub-large;
                 }
             }
 
             &,
             &-horz {
                 padding: {
-                    right: $size-sub-large ;
-                    left: $size-sub-large ;
+                    right: $size-sub-large;
+                    left: $size-sub-large;
                 }
             }
 
             &-shorten {
-
                 &,
                 &-vert {
                     padding: {
-                        bottom: $size ;
-                        top: $size ;
+                        bottom: $size;
+                        top: $size;
                     }
                 }
 
                 &,
                 &-horz {
                     padding: {
-                        right: $size ;
-                        left: $size ;
+                        right: $size;
+                        left: $size;
                     }
                 }
             }
 
             &-mini {
-
                 &,
                 &-vert {
                     padding: {
-                        bottom: $size-small ;
-                        top: $size-small ;
+                        bottom: $size-small;
+                        top: $size-small;
                     }
                 }
 
                 &,
                 &-horz {
                     padding: {
-                        right: $size-small ;
-                        left: $size-small ;
+                        right: $size-small;
+                        left: $size-small;
                     }
                 }
             }
@@ -214,7 +206,6 @@
         // display: none;
         visibility: hidden;
         // @include deviceList(display, none);
-
     }
 
     &-inline {
@@ -224,12 +215,12 @@
 
         &-block {
             display: inline-block !important;
-        @include deviceList(display, inline-block !important);
+            @include deviceList(display, inline-block !important);
         }
     }
 
     &-flex {
-        display: flex ;
+        display: flex;
 
         &-center {
             justify-content: center;
@@ -324,7 +315,6 @@
 
     /* -- Container (keep the page focused and content central) -- */
     &-contain {
-
         &,
         &-larger,
         &-enlarge,
@@ -360,7 +350,6 @@
         }
 
         @media (min-width: 800px) {
-
             &,
             &-large {
                 max-width: 800px;
@@ -422,8 +411,16 @@
     @each $spacing in $spaceTypes {
         &-#{$spacing} {
             $spacing-parent: &;
-            $basic-dirs: ("horz": ("left", "right"),
-                    "vert": ("top", "bottom"));
+            $basic-dirs: (
+                "horz": (
+                    "left",
+                    "right",
+                ),
+                "vert": (
+                    "top",
+                    "bottom",
+                ),
+            );
 
             @each $basic-dir, $dirs in $basic-dirs {
                 &,
@@ -439,7 +436,10 @@
                             @each $type, $val in $sizes {
                                 &-#{$type} {
                                     #{$spacing}-#{$dir}: $val;
-                                    @include deviceList(#{$spacing}-#{$dir}, $val);
+                                    @include deviceList(
+                                        #{$spacing}-#{$dir},
+                                        $val
+                                    );
                                 }
                             }
                         }
@@ -492,9 +492,7 @@
                 @media (max-width: 750px) {
                     @if $i>=6 {
                         max-width: 100% !important;
-                    }
-
-                    @else {
+                    } @else {
                         max-width: 50% !important;
                     }
                 }

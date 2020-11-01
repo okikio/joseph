@@ -1,18 +1,89 @@
 /* -- Presets & Resets -- */
 /* -- Elements -- */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, button, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, main, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, svg {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+button,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+main,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+svg {
     &,
     &:before,
     &:after {
@@ -31,7 +102,7 @@ time, mark, audio, video, svg {
  */
 
 template {
-  display: none;
+    display: none;
 }
 
 /**
@@ -39,17 +110,20 @@ template {
  */
 
 [hidden] {
-  display: none;
+    display: none;
 }
 
 html {
     transition: scrollbar-color #{$transitionDuration} ease;
     scrollbar-color: $primary-light lighten($mid-dark, 5%);
-    scrollbar-color: var(--mid-dark, $primary-light) var(--light, lighten($mid-dark, 5%));
+    scrollbar-color: var(--mid-dark, $primary-light)
+        var(--light, lighten($mid-dark, 5%));
     scrollbar-width: thin;
 }
 body {
-    transition: background-color #{$transitionDuration} ease, color #{$transitionDuration} ease, scrollbar-color #{$transitionDuration} ease;
+    transition: background-color #{$transitionDuration} ease,
+        color #{$transitionDuration} ease,
+        scrollbar-color #{$transitionDuration} ease;
     @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
 
@@ -199,7 +273,8 @@ a {
 }
 
 // For touch screen devices
-a, button {
+a,
+button {
     -webkit-tap-highlight-color: transparent;
     background-image: none;
     outline: 0;
@@ -213,29 +288,36 @@ a, button {
     }
 }
 
-ul, .ul,
-ol, .ol {
+ul,
+.ul,
+ol,
+.ol {
     list-style-type: disc;
     margin: 20px 2em;
     display: block;
 }
 
-ol, .ol {
+ol,
+.ol {
     list-style-type: decimal;
 }
 
-ul ul, .ul .ul,
-ol ul, .ol .ul {
+ul ul,
+.ul .ul,
+ol ul,
+.ol .ul {
     list-style-type: circle;
 }
 
-li, .li {
+li,
+.li {
     text-align: inherit;
     display: list-item;
 }
 
 a.skip-main {
-    transition: background-color #{$transitionDuration} ease, color #{$transitionDuration} ease, border-color .35s ease;
+    transition: background-color #{$transitionDuration} ease,
+        color #{$transitionDuration} ease, border-color 0.35s ease;
     border: 2px solid $secondary-light;
     border-color: var(--secondary-light, $secondary-light);
     // color: $secondary-light;
@@ -284,12 +366,13 @@ a.skip-main {
 }
 
 .core-img-pic {
-    transition: opacity .9s ease-out, transform .9s ease-out;
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
     transform: scale(1.2);
     opacity: 0;
 }
 
-.core-img, .no-script-img {
+.core-img,
+.no-script-img {
     image-rendering: auto;
     image-rendering: high-quality;
     position: absolute;
@@ -304,7 +387,9 @@ a.skip-main {
     }
 }
 
-.core-img, .no-script-img, .placeholder-img {
+.core-img,
+.no-script-img,
+.placeholder-img {
     color: transparent;
 }
 
@@ -321,7 +406,8 @@ main {
     }
 }
 
-.layer, .footer {
+.layer,
+.footer {
     a.focus-box {
         & {
             border: 2px solid transparent;
@@ -356,7 +442,7 @@ main {
     }
 }
 
-@media #{$screen-size-gt-phone} {
+@media #{$screen-size-gt-tablet} {
     .footer-stuck {
         position: absolute;
         bottom: 0;

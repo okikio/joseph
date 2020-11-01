@@ -168,7 +168,7 @@ on(_menu, "mouseup", () => {
 });
 
 try {
-    //! This code comes from the theme.js file
+    // This code comes from the theme.js file
     // Control localStorage storage of theme
     const { setTheme, getTheme, matchMedia } = window;
     const html = document.querySelector("html");

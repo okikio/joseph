@@ -17,17 +17,17 @@ block content
   //- Intro layer
   +layer
     +layout({
-      class: "layout-contain layout-padding-vert-top-larger"
+      class: "layout-contain "
     })
-      section(class="layout-shorten layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
+      section(class="layout-shorten layout-max-height-limited  layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
         +tile({
           class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layout-left layer-shadow--1",
           image: {
-            src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-portrait",
-            alt: "An image of Joseph Ojo in a suit on a boat.",
+            src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
+            alt: "An image of Joseph Ojo laughing with friends on a boat.",
           }
         })
-        section.layout-contain-large.style-left.layout-margin-top-larger--device-tablet
+        section.layout-contain-large.style-left
           +head({
             class: "layout-margin-bottom"
           })
@@ -130,6 +130,6 @@ block content
 
 block footer
   +footer({
-    class: "layout-margin-vert-top",
+    class: "footer-stuck layout-margin-vert-top",
     noSocials: false
   })
