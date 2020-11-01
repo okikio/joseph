@@ -4,21 +4,21 @@ block pageInfo
   -
     let page = {
       websiteURL,
-      url: "/projects/google-designs",
-      name: "google-designs",
-      title: "Google Designs — A project I did with Google.",
-      description: "I worked with the Google Designs team to... Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
+      url: "/projects/sarbot",
+      name: "sarbot",
+      title: "SarBot — A Search and Rescue Robot",
+      description: "I worked with ... Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
     };
 
 block content
   //- Banner layer
   +banner({
-    title: "Google Designs — A project I did with Google...",
-    content: "I worked with the Google Designs team to... Lorem Ipsium dolor sit amet, tempor...",
+    title: "SarBot — A Search and Rescue Robot",
+    content: "I worked with ... Lorem Ipsium dolor sit amet, tempor...",
     image: {
       class: "effect-parallax hero-img",
-      src: "cloudinary/engineer-piping",
-      alt: "An image of large pipes for a Power Plant from Unsplash by @martinadams."
+      src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+      alt: "An image of a 3D model of Sarbot.",
     }
   })
 
@@ -47,7 +47,7 @@ block content
 
   //- Next page layer
   +link({
-    href: "/projects/nasa",
+    href: "/projects/ultima-apparel",
     class: "layout-block"
   }, true)
     +layer({
@@ -56,20 +56,20 @@ block content
       +head({
         class: "layout-padding-top-default"
       })
-        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Previous
+        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
       +layout({
         class: "layout-contain layout-padding-horz--device-gt-tablet"
       })
         +main({
           class: "layout-padding-vert-sub-large--device-gt-tablet"
         })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Nasa
+          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Ultima Apparel
 
         +tile({
           class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
           image: {
             class: "effect-parallax",
-            src: "cloudinary/aerial-photo-of-brown-mountains",
-            alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+            src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+            alt: "An image of Ultima Apparels first proof of concept.",
           }
         })

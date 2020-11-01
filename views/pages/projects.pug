@@ -55,55 +55,60 @@ block content
       +main({
         class: "layout-shorten-vert"
       })
-        //- 1st Row
         +row({
           class: "layout-margin-dull"
         })
-          //- 1st Column
           +column({
             class: "layout-col-12 layout-padding-small"
           })
             +link({
-              href: "/projects/google-designs",
+              href: "/projects/the-boxer",
               class: "layout-block"
             }, true)
               +tile({
-                title: "Google Design",
+                title: "The Boxer",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
                   class: "effect-parallax",
-                  src: "cloudinary/engineer-piping",
-                  alt: "An image of large pipes for a Power Plant from Unsplash.",
+                  src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+                  alt: "An image of a rendered robot."
                 }
               })
 
-        //- 2nd Row
-        +row({
-          class: "layout-margin-dull"
-        })
-          //- 2nd Column
           +column({
             class: "layout-col-12 layout-padding-small layout-padding-vert-large"
           })
             +link({
-              href: "/projects/nasa",
+              href: "/projects/battery-tester",
               class: "layout-block"
             }, true)
               +tile({
-                title: "Nasa",
+                title: "Battery Tester",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
                   class: "effect-parallax",
-                  src: "cloudinary/aerial-photo-of-brown-mountains",
-                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+                  src: "cloudinary/joseph-projects/battery_tester/BatteryTester_Diag",
+                  alt: "An image of the battery testing workstation box.",
                 }
               })
 
-        //- 3rd Row
-        +row({
-          class: "layout-margin-dull"
-        })
-          //- 3rd Column
+          +column({
+            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/sarbot",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Search and Rescue Robot (SarBot)",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+                  alt: "An image of a 3D model of Sarbot.",
+                }
+              })
+
           +column({
             class: "layout-col-12 layout-padding-small layout-padding-vert-large"
           })
@@ -116,7 +121,41 @@ block content
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
                   class: "effect-parallax",
-                  src: "cloudinary/Ultima_Team_2",
-                  alt: "An image of me and some friends holding up a prototype of an Ultima Apparel product."
+                  src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+                  alt: "An image of Ultima Apparels first proof of concept.",
+                }
+              })
+
+          +column({
+            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/celestica",
+              class: "layout-block"
+            }, true)
+              +tile({
+                title: "Celestica",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/joseph-projects/celestica/New_Solar_Panel_1-03",
+                  alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
+                }
+              })
+
+          +column({
+            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
+          })
+            +link({
+              href: "/projects/publications",
+              class: "layout-block"
+            }, true)(title="The link to the Nasa project page.")
+              +tile({
+                title: "Publications",
+                class: "layer-box layer-surface layout-block layer-tile-outline",
+                image: {
+                  class: "effect-parallax",
+                  src: "cloudinary/aerial-photo-of-brown-mountains",
+                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
                 }
               })

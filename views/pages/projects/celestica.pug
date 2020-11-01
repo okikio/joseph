@@ -4,21 +4,21 @@ block pageInfo
   -
     let page = {
       websiteURL,
-      url: "/projects/nasa",
-      name: "nasa",
-      title: "Nasa — A project I did with Nasa.",
-      description: "Nasa and I, Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
+      url: "/projects/celestica",
+      name: "celestica",
+      title: "Celestica — A solar panel company.",
+      description: "I worked with ... Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
     };
 
 block content
   //- Banner layer
   +banner({
-    title: "Nasa — A project I did with Nasa...",
-    content: "Nasa and I, Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod...",
+    title: "Celestica — A project I did with ...",
+    content: "I worked with ... Lorem Ipsium dolor sit amet, tempor...",
     image: {
       class: "effect-parallax hero-img",
-      src: "cloudinary/aerial-photo-of-brown-mountains",
-      alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash."
+      src: "cloudinary/joseph-projects/celestica/New_Solar_Panel_1-03",
+      alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
     }
   })
 
@@ -47,7 +47,7 @@ block content
 
   //- Next page layer
   +link({
-    href: "/projects/ultima-apparel",
+    href: "/projects/publications",
     class: "layout-block"
   }, true)
     +layer({
@@ -63,13 +63,13 @@ block content
         +main({
           class: "layout-padding-vert-sub-large--device-gt-tablet"
         })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Ultima Apparel
+          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Publications
 
         +tile({
           class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
           image: {
             class: "effect-parallax",
-            src: "cloudinary/Ultima_Team_2",
-            alt: "An image of me and some friends holding up a prototype of an Ultima Apparel product.",
+            src: "cloudinary/aerial-photo-of-brown-mountains",
+            alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
           }
         })
