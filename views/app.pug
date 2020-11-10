@@ -50,8 +50,11 @@ html(lang="en")
     else
       //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
 
-    link(rel="stylesheet" href="/css/fonts.min.css" ph-inline)
-    link(rel="stylesheet" href="/css/app.min.css" ph-inline)
+
+    link(rel="preload" href="/fonts/frank-ruhl-libre--black_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
+    link(rel="stylesheet" href="/css/fonts.min.css" ph-inline async)
+    link(rel="stylesheet" href="/css/app.min.css" ph-inline async)
 
     meta(charset="utf-8")
     meta(name="color-scheme" content="dark light")
@@ -229,8 +232,8 @@ html(lang="en")
     //- link(rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- link(rel="dns-prefetch" href="https://cdnjs.cloudflare.com/" crossorigin)
     //- <![endif]-->
-    script(src="/js/ver-check.min.js" ph-inline ph-concat-start)
-    script(src="/js/theme.min.js" ph-inline ph-concat-end)
+    script(src="/js/ver-check.min.js" ph-inline async)
+    script(src="/js/theme.min.js" ph-inline async)
   body(itemscope="" itemtype="https://schema.org/WebPage")
     +link({
       class: "skip-main",
@@ -282,6 +285,6 @@ html(lang="en")
         class: "footer-stuck layout-margin-vert-top"
       })
 
-    script(src="/js/vendor.min.js" ph-inline)
+    script(src="/js/vendor.min.js" ph-inline async)
     //- if !dev
       script(src="/js/service.min.js" ph-inline)

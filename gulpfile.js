@@ -45,6 +45,7 @@ const {
     // parallelFn,
     // seriesFn,
 } = require("./util");
+const { public } = require('./material-design-icons');
 
 const browserSync = browserSyncModule.create();
 // const modernConfig = {
@@ -332,30 +333,59 @@ task("inlineExternal", () => {
     return stream(`${publicDest}/**/*.html`, {
         pipes: [
             posthtml([
-                tree => {
-                    tree.walk(node => {
-                        if (node.tag != 'html') {
-                            let _attrs = node.attrs || {}, key;
-                            if ('ph-inline' in _attrs) {
-                                node.attrs = { ..._attrs };
-                                key = node.tag == "link" ? "href" : "src";
-                                node.attrs[key] = node.attrs[key].slice(1);
-                            }
-                        }
-                        return node;
-                    });
-                },
+                // tree => {
+                //     tree.walk(node => {
+                //         if (node.tag != 'html') {
+                //             let _attrs = node.attrs || {}, key;
+                //             if ('ph-inline' in _attrs) {
+                //                 key = node.tag == "link" ? "href" : "src";
+                //                 if (node.attrs[key][0] == "/" && node.attrs[key].length > 1) {
+                //                     node.attrs[key] = node.attrs[key].slice(1);
+                //                 }
+                //             }
+                //         }
+                //         return node;
+                //     });
+                // },
 
                 inline({
                     transforms: {
                         script: {
                             resolve(node) {
-                                return node.tag === 'script' && node.attrs && ("src" in node.attrs) && ("ph-inline" in node.attrs);
+                                return node.tag === 'script' && node.attrs && ("ph-inline" in node.attrs) &&
+                                    typeof node.attrs.src == "string" && node.attrs.src.length > 1 &&
+                                    (node.attrs.src[0] == "/" ? (node.attrs.src + "").slice(1) : node.attrs.src);
+                            },
+                            transform(node, data) {
+                                delete node.attrs.src;
+                                delete node.attrs["ph-inline"];
+                                if ("async" in node.attrs)
+                                    delete node.attrs.async;
+
+                                node.content = [
+                                    data.buffer.toString('utf8')
+                                ];
+                                return node;
                             }
                         },
                         style: {
                             resolve(node) {
-                                return node.tag === 'link' && node.attrs && node.rel === "stylesheet" && ("href" in node.attrs) && ("ph-inline" in node.attrs);
+                                return node.tag === 'link' && node.attrs && node.attrs.rel === "stylesheet" && ("ph-inline" in node.attrs) &&
+                                    typeof node.attrs.href === "string" && node.attrs.href.length > 1 &&
+                                    (node.attrs.href[0] == "/" ? (node.attrs.href + "").slice(1) : node.attrs.href);
+                            },
+                            transform(node, data) {
+                                delete node.attrs.href;
+                                delete node.attrs.rel;
+                                delete node.attrs["ph-inline"];
+                                if ("async" in node.attrs)
+                                    delete node.attrs.async;
+
+                                node.tag = 'style';
+                                node.content = [
+                                    data.buffer.toString('utf8')
+                                ];
+                                return node;
                             }
                         },
                         favicon: false,
@@ -375,6 +405,7 @@ task("inlineExternal", () => {
 
 task("reload", () => {
     return stream(`${publicDest}/**/*.html`, {
+        dest: public,
         end: browserSync.reload
     });
 });
