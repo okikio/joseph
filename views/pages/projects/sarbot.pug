@@ -7,14 +7,14 @@ block pageInfo
       url: "/projects/sarbot",
       name: "sarbot",
       title: "SarBot — A Search and Rescue Robot",
-      description: "I worked with ... Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
+      description: "A test of the abilities of some colleagues and I; to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. "
     };
 
 block content
   //- Banner layer
   +banner({
-    title: "SarBot — A Search and Rescue Robot",
-    content: "I worked with ... Lorem Ipsium dolor sit amet, tempor...",
+    title: "Project 3: SarBot (2018)",
+    content: "A test of the abilities of some colleagues and I; to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner.",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
@@ -33,17 +33,35 @@ block content
         class: "layout-padding-vert-small layout-clearfix"
       })
         +p
-          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left A
-          span.layout-inline.layout-margin-dull s a mechatronics engineer I am adept at electrical, mechanical, and robotics, this allows me to take on a variety of projects, some more electrical, some robotic. I am often wonderstruck by mechatronics, and I like to create things that will leave others as wonderstruck as me when I see an amazing project.
-          span.layout-inline.layout-margin-dull(lorem="1")
-          p.layout-inline.layout-margin-dull(lorem="3")
-          span.layout-inline.layout-margin-dull  Some more electrical, lorem ipsum dolor,
-          span.layout-inline.layout-margin-dull= " "
-          +link({
-            href: "/",
-            class: "layout-margin-horz-left-mini",
-            content: "wanna go back home?"
-          })
+          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left T
+          span.layout-inline.layout-margin-dull he SarBot or Search and rescue robot was a major group project in the last year of my undergraduate studies. The project was meant to test our ability to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. This project was meant to emulate an actual rescue mission in the scenario that miners are trapped on a sub-level in a mine. The reason why a robot is used here is due to the risk to human rescuers.
+          br
+          br
+          i [ + image ...]
+          br
+          br
+          | Due to the smaller scale of the project, the team decided to design small for easy maneuverability. Our design consisted of a unibody chassis 3D printed in 2 parts. The top part housed 3 infrared (IR)sensors, the microcontroller (Teensy 3.6), a couple of voltage converter modules and the motor controller. On the bottom level, the wheels, batteries, geared DC motor, servo motors and one more IR sensor. The final assembly is shown below.
+          br
+          br
+          | Our approach, although not ideal for the use case, was similar to that of some self-driving vehicle companies. We first manually mapped out the maze with waypoints. These waypoints were placed near key landmarks. These landmarks include T-junctions, cross-sections, narrower paths, steep grades, terrain changes, miner location and so on. A matrix of data was then created for each waypoint to help the robot decide what actions to take at each waypoint. Each waypoint consisted of a base command to go forward, backward, left or right, a base command controller i.e. what controller to use to complete the base command, stopping conditions for the command, manipulator commands and others. For example, a waypoint next to a turn had data such a turn right command, how many degrees the turn is, the speed required to make the turn, and what controller to use to make the turn i.e. a PID controller for robot angle.
+          br
+          br
+          i [ + image ...]
+          br
+          br
+          i [ + image ...]
+          br
+          br
+          | Our method to secure and return the miner, in our case, a toy was a quick and quirky solution called the Swatter. The innovative design made from the most reliable materials, a metal clothes hanger and some duct tape, yep, duct tape! I think the saying goes something like this, “if you can’t fix it with duct tape, you’re not using enough duct tape” haha. All jokes aside though, it seemed to work reliably, so we left it as is, not bothering with a complex robotic arm design.
+          br
+          br
+          | At the end of it, we were awarded third place because our robot could not retrieve the miner in time, but we completed the full course as is seen in the video below. To give you a reference though, the first place could not retrieve the miner due to a mix up with their arm design, but they also completed the course. The second-place team were able to pick up the miner but could not fully make it to the initial point. All in all a wonderful accomplishment to be recognized for our hard work.
+          br
+          br
+          i [ + image ...]
+          br
+          br
+          i [ + video - **VIDEO** (Phase C good run-spedUp4.mp4) .]
 
   //- Next page layer
   +link({

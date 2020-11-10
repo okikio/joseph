@@ -6,15 +6,15 @@ block pageInfo
       websiteURL,
       url: "/projects/boxer",
       name: "boxer",
-      title: "Boxer — A project about robots.",
-      description: "I worked with ... Lorem Ipsium dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt..."
+      title: "Boxer — An autonomous robotic platform",
+      description: "Boxer is an autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension."
     };
 
 block content
   //- Banner layer
   +banner({
-    title: "Boxer — A project I did with ...",
-    content: "I worked with ... Lorem Ipsium dolor sit amet, tempor...",
+    title: "Project 1: Boxer (2019 – Present)",
+    content: "An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
@@ -33,21 +33,36 @@ block content
         class: "layout-padding-vert-small layout-clearfix"
       })
         +p
-          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left A
-          span.layout-inline.layout-margin-dull s a mechatronics engineer I am adept at electrical, mechanical, and robotics, this allows me to take on a variety of projects, some more electrical, some robotic. I am often wonderstruck by mechatronics, and I like to create things that will leave others as wonderstruck as me when I see an amazing project.
-          span.layout-inline.layout-margin-dull(lorem="1")
-          p.layout-inline.layout-margin-dull(lorem="3")
-          span.layout-inline.layout-margin-dull  Some more electrical, lorem ipsum dolor,
-          span.layout-inline.layout-margin-dull= " "
-          +link({
-            href: "/",
-            class: "layout-margin-horz-left-mini",
-            content: "wanna go back home?"
-          })
+          span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left B
+          span.layout-inline.layout-margin-dull
+            | oxer is an autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension. The project initially started as a platform to move material from one building to another, but has since been repurposed as a test platform for all research performed at
+            +link({
+              href: "https://www.xianke-lin.com/",
+              content: "a lab"
+            })(target="_blank" rel="noopener" title="A link to the lab where I conducted research on this project.")
+            span at Ontario Tech University.
+            br
+            br
+            | At only 46” x 30”, the platform can be both an indoor and outdoor vehicle. It boasts a sensor suite that will enable autonomy in the near future. These include, 4 cameras, one lidar, 8 ultrasonics and an inertial measurement unit (IMU).
+            br
+            br
+            i [+ Image of the sensor suite]
+            br
+            br
+            | With its 4 independent wheels, it can comfortably hold as much as an average human being (75kg).  Four independent wheels also allow for 3 different drive configurations, front wheel, rear wheel and all-wheel drive.
+            br
+            br
+            i [+ Image of its drive unit (wheels assembly)]
+            br
+            br
+            | Due to space restrictions, hub motors were used and in doing so, a Five-link suspension design was implemented on both the front and rear wheels to ensure proper handling.
+            br
+            br
+            | This work is still a work in progress, but I will periodically update it.
 
   //- Next page layer
   +link({
-    href: "/projects/battery-tester",
+    href: "/projects/battery-manager",
     class: "layout-block"
   }, true)
     +layer({
@@ -63,13 +78,13 @@ block content
         +main({
           class: "layout-padding-vert-sub-large--device-gt-tablet"
         })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Battery Tester
+          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Battery Manager
 
         +tile({
           class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
           image: {
             class: "effect-parallax",
-            src: "cloudinary/joseph-projects/battery_tester/BatteryTester_Diag",
+            src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
             alt: "An image of the battery testing workstation box.",
           }
         })

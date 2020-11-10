@@ -19,38 +19,57 @@ block content
     +layout({
       class: "layout-contain "
     })
-      section(class="layout-shorten layout-max-height-limited  layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center layout-padding-top-huge--device-lt-tablet")
-        +tile({
-          class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layout-left layer-shadow--1",
-          image: {
-            src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
-            alt: "An image of Joseph Ojo laughing with friends on a boat.",
-          }
-        })
-        section.layout-contain-large.style-left
-          +head({
-            class: "layout-margin-bottom"
-          })
-            h1.h3.h3.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull Contact
+      section(class="layout-shorten layout-padding-top-extra-large")
+        section.layout-contain-large.style-left(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center")
+          div
+            +head({
+              class: "layout-margin-bottom"
+            })
+              h1.h3.h3.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull Contact
 
-          +main
-            spam You can find me at:
-            +link({
-              href: "https://www.linkedin.com/in/o-josephojo/",
-              content: "LinkedIn"
-            })(target="_blank" rel="noopener")
-            span= " - "
-            +link({
-              href: "https://github.com/josephojo",
-              content: "Github"
-            })(target="_blank" rel="noopener")
-            span= " - "
-            spam(itemprop="email")
-              +link({
-                href: "mailto:laoluojo@gmail.com",
-                content: "Email"
-              })(target="_blank" rel="noopener")
+            +main
+              div(class="layout-padding-top-small--device-lt-tablet layout-padding-right-small--device-gt-tablet")
+                spam You can find me at:
+                +link({
+                  href: "https://www.linkedin.com/in/o-josephojo/",
+                  content: "LinkedIn"
+                })(target="_blank" rel="noopener")
+                span= " - "
+                +link({
+                  href: "https://github.com/josephojo",
+                  content: "Github"
+                })(target="_blank" rel="noopener")
+                span= " - "
+                spam(itemprop="email")
+                  +link({
+                    href: "mailto:laoluojo@gmail.com",
+                    content: "Email"
+                  })(target="_blank" rel="noopener")
+                br
+                div.layout-margin-bottom
+                | Drop me a message, fill out a contact form and I'll respond back as soon as possible:
+                br
+                +link({
+                    class: "layout-margin-bottom-small style-center action-btn action-btn-expand-scale action-btn-smooth layer-secondary-btn",
+                    href: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u"
+                }, true)(title="View my CV." target="_blank"  rel="noopener")
+                  span.layout-padding-nano
+                  section.action-btn-layout
+                    span.action-btn-group.layout-padding-smaller
+                      i.action-icon.style-font-size-24(inline) launch
+                      span.action-btn-section
+                        span.action-btn-spacer
+                        span.action-btn-spacer
+                        span.action-btn-content Contact form
+                        span.action-btn-spacer
 
+              +tile({
+                class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layer-shadow--1",
+                image: {
+                  src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
+                  alt: "An image of Joseph Ojo laughing with friends on a boat.",
+                }
+              })
   //- Contact Form layer
   //- +layer({
   //-   class: "layer-contrast layout-padding-horz-default--device-gt-tablet"
@@ -129,7 +148,7 @@ block content
                 })(target="_blank" rel="noopener")
 
 block footer
+  //- class: "",
   +footer({
-    class: "footer-stuck layout-margin-vert-top",
     noSocials: false
   })

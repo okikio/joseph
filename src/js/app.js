@@ -435,7 +435,7 @@ on(document, "ready", () => {
                 requestAnimationFrame(() => {
                     removeClass(_navLink, "navbar-link-focus");
                     each(_navLink, _link => {
-                        href == _link.href && addClass(_link, "navbar-link-focus");
+                        href.includes(_link.innerText.toLowerCase()) && addClass(_link, "navbar-link-focus");
                     });
                 });
             });

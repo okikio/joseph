@@ -9,11 +9,11 @@ mixin themeSwitcher()
         i.action-icon.style-font-family-bold.style-font-size-24(inline) theme switcher
 
 mixin navbar(value = {})
-  - let { name } = value;
+  - let { url } = value;
   - let _class = value.class;
 
   - let tabs = ["about", self.dev ? "projects" : null, "contact"]; //
-  - let focusIndex = tabs.indexOf(name.toLowerCase());
+  //- - let focusIndex = url.toLowerCase().includes(tabs);
 
   header.header
     nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement")
@@ -45,7 +45,7 @@ mixin navbar(value = {})
                   li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
                     +link({
                       href: `/${tab}`,
-                      class: `navbar-link${i == focusIndex ? " navbar-link-focus" : ""}`
+                      class: `navbar-link${url.toLowerCase().includes(tab) ? " navbar-link-focus" : ""}`
                     })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
                       span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                       meta(itemprop="position" content="1")
