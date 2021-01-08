@@ -246,6 +246,7 @@ $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
 }
 
 img {
+    object-position: center center;
     object-fit: cover;
     min-height: 200px;
     display: block;
