@@ -7,13 +7,12 @@ import rename from "gulp-rename";
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
-const dotenv = "dev" in process.env
+const dotenv = "siteUrl" in process.env
     ? process.env
     : require("dotenv");
 if (typeof dotenv.config === "function") dotenv.config();
 
 const env = process.env;
-const dev = "dev" in env ? env.dev == "true" : false;
 const siteUrl = "siteUrl" in env ? env.siteUrl : "https://josephojo.com";
 
 // Origin folders (source and destination folders)
@@ -157,7 +156,7 @@ tasks({
             dest: jsFolder, // Output
         });
     },
-    js: parallelFn(`modern-js`, dev ? null : `legacy-js`, `other-js`),
+    js: parallelFn(`modern-js`, `legacy-js`, `other-js`),
 });
 
 // Task for Optimizing for Production
@@ -329,7 +328,7 @@ task("watch", async () => {
     watch(`${scssFolder}/**/*.scss`, series(`css`));
     watch(
         [`${tsFolder}/**/*.js`, `!${tsFolder}/*.js`, `${tsFolder}/${tsFile}`],
-        series(parallelFn(`modern-js`, dev ? null : `legacy-js`), `reload`)
+        series(parallelFn(`modern-js`, `legacy-js`), `reload`)
     );
     watch(
         [`!${tsFolder}/${tsFile}`, `${tsFolder}/*.js`],
