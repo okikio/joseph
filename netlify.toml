@@ -1,4 +1,0 @@
-[context.branch-deploy.environment]
-  debug = "true"
-  dev = "true"
-  netlify = "true"

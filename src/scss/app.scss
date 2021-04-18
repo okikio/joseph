@@ -52,14 +52,9 @@ $background: #eaeef1; // #e2ebf5
 $surface: #fff; //  #3b3c3e
 
 $white: #fff;
-$black: #000; // #bbb8b8
-// navbar-link:hover = #e6e6e6
+$black: #000;
 
 $very-light: #efefef;
-// navbar-head/navbar-main border-color = #3b3c3e
-// navbar-list = #292d33
-// navbar-menu background-color = #2b2a2a
-
 $invert-white: #fff;
 $light: #eee; // #525252
 $mid-light: #ddd;
@@ -177,13 +172,11 @@ $dark-colors: (
 $fonts: (
     "title": $title-font,
     "light": $light-font,
-    // "icon": $icon-font,
     "regular": $regular-font,
     "bold": $bold-font
 );
 
 $sizes: (
-    "dull": 0 !important,
     "humungus-xl": $size-humungus-xl,
     "humungus": $size-humungus,
     "gigantic-xl": $size-gigantic,
@@ -207,7 +200,8 @@ $sizes: (
     "desktop": #{$desktop}px,
     "laptop": #{$laptop}px,
     "tablet": #{$tablet}px,
-    "phone": #{$phone}px
+    "phone": #{$phone}px,
+    "dull": 0,
 );
 
 @mixin deviceList($property, $val: 0px) {
@@ -301,7 +295,7 @@ html[theme=dark] {
     @include propertyList($property, $name, $colors, true, "focus");
 }
 
-// @import "./components/fonts.scss";
+@import "./components/fonts.scss";
 @import "./components/base.scss";
 @import "./components/navbar.scss";
 @import "./components/style.scss";

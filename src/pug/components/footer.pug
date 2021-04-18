@@ -1,0 +1,56 @@
+mixin footer(value = {})
+  - let _class = value.class;
+  - let noSocials = value.noSocials || false;
+  footer.footer(data-container)
+    .layout-contain-large.layout-padding.style-font-weight-bold.style-font-bold.style-spaceout-small.transition-fade.footer-layout(class=_class)
+      div
+        span.action-btn.action-btn-pointer-default(title="Copyright")
+          .action-btn-group
+            span.action-btn-spacer
+            +icon("copyright").action-icon
+            span.action-btn-section
+              span.action-btn-spacer
+              span 2020
+              span  Joseph Ojo
+              span.action-btn-spacer
+      div
+        //- if !debug
+        span(itemscope itemtype="https://schema.org/SiteNavigationElement")
+          +link({
+            href: "/sitemap",
+            class: "layout-margin-left-mini",
+          })(itemprop="url" title="The Joseph Ojo sitemap.")
+            span(itemprop="name") Sitemap
+        if !noSocials
+          span= " - "
+        if !noSocials
+          +link({
+            href: "https://www.linkedin.com/in/o-josephojo/",
+            class: "layout-margin-left-mini",
+            content: "LinkedIn"
+          })(target="_blank" rel="noopener" title="My LinkedIn page.")
+          span= " - "
+          +link({
+            href: "https://github.com/josephojo",
+            class: "layout-margin-left-mini",
+            content: "Github"
+          })(target="_blank" rel="noopener" title="The official Joseph Ojo github link.")
+          span= " - "
+          span(itemprop="publisher" itemscope itemtype="https://schema.org/Organization" itemid="https://josephojo.com")
+            +link({
+              href: "mailto:laoluojo@gmail.com",
+              class: "layout-margin-left-mini",
+              content: "Email"
+            })(target="_blank" rel="noopener" itemprop="email" title="An email you can contact me with.")
+      div
+        span
+          span Made with
+          span.action-btn-spacer
+          span.style-secondary ❤
+          span.action-btn-spacer
+          span by
+          span(itemprop="author")
+            +link({
+              href: "https://github.com/okikio",
+              content: "Okiki Ojo"
+            })(target="_blank" rel="noopener" title="The github link to the Web Developer who designed this site, Okiki Ojo.")

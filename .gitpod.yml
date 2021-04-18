@@ -11,7 +11,7 @@ ports:
 # List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/44_config_start_tasks/
 tasks:
   - command: >
-      nvm install v14 && nvm alias default v14 && nvm use default &&
+      nvm install v15 && nvm alias default v15 && nvm use default &&
       npm install -g pnpm gulp ultra-runner &&
       echo -e "dev=true" > .env &&
       pnpm install &&

@@ -1,0 +1,72 @@
+mixin seo(page)
+  - let { title, url, description, websiteURL } = page;
+  meta(name="og:locale" content="en_Us")
+  meta(property="og:type" content="website")
+
+  meta(itemprop="image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+  block title
+    title= title
+    
+  meta(name='title' content=title)
+  meta(itemprop='name' content=title)
+  meta(property='og:title' content=title)
+  meta(name='twitter:title' content=title)
+  meta(name="apple-mobile-web-app-title", content="Joseph Ojo")
+
+  link(rel="home", href=`/`)
+  link(rel="relative-url", href=`${url}`)
+  link(rel="canonical" href=`${websiteURL}${url}`)
+  meta(itemprop='url' content=`${websiteURL}${url}`)
+  meta(name="shortlink" content=`${websiteURL}${url}`)
+  meta(property='og:url' content=`${websiteURL}${url}`)
+  meta(name='twitter:url' content=`${websiteURL}${url}`)
+
+  meta(name='description' content=description)
+  meta(property='og:description' content=description)
+  meta(property='twitter:description' content=description)
+  meta(itemprop='description' content=description)
+
+  <!--[if IE]>
+  link(rel="shortcut icon", href="/favicon/favicon.ico", type="image/x-icon")
+  <![endif]-->
+
+  meta(name="web-author" content="Okiki Ojo")
+  meta(name="robots" content="index, follow")
+  meta(name="copyright" content="Joseph Ojo")
+  meta(name="contact" content="laoluojo@gmail.com")
+
+  link(rel="icon", type="image/svg+xml" href="/favicon/favicon.svg")
+  link(rel="apple-touch-icon", sizes="180x180", href="/favicon/apple-touch-icon.png")
+  link(rel="icon", type="image/png", sizes="32x32", href="/favicon/favicon-32x32.png")
+  link(rel="icon", type="image/png", sizes="16x16", href="/favicon/favicon-16x16.png")
+  link(rel="mask-icon", href="/favicon/safari-pinned-tab.svg", color="#2d22ca")
+  meta(name="theme-color", content="#2d22ca")
+
+  meta(name="application-name", content="Joseph Ojo")
+  meta(name="msapplication-tap-highlight" content="no")
+  meta(name="msapplication-TileColor", content="#2d22ca")
+  meta(name="apple-mobile-web-app-capable", content="yes")
+  meta(name="msapplication-TileImage", content="/favicon/mstile-144x144.png")
+
+  meta(name="og:locale" content="en_Us")
+  meta(property="og:type" content="website")
+  meta(property="article:author" content="Joseph Ojo")
+  meta(property="og:site_name" content=websiteURL.replace("https://", ""))
+
+  meta(property="og:image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+  meta(property="og:image:secure_url" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+  meta(property="og:image:type" content="image/png")
+  meta(property="og:image:width" content="512")
+  meta(property="og:image:height" content="512")
+  meta(property="og:image:alt" content="Joseph Ojo's Logo")
+
+  meta(name="twitter:card", content="summary")
+  //- meta(name="twitter:site", content="@jo-ojo")
+  meta(name="twitter:image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+  meta(property="twitter:image:alt" content="Joseph Ojo's Logo")
+
+  link(rel="home", href=websiteURL)
+  meta(name="mobile-web-app-capable" content="yes")
+
+  meta(name="msapplication-config", content="/browserconfig.xml")
+  meta(name="apple-mobile-web-app-status-bar-style", content="#2d22ca")

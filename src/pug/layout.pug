@@ -1,0 +1,202 @@
+include /components/sections.pug
+include /components/layout.pug
+include /components/banner.pug
+include /components/column.pug
+include /components/navbar.pug
+include /components/footer.pug
+include /components/image.pug
+include /components/layer.pug
+include /components/text.pug
+include /components/tile.pug
+include /components/hero.pug
+include /components/link.pug
+include /components/icon.pug
+include /components/seo.pug
+include /components/row.pug
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    meta(name="color-scheme" content="dark light")
+
+    link(rel="stylesheet" href="/css/app.min.css" async)
+
+    link(rel="manifest", href="/manifest.json")
+    link(type="text/plain" rel="author" href="/humans.txt")
+
+    script(src="/js/theme.min.js", async)
+    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,es2018,Object.entries,fetch,IntersectionObserver,IntersectionObserverEntry,smoothscroll,matchMedia,localStorage,getComputedStyle,Element.prototype.scrollIntoView,WebAnimations` defer)
+    
+    -
+      let defaults = {
+        url: "/",
+        websiteURL: "https://josephojo.com",
+        title: "Joseph Ojo — Mechatronics Engineer / Portfolio",
+        description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. This is my portfolio site, it holds my resume and ways to contact me."
+      };
+    block pageInfo
+      - let page = {};
+
+    -
+      page = Object.assign({}, defaults, page);
+
+    block seo
+      +seo(page)
+
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+
+    block seo
+      +seo(page)
+
+    block preload
+
+    script(src="/js/legacy.min.js", nomodule defer)
+    script(src="/js/modern.min.js", type="module" defer)
+    
+  body(itemscope="" itemtype="https://schema.org/WebPage")
+    +link({
+      class: "skip-main",
+      href: "#content",
+      content: "Skip to main content"
+    })
+
+    block navbar
+      +navbar(page)
+
+    main.main.transition-in-view(data-container tabindex="-1")
+      block hero
+      section(id="content" itemtype="http://schema.org/WebPageElement" itemscope itemprop="mainEntity")
+        block content
+
+    .layer-action-center.layer-action-center-hide
+      article.layer-action-group
+        .layer-round.layout-align-self-end.layout-margin-horz-small
+          button.back-to-top.action-btn.action-btn-hover.layer-round.layer-primary.layer-primary-light-hover.layer-primary-light-focus.style-white.style-hover-white.style-focus-white(type="button")
+            section.action-btn-layout.layout-padding-smallest
+              span.action-btn-group
+                span.action-btn-section
+                  span.action-btn-spacer
+                  span.action-btn-spacer
+                  span.action-btn-content Back To Top
+                +icon("expand_less").action-icon.style-font-size-24
+
+    block footer
+      +footer
+    
+    script(type="application/ld+json").
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "#{defaults.websiteURL}/#organization",
+            "name": "Joseph Ojo",
+            "url": "#{defaults.websiteURL}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/josephojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo",
+              "https://ca.alumnius.net/university_of_ontario_institute_of_technology-33082-10#id436734411"
+            ],
+            "description": "#{defaults.description}",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "#{defaults.websiteURL}/#logo",
+              "url": "#{defaults.websiteURL}/favicon/android-chrome-512x512.png",
+              "width": 512,
+              "height": 512,
+              "caption": "Joseph Ojo's Logo"
+            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "url": "#{defaults.websiteURL}",
+                "email": "mailto:laoluojo@gmail.com",
+                "contactType": "customer service"
+              }
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "#{defaults.websiteURL}/about.html#person",
+            "name": "Joseph Ojo",
+            "url": "#{defaults.websiteURL}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/josephojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo",
+              "https://ca.alumnius.net/university_of_ontario_institute_of_technology-33082-10#id436734411"
+            ],
+            "description": "#{defaults.description}",
+            "jobTitle": "Mechatronics Engineer",
+            "image": {
+              "@type": "ImageObject",
+              "@id": "#{defaults.websiteURL}/#image",
+              "url": "https://res.cloudinary.com/okikio-assets/image/upload/josephs_image.jpg",
+              "width": 410,
+              "height": 512,
+              "caption": "An image of Joseph Ojo."
+            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "url": "#{defaults.websiteURL}",
+                "email": "mailto:laoluojo@gmail.com",
+                "contactType": "customer service"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "#{defaults.websiteURL}/#website",
+            "url": "#{defaults.websiteURL}",
+            "description": "#{defaults.description}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/josephojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo"
+            ],
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "#{defaults.websiteURL}/projects.html#mainentity",
+              "lastReviewed": "Thu Mar 26 2020 15:35:01 GMT-0400"
+            },
+            "about": {
+              "@id": "#{defaults.websiteURL}/about.html#person"
+            },
+            "name": "Joseph Ojo",
+            "publisher": {
+              "@id": "#{defaults.websiteURL}/about.html#person"
+            },
+            "copyrightYear": "2020",
+            "copyrightHolder": [
+              {
+                "@id": "#{defaults.websiteURL}/about.html#person"
+              }
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "#{page.websiteURL + page.url}#webpage",
+            "url": "#{page.websiteURL + page.url}",
+            "description": "#{page.description}",
+            "inLanguage": "en",
+            "name": "#{page.title}",
+            "isPartOf": {
+              "@id": "#{defaults.websiteURL}/#website"
+            },
+            "about": {
+              "@id": "#{defaults.websiteURL}/about.html#person"
+            }
+          }
+        ]
+      }
+      

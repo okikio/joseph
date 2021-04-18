@@ -113,17 +113,16 @@ template {
     display: none;
 }
 
-html {
-    transition: scrollbar-color #{$transitionDuration} ease;
-    scrollbar-color: $primary-light lighten($mid-dark, 5%);
-    scrollbar-color: var(--mid-dark, $primary-light)
-        var(--light, lighten($mid-dark, 5%));
-    scrollbar-width: thin;
-}
+// html {
+//     transition: scrollbar-color #{$transitionDuration} ease;
+//     scrollbar-color: $primary-light lighten($mid-dark, 5%);
+//     scrollbar-color: var(--mid-dark, $primary-light)
+//         var(--light, lighten($mid-dark, 5%));
+//     scrollbar-width: thin;
+// }
 body {
     transition: background-color #{$transitionDuration} ease,
-        color #{$transitionDuration} ease,
-        scrollbar-color #{$transitionDuration} ease;
+        color #{$transitionDuration} ease;
     @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
 
@@ -144,22 +143,22 @@ body {
         // -webkit-touch-callout: none;
     }
 
-    &::-webkit-scrollbar {
-        display: block;
-        width: 6px;
-    }
+    // &::-webkit-scrollbar {
+    //     display: block;
+    //     width: 6px;
+    // }
 
-    &::-webkit-scrollbar-track-piece {
-        transition: background-color #{$transitionDuration} ease;
-        background-color: $mid-dark;
-        background-color: var(--light, lighten($mid-dark, 5%));
-    }
+    // &::-webkit-scrollbar-track-piece {
+    //     transition: background-color #{$transitionDuration} ease;
+    //     background-color: $mid-dark;
+    //     background-color: var(--light, lighten($mid-dark, 5%));
+    // }
 
-    &::-webkit-scrollbar-thumb {
-        transition: background-color #{$transitionDuration} ease;
-        background-color: $primary-light;
-        background-color: var(--mid-dark, $primary-light);
-    }
+    // &::-webkit-scrollbar-thumb {
+    //     transition: background-color #{$transitionDuration} ease;
+    //     background-color: $primary-light;
+    //     background-color: var(--mid-dark, $primary-light);
+    // }
 
     // &::-webkit-scrollbar-track-piece,
     // &::-webkit-scrollbar-thumb {

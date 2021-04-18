@@ -1,0 +1,12 @@
+/* DEVELOPMENT */
+  Okiki Ojo: Development, Concept, Research, Art Direction, SEO
+  Contact: hey@okikio.dev
+  Site: https://okikio.dev
+  Twitter: @okikio_dev
+  From: Oshawa, Canada
+
+/* SITE */
+  Last update: 2021/04/17
+  Language: English
+  Technologies: Gulp, Babel, SWUP, Pjax, Postcss, Posthtml, Pug, SCSS, Cloudinary, JS, Rollup
+  IDE: VS Code

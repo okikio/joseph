@@ -1,0 +1,118 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      
+      url: "/projects/sarbot",
+      name: "sarbot",
+      title: "SarBot — A Search and Rescue Robot",
+      description: "A test of the abilities of some colleagues and I; to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. "
+    };
+
+block content
+  //- Banner layer
+  +banner({
+    title: "Project 3: SarBot (2018)",
+    content: "A test of the abilities of some colleagues and I; to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner.",
+    image: {
+      class: "effect-parallax hero-img",
+      src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+      alt: "An image of a 3D model of Sarbot.",
+    }
+  })
+
+  //- Intro layer
+  +layer({
+    class: "layout-padding-horz-default--device-gt-tablet"
+  })
+    +layout({
+      class: "layout-contain-large"
+    })
+      +main({
+        class: "layout-padding-vert-small layout-clearfix"
+      })
+        div.layout-contain.layout-shorten
+          +p
+            span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left T
+            span.layout-inline.layout-margin-dull he SarBot or Search and rescue robot was a major group project in the last year of my undergraduate studies. The project was meant to test our ability to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. This project was meant to emulate an actual rescue mission in the scenario that miners are trapped on a sub-level in a mine. The reason why a robot is used here is due to the risk to human rescuers.
+            br
+            br
+            i [ + image ...]
+        .layout-margin-horz
+          +tile({
+            class: "layer-surface layer-box layout-block",
+            image: {
+              src: "cloudinary/joseph-projects/sarbot/2-Floor_Maze",
+              alt: "An image of the floor Maze Sarbot had to cross"
+            }
+          })
+        div.layout-contain.layout-shorten
+          +p
+            | Due to the smaller scale of the project, the team decided to design small for easy maneuverability. Our design consisted of a unibody chassis 3D printed in 2 parts. The top part housed 3 infrared (IR)sensors, the microcontroller (Teensy 3.6), a couple of voltage converter modules and the motor controller. On the bottom level, the wheels, batteries, geared DC motor, servo motors and one more IR sensor. The final assembly is shown below.
+            br
+            br
+            | Our approach, although not ideal for the use case, was similar to that of some self-driving vehicle companies. We first manually mapped out the maze with waypoints. These waypoints were placed near key landmarks. These landmarks include T-junctions, cross-sections, narrower paths, steep grades, terrain changes, miner location and so on. A matrix of data was then created for each waypoint to help the robot decide what actions to take at each waypoint. Each waypoint consisted of a base command to go forward, backward, left or right, a base command controller i.e. what controller to use to complete the base command, stopping conditions for the command, manipulator commands and others. For example, a waypoint next to a turn had data such a turn right command, how many degrees the turn is, the speed required to make the turn, and what controller to use to make the turn i.e. a PID controller for robot angle.
+            br
+            br
+            i [ + image ...]
+        .layout-margin-horz
+          +tile({
+            class: "layer-surface layer-box layout-block",
+            image: {
+              src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+              alt: "A model of Sarbot."
+            }
+          })
+        div.layout-contain.layout-shorten
+          +p
+            i [ + image ...]
+        .layout-margin-horz
+          +tile({
+            class: "layer-surface layer-box layout-block",
+            image: {
+              src: "cloudinary/joseph-projects/sarbot/3D_Printing",
+              alt: "The 3D printing of the parts for Sarbot"
+            }
+          })
+        div.layout-contain.layout-shorten
+          +p
+            | Our method to secure and return the miner, in our case, a toy was a quick and quirky solution called the Swatter. The innovative design made from the most reliable materials, a metal clothes hanger and some duct tape, yep, duct tape! I think the saying goes something like this, “if you can’t fix it with duct tape, you’re not using enough duct tape” haha. All jokes aside though, it seemed to work reliably, so we left it as is, not bothering with a complex robotic arm design.
+            br
+            br
+            | At the end of it, we were awarded third place because our robot could not retrieve the miner in time, but we completed the full course as is seen in the video below. To give you a reference though, the first place could not retrieve the miner due to a mix up with their arm design, but they also completed the course. The second-place team were able to pick up the miner but could not fully make it to the initial point. All in all a wonderful accomplishment to be recognized for our hard work.
+            br
+            br
+            i [ + image ...]
+            br
+            br
+            i [ + video - **VIDEO** (Phase C good run-spedUp4.mp4) .]
+
+  //- Next page layer
+  +link({
+    href: "/projects/ultima-apparel",
+    class: "layout-block"
+  }, true)
+    +layer({
+      class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+    })
+      +head({
+        class: "layout-padding-top-default"
+      })
+        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
+      +layout({
+        class: "layout-contain layout-padding-horz--device-gt-tablet"
+      })
+        +main({
+          class: "layout-padding-vert-sub-large--device-gt-tablet"
+        })
+          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Ultima Apparel
+
+        +tile({
+          class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+          image: {
+            class: "effect-parallax",
+            src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+            alt: "An image of Ultima Apparels first proof of concept.",
+          }
+        })
