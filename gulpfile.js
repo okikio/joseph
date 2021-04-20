@@ -305,11 +305,6 @@ task("watch", async () => {
             scrollThrottle: 250,
         },
         (_err, bs) => {
-            bs.addMiddleware("/projects", (_req, res) => {
-                res.writeHead(200, {
-                    location: `/projects.html`,
-                });
-            });
             bs.addMiddleware("*", (_req, res) => {
                 res.writeHead(302, {
                     location: `/404`,

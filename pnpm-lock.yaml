@@ -554,7 +554,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.16.4
-      caniuse-lite: 1.0.30001211
+      caniuse-lite: 1.0.30001214
       colorette: 1.2.2
       fraction.js: 4.0.13
       normalize-range: 0.1.2
@@ -784,7 +784,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001211
+      caniuse-lite: 1.0.30001214
       colorette: 1.2.2
       electron-to-chromium: 1.3.717
       escalade: 3.1.1
@@ -882,8 +882,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001211:
-    resolution: {integrity: sha512-v3GXWKofIkN3PkSidLI5d1oqeKNsam9nQkqieoMhP87nxOY0RPDC8X2+jcv8pjV4dRozPLSoMqNii9sDViOlIg==}
+  /caniuse-lite/1.0.30001214:
+    resolution: {integrity: sha512-O2/SCpuaU3eASWVaesQirZv1MSjUNOvmugaD8zNSJqw6Vv5SGwoOpA9LJs3pNPfM745nxqPvfZY3MQKY4AKHYg==}
     dev: true
 
   /caseless/0.12.0:
