@@ -4,7 +4,7 @@
     "description": "The porfolio of Joseph ojo, it contains all his amazing projects etc...",
     "type": "module",
     "scripts": {
-        "test": "gulp",
+        "test": "gulp build",
         "workspace": "echo -e 'dev=true' > .env && pnpm update",
         "watch": "gulp --watch",
         "build": "gulp build"

@@ -17,29 +17,47 @@ try {
     window.WebpSupport = false;
 }
 
-if (!window.WebpSupport) {
-    // Long Test for webp support
-    (() => {
-        // If the browser doesn't has the method createImageBitmap, you can't display webp format
-        if (!window.createImageBitmap) {
-            window.WebpSupport = false;
-            return;
-        }
+let test_webp = async () => {
+    let check_webp_feature = (feature) => {
+        return new Promise((resolve, reject) => {
+            let kTestImages = {
+                lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+                lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
+                alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
+                animation: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
+            };
 
-        // Base64 representation of a white point image
-        let webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+            let img = new window.Image();
 
-        // Retrieve the Image in Blob Format
-        fetch(webpdata)
-            .then(response => response.blob())
-            .then(blob => {
-                // If the createImageBitmap method succeeds, return true, otherwise false
-                createImageBitmap(blob)
-                    .then(() => { window.WebpSupport = true; })
-                    .catch(() => { window.WebpSupport = false; });
-            });
-    })();
-}
+            // @ts-ignore
+            img.src = "data:image/webp;base64," + kTestImages[feature];
+            // @ts-ignore
+            img.onload = () => {
+                // @ts-ignore
+                let result = (img.width > 0) && (img.height > 0);
+                img = resolve(result);
+            };
+
+            // @ts-ignore
+            img.onerror = () => {
+                img = reject(false);
+            };
+        });
+    };
+
+    // Quick test for webp support
+    try {
+        let result = await check_webp_feature("lossless");
+        window.WebpSupport = result;
+    } catch (e) {
+        window.WebpSupport = false;
+
+        // Safari still doesn't support WebP
+        console.info(
+            "Using JPG instead, of WEBP as this browser doesn't support WEBP."
+        );
+    }
+};
 
 const _layer = '.layer';
 const _navbar = '.navbar';
@@ -268,10 +286,21 @@ let init = () => {
     });
 };
 
-// Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
-init();
-resize();
-scroll();
+if (!window.WebpSupport) {
+    (async () => {
+        window.WebpSupport = await test_webp();
+
+        // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
+        init();
+        resize();
+        scroll();
+    })();
+} else {
+    // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
+    init();
+    resize();
+    scroll();
+}
 
 // Preload plugin dependencies
 import delegate from 'delegate';

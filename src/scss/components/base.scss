@@ -120,11 +120,15 @@ template {
 //         var(--light, lighten($mid-dark, 5%));
 //     scrollbar-width: thin;
 // }
+
+html, body {
+    
+    @include applyTheme(background-color, "background");
+    @include applyTheme(color, "dark");
+}
 body {
     transition: background-color #{$transitionDuration} ease,
         color #{$transitionDuration} ease;
-    @include applyTheme(background-color, "background");
-    @include applyTheme(color, "dark");
 
     text-rendering: optimizeSpeed;
     font-family: $regular-font;

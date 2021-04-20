@@ -246,6 +246,14 @@ html[theme=dark] {
     // }
 }
 
+// html:not([theme]) {
+//     @media (prefers-color-scheme: dark) {
+//     @each $name, $value in $dark-colors {
+//         --#{$name}: #{$value};
+//     }
+// }
+// }
+
 // html[theme=light] {
 //     // @media (prefers-color-scheme: light) {
 //         @each $name, $value in $colors {
