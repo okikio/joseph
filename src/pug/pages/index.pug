@@ -21,17 +21,10 @@ block content
     +layout({
       class: "layout-shorten layout-contain"
     })
-      //- +head("About me.")
       +main
         section.layout-padding-top.layout-padding-bottom-large.layout-clearfix
           h3.h5.style-font-30--device-phone.style-primary-dark.style-bold Hi, I’m Joseph. Nice to meet you.
-          //- p(lorem="2" class="layout-margin-dull")
           +p("For about a decade now, I have actively sought to leave the state of things better than I found it. I am a Mechatronics engineer at heart and on paper. I integrate hardware and software into harmonious matrimony to solve societal pain points. <br><br> I am always on my feet looking for the next opportunity. Through continuous improvement, confidence and determination, I seek to achieve my goals. Afterall, the game isn’t changed until the game is played.")
-          //- +link({
-          //-   href: "/about",
-          //-   class: "layout-margin-vert-dull layout-margin-left-mini",
-          //-   content: "learn more about me."
-          //- })
 
   div.layout-margin-horz-small.layer-capsule
     //- Skills Column layer
@@ -45,10 +38,7 @@ block content
             class: "layout-shorten-vert style-invert-white"
         })
           div.layout-shorten-horz
-            h3.style-font-30.style-bold.layout-margin-vert-botttom-dull Tools of the trade
-            //- a
-          //- div.layer-center-line
-          //- 1st Row
+            h3.h5.style-font-30--device-phone.style-bold.layout-margin-vert-botttom-dull Tools of the trade
           +row({
             class: "layout-margin-dull layout-padding-horz-small"
           })
@@ -74,82 +64,6 @@ block content
                     li= arr[i]
                   - }
 
-
-  //- Static Banner layer
-  //- +layer({
-  //-   class: "layer-color-primary"
-  //- })
-    +layout({
-      class: "layout-contain-large layout"
-    })
-      +head({
-          class: "style-center"
-      })
-        h3.h3.layout-padding-vert.style-bold-font.style-600.style-color-white.style-font-40--device-lt-tablet.style-font-size-larger--device-gt-phone My projects
-          span.style-color-tertiary-dark .
-
-  //- Breakthrough layer
-  //- +layer
-    +layout({
-      class: "layout-contain-large layout-padding-vert-large layout-padding-horz-large--device-gt-tablet layout-padding-horz-default--device-lt-tablet"
-    })
-      +main({
-          class: "layout-padding-vert"
-      })
-        +row
-          //- 1st Column
-          +column({
-            class: "layout-col-6 layout-padding-bottom-small layout-padding-right-large--device-gt-tablet"
-          })
-            +p({
-              content: "Breakthrough<br>Limits!",
-              class: "style-color-primary-dark style-bold-font style-600 style-font-30 style-line-height"
-            })
-
-          //- 2nd Column
-          +column({
-            class: "layout-col-6"
-          })
-            p.layout-block.layout-margin-dull(lorem="1")
-
-
-        div.layer-center-line
-
-        +row({
-          class: "layout-margin"
-        })
-          //- 1st Column
-          +column({
-            class: "layout-col-2 layout-padding-horz-dull layout-padding-bottom-small"
-          })
-            +p({
-              content: "03/03",
-              class: "style-font-17--device-lt-tablet style-font-20 style-bold"
-            })
-
-          //- 2nd Column
-          +column({
-            class: "layout-col-3 layout-padding-horz-dull layout-padding-bottom"
-          })
-            +p({
-              content: "2018",
-              class: "layout-block style-font-16--device-lt-tablet style-font-18--device-gt-tablet style-600  layout-padding-bottom-smaller"
-            })
-            +p({
-              content: "E-commerse",
-              class: "layout-block style-font-15--device-lt-tablet style-font-17--device-gt-tablet"
-            })
-            +p({
-              content: "Design Executive",
-              class: "layout-block style-font-15--device-lt-tablet style-font-17--device-gt-tablet"
-            })
-
-          //- 3rd Column
-          +column({
-            class: "layout-col-7 layout-padding-horz-dull"
-          })
-            p.layout-margin-dull(lorem="1")
-
   //- Image Column layer
   +layer({
     class: "layer-contrast layout-padding-horz-default--device-gt-tablet layer-capsule-push layer-capsule-pull"
@@ -162,10 +76,8 @@ block content
       })
         div.layout-padding-vert-bottom.layout-contain-small.layout-shorten-horz.layout-contain
           h3.style-font-30.style-bold My Recent Work
-          //- p(lorem="2" class="layout-margin-horz-dull")
           div
             +p("Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about. ")
-        //- div.layer-center-line
         //- 1st Row
         +row({
           class: "layout-margin-dull"
@@ -182,7 +94,7 @@ block content
                 title: "Boxer",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  class: "effect-parallax",
+                  class: "",
                   src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
                   alt: "An image of a rendered robot."
                 }
@@ -199,7 +111,7 @@ block content
                 title: "Battery Manager",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  class: "effect-parallax",
+                  class: "",
                   src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
                   alt: "An image of the battery testing workstation box.",
                 }
@@ -216,7 +128,7 @@ block content
                 title: "Search and Rescue Robot (SarBot)",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  class: "effect-parallax",
+                  class: "",
                   src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
                   alt: "An image of a 3D model of Sarbot.",
                 }
@@ -233,7 +145,7 @@ block content
                 title: "Ultima Apparel",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  class: "effect-parallax",
+                  class: "",
                   src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
                   alt: "An image of Ultima Apparels first proof of concept.",
                 }
@@ -250,7 +162,7 @@ block content
                 title: "Phoenix",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  class: "effect-parallax",
+                  class: "",
                   src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
                   alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
                 }
@@ -267,17 +179,11 @@ block content
                 title: "Publications",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
                 image: {
-                  class: "effect-parallax",
+                  class: "",
                   src: "cloudinary/aerial-photo-of-brown-mountains",
                   alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
                 }
               })
-        //- div.layout-block.style-center
-          +link({
-            href: "/projects",
-            class: "style-font-weight-bold style-font-30 style-font-title layout-padding layout-padding-horz-large layout-margin-top-larger",
-            content: "See more projects..."
-          })
 
   //- Quote and Signature layer
   +layer({
@@ -301,22 +207,13 @@ block content
             +head({
               class: "layer-relative layout-padding-left-small--device-gt-tablet"
             })
-              //- h1.h3.h3.style-font-35--device-phone.style-primary-dark.style-bold.layout-margin-dull Contact
-              //- p.style-font-size-large "
               .clearfix
-                //- h1.quote.style-secondary.style-font-size-huge
-                //-   +icon("format_quote").action-icon
                 +p({
                   class: "text-above-quote"
                 })
-                  span.layout-margin-horz-right-dull It has been a pleasure having you here. If I may add a couple of things, working with me is equal to a tripled chance at success. I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let’s get this motorized ball rolling!
-              //- p.style-center.style-italic.layout-padding-vert-top-large Signature
-
-              //- span.layout-margin-horz-left.layout-inline-block= " "
-              //- span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left O
-              //- +p("ne of my life goals is to leave everything I come in contact with better than I found it. This obviously can be difficult, but a couple of the ways I am trying to achieve this is to seize every opportunity and learn from previous mistakes... As a child I was curious, and my parents let my curiousity bloom. In high school I discovered a passion for engineering specifically the engineering of robots (which I later found out to be <strong>Mechatronics</strong>). <br> <br> I am Tenacious & Astute I aim to create only the best, I stop at nothing till the image I have in my mind has been captured in the project. I make sure that in all acts I commit too, I am ready to follow through even if the going gets difficult. I make sure to think things through thoroughly so as to avoid inefficienies. The definition of Astute by the Oxford dictionary is, ​very clever and quick at seeing what to do in a particular situation, especially how to get an advantage. I believe I enbody these traits when working on projects and I would love the oppertunity to show you. <br> <br> I created my portfolio site as a place to display some of the projects I have worked on, and as an easy source to access my resume. For more information")
-              //- +link({
-              //-   href: "/about",
-              //-   class: "layout-margin-vert-dull layout-margin-left-mini",
-              //-   content: "learn more about me."
-              //- })
+                  span.layout-margin-horz-right-dull 
+                    | If you are still reading this, you might just be the chosen one. Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course. 
+                    br
+                    br
+                    | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak! 
+  

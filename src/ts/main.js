@@ -308,7 +308,7 @@ on(window, {
             toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
 
             // If device width is greater than 700px
-            if (!_isMobile && window.isModern) {
+            if (!_isMobile && window.Promise) {
                 let dist, value, maxMove, transform, opacity;
                 _images.forEach(data => {
                     // On scroll turn on parallax effect for images with the class "effect-parallax"

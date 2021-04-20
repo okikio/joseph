@@ -29,25 +29,7 @@ block content
 
             +main
               div(class="layout-padding-top-small--device-lt-tablet layout-padding-right-small--device-gt-tablet")
-                spam You can find me at:
-                +link({
-                  href: "https://www.linkedin.com/in/o-josephojo/",
-                  content: "LinkedIn"
-                })(target="_blank" rel="noopener")
-                span= " - "
-                +link({
-                  href: "https://github.com/josephojo",
-                  content: "Github"
-                })(target="_blank" rel="noopener")
-                span= " - "
-                spam(itemprop="email")
-                  +link({
-                    href: "mailto:laoluojo@gmail.com",
-                    content: "Email"
-                  })(target="_blank" rel="noopener")
-                br
-                div.layout-margin-bottom
-                | Drop me a message, fill out a contact form and I'll respond back as soon as possible:
+                span Drop me a message by filling out this contact form and I'll respond back as soon as possible:
                 br
                 +link({
                     class: "layout-margin-bottom-small style-center action-btn action-btn-expand-scale action-btn-smooth layer-secondary-btn",
@@ -62,7 +44,26 @@ block content
                         span.action-btn-spacer
                         span.action-btn-content Contact form
                         span.action-btn-spacer
-
+                br
+                br
+                span="You can find me at: "
+                +link({
+                  href: "https://www.linkedin.com/in/o-josephojo/",
+                  content: "LinkedIn"
+                })(target="_blank" rel="noopener")
+                span= " - "
+                +link({
+                  href: "https://github.com/josephojo",
+                  content: "Github"
+                })(target="_blank" rel="noopener")
+                span= " - "
+                span(itemprop="email")
+                  +link({
+                    href: "mailto:laoluojo@gmail.com",
+                    content: "Email"
+                  })(target="_blank" rel="noopener")
+                span .  
+                br
               +tile({
                 class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layer-shadow--1",
                 image: {
@@ -141,7 +142,7 @@ block content
                 content: "Github"
               })(target="_blank" rel="noopener")
               span= " - "
-              spam(itemprop="email")
+              span(itemprop="email")
                 +link({
                   href: "mailto:laoluojo@gmail.com",
                   content: "Email"

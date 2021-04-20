@@ -3,7 +3,7 @@ mixin seo(page)
   meta(name="og:locale" content="en_Us")
   meta(property="og:type" content="website")
 
-  meta(itemprop="image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+  meta(itemprop="image" content=`https://res.cloudinary.com/okikio-assets/image/upload/josephs_image.jpg`)
   block title
     title= title
     
@@ -53,17 +53,17 @@ mixin seo(page)
   meta(property="article:author" content="Joseph Ojo")
   meta(property="og:site_name" content=websiteURL.replace("https://", ""))
 
-  meta(property="og:image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
-  meta(property="og:image:secure_url" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
+  meta(property="og:image" content=`https://res.cloudinary.com/okikio-assets/image/upload/josephs_image.jpg`)
+  meta(property="og:image:secure_url" content=`https://res.cloudinary.com/okikio-assets/image/upload/josephs_image.jpg`)
   meta(property="og:image:type" content="image/png")
-  meta(property="og:image:width" content="512")
+  meta(property="og:image:width" content="410")
   meta(property="og:image:height" content="512")
-  meta(property="og:image:alt" content="Joseph Ojo's Logo")
+  meta(property="og:image:alt" content="An image of Joseph Ojo.")
 
   meta(name="twitter:card", content="summary")
   //- meta(name="twitter:site", content="@jo-ojo")
-  meta(name="twitter:image" content=`${websiteURL}/favicon/android-chrome-512x512.png`)
-  meta(property="twitter:image:alt" content="Joseph Ojo's Logo")
+  meta(name="twitter:image" content=`https://res.cloudinary.com/okikio-assets/image/upload/josephs_image.jpg`)
+  meta(property="twitter:image:alt" content="An image of Joseph Ojo.")
 
   link(rel="home", href=websiteURL)
   meta(name="mobile-web-app-capable" content="yes")

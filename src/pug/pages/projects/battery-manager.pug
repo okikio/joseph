@@ -41,35 +41,54 @@ block content
             br
             br
             | Before upgrading the system, however, we successfully completed several research projects.
+            span=" "
             +link({
               href: "https://www.researchgate.net/publication/344658758_A_Recurrent_Neural_Networks_Approach_for_Estimating_the_Core_Temperature_in_Lithium-Ion_Batteries",
               content: "The first research project"
             })(target="_blank" rel="noopener" title="The link to the publication of the first research project.")
-            | was based on utilizing a gated recurrent neural network model (GRU) to estimate the internal temperatures in a battery cell. This is an important feature to have for cells fast-charging since a typical cell could have a vastly different temperature internally than on its surface where sensors are typically mounted.
+            |  was based on utilizing a gated recurrent neural network model (GRU) to estimate the internal temperatures in a battery cell. This is an important feature to have for cells fast-charging since a typical cell could have a vastly different temperature internally than on its surface where sensors are typically mounted.
+            span=" "
             +link({
               href: "https://ieeexplore.ieee.org/abstract/document/9064708",
               content: "The second research project"
             })(target="_blank" rel="noopener" title="The link to the publication of the second research project.")
-            | developed on the first generation of the battery manager was a thermal fault detection method using a long short-term memory (LSTM) neural network model combined with an innovative residual monitor. The goal here was to ensure that a fast-charging battery pack includes the health and safety benefits of detecting the onset of a battery thermal failure to prevent an explosive outcome. Still on the subject on safety, the third paper extends the previously described detection method to find minor current leaks before they develop into a safety hazard.
+            |  developed on the first generation of the battery manager was a thermal fault detection method using a long short-term memory (LSTM) neural network model combined with an innovative residual monitor. The goal here was to ensure that a fast-charging battery pack includes the health and safety benefits of detecting the onset of a battery thermal failure to prevent an explosive outcome. Still on the subject on safety, the third paper extends the previously described detection method to find minor current leaks before they develop into a safety hazard.
             br
             br
             | After the upgrade, the manager became more versatile, allowing testing on multiple cells in different configurations, thus, expanding the lab’s research capacity. The new system is also modular and can be expanded with additional power supplies and electronic loads. This new generation will be used while I complete my thesis on a health-conscious fast-charging algorithm for battery packs. While working on my research, I thought I should also streamline my colleagues’ workloads by providing a user interface (UI) for the manager. This will allow anyone to run basic tests with the pre-configured commands but also provide a script to run custom tests.
             br
             br
-            i [+ Figure 1: Battery Manager UI for testing battery packs]
+            figure.layout-margin-horz.style-center
+              +tile({
+                class: "layer-surface layer-box layout-block layout-margin-bottom-smaller",
+                image: {
+                  src: "cloudinary/joseph-projects/battery-manager/01_BatteryManager",
+                  alt: ""
+                }
+              })
+              figcaption.style-font-14.style-italic Figure 1: Battery Manager UI for testing battery packs
             br
             br
-            i [+ Figure 2: Device Configuration UI for selecting and configuring devices]
+            figure.layout-margin-horz.style-center
+              +tile({
+                class: "layer-surface layer-box layout-block layout-margin-bottom-smaller",
+                image: {
+                  src: "cloudinary/joseph-projects/battery-manager/02_DevConfig",
+                  alt: ""
+                }
+              })
+              figcaption.style-font-14.style-italic Figure 2: Device Configuration UI for selecting and configuring devices
             br
-            br
-            | As with any software product, continuous improvement and addition of new features is important, and since the platform will be for research, changes and improvements will more likely than not be necessary. Which is why I have provided the source code for the UI on my
+            | As with any software product, continuous improvement and addition of new features is important, and since the platform will be for research, changes and improvements will more likely than not be necessary. Which is why I have provided the source code for the UI in the
+            span=" "
             +link({
               href: "https://github.com/josephojo/BatteryManager",
-              content: "GitHub account."
-            })(target="_blank" rel="noopener" title="The link to the publication of the second research project.")
+              content: "BatteryManager repository"
+            })(target="_blank" rel="noopener" title="Link to BatteryManager repository on Joseph's Github account.") 
+            |  on my Github account.
             br
             br
-            | Although a lot of work has gone into this project, there is still more to do to improve user experience. It is my goal to improve it further and support others that might need to use or improve on it.
+            |  Although a lot of work has gone into this project, there is still more to do to improve user experience. It is my goal to improve it further and support others that might need to use or improve on it.
 
 
   //- Next page layer
@@ -95,7 +114,7 @@ block content
         +tile({
           class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
           image: {
-            class: "effect-parallax",
+            class: "",
             src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
             alt: "An image of a 3D model of Sarbot.",
           }
