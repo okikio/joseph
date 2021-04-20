@@ -255,7 +255,7 @@ let resize, scroll;
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
     'resize': resize = () => {
-        let srcset, src, _core_img, srcWid, load_img;
+        let srcset, src, _core_img, srcWid, srcHei, load_img;
         windowWid = width(window);
 
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
@@ -266,25 +266,25 @@ on(window, {
             each(_layer_img, $img => {
                 load_img = get(find($img, ".load-img"), 0);
                 srcWid = Math.round(width($img));
+                srcHei = Math.round(height($img));
 
                 // Find the core-img in the layer-image container
                 _core_img = get(find(load_img, ".core-img"), 0);
 
                 // Make sure the image that is loaded is the same size as its container
-                srcset = attr(get(find(load_img, ".webp"), 0), "data-srcset");
+                srcset = attr(_core_img, "data-src");
 
                 // On larger screens load smaller images, for faster image load times
-                src = srcset.replace(/w_[\d]+/, `w_${srcWid > 550 ? srcWid - 200 : srcWid}`);
+                src = srcset.replace(/w_auto/, `w_${srcWid}`);
+                if (srcHei > srcWid) src = src.replace(/ar_4:3,/, `ar_3:4,`);
+                if (!window.WebpSupport) src = src.replace(".webp", ".jpg");
 
-                // Safari still doesn't support WebP
-                if (!window.WebpSupport) {
-                    src = src.replace(".webp", ".jpg");
-                    console.info("Using JPG instead, of WEBP");
+                // Only load a new image If something has changed
+                if (src !== attr(_core_img, "src")) {
+                    // Ensure the image has loaded, then replace the small preview
+                    attr(_core_img, "src", src);
+                    on(_core_img, "load", onload(load_img));
                 }
-
-                // Ensure the image has loaded, then replace the small preview
-                attr(_core_img, "src", src);
-                on(_core_img, "load", onload(load_img));
             });
         });
     },

@@ -50,7 +50,7 @@
             }
         }
 
-        & picture {
+        & figure.load-img {
             position: absolute;
             // // overflow: hidden;
             display: block;
@@ -59,10 +59,6 @@
             width: 100%;
             left: 0;
             top: 0;
-
-            &.plchldr-pic {
-                // z-index: 500;
-            }
         }
 
         &-preview-img-card {
@@ -149,16 +145,6 @@
                 color: transparent;
                 min-width: 500px;
             }
-
-            figcaption {
-                padding: $size-small;
-            }
-        }
-
-        .load-img.img-show {
-            figcaption {
-                color: transparent;
-            }
         }
 
         &-scroll-down {
@@ -239,7 +225,7 @@
         }
     }
 
-    .wall-e .img-contain {
+    .wall-e figure.load-img {
         transform: translateY(-20px);
         object-fit: fill;
         height: 100%;
@@ -482,7 +468,7 @@
         }
 
         &-mid {
-            // max-height: 600px;
+            min-height: 600px;
         }
 
         &-tall {

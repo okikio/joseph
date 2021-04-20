@@ -1,28 +1,48 @@
+//- mixin image(value = {})
+//-   - let _class = value.class;
+//-   - let src = value.src || "cloudinary/city";
+//-   - let alt = value.alt || "Alternate text";
+
+//-   - let cloudinaryTest = /^cloudinary\//.test(src);
+//-   - let basicURL = "https://res.cloudinary.com/okikio-assets/image/upload/dpr_auto,f_auto,fl_progressive:steep";
+//-   -
+//-     let urlParse = (url = "") => cloudinaryTest ? `${basicURL + url},c_limit/${src.replace(/^cloudinary\//, "")}` : src;
+
+//-   .layer-image(class=_class title=alt)
+//-     .layer-image-preview-img-card
+//-     figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
+//-       .img-contain
+//-         picture.plchldr-pic
+//-           //- figcaption(aria-hidden="true")= alt
+//-           //- source.webp(srcset!=`${urlParse(",w_50,q_auto,e_blur:150")}.webp`)
+//-           img.placeholder-img(src!=`${urlParse(",w_50,q_auto,e_blur:150")}.jpg` sizes="100vw" width="100vw" alt=alt loading="lazy")
+//-         picture.core-img-pic
+//-           .webp(data-srcset!=`${urlParse(",w_600,q_100,c_limit")}.webp`)
+//-           //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
+//-           //- source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
+//-           img.core-img(data-src!=`${urlParse(",w_1100,q_auto")}.jpg` alt=alt loading="lazy" width="100vw" itemprop="url")
+//-         noscript Javascript is necessary for this sites awesome experience.
+//-           picture
+//-             source(srcset!=`${urlParse(",w_auto,q_auto")}.webp` sizes="100vw" width="100vw" type='image/webp')
+//-             img.no-script-img(src!=`${urlParse(",w_auto,q_auto")}.jpeg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
+//-     .layer-image-overlay
 mixin image(value = {})
-  - let _class = value.class;
-  - let src = value.src || "cloudinary/city";
-  - let alt = value.alt || "Alternate text";
-
-  - let cloudinaryTest = /^cloudinary\//.test(src);
-  - let basicURL = "https://res.cloudinary.com/okikio-assets/image/upload/dpr_auto,f_auto,fl_progressive:steep";
   -
-    let urlParse = (url = "") => cloudinaryTest ? `${basicURL + url},c_limit/${src.replace(/^cloudinary\//, "")}` : src;
+    let _class = value.class;
+    let source = value.src || "cloudinary/city";
+    let alt = value.alt || "Alternate text";
 
+    let external = /\/fetch\//.test(source);
+    let src = source.replace("fetch/", "");
+
+    let cloudinaryTest = /^cloudinary\//.test(src);
+    let origin = `https://res.cloudinary.com/okikio-assets/image/${external ? "fetch" : "upload"}/`;
+    let urlParse = (filters = "c_mfit,w_auto") => cloudinaryTest ? `${origin + "q_auto:best/" + filters},dpr_auto/${src.replace(/^cloudinary\//, "")}` : src;
+  
   .layer-image(class=_class title=alt)
-    .layer-image-preview-img-card
-    figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
-      .img-contain
-        picture.plchldr-pic
-          //- figcaption(aria-hidden="true")= alt
-          //- source.webp(srcset!=`${urlParse(",w_50,q_auto,e_blur:150")}.webp`)
-          img.placeholder-img(src!=`${urlParse(",w_50,q_auto,e_blur:150")}.jpg` sizes="100vw" width="100vw" alt=alt loading="lazy")
-        picture.core-img-pic
-          .webp(data-srcset!=`${urlParse(",w_600,q_100,c_limit")}.webp`)
-          //- source.webp(media='(max-width: 900px)' srcset!=`${urlParse(",w_900,q_80")}.webp` sizes="100vw" width="100vw" type='image/webp')
-          //- source.webp(media='(min-width: 900px)' srcset!=`${urlParse(",w_950,q_90")}.webp` sizes="100vw" width="100vw" type='image/webp')
-          img.core-img(data-src!=`${urlParse(",w_1100,q_auto")}.jpg` alt=alt loading="lazy" width="100vw" itemprop="url")
-        noscript Javascript is necessary for this sites awesome experience.
-          picture
-            source(srcset!=`${urlParse(",w_auto,q_auto")}.webp` sizes="100vw" width="100vw" type='image/webp')
-            img.no-script-img(src!=`${urlParse(",w_auto,q_auto")}.jpeg` alt=alt loading="lazy" sizes="(max-width: 500px) 500px,(max-width: 700px) 700px,(max-width: 900px) 900px, 100vw" width="100vw" itemprop="url")
-    .layer-image-overlay
+    figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")&attributes(attributes)
+      .layer-image-overlay
+      img.placeholder-img(src!=`${urlParse("c_fit,w_50,e_blur:500")}.jpg` alt=alt loading="lazy")
+      img.core-img(data-src!=`${urlParse()}.webp` alt=alt loading="lazy" itemprop="url")
+      noscript
+        img.no-script-img(src!=`${urlParse()}.jpg` aria-hidden="true" alt=alt loading="lazy")
