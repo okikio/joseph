@@ -15,7 +15,7 @@
   },
   "liveServer.settings.root": "/public",
   "editor.columnSelection": false,
-  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.multiCursorModifier": "alt",
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,

@@ -2,9 +2,9 @@ extends /layout.pug
 
 block hero
   //- Hero layer
+  //- content: "Bringing Hardware and Software to life.",
   +hero({
     title: "Bridging the Gap",
-    content: "Bringing Hardware and Software to life.",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/suspension-bridge",
@@ -23,8 +23,8 @@ block content
     })
       +main
         section.layout-padding-top.layout-padding-bottom-large.layout-clearfix
-          h3.h5.style-font-30--device-phone.style-primary-dark.style-bold Hi, I’m Joseph. Nice to meet you.
-          +p("For about a decade now, I have actively sought to leave the state of things better than I found it. I am a Mechatronics engineer at heart and on paper. I integrate hardware and software into harmonious matrimony to solve societal pain points. <br><br> I am always on my feet looking for the next opportunity. Through continuous improvement, confidence and determination, I seek to achieve my goals. Afterall, the game isn’t changed until the game is played.")
+          h3.h5.style-font-30--device-phone.style-primary-dark.style-bold Hi, I’m Joseph.
+          +p("For about a decade now, I have actively sought to leave the state of things better than I found it. I am a Mechatronics engineer at heart and on paper. I integrate hardware and software into harmonious alliance to solve societal pain points. <br><br> I am always on my feet looking for the next opportunity. Through continuous improvement, determination, and a foresight of opportunity, I seek to achieve my goals. Afterall, the game isn’t changed until the game is played. ")
 
   div.layout-margin-horz-small.layer-capsule
     //- Skills Column layer
@@ -48,7 +48,7 @@ block content
               div.layout-padding-left-small.layout-margin-bottom-small
                 h5.style-font-20.layout-margin-vert-botttom-dull.style-underline Hardware Development Tools
                 ul.layout-margin-vert-dull
-                  - let arr =  ["SolidWorks", "NX Siemens", "KiCAD", "Fritzing", "NI MultiSim", "LTSpice", "Arduino", "Rapid Prototyping", "Design for Assembly", "Design for Manufacturing"];
+                  - let arr =  [ "SolidWorks", "NX Siemens", "KiCAD", "Fritzing", "NI MultiSim", "LTSpice", "Arduino"];
                   - for (let i = 0; i < arr.length; i ++) {
                     li= arr[i]
                   - }
@@ -66,7 +66,7 @@ block content
 
   //- Image Column layer
   +layer({
-    class: "layer-contrast layout-padding-horz-default--device-gt-tablet layer-capsule-push layer-capsule-pull"
+    class: "layer-contrast layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone layer-capsule-push layer-capsule-pull"
   })
     +layout({
       class: "layout-contain-large"
@@ -74,10 +74,10 @@ block content
       +main({
           class: "layout-shorten-vert"
       })
-        div.layout-padding-vert-bottom.layout-contain-small.layout-shorten-horz.layout-contain
-          h3.style-font-30.style-bold My Recent Work
+        div.layout-padding-vert-bottom.layout-contain.layout-shorten-horz.layout-contain
+          h3.style-font-30.style-bold Recent Activities 
           div
-            +p("Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about. ")
+            +p("Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about.  ")
         //- 1st Row
         +row({
           class: "layout-margin-dull"
@@ -208,12 +208,13 @@ block content
               class: "layer-relative layout-padding-left-small--device-gt-tablet"
             })
               .clearfix
+                h3.style-font-30.style-bold.layout-margin-top-dull Signature
                 +p({
                   class: "text-above-quote"
                 })
                   span.layout-margin-horz-right-dull 
-                    | If you are still reading this, you might just be the chosen one. Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course. 
+                    | If you are still reading this, you might just be the chosen one.  Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course.
                     br
                     br
-                    | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak! 
+                    | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak!
   

@@ -29,15 +29,21 @@
         }
 
         &-radial {
+            &, &:focus-visible {
             border-radius: 24px;
+            }
         }
 
         &-round {
-            @extend .layer-round;
+            &, &:focus-visible {
+                @extend .layer-round;
+            }
         }
 
         &-smooth {
+            &, &:focus-visible {
             border-radius: 5px;
+            }
         }
 
         &-spacer {
@@ -151,7 +157,9 @@
 
         &-btn,
         &-btn:hover {
+            &, &:focus-visible {
             border-radius: 20em;
+            }
             text-decoration: none;
         }
     }

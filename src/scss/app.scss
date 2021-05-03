@@ -277,7 +277,7 @@ html[theme=dark] {
             &-#{$prefix}-#{$action}-#{$name}:#{$action},
             &-#{$prefix}-#{$name}-#{$action}:#{$action} {
                 @if ($themeable) {
-                    transition: #{$property} #{$transitionDuration} ease;
+                    transition: #{$property} #{$transitionDuration} ease, box-shadow ease #{$transitionDuration};
                     @include applyTheme($property, $name);
                 } @else {
                     #{$property}: $value;
@@ -287,7 +287,7 @@ html[theme=dark] {
             &-#{$name},
             &-#{$prefix}-#{$name} {
                 @if ($themeable) {
-                    transition: #{$property} #{$transitionDuration} ease;
+                    transition: #{$property} #{$transitionDuration} ease, box-shadow ease #{$transitionDuration};
                     @include applyTheme($property, $name);
                 } @else {
                     #{$property}: $value;

@@ -105,7 +105,11 @@
 		}
 
 		&-small {
-			line-height: 1;
+			line-height: 1em;
+		}
+
+		&-spaced {
+			line-height: 1.75em;
 		}
 
 		&-double {

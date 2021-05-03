@@ -76,9 +76,10 @@ let onload = $load_img => function () {
     addClass($load_img, "core-img-show"); // Hide the image preview
 };
 
-// On navbar menu click (this will only occur on mobile; mouseup is a tiny bit more efficient), show navbar
-on(_menu, "mouseup", () => {
+// On navbar menu click (this will only occur on mobile; click is a tiny bit more efficient), show navbar
+on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
+    attr(_menu, "aria-expanded", `` + hasClass(_navbar, "navbar-show"));
 });
 
 try {
@@ -106,8 +107,8 @@ try {
         setTheme(theme);
     };
 
-    // On theme switcher button click (mouseup is a tiny bit more efficient) toggle the theme between dark and light mode
-    on(_themeSwitcher, "mouseup", () => {
+    // On theme switcher button click (click is a tiny bit more efficient) toggle the theme between dark and light mode
+    on(_themeSwitcher, "click", () => {
         themeSet(themeGet() === "dark" ? "light" : "dark");
     });
 
@@ -118,8 +119,8 @@ try {
     console.warn("Theme switcher button broke, :(.");
 }
 
-// On backup button click (mouseup is a tiny bit more efficient) animate back to the top
-on(_backUp, "mouseup", () => {
+// On backup button click (click is a tiny bit more efficient) animate back to the top
+on(_backUp, "click", () => {
     scrollTo("0px", "1400ms");
 });
 
@@ -249,8 +250,8 @@ let goDown = () => {
 let init = () => {
     _images.clear();
 
-    // On scroll down button click (mouseup is a tiny bit more efficient) animate scroll to the height of the hero layer
-    on(_scrolldown, "mouseup", goDown);
+    // On scroll down button click (click is a tiny bit more efficient) animate scroll to the height of the hero layer
+    on(_scrolldown, "click", goDown);
 
     // Determine the height of the hero
     heroHeight = height(_hero);
@@ -472,8 +473,8 @@ on(document, "ready", () => {
 
             // This event runs for every page view after initial load
             Swup.on("clickLink", () => {
-                // Remove click (mouseup is a tiny bit more efficient) event from scroll down button
-                off(_scrolldown, "mouseup", goDown);
+                // Remove click (click is a tiny bit more efficient) event from scroll down button
+                off(_scrolldown, "click", goDown);
 
                 if (windowWid <= 700) {
                     requestAnimationFrame(() => {
@@ -483,8 +484,8 @@ on(document, "ready", () => {
             });
             Swup.on("samePage", () => {
                 // If on the same page reinvigorate the scroll down button click event
-                // On scroll down button click (mouseup is a tiny bit more efficient) animate scroll to the height of the hero layer
-                on(_scrolldown, "mouseup", goDown);
+                // On scroll down button click (click is a tiny bit more efficient) animate scroll to the height of the hero layer
+                on(_scrolldown, "click", goDown);
             });
             Swup.on('contentReplaced', () => {
                 init(); resize(); scroll();
@@ -502,7 +503,7 @@ on(document, "ready", () => {
         }
     } catch (e) {
         // Swup isn't very good at handling errors in page transitions, so to avoid errors blocking the site from working properly; if SWUP crashes it should fallback to normal page linking
-        on(linkSelector, 'mouseup', e => {
+        on(linkSelector, 'click', e => {
             window.location.href = e.currentTarget.href;
         });
 

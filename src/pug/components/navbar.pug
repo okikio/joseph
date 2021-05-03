@@ -3,7 +3,7 @@ include /components/image.pug
 
 mixin themeSwitcher()
   .layout-inline-block
-    a.theme-switcher.navbar-btn.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.layer-mid-dark-focus(title="Theme Switcher" name="Theme Switcher")
+    button.theme-switcher.navbar-btn.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover(title="Theme Switcher" name="Theme Switcher")
       span.action-btn-group
         //- brightness_medium
         +icon("theme switcher").action-icon.style-font-family-bold.style-font-size-24
@@ -12,11 +12,11 @@ mixin navbar(value = {})
   - let { url } = value;
   - let _class = value.class;
 
-  - let tabs = ["about", "projects", "contact"]; //
+  - let tabs = ["about", "portfolio", "contact"]; //
   //- - let focusIndex = url.toLowerCase().includes(tabs);
 
   header.header
-    nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement")
+    nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement" aria-label="Main Navigation")
       .layout-contain-enlarge.navbar-layout
         .navbar-head(itemscope itemtype="http://schema.org/Organization")
           +link({
@@ -26,27 +26,29 @@ mixin navbar(value = {})
             img.navbar-logo(src="/favicon/favicon.svg" alt="Logo." itemprop="logo" inline)
             //-  joseph-new.svg
             span.navbar-title-line
-            span.name.layout-inline-block(itemprop="name") JOSEPH!
+            span.name(itemprop="name") JOSEPH!
           .layout-spacer
           .navbar-foot.navbar-mobile
             +themeSwitcher
             //- if !debug
             .layout-inline-block
-              a.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover.layer-mid-dark-focus(title="Menu Button" name="Menu Button")
+              button.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover(title="Menu Button" name="Menu Button" 
+              aria-expanded="false"
+              aria-controls="navbar-list")
                 span.action-btn-group
                   +icon("menu").action-icon.style-font-family-bold.style-font-size-24
 
         .layout-spacer.navbar-desktop
         .navbar-main
           //- if !debug
-          ul.navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
+          ul.navbar-list#navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
             each tab, i in tabs
               if typeof tab == "string"
                 li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
                   +link({
                     href: `/${tab}`,
                     class: `navbar-link${url.toLowerCase().includes(tab) ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" tabindex="-1" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
+                  })(itemprop="url" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
                     span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                     meta(itemprop="position" content="1")
             .navbar-desktop-display
