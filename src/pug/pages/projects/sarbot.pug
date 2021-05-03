@@ -101,30 +101,28 @@ block content
               figcaption.style-font-14.style-italic Figure 5: A video displaying the capabilities of the final design of SarBot
 
   //- Next page layer
-  +link({
-    href: "/projects/ultima-apparel",
-    class: "layout-block"
-  }, true)
-    +layer({
-      class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
-    })
+  
+  +layout({
+    class: "layout-contain-large layer-round layout-padding-horz--device-gt-tablet"
+  })
+    +link({
+      href: "/projects/battery-manager",
+      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+    }, true)
       +head({
         class: "layout-padding-top-default"
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-      +layout({
-        class: "layout-contain layout-padding-horz--device-gt-tablet"
-      })
         +main({
           class: "layout-padding-vert-sub-large--device-gt-tablet"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Ultima Apparel
 
-        +tile({
-          class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
-          image: {
-            class: "",
-            src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
-            alt: "An image of Ultima Apparels first proof of concept.",
-          }
-        })
+        //- +tile({
+        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+        //-   image: {
+        //-     class: "",
+        //-     src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+        //-     alt: "An image of Ultima Apparels first proof of concept.",
+        //-   }
+        //- })

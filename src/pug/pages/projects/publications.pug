@@ -39,30 +39,27 @@ block content
                 })(target="_blank" rel="noopener" title="The link to the publication for Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots.")
 
   //- Next page layer
-  +link({
-    href: "/projects/boxer",
-    class: "layout-block"
-  }, true)
-    +layer({
-      class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
-    })
+  +layout({
+    class: "layout-contain-large layer-round layout-padding-horz--device-gt-tablet"
+  })
+    +link({
+      href: "/projects/battery-manager",
+      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+    }, true)
       +head({
         class: "layout-padding-top-default"
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-      +layout({
-        class: "layout-contain layout-padding-horz--device-gt-tablet"
-      })
         +main({
           class: "layout-padding-vert-sub-large--device-gt-tablet"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Boxer
 
-        +tile({
-          class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
-          image: {
-            class: "",
-            src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
-            alt: "An image of a rendered robot."
-          }
-        })
+        //- +tile({
+        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+        //-   image: {
+        //-     class: "",
+        //-     src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+        //-     alt: "An image of a rendered robot."
+        //-   }
+        //- })

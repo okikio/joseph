@@ -396,7 +396,7 @@
         @for $sz from 1 through 20 {
             &-radius-#{$sz} {
                 &, &:focus-visible {
-                border-radius: #{$sz}px;
+                    border-radius: #{$sz}px;
                 }
             }
         }
@@ -520,7 +520,12 @@
     &-next {
         background-color: $white;
         background-color: var(--very-light, $white);
-        contain: layout !important;
+        overflow: hidden;
+        border-radius: 24px;
+
+        &:focus-visible {
+            border-radius: 24px;
+        }
 
         .layer-title,
         .layer-content {
@@ -528,6 +533,13 @@
             color: var(--tertiary, $primary);
             text-align: center;
         }
+        
+        @media #{$screen-size-phone} {
+        .layer-content {
+            font-size: 30px;
+        }
+            
+    }
 
         @media #{$screen-size-gt-tablet} {
             margin-bottom: $size-extra-large;
@@ -539,6 +551,7 @@
     }
 
     &-capsule {
+        overflow: hidden;
         z-index: 25;
         position: relative;
 

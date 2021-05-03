@@ -50,30 +50,27 @@ block content
           | While at Celestica, it was also my responsibility to run engineering, certification and mini-production builds in our prototyping factory. My responsibility was to convert designs to assembling instructions for a team of about 20 people to run. The order was typically to create the first version, try it out on my own or with a couple other more experienced engineers, find out issues with the process, fix the issues, release a new version of the assembly instructions and build it out fully with the team. Before the build, I hold a meeting with the team, secure materials and get support with reconfiguring the machines and laying out the factory lines. Here is an image of one of the new generation panels at the time.
 
   //- Next page layer
-  +link({
-    href: "/projects/publications",
-    class: "layout-block"
-  }, true)
-    +layer({
-      class: "layout-padding-horz-default--device-gt-tablet layer-black layer-next"
-    })
+  +layout({
+    class: "layout-contain-large layer-round layout-padding-horz--device-gt-tablet"
+  })
+    +link({
+      href: "/projects/battery-manager",
+      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+    }, true)
       +head({
         class: "layout-padding-top-default"
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-      +layout({
-        class: "layout-contain layout-padding-horz--device-gt-tablet"
-      })
         +main({
           class: "layout-padding-vert-sub-large--device-gt-tablet"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Publications
 
-        +tile({
-          class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
-          image: {
-            class: "",
-            src: "cloudinary/aerial-photo-of-brown-mountains",
-            alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
-          }
-        })
+        //- +tile({
+        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+        //-   image: {
+        //-     class: "",
+        //-     src: "cloudinary/aerial-photo-of-brown-mountains",
+        //-     alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+        //-   }
+        //- })

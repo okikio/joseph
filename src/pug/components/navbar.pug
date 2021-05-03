@@ -48,7 +48,7 @@ mixin navbar(value = {})
                   +link({
                     href: `/${tab}`,
                     class: `navbar-link${url.toLowerCase().includes(tab) ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" data-swup-preload title=`The ${tab[0].toUpperCase() + tab.slice(1).replace("-", " ")} navbar link.`)
+                  })(itemprop="url" data-swup-preload)
                     span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                     meta(itemprop="position" content="1")
             .navbar-desktop-display
