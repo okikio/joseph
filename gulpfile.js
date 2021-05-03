@@ -132,7 +132,7 @@ tasks({
                     bundle: true,
                     minify: true,
                     outfile: "legacy.min.js",
-                    target: ["chrome58"],
+                    target: ["es6"],
                 }),
             ],
             dest: jsFolder, // Output
@@ -149,7 +149,7 @@ tasks({
                 esbuild({
                     bundle: true,
                     minify: true,
-                    target: ["chrome58"],
+                    target: ["es6"],
                 }),
                 rename({ suffix: ".min", extname: ".js" }), // Rename
             ],

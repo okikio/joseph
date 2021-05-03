@@ -395,7 +395,7 @@
 
         @for $sz from 1 through 20 {
             &-radius-#{$sz} {
-                &, &:focus-visible {
+                &, &:focus-visible {  
                     border-radius: #{$sz}px;
                 }
             }
@@ -554,6 +554,7 @@
         overflow: hidden;
         z-index: 25;
         position: relative;
+        border-radius: 24px;
 
         &-push {
             padding-top: 12rem;
