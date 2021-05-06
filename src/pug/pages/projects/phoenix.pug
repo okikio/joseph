@@ -3,18 +3,18 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-      
+
       url: "/projects/phoenix",
       name: "phoenix",
       title: "Phoenix — A revamp of a solar panel frame",
-      description: "As an intern at Celestica, I was tasked to revamp a solar panel frame, the name I gave this new frame was Phoenix."
+      description: "A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix"
     };
 
 block content
   //- Banner layer
   +banner({
     title: "Project 5: Phoenix (2015 - 2016)",
-    content: "As an intern at Celestica, I was tasked to revamp a solar panel frame, the name I gave this new frame was Phoenix.",
+    content: "A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
@@ -54,7 +54,7 @@ block content
     class: "layout-contain-large layer-round layout-padding-horz--device-gt-tablet"
   })
     +link({
-      href: "/projects/battery-manager",
+      href: "/projects/publications",
       class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
     }, true)
       +head({
@@ -62,7 +62,7 @@ block content
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
         +main({
-          class: "layout-padding-vert-sub-large--device-gt-tablet"
+          class: "layout-padding-vert-sub-large"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Publications
 

@@ -5,7 +5,7 @@ mixin banner(value = {})
   - Object.assign(image, { class: "effect-parallax hero-img" });
 
   .layer.layer-hero-id.banner-mode
-    article.layout-padding-bottom.layout-padding-dull-top
+    article.layout-padding-dull-top
       .layer-hero
         +image(image)
 
@@ -22,5 +22,6 @@ mixin banner(value = {})
                     +icon("expand_more").action-icon.style-font-size-24
                     span.action-btn-section
                       span.action-btn-spacer
+                      span.layout-margin-left-mini
                       span.action-btn-content Scroll Down
                       span.action-btn-spacer

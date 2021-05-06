@@ -47,14 +47,16 @@
             height: $height;
             margin: 0 auto;
 
-            &, &:before {
+            &,
+            &:before {
                 border-radius: 0 0 $radius $radius;
             }
 
             &:before {
                 @extend .layout-contain-enlarge;
-                transition: background-color #{$transitionDuration} ease, opacity .25s ease-out;
-                box-shadow: 0 5px 15px rgba(0, 0, 50, .08);
+                transition: background-color #{$transitionDuration} ease,
+                    opacity 0.25s ease-out;
+                box-shadow: 0 5px 15px rgba(0, 0, 50, 0.08);
                 @include applyTheme(background-color, "surface");
                 position: absolute;
                 display: block;
@@ -96,11 +98,25 @@
             position: relative;
             font-size: 17px;
             color: $dark;
+            white-space: nowrap;
             @include applyTheme(color, "dark");
 
             & .name {
                 font-family: $bold-font;
                 font-weight: 800;
+            }
+
+            @media #{$screen-size-phone} {
+                & .last-name {
+                    display: none;
+                }
+            }
+
+            & .name,
+            .navbar-title-line {
+                @media (max-width: 300px) {
+                    display: none;
+                }
             }
 
             &,
@@ -156,8 +172,9 @@
                 display: inline-block;
 
                 &:before {
-                    transition: transform .25s cubic-bezier(.25, .46, .45, .94),
-                                background-color #{$transitionDuration} ease;
+                    transition: transform 0.25s
+                            cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        background-color #{$transitionDuration} ease;
                     transform: translate3d(0, $height - 14px, 0) scaleX(0);
                     @include applyTheme(background-color, "primary-dark");
                     border: 1.5px solid transparent;
@@ -189,7 +206,8 @@
             }
 
             &-focus {
-                &, &:focus {
+                &,
+                &:focus {
                     @include applyTheme(color, "primary-dark");
                 }
             }
@@ -199,16 +217,15 @@
             text-decoration: none;
         }
 
-        &-menu, &-btn {
+        &-menu,
+        &-btn {
             & {
                 transition: color #{$transitionDuration} ease;
             }
 
-            &:hover, &:focus {
-                cursor: pointer;
-            }
-
-            &, &:hover, &:focus {
+            &,
+            &:hover,
+            &:focus {
                 color: $primary;
                 color: var(--dark, $primary);
             }
@@ -240,17 +257,20 @@
             }
 
             &-layout {
-                &, &:before {
+                &,
+                &:before {
                     border-radius: 0;
                 }
             }
 
-            &-layout:before, &-head {
+            &-layout:before,
+            &-head {
                 z-index: 15;
             }
 
-            &-layout:before, &-main {
-                box-shadow: 0 2px 15px rgba(0, 0, 50, .08);
+            &-layout:before,
+            &-main {
+                box-shadow: 0 2px 15px rgba(0, 0, 50, 0.08);
             }
 
             &-head {
@@ -260,7 +280,8 @@
             }
 
             &-main {
-                transition: transform #{$transitionDuration} ease-out, opacity .3s ease .1s, visibility .3s ease .1s;
+                transition: transform #{$transitionDuration} ease-out,
+                    opacity 0.3s ease 0.1s, visibility 0.3s ease 0.1s;
                 transform: translate3d(0, -100%, 0);
                 display: block;
                 width: 100%;

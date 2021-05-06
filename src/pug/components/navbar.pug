@@ -26,13 +26,14 @@ mixin navbar(value = {})
             img.navbar-logo(src="/favicon/favicon.svg" alt="Logo." itemprop="logo" inline)
             //-  joseph-new.svg
             span.navbar-title-line
-            span.name(itemprop="name") JOSEPH!
+            span.name(itemprop="name") JOSEPH
+              span.last-name  OJO
           .layout-spacer
           .navbar-foot.navbar-mobile
             +themeSwitcher
             //- if !debug
             .layout-inline-block
-              button.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover(title="Menu Button" name="Menu Button" 
+              button.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover(title="Menu Button" name="Menu Button"
               aria-expanded="false"
               aria-controls="navbar-list")
                 span.action-btn-group
@@ -48,9 +49,8 @@ mixin navbar(value = {})
                   +link({
                     href: `/${tab}`,
                     class: `navbar-link${url.toLowerCase().includes(tab) ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" data-swup-preload)
+                  })(itemprop="url" data-swup-preload data-path=`${tab == "portfolio" ? `projects` : tab}`)
                     span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                     meta(itemprop="position" content="1")
             .navbar-desktop-display
               +themeSwitcher
-

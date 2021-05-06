@@ -3,18 +3,18 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-      
+
       url: "/portfolio",
       name: "portfolio",
       title: "Portfolio — A showcase of some of the projects I have taken on.",
-      description: "A potfolio of projects I have completed, and even some that are still on-going..."
+      description: "A showcase of projects I have completed, and even some that are still on-going..."
     };
 
 block hero
   //- Banner layer
   +banner({
     title: "Portfolio",
-    content: "A list of projects I have completed, and even some that are still on-going.",
+    content: "A showcase of projects I have completed, and even some that are still on-going.",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/brown-book-on-table",
@@ -34,7 +34,8 @@ block content
       +main({
         class: "layout-padding-vert-small layout-clearfix"
       })
-        +p("This section of the website is dedicated to taking you through the journey of ongoing and completed projects. Tune in for frequent updates as I tack on more projects and complete other activities. ")
+        span.style-letter-head.style-title T
+        +p("his section of the website is dedicated to taking you through the journey of ongoing and completed projects. Tune in for frequent updates as I tack on more projects and complete other activities. ")
 
   //- Image Column layer
   +layer
@@ -55,7 +56,7 @@ block content
               +tile({
                 title: "Boxer",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "Boxer is an all-wheel drive semi-autonomous platform designed and developed for LinLab by myself and a few quirky undergraduate students...",
+                content: "An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.",
                 image: {
                   class: "",
                   src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
@@ -73,6 +74,7 @@ block content
               +tile({
                 title: "Battery Manager",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
+                content: "A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of battery technology.",
                 image: {
                   class: "",
                   src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
@@ -90,6 +92,7 @@ block content
               +tile({
                 title: "Search and Rescue Robot (SarBot)",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
+                content: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe.",
                 image: {
                   class: "",
                   src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
@@ -107,6 +110,7 @@ block content
               +tile({
                 title: "Ultima Apparel",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
+                content: "Enhanced sportsware designed to improve posture and track workout form.",
                 image: {
                   class: "",
                   src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
@@ -124,6 +128,7 @@ block content
               +tile({
                 title: "Phoenix",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
+                content: "A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix",
                 image: {
                   class: "",
                   src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
@@ -141,6 +146,7 @@ block content
               +tile({
                 title: "Publications",
                 class: "layer-box layer-surface layout-block layer-tile-outline",
+                content: "A list of publications I completed while studying for my masters at OntarioTech University.",
                 image: {
                   class: "",
                   src: "cloudinary/aerial-photo-of-brown-mountains",

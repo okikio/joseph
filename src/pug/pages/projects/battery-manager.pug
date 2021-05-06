@@ -3,18 +3,18 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-      
+
       url: "/projects/battery-manager",
       name: "battery-manager",
-      title: "Battery Manager — Providing flexibility in the variety research of battery.",
-      description: "Providing flexibility in the variety of research that I have, and future research colleagues will undertake into the field of batteries."
+      title: "Battery Manager — A tool designed to provide flexibility in a variety of research projects into batteries.",
+      description: "A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of batteries."
     };
 
 block content
   //- Banner layer
   +banner({
     title: "Project 2: Battery Manager (2018 – Present)",
-    content: "Providing flexibility in the variety of research that I have, and future research colleagues will undertake into the field of battery technology.",
+    content: "A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of battery technology.",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
@@ -84,7 +84,7 @@ block content
             +link({
               href: "https://github.com/josephojo/BatteryManager",
               content: "BatteryManager repository"
-            })(target="_blank" rel="noopener" title="Link to BatteryManager repository on Joseph's Github account.") 
+            })(target="_blank" rel="noopener" title="Link to BatteryManager repository on Joseph's Github account.")
             |  on my Github account.
             br
             br
@@ -92,27 +92,30 @@ block content
 
 
   //- Next page layer
-  +layout({
-    class: "layout-contain-large layer-round layout-padding-horz--device-gt-tablet"
+  +layer({
+    class: "layout-padding-horz-default--device-gt-tablet"
   })
-    +link({
-      href: "/projects/battery-manager",
-      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
-    }, true)
-      +head({
-        class: "layout-padding-top-default"
-      })
-        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "layout-padding-vert-sub-large--device-gt-tablet"
+    +layout({
+      class: "layout-contain-large"
+    })
+      +link({
+        href: "/projects/sarbot",
+        class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+      }, true)
+        +head({
+          class: "layout-padding-top-default"
         })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Search and Rescue Robot (SarBot)
+          h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
+          +main({
+            class: "layout-padding-vert-sub-large"
+          })
+            p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Search and Rescue Robot (SarBot)
 
-        //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
-        //-   image: {
-        //-     class: "",
-        //-     src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
-        //-     alt: "An image of a 3D model of Sarbot.",
-        //-   }
-        //- })
+          //- +tile({
+          //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+          //-   image: {
+          //-     class: "",
+          //-     src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+          //-     alt: "An image of a 3D model of Sarbot.",
+          //-   }
+          //- })

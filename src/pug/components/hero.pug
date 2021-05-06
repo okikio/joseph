@@ -6,7 +6,7 @@ mixin hero(value = {})
   - image = Object.assign({ class: "effect-parallax hero-img" }, image);
 
   .layer.layer-hero-id.header-top-spot
-    article.layout-padding-bottom.layout-padding-dull-top.layout-contain-larger.layout-padding-horz-small
+    article.layout-padding-dull-top.layout-contain-larger.layout-padding-horz-small
       .layer-hero
         div(class=_class)
           +image(image)
@@ -14,7 +14,7 @@ mixin hero(value = {})
           .layout-padding-horz-default--device-lt-tablet.layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center
             .layer-content.layout-contain
               .layer-header.layer-title
-                h1.style-font-size-sub-extra-large--device-gt-laptop.style-font-title.style-white.style-font-weight-bolder(itemprop="headline")= title
+                h1.style-font-size-sub-large--device-phone.style-font-size-sub-extra-large--device-gt-laptop.style-font-title.style-white.style-font-weight-bolder(itemprop="headline")= title
               .layer-main
                 h2.layout-margin-top.style-font-family-bold.style-font-weight-300.style-off-blue.layer-main-text(itemprop="description")!= content
               .layout-align-self-end
@@ -24,5 +24,6 @@ mixin hero(value = {})
                       +icon("expand_more").action-icon.style-font-size-24
                       span.action-btn-section
                         span.action-btn-spacer
+                        span.layout-margin-left-mini
                         span.action-btn-content Scroll Down
                         span.action-btn-spacer

@@ -3,18 +3,18 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-      
+
       url: "/projects/sarbot",
       name: "sarbot",
       title: "SarBot — A Search and Rescue Robot",
-      description: "A test of the abilities of some colleagues and I; to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. "
+      description: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe."
     };
 
 block content
   //- Banner layer
   +banner({
     title: "Project 3: SarBot (2018)",
-    content: "A test of the abilities of some colleagues and I; to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner.",
+    content: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe",
     image: {
       class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
@@ -101,12 +101,12 @@ block content
               figcaption.style-font-14.style-italic Figure 5: A video displaying the capabilities of the final design of SarBot
 
   //- Next page layer
-  
+
   +layout({
     class: "layout-contain-large layer-round layout-padding-horz--device-gt-tablet"
   })
     +link({
-      href: "/projects/battery-manager",
+      href: "/projects/ultima-apparel",
       class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
     }, true)
       +head({
@@ -114,7 +114,7 @@ block content
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
         +main({
-          class: "layout-padding-vert-sub-large--device-gt-tablet"
+          class: "layout-padding-vert-sub-large"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Ultima Apparel
 

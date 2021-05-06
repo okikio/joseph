@@ -3,10 +3,10 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-      
+
       url: "/sitemap",
       name: "sitemap",
-      title: "Sitemap — Lets find you a destination, the destination of greatness!",
+      title: "Sitemap — A list of all pages with descriptions.",
       description: "A little lost, here is a map, now where do you want to go? The sitemap lists all pages and gives brief descriptions to help you find your way."
     };
 
@@ -27,7 +27,8 @@ block content
     })
       section
         +head
-          h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center The Sitemap — Lets find you a destination!
+          h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Sitemap
+          p The sitemap lists all pages and gives brief descriptions to help you find your way.
         +main
           ul(itemscope itemtype="https://schema.org/SiteNavigationElement")
             //- Index
@@ -37,7 +38,7 @@ block content
                 class: "style-italic style-underline layout-margin-right-mini"
               })(itemprop="url")
                 span(itemprop="name") Home
-              +p("- Homepage galor, its the begining of our little adventure. Do you want to go back?")
+              +p("- Homepage galor, its the begining of our little adventure.")
               br
 
             //- About
@@ -47,44 +48,71 @@ block content
                 class: "style-italic style-underline layout-margin-right-mini"
               })(itemprop="url")
                 span(itemprop="name") About
-              +p("- The story of me, myself and I. Shall we begin?")
-              ul
-                //- Resume
-                li
-                  +link({
-                    href: "/my-resume",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") My Resume
-                  +p("- All the qualifications I have aquired over my life time, in readable, bite sized, format.")
+              +p("- What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering.")
 
             //- Projects
-            //- li
+            li
               +link({
-                href: "/projects",
+                href: "/portfolio",
                 class: "style-italic style-underline layout-margin-right-mini"
               })(itemprop="url")
-                span(itemprop="name") Projects
-              +p("- Hardwork and perseverance, hear all about it.")
+                span(itemprop="name") Portfolio
+              +p("- Hardwork and perseverance, hear all about it. A showcase of projects I have completed, and even some that are still on-going.")
               br
               ul
-                //- Nasa
+                //- Boxer
                 li
                   +link({
-                    href: "/projects/nasa",
+                    href: "/projects/boxer",
                     class: "style-italic style-underline layout-margin-right-mini"
                   })(itemprop="url")
-                    span(itemprop="name") Nasa
-                  +p("- Yes that Nasa, find out more.")
+                    span(itemprop="name") Boxer
+                  +p("- An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.")
                   br
-                //- Google Designs
+                //- Battery Manager
                 li
                   +link({
-                    href: "/projects/google-designs",
+                    href: "/projects/battery-manager",
                     class: "style-italic style-underline layout-margin-right-mini"
                   })(itemprop="url")
-                    span(itemprop="name") Google Designs
-                  +p("- I Also worked with Google, specifically their Design team.")
+                    span(itemprop="name") Battery Manager
+                  +p("- A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of batteries.")
+                  br
+                //- SarBot
+                li
+                  +link({
+                    href: "/projects/sarbot",
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") SarBot
+                  +p("- A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe.")
+                  br
+                //- Ultima Apparel
+                li
+                  +link({
+                    href: "/projects/ultima-apparel",
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") Ultima Apparel
+                  +p("- Enhanced sportsware designed to improve posture and track workout form.")
+                  br
+                //- Phoenix
+                li
+                  +link({
+                    href: "/projects/phoenix",
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") Phoenix
+                  +p("- A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix.")
+                  br
+                //- Publications
+                li
+                  +link({
+                    href: "/projects/publications",
+                    class: "style-italic style-underline layout-margin-right-mini"
+                  })(itemprop="url")
+                    span(itemprop="name") Academic Publications
+                  +p("- A list of publications I completed while studying for my masters at OntarioTech University.")
                   br
 
             //- Contact
