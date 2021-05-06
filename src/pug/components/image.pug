@@ -10,7 +10,7 @@ mixin image(value = {})
     let cloudinaryTest = /^cloudinary\//.test(src);
     let origin = `https://res.cloudinary.com/okikio-assets/image/${external ? "fetch" : "upload"}/`;
     let urlParse = (filters = "w_auto") => cloudinaryTest ? `${origin + "q_auto:best/c_fit," + filters},dpr_auto/${src.replace(/^cloudinary\//, "")}` : src;
-  
+
   .layer-image(class=_class title=alt)
     figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")&attributes(attributes)
       .layer-image-overlay

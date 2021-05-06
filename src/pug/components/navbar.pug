@@ -49,7 +49,7 @@ mixin navbar(value = {})
                   +link({
                     href: `/${tab}`,
                     class: `navbar-link${url.toLowerCase().includes(tab) ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" data-swup-preload data-path=`${tab == "portfolio" ? `projects` : tab}`)
+                  })(itemprop="url" data-swup-preload data-path=tab)
                     span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
                     meta(itemprop="position" content="1")
             .navbar-desktop-display

@@ -1,4 +1,4 @@
-mixin video(value = {})
+mixin img-view(value = {})
   -
     let _class = value.class;
     let source = value.src || "cloudinary/city";
@@ -9,10 +9,10 @@ mixin video(value = {})
 
     let cloudinaryTest = /^cloudinary\//.test(src);
     let origin = `https://res.cloudinary.com/okikio-assets/image/${external ? "fetch" : "upload"}/`;
-    let urlParse = (filters = "w_auto") => cloudinaryTest ? `${origin + "q_auto:best/c_fit," + filters},dpr_auto/${src.replace(/^cloudinary\//, "")}` : src;
-  
-  .layer-image(class=_class title=alt)
-    figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")&attributes(attributes)
-      .layer-image-overlay
+    let urlParse = (filters = "w_auto") => cloudinaryTest ? `${origin + "q_auto:best,f_auto," + filters},dpr_auto/${src.replace(/^cloudinary\//, "")}` : src;
+
+  .img-view
+    figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
+      img.core-img(data-src!=`${urlParse()}.webp` alt=alt loading="lazy" itemprop="url")&attributes(attributes)
       noscript
         img.no-script-img(src!=`${urlParse()}.jpg` aria-hidden="true" alt=alt loading="lazy")

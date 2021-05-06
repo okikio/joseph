@@ -58,26 +58,20 @@ block content
             | After the upgrade, the manager became more versatile, allowing testing on multiple cells in different configurations, thus, expanding the lab’s research capacity. The new system is also modular and can be expanded with additional power supplies and electronic loads. This new generation will be used while I complete my thesis on a health-conscious fast-charging algorithm for battery packs. While working on my research, I thought I should also streamline my colleagues’ workloads by providing a user interface (UI) for the manager. This will allow anyone to run basic tests with the pre-configured commands but also provide a script to run custom tests.
             br
             br
-            figure.layout-margin-horz.style-center
-              +tile({
-                class: "layer-surface layer-box layout-block layout-margin-bottom-smaller",
-                image: {
-                  src: "cloudinary/joseph-projects/battery-manager/01_BatteryManager",
-                  alt: ""
-                }
-              })
-              figcaption.style-font-14.style-italic Figure 1: Battery Manager UI for testing battery packs
+            figure.layout-margin-horz--device-gt-tablet.style-center
+              +img-view({
+                src: "cloudinary/joseph-projects/battery-manager/01_BatteryManager",
+                alt: ""
+              })(width="600px" height="500px")
+              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 1: Battery Manager UI for testing battery packs
             br
             br
-            figure.layout-margin-horz.style-center
-              +tile({
-                class: "layer-surface layer-box layout-block layout-margin-bottom-smaller",
-                image: {
-                  src: "cloudinary/joseph-projects/battery-manager/02_DevConfig",
-                  alt: ""
-                }
-              })
-              figcaption.style-font-14.style-italic Figure 2: Device Configuration UI for selecting and configuring devices
+            figure.layout-margin-horz--device-gt-tablet.style-center
+              +img-view({
+                src: "cloudinary/joseph-projects/battery-manager/02_DevConfig",
+                alt: ""
+              })(width="400px" height="300px")
+              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 2: Device Configuration UI for selecting and configuring devices
             br
             | As with any software product, continuous improvement and addition of new features is important, and since the platform will be for research, changes and improvements will more likely than not be necessary. Which is why I have provided the source code for the UI in the
             span=" "

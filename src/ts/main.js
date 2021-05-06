@@ -66,7 +66,8 @@ const _menu = '.navbar-menu';
 const _backUp = '.back-to-top';
 const _skipMain = ".skip-main";
 const _navLink = '.navbar-link';
-const _layer_img = ".layer-image";
+const _layer_img = ".layer-image[data-resize]";
+const _load_img = ".load-img";
 const _themeSwitcher = ".theme-switcher";
 const _actioncenter = ".layer-action-center";
 const _scrolldown = '.layer-hero-scroll-down';
@@ -107,7 +108,7 @@ try {
         setTheme(theme);
     };
 
-    // On theme switcher button click (click is a tiny bit more efficient) toggle the theme between dark and light mode
+    // On theme switcher button click toggle the theme between dark and light mode
     on(_themeSwitcher, "click", () => {
         themeSet(themeGet() === "dark" ? "light" : "dark");
     });
@@ -119,7 +120,7 @@ try {
     console.warn("Theme switcher button broke, :(.");
 }
 
-// On backup button click (click is a tiny bit more efficient) animate back to the top
+// On backup button click animate back to the top
 on(_backUp, "click", () => {
     scrollTo("0px", "1400ms");
 });
@@ -145,13 +146,12 @@ on(window, {
             toggleClass(_scrolldown, "action-btn-expand", windowWid <= 650);
 
             // Find the layer-images in each layer
-            each(_layer_img, $img => {
-                load_img = get(find($img, ".load-img"), 0);
+            each(_load_img, $img => {
                 srcWid = Math.round(width($img));
                 srcHei = Math.round(height($img));
 
                 // Find the core-img in the layer-image container
-                _core_img = get(find(load_img, ".core-img"), 0);
+                _core_img = get(find($img, ".core-img"), 0);
 
                 // Make sure the image that is loaded is the same size as its container
                 srcset = attr(_core_img, "data-src");
@@ -165,7 +165,7 @@ on(window, {
                 if (src !== attr(_core_img, "src")) {
                     // Ensure the image has loaded, then replace the small preview
                     attr(_core_img, "src", src);
-                    on(_core_img, "load", onload(load_img));
+                    on(_core_img, "load", onload($img));
                 }
             });
         });
@@ -250,7 +250,7 @@ let goDown = () => {
 let init = () => {
     _images.clear();
 
-    // On scroll down button click (click is a tiny bit more efficient) animate scroll to the height of the hero layer
+    // On scroll down button click animate scroll to the height of the hero layer
     on(_scrolldown, "click", goDown);
 
     // Determine the height of the hero
@@ -441,6 +441,19 @@ class customPreload extends Plugin {
     }
 }
 
+const activeNavLink = () => {
+    let href = window.location.href || "";
+    href = href.replace("projects", "portfolio");
+
+    requestAnimationFrame(() => {
+        removeClass(_navLink, "navbar-link-focus");
+        each(_navLink, _link => {
+            let path = attr(_link, "data-path") || " ";
+            toggleClass(_link, "navbar-link-focus", href.includes(path.toLowerCase()));
+        });
+    });
+};
+
 on(document, "ready", () => {
     // SWUP library
     try {
@@ -473,7 +486,7 @@ on(document, "ready", () => {
 
             // This event runs for every page view after initial load
             Swup.on("clickLink", () => {
-                // Remove click (click is a tiny bit more efficient) event from scroll down button
+                // Remove click event from scroll down button
                 off(_scrolldown, "click", goDown);
 
                 if (windowWid <= 700) {
@@ -484,24 +497,16 @@ on(document, "ready", () => {
             });
             Swup.on("samePage", () => {
                 // If on the same page reinvigorate the scroll down button click event
-                // On scroll down button click (click is a tiny bit more efficient) animate scroll to the height of the hero layer
+                // On scroll down button click animate scroll to the height of the hero layer
                 on(_scrolldown, "click", goDown);
             });
             Swup.on('contentReplaced', () => {
                 init(); resize(); scroll();
             });
-            Swup.on('willReplaceContent', () => {
-                let href = window.location.href;
-
-                requestAnimationFrame(() => {
-                    removeClass(_navLink, "navbar-link-focus");
-                    each(_navLink, _link => {
-                        let path = attr(_link, "data-path") || " ";
-                        toggleClass(_link, "navbar-link-focus", href.includes(path.toLowerCase()));
-                    });
-                });
-            });
+            Swup.on('willReplaceContent', activeNavLink);
         }
+
+        activeNavLink();
     } catch (e) {
         // Swup isn't very good at handling errors in page transitions, so to avoid errors blocking the site from working properly; if SWUP crashes it should fallback to normal page linking
         on(linkSelector, 'click', e => {
