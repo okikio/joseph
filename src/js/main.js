@@ -149,7 +149,6 @@ on(window, {
             each(_load_img, $img => {
                 srcWid = Math.round(width($img));
                 srcHei = Math.round(height($img));
-                console.log(srcWid);
 
                 // Find the core-img in the layer-image container
                 _core_img = get(find($img, ".core-img"), 0);

@@ -32,22 +32,19 @@ $dark-colors: (
     "primary-light": lighten($primary-dark, 5%),
     "primary": lighten($primary, 15%),
     "primary-dark": lighten($primary-light, 15%),
-
     "secondary-light": lighten($secondary-dark, 15%),
     "secondary": lighten($secondary, 5%),
     "secondary-dark": lighten($secondary-light, 15%),
-
     "tertiary-light": $tertiary-light,
     "tertiary": $tertiary,
     "tertiary-dark": $tertiary-dark,
-
-    "background": #18181b, // #000000
-    "surface": #333435, // #2f2f35
-    "transparent": transparent,
-
+    "background": #18181b,
+    // #000000
+        "surface": #333435,
+    // #2f2f35
+        "transparent": transparent,
     "white": $white,
     "black": $black,
-
     "invert-white": $black,
     "very-light": #1d2125,
     "light": #525252,
@@ -59,8 +56,7 @@ $dark-colors: (
     "invert-black": $white,
 );
 @media (prefers-color-scheme: dark) {
-    html,
-    html:not([theme="dark"]) {
+    html:not([theme="light"]) {
         @each $name, $value in $dark-colors {
             --#{$name}: #{$value};
         }

@@ -126,6 +126,15 @@ body {
     @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
 }
+
+@media (prefers-color-scheme: dark) {
+    html:not([theme]) {
+        @each $name, $value in $dark-colors {
+            --#{$name}: #{$value};
+        }
+    }
+}
+
 body {
     transition: background-color #{$transitionDuration} ease,
         color #{$transitionDuration} ease;
@@ -382,24 +391,33 @@ a.skip-main {
     }
 }
 
-figure.load-img {
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-
-    .img-view-contain {
-        transition: background-color #{$transitionDuration} ease;
+.img-view {
+    figure.load-img {
         position: relative;
-        transform: translate3d(0, 0, 0);
-        display: inline-block;
-        background-color: #797886;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
 
-        img {
-            position: relative;
-            object-fit: scale-down;
-            object-position: center center;
-            transform: scale(1);
+        .img-view-contain {
+            transition: background-color #{$transitionDuration} ease;
+            transform: translate3d(0, 0, 0);
+            display: inline-block;
+            background-color: #797886;
+
+            img {
+                position: relative;
+                object-fit: scale-down;
+                object-position: center center;
+                transform: scale(1);
+            }
+
+            .no-script-img {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                top: 0;
+                left: 0;
+            }
         }
     }
 }
