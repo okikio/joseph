@@ -22,15 +22,12 @@ html(lang="en")
     meta(name="viewport", content="width=device-width,initial-scale=1")
     meta(name="color-scheme" content="dark light")
 
+    link(rel="stylesheet" href="/css/app.min.css" async)
     noscript
       link(rel="stylesheet" href="/css/no-script.min.css" async)
-    link(rel="stylesheet" href="/css/app.min.css" async)
 
     link(rel="manifest", href="/manifest.json")
     link(type="text/plain" rel="author" href="/humans.txt")
-
-    script(src="/js/theme.min.js", async)
-    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,es2018,Object.entries,fetch,IntersectionObserver,IntersectionObserverEntry,smoothscroll,matchMedia,localStorage,getComputedStyle,Element.prototype.scrollIntoView,WebAnimations` defer)
 
     -
       let defaults = {
@@ -58,8 +55,7 @@ html(lang="en")
 
     block preload
 
-    script(src="/js/legacy.min.js", nomodule defer)
-    script(src="/js/modern.min.js", type="module" defer)
+    script(src="/js/theme.min.js", async)
 
   body(itemscope="" itemtype="https://schema.org/WebPage")
     +link({
@@ -91,6 +87,11 @@ html(lang="en")
 
     block footer
       +footer
+
+    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,es2018,Object.entries,fetch,IntersectionObserver,IntersectionObserverEntry,smoothscroll,matchMedia,localStorage,getComputedStyle,Element.prototype.scrollIntoView,WebAnimations` async)
+
+    script(src="/js/legacy.min.js", nomodule async)
+    script(src="/js/modern.min.js", type="module" async)
 
     script(type="application/ld+json").
       {

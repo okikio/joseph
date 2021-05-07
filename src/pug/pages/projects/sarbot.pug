@@ -42,7 +42,7 @@ block content
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/2-Floor_Maze",
                 alt: ""
-              })(width="500px" height="500px")
+              })(width="471px" height="315px")
               figcaption.layout-margin-top-small.style-font-14.style-italic Figure 1: An image of the floor Maze Sarbot had to cross
         div.layout-contain.layout-shorten-horz.layout-margin-vert
           +p
@@ -53,14 +53,14 @@ block content
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
                 alt: ""
-              })(width="500px" height="500px")
+              })(width="610px" height="481px")
               figcaption.layout-margin-top-small.style-font-14.style-italic Figure 2: A model of Sarbot.
             br
             figure.layout-margin-horz--device-gt-tablet.style-center
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/3D_Printing",
                 alt: ""
-              })(width="500px" height="500px")
+              })(width="602px" height="714px")
               figcaption.layout-margin-top-small.style-font-14.style-italic Figure 3: The 3D printing of the parts for Sarbot
             br
             | Our approach, although not ideal for the use case, was similar to that of some self-driving vehicle companies. We first manually mapped out the maze with waypoints. These waypoints were placed near key landmarks. These landmarks include T-junctions, cross-sections, narrower paths, steep grades, terrain changes, miner location and so on. A matrix of data was then created for each waypoint to help the robot decide what actions to take at each waypoint. Each waypoint consisted of a base command to go forward, backward, left or right, a base command controller i.e. what controller to use to complete the base command, stopping conditions for the command, manipulator commands and others. For example, a waypoint next to a turn had data such a turn right command, how many degrees the turn is, the speed required to make the turn, and what controller to use to make the turn i.e. a PID controller for robot angle.
@@ -76,13 +76,13 @@ block content
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/Final_Build",
                 alt: ""
-              })(width="500px" height="500px")
+              })(width="480px" height="452px")
               figcaption.layout-margin-top-small.style-font-14.style-italic Figure 4: The finalized model of Sarbot
             br
             br
             figure.layout-margin-horz--device-gt-tablet.style-center
               section(class="layout-block layout-margin-bottom-smaller")
-                video.layout-full-width(controls='' autoplay='' name='media')
+                video.layout-full-width(controls='' name='media')
                   source(src='https://res.cloudinary.com/okikio-assets/video/upload/v1618904172/joseph-projects/sarbot/Joseph_s_Trimmed_Video.mp4' type='video/mp4')
 
               figcaption.layout-margin-top-small.style-font-14.style-italic Figure 5: A video displaying the capabilities of the final design of SarBot

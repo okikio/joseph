@@ -382,12 +382,13 @@ a.skip-main {
     }
 }
 
-.img-view {
+figure.load-img {
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
 
-    figure.load-img {
+    .img-view-contain {
         transition: background-color #{$transitionDuration} ease;
         position: relative;
         transform: translate3d(0, 0, 0);
@@ -396,7 +397,7 @@ a.skip-main {
 
         img {
             position: relative;
-            object-fit: contain;
+            object-fit: scale-down;
             object-position: center center;
             transform: scale(1);
         }

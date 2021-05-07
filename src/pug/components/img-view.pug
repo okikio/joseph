@@ -13,6 +13,7 @@ mixin img-view(value = {})
 
   .img-view
     figure.load-img(itemprop="image" itemscope itemtype="https://schema.org/ImageObject")
-      img.core-img(data-src!=`${urlParse()}.webp` alt=alt loading="lazy" itemprop="url")&attributes(attributes)
-      noscript
-        img.no-script-img(src!=`${urlParse()}.jpg` aria-hidden="true" alt=alt loading="lazy")
+      .img-view-contain
+        img.core-img(data-src!=`${urlParse()}.webp` alt=alt loading="lazy" itemprop="url")&attributes(attributes)
+        noscript
+          img.no-script-img(src!=`${urlParse()}.jpg` aria-hidden="true" alt=alt loading="lazy")
