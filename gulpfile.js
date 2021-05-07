@@ -20,7 +20,7 @@ const srcFolder = `src`;
 const destFolder = `public`;
 
 // Source file folders
-const tsFolder = `${srcFolder}/ts`;
+const srcjsFolder = `${srcFolder}/js`;
 const pugFolder = `${srcFolder}/pug`;
 const scssFolder = `${srcFolder}/scss`;
 const assetsFolder = `${srcFolder}/assets`;
@@ -31,7 +31,7 @@ const cssFolder = `${destFolder}/css`;
 const htmlFolder = `${destFolder}`;
 
 // Main ts file bane
-const tsFile = `main.js`;
+const jsFile = `main.js`;
 
 // HTML Tasks
 const iconPath = `./icons.cjs`;
@@ -98,7 +98,7 @@ tasks({
         ]);
 
         let esbuild = mode == "watch" ? createGulpEsbuild() : gulpEsBuild;
-        return stream(`${tsFolder}/${tsFile}`, {
+        return stream(`${srcjsFolder}/${jsFile}`, {
             pipes: [
                 // Bundle Modules
                 esbuild({
@@ -125,7 +125,7 @@ tasks({
         );
         let esbuild = mode == "watch" ? createGulpEsbuild() : gulpEsBuild;
 
-        return stream(`${tsFolder}/${tsFile}`, {
+        return stream(`${srcjsFolder}/${jsFile}`, {
             pipes: [
                 // Bundle Modules
                 esbuild({
@@ -143,7 +143,7 @@ tasks({
             "gulp-esbuild"
         );
         let esbuild = mode == "watch" ? createGulpEsbuild() : gulpEsBuild;
-        return stream([`${tsFolder}/*.js`, `!${tsFolder}/${tsFile}`], {
+        return stream([`${srcjsFolder}/*.js`, `!${srcjsFolder}/${jsFile}`], {
             pipes: [
                 // Bundle Modules
                 esbuild({
@@ -156,7 +156,7 @@ tasks({
             dest: jsFolder, // Output
         });
     },
-    js: parallelFn(`modern-js`, `legacy-js`, `other-js`),
+    js: seriesFn(`modern-js`, `legacy-js`, `other-js`),
 });
 
 // Task for Optimizing for Production
@@ -315,24 +315,22 @@ task("watch", async () => {
     );
 
     watch(
-        [`${pugFolder}/pages/**/*.pug`],
-        series(`html`, "reload")
-    );
-    watch(
         [
+            `${pugFolder}/pages/**/*.pug`,
             `${pugFolder}/layout.pug`,
             `${pugFolder}/components/**/*.pug`,
             iconPath,
         ],
+        { delay: 300 },
         series(`html`, "reload")
     );
     watch(`${scssFolder}/**/*.scss`, series(`css`));
     watch(
-        [`${tsFolder}/**/*.js`, `!${tsFolder}/*.js`, `${tsFolder}/${tsFile}`],
-        series(parallelFn(`modern-js`, `legacy-js`), `reload`)
+        [`${srcjsFolder}/${jsFile}`, `${srcjsFolder}/components/*.js`, `!${srcjsFolder}/*.js`],
+        series(`modern-js`, `legacy-js`, `reload`)
     );
     watch(
-        [`!${tsFolder}/${tsFile}`, `${tsFolder}/*.js`],
+        [`!${srcjsFolder}/${jsFile}`, `${srcjsFolder}/*.js`],
         series(`other-js`, `reload`)
     );
     watch(`${assetsFolder}/**/*`, { delay: 500 }, series(`assets`, "reload"));
@@ -342,8 +340,8 @@ task("watch", async () => {
 task(
     "build",
     series(
-        parallelFn("html", "js", "css", "assets"),
-        parallelFn("posthtml", "production")
+        parallelFn("html", "css", "js", "assets"),
+        "production", "posthtml"
     )
 );
 
@@ -351,6 +349,6 @@ task(
     "default",
     series(
         parallelFn("html", "css", "js", "assets"),
-        parallelFn("posthtml", "watch")
+        "posthtml", "watch"
     )
 );
