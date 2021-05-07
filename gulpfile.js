@@ -106,7 +106,7 @@ tasks({
                     minify: true,
                     sourcemap: true,
                     outfile: "modern.min.js",
-                    target: ["chrome83"],
+                    target: ["es2018"],
                 }),
             ],
             dest: jsFolder, // Output
