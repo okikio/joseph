@@ -31,9 +31,10 @@
                 opacity: 1;
             }
 
-            .navbar-title-line {
-                border-left-color: darken($background, 14%);
-            }
+            // .navbar-title-line {
+            //     border-left-color: darken($background, 14%);
+            //     border-left-color: var(--light, darken($background, 14%));
+            // }
         }
 
         &-fixed {
@@ -125,11 +126,11 @@
             }
 
             &-line {
-                // transition: border-left-color #{$transitionDuration} ease;
+                transition: border #{$transitionDuration} ease;
 
                 border-left: 1px solid transparent;
-                border-left-color: darken($mid-light, 2%);
-                border-left-color: var(--mid-light, darken($mid-light, 2%));
+                border-left-color: darken($background, 14%);
+                border-left-color: var(--light, darken($background, 14%));
 
                 margin-right: $size-smaller;
                 margin-left: $size-smaller;

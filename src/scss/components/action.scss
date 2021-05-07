@@ -29,24 +29,25 @@
         }
 
         &-radial {
-            &,
-            &:focus-visible {
-                border-radius: 24px;
-            }
+            border-radius: 24px;
+        }
+        &-radial:focus-visible {
+            border-radius: 24px;
         }
 
         &-round {
-            &,
-            &:focus-visible {
-                @extend .layer-round;
-            }
+            border-radius: 9999px;
+        }
+        &-round:focus-visible {
+            border-radius: 9999px;
         }
 
         &-smooth {
-            &,
-            &:focus-visible {
-                border-radius: 5px;
-            }
+            border-radius: 5px;
+        }
+
+        &-smooth:focus-visible {
+            border-radius: 5px;
         }
 
         &-spacer {
@@ -161,9 +162,9 @@
 
         &-btn,
         &-btn:hover {
-            &,
+            border-radius: 9999px;
             &:focus-visible {
-                border-radius: 20em;
+                border-radius: 9999px;
             }
             text-decoration: none;
         }

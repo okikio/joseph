@@ -11,14 +11,14 @@ mixin hero(value = {})
         div(class=_class)
           +image(image)
 
-          .layout-padding-horz-default--device-lt-tablet.layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center.layout-justify-content-center
+          .layout-padding-horz-default--device-lt-tablet.layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center
             .layer-content.layout-contain
               .layer-header.layer-title
                 h1.style-font-size-sub-large--device-phone.style-font-size-sub-extra-large--device-gt-laptop.style-font-title.style-white.style-font-weight-bolder(itemprop="headline")= title
               .layer-main
                 h2.layout-margin-top.style-font-family-bold.style-font-weight-300.style-off-blue.layer-main-text(itemprop="description")!= content
               .layout-align-self-end
-                button.layer-footer.action-btn.action-btn-hover.layer-round.layer-secondary-btn.layer-hero-scroll-down(type="button" tabindex="0")
+                button.layer-footer.action-btn.action-btn-hover.action-btn-round.layer-secondary-btn.layer-hero-scroll-down(type="button" tabindex="0")
                   section.action-btn-layout.layout-padding-smallest
                     span.action-btn-group
                       +icon("expand_more").action-icon.style-font-size-24
