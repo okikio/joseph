@@ -1,8 +1,7 @@
 const minSuffix = { suffix: ".min" };
 const mode = process.argv.includes("--watch") ? "watch" : "build";
 
-import { gulpSass, watch, task, tasks, series, parallel, seriesFn, parallelFn, stream, streamList } from "./util.js";
-import rename from "gulp-rename";
+import { watch, task, tasks, series, parallel, seriesFn, parallelFn, stream, streamList } from "./util.js";
 
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
@@ -71,12 +70,27 @@ task("html", async () => {
 
 // CSS Tasks
 let browserSync;
-task("css", () => {
+task("css", async () => {
+    let [
+        { default: sass },
+        { default: compiler },
+        { default: fiber },
+        { default: rename }
+    ] = await Promise.all([
+        import("gulp-sass"),
+        import("sass"),
+        import("fibers"),
+        import("gulp-rename")
+    ]);
+
+    sass.compiler = compiler;
     return stream(`${scssFolder}/*.scss`, {
         pipes: [
             // Minify scss to css
-            gulpSass({ outputStyle: "compressed" })
-                .on("error", gulpSass.logError),
+            sass({
+                outputStyle: "compressed",
+                fiber
+            }).on("error", sass.logError),
             rename(minSuffix), // Rename
         ],
         dest: cssFolder,
@@ -89,12 +103,12 @@ tasks({
     "modern-js": async () => {
         let [
             { default: gulpEsBuild, createGulpEsbuild },
-            { default: gzipSize },
-            { default: prettyBytes },
+            { default: size },
+            { default: gulpif }
         ] = await Promise.all([
             import("gulp-esbuild"),
-            import("gzip-size"),
-            import("pretty-bytes"),
+            import("gulp-size"),
+            import("gulp-if")
         ]);
 
         let esbuild = mode == "watch" ? createGulpEsbuild() : gulpEsBuild;
@@ -105,26 +119,27 @@ tasks({
                     bundle: true,
                     minify: true,
                     sourcemap: true,
-                    outfile: "modern.min.js",
+                    format: "esm",
+                    platform: "browser",
                     target: ["es2018"],
+                    outfile: "modern.min.js",
                 }),
+
+                // Filter out the sourcemap
+                // I don't need to know the size of the sourcemap
+                gulpif((file) => {
+                    return !/\.map$/.test(file.path);
+                }, size({ gzip: true, showFiles: true, showTotal: false }))
             ],
             dest: jsFolder, // Output
-            async end() {
-                console.log(
-                    `=> Gzip size - ${prettyBytes(
-                        await gzipSize.file(`${jsFolder}/modern.min.js`)
-                    )}\n`
-                );
-            },
         });
     },
     "legacy-js": async () => {
         let { default: gulpEsBuild, createGulpEsbuild } = await import(
             "gulp-esbuild"
         );
-        let esbuild = mode == "watch" ? createGulpEsbuild() : gulpEsBuild;
 
+        let esbuild = mode == "watch" ? createGulpEsbuild() : gulpEsBuild;
         return stream(`${srcjsFolder}/${jsFile}`, {
             pipes: [
                 // Bundle Modules
@@ -133,6 +148,8 @@ tasks({
                     minify: true,
                     outfile: "legacy.min.js",
                     target: ["es6"],
+                    format: "iife",
+                    platform: "browser",
                 }),
             ],
             dest: jsFolder, // Output
@@ -149,14 +166,16 @@ tasks({
                 esbuild({
                     bundle: true,
                     minify: true,
+                    entryNames: '[name].min',
                     target: ["es6"],
+                    format: "esm",
+                    platform: "browser",
                 }),
-                rename({ suffix: ".min", extname: ".js" }), // Rename
             ],
             dest: jsFolder, // Output
         });
     },
-    js: seriesFn(`modern-js`, `legacy-js`, `other-js`),
+    js: parallelFn(`modern-js`, `legacy-js`, `other-js`),
 });
 
 // Task for Optimizing for Production
@@ -234,51 +253,31 @@ task("assets", () => {
     });
 });
 
-task("posthtml", async () => {
+task("sitemap", async () => {
     let [
-        { default: posthtml },
-        { default: textr },
-        { default: lorem },
-        { default: singleSpaces },
         { default: sitemap },
     ] = await Promise.all([
-        import("gulp-posthtml"),
-        import("posthtml-textr"),
-        import("posthtml-lorem"),
-        import("typographic-single-spaces"),
         import("gulp-sitemap"),
     ]);
 
-    return streamList([
-        [[`${htmlFolder}/**/*.html`, `!${htmlFolder}/**/404.html`], {
-            pipes: [
-                posthtml([
-                    // Test processes
-                    textr({}, [singleSpaces]),
-                    lorem(),
-                ]),
-            ],
-            dest: htmlFolder
-        }],
-        [`${htmlFolder}/**/*.html`, {
-            pipes: [
-                sitemap({
-                    siteUrl,
-                    mappings: [
-                        {
-                            pages: ["**/*"],
-                            changefreq: "monthly",
-                            getLoc(siteUrl, loc, entry) {
-                                // Removes the file extension if it exists
-                                return loc.replace(/\.\w+$/, "");
-                            },
+    return stream(`${htmlFolder}/**/*.html`, {
+        pipes: [
+            sitemap({
+                siteUrl,
+                mappings: [
+                    {
+                        pages: ["**/*"],
+                        changefreq: "monthly",
+                        getLoc(siteUrl, loc, entry) {
+                            // Removes the file extension if it exists
+                            return loc.replace(/\.\w+$/, "");
                         },
-                    ],
-                }),
-            ],
-            dest: htmlFolder,
-        }],
-    ]);
+                    },
+                ],
+            }),
+        ],
+        dest: htmlFolder,
+    });
 });
 
 // BrowserSync
@@ -324,15 +323,18 @@ task("watch", async () => {
         { delay: 300 },
         series(`html`, "reload")
     );
+
     watch(`${scssFolder}/**/*.scss`, series(`css`));
     watch(
-        [`${srcjsFolder}/${jsFile}`, `${srcjsFolder}/components/*.js`, `!${srcjsFolder}/*.js`],
+        [`${srcjsFolder}/${jsFile}`, `${srcjsFolder}/components/*.js`],
         series(`modern-js`, `legacy-js`, `reload`)
     );
+
     watch(
         [`!${srcjsFolder}/${jsFile}`, `${srcjsFolder}/*.js`],
         series(`other-js`, `reload`)
     );
+
     watch(`${assetsFolder}/**/*`, { delay: 500 }, series(`assets`, "reload"));
 });
 
@@ -341,14 +343,11 @@ task(
     "build",
     series(
         parallelFn("html", "css", "js", "assets"),
-        "production", "posthtml"
+        parallelFn("production", "sitemap")
     )
 );
 
 task(
     "default",
-    series(
-        parallelFn("html", "css", "js", "assets"),
-        "posthtml", "watch"
-    )
+    series(parallelFn("html", "css", "js", "assets"), "watch")
 );

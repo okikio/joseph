@@ -1,3 +1,6 @@
+@use "./mixins.scss" as *;
+@use "./layout.scss" as *;
+
 /* -- Header -- */
 .header {
     $height: 60px;

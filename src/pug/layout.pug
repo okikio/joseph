@@ -36,14 +36,12 @@ html(lang="en")
         title: "Joseph Ojo — A Mechatronics Engineers Portfolio",
         description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. This is my portfolio site, it holds my resume and ways to contact me."
       };
+
     block pageInfo
       - let page = {};
 
     -
       page = Object.assign({}, defaults, page);
-
-    block seo
-      +seo(page)
 
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -55,7 +53,7 @@ html(lang="en")
 
     block preload
 
-    script(src="/js/theme.min.js", defer)
+    script(src="/js/theme.min.js" type="module", defer)
 
   body(itemscope="" itemtype="https://schema.org/WebPage")
     +link({
@@ -88,7 +86,7 @@ html(lang="en")
     block footer
       +footer
 
-    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,es2018,Object.entries,fetch,IntersectionObserver,IntersectionObserverEntry,smoothscroll,matchMedia,localStorage,getComputedStyle,Element.prototype.scrollIntoView,WebAnimations` async)
+    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,fetch,smoothscroll,WebAnimations` async)
 
     script(src="/js/legacy.min.js", nomodule async)
     script(src="/js/modern.min.js", type="module" async)

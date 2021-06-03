@@ -1,3 +1,5 @@
+@use "./mixins.scss" as *;
+
 /* -- Action (represents elements that request direct interaction) -- */
 .action {
     &-btn {

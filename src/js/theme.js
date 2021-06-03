@@ -1,6 +1,6 @@
 // Based on [joshwcomeau.com/gatsby/dark-mode/]
 const { localStorage, matchMedia } = window;
-let getTheme = () => {
+export let getTheme = () => {
     const theme = localStorage.getItem('theme');
     // If the user has explicitly chosen light or dark,
     // let's use it. Otherwise, this value will be null.
@@ -11,21 +11,17 @@ let getTheme = () => {
     return null;
 };
 
-let setTheme = theme => {
+export let setTheme = theme => {
     // If the user has explicitly chosen light or dark, store the default theme
     if (typeof theme === 'string') localStorage.setItem('theme', theme);
 };
 
-let mediaTheme = () => {
+export let mediaTheme = () => {
     // If they haven't been explicitly set, let's check the media query
     const mql = matchMedia('(prefers-color-scheme: dark)');
     const hasMediaQueryPreference = typeof mql.matches === 'boolean';
     if (hasMediaQueryPreference) return mql.matches ? 'dark' : 'light';
 };
-
-window.setTheme = setTheme;
-window.getTheme = getTheme;
-window.mediaTheme = mediaTheme;
 
 try {
     let theme = getTheme();

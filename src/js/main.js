@@ -1,63 +1,12 @@
 // Imported external libraries
 import swup from "swup";
-// import headPlugin from '@swup/head-plugin';
 import scrollPlugin from "@swup/scroll-plugin";
+import preloadPlugin from "@swup/preload-plugin";
 
 // Internal use components
+import { setTheme, getTheme } from "./theme";
 import { _constrain, _map, toFixed } from "./components/util";
 import { on, off, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
-
-
-// Quick test for webp support
-try {
-    window.WebpSupport = document.createElement('canvas')
-        .toDataURL('image/webp')
-        .indexOf('data:image/webp') == 0;
-} catch (e) {
-    window.WebpSupport = false;
-}
-
-let test_webp = async () => {
-    let check_webp_feature = (feature) => {
-        return new Promise((resolve, reject) => {
-            let kTestImages = {
-                lossy: "UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
-                lossless: "UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==",
-                alpha: "UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",
-                animation: "UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"
-            };
-
-            let img = new window.Image();
-
-            // @ts-ignore
-            img.src = "data:image/webp;base64," + kTestImages[feature];
-            // @ts-ignore
-            img.onload = () => {
-                // @ts-ignore
-                let result = (img.width > 0) && (img.height > 0);
-                img = resolve(result);
-            };
-
-            // @ts-ignore
-            img.onerror = () => {
-                img = reject(false);
-            };
-        });
-    };
-
-    // Quick test for webp support
-    try {
-        let result = await check_webp_feature("lossless");
-        window.WebpSupport = result;
-    } catch (e) {
-        window.WebpSupport = false;
-
-        // Safari still doesn't support WebP
-        console.info(
-            "Using JPG instead, of WEBP as this browser doesn't support WEBP."
-        );
-    }
-};
 
 const _layer = '.layer';
 const _navbar = '.navbar';
@@ -66,7 +15,7 @@ const _menu = '.navbar-menu';
 const _backUp = '.back-to-top';
 const _skipMain = ".skip-main";
 const _navLink = '.navbar-link';
-const _layer_img = ".layer-image[data-resize]";
+const _layer_img = ".layer-image";
 const _load_img = ".load-img";
 const _themeSwitcher = ".theme-switcher";
 const _actioncenter = ".layer-action-center";
@@ -83,161 +32,121 @@ on(_menu, "click", () => {
     attr(_menu, "aria-expanded", `` + hasClass(_navbar, "navbar-show"));
 });
 
-try {
-    // This code comes from the theme.js file
-    // Control localStorage storage of theme
-    const { setTheme, getTheme, matchMedia } = window;
-    const html = document.querySelector("html");
-    // const meta = document.querySelector("meta[name=theme-color]");
-
-    // Get theme from html tag, if it has a theme or get it from localStorage
-    let themeGet = () => {
-        let themeAttr = attr(html, "theme");
-        if (themeAttr && themeAttr.length) {
-            return themeAttr;
-        }
-
-        return getTheme();
-    };
-
-    // Set theme in localStorage, as well as in the html tag
-    let themeSet = theme => {
-        // let primaryColor = getComputedStyle(html).getPropertyValue('--primary');
-        // meta.setAttribute("content", primaryColor);
-        attr(html, "theme", theme);
-        setTheme(theme);
-    };
-
-    // On theme switcher button click toggle the theme between dark and light mode
-    on(_themeSwitcher, "click", () => {
-        themeSet(themeGet() === "dark" ? "light" : "dark");
-    });
-
-    matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-        themeSet(e.matches ? "dark" : "light");
-    });
-} catch (e) {
-    console.warn("Theme switcher button broke, :(.");
-}
-
-// On backup button click animate back to the top
-on(_backUp, "click", () => {
-    scrollTo("0px", "1400ms");
-});
-
-// On skip main button click animate to the main content
-let heroHeight;
-on(_skipMain, "click", () => {
-    scrollTo(heroHeight, "1400ms");
-});
-
 // The focus pt., 10px past the height of the navbar
-let _focusPt = height(_navbar) + 10;
+let navHeight = height(_navbar);
 let _images = new Set(), windowWid;
 let resize, scroll;
+let canScroll = true, canResize = true;
 on(window, {
     // On window resize make sure the scroll down hero button, is expanded and visible
     'resize': resize = () => {
-        let srcset, src, _core_img, srcWid, srcHei, load_img;
-        windowWid = width(window);
-
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
-        requestAnimationFrame(() => {
-            toggleClass(_scrolldown, "action-btn-expand", windowWid <= 650);
+        if (canResize) {
+            let srcset, src, _core_img, srcWid, srcHei;
+            let timer, raf;
+            canResize = false;
 
-            // Find the layer-images in each layer
-            each(_load_img, $img => {
-                srcWid = Math.round(width($img));
-                srcHei = Math.round(height($img));
+            raf = requestAnimationFrame(() => {
+                windowWid = width(window);
+                toggleClass(_scrolldown, "action-btn-expand", windowWid <= 650);
 
-                // Find the core-img in the layer-image container
-                _core_img = get(find($img, ".core-img"), 0);
+                // Find the layer-images in each layer
+                each(_load_img, $img => {
+                    srcWid = Math.round(width($img));
+                    srcHei = Math.round(height($img));
 
-                // Make sure the image that is loaded is the same size as its container
-                srcset = attr(_core_img, "data-src");
+                    // Find the core-img in the layer-image container
+                    _core_img = get(find($img, ".core-img"), 0);
 
-                // On larger screens load smaller images, for faster image load times
-                src = srcset.replace(/w_auto/, `w_${srcWid}`);
-                if (srcHei > srcWid) src = src.replace(/ar_4:3,/, `ar_3:4,`);
-                if (!window.WebpSupport) src = src.replace(".webp", ".jpg");
+                    // Make sure the image that is loaded is the same size as its container
+                    srcset = attr(_core_img, "data-src");
 
-                // Only load a new image If something has changed
-                if (src !== attr(_core_img, "src")) {
-                    // Ensure the image has loaded, then replace the small preview
-                    attr(_core_img, "src", src);
-                    on(_core_img, "load", onload($img));
-                }
+                    // On larger screens load smaller images, for faster image load times
+                    src = srcset.replace(/w_auto/, `w_${srcWid}`);
+                    if (srcHei > srcWid) src = src.replace(/ar_4:3,/, `ar_3:4,`);
+
+                    // Only load a new image If something has changed
+                    if (src !== attr(_core_img, "src")) {
+                        // Ensure the image has loaded, then replace the small preview
+                        attr(_core_img, "src", src);
+                        on(_core_img, "load", onload($img));
+                    }
+                });
+
+                // set a timeout to un-throttle
+                timer = window.setTimeout(() => {
+                    canResize = true;
+                    timer = window.clearTimeout(timer);
+                    raf = window.cancelAnimationFrame(raf);
+                }, 150);
             });
-        });
+        }
     },
 
     // On scroll accomplish a set of tasks
     'scroll': scroll = () => {
-        let _isMobile = windowWid < 650;
-        let _scrollTop = scrollTop(window);
-        let isBanner = hasClass(_layer, "banner-mode");
-
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
-        requestAnimationFrame(() => {
-            // If the current page uses a banner ensure the navbar is still visible
-            toggleClass(_navbar, "navbar-focus", isBanner || _scrollTop >= 5);
+        if (canScroll) {
+            let raf;
+            canScroll = false;
 
-            // On mobile if the window is scrolled remove main navbar menu from view
-            hasClass(_navbar, "navbar-show") && removeClass(_navbar, "navbar-show");
+            raf = window.requestAnimationFrame(() => {
+                let _scrollTop = scrollTop(window);
+                let isBanner = hasClass(_layer, "banner-mode");
+                let _isMobile = windowWid < 650;
 
-            // Hide and show the action-center if the window has been scrolled 10px past the height of the navbar
-            toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > _focusPt * 4);
-            toggleClass(_actioncenter, "layer-action-center-hide", _scrollTop <= _focusPt * 4);
+                // If the current page uses a banner ensure the navbar is still visible
+                toggleClass(_navbar, "navbar-focus", isBanner || _scrollTop >= 5);
 
-            // If device width is greater than 700px
-            if (!_isMobile && window.Promise) {
-                let dist, value, maxMove, transform, opacity;
-                _images.forEach(data => {
-                    // On scroll turn on parallax effect for images with the class "effect-parallax"
-                    if (hasClass(data.target, "effect-parallax")) {
-                        let { clientRect, load_img, overlay, isHero, _isBanner, header, main } = data;
-                        let { top, height } = clientRect;
-                        dist = _scrollTop - top + _focusPt * 2;
+                // Hide and show the action-center if the window has been scrolled past the visible height of the page
+                toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > window.innerHeight);
 
-                        // Some complex math, I can't explain it very well, but it works
-                        if (dist >= -_focusPt && dist <= height - _focusPt / 2) {
-                            value = _constrain(dist - _focusPt, 0, height);
-                            if (isHero && !_isMobile) style(overlay, { opacity: toFixed(_map(value, 0, height * 0.75, 0.45, 0.7), _isMobile ? 1 : 4) });
+                // If device width is greater than 700px
+                if (!_isMobile && "Promise" in window) {
+                    _images.forEach(data => {
+                        // On scroll turn on parallax effect for images with the class "effect-parallax"
+                        if (hasClass(data.target, "effect-parallax")) {
+                            let { clientRect, load_img, overlay, isHero, header, main } = data;
+                            let { top, height } = clientRect;
 
-                            // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
-                            // FPS Counter test: !(fpsCounter.fps < 24 && windowWid < 500)
-                            if (!_isMobile) {
+                            let endPt = height + top;
+                            let startPt = top;
+
+                            // Only compute the parallax effect, if the image is in view
+                            if (_scrollTop + navHeight >= startPt && _scrollTop <= endPt) {
+                                // Convert `value` to a scale of 0 to 1
+                                let value = _map(_scrollTop, startPt, endPt, 0, 1);
+
+                                // Restrict value to a min of 0 and a max of 1
+                                value = _constrain(value, 0, 1);
+
+                                if (isHero) {
+                                    style(overlay, {
+                                        opacity: _map(value, 0, 0.75, 0.45, 0.8).toFixed(2)
+                                    });
+                                }
+
+                                // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
+                                let translateY = _map(value, 0, 0.75, 0, height / 2).toFixed(4);
                                 style(load_img, {
-                                    transform: `translate3d(0, ${toFixed(_map(
-                                        _constrain(value - (_isBanner ? _focusPt * 2 : 20), 0, height),
-                                        0, height * 0.75, 0, height / 2), 2)}px, 0)`,
+                                    transform: `translateY(${translateY}px)`,
                                 });
-                            }
 
-                            maxMove = _isBanner ? 6 : 5;
-                            transform = `translate3d(0, ${toFixed(
-                                _constrain(
-                                    _map(value - (_isBanner ? _focusPt : 0), 0, height * 0.65, 0, height * maxMove / 16),
-                                    0, height * maxMove / 16),
-                                _isMobile ? 1 : 2)}px, 0)`;
-                            opacity = toFixed(
-                                _constrain(
-                                    _map(_constrain(value - (height * 0.15), 0, height), 0, height * 0.40, 1, 0),
-                                    0, 1),
-                                _isMobile ? 1 : 4);
+                                let opacity = _map(value, 0, 0.45, 1, 0).toFixed(4);
+                                translateY = _constrain(_map(value, 0, 1, 0, height / 2), 0, height / 3).toFixed(4);
 
-                            if (header) {
-                                style(header, { transform });
-                            }
-
-                            if (main) {
-                                style(main, { transform, opacity });
+                                let transform = `translateY(${translateY}px)`;
+                                if (header) style(header, { transform });
+                                if (main) style(main, { transform, opacity });
                             }
                         }
-                    }
-                });
-            }
-        });
+                    });
+                }
+
+                canScroll = true;
+                raf = window.cancelAnimationFrame(raf);
+            });
+        }
     }
 });
 
@@ -287,159 +196,21 @@ let init = () => {
     });
 };
 
-if (!window.WebpSupport) {
-    (async () => {
-        window.WebpSupport = await test_webp();
+// Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
+init();
+resize();
+scroll();
 
-        // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
-        init();
-        resize();
-        scroll();
-    })();
-} else {
-    // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
-    init();
-    resize();
-    scroll();
-}
+// On backup button click animate back to the top
+on(_backUp, "click", () => {
+    scrollTo("0px", "1400ms");
+});
 
-// Preload plugin dependencies
-import delegate from 'delegate';
-import { queryAll } from 'swup/lib/utils';
-import { Link, getCurrentUrl, fetch } from 'swup/lib/helpers';
-
-// Swups plugin class
-class Plugin {
-    constructor() {
-        // this is here so we can tell if plugin was created by extending this class
-        this.isSwupPlugin = true;
-    }
-
-    mount() {
-        // this is mount method rewritten by class extending
-        // and is executed when swup is enabled with plugin
-    }
-
-    unmount() {
-        // this is unmount method rewritten by class extending
-        // and is executed when swup with plugin is disabled
-    }
-
-    _beforeMount() {
-        // here for any future hidden auto init
-    }
-
-    _afterUnmount() {
-        // here for any future hidden auto-cleanup
-    }
-}
-
-// Slight tweaks to the nature of the preload plugin class
-class customPreload extends Plugin {
-    constructor(...args) {
-        super(...args);
-        this.name = "PreloadPlugin";
-    }
-
-    mount() {
-        const swup = this.swup;
-
-        swup._handlers.pagePreloaded = [];
-        swup._handlers.hoverLink = [];
-
-        swup.preloadPage = this.preloadPage.bind(this);
-        swup.preloadPages = this.preloadPages.bind(this);
-
-        // register mouseover handler
-        swup.delegatedListeners.mouseover = delegate(
-            document.body,
-            swup.options.linkSelector,
-            'mouseover',
-            this.onMouseover.bind(this)
-        );
-
-        // initial preload of page form links with [data-swup-preload]
-        swup.preloadPages();
-
-        // do the same on every content replace
-        swup.on('contentReplaced', this.onContentReplaced.bind(this));
-    }
-
-    unmount() {
-        const swup = this.swup;
-
-        swup._handlers.pagePreloaded = null;
-        swup._handlers.hoverLink = null;
-
-        swup.preloadPage = null;
-        swup.preloadPages = null;
-
-        swup.delegatedListeners.mouseover.destroy();
-
-        swup.off('contentReplaced', this.onContentReplaced.bind(this));
-    }
-
-    onContentReplaced() {
-        this.swup.preloadPages();
-    };
-
-    onMouseover(event) {
-        const swup = this.swup;
-        swup.triggerEvent('hoverLink', event);
-
-        const link = new Link(event.delegateTarget);
-        if (
-            link.getAddress() !== getCurrentUrl() &&
-            !swup.cache.exists(link.getAddress()) &&
-            swup.preloadPromise == null
-        ) {
-            swup.preloadPromise = swup.preloadPage.call(this, link.getAddress());
-            swup.preloadPromise.route = link.getAddress();
-            swup.preloadPromise
-                .finally(() => {
-                    swup.preloadPromise = null;
-                });
-        }
-    }
-
-    preloadPage(pathname) {
-        const swup = this.swup;
-
-        let link = new Link(pathname);
-        return new Promise((resolve, reject) => {
-            if (link.getAddress() != getCurrentUrl() && !swup.cache.exists(link.getAddress())) {
-                fetch({ url: link.getAddress(), headers: swup.options.requestHeaders }, (response) => {
-                    if (response.status === 500) {
-                        swup.triggerEvent('serverError');
-                        reject();
-                    } else {
-                        // get json data
-                        let page = swup.getPageData(response);
-                        if (page != null) {
-                            page.url = link.getAddress();
-                            swup.cache.cacheUrl(page, swup.options.debugMode);
-                            swup.triggerEvent('pagePreloaded');
-                        } else {
-                            reject(link.getAddress());
-                            return;
-                        }
-                        resolve(swup.cache.getPage(link.getAddress()));
-                    }
-                });
-            } else {
-                resolve(swup.cache.getPage(link.getAddress()));
-            }
-        });
-    }
-
-    preloadPages() {
-        if (width(window) < 730) {
-            queryAll('[data-swup-preload]').forEach((element) => {
-                this.swup.preloadPage(element.href);
-            });
-        }
-    }
-}
+// On skip main button click animate to the main content
+let heroHeight;
+on(_skipMain, "click", () => {
+    scrollTo(heroHeight, "1400ms");
+});
 
 const activeNavLink = () => {
     let href = window.location.href || "";
@@ -458,7 +229,7 @@ on(document, "ready", () => {
     // SWUP library
     try {
         // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features or supports webp (most browser that support webp can handle the history management SWUP does)
-        if (window.WebpSupport || window.Promise) {
+        if ("Promise" in window) {
             console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
 
             // Page transition manager SWUP for faster page loads
@@ -467,9 +238,8 @@ on(document, "ready", () => {
                 animateHistoryBrowsing: true,
                 containers: ["[data-container]"],
                 plugins: [
-                    // Preload pages only on mobile
-                    new customPreload(),
-                    // new headPlugin(), // Replace the contents of the head elements
+                    // Preload pages
+                    new preloadPlugin(),
 
                     // For every new page, scroll to the top smoothly
                     new scrollPlugin({
@@ -495,14 +265,17 @@ on(document, "ready", () => {
                     });
                 }
             });
+
             Swup.on("samePage", () => {
                 // If on the same page reinvigorate the scroll down button click event
                 // On scroll down button click animate scroll to the height of the hero layer
                 on(_scrolldown, "click", goDown);
             });
+
             Swup.on('contentReplaced', () => {
                 init(); resize(); scroll();
             });
+
             Swup.on('willReplaceContent', activeNavLink);
         }
 
@@ -516,3 +289,36 @@ on(document, "ready", () => {
         console.error(`Swup Error: ${e.message}`);
     }
 });
+
+try {
+    // This code comes from the theme.js file
+    // Control localStorage storage of theme
+    const html = document.querySelector("html");
+
+    // Get theme from html tag, if it has a theme or get it from localStorage
+    let themeGet = () => {
+        let themeAttr = attr(html, "theme");
+        if (themeAttr && themeAttr.length) {
+            return themeAttr;
+        }
+
+        return getTheme();
+    };
+
+    // Set theme in localStorage, as well as in the html tag
+    let themeSet = theme => {
+        attr(html, "theme", theme);
+        setTheme(theme);
+    };
+
+    // On theme switcher button click toggle the theme between dark and light mode
+    on(_themeSwitcher, "click", () => {
+        themeSet(themeGet() === "dark" ? "light" : "dark");
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", e => {
+        themeSet(e.matches ? "dark" : "light");
+    });
+} catch (e) {
+    console.warn("Theme switcher button broke, :(.");
+}

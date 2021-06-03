@@ -1,3 +1,5 @@
+@use "./mixins.scss" as *;
+
 /*
     -- Layer (represents a section of code that displays content) --
      * ".more" = is for the learn more buttons
@@ -534,6 +536,7 @@
         }
 
         &-show {
+            pointer-events: auto;
             opacity: 1;
         }
     }

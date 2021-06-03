@@ -1,130 +1,9 @@
-/* -- Presets & Resets -- */
-/* -- Elements -- */
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-button,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-main,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video,
-svg {
-    &,
-    &:before,
-    &:after {
-        box-sizing: border-box;
-        font-size: 100%;
-        outline: none;
-        resize: none;
-        border: none;
-        padding: 0;
-        margin: 0;
+@use "./mixins.scss" as *;
+
+html[theme="dark"] {
+    @each $name, $value in $dark-colors {
+        --#{$name}: #{$value};
     }
-}
-
-/**
- * Add the correct display in IE 10+.
- */
-
-template {
-    display: none;
-}
-
-/**
- * Add the correct display in IE 10.
- */
-
-[hidden] {
-    display: none;
-}
-
-// html {
-//     transition: scrollbar-color #{$transitionDuration} ease;
-//     scrollbar-color: $primary-light lighten($mid-dark, 5%);
-//     scrollbar-color: var(--mid-dark, $primary-light)
-//         var(--light, lighten($mid-dark, 5%));
-//     scrollbar-width: thin;
-// }
-
-html,
-body {
-    @include applyTheme(background-color, "background");
-    @include applyTheme(color, "dark");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -133,6 +12,12 @@ body {
             --#{$name}: #{$value};
         }
     }
+}
+
+html,
+body {
+    @include applyTheme(background-color, "background");
+    @include applyTheme(color, "dark");
 }
 
 body {
@@ -153,30 +38,7 @@ body {
     @media #{$screen-size-lt-tablet} {
         -webkit-overflow-scrolling: touch;
         -webkit-tap-highlight-color: transparent;
-        // -webkit-touch-callout: none;
     }
-
-    // &::-webkit-scrollbar {
-    //     display: block;
-    //     width: 6px;
-    // }
-
-    // &::-webkit-scrollbar-track-piece {
-    //     transition: background-color #{$transitionDuration} ease;
-    //     background-color: $mid-dark;
-    //     background-color: var(--light, lighten($mid-dark, 5%));
-    // }
-
-    // &::-webkit-scrollbar-thumb {
-    //     transition: background-color #{$transitionDuration} ease;
-    //     background-color: $primary-light;
-    //     background-color: var(--mid-dark, $primary-light);
-    // }
-
-    // &::-webkit-scrollbar-track-piece,
-    // &::-webkit-scrollbar-thumb {
-    //     // border-radius: 5px;
-    // }
 }
 
 ::selection {
@@ -185,12 +47,6 @@ body {
     background-color: var(--primary-dark, lighten($primary-dark, 15%));
     color: $white;
 }
-
-// a::selection {
-//     background-color: $secondary-dark;
-//     background-color: var(--secondary-dark, $secondary-dark);
-//     color: $white;
-// }
 
 h1,
 h2,
@@ -244,7 +100,6 @@ p,
 }
 
 $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
-
 @each $sz in $headerSizes {
     $i: index($headerSizes, $sz);
 
@@ -464,10 +319,6 @@ html[theme="dark"] {
 .no-script-img,
 .placeholder-img {
     color: transparent;
-}
-
-main {
-    // contain: content;
 }
 
 .list {
