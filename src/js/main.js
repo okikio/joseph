@@ -308,12 +308,14 @@ try {
     // Set theme in localStorage, as well as in the html tag
     let themeSet = theme => {
         attr(html, "theme", theme);
-        setTheme(theme);
     };
 
     // On theme switcher button click toggle the theme between dark and light mode
     on(_themeSwitcher, "click", () => {
-        themeSet(themeGet() === "dark" ? "light" : "dark");
+        let theme = themeGet() === "dark" ? "light" : "dark";
+        themeSet(theme);
+        setTheme(theme);
+
     });
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", e => {
