@@ -41,7 +41,7 @@
         }
 
         h1 {
-            @apply text-7xl;
+            @apply text-3xl sm:text-4xl md:text-5xl lg:text-7xl;
         }
     }
 
@@ -63,7 +63,7 @@
     }
 
     h1 {
-        @apply font-title font-900 text-6xl leading-tight mb-8;
+        @apply font-title font-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-8;
     }
 
     h2 {
@@ -145,8 +145,8 @@ html[theme="dark"] {
     background-color: var(--very-light, $white);
 }
 
-.col-grid-3 {
-    @apply -my-2 -mx-2;
+.col-grid {
+    @apply -mx-2;
 
     & > * {
         @apply px-2 py-2;

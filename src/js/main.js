@@ -9,6 +9,7 @@ import { _constrain as limit, _map as scale } from "./components/util";
 import { el, on, off, toggleClass, each, find, addClass, removeClass, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
 const _layer = '.layer';
+const _navOverlay = '.navbar-overlay';
 const _navbar = '.navbar';
 const _banner = '.banner';
 const _menu = '.navbar-menu';
@@ -162,6 +163,10 @@ on(_backUp, "click", () => {
         behavior: "smooth"
     });
 });
+
+on(_navOverlay, "click", () => {
+    removeClass(_navbar, "navbar-show");
+})
 
 // Initialize images
 let init = () => {

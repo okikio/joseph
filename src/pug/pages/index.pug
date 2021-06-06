@@ -47,84 +47,90 @@ block content
         p
         | Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about.
 
-      .row.col-grid-3
-        +link({
-          href: "/projects/boxer",
-          class: "block col-4"
-        })
-          +tile({
-            title: "Boxer",
-            class: "layer-box layer-surface block layer-tile-outline",
-            image: {
-              src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
-              alt: "An image of a rendered robot."
-            }
+      .row.col-grid
+        .col-4
+          +link({
+            href: "/projects/boxer",
+            class: "block"
           })
+            +tile({
+              title: "Boxer",
+              class: "layer-box layer-surface block layer-tile-outline",
+              image: {
+                src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+                alt: "An image of a rendered robot."
+              }
+            })
 
-        +link({
-          href: "/projects/battery-manager",
-          class: "block col-4"
-        })
-          +tile({
-            title: "Battery Manager",
-            class: "layer-box layer-surface block layer-tile-outline",
-            image: {
-              src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
-              alt: "An image of the battery testing workstation box.",
-            }
+        .col-4
+          +link({
+            href: "/projects/battery-manager",
+            class: "block"
           })
+            +tile({
+              title: "Battery Manager",
+              class: "layer-box layer-surface block layer-tile-outline",
+              image: {
+                src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
+                alt: "An image of the battery testing workstation box.",
+              }
+            })
 
-        +link({
-          href: "/projects/sarbot",
-          class: "block col-4"
-        })
-          +tile({
-            title: "Search and Rescue Robot (SarBot)",
-            class: "layer-box layer-surface block layer-tile-outline",
-            image: {
-              src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
-              alt: "An image of a 3D model of Sarbot.",
-            }
+        .col-4
+          +link({
+            href: "/projects/sarbot",
+            class: "block"
           })
+            +tile({
+              title: "Search and Rescue Robot (SarBot)",
+              class: "layer-box layer-surface block layer-tile-outline",
+              image: {
+                src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+                alt: "An image of a 3D model of Sarbot.",
+              }
+            })
 
-        +link({
-          href: "/projects/ultima-apparel",
-          class: "block col-4"
-        })
-          +tile({
-            title: "Ultima Apparel",
-            class: "layer-box layer-surface block layer-tile-outline",
-            image: {
-              src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
-              alt: "An image of Ultima Apparels first proof of concept.",
-            }
+        .col-4
+          +link({
+            href: "/projects/ultima-apparel",
+            class: "block"
           })
+            +tile({
+              title: "Ultima Apparel",
+              class: "layer-box layer-surface block layer-tile-outline",
+              image: {
+                src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+                alt: "An image of Ultima Apparels first proof of concept.",
+              }
+            })
 
-        +link({
-          href: "/projects/phoenix",
-          class: "block col-8"
-        })
-          +tile({
-            title: "Phoenix",
-            class: "layer-box layer-surface block layer-tile-outline",
-            image: {
-              src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
-              alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
-            }
+        .col-8
+          +link({
+            href: "/projects/phoenix",
+            class: "block"
           })
+            +tile({
+              title: "Phoenix",
+              class: "layer-box layer-surface block layer-tile-outline",
+              image: {
+                src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
+                alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
+              }
+            })
 
-        +link({
-          href: "/projects/publications",
-          class: "block col-12"
-        })
-          +tile({
-            title: "Publications",
-            class: "layer-box layer-surface block layer-tile-outline",
-            image: {
-              src: "cloudinary/aerial-photo-of-brown-mountains",
-              alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
-            }
+        .col-12
+          +link({
+            href: "/projects/publications",
+            class: "block"
           })
+            +tile({
+              title: "Publications",
+              class: "layer-box layer-surface block layer-tile-outline",
+              image: {
+                src: "cloudinary/aerial-photo-of-brown-mountains",
+                alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+              }
+            })
 
   //- Quote and Signature layer
   .container-lg
