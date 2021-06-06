@@ -113,7 +113,7 @@
             &:after {
                 transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                     background-color #{$transitionDuration} ease;
-                @apply absolute bottom-0 left-0 transform scale-x-0;
+                @apply absolute bottom-0.5 left-0 transform scale-x-0;
                 @include applyTheme(background-color, "primary-dark");
                 border: 1px solid transparent;
                 transform-origin: 100%;
@@ -219,11 +219,6 @@
             z-index: 25;
         }
 
-        &-layout:before,
-        &-main {
-            box-shadow: 0 2px 15px rgba(0, 0, 50, 0.08);
-        }
-
         &-head {
             @apply flex items-center justify-between relative align-middle;
             @apply px-3 w-full h-16 leading-none;
@@ -285,6 +280,7 @@
             }
 
             .navbar-main {
+                box-shadow: 0 2px 15px rgba(0, 0, 50, 0.08);
                 transform: translate3d(0, 0, 0);
             }
 

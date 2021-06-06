@@ -30,7 +30,7 @@
     @apply text-white;
 
     &.hero {
-        @apply pt-20 px-5;
+        @apply pt-20 px-2 sm:px-5;
 
         .image {
             @apply rounded-2xl overflow-hidden;
@@ -41,7 +41,11 @@
         }
 
         h1 {
-            @apply text-3xl sm:text-4xl md:text-5xl lg:text-7xl;
+            @apply lg:text-7xl;
+        }
+
+        h2 {
+            @apply lg:text-2xl;
         }
     }
 
@@ -55,7 +59,7 @@
     }
 
     .layout {
-        @apply transform translate-y-5 px-12 flex flex-col;
+        @apply transform translate-y-5 px-6 md:px-12 flex flex-col;
     }
 
     .content {
@@ -63,11 +67,16 @@
     }
 
     h1 {
-        @apply font-title font-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-8;
+        @apply font-title font-900 text-5xl sm:text-6xl mb-4;
+        line-height: 1;
+
+        @screen md {
+            @apply leading-none mb-8;
+        }
     }
 
     h2 {
-        @apply font-regular text-2xl leading-normal;
+        @apply font-regular text-lg md:text-xl leading-relaxed;
         font-weight: 500;
     }
 }
@@ -109,25 +118,32 @@ html[theme="dark"] {
     }
 }
 
-.container-lg {
-    @apply container max-w-screen-lg px-8 py-24 leading-8 font-600;
-}
+.container {
+    &-xl,
+    &-lg {
+        @apply container px-5 sm:px-8 py-8 sm:py-16 lg:py-24 leading-8 font-500;
+    }
 
-.container-xl {
-    @apply container max-w-screen-xl px-8 py-24 leading-8 font-600;
+    &-lg {
+        @apply max-w-screen-lg;
+    }
+
+    &-xl {
+        @apply max-w-screen-xl;
+    }
 }
 
 .capsule-layer {
     @apply z-10 relative;
-    @apply px-5;
+    @apply px-2 sm:px-5;
 
     .layout {
         @include applyTheme(color, "white");
 
-        @apply bg-gray-800 dark:bg-black;
+        @apply bg-gray-800 dark:bg-gray-700  shadow-xl;
         @apply relative overflow-hidden rounded-xl;
         @apply mx-auto w-full max-w-screen-xl;
-        @apply px-16 py-5 leading-loose;
+        @apply px-6 md:px-16 py-2 md:py-5 leading-loose;
 
         transition: background-color #{$transitionDuration} ease,
             color #{$transitionDuration} ease;
@@ -135,7 +151,9 @@ html[theme="dark"] {
 }
 
 .capsule-offset {
-    @apply pt-48 -mt-48;
+    @apply pt-64 -mt-64;
+    // margin-top: -50%;
+    // padding-top: 50%;
 }
 
 .contrast-layer {
@@ -150,6 +168,26 @@ html[theme="dark"] {
 
     & > * {
         @apply px-2 py-2;
+    }
+}
+
+.signature-layer {
+    .container-lg {
+        @apply flex flex-col sm:flex-row sm:space-x-4 md:space-x-8 lt-sm:space-y-4 items-center;
+    }
+
+    .tile {
+        @apply relative block w-full rounded-xl overflow-hidden;
+        height: 400px;
+
+        @screen sm {
+            min-width: theme("spacing.64");
+            height: 500px;
+        }
+    }
+
+    img {
+        object-position: top center;
     }
 }
 

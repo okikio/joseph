@@ -196,7 +196,7 @@
     &-content {
         transition: opacity 0.4s ease 0.1s;
         @apply text-center text-sm;
-        @apply font-bold font-900 uppercase whitespace-nowrap;
+        @apply font-bold font-700 uppercase whitespace-nowrap;
         @apply overflow-hidden flex w-full;
 
         &:before {

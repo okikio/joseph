@@ -15,7 +15,6 @@ block content
   //- Intro layer
   .container-lg
     h3.h5.font-800 Hi, I’m Joseph.
-    p
     | For about a decade now, I have actively sought to leave the state of things better than I found it. I am a Mechatronics engineer at heart and on paper. I integrate hardware and software into harmonious alliance to solve societal pain points. <br><br> I am always on my feet looking for the next opportunity. Through continuous improvement, determination, and a foresight of opportunity, I seek to achieve my goals. The game isn’t changed until the game is played.
 
   //- Skills Column layer
@@ -44,7 +43,6 @@ block content
     .container-xl
       .container.max-w-screen-lg.pb-8
         h3.h5.font-800 Recent Activities
-        p
         | Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about.
 
       .row.col-grid
@@ -133,20 +131,18 @@ block content
             })
 
   //- Quote and Signature layer
-  .container-lg
-    .flex.flex-column.items-center.justify-center
-      +tile({
-        class: "layer-surface layer-box block layer-tile-outline layer-joseph-img3 layout-left layer-shadow--1",
-        image: {
+  .signature-layer
+    .container-lg
+      .tile
+        +image({
           src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-portrait",
           alt: "An image of Joseph Ojo in a suit on a boat.",
-        }
-      })
-      section.float-left
-        .clearfix
-          h3.h5.font-800 Signature
-          p.text-above-quote
-            | If you are still reading this, you might just want to work with me. Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course.
-            br
-            br
-            | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak!
+          overlay: false
+        })
+      section
+        h3.h5.font-800 Signature
+        p.text-above-quote
+          | If you are still reading this, you might just want to work with me. Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course.
+          br
+          br
+          | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak!

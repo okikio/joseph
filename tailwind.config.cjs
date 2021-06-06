@@ -8,7 +8,7 @@ module.exports = {
   darkMode: 'class',
   mode: "jit",
   purge: [
-    './public/**/*.html'
+    'src/**/*.pug'
   ],
   theme: {
     extend: {

@@ -323,7 +323,8 @@ task("watch", async () => {
                     extensions: ["html"],
                 },
             },
-            // online: true,
+            
+            browser: "chrome",
             scrollThrottle: 250,
         },
         (_err, bs) => {
