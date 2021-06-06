@@ -1,219 +1,146 @@
 extends /layout.pug
 
-block hero
-  //- Hero layer
-  +hero({
+block banner
+  +banner({
     title: "Bridging the Gap",
     content: "Bringing Hardware and Software to life.",
     image: {
-      class: "effect-parallax hero-img",
       src: "cloudinary/suspension-bridge",
       alt: "An image of a close up photo of a suspension bridge. By @osmanrana on unsplash."
-    }
+    },
   })
 
 
 block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
-  })
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +main
-        section.layout-padding-top--device-gt-phone.layout-padding-bottom-large.layout-clearfix
-          h3.h5.style-font-30--device-phone.style-primary-dark.style-bold Hi, I’m Joseph.
-          +p("For about a decade now, I have actively sought to leave the state of things better than I found it. I am a Mechatronics engineer at heart and on paper. I integrate hardware and software into harmonious alliance to solve societal pain points. <br><br> I am always on my feet looking for the next opportunity. Through continuous improvement, determination, and a foresight of opportunity, I seek to achieve my goals. The game isn’t changed until the game is played. ")
+  .container-lg
+    h3.h5.font-800 Hi, I’m Joseph.
+    p
+    | For about a decade now, I have actively sought to leave the state of things better than I found it. I am a Mechatronics engineer at heart and on paper. I integrate hardware and software into harmonious alliance to solve societal pain points. <br><br> I am always on my feet looking for the next opportunity. Through continuous improvement, determination, and a foresight of opportunity, I seek to achieve my goals. The game isn’t changed until the game is played.
 
-  div.layout-margin-horz-small
-    //- Skills Column layer
-    +layer({
-      class: "layout-contain-large layer-capsule"
-    })
-      +layout({
-        class: "layer-primary-dark layout-padding-horz-default--device-gt-tablet"
-      })
-        +main({
-            class: "layout-shorten-vert style-invert-white"
-        })
-          div.layout-shorten-horz
-            h3.h5.style-font-30--device-phone.style-bold.layout-margin-vert-botttom-dull Tools of the trade
-          +row({
-            class: "layout-margin-dull layout-padding-horz-small"
-          })
-            +column({
-              class: "layout-col-6 seperate-tools"
-            })
-              div.layout-padding-left-small.layout-margin-bottom-small
-                h4.style-font-20.layout-margin-vert-botttom-dull.style-underline Hardware Development Tools
-                ul.layout-margin-vert-dull
-                  - let arr =  [ "SolidWorks", "NX Siemens", "KiCAD", "Fritzing", "NI MultiSim", "LTSpice", "Arduino"];
-                  - for (let i = 0; i < arr.length; i ++) {
-                    li= arr[i]
-                  - }
+  //- Skills Column layer
+  .capsule-layer
+    .layout
+      h3.h5.font-800 Tools of the trade
+      .row.seperate-tools
+        .col-6
+          h4.underline Hardware Development Tools
+          ul
+            - let arr =  [ "SolidWorks", "NX Siemens", "KiCAD", "Fritzing", "NI MultiSim", "LTSpice", "Arduino"];
+            - for (let i = 0; i < arr.length; i ++) {
+              li= arr[i]
+            - }
 
-            +column({
-              class: "layout-col-6"
-            })
-              div.layout-padding-left-small
-                h4.style-font-20.layout-margin-vert-botttom-dull.style-underline Software Development Tools
-                ul.layout-margin-vert-dull
-                  - let arr =  ["C++", "Python", "Matlab & Simulink", "Visual Studio", "Robot Operating System (ROS)", "Arduino", "Keras", "Anaconda"];
-                  - for (let i = 0; i < arr.length; i ++) {
-                    li= arr[i]
-                  - }
+        .col-6
+          h4.underline Software Development Tools
+          ul
+            - arr =  ["C++", "Python", "Matlab & Simulink", "Visual Studio", "Robot Operating System (ROS)", "Arduino", "Keras", "Anaconda"];
+            - for (let i = 0; i < arr.length; i ++) {
+              li= arr[i]
+            - }
 
   //- Image Column layer
-  +layer({
-    class: "layer-contrast layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone layer-capsule-push layer-capsule-pull"
-  })
-    +layout({
-      class: "layout-contain-large"
-    })
-      +main({
-          class: "layout-shorten-vert"
-      })
-        div.layout-padding-vert-bottom.layout-contain.layout-shorten-horz.layout-contain
-          h3.style-font-30.style-bold Recent Activities
-          div
-            +p("Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about.  ")
-        //- 1st Row
-        +row({
-          class: "layout-margin-dull"
+  .capsule-offset.contrast-layer
+    .container-xl
+      .container.max-w-screen-lg.pb-8
+        h3.h5.font-800 Recent Activities
+        p
+        | Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about.
+
+      .row.col-grid-3
+        +link({
+          href: "/projects/boxer",
+          class: "block col-4"
         })
-
-          +column({
-            class: "layout-col-4 layout-padding-small"
-          })
-            +link({
-              href: "/projects/boxer",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Boxer",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
-                  alt: "An image of a rendered robot."
-                }
-              })
-
-          +column({
-            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/battery-manager",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Battery Manager",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
-                  alt: "An image of the battery testing workstation box.",
-                }
-              })
-
-          +column({
-            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/sarbot",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Search and Rescue Robot (SarBot)",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
-                  alt: "An image of a 3D model of Sarbot.",
-                }
-              })
-
-          +column({
-            class: "layout-col-4 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/ultima-apparel",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Ultima Apparel",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
-                  alt: "An image of Ultima Apparels first proof of concept.",
-                }
-              })
-
-          +column({
-            class: "layout-col-8 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/phoenix",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Phoenix",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
-                  alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
-                }
-              })
-
-          +column({
-            class: "layout-col-12 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/publications",
-              class: "layout-block"
-            }, true)(title="The link to the Nasa project page.")
-              +tile({
-                title: "Publications",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                image: {
-                  class: "",
-                  src: "cloudinary/aerial-photo-of-brown-mountains",
-                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
-                }
-              })
-
-  //- Quote and Signature layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
-  })
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +main({
-        class: "layout-shorten-horz layout-shorten-vert-top"
-      })
-        section(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center")
           +tile({
-            class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img3 layout-left layer-shadow--1",
+            title: "Boxer",
+            class: "layer-box layer-surface block layer-tile-outline",
             image: {
-              src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-portrait",
-              alt: "An image of Joseph Ojo in a suit on a boat.",
+              src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+              alt: "An image of a rendered robot."
             }
           })
-          section.layout-contain-large.style-left
-            +head({
-              class: "layer-relative layout-padding-left-small--device-gt-tablet"
-            })
-              .clearfix
-                h3.style-font-30.style-bold.layout-margin-top-dull Signature
-                +p({
-                  class: "text-above-quote"
-                })
-                  span.layout-margin-horz-right-dull
-                    | If you are still reading this, you might just want to work with me. Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course.
-                    br
-                    br
-                    | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak!
+
+        +link({
+          href: "/projects/battery-manager",
+          class: "block col-4"
+        })
+          +tile({
+            title: "Battery Manager",
+            class: "layer-box layer-surface block layer-tile-outline",
+            image: {
+              src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
+              alt: "An image of the battery testing workstation box.",
+            }
+          })
+
+        +link({
+          href: "/projects/sarbot",
+          class: "block col-4"
+        })
+          +tile({
+            title: "Search and Rescue Robot (SarBot)",
+            class: "layer-box layer-surface block layer-tile-outline",
+            image: {
+              src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+              alt: "An image of a 3D model of Sarbot.",
+            }
+          })
+
+        +link({
+          href: "/projects/ultima-apparel",
+          class: "block col-4"
+        })
+          +tile({
+            title: "Ultima Apparel",
+            class: "layer-box layer-surface block layer-tile-outline",
+            image: {
+              src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+              alt: "An image of Ultima Apparels first proof of concept.",
+            }
+          })
+
+        +link({
+          href: "/projects/phoenix",
+          class: "block col-8"
+        })
+          +tile({
+            title: "Phoenix",
+            class: "layer-box layer-surface block layer-tile-outline",
+            image: {
+              src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
+              alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
+            }
+          })
+
+        +link({
+          href: "/projects/publications",
+          class: "block col-12"
+        })
+          +tile({
+            title: "Publications",
+            class: "layer-box layer-surface block layer-tile-outline",
+            image: {
+              src: "cloudinary/aerial-photo-of-brown-mountains",
+              alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
+            }
+          })
+
+  //- Quote and Signature layer
+  .container-lg
+    .flex.flex-column.items-center.justify-center
+      +tile({
+        class: "layer-surface layer-box block layer-tile-outline layer-joseph-img3 layout-left layer-shadow--1",
+        image: {
+          src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-portrait",
+          alt: "An image of Joseph Ojo in a suit on a boat.",
+        }
+      })
+      section.float-left
+        .clearfix
+          h3.h5.font-800 Signature
+          p.text-above-quote
+            | If you are still reading this, you might just want to work with me. Working with me is like eating a quadruple-layer steak-filled poutine lasagna – you are not sure what you’re getting yourself into, but you’re going to have the time of your life, provided you like lasagna of course.
+            br
+            br
+            | I’ve been told that the zeal I have with my projects is strong and unwavering. Therefore, if you are looking for persistence, I’m your guy. I am also very goal focused. I like to plan and accomplish, and I hope you are too. So, let us get this motorized ball rolling – so to speak!

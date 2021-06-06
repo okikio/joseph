@@ -3,42 +3,38 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/portfolio",
       name: "portfolio",
       title: "Portfolio — A showcase of some of the projects I have taken on.",
       description: "A showcase of projects I have completed, and even some that are still on-going..."
     };
 
-block hero
+block banner
   //- Banner layer
   +banner({
     title: "Portfolio",
     content: "A showcase of projects I have completed, and even some that are still on-going.",
     image: {
-      class: "effect-parallax hero-img",
       src: "cloudinary/brown-book-on-table",
       alt: "An image of a book on a L-shape ruler beside a pen that is on a brown wooden table. By @ugmonk on unsplash."
-    }
+    },
+    mode: "banner"
   })
-
 
 block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-top-sub-large layout-padding-horz-default--device-gt-tablet"
-  })
+  .container-lg
     +layout({
-      class: "layout-shorten-horz layout-contain"
+      class: "layout-shorten-x layout-contain"
     })
       +main({
-        class: "layout-padding-vert-small layout-clearfix"
+        class: "py-small layout-clearfix"
       })
         span.style-letter-head.style-title T
         +p("his section of the website is dedicated to taking you through the journey of ongoing and completed projects. Tune in for frequent updates as I tack on more projects and complete other activities. ")
 
   //- Image Column layer
-  +layer
+  .container-lg
     +layout({
       class: "layout-contain-large"
     })
@@ -47,15 +43,15 @@ block content
           class: "layout-margin-dull"
         })
           +column({
-            class: "layout-col-6 layout-padding-small"
+            class: "col-6 layout-padding-small"
           })
             +link({
               href: "/projects/boxer",
-              class: "layout-block"
+              class: "block"
             }, true)
               +tile({
                 title: "Boxer",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
+                class: "layer-box layer-surface block layer-tile-outline",
                 content: "An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.",
                 image: {
                   class: "",
@@ -65,15 +61,15 @@ block content
               })
 
           +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
+            class: "col-6 layout-padding-small py-large"
           })
             +link({
               href: "/projects/battery-manager",
-              class: "layout-block"
+              class: "block"
             }, true)
               +tile({
                 title: "Battery Manager",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
+                class: "layer-box layer-surface block layer-tile-outline",
                 content: "A tool designed to provide flexibility in the variety of research that I and future research colleagues will undertake into the field of battery technology.",
                 image: {
                   class: "",
@@ -83,15 +79,15 @@ block content
               })
 
           +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
+            class: "col-6 layout-padding-small py-large"
           })
             +link({
               href: "/projects/sarbot",
-              class: "layout-block"
+              class: "block"
             }, true)
               +tile({
                 title: "Search and Rescue Robot (SarBot)",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
+                class: "layer-box layer-surface block layer-tile-outline",
                 content: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person or object in toe.",
                 image: {
                   class: "",
@@ -101,15 +97,15 @@ block content
               })
 
           +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
+            class: "col-6 layout-padding-small py-large"
           })
             +link({
               href: "/projects/ultima-apparel",
-              class: "layout-block"
+              class: "block"
             }, true)
               +tile({
                 title: "Ultima Apparel",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
+                class: "layer-box layer-surface block layer-tile-outline",
                 content: "Enhanced sportsware designed to improve posture and track workout form.",
                 image: {
                   class: "",
@@ -119,15 +115,15 @@ block content
               })
 
           +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
+            class: "col-6 layout-padding-small py-large"
           })
             +link({
               href: "/projects/phoenix",
-              class: "layout-block"
+              class: "block"
             }, true)
               +tile({
                 title: "Phoenix",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
+                class: "layer-box layer-surface block layer-tile-outline",
                 content: "A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix",
                 image: {
                   class: "",
@@ -137,15 +133,15 @@ block content
               })
 
           +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
+            class: "col-6 layout-padding-small py-large"
           })
             +link({
               href: "/projects/publications",
-              class: "layout-block"
+              class: "block"
             }, true)(title="The link to the Nasa project page.")
               +tile({
                 title: "Publications",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
+                class: "layer-box layer-surface block layer-tile-outline",
                 content: "A list of publications I completed while studying for my masters at OntarioTech University.",
                 image: {
                   class: "",

@@ -13,18 +13,16 @@ block pageInfo
 
 block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet layout-padding-vert-top-default--device-phone"
-  })
+  .container-lg
     +layout({
       class: "layout-shorten layout-contain"
     })
       +main({
-        class: "layout-padding-vert-large layout-clearfix"
+        class: "py-large clearfix"
       })
-        h1.layout-padding-bottom.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Who am I?
+        h1.pb.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Who am I?
         +tile({
-          class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img layout-left layer-shadow--1",
+          class: "layer-surface layer-box block layer-tile-outline layer-joseph-img float-left layer-shadow--1",
           image: {
             src: "cloudinary/josephs_image",
             alt: "An image of Joseph Ojo",
@@ -71,9 +69,9 @@ block content
               class: "layout-right action-btn action-btn-expand-scale action-btn-smooth layer-secondary-btn focus-box",
               href: "https://drive.google.com/file/d/13iItslKMyqXlFdqr240vfbMlnwfHkFk_/view?usp=sharing"
           }, true)(title="View my CV/resume." target="_blank"  rel="noopener")
-            span.layout-padding-nano
+            span.padding-nano
             section.action-btn-layout
-              span.action-btn-group.layout-padding-smaller
+              span.action-btn-group.padding-smaller
                 +icon("launch").action-icon.style-font-size-24
                 span.action-btn-section
                   span.action-btn-spacer

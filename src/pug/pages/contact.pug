@@ -15,12 +15,12 @@ block pageInfo
 
 block content
   //- Intro layer
-  +layer
+  .container-lg
     +layout({
       class: "layout-contain"
     })
-      section(class="layout-shorten layout-padding-top-extra-large")
-        section.layout-contain-large.style-left(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center")
+      section(class="layout-shorten pt-extra-large")
+        section.contain-large.style-left(class="layout-flex layout-flex-col--device-lt-tablet layout-align-items-center layout-justify-content-center")
           div
             +head({
               class: "style-center"
@@ -30,12 +30,12 @@ block content
                 href: "https://www.linkedin.com/in/o-josephojo/",
                 content: "LinkedIn"
               })(target="_blank" rel="noopener")
-              span.layout-margin-right= "   "
+              span.mr= "   "
               +link({
                 href: "https://github.com/josephojo",
                 content: "Github"
               })(target="_blank" rel="noopener")
-              span.layout-margin-right= "   "
+              span.mr= "   "
               span(itemprop="email")
                 +link({
                   href: "mailto:laoluojo@gmail.com",
@@ -47,14 +47,14 @@ block content
                 span Drop me a message by filling out this contact form and I'll respond back as soon as possible.
                 br
                 br
-                .layout-flex.layout-flex-center
+                .flex.flex-center
                   +link({
-                      class: "layout-margin-bottom-small style-center action-btn action-btn-expand-scale action-btn-smooth layer-secondary-btn",
+                      class: "mb-small style-center action-btn action-btn-expand-scale action-btn-smooth layer-secondary-btn",
                       href: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u"
                   }, true)(title="Open the Contact Form." target="_blank"  rel="noopener")
-                    span.layout-padding-nano
+                    span.padding-nano
                     section.action-btn-layout
-                      span.action-btn-group.layout-padding-smaller
+                      span.action-btn-group.padding-smaller
                         +icon("launch").action-icon.style-font-size-24
                         span.action-btn-section
                           span.action-btn-spacer
@@ -63,7 +63,7 @@ block content
                           span.action-btn-spacer
                 br
               +tile({
-                class: "layer-surface layer-box layout-block layer-tile-outline layer-joseph-img2 layer-shadow--1",
+                class: "layer-surface layer-box block layer-tile-outline layer-joseph-img2 layer-shadow--1",
                 image: {
                   src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
                   alt: "An image of Joseph Ojo laughing with friends on a boat.",
@@ -71,34 +71,34 @@ block content
               })
   //- Contact Form layer
   //- +layer({
-  //-   class: "layer-contrast layout-padding-horz-default--device-gt-tablet"
+  //-   class: "layer-contrast px-default--device-gt-tablet"
   //- })
     +layout({
       class: "layout-contain-large"
     })
       +main({
-          class: "layout-shorten-vert"
+          class: "layout-shorten-y"
       })
-        div.layout-padding-vert-bottom.layout-contain.layout-shorten-horz
+        div.pb.contain.shorten-x
           h4.style-primary.style-font-25.style-bold.style-center Leave you name and number, and I'll get back to you.
-          //- p(lorem="2" class="layout-margin-horz-dull")
+          //- p(lorem="2" class="mx-dull")
           //- a
         //- div.layer-center-line
         //- 1st Row
 
         //- https://haerfest.com/pages/contact
-        form.layout-contain-small.layout-padding-horz(action='')
-          fieldset.layer-fieldset.layout-flex.layout-center
-            input.layout-full-width#name(type='text', name='name', placeholder="" required)
+        form.contain-small.padding-x(action='')
+          fieldset.layer-fieldset.flex.center
+            input.full-width#name(type='text', name='name', placeholder="" required)
             label(for='name') Name
-          fieldset.layer-fieldset.layout-flex.layout-center
+          fieldset.layer-fieldset.flex.center
             input#email(type='email', name='email',  required)
             label(for='email') Email
           fieldset.style-center
             button.action-btn.action-btn-smooth.layer-secondary-btn(type='submit')
-              span.layout-padding-nano
-              section.action-btn-layout.layout-padding-horz-right-smaller
-                span.action-btn-group.layout-padding-smaller
+              span.padding-nano
+              section.action-btn-layout.pr-smaller
+                span.action-btn-group.padding-smaller
                   +icon("launch").action-icon.style-font-size-24
                   span.action-btn-section
                     span.action-btn-spacer
@@ -107,24 +107,24 @@ block content
 
   //- Intro layer
   //- +layer({
-  //-   class: "layout-padding-horz-default header-top-spot"
+  //-   class: "px-default header-top-spot"
   //- })
     +layout({
-      class: "layout-contain-small layout-padding-vert"
+      class: "layout-contain-small py"
     })
       section
         +head
           //- h1.style-font-30--device-phone.style-primary-dark.style-bold.style-uppercase Say Hello — Lets talk
           h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Contact
         +main({
-          class: "layout-padding-vert-small layout-clearfix style-center"
+          class: "py-small layout-clearfix style-center"
         })
           //- span.style-letter-head H
           //- +p("ey, I am ")
           //-   span(itemprop='author') Joseph Ojo
           //-   span , the man, the myth, the legend, let's talk.
-          //- span.layout-margin-vert-bottom(itemprop='description')
-          //-   p.layout-inline.layout-margin-dull(lorem="1")
+          //- span.mb(itemprop='description')
+          //-   p.inline.margin-dull(lorem="1")
           //-   span(itemtype='https://schema.org/EducationalOrganization' itemprop="alumniOf")
           //-     |  I am an alumni of OnTech - Ontario Tech University
           section(itemtype='https://schema.org/Person')

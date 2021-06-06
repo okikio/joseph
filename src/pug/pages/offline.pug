@@ -3,7 +3,7 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-      
+
       url: "/offline",
       name: "offline",
       title: "Yikes you're offline!",
@@ -15,20 +15,20 @@ block preload
 
 block content
   //- Intro layer
-  +layer
+  .container-lg
     +layout({
       class: "layout-contain layer-overflow-hide"
     })
       section(class="layout-shorten layout-max-height-limited layout-flex layout-align-items-center layout-justify-content-center")
-        section.style-center.layout-margin-top-larger--device-phone
+        section.style-center.mt-larger--device-phone
           +head({
-            class: "layout-margin-bottom"
+            class: "mb"
           })
-            h1.h3.style-font-45--device-phone.style-primary-dark.style-bold.layout-margin-dull Yikes you're offline!
+            h1.h3.style-font-45--device-phone.style-primary-dark.style-bold.margin-dull Yikes you're offline!
           +main
             +p("Psshhh, psshhh, you are cutting off, psshhh. You are currently offline. Reload the page or try again later.")
 
 block footer
   +footer({
-    class: "footer-stuck layout-margin-vert-top"
+    class: "footer-stuck mt"
   })

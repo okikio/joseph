@@ -9,62 +9,59 @@ block pageInfo
       title: "SarBot — A Search and Rescue Robot",
       description: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person or object in toe."
     };
-
-block content
-  //- Banner layer
+block banner
   +banner({
     title: "Project 3: SarBot (2018)",
     content: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person or object in toe",
     image: {
-      class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
       alt: "An image of a 3D model of Sarbot.",
-    }
+    },
+    mode: "banner"
   })
 
+block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet"
-  })
+  .container-lg
     +layout({
       class: "layout-contain-large"
     })
       +main({
-        class: "layout-padding-vert-small layout-clearfix"
+        class: "py-small layout-clearfix"
       })
-        div.layout-contain.layout-shorten-horz.layout-margin-vert
+        div.contain.layout-shorten-x.my
           +p
             span.style-letter-head T
-            span.layout-inline.layout-margin-dull  he SarBot or Search and Rescue Robot was a major group project in the last year of my undergraduate studies. The project was meant to test our ability to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. This project was meant to emulate an actual rescue mission in the scenario that miners are trapped on a sub-level in a mine. The reason why a robot is used here is due to the risk to human rescuers.
+            span.inline.margin-dull  he SarBot or Search and Rescue Robot was a major group project in the last year of my undergraduate studies. The project was meant to test our ability to design and develop a semi-autonomous robot to traverse a multi-leveled maze and return to the initial point with a miner. This project was meant to emulate an actual rescue mission in the scenario that miners are trapped on a sub-level in a mine. The reason why a robot is used here is due to the risk to human rescuers.
             br
             br
-            figure.layout-margin-horz--device-gt-tablet.style-center
+            figure.mx--device-gt-tablet.style-center
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/2-Floor_Maze",
                 alt: ""
               })(width="471px" height="315px")
-              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 1: An image of the floor Maze Sarbot had to cross
-        div.layout-contain.layout-shorten-horz.layout-margin-vert
+              figcaption.mt-small.style-font-14.style-italic Figure 1: An image of the floor Maze Sarbot had to cross
+        div.contain.layout-shorten-x.my
           +p
             | Due to the smaller scale of the project, the team decided to design small for easy maneuverability. Our design consisted of a unibody chassis 3D printed in 2 parts. The top part housed 3 infrared (IR) sensors, the microcontroller (Teensy 3.6), a couple of voltage converter modules and the motor controller. On the bottom level, the wheels, batteries, geared DC motor, servo motors and one more IR sensor. The final assembly is shown below.
             br
             br
-            figure.layout-margin-horz--device-gt-tablet.style-center
+            figure.mx--device-gt-tablet.style-center
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
                 alt: ""
               })(width="610px" height="481px")
-              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 2: A model of Sarbot.
+              figcaption.mt-small.style-font-14.style-italic Figure 2: A model of Sarbot.
             br
-            figure.layout-margin-horz--device-gt-tablet.style-center
+            figure.mx--device-gt-tablet.style-center
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/3D_Printing",
                 alt: ""
               })(width="602px" height="714px")
-              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 3: The 3D printing of the parts for Sarbot
+              figcaption.mt-small.style-font-14.style-italic Figure 3: The 3D printing of the parts for Sarbot
             br
             | Our approach, although not ideal for the use case, was similar to that of some self-driving vehicle companies. We first manually mapped out the maze with waypoints. These waypoints were placed near key landmarks. These landmarks include T-junctions, cross-sections, narrower paths, steep grades, terrain changes, miner location and so on. A matrix of data was then created for each waypoint to help the robot decide what actions to take at each waypoint. Each waypoint consisted of a base command to go forward, backward, left or right, a base command controller i.e. what controller to use to complete the base command, stopping conditions for the command, manipulator commands and others. For example, a waypoint next to a turn had data such a turn right command, how many degrees the turn is, the speed required to make the turn, and what controller to use to make the turn i.e. a PID controller for robot angle.
-        div.layout-contain.layout-shorten-horz.layout-margin-vert
+        div.contain.layout-shorten-x.my
           +p
             | Our method to secure and return the miner, in our case, a toy was a quick and quirky solution called the Swatter. The innovative design made from the most reliable materials, a metal clothes hanger and some duct tape, yep, duct tape! I think the saying goes something like this, “if you can’t fix it with duct tape, you’re not using enough duct tape” haha. All jokes aside though, it seemed to work reliably, so we left it as is, not bothering with a complex robotic arm design.
             br
@@ -72,41 +69,41 @@ block content
             | At the end of it, we were awarded third place because our robot could not retrieve the miner in time, but we completed the full course as is seen in the video below. To give you a reference though, the first place could not retrieve the miner due to a mix up with their arm design, but they also completed the course. The second-place team were able to pick up the miner but could not fully make it to the initial point. All in all a wonderful accomplishment to be recognized for our hard work.
             br
             br
-            figure.layout-margin-horz--device-gt-tablet.style-center
+            figure.mx--device-gt-tablet.style-center
               +img-view({
                 src: "cloudinary/joseph-projects/sarbot/Final_Build",
                 alt: ""
               })(width="480px" height="452px")
-              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 4: The finalized model of Sarbot
+              figcaption.mt-small.style-font-14.style-italic Figure 4: The finalized model of Sarbot
             br
             br
-            figure.layout-margin-horz--device-gt-tablet.style-center
-              section(class="layout-block layout-margin-bottom-smaller")
-                video.layout-full-width(controls='' name='media')
+            figure.mx--device-gt-tablet.style-center
+              section(class="block mb-smaller")
+                video.full-width(controls='' name='media')
                   source(src='https://res.cloudinary.com/okikio-assets/video/upload/v1618904172/joseph-projects/sarbot/Joseph_s_Trimmed_Video.mp4' type='video/mp4')
 
-              figcaption.layout-margin-top-small.style-font-14.style-italic Figure 5: A video displaying the capabilities of the final design of SarBot
+              figcaption.mt-small.style-font-14.style-italic Figure 5: A video displaying the capabilities of the final design of SarBot
 
   //- Next page layer
 
   +layout({
-    class: "layout-contain-large layer-round layout-padding-horz-small layout-padding-horz--device-gt-tablet"
+    class: "layout-contain-large layer-round px-small px--device-gt-tablet"
   })
     +link({
       href: "/projects/ultima-apparel",
-      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+      class: "block px-default--device-gt-tablet layer-black layer-next"
     }, true)
       +head({
-        class: "layout-padding-top-default"
+        class: "pt-default"
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
         +main({
-          class: "layout-padding-vert-sub-large"
+          class: "py-sub-large"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Ultima Apparel
 
         //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 mt-larger block layer-tile-outline",
         //-   image: {
         //-     class: "",
         //-     src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",

@@ -19,11 +19,10 @@ block preload
 
 block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet header-top-spot"
-  })
+  .navbar-top-spot
+  .container-lg
     +layout({
-      class: "layout-contain-small layout-shorten-vert"
+      class: "layout-contain-small layout-shorten-y"
     })
       section
         +head
@@ -35,7 +34,7 @@ block content
             li
               +link({
                 href: "/",
-                class: "style-italic style-underline layout-margin-right-mini"
+                class: "style-italic style-underline mr-mini"
               })(itemprop="url")
                 span(itemprop="name") Home
               +p("- Homepage galor, its the begining of our little adventure.")
@@ -45,7 +44,7 @@ block content
             li
               +link({
                 href: "/about",
-                class: "style-italic style-underline layout-margin-right-mini"
+                class: "style-italic style-underline mr-mini"
               })(itemprop="url")
                 span(itemprop="name") About
               +p("- What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering.")
@@ -54,7 +53,7 @@ block content
             li
               +link({
                 href: "/portfolio",
-                class: "style-italic style-underline layout-margin-right-mini"
+                class: "style-italic style-underline mr-mini"
               })(itemprop="url")
                 span(itemprop="name") Portfolio
               +p("- Hardwork and perseverance, hear all about it. A showcase of projects I have completed, and even some that are still on-going.")
@@ -64,7 +63,7 @@ block content
                 li
                   +link({
                     href: "/projects/boxer",
-                    class: "style-italic style-underline layout-margin-right-mini"
+                    class: "style-italic style-underline mr-mini"
                   })(itemprop="url")
                     span(itemprop="name") Boxer
                   +p("- An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.")
@@ -73,7 +72,7 @@ block content
                 li
                   +link({
                     href: "/projects/battery-manager",
-                    class: "style-italic style-underline layout-margin-right-mini"
+                    class: "style-italic style-underline mr-mini"
                   })(itemprop="url")
                     span(itemprop="name") Battery Manager
                   +p("- A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of batteries.")
@@ -82,7 +81,7 @@ block content
                 li
                   +link({
                     href: "/projects/sarbot",
-                    class: "style-italic style-underline layout-margin-right-mini"
+                    class: "style-italic style-underline mr-mini"
                   })(itemprop="url")
                     span(itemprop="name") SarBot
                   +p("- A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe.")
@@ -91,7 +90,7 @@ block content
                 li
                   +link({
                     href: "/projects/ultima-apparel",
-                    class: "style-italic style-underline layout-margin-right-mini"
+                    class: "style-italic style-underline mr-mini"
                   })(itemprop="url")
                     span(itemprop="name") Ultima Apparel
                   +p("- Enhanced sportsware designed to improve posture and track workout form.")
@@ -100,7 +99,7 @@ block content
                 li
                   +link({
                     href: "/projects/phoenix",
-                    class: "style-italic style-underline layout-margin-right-mini"
+                    class: "style-italic style-underline mr-mini"
                   })(itemprop="url")
                     span(itemprop="name") Phoenix
                   +p("- A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix.")
@@ -109,7 +108,7 @@ block content
                 li
                   +link({
                     href: "/projects/publications",
-                    class: "style-italic style-underline layout-margin-right-mini"
+                    class: "style-italic style-underline mr-mini"
                   })(itemprop="url")
                     span(itemprop="name") Academic Publications
                   +p("- A list of publications I completed while studying for my masters at OntarioTech University.")
@@ -119,7 +118,7 @@ block content
             li
               +link({
                 href: "/contact",
-                class: "style-italic style-underline layout-margin-right-mini"
+                class: "style-italic style-underline mr-mini"
               })(itemprop="url")
                 span(itemprop="name") Contact
               +p("- Do you have a project that demands perservance and passion? Then, lets talk.")

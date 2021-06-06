@@ -2,55 +2,37 @@ include /components/link.pug
 include /components/image.pug
 
 mixin themeSwitcher()
-  .layout-inline-block
-    button.theme-switcher.navbar-btn.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover(title="Theme Switcher" name="Theme Switcher")
-      span.action-btn-group
-        //- brightness_medium
-        +icon("theme switcher").action-icon.style-font-family-bold.style-font-size-24
+  button.theme-switcher.navbar-btn(title="Theme Switcher")
+    +icon("theme switcher").icon
 
 mixin navbar(value = {})
   - let { url } = value;
   - let _class = value.class;
 
-  - let tabs = ["about", "portfolio", "contact"]; //
-  //- - let focusIndex = url.toLowerCase().includes(tabs);
+  - let tabs = ["about", "portfolio", "contact"];
 
-  header.header
-    nav.navbar.navbar-fixed(class=_class itemscope itemtype="https://schema.org/SiteNavigationElement" aria-label="Main Navigation")
-      .layout-contain-enlarge.navbar-layout
-        .navbar-head(itemscope itemtype="http://schema.org/Organization")
+  nav.navbar(aria-label="Main Navigation")
+    .navbar-layout
+      .navbar-head
+        +link({
+          href: "/",
+          class: "navbar-title"
+        })(data-swup-preload)
+          img(src="/favicon/favicon.svg" alt="Logo." itemprop="logo" width="20px" height="20px" loading="eager")
+          .title-line
+          | JOSEPH OJO
+        .navbar-foot
+          +themeSwitcher
+          button.navbar-menu.navbar-btn(title="Menu Button")
+            +icon("menu").icon
+
+      .navbar-main
+        each tab, i in tabs
+          - let active = url.toLowerCase().includes(tab);
           +link({
-            href: "/",
-            class: "navbar-title style-primary-dark-hover style-primary-dark-focus"
-          })(itemprop="url" data-swup-preload title="The Joseph Ojo Logo.")
-            img.navbar-logo(src="/favicon/favicon.svg" alt="Logo." itemprop="logo" width="20px" height="20px" loading="eager")
-            //-  joseph-new.svg
-            span.navbar-title-line
-            span.name(itemprop="name") JOSEPH
-              span.last-name  OJO
-          .layout-spacer
-          .navbar-foot.navbar-mobile
-            +themeSwitcher
-            //- if !debug
-            .layout-inline-block
-              button.navbar-menu.action-btn.layer-round.layout-padding-smaller.layer-transparent.layer-light-hover(title="Menu Button" name="Menu Button"
-              aria-expanded="false"
-              aria-controls="navbar-list")
-                span.action-btn-group
-                  +icon("menu").action-icon.style-font-family-bold.style-font-size-24
-
-        .layout-spacer.navbar-desktop
-        .navbar-main
-          //- if !debug
-          ul.navbar-list#navbar-list(itemscope itemtype="http://schema.org/BreadcrumbList")
-            each tab, i in tabs
-              if typeof tab == "string"
-                li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
-                  +link({
-                    href: `/${tab}`,
-                    class: `navbar-link${url.toLowerCase().includes(tab) ? " navbar-link-focus" : ""}`
-                  })(itemprop="url" data-swup-preload data-path=tab)
-                    span.navbar-link-content(itemprop="name")= tab.replace("-", " ")
-                    //- meta(itemprop="position" content="1")
-            .navbar-desktop-display
-              +themeSwitcher
+            href: `/${tab}`,
+            class: `navbar-link`
+          })(data-swup-preload data-path=tab class={ active })
+            span.link-content= tab.replace("-", " ")
+        .navbar-mobile-only
+          +themeSwitcher

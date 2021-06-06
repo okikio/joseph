@@ -3,7 +3,6 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/projects/publications",
       name: "publications",
       title: "Academic Publications.",
@@ -12,18 +11,16 @@ block pageInfo
 
 block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet"
-  })
+  .container-lg
     +layout({
       class: "layout-shorten layout-contain"
     })
       +main({
-        class: "layout-padding-vert-large layout-clearfix"
+        class: "py-large layout-clearfix"
       })
-        h1.layout-padding-vert.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Academic Publications.
+        h1.padding-y.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Academic Publications.
         +p
-          span.layout-inline.layout-margin-dull
+          span.inline.margin-dull
             ol
               li O. Ojo, X. Lin, H. Lang, “A Threshold-Based Voltage Fault Detection Method Enabled by A Novel Neural Network Architecture for Lithium-ion Batteries” [Under Review]
 
@@ -40,23 +37,23 @@ block content
 
   //- Next page layer
   +layout({
-    class: "layout-contain-large layer-round layout-padding-horz-small layout-padding-horz--device-gt-tablet"
+    class: "layout-contain-large layer-round px-small px--device-gt-tablet"
   })
     +link({
       href: "/projects/boxer",
-      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+      class: "block px-default--device-gt-tablet layer-black layer-next"
     }, true)
       +head({
-        class: "layout-padding-top-default"
+        class: "pt-default"
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
         +main({
-          class: "layout-padding-vert-sub-large"
+          class: "py-sub-large"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Boxer
 
         //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 mt-larger block layer-tile-outline",
         //-   image: {
         //-     class: "",
         //-     src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",

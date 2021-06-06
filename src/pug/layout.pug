@@ -4,12 +4,12 @@ include /components/banner.pug
 include /components/column.pug
 include /components/navbar.pug
 include /components/footer.pug
+include /components/back-to-top.pug
 include /components/img-view.pug
 include /components/image.pug
 include /components/layer.pug
 include /components/text.pug
 include /components/tile.pug
-include /components/hero.pug
 include /components/link.pug
 include /components/icon.pug
 include /components/seo.pug
@@ -20,9 +20,13 @@ html(lang="en")
   head
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width,initial-scale=1")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
     meta(name="color-scheme" content="dark light")
 
     link(rel="stylesheet" href="/css/app.min.css" async)
+
     noscript
       link(rel="stylesheet" href="/css/no-script.min.css" async)
 
@@ -39,14 +43,7 @@ html(lang="en")
 
     block pageInfo
       - let page = {};
-
-    -
-      page = Object.assign({}, defaults, page);
-
-    meta(charset="utf-8")
-    meta(http-equiv="x-ua-compatible" content="ie=edge")
-    meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
-    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+    - page = Object.assign({}, defaults, page);
 
     block seo
       +seo(page)
@@ -55,7 +52,7 @@ html(lang="en")
 
     script(src="/js/theme.min.js" type="module", defer)
 
-  body(itemscope="" itemtype="https://schema.org/WebPage")
+  body
     +link({
       class: "skip-main",
       href: "#content",
@@ -65,23 +62,12 @@ html(lang="en")
     block navbar
       +navbar(page)
 
-    main.main.transition-in-view(data-container tabindex="-1")
-      block hero
-      section(id="content" itemtype="http://schema.org/WebPageElement" itemscope itemprop="mainEntity")
+    main.transition-in-view(data-container)
+      block banner
+      section(id="content")
         block content
 
-    .layer-action-center.layer-action-center-hide
-      article.layer-action-group
-        .layer-round.layout-align-self-end.layout-margin-horz-small
-          button.back-to-top.action-btn.action-btn-hover.layer-round.layer-primary.layer-primary-light-hover.layer-primary-light-focus.style-white.style-hover-white.style-focus-white(type="button")
-            section.action-btn-layout.layout-padding-smallest
-              span.action-btn-group
-                span.action-btn-section
-                  span.action-btn-spacer
-                  span.action-btn-spacer
-                  span.layout-margin-left-mini
-                  span.action-btn-content Back To Top
-                +icon("expand_less").action-icon.style-font-size-24
+    +back-to-top
 
     block footer
       +footer

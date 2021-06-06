@@ -81,7 +81,7 @@
         &-content {
             text-transform: uppercase;
             letter-spacing: 0.02857em;
-            font-family: $bold-font;
+            // font-family: $bold-font;
             font-size: 0.875rem;
             font-weight: 500;
         }
@@ -134,41 +134,130 @@
     &-pointer-default {
         cursor: default;
     }
+}
 
-    &-icon,
-    &-material-icons {
-        -webkit-font-feature-settings: "liga" off, "dlig";
-        /* Ch 16-26, BB 10, And 18.0 */
-        -moz-font-feature-settings: "liga=0, dlig=1";
-        /* Fx 4-21 */
-        font-feature-settings: "liga", "dlig";
-        /* IE 10, Saf 4.0-6.0 */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-        font-family: $icon-font;
-        vertical-align: middle;
-        letter-spacing: normal;
-        display: inline-block;
-        text-decoration: none;
-        text-transform: none;
-        white-space: nowrap;
-        font-weight: normal;
-        position: relative;
-        font-style: normal;
-        word-wrap: normal;
-        line-height: 1;
-        direction: ltr;
-        height: 1em;
-        width: 1em;
+.icon,
+.material-icons {
+    font-feature-settings: "liga", "dlig";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    vertical-align: middle;
+    letter-spacing: normal;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: none;
+    white-space: nowrap;
+    font-weight: 400;
+    position: relative;
+    font-style: normal;
+    word-wrap: normal;
+    @apply text-2xl;
+    line-height: 1;
+    direction: ltr;
+    height: 1em;
+    width: 1em;
 
-        &-btn,
-        &-btn:hover {
+    &-btn,
+    &-btn:hover {
+        border-radius: 9999px;
+        &:focus-visible {
             border-radius: 9999px;
-            &:focus-visible {
-                border-radius: 9999px;
+        }
+        text-decoration: none;
+    }
+}
+
+.btn {
+    transition: background-color #{$transitionDuration} ease,
+        color #{$transitionDuration} ease, width 0.6s ease 0s !important;
+    @apply flex justify-center align-middle items-center overflow-hidden;
+    @apply rounded-full select-none;
+
+    &-hover {
+        @apply w-10 hover:w-44 focus-visible:w-44;
+
+        .btn-content {
+            @apply opacity-0;
+        }
+
+        &:hover,
+        &:focus-visible {
+            .btn-content {
+                @apply opacity-100;
             }
-            text-decoration: none;
+        }
+    }
+
+    &-layout {
+        @apply flex w-full items-center justify-center;
+    }
+
+    &-content {
+        transition: opacity 0.4s ease 0.1s;
+        @apply text-center text-sm;
+        @apply font-bold font-900 uppercase whitespace-nowrap;
+        @apply overflow-hidden flex w-full;
+
+        &:before {
+            @apply ml-5 block;
+            content: "";
+        }
+    }
+}
+
+.icon-btn {
+    @apply w-10 h-10 flex items-center justify-center;
+    min-width: theme("spacing.10");
+
+    .icon {
+        @apply rounded-full block;
+    }
+}
+
+#to-top {
+    transition: opacity 0.4s ease;
+    @apply fixed bottom-4 right-4;
+    opacity: 1;
+    color: white;
+    z-index: 80;
+
+    .btn {
+        @include applyTheme(background-color, "primary");
+        --color: var(--primary, #{$primary});
+
+        .icon {
+            transition: box-shadow ease 0.35s;
+            @apply rounded-full;
+            box-shadow: 0 0 35px 15px var(--color, #{$primary});
+        }
+
+        &:hover,
+        &:focus {
+            --color: var(--primary-light, #{$primary-light});
+            @include applyTheme(background-color, "primary-light");
+        }
+    }
+
+    &.hide {
+        opacity: 0;
+    }
+}
+
+#scroll-down {
+    color: black;
+    z-index: 80;
+
+    .btn {
+        @include applyTheme(background-color, "secondary-light");
+
+        &-content:before {
+            display: none;
+        }
+
+        &:hover,
+        &:focus {
+            @include applyTheme(background-color, "secondary");
         }
     }
 }

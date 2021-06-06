@@ -18,27 +18,22 @@ html,
 body {
     @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
+    scroll-behavior: smooth;
+
+    text-rendering: optimizeSpeed;
+    word-wrap: break-word;
+    line-height: 1.5;
+    font-weight: 500;
+    font-size: 1rem;
+
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+    @apply font-regular;
 }
 
 body {
     transition: background-color #{$transitionDuration} ease,
         color #{$transitionDuration} ease;
-
-    text-rendering: optimizeSpeed;
-    font-family: $regular-font;
-    word-wrap: break-word;
-    line-height: 1.15;
-    font-weight: 400;
-    font-size: 14px;
-
-    @media (max-width: 300px) {
-        word-break: break-all;
-    }
-
-    @media #{$screen-size-lt-tablet} {
-        -webkit-overflow-scrolling: touch;
-        -webkit-tap-highlight-color: transparent;
-    }
 }
 
 ::selection {
@@ -48,53 +43,46 @@ body {
     color: $white;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: inherit;
-    line-height: 1.15;
-    font-weight: 400;
-    color: inherit;
-    display: block;
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    // font-family: inherit;
+    // line-height: 1.15;
+    // font-weight: 400;
+    // color: inherit;
+    // display: block;
 }
 
-h1,
 .h1 {
     margin: 2.1rem 0 1.68rem 0;
     font-weight: 900;
 }
 
-h2,
 .h2 {
     margin: 1.78rem 0 1.424rem 0;
     font-weight: 700;
 }
 
-h3,
 .h3 {
     margin: 1.46rem 0 1.168rem 0;
     font-weight: 600;
 }
 
-h4,
 .h4 {
     margin: 1.14rem 0 0.912rem 0;
 }
 
-h5,
 .h5 {
     margin: 0.82rem 0 0.656rem 0;
 }
 
-h6,
 .h6 {
     margin: 0.5rem 0 0.4rem 0;
 }
 
-p,
 .p {
     margin: 0 2em 10px 2em;
 }
@@ -102,10 +90,6 @@ p,
 $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
 @each $sz in $headerSizes {
     $i: index($headerSizes, $sz);
-
-    h#{$i} {
-        font-size: $sz;
-    }
 
     .h#{$i} {
         font-size: $sz !important;
@@ -121,9 +105,9 @@ video {
     border: none;
     // width: 100%;
 
-    @media #{$screen-size-lt-tablet} {
-        height: inherit;
-    }
+    // @media #{$screen-size-lt-tablet} {
+    //     height: inherit;
+    // }
 }
 
 a {
@@ -141,6 +125,16 @@ a {
     }
 }
 
+button,
+a {
+    transition: color ease #{$transitionDuration}, box-shadow 0.2s ease-out;
+    @apply focus-visible:ring-4 focus-visible:ring-blue-600 focus-visible:ring-opacity-50;
+    @apply ring-offset-2 ring-offset-black dark:ring-offset-white;
+    @apply rounded-md focus:outline-none;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
 // For touch screen devices
 a,
 button,
@@ -149,7 +143,7 @@ input {
     background-image: none;
     outline: 0;
 
-    @media #{$screen-size-phone} {
+    @screen lt-sm {
         user-select: none;
     }
 
@@ -220,69 +214,6 @@ a.skip-main {
     }
 }
 
-.layer-image {
-    figure.load-img {
-        height: 500px;
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        transform: translate3d(0, 0, 0);
-        // height: 100%;
-
-        img {
-            position: absolute;
-            object-fit: cover;
-            object-position: center center;
-            left: 0;
-            bottom: 0;
-
-            height: 100%;
-            width: 100%;
-        }
-
-        &.bottom img {
-            object-position: center bottom;
-        }
-    }
-}
-
-.img-view {
-    figure.load-img {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-
-        .img-view-contain {
-            transition: background-color #{$transitionDuration} ease;
-            transform: translate3d(0, 0, 0);
-            display: inline-block;
-            background-color: #797886;
-
-            img {
-                position: relative;
-                object-fit: scale-down;
-                object-position: center center;
-                transform: scale(1);
-            }
-
-            .no-script-img {
-                position: absolute;
-                width: 100%;
-                height: auto;
-                top: 0;
-                left: 0;
-            }
-        }
-    }
-}
-
-html[theme="dark"] {
-    .img-view figure.load-img {
-        background-color: #1d1c2b;
-    }
-}
-
 .placeholder-img {
     image-rendering: auto;
     image-rendering: smooth;
@@ -330,42 +261,27 @@ html[theme="dark"] {
     }
 }
 
-a,
-button,
-input {
-    &:focus-visible {
-        transition: box-shadow ease 0.25s;
-        --tw-ring-offset-shadow: 0 0 0 4px #{transparentize($secondary, 0.5)};
-        --tw-ring-shadow: 0 0 0 calc(4px + var(--tw-ring-offset-width, 0px))
-            var(--tw-ring-color);
-        box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-            var(--tw-shadow, 0 0 #0000);
-        --tw-ring-color: #{transparentize($secondary-light, 0.5)};
-        border-radius: 5px;
-    }
-}
-
 .footer {
     font-size: 14px;
     line-height: 35px;
 
-    @media #{$screen-size-lt-tablet} {
-        font-size: 13px;
-    }
+    // @media #{$screen-size-lt-tablet} {
+    //     font-size: 13px;
+    // }
 
-    @media #{$screen-size-lt-laptop} {
-        padding-right: $size + 10px;
-    }
+    // @media #{$screen-size-lt-laptop} {
+    //     padding-right: $size + 10px;
+    // }
 }
 
-@media #{$screen-size-gt-tablet} {
-    .footer-stuck {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
-    }
-}
+// @media #{$screen-size-gt-tablet} {
+//     .footer-stuck {
+//         position: absolute;
+//         bottom: 0;
+//         right: 0;
+//         left: 0;
+//     }
+// }
 
 .footer-layout {
     display: flex;
@@ -373,25 +289,7 @@ input {
     flex-wrap: wrap;
     justify-content: space-between;
 
-    @media #{$screen-size-lt-laptop} {
-        flex-direction: column;
-    }
-}
-
-.back-to-top {
-    --color: var(--primary, #{$primary});
-    z-index: 500;
-
-    .action-icon {
-        transition: box-shadow ease 0.35s;
-        border-radius: 9999px;
-        box-shadow: 0 0 25px 15px var(--color, $primary);
-    }
-
-    &:hover,
-    &:focus {
-        .action-icon {
-            --color: var(--primary-light, #{#{$primary-light}});
-        }
-    }
+    // @media #{$screen-size-lt-laptop} {
+    //     flex-direction: column;
+    // }
 }

@@ -766,7 +766,7 @@ export let on = (elems, events, callback, scope) => {
             }
         } else {
             each(elems, elem => {
-                elem.addEventListener(event, callback, scope);
+                elem?.addEventListener(event, callback, scope);
             });
         }
     }, this);
@@ -803,9 +803,10 @@ export let off = (elems, events, callback, scope) => {
             scope = event === "scroll" ? passive || {} : { useCapture };
         }
 
-        if (/ready/.test(event)) { console.warn("Cannot remove the 'ready' event."); } else {
+        if (/ready/.test(event)) console.warn("Cannot remove the 'ready' event.");
+        else {
             each(elems, elem => {
-                elem.removeEventListener(event, callback, scope);
+                elem?.removeEventListener?.(event, callback, scope);
             });
         }
     }, this);

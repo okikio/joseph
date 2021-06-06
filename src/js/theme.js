@@ -28,6 +28,7 @@ try {
     let html = document.querySelector("html");
     if (theme === null) theme = mediaTheme();
     theme && html.setAttribute("theme", theme);
+    theme && html.classList.add(theme);
 } catch (e) {
     console.warn("Theming isn't available on this browser.");
 }

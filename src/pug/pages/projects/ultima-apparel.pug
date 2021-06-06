@@ -10,54 +10,53 @@ block pageInfo
       description: "Enhanced sportsware designed to improve posture and track workout form."
     };
 
-block content
+block banner
   //- Banner layer
   +banner({
     title: "Project 4: Ultima Apparel (2016 - 2018)",
     content: "A project to improve posture form during workouts by means of clothing that tracked form and posture.",
     image: {
-      class: "effect-parallax hero-img",
       src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
       alt: "An image of Ultima Apparels first proof of concept.",
-    }
+    },
+    mode: "banner"
   })
 
+block content
   //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet"
-  })
+  .container-lg
     +layout({
       class: "layout-shorten layout-contain"
     })
       +main({
-        class: "layout-padding-vert-small layout-clearfix"
+        class: "py-small layout-clearfix"
       })
         +p
           span.style-letter-head U
-          span.layout-inline.layout-margin-dull ltima Apparel started off as a pet project for my co-founder. He was looking to find a way to improve his posture and acquire data about his form after hurting himself during a workout. He approached me to see if we could solve that problem for others as well.
+          span.inline.margin-dull ltima Apparel started off as a pet project for my co-founder. He was looking to find a way to improve his posture and acquire data about his form after hurting himself during a workout. He approached me to see if we could solve that problem for others as well.
           br
           br
           | We decided to enter the project into our capstone competition as our final year capstone project.
 
   //- Next page layer
   +layout({
-    class: "layout-contain-large layer-round layout-padding-horz-small layout-padding-horz--device-gt-tablet"
+    class: "layout-contain-large layer-round px-small px--device-gt-tablet"
   })
     +link({
       href: "/projects/phoenix",
-      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
+      class: "block px-default--device-gt-tablet layer-black layer-next"
     }, true)
       +head({
-        class: "layout-padding-top-default"
+        class: "pt-default"
       })
         h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
         +main({
-          class: "layout-padding-vert-sub-large"
+          class: "py-sub-large"
         })
           p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Phoenix
 
         //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
+        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 mt-larger block layer-tile-outline",
         //-   image: {
         //-     class: "",
         //-     src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",

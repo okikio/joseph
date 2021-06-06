@@ -4,8 +4,157 @@
     -- Layer (represents a section of code that displays content) --
      * ".more" = is for the learn more buttons
 */
+
+.image {
+    z-index: 0;
+
+    &,
+    figure,
+    &-overlay {
+        @apply absolute top-0 left-0 overflow-hidden block h-full w-full;
+    }
+
+    img {
+        @apply absolute top-0 left-0 overflow-hidden object-cover object-center h-full w-full;
+    }
+
+    &-overlay {
+        transition: background-color #{$transitionDuration} ease;
+        background-color: darken($primary-dark, 30%);
+        opacity: 0.55;
+        z-index: 25;
+    }
+}
+
+.banner {
+    @apply text-white;
+
+    &.hero {
+        @apply pt-20 px-5;
+
+        .image {
+            @apply rounded-2xl overflow-hidden;
+        }
+
+        .container {
+            @apply container max-w-screen-3xl;
+        }
+
+        h1 {
+            @apply text-7xl;
+        }
+    }
+
+    .container {
+        @apply relative max-w-full;
+    }
+
+    .image-container,
+    .layout {
+        @apply container max-w-screen-lg;
+    }
+
+    .layout {
+        @apply transform translate-y-5 px-12 flex flex-col;
+    }
+
+    .content {
+        @apply py-36 z-10;
+    }
+
+    h1 {
+        @apply font-title font-900 text-6xl leading-tight mb-8;
+    }
+
+    h2 {
+        @apply font-regular text-2xl leading-normal;
+        font-weight: 500;
+    }
+}
+
+.img-view {
+    figure.load-img {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+
+        .img-view-contain {
+            transition: background-color #{$transitionDuration} ease;
+            transform: translate3d(0, 0, 0);
+            display: inline-block;
+            background-color: #797886;
+
+            img {
+                position: relative;
+                object-fit: scale-down;
+                object-position: center center;
+                transform: scale(1);
+            }
+
+            .no-script-img {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+}
+
+html[theme="dark"] {
+    .img-view figure.load-img {
+        background-color: #1d1c2b;
+    }
+}
+
+.container-lg {
+    @apply container max-w-screen-lg px-8 py-24 leading-8 font-600;
+}
+
+.container-xl {
+    @apply container max-w-screen-xl px-8 py-24 leading-8 font-600;
+}
+
+.capsule-layer {
+    @apply z-10 relative;
+    @apply px-5;
+
+    .layout {
+        @include applyTheme(color, "white");
+
+        @apply bg-gray-800 dark:bg-black;
+        @apply relative overflow-hidden rounded-xl;
+        @apply mx-auto w-full max-w-screen-xl;
+        @apply px-16 py-5 leading-loose;
+
+        transition: background-color #{$transitionDuration} ease,
+            color #{$transitionDuration} ease;
+    }
+}
+
+.capsule-offset {
+    @apply pt-48 -mt-48;
+}
+
+.contrast-layer {
+    transition: background-color #{$transitionDuration} ease,
+        color #{$transitionDuration} ease;
+    background-color: $white;
+    background-color: var(--very-light, $white);
+}
+
+.col-grid-3 {
+    @apply -my-2 -mx-2;
+
+    & > * {
+        @apply px-2 py-2;
+    }
+}
+
 .layer {
-    font-family: $regular-font;
+    // font-family: $regular-font;
     line-height: 1.85;
     position: static;
     font-size: 17px;
@@ -13,233 +162,26 @@
     width: 100%;
     z-index: 0;
 
-    @media #{$screen-size-lt-tablet} {
-        line-height: 1.15;
-        font-weight: 400;
-        font-size: 15px;
-    }
-    @media (min-width: 750px) {
-        .seperate-tools {
-            // border-right: 1px solid;
-            // @include applyTheme(border-color, "background");
-        }
-    }
-
-    // /* &-title {
-    //    // overflow-wrap: break-word;
-    // } */
-
     &-content {
         position: relative;
         z-index: 25;
     }
 
-    &-image {
-        position: absolute;
-        overflow: hidden;
-        contain: strict;
-        display: block;
-        height: 100%;
-        width: 100%;
-        z-index: 0;
-        left: 0;
-        top: 0;
-
-        &.effect-parallax {
-            .layer-main {
-                opacity: 1;
-            }
-        }
-
-        & figure.load-img {
-            position: absolute;
-            // // overflow: hidden;
-            display: block;
-            height: 100%;
-            z-index: 250;
-            width: 100%;
-            left: 0;
-            top: 0;
-        }
-
-        &-preview-img-card {
-            transition: background-color #{$transitionDuration} ease;
-            position: absolute;
-            background-color: $dark;
-            background-color: var(--light, $dark);
-            // background: $dark;
-            display: block;
-            height: 100%;
-            width: 100%;
-            z-index: 0;
-            opacity: 1;
-            left: 0;
-            top: 0;
-        }
-
-        &-overlay {
-            transition: background-color #{$transitionDuration} ease,
-                border-color 0.25s ease;
-            background-color: darken(#252072, 20%);
-            // @include applyTheme(background, "dark");
-            position: absolute;
-            display: block;
-            opacity: 0.55;
-            z-index: 505;
-            height: 100%;
-            width: 100%;
-            left: 0;
-            top: 0;
-        }
-
-        &-blur {
-            filter: blur(3px);
-        }
-    }
-
     &-shadow,
     %shadow {
-        box-shadow: 0 0px 35px 5px change-color($dark, $alpha: 0.53); // rgba(0, 0, 40, 0.23);
+        box-shadow: 0 0px 35px 5px change-color($dark, $alpha: 0.53);
 
         &--1 {
-            // box-shadow: 0 5px 14px 6px rgba(0,0,0,.23);
-            // box-shadow: 0 5px 14px 6px rgba(19, 19, 19, 0.23);
-            // box-shadow: 0 2px 10px 2px rgba(33, 33, 33, 0.22);
             box-shadow: 0 0 10px 2px rgba(33, 33, 33, 0.12);
-            // border: 1px solid change-color($white, $alpha: 0.7);
-            // border-color: var(--tertiary, white);
-            // border: 2px solid var(--dark);
-            // border: 2px solid rgba(255, 255, 255, 0.35);
         }
 
         &--2 {
             box-shadow: 0 10px 85px rgba(0, 0, 0, 0.35);
-            // border: 2px solid change-color($tertiary, $alpha: 0.35);
         }
     }
 
     &-overflow-hide {
         overflow: hidden;
-    }
-
-    &-hero .layer-image {
-        border-radius: 15px;
-    }
-
-    &.banner-mode &-hero .layer-image {
-        border-radius: 0px;
-    }
-
-    &.banner-mode .layer-image figcaption {
-        padding: $size;
-        padding-top: $size-small + 60px;
-    }
-
-    &-hero,
-    %hero {
-        // @extend %shadow;
-        // background: $surface;
-        position: relative;
-        z-index: 125;
-
-        .layer-image {
-            cursor: help;
-
-            img {
-                // transform: scale(1.2);
-                color: transparent;
-                min-width: 500px;
-            }
-        }
-
-        &-scroll-down {
-            position: relative;
-            z-index: 250;
-
-            @media #{$screen-size-lt-tablet} {
-                margin-bottom: -176px;
-            }
-
-            @media #{$screen-size-gt-tablet} {
-                margin-bottom: -270px;
-            }
-        }
-
-        .layer-title {
-            font-size: 54px;
-
-            @media (max-width: 500px) {
-                font-size: 34px;
-            }
-
-            @media (min-width: 500px) {
-                font-size: 44px;
-            }
-
-            @media (min-width: 700px) {
-                font-size: 7vw;
-            }
-
-            @media (min-width: 900px) {
-                font-size: 54px;
-            }
-        }
-
-        .layer-main-text {
-            font-family: $regular-font;
-            line-height: 1.25;
-            font-weight: 400;
-            font-size: 4vw;
-
-            @media (max-width: 500px) {
-                line-height: 1.5;
-                font-size: 18px;
-            }
-
-            @media (min-width: 500px) {
-                line-height: 1.65;
-                font-size: 20px;
-            }
-
-            @media (min-width: 700px) {
-                font-size: 22px;
-            }
-
-            @media (min-width: 900px) {
-                font-size: 26px;
-            }
-        }
-    }
-
-    &-center-line {
-        padding: $size-larger;
-        width: 100%;
-
-        &:before {
-            // transition: border-left-color #{$transitionDuration} ease;
-
-            border-left: 1px solid transparent;
-            border-left-color: lighten($dark, 35%);
-            border-left-color: var(--mid-light, lighten($dark, 35%));
-
-            transform: translateX(100%);
-            vertical-align: middle;
-            display: inline-block;
-            height: 50px;
-            content: "";
-            width: 50%;
-        }
-    }
-
-    .wall-e figure.load-img {
-        transform: translateY(-20px);
-        object-fit: fill;
-        height: 100%;
-        width: 100%;
-    }
-
-    &-relative {
-        position: relative;
     }
 
     .quote {
@@ -253,9 +195,9 @@
         z-index: 0;
         display: block;
 
-        @media #{$screen-size-lt-tablet} {
-            visibility: hidden;
-        }
+        // @media #{$screen-size-lt-tablet} {
+        //     visibility: hidden;
+        // }
     }
 
     .text-above-quote {
@@ -283,14 +225,14 @@
             display: none;
         }
 
-        &.layout-left {
-            margin-bottom: $size;
-            margin-right: $size;
+        &.left {
+            // margin-bottom: $size;
+            // margin-right: $size;
         }
 
-        @media #{$screen-size-lt-tablet} {
-            max-width: 100%;
-        }
+        // @media #{$screen-size-lt-tablet} {
+        //     max-width: 100%;
+        // }
 
         .placeholder-img {
             transform: scale(1) !important;
@@ -299,9 +241,6 @@
 
     &-joseph-img2 {
         position: relative;
-        // max-width: 600px;
-        // height: 450px;
-        // max-height: 450px;
         width: 500px;
 
         .layer-image-overlay {
@@ -309,19 +248,19 @@
             display: none;
         }
 
-        &.layout-left {
-            margin-bottom: $size;
+        &.left {
+            // margin-bottom: $size;
         }
-        @media #{$screen-size-gt-tablet} {
-            &.layout-left {
-                margin-right: $size;
-            }
-        }
+        // @media #{$screen-size-gt-tablet} {
+        //     &.left {
+        //         margin-right: $size;
+        //     }
+        // }
 
-        @media #{$screen-size-lt-tablet} {
-            max-width: 100%;
-            display: block;
-        }
+        // @media #{$screen-size-lt-tablet} {
+        //     max-width: 100%;
+        //     display: block;
+        // }
 
         .placeholder-img {
             transform: scale(1) !important;
@@ -339,19 +278,19 @@
             display: none;
         }
 
-        &.layout-left {
-            margin-bottom: $size;
-        }
-        @media #{$screen-size-gt-tablet} {
-            &.layout-left {
-                margin-right: $size;
-            }
-        }
+        // &.left {
+        //     margin-bottom: $size;
+        // }
+        // @media #{$screen-size-gt-tablet} {
+        //     &.left {
+        //         margin-right: $size;
+        //     }
+        // }
 
-        @media #{$screen-size-lt-tablet} {
-            max-width: 100%;
-            display: block;
-        }
+        // @media #{$screen-size-lt-tablet} {
+        //     max-width: 100%;
+        //     display: block;
+        // }
 
         .placeholder-img {
             transform: scale(1) !important;
@@ -395,27 +334,7 @@
         );
         border: 1px solid $mid;
 
-        @for $sz from 1 through 10 {
-            &-width-#{$sz} {
-                border-width: #{$sz}px;
-            }
-        }
-
-        @for $sz from 1 through 20 {
-            &-radius-#{$sz} {
-                // IE doesn't support :focus-visible
-                border-radius: #{$sz}px;
-
-                &:focus-visible {
-                    border-radius: #{$sz}px;
-                }
-            }
-        }
-
         @include colorList(border-color);
-        @include propertyList(border-width, "size", $sizes);
-        @include propertyList(border-radius, "radius", $sizes);
-        @include propertyList(border-style, "style", $borderStyles);
     }
 
     &-round {
@@ -491,18 +410,18 @@
             }
         }
 
-        @media #{$screen-size-lt-tablet} {
-            &-flat-mobile {
-                &,
-                & .layer-image,
-                & .layer-image-overlay {
-                    border-radius: 0 !important;
-                    &:focus-visible {
-                        border-radius: 0 !important;
-                    }
-                }
-            }
-        }
+        // @media #{$screen-size-lt-tablet} {
+        //     &-flat-mobile {
+        //         &,
+        //         & .layer-image,
+        //         & .layer-image-overlay {
+        //             border-radius: 0 !important;
+        //             &:focus-visible {
+        //                 border-radius: 0 !important;
+        //             }
+        //         }
+        //     }
+        // }
 
         &-mid {
             min-height: 600px;
@@ -550,12 +469,12 @@
             border-radius: 12px;
         }
 
-        @media #{$screen-size-gt-tablet} {
-            border-radius: 24px;
-            &:focus-visible {
-                border-radius: 24px;
-            }
-        }
+        // @media #{$screen-size-gt-tablet} {
+        //     border-radius: 24px;
+        //     &:focus-visible {
+        //         border-radius: 24px;
+        //     }
+        // }
 
         .layer-title,
         .layer-content {
@@ -564,19 +483,19 @@
             text-align: center;
         }
 
-        @media #{$screen-size-phone} {
-            .layer-content {
-                font-size: 30px;
-            }
-        }
+        // @media #{$screen-size-phone} {
+        //     .layer-content {
+        //         font-size: 30px;
+        //     }
+        // }
 
-        @media #{$screen-size-gt-tablet} {
-            margin-bottom: $size-extra-large;
+        // @media #{$screen-size-gt-tablet} {
+        //     margin-bottom: $size-extra-large;
 
-            .layer-tile {
-                margin-bottom: -$size-extra-large;
-            }
-        }
+        //     .layer-tile {
+        //         margin-bottom: -$size-extra-large;
+        //     }
+        // }
     }
 
     &-capsule {
@@ -607,102 +526,102 @@
         }
     }
 
-    &-fieldset {
-        $padding-horz: 1.2em;
-        // border: 1px solid gray;
-        // @include applyTheme(border-color, "mid-light");
-        position: relative;
-        // border-radius: 4px;
-        // padding: 0.8em 0.8em;
-        vertical-align: middle;
-        // height: 3em;
-        width: 100%;
-        margin-bottom: 2em;
+    // &-fieldset {
+    //     $padding-x: 1.2em;
+    //     // border: 1px solid gray;
+    //     // @include applyTheme(border-color, "mid-light");
+    //     position: relative;
+    //     // border-radius: 4px;
+    //     // padding: 0.8em 0.8em;
+    //     vertical-align: middle;
+    //     // height: 3em;
+    //     width: 100%;
+    //     margin-bottom: 2em;
 
-        label {
-            @include applyTheme(background-color, "invert-white");
-            transition: transform ease 0.5s;
-            position: absolute;
-            display: block;
-            top: 50%;
-            align-self: center;
-            line-height: 100%;
-            transform: translateY(-50%) scale(1);
-            margin-left: $padding-horz - 0.25em * 2;
-            padding: 0 0.25em;
+    //     label {
+    //         @include applyTheme(background-color, "invert-white");
+    //         transition: transform ease 0.5s;
+    //         position: absolute;
+    //         display: block;
+    //         top: 50%;
+    //         align-self: center;
+    //         line-height: 100%;
+    //         transform: translateY(-50%) scale(1);
+    //         margin-left: $padding-x - 0.25em * 2;
+    //         padding: 0 0.25em;
 
-            font-family: $bold-font;
-            // letter-spacing: 0.0525em;
-            font-size: 0.8rem;
-            @include applyTheme(color, "mid-dark");
-            // bottom: 38px;
-        }
+    //         font-family: $bold-font;
+    //         // letter-spacing: 0.0525em;
+    //         font-size: 0.8rem;
+    //         @include applyTheme(color, "mid-dark");
+    //         // bottom: 38px;
+    //     }
 
-        input {
-            border: 2px solid;
-            @include applyTheme(border-color, "mid-dark");
-            position: relative;
-            border-radius: 3px;
-            &:focus-visible {
-                border-radius: 3px;
-            }
-            padding: 0.8em $padding-horz;
-            vertical-align: middle;
-            width: 100%;
+    //     input {
+    //         border: 2px solid;
+    //         @include applyTheme(border-color, "mid-dark");
+    //         position: relative;
+    //         border-radius: 3px;
+    //         &:focus-visible {
+    //             border-radius: 3px;
+    //         }
+    //         padding: 0.8em $padding-x;
+    //         vertical-align: middle;
+    //         width: 100%;
 
-            // @include applyTheme(background-color, "background");
-            @include applyTheme(background-color, "invert-white");
-            @include applyTheme(color, "invert-black");
-            outline: none;
+    //         // @include applyTheme(background-color, "background");
+    //         @include applyTheme(background-color, "invert-white");
+    //         @include applyTheme(color, "invert-black");
+    //         outline: none;
 
-            &:hover {
-                @include applyTheme(border-color, "dark");
-                & ~ label {
-                    @include applyTheme(color, "dark");
-                }
-            }
+    //         &:hover {
+    //             @include applyTheme(border-color, "dark");
+    //             & ~ label {
+    //                 @include applyTheme(color, "dark");
+    //             }
+    //         }
 
-            &[type="email"]:invalid {
-                // :not(:placeholder-shown)
-                color: red;
-                border-color: red;
+    //         &[type="email"]:invalid {
+    //             // :not(:placeholder-shown)
+    //             color: red;
+    //             border-color: red;
 
-                & ~ label {
-                    transform: translateY(-200%) scale(0.8);
-                    color: red;
-                }
-            }
-            &:valid ~ label,
-            &.focused ~ label,
-            &:focus ~ label {
-                transform: translateY(-200%) scale(0.8);
-                // top: 0;
-            }
+    //             & ~ label {
+    //                 transform: translateY(-200%) scale(0.8);
+    //                 color: red;
+    //             }
+    //         }
+    //         &:valid ~ label,
+    //         &.focused ~ label,
+    //         &:focus ~ label {
+    //             transform: translateY(-200%) scale(0.8);
+    //             // top: 0;
+    //         }
 
-            &:focus ~ label {
-                @include applyTheme(color, "primary");
-            }
+    //         &:focus ~ label {
+    //             @include applyTheme(color, "primary");
+    //         }
 
-            &:focus {
-                @include applyTheme(border-color, "primary");
-            }
+    //         &:focus {
+    //             @include applyTheme(border-color, "primary");
+    //         }
 
-            &:valid ~ label,
-            &.focused ~ label {
-                // text-transform: uppercase;
-                // font-style: italic;
-            }
+    //         &:valid ~ label,
+    //         &.focused ~ label {
+    //             // text-transform: uppercase;
+    //             // font-style: italic;
+    //         }
 
-            &:-webkit-autofill,
-            &:-webkit-autofill:hover,
-            &:-webkit-autofill:focus,
-            &:-webkit-autofill:active {
-                // -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-                // background: transparent;
-                -webkit-box-shadow: 0 0 0 50px var(--invert-white) inset; /* Change the color to your own background color */
-                // @include applyTheme(background-color, "invert-white");
-                @include applyTheme(-webkit-text-fill-color, "primary-light");
-            }
-        }
-    }
+    //         &:-webkit-autofill,
+    //         &:-webkit-autofill:hover,
+    //         &:-webkit-autofill:focus,
+    //         &:-webkit-autofill:active {
+    //             // -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    //             // background: transparent;
+    //             -webkit-box-shadow: 0 0 0 50px var(--invert-white) inset; /* Change the color to your own background color */
+    //             // @include applyTheme(background-color, "invert-white");
+    //             @include applyTheme(-webkit-text-fill-color, "primary-light");
+    //         }
+    //     }
+    // }
 }
