@@ -3,7 +3,6 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/404",
       name: "404",
       title: "Ooops!",
@@ -11,30 +10,22 @@ block pageInfo
     };
 
 block preload
-  //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
 
 block content
-  //- Intro layer
-  .container-lg
-    +layout({
-      class: "layout-contain layer-overflow-hide"
-    })
-      section(class="layout-shorten layout-max-height-limited layout-flex layout-align-items-center layout-justify-content-center")
-        section.style-center.mt-larger--device-phone
-          +head({
-            class: "mb"
-          })
-            h1.style-font-35--device-phone.style-primary-dark.style-bold.margin-dull 404, Page Not Found.
-          +main
-            +p("Sorry, the page you are looking for doesn't exist. How about going back")
+  .stretch-layer
+    .navbar-top-spot
+    .container
+      .layout.justify-center
+        section
+          h1 404, Page Not Found.
+          p
+            | Sorry, the page you are looking for doesn't exist. How about going back 
             +link({
               href: "/",
-              class: "style-italic style-underline ml-mini",
+              class: "underline",
               content: "home"
             })
-            +p(".")
+            | .
+    +footer
 
 block footer
-  +footer({
-    class: "footer-stuck mt"
-  })

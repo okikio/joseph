@@ -103,11 +103,6 @@ video {
     min-height: 200px;
     display: block;
     border: none;
-    // width: 100%;
-
-    // @media #{$screen-size-lt-tablet} {
-    //     height: inherit;
-    // }
 }
 
 a {
@@ -181,31 +176,18 @@ li,
 
 a.skip-main {
     transition: background-color #{$transitionDuration} ease,
-        color #{$transitionDuration} ease, border-color 0.35s ease;
+        color #{$transitionDuration} ease, border 0.35s ease;
     border: 2px solid $secondary-light;
     border-color: var(--secondary-light, $secondary-light);
-    // color: $secondary-light;
     @include applyTheme(color, "secondary-light");
     @include applyTheme(background-color, "dark");
     transform: translate3d(-50%, 0, 0);
-    // background-color: $dark;
-    position: absolute;
-    border-radius: 6px;
-    text-align: center;
-    font-weight: 600;
-    margin: 80px auto;
-    contain: content;
-    font-size: 1.2em;
-    overflow: auto;
-    height: auto;
-    padding: 5px;
-    z-index: 500;
-    width: 40%;
-    left: 50%;
-    top: auto;
 
-    opacity: 0;
-    pointer-events: none;
+    @apply absolute top-0 left-0 rounded-lg text-center mt-10 text-lg py-2 px-12;
+    @apply transform left-1/2 -translate-x-1/2 opacity-0 pointer-events-none;
+
+    z-index: 500;
+
 
     &:focus,
     &:active {
@@ -262,34 +244,31 @@ a.skip-main {
 }
 
 .footer {
-    font-size: 14px;
-    line-height: 35px;
+    @apply font-bold font-600 py-6;
 
-    // @media #{$screen-size-lt-tablet} {
-    //     font-size: 13px;
-    // }
+    &,
+    .icon {
+        @apply text-sm;
+    }
 
-    // @media #{$screen-size-lt-laptop} {
-    //     padding-right: $size + 10px;
-    // }
-}
+    #copyright {
+        @apply flex self-center items-center;
 
-// @media #{$screen-size-gt-tablet} {
-//     .footer-stuck {
-//         position: absolute;
-//         bottom: 0;
-//         right: 0;
-//         left: 0;
-//     }
-// }
+        .icon {
+            @apply text-sm mr-1;
+        }
+    }
 
-.footer-layout {
-    display: flex;
-    text-align: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    #social-links a {
+        @apply px-2 lt-lg:py-2;
+    }
 
-    // @media #{$screen-size-lt-laptop} {
-    //     flex-direction: column;
-    // }
+    #design-by a {
+        @apply px-0.5;
+    }
+
+    .container {
+        @apply container max-w-screen-md;
+        @apply flex flex-wrap justify-around lt-lg:flex-col lt-lg:text-center;
+    }
 }

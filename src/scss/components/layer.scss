@@ -152,8 +152,6 @@ html[theme="dark"] {
 
 .capsule-offset {
     @apply pt-64 -mt-64;
-    // margin-top: -50%;
-    // padding-top: 50%;
 }
 
 .contrast-layer {
@@ -176,18 +174,67 @@ html[theme="dark"] {
         @apply flex flex-col sm:flex-row sm:space-x-4 md:space-x-8 lt-sm:space-y-4 items-center;
     }
 
-    .tile {
-        @apply relative block w-full rounded-xl overflow-hidden;
-        height: 400px;
+    img {
+        object-position: top center;
+    }
+}
 
-        @screen sm {
-            min-width: theme("spacing.64");
-            height: 500px;
+.stretch-layer {
+    @apply flex flex-col h-screen;
+
+    h1 {
+        @apply text-3xl lg:text-5xl font-800 mb-8;
+    }
+
+    .container {
+        @apply max-w-screen-lg text-center flex-1;
+    }
+
+    .layout {
+        @apply flex flex-col items-center justify-around px-2 h-full;
+    }
+
+    @screen lg {
+        .tile {
+            min-height: 400px;
         }
     }
 
     img {
-        object-position: top center;
+        object-position: center center;
+    }
+}
+
+.about-layer {
+    .container {
+        @apply max-w-screen-lg pb-8 leading-8 font-500 px-2 sm:px-5;
+    }
+
+    h1 {
+        @apply mb-5 sm:mb-12;
+    }
+
+    .tile {
+        @apply sm:max-w-xs mb-5 sm:float-left sm:mr-5;
+        height: 400px;
+
+        @screen sm {
+            height: 350px;
+        }
+
+        img {
+            object-position: top center;
+        }
+    }
+}
+
+.tile {
+    @apply relative block w-full rounded-xl overflow-hidden;
+    height: 400px;
+
+    @screen sm {
+        min-width: theme("spacing.64");
+        height: 500px;
     }
 }
 

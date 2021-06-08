@@ -1,143 +1,7 @@
 @use "./mixins.scss" as *;
 
 /* -- Action (represents elements that request direct interaction) -- */
-.action {
-    &-btn {
-        justify-content: center;
-        vertical-align: middle;
-        contain: content;
-        text-decoration: none;
-        display: inline-flex;
-        word-break: initial;
-        align-items: center;
-        position: relative;
-        user-select: none;
-        cursor: pointer;
-        line-height: 1;
-
-        &-layout {
-            min-height: 20px;
-            width: auto;
-        }
-
-        &:focus,
-        &:hover {
-            text-decoration: none;
-        }
-
-        &-default {
-            padding: 8px 16px;
-            margin: 8px;
-        }
-
-        &-radial {
-            border-radius: 24px;
-        }
-        &-radial:focus-visible {
-            border-radius: 24px;
-        }
-
-        &-round {
-            border-radius: 9999px;
-        }
-        &-round:focus-visible {
-            border-radius: 9999px;
-        }
-
-        &-smooth {
-            border-radius: 5px;
-        }
-
-        &-smooth:focus-visible {
-            border-radius: 5px;
-        }
-
-        &-spacer {
-            margin-right: 8px;
-        }
-
-        &-strict {
-            min-width: 48px;
-            padding: 0 16px;
-            height: 48px;
-        }
-
-        &-group {
-            justify-content: center;
-            align-content: center;
-            align-items: center;
-            display: flex;
-            width: 100%;
-
-            .action-icon {
-                vertical-align: middle;
-                display: inline-block;
-                user-select: none;
-                overflow: hidden;
-                flex-shrink: 0;
-            }
-        }
-
-        &-content {
-            text-transform: uppercase;
-            letter-spacing: 0.02857em;
-            // font-family: $bold-font;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        &-hover &-layout,
-        &-expand &-layout,
-        &-expand-scale &-layout {
-            transition: width 0.6s ease 0s;
-
-            .action-btn-section {
-                transition: opacity 0.4s ease 0.1s;
-                overflow-wrap: normal;
-                word-break: keep-all;
-                white-space: nowrap;
-                word-wrap: normal;
-                overflow: hidden;
-                display: flex;
-                width: 100%;
-            }
-        }
-
-        &-hover &-layout {
-            width: 40px !important;
-            position: relative;
-            height: 40px;
-
-            .action-btn-section {
-                opacity: 0;
-            }
-        }
-
-        &-expand &-layout,
-        &-hover:hover &-layout {
-            width: 180px !important;
-
-            .action-btn-section {
-                opacity: 1;
-            }
-        }
-    }
-
-    &-expand-scale &-layout {
-        width: 100% !important;
-
-        .action-btn-section {
-            opacity: 1;
-        }
-    }
-
-    &-pointer-default {
-        cursor: default;
-    }
-}
-
-.icon,
-.material-icons {
+.icon {
     font-feature-settings: "liga", "dlig";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -168,14 +32,22 @@
     }
 }
 
+.icon-btn {
+    @apply w-10 h-10 flex items-center justify-center;
+    min-width: theme("spacing.10");
+
+    .icon {
+        @apply rounded-full block;
+    }
+}
+
 .btn {
     transition: background-color #{$transitionDuration} ease,
         color #{$transitionDuration} ease, width 0.6s ease 0s !important;
-    @apply flex justify-center align-middle items-center overflow-hidden;
-    @apply rounded-full select-none;
+    @apply overflow-hidden select-none;
 
     &-hover {
-        @apply w-10 hover:w-44 focus-visible:w-44;
+        @apply w-10;
 
         .btn-content {
             @apply opacity-0;
@@ -183,6 +55,7 @@
 
         &:hover,
         &:focus-visible {
+            width: theme("spacing.44");
             .btn-content {
                 @apply opacity-100;
             }
@@ -190,7 +63,7 @@
     }
 
     &-layout {
-        @apply flex w-full items-center justify-center;
+        @apply flex w-full items-center justify-center align-middle;
     }
 
     &-content {
@@ -198,20 +71,6 @@
         @apply text-center text-sm;
         @apply font-bold font-700 uppercase whitespace-nowrap;
         @apply overflow-hidden flex w-full;
-
-        &:before {
-            @apply ml-5 block;
-            content: "";
-        }
-    }
-}
-
-.icon-btn {
-    @apply w-10 h-10 flex items-center justify-center;
-    min-width: theme("spacing.10");
-
-    .icon {
-        @apply rounded-full block;
     }
 }
 
@@ -226,16 +85,22 @@
         @include applyTheme(background-color, "primary");
         --color: var(--primary, #{$primary});
 
-        .icon {
-            transition: box-shadow ease 0.35s;
-            @apply rounded-full;
-            box-shadow: 0 0 35px 15px var(--color, #{$primary});
+        .icon-btn {
+            transition: background-color ease 0.4s, box-shadow ease 0.4s;
+            @apply rounded-full z-10;
+            background-color: var(--color, #{$primary});
+            box-shadow: 0 0 15px theme("spacing.3") var(--color, #{$primary});
         }
 
         &:hover,
         &:focus {
             --color: var(--primary-light, #{$primary-light});
             @include applyTheme(background-color, "primary-light");
+        }
+
+        &-content:before {
+            @apply ml-5 block;
+            content: "";
         }
     }
 
@@ -251,8 +116,12 @@
     .btn {
         @include applyTheme(background-color, "secondary-light");
 
-        &-content:before {
-            display: none;
+        @screen lt-md {
+            @apply w-44;
+
+            &-content {
+                opacity: 1;
+            }
         }
 
         &:hover,

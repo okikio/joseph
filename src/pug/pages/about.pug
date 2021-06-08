@@ -3,7 +3,6 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/about",
       name: "about",
       title: "About me",
@@ -12,69 +11,57 @@ block pageInfo
 
 
 block content
-  //- Intro layer
-  .container-lg
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +main({
-        class: "py-large clearfix"
-      })
-        h1.pb.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Who am I?
-        +tile({
-          class: "layer-surface layer-box block layer-tile-outline layer-joseph-img float-left layer-shadow--1",
-          image: {
+  .navbar-top-spot
+  .about-layer
+    .container
+      h1.h4.text-center.font-800 Who am I?
+      .clearfix
+        .tile
+          +image({
             src: "cloudinary/josephs_image",
-            alt: "An image of Joseph Ojo",
-          }
-        })
-
-        section(itemscope itemtype="https://schema.org/SiteNavigationElement")
-          span.style-letter-head A
-          +p("s the eldest of 4 children, I have picked up on several skills and philosophies including a natural inclination for leadership, a keen sense of responsibility, a strong ability to maintain peaceful interactions, and the continuous need to improve myself and surroundings. Interestingly, a recent professional development assessment (developed by Plum.io) places adaptation, teamwork, conflict resolution and innovation as some of my top talents. This, and many other projects I have led or collaborated on are also evidences of the skilled I have accrued thus far.")
+            alt: "A portrait image of Joseph Ojo in a suit.",
+            overlay: false
+          })
+        section
+          .style-letter-head A
+          | s the eldest of 4 children, I have picked up on several skills and philosophies including a natural inclination for leadership, a keen sense of responsibility, a strong ability to maintain peaceful interactions, and the continuous need to improve myself and surroundings. Interestingly, a recent professional development assessment (developed by Plum.io) places adaptation, teamwork, conflict resolution and innovation as some of my top talents. This, and many other projects I have led or collaborated on are also evidences of the skilled I have accrued thus far.
           br
           br
-          +p("I have been quite fortunate in my educational career, graduating with a High Distinction from Ontario Tech University in a Mechanical (specifically Mechatronics) Engineering program. I am currently working towards my master’s degree under the supervision of two of the best at Ontario Tech University, Drs. ")
+          | I have been quite fortunate in my educational career, graduating with a High Distinction from Ontario Tech University in a Mechanical (specifically Mechatronics) Engineering program. I am currently working towards my master’s degree under the supervision of two of the best at Ontario Tech University, Drs. 
           +link({
             href: "https://www.xianke-lin.com/",
             content: "Xianke Lin"
-          })(target="_blank" rel="noopener" title="Link to Dr. Xianke Lin's website.")
-          span=" and "
+          })(target="_blank" rel="noopener")
+          |  and 
           +link({
             href: "https://faculty.ontariotechu.ca/lang/people.html",
             content: "Haoxiang Lang"
-          })(target="_blank" rel="noopener" title="Link to an about page for Dr. Haoxiang Lang.")
-          span=". "
-          +p("My thesis is set to combine the use of neural networks and predictive control algorithms to ensure that robotic and automotive battery systems are safe, and last long while charged quickly. This is a very exciting and fulfilling research project due to its necessity for future economic growth and sustainability.")
+          })(target="_blank" rel="noopener")
+          | . 
+          | My thesis is set to combine the use of neural networks and predictive control algorithms to ensure that robotic and automotive battery systems are safe, and last long while charged quickly. This is a very exciting and fulfilling research project due to its necessity for future economic growth and sustainability.
           br
           br
-          +p("I am enthusiastic about all things Mechatronics. The sheer brilliance of how mechanical, electronics and software components cohesively mesh together in a harmonious synergy is absolutely fascinating to me. This fascination originated from when I was a child and has always meant that I was unwavered in what I knew I was born to do. One of my now software engineer friends used to joke about creating the")
-          i Terminators
-          +p(" and ")
-          i Skynet
-          +p(" together, screaming that ")
-          i “we’ll be back”.
-          +p(" Thankfully, we haven’t fallen to the dark side. My goal now is to create assistive Mechatronic technologies to improve the lives of many. ")
+          | I am enthusiastic about all things Mechatronics. The sheer brilliance of how mechanical, electronics and software components cohesively mesh together in a harmonious synergy is absolutely fascinating to me. This fascination originated from when I was a child and has always meant that I was unwavered in what I knew I was born to do. One of my now software engineer friends used to joke about creating the 
+          i.italic Terminators
+          |  and 
+          i.italic Skynet
+          |  together, screaming that 
+          i.italic “we’ll be back”.
+          |  Thankfully, we haven’t fallen to the dark side. My goal now is to create assistive Mechatronic technologies to improve the lives of many.
           br
           br
-          +p("As far as I can remember, my personal motto has always been to leave things better than I found it. This has helped motivate most of my life choices up till now. My recent experiences have even further solidified this philosophy. After completing a 16-month internship as a photovoltaic designer and new product introduction (NPI) coordinator at Celestica, my approach to problem solving and continuous improvement has been revamped. I now understand the value of Kaizen and asking why. My observation of problems is now unequivocally from the top-down in order to effectively solve them. And so far, that need to continuously learn, and improve the tools and people around me has established opportunities and allowed for more efficient processes. ")
+          | As far as I can remember, my personal motto has always been to leave things better than I found it. This has helped motivate most of my life choices up till now. My recent experiences have even further solidified this philosophy. After completing a 16-month internship as a photovoltaic designer and new product introduction (NPI) coordinator at Celestica, my approach to problem solving and continuous improvement has been revamped. I now understand the value of Kaizen and asking why. My observation of problems is now unequivocally from the top-down in order to effectively solve them. And so far, that need to continuously learn, and improve the tools and people around me has established opportunities and allowed for more efficient processes.
           br
           br
-          +p("So now that you know one or two things about me, feel free to peek at some my work. Or better yet, get in touch. Maybe we’ll grab a coffee and talk about our visions for the future and how I can be of service. For more information check out my resume by hitting the button below.")
+          | So now that you know one or two things about me, feel free to peek at some my work. Or better yet, get in touch. Maybe we’ll grab a coffee and talk about our visions for the future and how I can be of service. For more information check out my resume by hitting the button below.
           br
           br
           br
-
           +link({
-              class: "layout-right action-btn action-btn-expand-scale action-btn-smooth layer-secondary-btn focus-box",
-              href: "https://drive.google.com/file/d/13iItslKMyqXlFdqr240vfbMlnwfHkFk_/view?usp=sharing"
-          }, true)(title="View my CV/resume." target="_blank"  rel="noopener")
-            span.padding-nano
-            section.action-btn-layout
-              span.action-btn-group.padding-smaller
-                +icon("launch").action-icon.style-font-size-24
-                span.action-btn-section
-                  span.action-btn-spacer
-                  span.action-btn-spacer
-                  span.action-btn-content View my Resume
-                  span.action-btn-spacer
+            class: "inline-block px-2 py-1 btn layer-secondary-btn",
+            href: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u"
+          })(title="View my CV/resume." target="_blank"  rel="noopener")
+            .btn-layout
+              .icon-btn
+                +icon("launch").icon
+              .btn-content.px-2 View my Resume
