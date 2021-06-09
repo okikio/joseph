@@ -86,16 +86,13 @@
 
 .img-view {
     figure {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
+        @apply flex flex-col relative overflow-hidden justify-center;
 
         .img-view-contain {
             transition: background-color #{$transitionDuration} ease;
             transform: translate3d(0, 0, 0);
-            display: inline-block;
             background-color: #797886;
+            @apply flex justify-center items-center relative;
 
             img {
                 position: relative;
@@ -112,11 +109,15 @@
                 left: 0;
             }
         }
+
+        figcaption {
+            @apply italic text-xs;
+        }
     }
 }
 
 html[theme="dark"] {
-    .img-view figure.load-img {
+    .img-view .img-view-contain {
         background-color: #1d1c2b;
     }
 }

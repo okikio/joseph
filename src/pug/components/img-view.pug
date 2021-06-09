@@ -14,4 +14,4 @@ mixin img-view(value = {})
     figure.text-center
       .img-view-contain
         img(src!=`${urlParse()}.jpg` alt=alt loading="lazy")&attributes(attributes)
-      figcaption.italic= alt
+      figcaption= alt
