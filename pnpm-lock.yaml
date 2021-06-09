@@ -9,11 +9,11 @@ specifiers:
   autoprefixer: ^10.2.6
   browser-sync: ^2.26.14
   del: ^6.0.0
-  dotenv: ^9.0.2
-  esbuild: ^0.11.23
+  dotenv: ^10.0.0
+  esbuild: ^0.12.7
   fibers: ^5.0.0
   gulp: ^4.0.2
-  gulp-esbuild: ^0.7.7
+  gulp-esbuild: ^0.8.1
   gulp-if: ^3.0.0
   gulp-minify-inline-json: ^1.4.2
   gulp-plumber: ^1.2.1
@@ -46,11 +46,11 @@ devDependencies:
   autoprefixer: 10.2.6_postcss@8.3.0
   browser-sync: 2.26.14
   del: 6.0.0
-  dotenv: 9.0.2
-  esbuild: 0.11.23
+  dotenv: 10.0.0
+  esbuild: 0.12.7
   fibers: 5.0.0
   gulp: 4.0.2
-  gulp-esbuild: 0.7.7
+  gulp-esbuild: 0.8.1
   gulp-if: 3.0.0
   gulp-minify-inline-json: 1.4.2
   gulp-plumber: 1.2.1
@@ -739,7 +739,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001235
       colorette: 1.2.2
-      electron-to-chromium: 1.3.749
+      electron-to-chromium: 1.3.750
       escalade: 3.1.1
       node-releases: 1.1.73
     dev: true
@@ -1349,8 +1349,8 @@ packages:
     resolution: {integrity: sha1-6oCxBqh1OHdOijpKWv4pPeSJ4Kk=}
     dev: true
 
-  /dotenv/9.0.2:
-    resolution: {integrity: sha512-I9OvvrHp4pIARv4+x9iuewrWycX6CcZtoAu1XrzPxc5UygMJXJZYmBsynku8IkrJwgypE5DGNjDPmPRhDCptUg==}
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
     engines: {node: '>=10'}
     dev: true
 
@@ -1405,8 +1405,8 @@ packages:
     resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
     dev: true
 
-  /electron-to-chromium/1.3.749:
-    resolution: {integrity: sha512-F+v2zxZgw/fMwPz/VUGIggG4ZndDsYy0vlpthi3tjmDZlcfbhN5mYW0evXUsBr2sUtuDANFtle410A9u/sd/4A==}
+  /electron-to-chromium/1.3.750:
+    resolution: {integrity: sha512-Eqy9eHNepZxJXT+Pc5++zvEi5nQ6AGikwFYDCYwXUFBr+ynJ6pDG7MzZmwGYCIuXShLJM0n4bq+aoKDmvSGJ8A==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1506,8 +1506,8 @@ packages:
       es6-symbol: 3.1.3
     dev: true
 
-  /esbuild/0.11.23:
-    resolution: {integrity: sha512-iaiZZ9vUF5wJV8ob1tl+5aJTrwDczlvGP0JoMmnpC2B0ppiMCu8n8gmy5ZTGl5bcG081XBVn+U+jP+mPFm5T5Q==}
+  /esbuild/0.12.7:
+    resolution: {integrity: sha512-vxENKWBo928ErLiT/uUv8Sl2EoC5cF3cZzCTc8hDEh9ZAZ75xblJCr72NeJo74lxWaGopIePZPIWq1qDpLUHQQ==}
     hasBin: true
     requiresBuild: true
     dev: true
@@ -2009,11 +2009,11 @@ packages:
       yargs: 7.1.2
     dev: true
 
-  /gulp-esbuild/0.7.7:
-    resolution: {integrity: sha512-v0Wp5ptrw4hBoTUy2H2YnbJH2QDr88TN9wgD6XMU1+hj2Bx119gNISVuAsnIWgzhPqybqN2usu1ROhcKtTFyiA==}
+  /gulp-esbuild/0.8.1:
+    resolution: {integrity: sha512-MZufAiwGPzp1iepK34z0ICh8QdFxCVtqX036QSo303DtvJhP2fXVDTlPRYCVYQVBXYor8uvYWH/paxZ43RYh/Q==}
     engines: {node: '>=8.6.0'}
     dependencies:
-      esbuild: 0.11.23
+      esbuild: 0.12.7
       plugin-error: 1.0.1
       vinyl: 2.2.1
     dev: true
