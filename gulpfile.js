@@ -85,6 +85,7 @@ task("css", async () => {
 
         { default: scss },
         { default: sass },
+        { default: easings }
     ] = await Promise.all([
         import("fibers"),
 
@@ -95,9 +96,9 @@ task("css", async () => {
 
         import("postcss-scss"),
         import("@csstools/postcss-sass"),
+        import("postcss-easings")
     ]);
-
-    // sass.compiler = compiler;
+    
     return stream(`${scssFolder}/*.scss`, {
         pipes: [
             postcss([
@@ -108,6 +109,11 @@ task("css", async () => {
                 }),
                 tailwind("./tailwind.config.cjs"),
             ], { syntax: scss }),
+
+            postcss([
+                easings(),
+            ], { syntax: scss }),
+            
             rename({ extname: ".min.css" }), // Rename
         ],
         dest: cssFolder,

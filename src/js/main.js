@@ -6,16 +6,17 @@ import preloadPlugin from "@swup/preload-plugin";
 // Internal use components
 import { setTheme, getTheme } from "./theme";
 import { _constrain as limit, _map as scale } from "./components/util";
-import { el, on, off, toggleClass, each, find, addClass, removeClass, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { el, on, off, has, toggleClass, each, find, addClass, removeClass, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-const _layer = '.layer';
+const _dropdownBtn = '.dropdown-btn';
+const _dropdown = '.dropdown';
 const _navOverlay = '.navbar-overlay';
 const _navbar = '.navbar';
 const _banner = '.banner';
 const _menu = '.navbar-menu';
 const _backUp = '#to-top';
 const _skipMain = ".skip-main";
-const _navLink = '.navbar-link';
+const _navLink = '.navbar-link a';
 const _image = ".image";
 const _themeSwitcher = ".theme-switcher";
 const _scrolldown = '#scroll-down';
@@ -28,6 +29,15 @@ let onload = image => function () {
 // On navbar menu click (this will only occur on mobile; click is a tiny bit more efficient), show navbar
 on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
+});
+
+let dropdownLink = el(".dropdown-link");
+on(document, "click", ({ target }) => {
+    !has(dropdownLink, target).length && removeClass(_dropdown, "show");
+});
+
+on(_dropdownBtn, "click", () => {
+    toggleClass(_dropdown, "show");
 });
 
 // The focus pt., 10px past the height of the navbar
@@ -260,6 +270,7 @@ on(document, "ready", () => {
                 // Remove click event from scroll down button
                 off(_scrolldown, "click", goDown);
 
+                removeClass(_dropdown, "show");
                 if (windowWid <= 700) {
                     removeClass(_navbar, "navbar-show");
                 }

@@ -50,7 +50,7 @@
     }
 
     &-title {
-        transition: color #{$transitionDuration} ease;
+        transition: color ease #{$transitionDuration}, box-shadow 0.2s ease-out;
         letter-spacing: 0.03em;
 
         @include applyTheme(color, "dark");
@@ -60,7 +60,7 @@
         @apply text-base font-bold font-700 whitespace-nowrap;
 
         img {
-            @apply w-auto h-5 inline-block align-middle;
+            @apply w-auto h-5 inline-block align-middle rounded;
             min-height: theme("spacing.5");
         }
 
@@ -101,11 +101,48 @@
         visibility: visible;
         opacity: 1;
 
-        color: $black;
-        @include applyTheme(color, "dark");
-        @apply font-700 text-sm tracking-wide;
-        @apply w-full px-5;
+        @apply relative font-700 text-sm tracking-wide;
+        @apply w-full px-2;
         line-height: theme("spacing.10");
+
+        .link-layout {
+            @apply flex items-center w-full;
+        }
+
+        &,
+        a,
+        .dropdown-btn {
+            color: $black;
+            @include applyTheme(color, "dark");
+        }
+
+        a {
+            @apply px-3;
+
+            &:hover,
+            &:focus,
+            &.active {
+                text-decoration: none;
+                @include applyTheme(color, "dark");
+
+                .link-content:after {
+                    @apply transform scale-x-100;
+                    transform-origin: 0;
+                }
+            }
+
+            &:focus {
+                color: $primary;
+                @include applyTheme(color, "primary-dark");
+            }
+
+            &.active {
+                &,
+                &:focus {
+                    @include applyTheme(color, "primary-dark");
+                }
+            }
+        }
 
         .link-content {
             @apply relative inline-block;
@@ -125,35 +162,84 @@
                 content: "";
             }
         }
+    }
 
-        &:hover,
-        &:focus,
-        &.active {
-            text-decoration: none;
-            @include applyTheme(color, "dark");
+    ul.dropdown {
+        @include applyTheme(background-color, "surface");
+        @apply rounded-lg;
+        margin: 0;
+        pointer-events: none;
+
+        &.show {
+            pointer-events: auto;
+
+            a {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+
+        a {
+            transition: color ease #{$transitionDuration},
+                box-shadow 0.2s ease-out, visibility 0.4s ease,
+                opacity 0.3s ease;
+            visibility: hidden;
+            opacity: 0;
+            @apply px-6 font-700;
+        }
+
+        @screen lt-sm {
+            transition: background-color #{$transitionDuration} ease,
+                height 0.35s ease-out;
+            height: 0;
+            overflow-y: hidden;
+
+            &.show {
+                height: 40px * 6;
+            }
+        }
+
+        @screen sm {
+            transition: background-color #{$transitionDuration} ease,
+                opacity 0.35s ease-out, transform 0.35s ease-out;
+            @apply absolute top-12 left-0 m-0 w-56 z-10;
+            box-shadow: 0 5px 25px 5px rgba(0, 0, 0, 0.1),
+                0 5px 10px 5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.8);
+            transform-origin: top center;
+            opacity: 0;
+
+            a {
+                @apply py-3 text-sm font-600;
+            }
+
+            &.show {
+                transition: color ease #{$transitionDuration},
+                    visibility 0.4s ease, opacity 0.3s ease,
+                    transform 0.35s ease-out;
+                transform: scale(1);
+                transform-origin: top center;
+                opacity: 1;
+            }
 
             .link-content:after {
-                @apply transform scale-x-100;
-                transform-origin: 0;
+                @apply -bottom-1;
             }
         }
+    }
 
-        &:focus {
-            color: $primary;
-            @include applyTheme(color, "primary-dark");
-        }
+    .dropdown-btn {
+        @apply sm:ml-0;
 
-        &.active {
-            &,
-            &:focus {
-                @include applyTheme(color, "primary-dark");
-            }
+        &:hover {
+            @include applyTheme(background-color, "mid");
+            @include applyTheme(color, "dark");
         }
     }
 
     &-btn {
         transition: color #{$transitionDuration} ease,
-            background-color 0.45s ease;
+            background-color 0.45s ease, box-shadow 0.2s ease-out;
         @apply ml-3 w-10 h-10 rounded-md;
         @include applyTheme(background-color, "light");
 
@@ -162,7 +248,8 @@
         }
 
         &:hover {
-            @include applyTheme(background-color, "light");
+            @include applyTheme(background-color, "mid");
+            @include applyTheme(color, "dark");
         }
 
         &,
@@ -242,28 +329,34 @@
             visibility: hidden;
             opacity: 0;
 
-            &:hover {
-                @include applyTheme(background-color, "navbar-gray");
-            }
-
-            &.active {
-                @include applyTheme(background-color, "primary-dark");
-                &,
-                &:hover,
-                &:focus-visible {
-                    @include applyTheme(color, "invert-white");
-                }
+            a {
+                transition: background-color #{$transitionDuration} ease,
+                    color ease #{$transitionDuration}, box-shadow 0.2s ease-out;
+                @apply w-full;
 
                 &:hover {
-                    @include applyTheme(background-color, "primary");
+                    @include applyTheme(background-color, "navbar-gray");
                 }
-            }
 
-            &:hover,
-            &:focus,
-            &.active {
-                .link-content:after {
-                    @apply transform scale-x-0;
+                &.active {
+                    @include applyTheme(background-color, "primary-dark");
+                    &,
+                    &:hover,
+                    &:focus-visible {
+                        @include applyTheme(color, "invert-white");
+                    }
+
+                    &:hover {
+                        @include applyTheme(background-color, "primary");
+                    }
+                }
+
+                &:hover,
+                &:focus,
+                &.active {
+                    .link-content:after {
+                        @apply transform scale-x-0;
+                    }
                 }
             }
         }

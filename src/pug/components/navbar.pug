@@ -8,8 +8,8 @@ mixin themeSwitcher()
 mixin navbar(value = {})
   - let { url } = value;
   - let _class = value.class;
-
   - let tabs = ["about", "portfolio", "contact"];
+  - let projects = ["boxer", "battery-manager", "sarbot", "ultima-apparel", "phoenix", "publications"];
 
   nav.navbar(aria-label="Main Navigation")
     .navbar-overlay
@@ -27,7 +27,20 @@ mixin navbar(value = {})
       .navbar-main
         each tab, i in tabs
           - let active = url.toLowerCase().includes(tab);
-          +link(`/${tab}`)(data-swup-preload data-path=tab class="navbar-link" class={ active })
-            span.link-content= tab.replace("-", " ")
+          .navbar-link(class={ "dropdown-link": tab == "portfolio" })
+            .link-layout
+              +link(`/${tab}`)(data-swup-preload data-path=tab class={ active })
+                .link-content= tab.replace("-", " ")
+                
+              if tab == "portfolio"
+                button.dropdown-btn.navbar-btn(title="Show All Projects")
+                  +icon("expand_more").icon
+                
+            if tab == "portfolio"
+              ul.dropdown
+                each project, j in projects
+                  - let activeProject = url.toLowerCase().includes(project);
+                  +link(`/projects/${project}`)(data-swup-preload data-path=project class="navbar-link" class={ active: activeProject })
+                    span.link-content= project.replace("-", " ")
         .navbar-mobile-only
           +themeSwitcher

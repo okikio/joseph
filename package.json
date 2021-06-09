@@ -41,7 +41,6 @@
         "@okikio/native": "^2.1.8",
         "@swup/preload-plugin": "^1.0.3",
         "@swup/scroll-plugin": "^1.1.0",
-        "sass": "^1.34.1",
         "swup": "^2.0.14"
     },
     "devDependencies": {
@@ -51,7 +50,7 @@
         "browser-sync": "^2.26.14",
         "del": "^6.0.0",
         "dotenv": "^10.0.0",
-        "esbuild": "^0.12.7",
+        "esbuild": "^0.12.8",
         "fibers": "^5.0.0",
         "gulp": "^4.0.2",
         "gulp-esbuild": "^0.8.1",
@@ -67,8 +66,10 @@
         "gulp-typescript": "^6.0.0-alpha.1",
         "postcss": "^8.3.0",
         "postcss-csso": "^5.0.1",
+        "postcss-easings": "^3.0.1",
         "postcss-easy-import": "^3.0.0",
         "postcss-scss": "^3.0.5",
+        "sass": "^1.34.1",
         "tailwindcss": "^2.1.4",
         "typescript": "^4.3.2"
     }

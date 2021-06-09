@@ -43,11 +43,11 @@
         }
 
         h1 {
-            @apply lg:text-7xl;
+            @apply text-4xl lg:text-7xl;
         }
 
         h2 {
-            @apply lg:text-2xl;
+            @apply text-lg lg:text-2xl;
         }
     }
 
@@ -65,7 +65,7 @@
     }
 
     .content {
-        @apply py-20 sm:py-36 z-10;
+        @apply py-32 sm:py-36 z-10;
     }
 
     h1 {
@@ -90,9 +90,8 @@
 
         .img-view-contain {
             transition: background-color #{$transitionDuration} ease;
-            transform: translate3d(0, 0, 0);
             background-color: #797886;
-            @apply flex justify-center items-center relative;
+            @apply inline-block mx-auto relative;
 
             img {
                 position: relative;
@@ -109,10 +108,6 @@
                 left: 0;
             }
         }
-
-        figcaption {
-            @apply italic text-xs;
-        }
     }
 }
 
@@ -125,7 +120,7 @@ html[theme="dark"] {
 .container {
     &-xl,
     &-lg {
-        @apply container px-5 sm:px-8 py-12 sm:py-16 lg:py-16 leading-8 font-500;
+        @apply container px-2 sm:px-8 py-12 sm:py-16 lg:py-16 leading-8 font-500;
     }
 
     &-lg {
@@ -182,6 +177,13 @@ html[theme="dark"] {
         @apply flex flex-col sm:flex-row sm:space-x-4 md:space-x-8 lt-sm:space-y-4 items-center;
     }
 
+    .tile {
+        @screen sm {
+            min-width: theme("spacing.64");
+            height: 500px;
+        }
+    }
+
     img {
         object-position: top center;
     }
@@ -191,25 +193,34 @@ html[theme="dark"] {
     @apply flex flex-col h-screen;
 
     h1 {
-        @apply text-3xl lg:text-5xl font-600 mb-8;
+        @apply text-3xl lg:text-5xl font-600 mb-3;
     }
 
-    .container {
-        @apply max-w-screen-lg text-center flex-1;
+    .stretch-container {
+        @apply container max-w-screen-lg text-center flex-1 flex flex-col items-center justify-center;
     }
 
     .layout {
-        @apply flex flex-col items-center justify-around px-2 h-full;
+        @apply w-full px-2;
     }
 
-    @screen lg {
-        .tile {
-            min-height: 400px;
+    .social-links {
+        @apply space-x-4;
+
+        a {
+            @apply px-2 py-3;
+        }
+    }
+
+    .tile {
+        height: 350px;
+        @screen md {
+            height: 400px;
         }
     }
 
     img {
-        object-position: center center;
+        object-position: 10% center;
     }
 }
 
@@ -236,19 +247,58 @@ html[theme="dark"] {
     }
 }
 
+.publication-layer {
+    a {
+        word-break: break-all;
+    }
+}
+
 .tile {
     @apply relative block w-full rounded-xl overflow-hidden;
     height: 400px;
+    min-height: 300px;
 
-    @screen sm {
-        min-width: theme("spacing.64");
-        height: 500px;
+    &-hover {
+        .core-img,
+        .no-script-img {
+            transition: opacity 0.35s easeOutQuad, transform 0.35s easeOutQuad;
+        }
+
+        &:hover {
+            .core-img,
+            .no-script-img {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+    }
+
+    &-content {
+        transition: color #{$transitionDuration} ease;
+        @include applyTheme(color, "white");
+        @apply text-sm sm:text-base leading-relaxed px-5 py-5 font-400;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    &-title {
+        transition: color #{$transitionDuration} ease;
+        @include applyTheme(color, "white");
+        @apply text-lg leading-loose font-600 pb-2;
+    }
+
+    &,
+    .image {
+        &,
+        &:focus-visible {
+            @apply rounded-xl;
+        }
     }
 }
 
 .blockquote-layer {
     @apply py-3;
-    // @apply flex  lt-sm:flex-col;
     @apply flow-root;
 }
 
@@ -279,7 +329,6 @@ blockquote {
 }
 
 .layer {
-
     .quote {
         line-height: 1;
         margin: 0;
@@ -292,122 +341,36 @@ blockquote {
         display: block;
     }
 
-    &-joseph-img {
-        position: relative;
-        width: 500px;
-
-        .layer-image-overlay {
-            background-color: transparent !important;
-            display: none;
-        }
-
-        &.left {
-            // margin-bottom: $size;
-        }
-        // @media #{$screen-size-gt-tablet} {
-        //     &.left {
-        //         margin-right: $size;
-        //     }
-        // }
-
-        // @media #{$screen-size-lt-tablet} {
-        //     max-width: 100%;
-        //     display: block;
-        // }
-
-        .placeholder-img {
-            transform: scale(1) !important;
-        }
-    }
-
-    &-tile {
-        position: relative;
-        min-height: 300px;
-        display: block;
-        width: 100%;
-
-        &:hover {
-            .core-img {
-                transition: opacity 0.25s ease;
-                opacity: 0;
-            }
-        }
-
-        &-footer {
-            transition: color #{$transitionDuration} ease;
-            @include applyTheme(color, "white");
-            @apply text-sm leading-relaxed px-5 py-4 font-400;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-        }
-
-        &-title {
-            transition: color #{$transitionDuration} ease;
-            @include applyTheme(color, "white");
-            @apply text-lg leading-loose font-600;
-        }
-    }
-
-    &-box {
-        position: relative;
-        min-height: 300px;
-        width: 100%;
-
-        &,
-        .layer-image {
-            border-radius: 8px;
-            &:focus-visible {
-                border-radius: 8px;
-            }
-        }
+    &-title {
+        @apply text-xl md:text-2xl font-600 my-3;
     }
 
     &-next {
-        transition: background-color ease #{$transitionDuration},
-            color ease #{$transitionDuration};
-        background-color: $white;
-        background-color: var(--very-light, $white);
-
         text-align: center;
-        overflow: hidden;
-        border-radius: 12px;
-        &:focus-visible {
-            border-radius: 12px;
+
+        a {
+            display: block;
         }
 
-        &,
-        &:hover {
-            color: $primary;
-            color: var(--tertiary, $primary);
-        }
-    }
-
-    &-capsule {
-        overflow: hidden;
-        z-index: 25;
-        position: relative;
-        border-radius: 12px;
-
-        &-push {
-            padding-top: 12rem;
+        .container {
+            @apply max-w-screen-lg;
         }
 
-        &-pull {
-            margin-top: -12rem;
+        .content {
+            transition: background-color ease #{$transitionDuration},
+                color ease #{$transitionDuration};
+            background-color: $white;
+            background-color: var(--very-light, $white);
+            @apply px-2 sm:px-5 py-16 block;
+
+            &,
+            &:focus-visible {
+                @apply rounded-2xl;
+            }
         }
-    }
 
-    &-contrast {
-        background-color: $white;
-        background-color: var(--very-light, $white);
-        contain: layout !important;
-
-        .layer-title,
-        .layer-content {
-            color: $primary;
-            color: var(--tertiary, $primary);
-            text-align: center;
+        .title {
+            @apply text-3xl sm:text-4xl md:text-5xl font-700 mt-5;
         }
     }
 }

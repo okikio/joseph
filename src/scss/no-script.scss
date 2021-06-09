@@ -59,6 +59,7 @@ $dark-colors: (
 
 @media (prefers-color-scheme: dark) {
     html:not([theme="light"]) {
+        color-scheme: dark;
         @each $name, $value in $dark-colors {
             --#{$name}: #{$value};
         }

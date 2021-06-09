@@ -1,6 +1,12 @@
 @use "./mixins.scss" as *;
 
+:root {
+    
+    color-scheme: light;
+}
+
 html[theme="dark"] {
+    color-scheme: dark;
     @each $name, $value in $dark-colors {
         --#{$name}: #{$value};
     }
@@ -8,6 +14,7 @@ html[theme="dark"] {
 
 @media (prefers-color-scheme: dark) {
     html:not([theme]) {
+        color-scheme: dark;
         @each $name, $value in $dark-colors {
             --#{$name}: #{$value};
         }
@@ -99,6 +106,11 @@ $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
 figure {
     @apply block relative;
 }
+
+figcaption {
+    @apply italic text-xs py-2;
+}
+
 
 img,
 video {
@@ -254,7 +266,7 @@ a.skip-main {
     }
 
     #social-links a {
-        @apply px-2 lt-lg:py-2;
+        @apply px-2 lt-lg:py-3;
     }
 
     #design-by a {
@@ -262,7 +274,7 @@ a.skip-main {
     }
 
     .container {
-        @apply container max-w-screen-md;
+        @apply max-w-screen-md;
         @apply flex flex-wrap justify-around lt-lg:flex-col lt-lg:text-center;
     }
 }

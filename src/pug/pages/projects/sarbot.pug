@@ -31,7 +31,6 @@ block content
       alt: "Image of the floor Maze Sarbot had to cross"
     })(width="471px" height="315px")    
     br
-    br
     | Due to the smaller scale of the project, the team decided to design small for easy maneuverability. Our design consisted of a unibody chassis 3D printed in 2 parts. The top part housed 3 infrared (IR) sensors, the microcontroller (Teensy 3.6), a couple of voltage converter modules and the motor controller. On the bottom level, the wheels, batteries, geared DC motor, servo motors and one more IR sensor. The final assembly is shown below.
     br
     br
@@ -45,7 +44,6 @@ block content
       alt: "The 3D printing of the parts for Sarbot"
     })(width="602px" height="714px")
     br
-    br
     | Our approach, although not ideal for the use case, was similar to that of some self-driving vehicle companies. We first manually mapped out the maze with waypoints. These waypoints were placed near key landmarks. These landmarks include T-junctions, cross-sections, narrower paths, steep grades, terrain changes, miner location and so on. A matrix of data was then created for each waypoint to help the robot decide what actions to take at each waypoint. Each waypoint consisted of a base command to go forward, backward, left or right, a base command controller i.e. what controller to use to complete the base command, stopping conditions for the command, manipulator commands and others. For example, a waypoint next to a turn had data such a turn right command, how many degrees the turn is, the speed required to make the turn, and what controller to use to make the turn i.e. a PID controller for robot angle.
     br
     br
@@ -56,7 +54,6 @@ block content
       src: "cloudinary/joseph-projects/sarbot/Final_Build",
       alt: "The finalized model of Sarbot"
     })(width="480px" height="452px")
-    br
     br
     | At the end of it, we were awarded third place because our robot could not retrieve the miner in time, but we completed the full course as is seen in the video below. To give you a reference though, the first place could not retrieve the miner due to a mix up with their arm design, but they also completed the course. The second-place team were able to pick up the miner but could not fully make it to the initial point. All in all, a wonderful accomplishment to be recognized for our hard work.
     br

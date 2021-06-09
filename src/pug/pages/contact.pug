@@ -14,10 +14,10 @@ block preload
 block content 
   .stretch-layer
     .navbar-top-spot
-    .container
+    .stretch-container
       .layout
         h1 Contact
-        section.space-x-4
+        section.social-links
           +link("https://www.linkedin.com/in/o-josephojo/") LinkedIn
           +link("https://github.com/josephojo") Github
           +link("mailto:laoluojo@gmail.com") Email
@@ -32,7 +32,8 @@ block content
                 +icon("launch").icon
               .btn-content.px-2 Contact Form
         br
-        .tile.layer-box.layer-joseph-img.shadow-2xl
+        br
+        .tile.shadow-2xl
           +image({
             src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
             alt: "An image of Joseph Ojo laughing with friends on a boat.",
