@@ -6,7 +6,7 @@ block pageInfo
       url: "/projects/boxer",
       name: "boxer",
       title: "Boxer — An autonomous robotic platform",
-      description: "Boxer is an autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension."
+      description: "Boxer is a research platform design and built by myself and some other members of my research lab. The project started in late 2019 with some basic plans and really took off in 2020. The mobile robotic platform features several interesting designs that allow research on both its hardware and its software."
     };
 
 block banner
@@ -21,65 +21,38 @@ block banner
   })
 
 block content
-  //- Intro layer
   .container-lg
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +main({
-        class: "py-small layout-clearfix"
-      })
-        +p
-          span.style-letter-head B
-          span.inline.margin-dull
-            |  oxer is an autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension. The project initially started as a platform to move material from one building to another, but has since been repurposed as a test platform for all research performed at
-            span=" "
-            +link({
-              href: "https://www.xianke-lin.com/",
-              content: "Lin Lab in Ontario Tech"
-            })(target="_blank" rel="noopener" title="A link to the lab where I conducted research on this project.")
-            span .
-            br
-            br
-            | At only 1.2 m x 0.8 m (46” x 30”), the platform can be both an indoor and outdoor vehicle. It boasts a sensor suite that will enable autonomy in the near future. These include, 4 cameras, one lidar, 8 ultrasonics and an inertial measurement unit (IMU).
-            br
-            br
-            i [+ Image of the sensor suite]
-            br
-            br
-            | With its 4 independent wheels, it can comfortably hold as much as an average human being (75 kg).  Four independent wheels also allow for 3 different drive configurations, front wheel, rear wheel and all-wheel drive.
-            br
-            br
-            i [+ Image of its drive unit (wheels assembly)]
-            br
-            br
-            | Due to space restrictions, hub motors were used and in doing so, a Five-link suspension design was implemented on both the front and rear wheels to ensure proper handling.
-            br
-            br
-            | This work is still a work in progress, but I will update it periodically.
+    .style-letter-head B
+    | oxer is an autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension. The project initially started as a platform to move material from one building to another but has since been repurposed as a test platform for new research performed at 
+
+    +link("https://www.xianke-lin.com/") Linlab
+    |  at Ontario Tech University.
+
+    br
+    br
+    | At only 1.2 m x 0.8 m (46” x 30”), the platform can be both an indoor and outdoor vehicle. It boasts a sensor suite that will enable autonomy in the near future. These include, 6 cameras, four of which are assembled together with a 2D lidar in a craftly-named package called the lighthouse. There are also 8 ultrasonics, an inertial measurement unit (IMU), a GPS module and many more. A 2.35kWh battery pack has also been designed internally to power the vehicle.
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/boxer/TheLighthouse",
+      alt: "The Lighthouse consisting of 4 cameras and a 2D Lidar"
+    })(width="960px" height="720px")
+    br
+    br
+    | With its 4 independent wheels, it can comfortably hold as much as an average human being (75 kg).  Four independent wheels also allow for 3 different drive configurations, front wheel, rear wheel and all-wheel drive.
+    br
+    br
+    figure.text-center
+      video.w-full(controls name='media')
+        source(src='https://res.cloudinary.com/okikio-assets/video/upload/v1623196482/joseph-projects/boxer/WheelAssembly_Edit.mp4' type='video/mp4')
+
+      figcaption.italic Vehicle Wheel Assembly
+    br
+    br
+    | Due to space restrictions, hub motors were used and in doing so, a Five-link suspension design was implemented on both the front and rear wheels to ensure proper handling.
+    br
+    br
+    | This work is still a work in progress, but I will update it periodically.
 
   //- Next page layer
-  +layout({
-    class: "layout-contain-large layer-round px-small px--device-gt-tablet"
-  })
-    +link({
-      href: "/projects/battery-manager",
-      class: "block px-default--device-gt-tablet layer-black layer-next"
-    }, true)
-      +head({
-        class: "pt-default"
-      })
-        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "py-sub-large"
-        })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Battery Manager
-
-          //- +tile({
-          //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 mt-larger block layer-tile-outline",
-          //-   image: {
-          //-     class: "",
-          //-     src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
-          //-     alt: "An image of the battery testing workstation box.",
-          //-   }
-          //- })
+  +next-page("/projects/battery-manager", "Battery Manager")

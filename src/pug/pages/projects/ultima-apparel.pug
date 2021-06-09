@@ -3,18 +3,16 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/projects/ultima-apparel",
       name: "ultima-apparel",
       title: "Ultima Apparel — Improving posture and form through data",
-      description: "Enhanced sportsware designed to improve posture and track workout form."
+      description: "Ultima Apparel started as a startup company with me and a colleague in our undergrad, hoping to reduce the occurrence of lower back and shoulder injuries during work outs. The project eventually morphed into an interesting capstone project and won our team first place in the electrical engineering competition in 2018."
     };
 
 block banner
-  //- Banner layer
   +banner({
     title: "Project 4: Ultima Apparel (2016 - 2018)",
-    content: "A project to improve posture form during workouts by means of clothing that tracked form and posture.",
+    content: "Ultima Apparel started as a startup company with me and a colleague in our undergrad, hoping to reduce the occurrence of lower back and shoulder injuries during work outs. The project eventually morphed into an interesting capstone project and won our team first place in the electrical engineering competition in 2018.",
     image: {
       src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
       alt: "An image of Ultima Apparels first proof of concept.",
@@ -23,43 +21,71 @@ block banner
   })
 
 block content
-  //- Intro layer
   .container-lg
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +main({
-        class: "py-small layout-clearfix"
-      })
-        +p
-          span.style-letter-head U
-          span.inline.margin-dull ltima Apparel started off as a pet project for my co-founder. He was looking to find a way to improve his posture and acquire data about his form after hurting himself during a workout. He approached me to see if we could solve that problem for others as well.
-          br
-          br
-          | We decided to enter the project into our capstone competition as our final year capstone project.
+    .style-letter-head U
+    | ltima Apparel started off as a pet project for my co-founder. He was looking to find a way to improve his posture and acquire data about his form after hurting himself during a workout. He approached me to see if we could solve that problem for others as well.
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+      alt: "Initial Proof of Concept"
+    })(width="960px" height="1706px")
+    br
+    br
+    | After some customer discovery and lots of advice to do so, we pivoted toward solving the problem in material handling. The whole premise was that we were going to mitigate the risks associated with improper posture and techniques in workplaces while simultaneously providing training and environmental solutions to institutions that hired our services. 
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Apparel_Front",
+      alt: "Material Handling"
+    })(width="960px" height="1556px")
+    br
+    br
+    figure.text-center
+      video.w-full(controls name='media')
+        source(src='https://res.cloudinary.com/okikio-assets/image/upload/joseph-projects/ultima-apparel/00_-_Pres_Video.mp4' type='video/mp4')
+
+      figcaption.italic Video of MoCap for material handling
+    br
+    br
+    | However, after some deliberation and having just entered the project in our final year capstone competition, we decided to shelf the business and concentrating on winning the competition. 
+    br
+    br 
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Ultima_Team_2",
+      alt: "Capstone Competition Award"
+    })(width="960px" height="1556px")
+    br
+    br
+    | The system consisted of 7 inertial measurement units (IMUs) and 4 vibration motors. The IMUs together were used to create a motion capture of the user of the wearer. The vibration motors were proposed to be notify the wearer of movements that could cause immediate injuries.
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Shirt_NO_Watermark",
+      alt: "Prototype version 2 design"
+    })(width="960px" height="500px")
+    br
+    br
+    | A feature we felt necessary for remote workers was the use of cloud communications for transferring data between device and client as well as for saving wearer profiles. The idea was that data was going to be sent from the wearable via an internet connection to a firebase cloud server. The information can then be viewed real time or at a later date in another location. With that, analysis could be done on the movements and reports could be generated. A short clip of an initial test program that connected and retrieved information from the cloud is shown below.
+    br
+    br
+    figure.text-center
+      video.w-full(controls name='media')
+        source(src='https://res.cloudinary.com/okikio-assets/video/upload/joseph-projects/ultima-apparel/PostureAnalysis.mp4' type='video/mp4')
+
+      figcaption.italic Prototype Software
+    br
+    br
+    | Unfortunately, we did not capture the final demo of the wearable, but to give an idea, here is a brief video of me working out the kinks with the sensors. 
+    br
+    br
+    figure.text-center
+      video.w-full(controls name='media')
+        source(src='https://res.cloudinary.com/okikio-assets/video/upload/v1623195437/joseph-projects/ultima-apparel/MoCapLimitedTest.mp4' type='video/mp4')
+
+      figcaption.italic MoCap Development
+
 
   //- Next page layer
-  +layout({
-    class: "layout-contain-large layer-round px-small px--device-gt-tablet"
-  })
-    +link({
-      href: "/projects/phoenix",
-      class: "block px-default--device-gt-tablet layer-black layer-next"
-    }, true)
-      +head({
-        class: "pt-default"
-      })
-        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "py-sub-large"
-        })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Phoenix
+  +next-page("/projects/phoenix", "Phoenix")
 
-        //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 mt-larger block layer-tile-outline",
-        //-   image: {
-        //-     class: "",
-        //-     src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
-        //-     alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
-        //-   }
-        //- })

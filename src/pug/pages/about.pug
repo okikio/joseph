@@ -9,12 +9,11 @@ block pageInfo
       description: "What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering."
     };
 
-
 block content
   .navbar-top-spot
   .about-layer
     .container
-      h1.h4.text-center.font-800 Who am I?
+      h1.h4.text-center.font-600 Who am I?
       .clearfix
         .tile
           +image({
@@ -28,15 +27,9 @@ block content
           br
           br
           | I have been quite fortunate in my educational career, graduating with a High Distinction from Ontario Tech University in a Mechanical (specifically Mechatronics) Engineering program. I am currently working towards my master’s degree under the supervision of two of the best at Ontario Tech University, Drs. 
-          +link({
-            href: "https://www.xianke-lin.com/",
-            content: "Xianke Lin"
-          })(target="_blank" rel="noopener")
+          +link("https://www.xianke-lin.com/") Xianke Lin
           |  and 
-          +link({
-            href: "https://faculty.ontariotechu.ca/lang/people.html",
-            content: "Haoxiang Lang"
-          })(target="_blank" rel="noopener")
+          +link("https://faculty.ontariotechu.ca/lang/people.html") Haoxiang Lang
           | . 
           | My thesis is set to combine the use of neural networks and predictive control algorithms to ensure that robotic and automotive battery systems are safe, and last long while charged quickly. This is a very exciting and fulfilling research project due to its necessity for future economic growth and sustainability.
           br
@@ -57,11 +50,9 @@ block content
           br
           br
           br
-          +link({
-            class: "inline-block px-2 py-1 btn layer-secondary-btn",
-            href: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u"
-          })(title="View my CV/resume." target="_blank"  rel="noopener")
-            .btn-layout
-              .icon-btn
-                +icon("launch").icon
-              .btn-content.px-2 View my Resume
+          +link("https://drive.google.com/file/d/13iItslKMyqXlFdqr240vfbMlnwfHkFk_/view?usp=sharing").rounded-md.overflow-hidden
+            .btn.px-2.py-1.btn-secondary
+              .btn-layout
+                .icon-btn
+                  +icon("launch").icon
+                .btn-content.px-2 View my Resume

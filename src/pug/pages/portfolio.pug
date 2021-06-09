@@ -10,7 +10,6 @@ block pageInfo
     };
 
 block banner
-  //- Banner layer
   +banner({
     title: "Portfolio",
     content: "A showcase of projects I have completed, and even some that are still on-going. Tune in for frequent updates as I tack on more projects and complete other activities.",
@@ -26,10 +25,7 @@ block content
     .py-5
       .row.col-grid
         .col-6
-          +link({
-            href: "/projects/boxer",
-            class: "block"
-          })
+          +link("/projects/boxer")
             +tile({
               title: "Boxer",
               class: "layer-box layer-surface block layer-tile-outline",
@@ -41,29 +37,22 @@ block content
             })
 
         .col-6
-          +link({
-            href: "/projects/battery-manager",
-            class: "block"
-          })
+          +link("/projects/battery-manager")
             +tile({
               title: "Battery Manager",
               class: "layer-box layer-surface block layer-tile-outline",
-              content: "A tool designed to provide flexibility in the variety of research that I and future research colleagues will undertake into the field of battery technology.",
+              content: "A tool built to perform a multitude of experiments on battery cells and packs of different sizes. Rated for 35A, the device is capable of fast charging, cycling, fault induction and recognition and many more due to its customizability.",
               image: {
                 src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
                 alt: "An image of the battery testing workstation box.",
               }
             })
-
         .col-6
-          +link({
-            href: "/projects/sarbot",
-            class: "block"
-          })
+          +link("/projects/sarbot")
             +tile({
               title: "Search and Rescue Robot (SarBot)",
               class: "layer-box layer-surface block layer-tile-outline",
-              content: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person or object in toe.",
+              content: "SarBot was a major course project in my final year of undergrad. The objective was to emulate a search and rescue (SaR) operation for a miner trapped underground. The robot had to be semi-autonomous and had to avoid obstacles.",
               image: {
                 src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
                 alt: "An image of a 3D model of Sarbot.",
@@ -71,29 +60,24 @@ block content
             })
 
         .col-6
-          +link({
-            href: "/projects/ultima-apparel",
-            class: "block"
-          })
+          +link("/projects/ultima-apparel")
             +tile({
               title: "Ultima Apparel",
               class: "layer-box layer-surface block layer-tile-outline",
-              content: "Enhanced sportsware designed to improve posture and track workout form.",
+              content: "A startup company created by a colleague and I in our undergrad, hoping to reduce the occurrence of lower back and shoulder injuries during work outs. The project eventually morphed into an interesting capstone project and won our team first place in the electrical engineering competition in 2018.",
               image: {
                 src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
                 alt: "An image of Ultima Apparels first proof of concept.",
               }
             })
 
+
         .col-6
-          +link({
-            href: "/projects/phoenix",
-            class: "block"
-          })
+          +link("/projects/phoenix")
             +tile({
               title: "Phoenix",
               class: "layer-box layer-surface block layer-tile-outline",
-              content: "A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix",
+              content: "As part of my job as an engineering intern at Celestica, one of my projects was the design of a new solar panel frame that had interesting features and functions while being cheaper than the older product version.",
               image: {
                 src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
                 alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
@@ -101,10 +85,7 @@ block content
             })
 
         .col-6
-          +link({
-            href: "/projects/publications",
-            class: "block"
-          })
+          +link("/projects/publications")
             +tile({
               title: "Publications",
               class: "layer-box layer-surface block layer-tile-outline",

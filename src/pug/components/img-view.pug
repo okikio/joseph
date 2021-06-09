@@ -1,8 +1,7 @@
 mixin img-view(value = {})
   -
-    let _class = value.class;
     let source = value.src || "cloudinary/city";
-    let alt = value.alt || "Alternate text";
+    let alt = value.alt || "";
 
     let external = /\/fetch\//.test(source);
     let src = source.replace("fetch/", "");
@@ -11,10 +10,8 @@ mixin img-view(value = {})
     let origin = `https://res.cloudinary.com/okikio-assets/image/${external ? "fetch" : "upload"}/`;
     let urlParse = (filters = "w_auto") => cloudinaryTest ? `${origin + "q_auto:best,f_auto," + filters},dpr_auto/${src.replace(/^cloudinary\//, "")}` : src;
 
-  .image&attributes(attributes)
-    .img-view
-      figure(class=_class title=alt)
-        .img-view-contain
-          img.core-img(data-src!=`${urlParse()}.webp` alt=alt loading="lazy" itemprop="url")&attributes(attributes)
-          noscript
-            img.no-script-img(src!=`${urlParse()}.jpg` aria-hidden="true" alt=alt loading="lazy")
+  .img-view
+    figure.text-center
+      .img-view-contain
+        img(src!=`${urlParse()}.jpg` alt=alt loading="lazy")&attributes(attributes)
+      figcaption.italic= alt

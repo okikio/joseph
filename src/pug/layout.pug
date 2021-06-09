@@ -1,19 +1,14 @@
-include /components/sections.pug
-include /components/layout.pug
 include /components/banner.pug
-include /components/column.pug
 include /components/navbar.pug
 include /components/footer.pug
 include /components/buttons.pug
 include /components/img-view.pug
 include /components/image.pug
-include /components/layer.pug
-include /components/text.pug
+include /components/next-page.pug
 include /components/tile.pug
 include /components/link.pug
 include /components/icon.pug
 include /components/seo.pug
-include /components/row.pug
 
 doctype html
 html(lang="en")
@@ -55,11 +50,7 @@ html(lang="en")
     script(src="/js/theme.min.js" type="module", defer)
 
   body
-    +link({
-      class: "skip-main",
-      href: "#content",
-      content: "Skip to main content"
-    })
+    +link("#content").skip-main Skip to main content
 
     block navbar
       +navbar(page)

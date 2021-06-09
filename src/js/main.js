@@ -47,6 +47,18 @@ on(window, {
 
             raf = requestAnimationFrame(() => {
                 windowWid = width(window);
+                
+                // On Resize re-scale the parallax effect
+                let target = find(_banner, _image)[0];
+                let clientRect = offset(target);
+                bannerHeight = clientRect?.height;
+            
+                // In each layer-image find load-img image container and store all key info, important for creating a parallax effect
+                bannerInfo = {
+                    ...bannerInfo,
+                    target,
+                    clientRect
+                };
 
                 // Find the layer-images in each layer
                 each(_image, image => {
@@ -103,33 +115,36 @@ on(window, {
 
                 // If device width is greater than 700px
                 if ("Promise" in window) {
-                    let { clientRect, target, figure, overlay, header, main } = bannerInfo;
+                    let { clientRect, target, figure, overlay, header, main, isHero } = bannerInfo;
 
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
                     if (target && hasClass(target, "effect-parallax")) {
                         let { top, height } = clientRect;
 
+                        let topScroll = _scrollTop;
+                        if (isHero) topScroll += navHeight;
+
                         let endPt = height + top;
                         let startPt = top;
 
                         // Only compute the parallax effect, if the image is in view
-                        if (_scrollTop + navHeight >= startPt && _scrollTop <= endPt) {
+                        if (topScroll >= startPt && _scrollTop <= endPt) {
                             // Convert `value` to a scale of 0 to 1
-                            let value = scale(_scrollTop, startPt, endPt, 0, 1);
+                            let value = scale(topScroll, startPt, endPt, 0, 1);
 
                             // Restrict value to a min of 0 and a max of 1
                             value = limit(value, 0, 1);
 
-                            let opacity = scale(value, 0, 0.75, 0.45, 0.8).toFixed(2);
+                            let opacity = parseFloat( scale(value, 0, 0.75, 0.55, 0.8).toFixed(_isMobile ? 2 : 4) );
                             style(overlay, { opacity });
 
                             // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
-                            let translateY = scale(value, 0, 0.75, 0, height / 2).toFixed(_isMobile ? 2 : 4);
+                            let translateY = parseFloat( scale(value, 0, 0.75, 0, height / 2).toFixed(_isMobile ? 2 : 4) );
                             let transform = `translateY(${translateY}px)`;
                             style(figure, { transform });
 
-                            opacity = scale(value, 0, 0.45, 1, 0).toFixed(2);
-                            translateY = limit(scale(value, 0, 1, 0, height / 2), 0, height / 3).toFixed(_isMobile ? 2 : 4);
+                            opacity = parseFloat( scale(value, 0, 0.45, 1, 0).toFixed(_isMobile ? 2 : 4) );
+                            translateY = parseFloat( limit(scale(value, 0, 1, 0, height / 2), 0, height / 3).toFixed(_isMobile ? 2 : 4) );
                             transform = `translateY(${translateY}px)`;
                             if (header) style(header, { transform });
                             if (main) style(main, { transform, opacity });
@@ -170,10 +185,11 @@ on(_navOverlay, "click", () => {
 
 // Initialize images
 let init = () => {
-    let header = find(_banner, "h1")[0];
-    let main = find(_banner, "h2")[0];
+    let banner = el(_banner);
+    let header = find(banner, "h1")[0];
+    let main = find(banner, "h2")[0];
 
-    let target = find(_banner, _image)[0];
+    let target = find(banner, _image)[0];
     let figure = find(target, "figure")[0];
     let overlay = find(target, ".image-overlay")[0];
     let clientRect = offset(target);
@@ -181,6 +197,7 @@ let init = () => {
 
     // In each layer-image find load-img image container and store all key info, important for creating a parallax effect
     bannerInfo = {
+        isHero: hasClass(banner, "hero"),
         overlay,
         target,
         figure,

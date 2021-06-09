@@ -11,45 +11,23 @@ block pageInfo
 
 block content
   .container-lg
-    h1.h4.font-800.style-center Academic Publications.
-    +p
-      span.inline.margin-dull
-        ol
-          li O. Ojo, X. Lin, H. Lang, “A Threshold-Based Voltage Fault Detection Method Enabled by A Novel Neural Network Architecture for Lithium-ion Batteries” [Under Review]
+    h1.h4.font-600.text-center Academic Publications.
+    ol.space-y-8
+      li 
+        strong.font-800 O. Ojo
+        | , X. Lin, H. Lang, “A Threshold-Based Voltage Fault Detection Method Enabled by A Novel Neural Network Architecture for Lithium-ion Batteries” 
+        strong.font-800 [Under Review]
+      li 
+        strong.font-800 O. Ojo
+        | , X. Lin, H. Lang, and Y. Kim, “A Recurrent Neural Networks Approach for Estimating the Core Temperature in Lithium-Ion Batteries”, Progress in Canadian Mechanical Engineering. Volume 3, Jun. 2020, doi: 10.32393/csme.2020.130
+      li 
+        strong.font-800 O. Ojo
+        | , H. Lang, Y. Kim, X. Hu, B. Mu and X. Lin, "A Neural Network-Based Method for Thermal Fault Detection in Lithium-Ion Batteries”, in IEEE Transactions on Industrial Electronics, doi: 10.1109/TIE.2020.2984980
 
-          li O. Ojo, X. Lin, H. Lang, and Y. Kim, “A Recurrent Neural Networks Approach for Estimating the Core Temperature in Lithium-Ion Batteries”, Progress in Canadian Mechanical Engineering. Volume 3, Jun. 2020, doi: 10.32393/csme.2020.130
-
-          li O. Ojo, H. Lang, Y. Kim, X. Hu, B. Mu and X. Lin, "A Neural Network-Based Method for Thermal Fault Detection in Lithium-Ion Batteries”, in IEEE Transactions on Industrial Electronics, doi: 10.1109/TIE.2020.2984980
-
-          li 
-            | J. Ojo, X. Lin and H. Lang, "Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots", CNKI.com, 2019. [Online]. Available: 
-            +link({
-              href: "http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm",
-              content: "http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm"
-            })(target="_blank" rel="noopener")
+      li 
+        strong.font-800 J. Ojo
+        | , X. Lin and H. Lang, "Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots", CNKI.com, 2019. [Online]. Available: 
+        +link("http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm") http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm
 
   //- Next page layer
-  +layout({
-    class: "layout-contain-large layer-round px-small px--device-gt-tablet"
-  })
-    +link({
-      href: "/projects/boxer",
-      class: "block px-default--device-gt-tablet layer-black layer-next"
-    }, true)
-      +head({
-        class: "pt-default"
-      })
-        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "py-sub-large"
-        })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Boxer
-
-        //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 mt-larger block layer-tile-outline",
-        //-   image: {
-        //-     class: "",
-        //-     src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
-        //-     alt: "An image of a rendered robot."
-        //-   }
-        //- })
+  +next-page("/projects/boxer", "Boxer")

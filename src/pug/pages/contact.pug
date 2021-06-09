@@ -3,7 +3,6 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/contact",
       name: "contact",
       title: "Contact me — Let's talk. I'm ready to create something awesome, are you?",
@@ -19,38 +18,26 @@ block content
       .layout
         h1 Contact
         section.space-x-4
-          +link({
-            href: "https://www.linkedin.com/in/o-josephojo/",
-            content: "LinkedIn"
-          })(target="_blank" rel="noopener")
-          +link({
-            href: "https://github.com/josephojo",
-            content: "Github"
-          })(target="_blank" rel="noopener")
-          +link({
-            href: "mailto:laoluojo@gmail.com",
-            content: "Email"
-          })(target="_blank" rel="noopener")
+          +link("https://www.linkedin.com/in/o-josephojo/") LinkedIn
+          +link("https://github.com/josephojo") Github
+          +link("mailto:laoluojo@gmail.com") Email
         
         | Drop me a message by filling out this contact form and I'll respond back as soon as possible.
         br
         br
-        +link({
-          class: "inline-block px-2 py-1 btn layer-secondary-btn",
-          href: "https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u"
-        })(title="Open the Contact Form." target="_blank"  rel="noopener")
-          .btn-layout
-            .icon-btn
-              +icon("launch").icon
-            .btn-content.px-2 Contact Form
+        +link("https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u").rounded-md.overflow-hidden
+          .btn.px-2.py-1.btn-secondary
+            .btn-layout
+              .icon-btn
+                +icon("launch").icon
+              .btn-content.px-2 Contact Form
         br
-        +tile({
-          class: "tile layer-surface layer-box block layer-tile-outline layer-joseph-img2 shadow",
-          image: {
+        .tile.layer-box.layer-joseph-img.shadow-2xl
+          +image({
             src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
             alt: "An image of Joseph Ojo laughing with friends on a boat.",
-          }
-        })
+            overlay: false
+          })
     +footer
 
 block footer

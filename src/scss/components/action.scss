@@ -74,6 +74,22 @@
     }
 }
 
+.btn-secondary {
+    transition: background-color #{$transitionDuration} ease;
+    @include applyTheme(background-color, "secondary-light");
+
+    &:hover,
+    &:focus {
+        @include applyTheme(background-color, "secondary");
+    }
+
+    &,
+    &:hover,
+    &:focus {
+        color: $black;
+    }
+}
+
 #to-top {
     transition: opacity 0.4s ease;
     @apply fixed bottom-4 right-4;

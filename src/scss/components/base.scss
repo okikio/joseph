@@ -96,6 +96,10 @@ $headerSizes: (4.2rem, 3.56rem, 2.92rem, 2.28rem, 1.64rem, 1rem);
     }
 }
 
+figure {
+    @apply block relative;
+}
+
 img,
 video {
     object-position: center center;
@@ -115,8 +119,8 @@ a {
     &:hover,
     &:focus {
         text-decoration: underline;
-        color: lighten($secondary, 15%);
-        color: var(--secondary, lighten($secondary, 15%));
+        color: lighten($secondary-dark, 20%);
+        color: var(--secondary, lighten($secondary-dark, 20%));
     }
 }
 
@@ -132,8 +136,7 @@ a {
 
 // For touch screen devices
 a,
-button,
-input {
+button {
     -webkit-tap-highlight-color: transparent;
     background-image: none;
     outline: 0;
@@ -232,15 +235,6 @@ a.skip-main {
 .no-script-img,
 .placeholder-img {
     color: transparent;
-}
-
-.list {
-    list-style: circle;
-    display: list-item;
-
-    &-none {
-        list-style: none;
-    }
 }
 
 .footer {

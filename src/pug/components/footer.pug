@@ -5,30 +5,15 @@ mixin footer
         +icon("copyright").icon
         |  2021 Joseph Ojo
 
-      #social-links
-        +link({
-          href: "/sitemap",
-          content: "Sitemap"
-        })
-        |  - 
-        +link({
-          href: "https://www.linkedin.com/in/o-josephojo/",
-          content: "LinkedIn"
-        })(target="_blank" rel="noopener")
-        |  - 
-        +link({
-          href: "https://github.com/josephojo",
-          content: "Github"
-        })(target="_blank" rel="noopener")
-        |  - 
-        +link({
-          href: "mailto:laoluojo@gmail.com",
-          content: "Email"
-        })(target="_blank" rel="noopener")
+      #social-links.space-x-2
+        +link("/sitemap") Sitemap
+        //- |  - 
+        +link("https://www.linkedin.com/in/o-josephojo/") LinkedIn
+        //- |  - 
+        +link("https://github.com/josephojo") Github
+        //- |  - 
+        +link("mailto:laoluojo@gmail.com") Email
 
       #design-by
         | Designed by 
-        +link({
-          href: "https://github.com/okikio",
-          content: "Okiki Ojo"
-        })(target="_blank" rel="noopener")
+        +link("https://github.com/okikio") Okiki Ojo
