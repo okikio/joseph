@@ -342,8 +342,9 @@ blockquote {
     }
 
     &-title {
-        @apply text-xl md:text-2xl font-600 my-3;
+        @apply text-xl font-600 my-3;
         font-size: theme("spacing.5");
+        @apply md:text-2xl;
     }
 
     &-next {
