@@ -14,7 +14,7 @@
   Link: <https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   Link: <https://fonts.gstatic.com/s/manrope/v4/xn7gYHE41ni1AdIRggexSg.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   Link: <https://fonts.gstatic.com/s/frankruhllibre/v6/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGhA.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
-  Link: </js/theme.min.js>; rel=preload; as=script
+  Link: </js/theme.min.js>; rel=preload; as=script; crossorigin
   Link: <https://cdn.polyfill.io>; rel=preconnect; crossorigin
   Link: <https://res.cloudinary.com>; rel=preconnect; crossorigin
 
