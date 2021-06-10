@@ -1,0 +1,34 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      url: "/projects/publications",
+      name: "publications",
+      title: "Academic Publications.",
+      description: "A list of publications I completed while studying for my masters at OntarioTech University."
+    };
+
+block content
+  .navbar-top-spot
+  .container-lg.publication-layer
+    h1.h4.font-600.text-center Academic Publications.
+    ol.space-y-8
+      li 
+        strong.font-800 O. Ojo
+        | , X. Lin, H. Lang, “A Threshold-Based Voltage Fault Detection Method Enabled by A Novel Neural Network Architecture for Lithium-ion Batteries” 
+        strong.font-800 [Under Review]
+      li 
+        strong.font-800 O. Ojo
+        | , X. Lin, H. Lang, and Y. Kim, “A Recurrent Neural Networks Approach for Estimating the Core Temperature in Lithium-Ion Batteries”, Progress in Canadian Mechanical Engineering. Volume 3, Jun. 2020, doi: 10.32393/csme.2020.130
+      li 
+        strong.font-800 O. Ojo
+        | , H. Lang, Y. Kim, X. Hu, B. Mu and X. Lin, "A Neural Network-Based Method for Thermal Fault Detection in Lithium-Ion Batteries”, in IEEE Transactions on Industrial Electronics, doi: 10.1109/TIE.2020.2984980
+
+      li 
+        strong.font-800 J. Ojo
+        | , X. Lin and H. Lang, "Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots", CNKI.com, 2019. [Online]. Available: 
+        +link("http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm") http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm
+
+  //- Next page layer
+  +next-page("/projects/boxer", "Boxer")

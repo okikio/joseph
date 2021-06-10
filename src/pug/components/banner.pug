@@ -1,0 +1,13 @@
+mixin banner(value = {})
+  - let { content, title, image, mode = "hero" } = value;
+
+  .banner(class=mode)
+    .container
+      .image-container
+        +image(image).effect-parallax
+
+      .layout
+        header.content
+          h1(itemprop="headline")= title
+          h2.style-off-blue(itemprop="description")!= content
+        +scroll-down

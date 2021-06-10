@@ -1,171 +1,149 @@
+@use "./mixins.scss" as *;
+
 /* -- Styles (only affect text) -- */
 .style {
-	$styleParent: &;
+    $styleParent: &;
 
-	&, &-font {
-		@each $name, $family in $fonts {
+    &,
+    &-font {
+        &,
+        &-weight {
+            font-weight: 400;
 
-			&-#{$name},
-			&-#{$name}-font,
-			&-family-#{$name} {
-				font-family: #{$family};
-			}
-		}
+            @for $weight from 1 through 9 {
+                &-#{$weight}00 {
+                    font-weight: #{$weight + "00"};
+                }
+            }
 
-		&,
-		&-size {
-			font-size: 14px;
+            &-bolder {
+                font-weight: 900;
+            }
 
-			@for $sz from 8 through 50 {
-				&-#{$sz} {
-					font-size: #{$sz}px;
+            &-bold {
+                font-weight: 700;
+            }
 
-					@include deviceList(font-size, #{$sz}px);
-				}
-			}
-		}
+            &-regular {
+                font-weight: 600;
+            }
 
-		@each $name,
-		$value in $sizes {
+            &-thin {
+                font-weight: 300;
+            }
 
-			&-#{$name},
-			&-size-#{$name} {
-				font-size: $value;
+            &-thiner {
+                font-weight: 100;
+            }
+        }
 
-				@include deviceList(font-size, $value);
-			}
-		}
+        &-italic {
+            font-style: italic;
+        }
 
-		&,
-		&-weight {
-			font-weight: 400;
+        &-underline {
+            text-decoration: underline;
+        }
+    }
 
-			@for $weight from 1 through 9 {
-				&-#{$weight}00 {
-					font-weight: #{$weight + "00"};
-				}
-			}
+    &-spaceout,
+    &-letter-spacing {
+        letter-spacing: 3px;
 
-			&-bolder {
-				font-weight: 900;
-			}
+        &-none {
+            letter-spacing: 0;
+        }
 
-			&-bold {
-				font-weight: 700;
-			}
+        &-small {
+            letter-spacing: 1px;
+        }
 
-			&-regular {
-				font-weight: 600;
-			}
+        &-double {
+            letter-spacing: 2px;
+        }
 
-			&-thin {
-				font-weight: 300;
-			}
+        &-large {
+            letter-spacing: 7px;
+        }
+    }
 
-			&-thiner {
-				font-weight: 100;
-			}
-		}
+    &-line-height {
+        line-height: 1.5em;
 
-		&-italic {
-			font-style: italic;
-		}
+        &-none {
+            line-height: 0;
+        }
 
-		&-underline {
-			text-decoration: underline;
-		}
-	}
+        &-small {
+            line-height: 1em;
+        }
 
-	&-spaceout,
-	&-letter-spacing {
-		letter-spacing: 3px;
+        &-spaced {
+            line-height: 1.75em;
+        }
 
-		&-none {
-			letter-spacing: 0;
-		}
+        &-double {
+            line-height: 2em;
+        }
 
-		&-small {
-			letter-spacing: 1px;
-		}
+        &-large {
+            line-height: 3em;
+        }
+    }
 
-		&-double {
-			letter-spacing: 2px;
-		}
+    &,
+    &-align {
+        &-left {
+            text-align: left;
+        }
 
-		&-large {
-			letter-spacing: 7px;
-		}
-	}
+        &-center {
+            text-align: center;
+        }
 
-	&-line-height {
-		line-height: 1.5em;
+        &-right {
+            text-align: right;
+        }
 
-		&-none {
-			line-height: 0;
-		}
+        &-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    }
 
-		&-small {
-			line-height: 1;
-		}
+    &,
+    &-transform {
+        &-capital {
+            text-transform: capitalize;
+        }
 
-		&-double {
-			line-height: 2em;
-		}
+        &-uppercase {
+            text-transform: uppercase;
+        }
 
-		&-large {
-			line-height: 3em;
-		}
-	}
-
-	&,
-	&-align {
-		&-left {
-			text-align: left;
-		}
-
-		&-center {
-			text-align: center;
-		}
-
-		&-right {
-			text-align: right;
-		}
-
-		&-justify {
-			text-align: justify;
-			text-justify: inter-word;
-		}
-	}
-
-	&,
-	&-transform {
-		&-capital {
-			text-transform: capitalize;
-		}
-
-		&-uppercase {
-			text-transform: uppercase;
-		}
-
-		&-lowercase {
-			text-transform: lowercase;
-		}
-	}
+        &-lowercase {
+            text-transform: lowercase;
+        }
+    }
 
     &-letter-head {
-		letter-spacing: 2.54px;
+        // font-family: $title-font;
+        letter-spacing: 2.54px;
         line-height: 1.62rem;
         font-size: 5.15rem;
         font-weight: 900;
         margin: 0;
-		padding-top: 1.25rem;
-		padding-bottom: 2px;
+        padding-top: 1.25rem;
+        padding-bottom: 2px;
+        display: inline-block;
+        padding-right: 6px;
+        float: left;
 
-        @media #{$screen-size-phone} {
-            line-height: 3.80rem;
-            font-size: 4.85rem;
-        }
+        // @media #{$screen-size-phone} {
+        //     line-height: 3.80rem;
+        //     font-size: 4.85rem;
+        // }
     }
 
-	@include colorList;
+    @include colorList;
 }

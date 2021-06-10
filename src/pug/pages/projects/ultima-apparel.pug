@@ -1,0 +1,85 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      url: "/projects/ultima-apparel",
+      name: "ultima-apparel",
+      title: "Ultima Apparel — Improving posture and form through data",
+      description: "Ultima Apparel started as a startup company with me and a colleague in our undergrad, hoping to reduce the occurrence of lower back and shoulder injuries during work outs. The project eventually morphed into an interesting capstone project and won our team first place in the electrical engineering competition in 2018."
+    };
+
+block banner
+  +banner({
+    title: "Project 4: Ultima Apparel (2016 - 2018)",
+    content: "Ultima Apparel was a company started to reduce the occurrence of lower back and shoulder injuries in labor intensive jobs using a motion capture wearable.",
+    image: {
+      src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+      alt: "An image of Ultima Apparels first proof of concept.",
+    },
+    mode: "banner"
+  })
+
+block content
+  .container-lg
+    .style-letter-head U
+    | ltima Apparel started off as a pet project for my co-founder. He was looking to find a way to improve his posture and acquire data about his form after hurting himself during a workout. He approached me to see if we could solve that problem for others as well.
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+      alt: "Initial Proof of Concept"
+    })(width="640px" height="840px")
+    br
+    | After some customer discovery and lots of advice to do so, we pivoted toward solving the problem in material handling. The whole premise was that we were going to mitigate the risks associated with improper posture and techniques in workplaces while simultaneously providing training and environmental solutions to institutions that hired our services. 
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Apparel_Front",
+      alt: "Material Handling"
+    })(width="640px" height="856px")
+    br
+    figure.text-center
+      video.mx-auto(controls name='media' width="640px")
+        source(src='https://res.cloudinary.com/okikio-assets/image/upload/joseph-projects/ultima-apparel/00_-_Pres_Video.mp4' type='video/mp4')
+
+      figcaption.italic Video of MoCap for material handling
+    br
+    | However, after some deliberation and having just entered the project in our final year capstone competition, we decided to shelf the business and concentrating on winning the competition. 
+    br
+    br 
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Ultima_Team_2",
+      alt: "Capstone Competition Award"
+    })(width="860px" height="540px")
+    br
+    | The system consisted of 7 inertial measurement units (IMUs) and 4 vibration motors. The IMUs together were used to create a motion capture of the user of the wearer. The vibration motors were proposed to be notify the wearer of movements that could cause immediate injuries.
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/ultima-apparel/Shirt_NO_Watermark",
+      alt: "Prototype version 2 design"
+    })(width="648px" height="343px")
+    br
+    | A feature we felt necessary for remote workers was the use of cloud communications for transferring data between device and client as well as for saving wearer profiles. The idea was that data was going to be sent from the wearable via an internet connection to a firebase cloud server. The information can then be viewed real time or at a later date in another location. With that, analysis could be done on the movements and reports could be generated. A short clip of an initial test program that connected and retrieved information from the cloud is shown below.
+    br
+    br
+    figure.text-center
+      video.w-full(controls name='media')
+        source(src='https://res.cloudinary.com/okikio-assets/video/upload/joseph-projects/ultima-apparel/PostureAnalysis.mp4' type='video/mp4')
+
+      figcaption.italic Prototype Software
+    br
+    | Unfortunately, we did not capture the final demo of the wearable, but to give an idea, here is a brief video of me working out the kinks with the sensors. 
+    br
+    br
+    figure.text-center
+      video.w-full(controls name='media')
+        source(src='https://res.cloudinary.com/okikio-assets/video/upload/v1623195437/joseph-projects/ultima-apparel/MoCapLimitedTest.mp4' type='video/mp4')
+
+      figcaption.italic MoCap Development
+
+
+  //- Next page layer
+  +next-page("/projects/phoenix", "Phoenix")
+

@@ -1,0 +1,130 @@
+/* -- Fonts -- */
+// Variables
+$primary-light: #4e41ff;
+$primary: #2d22ca;
+$primary-dark: #271daf;
+$secondary-light: #ff4b78;
+$secondary: #ff3a6b;
+$secondary-dark: #ce0c3c;
+$tertiary-light: #ffe851;
+$tertiary: #ffde03;
+$tertiary-dark: #e5c702;
+$off-blue: #d7d4ff;
+
+$background: #eaeef1;
+$surface: #fff;
+
+$white: #fff;
+$black: #000;
+
+$very-light: #efefef;
+$invert-white: #fff;
+$light: #eee;
+$mid-light: #ddd;
+$mid: #ccc;
+$mid-dark: #bbb;
+$dark: #222;
+
+$desktop: 1480;
+$laptop: 1080;
+$tablet: 680;
+$phone: 480;
+
+$transitionDuration: 0.4s;
+
+$colors: (
+    "navbar-gray": theme("colors.gray.300"),
+    "primary-light": $primary-light,
+    "primary": $primary,
+    "primary-dark": $primary-dark,
+    "secondary-light": $secondary-light,
+    "secondary": $secondary,
+    "secondary-dark": $secondary-dark,
+    "tertiary-light": $tertiary-light,
+    "tertiary": $tertiary,
+    "tertiary-dark": $tertiary-dark,
+    "off-blue": $off-blue,
+    "background": $background,
+    "surface": $surface,
+    "transparent": transparent,
+    "white": $white,
+    "black": $black,
+    "invert-white": $white,
+    "very-light": $very-light,
+    "light": $light,
+    "mid-light": $mid-light,
+    "mid": $mid,
+    "dim": #77709e,
+    "mid-dark": $mid-dark,
+    "dark": $dark,
+    "invert-black": $black,
+);
+
+$dark-colors: (
+    "navbar-gray": theme("colors.quaternary"),
+    "primary-light": lighten($primary-dark, 5%),
+    "primary": lighten($primary, 15%),
+    "primary-dark": lighten($primary-light, 15%),
+    "secondary-light": lighten($secondary-dark, 15%),
+    "secondary": lighten($secondary, 5%),
+    "secondary-dark": lighten($secondary-light, 15%),
+    "tertiary-light": $tertiary-light,
+    "tertiary": $tertiary,
+    "tertiary-dark": $tertiary-dark,
+    "background": #18181b,
+    "surface": #333435,
+    "transparent": transparent,
+    "white": $white,
+    "black": $black,
+    "invert-white": $black,
+    "very-light": #1d2125,
+    "light": #525252,
+    "mid-light": darken($mid-light, 30%),
+    "mid": darken($mid, 33%),
+    "dim": #696873,
+    "mid-dark": #bbb8b8,
+    "dark": #ddd,
+    "invert-black": $white,
+);
+
+@mixin applyTheme($property: color, $value: "primary") {
+    #{$property}: map-get($colors, $value);
+    #{$property}: var(--#{$value}, map-get($colors, $value));
+}
+
+@mixin propertyList($property, $prefix, $list, $themeable: false, $action: "") {
+    @each $name, $value in $list {
+        @if str-length($action) > 0 {
+            &-#{$action}-#{$name}:#{$action},
+            &-#{$name}-#{$action}:#{$action},
+            &-#{$action}-#{$prefix}-#{$name}:#{$action},
+            &-#{$prefix}-#{$action}-#{$name}:#{$action},
+            &-#{$prefix}-#{$name}-#{$action}:#{$action} {
+                @if ($themeable) {
+                    transition: #{$property} #{$transitionDuration} ease,
+                        box-shadow ease #{$transitionDuration};
+                    @include applyTheme($property, $name);
+                } @else {
+                    #{$property}: $value;
+                }
+            }
+        } @else {
+            &-#{$name},
+            &-#{$prefix}-#{$name} {
+                @if ($themeable) {
+                    transition: #{$property} #{$transitionDuration} ease,
+                        box-shadow ease #{$transitionDuration};
+                    @include applyTheme($property, $name);
+                } @else {
+                    #{$property}: $value;
+                }
+            }
+        }
+    }
+}
+
+@mixin colorList($property: color, $name: "color") {
+    @include propertyList($property, $name, $colors, true);
+    @include propertyList($property, $name, $colors, true, "hover");
+    @include propertyList($property, $name, $colors, true, "focus");
+}

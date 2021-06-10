@@ -1,0 +1,14 @@
+mixin tile(value = {})
+  - let { title, content, image } = value;
+  - let _class = value.class;
+
+  .tile.tile-hover(class=_class)
+    if image
+      +image(image)
+
+    .tile-content
+      if title
+        .tile-title.font-600= title
+
+      if content
+        p= content

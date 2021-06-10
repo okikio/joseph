@@ -1,0 +1,46 @@
+include /components/link.pug
+include /components/image.pug
+
+mixin themeSwitcher()
+  button.theme-switcher.navbar-btn(title="Theme Switcher")
+    +icon("theme switcher").icon
+
+mixin navbar(value = {})
+  - let { url } = value;
+  - let _class = value.class;
+  - let tabs = ["about", "portfolio", "contact"];
+  - let projects = ["boxer", "battery-manager", "sarbot", "ultima-apparel", "phoenix", "publications"];
+
+  nav.navbar(aria-label="Main Navigation")
+    .navbar-overlay
+    .navbar-layout
+      .navbar-head
+        +link.navbar-title(data-swup-preload)
+          img(src="/favicon/favicon.svg" alt="Logo." itemprop="logo" width="20px" height="20px" loading="eager")
+          .title-line
+          | JOSEPH OJO
+        .navbar-foot
+          +themeSwitcher
+          button.navbar-menu.navbar-btn(title="Menu Button")
+            +icon("menu").icon
+
+      .navbar-main
+        each tab, i in tabs
+          - let active = url.toLowerCase().includes(tab);
+          .navbar-link(class={ "dropdown-link": tab == "portfolio" })
+            .link-layout
+              +link(`/${tab}`)(data-swup-preload data-path=tab class={ active })
+                .link-content= tab.replace("-", " ")
+                
+              if tab == "portfolio"
+                button.dropdown-btn.navbar-btn(title="Show All Projects")
+                  +icon("expand_more").icon
+                
+            if tab == "portfolio"
+              ul.dropdown
+                each project, j in projects
+                  - let activeProject = url.toLowerCase().includes(project);
+                  +link(`/projects/${project}`)(data-path=project class="navbar-link" class={ active: activeProject })
+                    span.link-content= project.replace("-", " ")
+        .navbar-mobile-only
+          +themeSwitcher

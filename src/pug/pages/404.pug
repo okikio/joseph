@@ -1,0 +1,27 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      url: "/404",
+      name: "404",
+      title: "Ooops!",
+      description: "Sorry, the page you are looking for doesn't exist. How about going back home."
+    };
+
+block preload
+
+block content
+  .stretch-layer
+    .navbar-top-spot
+    .stretch-container
+      .layout.justify-center
+        section
+          h1 404, Page Not Found.
+          p
+            | Sorry, the page you are looking for doesn't exist. How about going back 
+            +link.underline home
+            | .
+    +footer
+
+block footer

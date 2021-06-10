@@ -1,0 +1,56 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      url: "/sitemap",
+      name: "sitemap",
+      title: "Sitemap — A list of all pages with descriptions.",
+      description: "A little lost, here is a map, now where do you want to go? The sitemap lists all pages and gives brief descriptions to help you find your way."
+    };
+
+block preload
+
+block content
+  .navbar-top-spot
+  .container-lg
+    .text-center
+      h1.h4.font-600 Sitemap
+      | The sitemap lists all pages and gives brief descriptions to help you find your way.
+    ul
+      li
+        +link.italic.underline Home
+        |   -  The homepage, its the begining of our little adventure.
+      li
+        +link("/about").italic.underline About
+        |   -  What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering.
+      li
+        +link("/portfolio").italic.underline Portfolio
+        |   -  Hardwork and perseverance, hear all about it. A showcase of projects I have completed, and even some that are still on-going.
+        br
+
+        //- Projects
+        ul
+          li
+            +link( "/projects/boxer").italic.underline Boxer
+            |   -  An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.
+          li
+            +link("/projects/battery-manager").italic.underline Battery Manager
+            |   -  A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of batteries.
+          li
+            +link("/projects/sarbot").italic.underline SarBot
+            |   -  A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe.
+          li
+            +link("/projects/ultima-apparel").italic.underline Ultima Apparel
+            |   -  Enhanced sportsware designed to improve posture and track workout form.
+          li
+            +link("/projects/phoenix").italic.underline Phoenix
+            |   -  A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix.
+          li
+            +link("/projects/publications").italic.underline Academic Publications
+            |   -  A list of publications I completed while studying for my masters at OntarioTech University.
+
+      li
+        +link("/contact").italic.underline Contact
+        |   -  Do you have a project that demands perservance and passion? Then, lets talk.
+        

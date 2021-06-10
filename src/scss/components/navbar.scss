@@ -1,343 +1,392 @@
-/* -- Header -- */
-.header {
-    $height: 60px;
+@use "./mixins.scss" as *;
+@use "./layout.scss" as *;
 
-    position: relative;
-    display: block;
+/* -- Header -- */
+.navbar {
+    @apply w-full h-16 fixed left-0 top-0;
+    z-index: 100;
 
     &-top-spot {
-        padding-top: $height + $size;
+        @apply pt-20;
     }
 
-    /* -- Navigation -- */
-    @at-root .navbar {
-        $radius: 18px;
+    &-layout {
+        @include applyTheme(background-color, "background");
+        @apply flex items-center justify-between relative;
+        @apply px-8;
 
-        position: relative;
-        max-height: 1000px;
-        height: $height;
-        z-index: 1200;
-        width: 100%;
-
-        .navbar-layout {
-            transition: background-color #{$transitionDuration} ease;
-            @include applyTheme(background-color, "background");
+        &,
+        &:before {
+            @apply container max-w-screen-1.5xl h-16;
+            @apply rounded-br-2xl rounded-bl-2xl;
         }
 
-        &-focus,
-        &-show,
+        &:before {
+            transition: background-color #{$transitionDuration} ease,
+                opacity 0.25s ease-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 50, 0.08);
+            @include applyTheme(background-color, "surface");
+            @apply absolute block w-full h-full opacity-0 left-0 top-0;
+            content: "";
+        }
+    }
+
+    &-focus,
+    &-show,
+    &:hover {
+        .navbar-layout:before {
+            opacity: 1;
+        }
+
+        .title-line {
+            border-left-color: darken($background, 14%);
+            border-left-color: var(--light, darken($background, 14%));
+        }
+    }
+
+    &-head {
+        @apply flex items-center justify-between relative align-middle;
+        line-height: theme("spacing.16");
+    }
+
+    &-title {
+        transition: color ease #{$transitionDuration}, box-shadow 0.2s ease-out;
+        letter-spacing: 0.03em;
+
+        @include applyTheme(color, "dark");
+
+        @apply p-2;
+        @apply flex relative items-center;
+        @apply text-base font-bold font-700 whitespace-nowrap;
+
+        img {
+            @apply w-auto h-5 inline-block align-middle rounded;
+            min-height: theme("spacing.5");
+        }
+
         &:hover {
-            .navbar-layout:before {
-                opacity: 1;
-            }
-
-            .navbar-title-line {
-                border-left-color: darken($background, 14%);
-            }
+            @include applyTheme(color, "primary-dark");
         }
 
-        &-fixed {
-            contain: layout size;
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-
-        &-layout {
-            height: $height;
-            margin: 0 auto;
-
-            &, &:before {
-                border-radius: 0 0 $radius $radius;
-            }
-
-            &:before {
-                @extend .layout-contain-enlarge;
-                transition: background-color #{$transitionDuration} ease, opacity .25s ease-out;
-                box-shadow: 0 5px 15px rgba(0, 0, 50, .08);
-                @include applyTheme(background-color, "surface");
-                position: absolute;
-                display: block;
-                height: 100%;
-                width: 100%;
-                content: "";
-                opacity: 0;
-                right: 0;
-                left: 0;
-                top: 0;
-            }
-        }
-
-        &-head {
-            vertical-align: middle;
-            flex-direction: row;
-            align-items: center;
-            flex-wrap: nowrap;
-            display: flex;
-        }
-
-        &-logo {
-            // transform: translate3d(0, 4px, 0);
-            vertical-align: middle;
-            display: inline-block;
-            line-height: $height;
-            min-height: 20px;
-            height: 20px;
-            width: auto;
-        }
-
-        &-title {
-            transition: color #{$transitionDuration} ease;
-            letter-spacing: 0.03em;
-            line-height: $height;
-            padding-left: $size;
-            position: relative;
-            font-size: 17px;
-            color: $dark;
+        &:focus {
             @include applyTheme(color, "dark");
-
-            & .name {
-                position: absolute;
-                font-family: $bold-font;
-                font-weight: 800;
-                top: 1.5px;
-            }
-
-            &,
-            &:focus {
-                text-decoration: none;
-            }
-
-            &-line {
-                // transition: border-left-color #{$transitionDuration} ease;
-
-                border-left: 1px solid transparent;
-                border-left-color: darken($mid-light, 2%);
-                border-left-color: var(--mid-light, darken($mid-light, 2%));
-
-                margin-right: $size-smaller;
-                margin-left: $size-smaller;
-                vertical-align: middle;
-                display: inline-block;
-                height: 14px;
-            }
         }
 
-        &-main {
-            z-index: 10;
-        }
-
-        &-list {
-            justify-content: center;
-            align-items: center;
-            white-space: nowrap;
-            overflow-y: hidden;
-            list-style: none;
-            display: flex;
-            width: 100%;
-            margin: 0;
-        }
-
-        &-link {
-            transition: color #{$transitionDuration} ease;
-            text-transform: uppercase;
-            font-family: $bold-font;
+        &,
+        &:hover,
+        &:active,
+        &:focus {
             text-decoration: none;
-            line-height: $height;
-            letter-spacing: 1px;
-            font-weight: 600;
-            padding: 0 28px;
-            font-size: 14px;
-            color: $black; // #bbb8b8
+        }
+
+        .title-line {
+            transition: border #{$transitionDuration} ease;
+
+            border-left: 1px solid darken($background, 14%);
+            border-left-color: var(--light, darken($background, 14%));
+            @apply mx-2 h-3 inline-block align-middle;
+        }
+    }
+
+    &-main {
+        z-index: 1;
+        @apply relative items-center flex-nowrap flex;
+    }
+
+    &-link {
+        transition: color #{$transitionDuration} ease, visibility 0.7s ease,
+            opacity 0.35s ease;
+        text-transform: uppercase;
+        text-decoration: none;
+        visibility: visible;
+        opacity: 1;
+
+        @apply relative font-700 text-sm tracking-wide;
+        @apply w-full px-2;
+        line-height: theme("spacing.10");
+
+        .link-layout {
+            @apply flex items-center w-full;
+        }
+
+        &,
+        a,
+        .dropdown-btn {
+            color: $black;
             @include applyTheme(color, "dark");
-            width: 100%;
+        }
 
-            &-content {
-                display: inline-block;
-
-                &:before {
-                    transition: transform .25s cubic-bezier(.25, .46, .45, .94),
-                                background-color #{$transitionDuration} ease;
-                    transform: translate3d(0, $height - 14px, 0) scaleX(0);
-                    @include applyTheme(background-color, "primary-dark");
-                    border: 1.5px solid transparent;
-                    transform-origin: 100% 50%;
-                    transition-delay: 70ms;
-                    border-radius: 10px;
-                    display: block;
-                    height: 2.5px;
-                    width: 100%;
-                    content: "";
-                }
-            }
+        a {
+            @apply px-3;
 
             &:hover,
             &:focus,
-            &-focus {
+            &.active {
                 text-decoration: none;
                 @include applyTheme(color, "dark");
 
-                .navbar-link-content:before {
-                    transform: translate3d(0, $height - 14px, 0) scaleX(1);
-                    transform-origin: 0 50%;
+                .link-content:after {
+                    @apply transform scale-x-100;
+                    transform-origin: 0;
                 }
             }
 
-            &:active {
+            &:focus {
                 color: $primary;
                 @include applyTheme(color, "primary-dark");
             }
 
-            &-focus {
-                &, &:focus {
+            &.active {
+                &,
+                &:focus {
                     @include applyTheme(color, "primary-dark");
                 }
             }
         }
 
-        a:hover {
-            text-decoration: none;
+        .link-content {
+            @apply relative inline-block;
+
+            &:after {
+                transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    background-color #{$transitionDuration} ease;
+                @apply absolute bottom-0.5 left-0 transform scale-x-0;
+                @include applyTheme(background-color, "primary-dark");
+                border: 1px solid transparent;
+                transform-origin: 100%;
+                transition-delay: 70ms;
+                border-radius: 10px;
+                display: block;
+                height: 3px;
+                width: 100%;
+                content: "";
+            }
+        }
+    }
+
+    ul.dropdown {
+        @include applyTheme(background-color, "surface");
+        @apply rounded-lg;
+        margin: 0;
+        pointer-events: none;
+
+        &.show {
+            pointer-events: auto;
+
+            a {
+                visibility: visible;
+                opacity: 1;
+            }
         }
 
-        &-menu, &-btn {
-            & {
-                transition: color #{$transitionDuration} ease;
-            }
-
-            &:hover, &:focus {
-                cursor: pointer;
-            }
-
-            &, &:hover, &:focus {
-                color: $primary;
-                color: var(--dark, $primary);
-            }
-        }
-
-        &-mobile {
-            // display: none;
+        a {
+            transition: color ease #{$transitionDuration},
+                box-shadow 0.2s ease-out, visibility 0.4s ease,
+                opacity 0.3s ease;
             visibility: hidden;
+            opacity: 0;
+            @apply px-6 font-700;
         }
 
-        &-desktop {
-            // display: block;
-            visibility: visible;
+        @screen lt-sm {
+            transition: background-color #{$transitionDuration} ease,
+                height 0.35s ease-out;
+            height: 0;
+            overflow-y: hidden;
+
+            &.show {
+                height: 40px * 6;
+            }
         }
 
-        &-mobile-display {
+        @screen sm {
+            transition: background-color #{$transitionDuration} ease,
+                opacity 0.35s ease-out, transform 0.35s ease-out;
+            @apply absolute top-12 left-0 m-0 w-56 z-10;
+            box-shadow: 0 5px 25px 5px rgba(0, 0, 0, 0.1),
+                0 5px 10px 5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.8);
+            transform-origin: top center;
+            opacity: 0;
+
+            a {
+                @apply py-3 text-sm font-600;
+            }
+
+            &.show {
+                transition: color ease #{$transitionDuration},
+                    visibility 0.4s ease, opacity 0.3s ease,
+                    transform 0.35s ease-out;
+                transform: scale(1);
+                transform-origin: top center;
+                opacity: 1;
+            }
+
+            .link-content:after {
+                @apply -bottom-1;
+            }
+        }
+    }
+
+    .dropdown-btn {
+        @apply sm:ml-0;
+
+        &:hover {
+            @include applyTheme(background-color, "mid");
+            @include applyTheme(color, "dark");
+        }
+    }
+
+    &-btn {
+        transition: color #{$transitionDuration} ease,
+            background-color 0.45s ease, box-shadow 0.2s ease-out;
+        @apply ml-3 w-10 h-10 rounded-md;
+        @include applyTheme(background-color, "light");
+
+        svg {
+            @apply inline-block text-2xl;
+        }
+
+        &:hover {
+            @include applyTheme(background-color, "mid");
+            @include applyTheme(color, "dark");
+        }
+
+        &,
+        &:hover,
+        &:focus {
+            color: $primary;
+            color: var(--dark, $primary);
+            @apply outline-none;
+        }
+    }
+
+    &-foot {
+        visibility: hidden;
+    }
+
+    &-mobile-only {
+        display: block;
+    }
+
+    &-overlay {
+        @apply bg-gray-300 dark:bg-gray-900 bg-opacity-70 dark:bg-opacity-80;
+        transition: background-color #{$transitionDuration} ease,
+            opacity #{$transitionDuration} ease;
+        @apply absolute top-0 left-0 w-screen h-screen;
+        opacity: 0;
+        pointer-events: none;
+        z-index: -1;
+
+        @supports (backdrop-filter: blur(5px)) {
+            @apply backdrop-filter backdrop-blur;
+        }
+    }
+
+    // Mobile navbar settings
+    @screen lt-sm {
+        &-mobile-only {
             display: none;
         }
 
-        &-desktop-display {
-            display: block;
+        &-layout,
+        &-main {
+            flex-direction: column;
         }
 
-        // Mobile navbar settings
-        @media (max-width: #{$tablet + 50}px) {
-            &-layout,
-            &-list {
-                flex-direction: column;
+        &-layout {
+            &,
+            &:before {
+                @apply px-0 rounded-none;
             }
+        }
 
-            &-layout {
-                &, &:before {
-                    border-radius: 0;
-                }
-            }
+        &-layout:before,
+        &-head {
+            z-index: 25;
+        }
 
-            &-layout:before, &-head {
-                z-index: 15;
-            }
+        &-head {
+            @apply flex items-center justify-between relative align-middle;
+            @apply px-3 w-full h-16 leading-none;
+        }
 
-            &-layout:before, &-main {
-                box-shadow: 0 2px 15px rgba(0, 0, 50, .08);
-            }
+        &-main {
+            transition: transform 0.35s cubic-bezier(0.61, 1, 0.88, 1),
+                background-color #{$transitionDuration} ease;
+            transform: translate3d(0, -100%, 0);
+            @apply px-2 w-full rounded-bl-xl rounded-br-xl;
+            @apply py-2 space-y-2;
+            z-index: -1;
 
-            &-head {
-                padding-right: $size-small;
-                position: relative;
-                width: 100%;
-            }
+            background-color: lighten($very-light, 2%);
+            @include applyTheme(background-color, "very-light");
+        }
 
-            &-main {
-                transition: transform #{$transitionDuration} ease-out, opacity .3s ease .1s;
-                transform: translate3d(0, -100%, 0);
-                display: block;
-                width: 100%;
-                opacity: 0;
-                z-index: 0;
-            }
+        &-link {
+            transition: color 0.25s ease, background-color 0.25s ease,
+                visibility 0.5s ease, opacity 0.3s ease;
+            visibility: hidden;
+            opacity: 0;
 
-            &-list {
-                transition: background-color #{$transitionDuration} ease;
-                background-color: lighten($very-light, 2%); // #292d33
-                @include applyTheme(background-color, "very-light");
-                position: relative;
-                overflow: hidden;
-                display: block;
+            a {
+                transition: background-color #{$transitionDuration} ease,
+                    color ease #{$transitionDuration}, box-shadow 0.2s ease-out;
+                @apply w-full;
 
-                li {
-                    display: block;
-                    width: 100%;
-                }
-            }
-
-            &-show {
-                .navbar-head {
-                    box-shadow: none;
-                }
-
-                .navbar-main {
-                    transform: translate3d(0, 0, 0);
-                    opacity: 1;
-                }
-            }
-
-            &-link {
-                line-height: $height - 12px;
-                padding: 0 24px;
-
-                &-content:before {
-                    transform: translate3d(0, $height - 18px, 0) scaleX(0);
-                }
-
-                &-focus,
-                &:focus,
                 &:hover {
-                    .navbar-link-content:before {
-                        transform: translate3d(0, $height - 18px, 0) scaleX(1);
+                    @include applyTheme(background-color, "navbar-gray");
+                }
+
+                &.active {
+                    @include applyTheme(background-color, "primary-dark");
+                    &,
+                    &:hover,
+                    &:focus-visible {
+                        @include applyTheme(color, "invert-white");
+                    }
+
+                    &:hover {
+                        @include applyTheme(background-color, "primary");
+                    }
+                }
+
+                &:hover,
+                &:focus,
+                &.active {
+                    .link-content:after {
+                        @apply transform scale-x-0;
                     }
                 }
             }
-
-            &-desktop {
-                visibility: hidden;
-                // display: none;
-            }
-
-            &-mobile {
-                // display: block;
-                visibility: visible;
-            }
-
-            &-desktop-display {
-                display: none;
-            }
-
-            &-mobile-display {
-                display: block;
-            }
         }
 
-        // Desktop navbar settings
-        @media (min-width: #{$tablet + 50}px) {
-            &-layout {
-                padding: 0 $size;
-                display: flex;
+        &-foot {
+            @apply flex items-center relative align-middle;
+            @apply h-16 space-x-1;
+            visibility: visible;
+        }
+
+        &-show {
+            .navbar-head {
+                box-shadow: none;
             }
 
-            &-list {
-                height: $height;
+            .navbar-main {
+                box-shadow: 0 2px 15px rgba(0, 0, 50, 0.08);
+                transform: translate3d(0, 0, 0);
+            }
+
+            .navbar-link {
+                transition: color 0.25s ease, background-color 0.25s ease,
+                    visibility 0.5s ease, opacity 0.4s ease 0.1s;
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .navbar-overlay {
+                opacity: 1;
+                pointer-events: auto;
             }
         }
     }

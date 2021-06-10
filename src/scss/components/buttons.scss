@@ -1,0 +1,148 @@
+@use "./mixins.scss" as *;
+
+/* -- Action (represents elements that request direct interaction) -- */
+.icon {
+    font-feature-settings: "liga", "dlig";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    vertical-align: middle;
+    letter-spacing: normal;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: none;
+    white-space: nowrap;
+    font-weight: 400;
+    position: relative;
+    font-style: normal;
+    word-wrap: normal;
+    @apply text-2xl;
+    line-height: 1;
+    direction: ltr;
+    height: 1em;
+    width: 1em;
+
+    &-btn,
+    &-btn:hover {
+        border-radius: 9999px;
+        &:focus-visible {
+            border-radius: 9999px;
+        }
+        text-decoration: none;
+    }
+}
+
+.icon-btn {
+    @apply w-10 h-10 flex items-center justify-center;
+    min-width: theme("spacing.10");
+
+    .icon {
+        @apply rounded-full block;
+    }
+}
+
+.btn {
+    transition: background-color #{$transitionDuration} ease,
+        color #{$transitionDuration} ease, width 0.6s ease 0s !important;
+    @apply overflow-hidden select-none;
+
+    &-hover {
+        @apply w-10;
+
+        .btn-content {
+            @apply opacity-0;
+        }
+
+        &:hover,
+        &:focus-visible {
+            width: theme("spacing.44");
+            .btn-content {
+                @apply opacity-100;
+            }
+        }
+    }
+
+    &-layout {
+        @apply flex w-full items-center justify-center align-middle;
+    }
+
+    &-content {
+        transition: opacity 0.4s ease 0.1s;
+        @apply text-center text-sm;
+        @apply font-bold font-700 uppercase whitespace-nowrap;
+        @apply overflow-hidden flex w-full;
+    }
+}
+
+.btn-secondary {
+    transition: background-color #{$transitionDuration} ease;
+    @include applyTheme(background-color, "secondary-light");
+
+    &:hover,
+    &:focus {
+        @include applyTheme(background-color, "secondary");
+    }
+
+    &,
+    &:hover,
+    &:focus {
+        color: $black;
+    }
+}
+
+#to-top {
+    transition: opacity 0.4s ease;
+    @apply fixed bottom-4 right-4;
+    opacity: 1;
+    color: white;
+    z-index: 80;
+
+    .btn {
+        @include applyTheme(background-color, "primary");
+        --color: var(--primary, #{$primary});
+
+        .icon-btn {
+            transition: background-color ease 0.4s, box-shadow ease 0.4s;
+            @apply rounded-full z-10;
+            background-color: var(--color, #{$primary});
+            box-shadow: 0 0 15px theme("spacing.3") var(--color, #{$primary});
+        }
+
+        &:hover,
+        &:focus {
+            --color: var(--primary-light, #{$primary-light});
+            @include applyTheme(background-color, "primary-light");
+        }
+
+        &-content:before {
+            @apply ml-5 block;
+            content: "";
+        }
+    }
+
+    &.hide {
+        opacity: 0;
+    }
+}
+
+#scroll-down {
+    color: black;
+    z-index: 80;
+
+    .btn {
+        @include applyTheme(background-color, "secondary-light");
+
+        @screen lt-md {
+            @apply w-44;
+
+            &-content {
+                opacity: 1;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            @include applyTheme(background-color, "secondary");
+        }
+    }
+}

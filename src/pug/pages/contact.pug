@@ -1,0 +1,44 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      url: "/contact",
+      name: "contact",
+      title: "Contact me — Let's talk. I'm ready to create something awesome, are you?",
+      description: "Do you have a project that requires passion and dedication, then let's talk. Let's create something extrodinary."
+    };
+
+block preload
+
+block content 
+  .stretch-layer
+    .navbar-top-spot
+    .stretch-container
+      .layout
+        h1 Contact
+        section.social-links
+          +link("https://www.linkedin.com/in/o-josephojo/") LinkedIn
+          +link("https://github.com/josephojo") Github
+          +link("mailto:laoluojo@gmail.com") Email
+        
+        | Drop me a message by filling out this contact form and I'll respond back as soon as possible.
+        br
+        br
+        +link("https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAafqFGVUOFpCU0tIMk8xRTZCTzFFS09ITlEwTlFFRS4u").rounded-md.overflow-hidden
+          .btn.px-2.py-1.btn-secondary
+            .btn-layout
+              .icon-btn
+                +icon("launch").icon
+              .btn-content.px-2 Contact Form
+        br
+        br
+        .tile.shadow-2xl
+          +image({
+            src: "cloudinary/e_sharpen,e_art:hokusai/josephojo-with-friends",
+            alt: "An image of Joseph Ojo laughing with friends on a boat.",
+            overlay: false
+          })
+    +footer
+
+block footer

@@ -1,0 +1,182 @@
+include /components/banner.pug
+include /components/navbar.pug
+include /components/footer.pug
+include /components/buttons.pug
+include /components/img-view.pug
+include /components/image.pug
+include /components/next-page.pug
+include /components/tile.pug
+include /components/link.pug
+include /components/icon.pug
+include /components/seo.pug
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    meta(http-equiv="Accept-CH" content="DPR, Viewport-Width, Width")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+    link(rel="stylesheet" href="/css/app.min.css")
+
+    noscript
+      link(rel="stylesheet" href="/css/no-script.min.css")
+
+    link(rel="manifest", href="/manifest.json")
+    link(type="text/plain" rel="author" href="/humans.txt")
+
+    -
+      let defaults = {
+        url: "/",
+        websiteURL: "https://josephojo.com",
+        title: "Joseph Ojo — A Mechatronics Engineers Portfolio",
+        description: "I'm Joseph Ojo, a skilled Mechatronics Engineer based in Oshawa, Canada. This is my portfolio site, it holds my resume and ways to contact me."
+      };
+
+    block pageInfo
+      - let page = {};
+    - page = Object.assign({}, defaults, page);
+
+    block seo
+      +seo(page)
+
+    block preload
+
+    script(src="/js/theme.min.js" type="module", defer)
+
+  body
+    +link("#content").skip-main Skip to main content
+
+    block navbar
+      +navbar(page)
+
+    main.transition-in-view(data-container)
+      block banner
+      section(id="content")
+        block content
+
+    +back-to-top
+
+    footer(data-container).transition-fade
+      block footer
+        +footer
+
+    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,fetch,smoothscroll,WebAnimations` async)
+
+    script(src="/js/legacy.min.js", nomodule async)
+    script(src="/js/modern.min.js", type="module" async)
+
+    script(type="application/ld+json").
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "#{defaults.websiteURL}/#organization",
+            "name": "Joseph Ojo",
+            "url": "#{defaults.websiteURL}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/josephojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo",
+              "https://ca.alumnius.net/university_of_ontario_institute_of_technology-33082-10#id436734411"
+            ],
+            "description": "#{defaults.description}",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "#{defaults.websiteURL}/#logo",
+              "url": "#{defaults.websiteURL}/favicon/android-chrome-512x512.png",
+              "width": 512,
+              "height": 512,
+              "caption": "Joseph Ojo's Logo"
+            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "url": "#{defaults.websiteURL}",
+                "email": "mailto:laoluojo@gmail.com",
+                "contactType": "customer service"
+              }
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "#{defaults.websiteURL}/about.html#person",
+            "name": "Joseph Ojo",
+            "url": "#{defaults.websiteURL}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/josephojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo",
+              "https://ca.alumnius.net/university_of_ontario_institute_of_technology-33082-10#id436734411"
+            ],
+            "description": "#{defaults.description}",
+            "jobTitle": "Mechatronics Engineer",
+            "image": {
+              "@type": "ImageObject",
+              "@id": "#{defaults.websiteURL}/#image",
+              "url": "https://res.cloudinary.com/okikio-assets/image/upload/josephs_image.jpg",
+              "width": 410,
+              "height": 512,
+              "caption": "An image of Joseph Ojo."
+            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "url": "#{defaults.websiteURL}",
+                "email": "mailto:laoluojo@gmail.com",
+                "contactType": "customer service"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "#{defaults.websiteURL}/#website",
+            "url": "#{defaults.websiteURL}",
+            "description": "#{defaults.description}",
+            "sameAs": [
+              "https://www.linkedin.com/in/o-josephojo/",
+              "https://github.com/josephojo",
+              "https://github.com/okikio/joseph",
+              "https://www.f6s.com/olaoluwajosephojo"
+            ],
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "#{defaults.websiteURL}/projects.html#mainentity",
+              "lastReviewed": "Thu Mar 26 2020 15:35:01 GMT-0400"
+            },
+            "about": {
+              "@id": "#{defaults.websiteURL}/about.html#person"
+            },
+            "name": "Joseph Ojo",
+            "publisher": {
+              "@id": "#{defaults.websiteURL}/about.html#person"
+            },
+            "copyrightYear": "2020",
+            "copyrightHolder": [
+              {
+                "@id": "#{defaults.websiteURL}/about.html#person"
+              }
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "#{page.websiteURL + page.url}#webpage",
+            "url": "#{page.websiteURL + page.url}",
+            "description": "#{page.description}",
+            "inLanguage": "en",
+            "name": "#{page.title}",
+            "isPartOf": {
+              "@id": "#{defaults.websiteURL}/#website"
+            },
+            "about": {
+              "@id": "#{defaults.websiteURL}/about.html#person"
+            }
+          }
+        ]
+      }

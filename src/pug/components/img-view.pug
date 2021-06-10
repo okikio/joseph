@@ -1,0 +1,17 @@
+mixin img-view(value = {})
+  -
+    let source = value.src || "cloudinary/city";
+    let alt = value.alt || "";
+
+    let external = /\/fetch\//.test(source);
+    let src = source.replace("fetch/", "");
+
+    let cloudinaryTest = /^cloudinary\//.test(src);
+    let origin = `https://res.cloudinary.com/okikio-assets/image/${external ? "fetch" : "upload"}/`;
+    let urlParse = (filters = "w_auto") => cloudinaryTest ? `${origin + "q_auto:best,f_auto," + filters},dpr_auto/${src.replace(/^cloudinary\//, "")}` : src;
+
+  .img-view
+    figure.text-center
+      .img-view-contain
+        img(src!=`${urlParse()}.jpg` alt=alt loading="lazy")&attributes(attributes)
+      figcaption= alt

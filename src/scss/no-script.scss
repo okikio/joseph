@@ -1,0 +1,67 @@
+[data-wrapper] {
+    transition: none;
+}
+
+// Variables
+$primary-light: #4e41ff;
+$primary: #2d22ca;
+$primary-dark: #271daf; // #774bec
+$secondary-light: #ff4b78;
+$secondary: #ff3a6b;
+$secondary-dark: #ce0c3c;
+$tertiary-light: #ffe851;
+$tertiary: #ffde03;
+$tertiary-dark: #e5c702;
+$off-blue: #d7d4ff;
+
+$background: #eaeef1; // #e2ebf5
+$surface: #fff; //  #3b3c3e
+
+$white: #fff;
+$black: #000;
+
+$very-light: #efefef;
+$invert-white: #fff;
+$light: #eee; // #525252
+$mid-light: #ddd;
+$mid: #ccc;
+$mid-dark: #bbb;
+$dark: #222; // #ddd
+
+$dark-colors: (
+    "navbar-gray": theme("colors.quaternary"),
+    "primary-light": lighten($primary-dark, 5%),
+    "primary": lighten($primary, 15%),
+    "primary-dark": lighten($primary-light, 15%),
+    "secondary-light": lighten($secondary-dark, 15%),
+    "secondary": lighten($secondary, 5%),
+    "secondary-dark": lighten($secondary-light, 15%),
+    "tertiary-light": $tertiary-light,
+    "tertiary": $tertiary,
+    "tertiary-dark": $tertiary-dark,
+    "background": #18181b,
+    // #000000
+        "surface": #333435,
+    // #2f2f35
+        "transparent": transparent,
+    "white": $white,
+    "black": $black,
+    "invert-white": $black,
+    "very-light": #1d2125,
+    "light": #525252,
+    "mid-light": $mid-light,
+    "mid": $mid,
+    "dim": #696873,
+    "mid-dark": #bbb8b8,
+    "dark": #ddd,
+    "invert-black": $white,
+);
+
+@media (prefers-color-scheme: dark) {
+    html:not([theme="light"]) {
+        color-scheme: dark;
+        @each $name, $value in $dark-colors {
+            --#{$name}: #{$value};
+        }
+    }
+}
