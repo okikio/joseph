@@ -40,7 +40,7 @@ mixin navbar(value = {})
               ul.dropdown
                 each project, j in projects
                   - let activeProject = url.toLowerCase().includes(project);
-                  +link(`/projects/${project}`)(data-swup-preload data-path=project class="navbar-link" class={ active: activeProject })
+                  +link(`/projects/${project}`)(data-path=project class="navbar-link" class={ active: activeProject })
                     span.link-content= project.replace("-", " ")
         .navbar-mobile-only
           +themeSwitcher

@@ -25,7 +25,7 @@ html,
 body {
     @include applyTheme(background-color, "background");
     @include applyTheme(color, "dark");
-    scroll-behavior: smooth;
+    // scroll-behavior: smooth;
 
     text-rendering: optimizeSpeed;
     word-wrap: break-word;
