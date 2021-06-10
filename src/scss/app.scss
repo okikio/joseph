@@ -1,9 +1,10 @@
-@use "./components/reset.scss";
+
+@use "./tailwind.css";
 @use "./components/fonts.scss";
 @use "./components/base.scss";
 @use "./components/navbar.scss";
 @use "./components/style.scss";
-@use "./components/action.scss";
+@use "./components/buttons.scss";
 @use "./components/layout.scss";
 @use "./components/layer.scss";
 @use "./components/transition.scss";

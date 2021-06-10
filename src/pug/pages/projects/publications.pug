@@ -3,7 +3,6 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/projects/publications",
       name: "publications",
       title: "Academic Publications.",
@@ -11,55 +10,25 @@ block pageInfo
     };
 
 block content
-  //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet"
-  })
-    +layout({
-      class: "layout-shorten layout-contain"
-    })
-      +main({
-        class: "layout-padding-vert-large layout-clearfix"
-      })
-        h1.layout-padding-vert.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Academic Publications.
-        +p
-          span.layout-inline.layout-margin-dull
-            ol
-              li O. Ojo, X. Lin, H. Lang, “A Threshold-Based Voltage Fault Detection Method Enabled by A Novel Neural Network Architecture for Lithium-ion Batteries” [Under Review]
+  .navbar-top-spot
+  .container-lg.publication-layer
+    h1.h4.font-600.text-center Academic Publications.
+    ol.space-y-8
+      li 
+        strong.font-800 O. Ojo
+        | , X. Lin, H. Lang, “A Threshold-Based Voltage Fault Detection Method Enabled by A Novel Neural Network Architecture for Lithium-ion Batteries” 
+        strong.font-800 [Under Review]
+      li 
+        strong.font-800 O. Ojo
+        | , X. Lin, H. Lang, and Y. Kim, “A Recurrent Neural Networks Approach for Estimating the Core Temperature in Lithium-Ion Batteries”, Progress in Canadian Mechanical Engineering. Volume 3, Jun. 2020, doi: 10.32393/csme.2020.130
+      li 
+        strong.font-800 O. Ojo
+        | , H. Lang, Y. Kim, X. Hu, B. Mu and X. Lin, "A Neural Network-Based Method for Thermal Fault Detection in Lithium-Ion Batteries”, in IEEE Transactions on Industrial Electronics, doi: 10.1109/TIE.2020.2984980
 
-              li O. Ojo, X. Lin, H. Lang, and Y. Kim, “A Recurrent Neural Networks Approach for Estimating the Core Temperature in Lithium-Ion Batteries”, Progress in Canadian Mechanical Engineering. Volume 3, Jun. 2020, doi: 10.32393/csme.2020.130
-
-              li O. Ojo, H. Lang, Y. Kim, X. Hu, B. Mu and X. Lin, "A Neural Network-Based Method for Thermal Fault Detection in Lithium-Ion Batteries”, in IEEE Transactions on Industrial Electronics, doi: 10.1109/TIE.2020.2984980
-
-              li J. Ojo, X. Lin and H. Lang, "Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots", CNKI.com, 2019. [Online]. Available:
-                span=" "
-                +link({
-                  href: "http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm",
-                  content: "http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm"
-                })(target="_blank" rel="noopener" title="The link to the publication for Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots.")
+      li 
+        strong.font-800 J. Ojo
+        | , X. Lin and H. Lang, "Resonant-Inductive Wireless Power Transfer for Autonomous Mobile Robots", CNKI.com, 2019. [Online]. Available: 
+        +link("http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm") http://www.cnki.com.cn/Article/CJFDTOTAL-YQBE201901007.htm
 
   //- Next page layer
-  +layout({
-    class: "layout-contain-large layer-round layout-padding-horz-small layout-padding-horz--device-gt-tablet"
-  })
-    +link({
-      href: "/projects/boxer",
-      class: "layout-block layout-padding-horz-default--device-gt-tablet layer-black layer-next"
-    }, true)
-      +head({
-        class: "layout-padding-top-default"
-      })
-        h3.layer-title.style-font-light.style-font-thin.style-spaceout.style-font-default--device-gt-tablet.style-font-20 Next
-        +main({
-          class: "layout-padding-vert-sub-large"
-        })
-          p.layer-content.style-font-bold.style-400.style-font-large--device-gt-tablet.style-font-sub-large--device-lt-tablet.style-line-height Boxer
-
-        //- +tile({
-        //-   class: "layer-box layer-box-flat-mobile layer-tertiary-dark layer-shadow--2 layout-margin-vert-top-larger layout-block layer-tile-outline",
-        //-   image: {
-        //-     class: "",
-        //-     src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
-        //-     alt: "An image of a rendered robot."
-        //-   }
-        //- })
+  +next-page("/projects/boxer", "Boxer")

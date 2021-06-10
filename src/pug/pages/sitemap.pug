@@ -3,124 +3,54 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/sitemap",
       name: "sitemap",
       title: "Sitemap — A list of all pages with descriptions.",
       description: "A little lost, here is a map, now where do you want to go? The sitemap lists all pages and gives brief descriptions to help you find your way."
     };
 
-
-    //- link(rel="preload" href="/fonts/roboto--regular_latin.woff2" as="font" crossorigin)
-    //- link(rel="preload" href="/fonts/montserrat--extrabold_latin.woff2" as="font" crossorigin)
-    //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" crossorigin)
 block preload
-  //- link(rel="preload" href="/fonts/montserrat--bold_latin.woff2" as="font" type="font/woff2" crossorigin)
 
 block content
-  //- Intro layer
-  +layer({
-    class: "layout-padding-horz-default--device-gt-tablet header-top-spot"
-  })
-    +layout({
-      class: "layout-contain-small layout-shorten-vert"
-    })
-      section
-        +head
-          h1.h4.style-font-30--device-phone.style-primary-dark.style-bold.style-center Sitemap
-          p The sitemap lists all pages and gives brief descriptions to help you find your way.
-        +main
-          ul(itemscope itemtype="https://schema.org/SiteNavigationElement")
-            //- Index
-            li
-              +link({
-                href: "/",
-                class: "style-italic style-underline layout-margin-right-mini"
-              })(itemprop="url")
-                span(itemprop="name") Home
-              +p("- Homepage galor, its the begining of our little adventure.")
-              br
+  .navbar-top-spot
+  .container-lg
+    .text-center
+      h1.h4.font-600 Sitemap
+      | The sitemap lists all pages and gives brief descriptions to help you find your way.
+    ul
+      li
+        +link.italic.underline Home
+        |   -  The homepage, its the begining of our little adventure.
+      li
+        +link("/about").italic.underline About
+        |   -  What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering.
+      li
+        +link("/portfolio").italic.underline Portfolio
+        |   -  Hardwork and perseverance, hear all about it. A showcase of projects I have completed, and even some that are still on-going.
+        br
 
-            //- About
-            li
-              +link({
-                href: "/about",
-                class: "style-italic style-underline layout-margin-right-mini"
-              })(itemprop="url")
-                span(itemprop="name") About
-              +p("- What drove me to become a Mechatronics Engineer and why? I explore my life story, as well as my passion for engineering.")
+        //- Projects
+        ul
+          li
+            +link( "/projects/boxer").italic.underline Boxer
+            |   -  An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.
+          li
+            +link("/projects/battery-manager").italic.underline Battery Manager
+            |   -  A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of batteries.
+          li
+            +link("/projects/sarbot").italic.underline SarBot
+            |   -  A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe.
+          li
+            +link("/projects/ultima-apparel").italic.underline Ultima Apparel
+            |   -  Enhanced sportsware designed to improve posture and track workout form.
+          li
+            +link("/projects/phoenix").italic.underline Phoenix
+            |   -  A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix.
+          li
+            +link("/projects/publications").italic.underline Academic Publications
+            |   -  A list of publications I completed while studying for my masters at OntarioTech University.
 
-            //- Projects
-            li
-              +link({
-                href: "/portfolio",
-                class: "style-italic style-underline layout-margin-right-mini"
-              })(itemprop="url")
-                span(itemprop="name") Portfolio
-              +p("- Hardwork and perseverance, hear all about it. A showcase of projects I have completed, and even some that are still on-going.")
-              br
-              ul
-                //- Boxer
-                li
-                  +link({
-                    href: "/projects/boxer",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") Boxer
-                  +p("- An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.")
-                  br
-                //- Battery Manager
-                li
-                  +link({
-                    href: "/projects/battery-manager",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") Battery Manager
-                  +p("- A tool designed to provide flexibility in the variety of research that I, and future research colleagues will undertake into the field of batteries.")
-                  br
-                //- SarBot
-                li
-                  +link({
-                    href: "/projects/sarbot",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") SarBot
-                  +p("- A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person in toe.")
-                  br
-                //- Ultima Apparel
-                li
-                  +link({
-                    href: "/projects/ultima-apparel",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") Ultima Apparel
-                  +p("- Enhanced sportsware designed to improve posture and track workout form.")
-                  br
-                //- Phoenix
-                li
-                  +link({
-                    href: "/projects/phoenix",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") Phoenix
-                  +p("- A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix.")
-                  br
-                //- Publications
-                li
-                  +link({
-                    href: "/projects/publications",
-                    class: "style-italic style-underline layout-margin-right-mini"
-                  })(itemprop="url")
-                    span(itemprop="name") Academic Publications
-                  +p("- A list of publications I completed while studying for my masters at OntarioTech University.")
-                  br
-
-            //- Contact
-            li
-              +link({
-                href: "/contact",
-                class: "style-italic style-underline layout-margin-right-mini"
-              })(itemprop="url")
-                span(itemprop="name") Contact
-              +p("- Do you have a project that demands perservance and passion? Then, lets talk.")
-              br
+      li
+        +link("/contact").italic.underline Contact
+        |   -  Do you have a project that demands perservance and passion? Then, lets talk.
+        

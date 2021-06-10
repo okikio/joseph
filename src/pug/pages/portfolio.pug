@@ -3,153 +3,89 @@ extends /layout.pug
 block pageInfo
   -
     let page = {
-
       url: "/portfolio",
       name: "portfolio",
       title: "Portfolio — A showcase of some of the projects I have taken on.",
       description: "A showcase of projects I have completed, and even some that are still on-going..."
     };
 
-block hero
-  //- Banner layer
+block banner
   +banner({
     title: "Portfolio",
-    content: "A showcase of projects I have completed, and even some that are still on-going.",
+    content: "A showcase of projects I have completed, and even some that are still on-going. Tune in for frequent updates as I tack on more projects and complete other activities.",
     image: {
-      class: "effect-parallax hero-img",
       src: "cloudinary/brown-book-on-table",
       alt: "An image of a book on a L-shape ruler beside a pen that is on a brown wooden table. By @ugmonk on unsplash."
-    }
+    },
+    mode: "banner"
   })
-
 
 block content
-  //- Intro layer
-  +layer({
-    class: "layout-padding-top-sub-large layout-padding-horz-default--device-gt-tablet"
-  })
-    +layout({
-      class: "layout-shorten-horz layout-contain"
-    })
-      +main({
-        class: "layout-padding-vert-small layout-clearfix"
-      })
-        span.style-letter-head.style-title T
-        +p("his section of the website is dedicated to taking you through the journey of ongoing and completed projects. Tune in for frequent updates as I tack on more projects and complete other activities. ")
+  .container-lg
+    .py-5
+      .row.col-grid
+        .col-6
+          +link("/projects/boxer")
+            +tile({
+              title: "Boxer",
+              content: "Boxer is a robotic platform designed as an autonomous delivery vehicle and built for research purposes.",
+              image: {
+                src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+                alt: "An image of a rendered robot."
+              }
+            })
 
-  //- Image Column layer
-  +layer
-    +layout({
-      class: "layout-contain-large"
-    })
-      +main
-        +row({
-          class: "layout-margin-dull"
-        })
-          +column({
-            class: "layout-col-6 layout-padding-small"
-          })
-            +link({
-              href: "/projects/boxer",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Boxer",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "An autonomous robotic platform very similar to a conventional vehicle due to its ackerman steering design, and independent suspension.",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
-                  alt: "An image of a rendered robot."
-                }
-              })
+        .col-6
+          +link("/projects/battery-manager")
+            +tile({
+              title: "Battery Manager",
+              content: "The battery manager is a testing tool built to perform a multitude of experiments on battery cells and packs of different sizes.",
+              image: {
+                src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
+                alt: "An image of the battery testing workstation box.",
+              }
+            })
+        .col-6
+          +link("/projects/sarbot")
+            +tile({
+              title: "Search and Rescue Robot (SarBot)",
+              content: "SarBot was a semi-autonomous robotic project in my final year as an undergrad. The objective was to emulate a search and rescue (SaR) operation for a miner trapped underground.",
+              image: {
+                src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
+                alt: "An image of a 3D model of Sarbot.",
+              }
+            })
 
-          +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/battery-manager",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Battery Manager",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "A tool designed to provide flexibility in the variety of research that I and future research colleagues will undertake into the field of battery technology.",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/battery-manager/BatteryTester_Diag",
-                  alt: "An image of the battery testing workstation box.",
-                }
-              })
+        .col-6
+          +link("/projects/ultima-apparel")
+            +tile({
+              title: "Ultima Apparel",
+              content: "Ultima Apparel was a company started to reduce the occurrence of lower back and shoulder injuries in labor intensive jobs using a motion capture wearable.",
+              image: {
+                src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
+                alt: "An image of Ultima Apparels first proof of concept.",
+              }
+            })
 
-          +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/sarbot",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Search and Rescue Robot (SarBot)",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "A semi-autonomous robot designed to traverse a multi-leveled maze and return to the initial point with a person or object in toe.",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/sarbot/3D_Modelling",
-                  alt: "An image of a 3D model of Sarbot.",
-                }
-              })
 
-          +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/ultima-apparel",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Ultima Apparel",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "Enhanced sportsware designed to improve posture and track workout form.",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/ultima-apparel/Proof_of_Concept_1",
-                  alt: "An image of Ultima Apparels first proof of concept.",
-                }
-              })
+        .col-6
+          +link("/projects/phoenix")
+            +tile({
+              title: "Phoenix",
+              content: "As part of my job as an engineering intern at Celestica, one of my projects was the design of a new solar panel frame cheaper and stronger than previous versions.",
+              image: {
+                src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
+                alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
+              }
+            })
 
-          +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/phoenix",
-              class: "layout-block"
-            }, true)
-              +tile({
-                title: "Phoenix",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "A solar panel frame I revamped while I interned at Celestica, I named this new frame Phoenix",
-                image: {
-                  class: "",
-                  src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
-                  alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
-                }
-              })
-
-          +column({
-            class: "layout-col-6 layout-padding-small layout-padding-vert-large"
-          })
-            +link({
-              href: "/projects/publications",
-              class: "layout-block"
-            }, true)(title="The link to the Nasa project page.")
-              +tile({
-                title: "Publications",
-                class: "layer-box layer-surface layout-block layer-tile-outline",
-                content: "A list of publications I completed while studying for my masters at OntarioTech University.",
-                image: {
-                  class: "",
-                  src: "cloudinary/aerial-photo-of-brown-mountains",
-                  alt: "An aerial photo of brown mountains by JOHN TOWNER @heytowner on Unsplash.",
-                }
-              })
+        .col-6
+          +link("/projects/publications")
+            +tile({
+              title: "Publications",
+              content: "A list of publications I completed while studying for my masters at Ontario Tech University.",
+              image: {
+                src: "cloudinary/joseph-projects/publications/annie-spratt-_dAnK9GJvdY-unsplash",
+                alt: "An image of a set of papers laid on a table by Annie Spratt on Unsplash.",
+              }
+            })

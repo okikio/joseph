@@ -1,7 +1,4 @@
-mixin link(arg = {}, noFocus)
-  -
-    let { content, href } = arg;
-    let _class = arg.class || "layout-inline";
-    let _href = href == null || href == undefined ? "/" : href;
-  a(href=_href class=_class class={ "focus-box": noFocus })&attributes(attributes)= content
+mixin link(href = "/")
+  - let attrs = /^(http|mailto)/.test(href) ? { target: "_blank", rel: "noopener" } : {};
+  a(href=href)&attributes(Object.assign(attrs, attributes))
     block

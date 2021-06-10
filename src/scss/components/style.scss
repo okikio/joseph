@@ -6,36 +6,6 @@
 
     &,
     &-font {
-        @each $name, $family in $fonts {
-            &-#{$name},
-            &-#{$name}-font,
-            &-family-#{$name} {
-                font-family: #{$family};
-            }
-        }
-
-        &,
-        &-size {
-            font-size: 14px;
-
-            @for $sz from 8 through 50 {
-                &-#{$sz} {
-                    font-size: #{$sz}px;
-
-                    @include deviceList(font-size, #{$sz}px);
-                }
-            }
-        }
-
-        @each $name, $value in $sizes {
-            &-#{$name},
-            &-size-#{$name} {
-                font-size: $value;
-
-                @include deviceList(font-size, $value);
-            }
-        }
-
         &,
         &-weight {
             font-weight: 400;
@@ -157,7 +127,7 @@
     }
 
     &-letter-head {
-        font-family: $title-font;
+        // font-family: $title-font;
         letter-spacing: 2.54px;
         line-height: 1.62rem;
         font-size: 5.15rem;
@@ -168,8 +138,6 @@
         display: inline-block;
         padding-right: 6px;
         float: left;
-
-        // span.style-font-title.style-letter-head.layout-padding-right-nano.layout-inline-block.layout-left A
 
         // @media #{$screen-size-phone} {
         //     line-height: 3.80rem;

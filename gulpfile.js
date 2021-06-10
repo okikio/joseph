@@ -4,6 +4,7 @@ const mode = process.argv.includes("--watch") ? "watch" : "build";
 import { watch, task, tasks, series, parallel, seriesFn, parallelFn, stream, streamList } from "./util.js";
 
 import { createRequire } from 'module';
+import rename from "gulp-rename";
 const require = createRequire(import.meta.url);
 
 const dotenv = "siteUrl" in process.env
@@ -64,6 +65,9 @@ task("html", async () => {
 
             minifyJSON(), // Minify application/ld+json
         ],
+        end() {
+            delete require.cache[iconResolve];
+        },
         dest: htmlFolder
     });
 });
@@ -71,27 +75,46 @@ task("html", async () => {
 // CSS Tasks
 let browserSync;
 task("css", async () => {
-    let [
-        { default: sass },
-        { default: compiler },
+    const [
         { default: fiber },
-        { default: rename }
-    ] = await Promise.all([
-        import("gulp-sass"),
-        import("sass"),
-        import("fibers"),
-        import("gulp-rename")
-    ]);
 
-    sass.compiler = compiler;
+        { default: postcss },
+        { default: tailwind },
+
+        { default: _import },
+
+        { default: scss },
+        { default: sass },
+        { default: easings }
+    ] = await Promise.all([
+        import("fibers"),
+
+        import("gulp-postcss"),
+        import("tailwindcss"),
+
+        import("postcss-easy-import"),
+
+        import("postcss-scss"),
+        import("@csstools/postcss-sass"),
+        import("postcss-easings")
+    ]);
+    
     return stream(`${scssFolder}/*.scss`, {
         pipes: [
-            // Minify scss to css
-            sass({
-                outputStyle: "compressed",
-                fiber
-            }).on("error", sass.logError),
-            rename(minSuffix), // Rename
+            postcss([
+                _import(),
+                sass({
+                    outputStyle: "compressed",
+                    fiber
+                }),
+                tailwind("./tailwind.config.cjs"),
+            ], { syntax: scss }),
+
+            postcss([
+                easings(),
+            ], { syntax: scss }),
+            
+            rename({ extname: ".min.css" }), // Rename
         ],
         dest: cssFolder,
         end: browserSync ? [browserSync.stream()] : undefined,
@@ -127,9 +150,10 @@ tasks({
 
                 // Filter out the sourcemap
                 // I don't need to know the size of the sourcemap
-                gulpif((file) => {
-                    return !/\.map$/.test(file.path);
-                }, size({ gzip: true, showFiles: true, showTotal: false }))
+                gulpif(
+                    (file) => !/\.map$/.test(file.path),
+                    size({ gzip: true, showFiles: true, showTotal: false })
+                )
             ],
             dest: jsFolder, // Output
         });
@@ -168,7 +192,7 @@ tasks({
                     minify: true,
                     entryNames: '[name].min',
                     target: ["es6"],
-                    format: "esm",
+                    format: "iife",
                     platform: "browser",
                 }),
             ],
@@ -280,10 +304,15 @@ task("sitemap", async () => {
     });
 });
 
+// Delete destFolder for added performance
+task("clean", async () => {
+    const { default: del } = await import("del");
+    return del(destFolder);
+});
+
 // BrowserSync
 task("reload", () => {
     if (browserSync) browserSync.reload();
-    delete require.cache[iconResolve];
     return Promise.resolve();
 });
 
@@ -300,7 +329,8 @@ task("watch", async () => {
                     extensions: ["html"],
                 },
             },
-            // online: true,
+            
+            browser: "chrome",
             scrollThrottle: 250,
         },
         (_err, bs) => {
@@ -324,7 +354,7 @@ task("watch", async () => {
         series(`html`, "reload")
     );
 
-    watch(`${scssFolder}/**/*.scss`, series(`css`));
+    watch([`${scssFolder}/**/*`, "tailwind.config.cjs"], series(`css`));
     watch(
         [`${srcjsFolder}/${jsFile}`, `${srcjsFolder}/components/*.js`],
         series(`modern-js`, `legacy-js`, `reload`)
@@ -342,6 +372,7 @@ task("watch", async () => {
 task(
     "build",
     series(
+        "clean",
         parallelFn("html", "css", "js", "assets"),
         parallelFn("production", "sitemap")
     )
@@ -349,5 +380,9 @@ task(
 
 task(
     "default",
-    series(parallelFn("html", "css", "js", "assets"), "watch")
+    series(
+        "clean",
+        parallelFn("html", "css", "js", "assets"),
+        "watch"
+    )
 );

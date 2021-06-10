@@ -1,27 +1,13 @@
-include /components/image.pug
-
 mixin banner(value = {})
-  - let { content, title, image } = value;
-  - Object.assign(image, { class: "effect-parallax hero-img" });
+  - let { content, title, image, mode = "hero" } = value;
 
-  .layer.layer-hero-id.banner-mode
-    article.layout-padding-dull-top
-      .layer-hero
-        +image(image)
+  .banner(class=mode)
+    .container
+      .image-container
+        +image(image).effect-parallax
 
-        .layout-padding-horz-default--device-lt-tablet.layout-padding-horz-sub-large--device-lt-laptop.layout-padding-vert-sub-extra-large--device-lt-tablet.layout-padding-vert-huge--device-gt-tablet.layout-enlarge-horz.layout-flex.layout-align-items-center
-          .layer-content.layout-contain
-            .layer-header
-              h1.style-font-title.layer-title.style-white.style-font-weight-bolder(itemprop="headline")!= title
-            .layer-main
-              h2.style-font-family-bold.style-font-weight-300.style-off-blue.layer-main-text(itemprop="description")!= content
-            .layout-align-self-end
-              button.layer-footer.action-btn.action-btn-hover.layer-round.layer-secondary-btn.layer-hero-scroll-down(type="button" tabindex="0")
-                section.action-btn-layout.layout-padding-smallest
-                  span.action-btn-group
-                    +icon("expand_more").action-icon.style-font-size-24
-                    span.action-btn-section
-                      span.action-btn-spacer
-                      span.layout-margin-left-mini
-                      span.action-btn-content Scroll Down
-                      span.action-btn-spacer
+      .layout
+        header.content
+          h1(itemprop="headline")= title
+          h2.style-off-blue(itemprop="description")!= content
+        +scroll-down

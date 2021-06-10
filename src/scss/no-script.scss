@@ -29,6 +29,7 @@ $mid-dark: #bbb;
 $dark: #222; // #ddd
 
 $dark-colors: (
+    "navbar-gray": theme("colors.quaternary"),
     "primary-light": lighten($primary-dark, 5%),
     "primary": lighten($primary, 15%),
     "primary-dark": lighten($primary-light, 15%),
@@ -55,8 +56,10 @@ $dark-colors: (
     "dark": #ddd,
     "invert-black": $white,
 );
+
 @media (prefers-color-scheme: dark) {
     html:not([theme="light"]) {
+        color-scheme: dark;
         @each $name, $value in $dark-colors {
             --#{$name}: #{$value};
         }

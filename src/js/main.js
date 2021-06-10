@@ -5,71 +5,91 @@ import preloadPlugin from "@swup/preload-plugin";
 
 // Internal use components
 import { setTheme, getTheme } from "./theme";
-import { _constrain, _map, toFixed } from "./components/util";
-import { on, off, toggleClass, each, find, get, addClass, removeClass, scrollTo, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
+import { _constrain as limit, _map as scale } from "./components/util";
+import { el, on, off, has, toggleClass, each, find, addClass, removeClass, scrollTop, hasClass, height, style, width, offset, attr } from "./components/dom";
 
-const _layer = '.layer';
+const _dropdownBtn = '.dropdown-btn';
+const _dropdown = '.dropdown';
+const _navOverlay = '.navbar-overlay';
 const _navbar = '.navbar';
-const _hero = '.layer-hero';
+const _banner = '.banner';
 const _menu = '.navbar-menu';
-const _backUp = '.back-to-top';
+const _backUp = '#to-top';
 const _skipMain = ".skip-main";
-const _navLink = '.navbar-link';
-const _layer_img = ".layer-image";
-const _load_img = ".load-img";
+const _navLink = '.navbar-link a';
+const _image = ".image";
 const _themeSwitcher = ".theme-switcher";
-const _actioncenter = ".layer-action-center";
-const _scrolldown = '.layer-hero-scroll-down';
+const _scrolldown = '#scroll-down';
 const linkSelector = `a[href^="${window.location.origin}"]:not([data-no-pjax]), a[href^="/"]:not([data-no-pjax])`;
 
-let onload = $load_img => function () {
-    addClass($load_img, "core-img-show"); // Hide the image preview
+let onload = image => function () {
+    addClass(image, "core-img-show"); // Hide the image preview
 };
 
 // On navbar menu click (this will only occur on mobile; click is a tiny bit more efficient), show navbar
 on(_menu, "click", () => {
     toggleClass(_navbar, "navbar-show");
-    attr(_menu, "aria-expanded", `` + hasClass(_navbar, "navbar-show"));
+});
+
+let dropdownLink = el(".dropdown-link");
+on(document, "click", ({ target }) => {
+    !has(dropdownLink, target).length && removeClass(_dropdown, "show");
+});
+
+on(_dropdownBtn, "click", () => {
+    toggleClass(_dropdown, "show");
 });
 
 // The focus pt., 10px past the height of the navbar
 let navHeight = height(_navbar);
-let _images = new Set(), windowWid;
+let bannerInfo, windowWid;
+
 let resize, scroll;
 let canScroll = true, canResize = true;
 on(window, {
-    // On window resize make sure the scroll down hero button, is expanded and visible
+    // On window resize make sure the scroll down banner button, is expanded and visible
     'resize': resize = () => {
         // Prevent layout-thrashing: [wilsonpage.co.uk/preventing-layout-thrashing/]
         if (canResize) {
-            let srcset, src, _core_img, srcWid, srcHei;
+            let srcset, src, coreImg, srcWid, srcHei;
             let timer, raf;
             canResize = false;
 
             raf = requestAnimationFrame(() => {
                 windowWid = width(window);
-                toggleClass(_scrolldown, "action-btn-expand", windowWid <= 650);
+                
+                // On Resize re-scale the parallax effect
+                let target = find(_banner, _image)[0];
+                let clientRect = offset(target);
+                bannerHeight = clientRect?.height;
+            
+                // In each layer-image find load-img image container and store all key info, important for creating a parallax effect
+                bannerInfo = {
+                    ...bannerInfo,
+                    target,
+                    clientRect
+                };
 
                 // Find the layer-images in each layer
-                each(_load_img, $img => {
-                    srcWid = Math.round(width($img));
-                    srcHei = Math.round(height($img));
+                each(_image, image => {
+                    srcWid = Math.round(width(image));
+                    srcHei = Math.round(height(image));
 
                     // Find the core-img in the layer-image container
-                    _core_img = get(find($img, ".core-img"), 0);
+                    coreImg = find(image, ".core-img")[0];
 
                     // Make sure the image that is loaded is the same size as its container
-                    srcset = attr(_core_img, "data-src");
+                    srcset = attr(coreImg, "data-src");
 
                     // On larger screens load smaller images, for faster image load times
                     src = srcset.replace(/w_auto/, `w_${srcWid}`);
                     if (srcHei > srcWid) src = src.replace(/ar_4:3,/, `ar_3:4,`);
 
                     // Only load a new image If something has changed
-                    if (src !== attr(_core_img, "src")) {
+                    if (src !== attr(coreImg, "src")) {
                         // Ensure the image has loaded, then replace the small preview
-                        attr(_core_img, "src", src);
-                        on(_core_img, "load", onload($img));
+                        attr(coreImg, "src", src);
+                        on(coreImg, "load", onload(image));
                     }
                 });
 
@@ -78,7 +98,7 @@ on(window, {
                     canResize = true;
                     timer = window.clearTimeout(timer);
                     raf = window.cancelAnimationFrame(raf);
-                }, 150);
+                }, 300);
             });
         }
     },
@@ -92,55 +112,54 @@ on(window, {
 
             raf = window.requestAnimationFrame(() => {
                 let _scrollTop = scrollTop(window);
-                let isBanner = hasClass(_layer, "banner-mode");
                 let _isMobile = windowWid < 650;
+
+                let banner = el(_banner);
+                let isBanner = banner.length ? !hasClass(banner, "hero") : false;
 
                 // If the current page uses a banner ensure the navbar is still visible
                 toggleClass(_navbar, "navbar-focus", isBanner || _scrollTop >= 5);
 
                 // Hide and show the action-center if the window has been scrolled past the visible height of the page
-                toggleClass(_actioncenter, "layer-action-center-show", _scrollTop > window.innerHeight);
+                toggleClass(_backUp, "hide", _scrollTop < window.innerHeight);
 
                 // If device width is greater than 700px
-                if (!_isMobile && "Promise" in window) {
-                    _images.forEach(data => {
-                        // On scroll turn on parallax effect for images with the class "effect-parallax"
-                        if (hasClass(data.target, "effect-parallax")) {
-                            let { clientRect, load_img, overlay, isHero, header, main } = data;
-                            let { top, height } = clientRect;
+                if ("Promise" in window) {
+                    let { clientRect, target, figure, overlay, header, main, isHero } = bannerInfo;
 
-                            let endPt = height + top;
-                            let startPt = top;
+                    // On scroll turn on parallax effect for images with the class "effect-parallax"
+                    if (target && hasClass(target, "effect-parallax")) {
+                        let { top, height } = clientRect;
 
-                            // Only compute the parallax effect, if the image is in view
-                            if (_scrollTop + navHeight >= startPt && _scrollTop <= endPt) {
-                                // Convert `value` to a scale of 0 to 1
-                                let value = _map(_scrollTop, startPt, endPt, 0, 1);
+                        let topScroll = _scrollTop;
+                        if (isHero) topScroll += navHeight;
 
-                                // Restrict value to a min of 0 and a max of 1
-                                value = _constrain(value, 0, 1);
+                        let endPt = height + top;
+                        let startPt = top;
 
-                                if (isHero) {
-                                    style(overlay, {
-                                        opacity: _map(value, 0, 0.75, 0.45, 0.8).toFixed(2)
-                                    });
-                                }
+                        // Only compute the parallax effect, if the image is in view
+                        if (topScroll >= startPt && _scrollTop <= endPt) {
+                            // Convert `value` to a scale of 0 to 1
+                            let value = scale(topScroll, startPt, endPt, 0, 1);
 
-                                // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
-                                let translateY = _map(value, 0, 0.75, 0, height / 2).toFixed(4);
-                                style(load_img, {
-                                    transform: `translateY(${translateY}px)`,
-                                });
+                            // Restrict value to a min of 0 and a max of 1
+                            value = limit(value, 0, 1);
 
-                                let opacity = _map(value, 0, 0.45, 1, 0).toFixed(4);
-                                translateY = _constrain(_map(value, 0, 1, 0, height / 2), 0, height / 3).toFixed(4);
+                            let opacity = parseFloat( scale(value, 0, 0.75, 0.55, 0.8).toFixed(_isMobile ? 2 : 4) );
+                            style(overlay, { opacity });
 
-                                let transform = `translateY(${translateY}px)`;
-                                if (header) style(header, { transform });
-                                if (main) style(main, { transform, opacity });
-                            }
+                            // Ensure moblie devices can handle smooth animation, or else the parallax effect is pointless
+                            let translateY = parseFloat( scale(value, 0, 0.75, 0, height / 2).toFixed(_isMobile ? 2 : 4) );
+                            let transform = `translateY(${translateY}px)`;
+                            style(figure, { transform });
+
+                            opacity = parseFloat( scale(value, 0, 0.45, 1, 0).toFixed(_isMobile ? 2 : 4) );
+                            translateY = parseFloat( limit(scale(value, 0, 1, 0, height / 2), 0, height / 3).toFixed(_isMobile ? 2 : 4) );
+                            transform = `translateY(${translateY}px)`;
+                            if (header) style(header, { transform });
+                            if (main) style(main, { transform, opacity });
                         }
-                    });
+                    }
                 }
 
                 canScroll = true;
@@ -151,49 +170,54 @@ on(window, {
 });
 
 // Method to run on scroll down button click
+let bannerHeight;
 let goDown = () => {
-    scrollTo(heroHeight, "800ms");
+    window.scrollTo({
+        top: bannerHeight,
+        behavior: "smooth"
+    });
 };
+
+// On skip main button click animate to the main content
+on(_skipMain, "click", goDown);
+
+// On backup button click animate back to the top
+on(_backUp, "click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+on(_navOverlay, "click", () => {
+    removeClass(_navbar, "navbar-show");
+})
 
 // Initialize images
 let init = () => {
-    _images.clear();
+    let banner = el(_banner);
+    let header = find(banner, "h1")[0];
+    let main = find(banner, "h2")[0];
 
-    // On scroll down button click animate scroll to the height of the hero layer
-    on(_scrolldown, "click", goDown);
+    let target = find(banner, _image)[0];
+    let figure = find(target, "figure")[0];
+    let overlay = find(target, ".image-overlay")[0];
+    let clientRect = offset(target);
+    bannerHeight = clientRect?.height;
 
-    // Determine the height of the hero
-    heroHeight = height(_hero);
+    // In each layer-image find load-img image container and store all key info, important for creating a parallax effect
+    bannerInfo = {
+        isHero: hasClass(banner, "hero"),
+        overlay,
+        target,
+        figure,
+        clientRect,
+        header,
+        main
+    };
 
-    // Find the layer-images in each layer
-    let layer_image, isHero, overlay, load_img, clientRect, header, main, _isbanner;
-    each(_layer, $layer => {
-        layer_image = find($layer, _layer_img);
-        isHero = hasClass($layer, "layer-hero-id");
-
-        if (isHero) {
-            _isbanner = hasClass($layer, "banner-mode");
-            header = get(find($layer, ".layer-header"), 0);
-            main = get(find($layer, ".layer-main"), 0);
-        }
-
-        // In each layer-image find load-img image container and store all key info. important for creating a parallax effect
-        each(layer_image, $img => {
-            load_img = get(find($img, ".load-img"), 0);
-            overlay = get(find($img, ".layer-image-overlay"), 0);
-            clientRect = offset($img);
-
-            _images.add({
-                _isBanner: _isbanner,
-                overlay, load_img,
-                target: $img,
-                clientRect,
-                header,
-                isHero,
-                main
-            });
-        });
-    });
+    // On scroll down button click animate scroll to the height of the banner layer
+    if (target) on(_scrolldown, "click", goDown);
 };
 
 // Run once each page, this is put into SWUP, so for every new page, all the images transition without having to maually rerun all the scripts on the page
@@ -201,27 +225,14 @@ init();
 resize();
 scroll();
 
-// On backup button click animate back to the top
-on(_backUp, "click", () => {
-    scrollTo("0px", "1400ms");
-});
-
-// On skip main button click animate to the main content
-let heroHeight;
-on(_skipMain, "click", () => {
-    scrollTo(heroHeight, "1400ms");
-});
-
 const activeNavLink = () => {
     let href = window.location.href || "";
     href = href.replace("projects", "portfolio");
 
-    requestAnimationFrame(() => {
-        removeClass(_navLink, "navbar-link-focus");
-        each(_navLink, _link => {
-            let path = attr(_link, "data-path") || " ";
-            toggleClass(_link, "navbar-link-focus", href.includes(path.toLowerCase()));
-        });
+    removeClass(_navLink, "active");
+    each(_navLink, _link => {
+        let path = attr(_link, "data-path") || " ";
+        toggleClass(_link, "active", href.includes(path.toLowerCase()));
     });
 };
 
@@ -259,16 +270,15 @@ on(document, "ready", () => {
                 // Remove click event from scroll down button
                 off(_scrolldown, "click", goDown);
 
+                removeClass(_dropdown, "show");
                 if (windowWid <= 700) {
-                    requestAnimationFrame(() => {
-                        removeClass(_navbar, "navbar-show");
-                    });
+                    removeClass(_navbar, "navbar-show");
                 }
             });
 
             Swup.on("samePage", () => {
                 // If on the same page reinvigorate the scroll down button click event
-                // On scroll down button click animate scroll to the height of the hero layer
+                // On scroll down button click animate scroll to the height of the banner layer
                 on(_scrolldown, "click", goDown);
             });
 
@@ -307,6 +317,7 @@ try {
 
     // Set theme in localStorage, as well as in the html tag
     let themeSet = theme => {
+        html.className = theme;
         attr(html, "theme", theme);
     };
 

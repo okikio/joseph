@@ -1,16 +1,14 @@
-include /components/image.pug
-
 mixin tile(value = {})
   - let { title, content, image } = value;
   - let _class = value.class;
 
-  .layer-tile(class=_class)
+  .tile.tile-hover(class=_class)
     if image
       +image(image)
 
-    .layer-tile-footer
+    .tile-content
       if title
-        .layer-tile-title.style-bold= title
+        .tile-title.font-600= title
 
       if content
-        .layer-tile-content.layout-padding-top-small.style-line-height-spaced.style-font-14= content
+        p= content
