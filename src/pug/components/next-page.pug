@@ -1,7 +1,15 @@
-mixin next-page(href, title = "")
+mixin next-page(prev, next)
   .layer-next 
     .container
-      +link(href)
-        .content
-          .uppercase Next
-          .title= title
+      .row.col-grid
+        .prev
+          +link(href=`/projects/${prev.toLowerCase().replace(/\s/g, "-")}`)
+            .content
+              .uppercase Previous
+              .title= prev
+
+        .next
+          +link(href=`/projects/${next.toLowerCase().replace(/\s/g, "-")}`)
+            .content.text-right
+              .uppercase Next
+              .title= next

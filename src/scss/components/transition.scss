@@ -19,18 +19,18 @@
             opacity: 0 !important;
         }
 
-        @screen md {
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-            transform: translate3d(0, 0, 0);
+        // @screen sm {
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        transform: translate3d(0, 0, 0);
 
-            .is-animating & {
-                transform: translateY(40px) !important;
-            }
-
-            html.is-animating.is-leaving & {
-                transform: translateY(-40px) !important;
-            }
+        .is-animating & {
+            transform: translateY(40px) !important;
         }
+
+        html.is-animating.is-leaving & {
+            transform: translateY(-40px) !important;
+        }
+        // }
     }
 }
 /*! purgecss end ignore */

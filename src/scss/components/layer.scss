@@ -161,10 +161,10 @@ html[theme="dark"] {
 }
 
 .col-grid {
-    @apply -mx-2;
+    @apply -mx-1 sm:-mx-2;
 
     & > * {
-        @apply px-2 py-2;
+        @apply px-1 sm:px-2 py-2;
     }
 
     a {
@@ -348,8 +348,6 @@ blockquote {
     }
 
     &-next {
-        text-align: center;
-
         a {
             display: block;
         }
@@ -363,16 +361,29 @@ blockquote {
                 color ease #{$transitionDuration};
             background-color: $white;
             background-color: var(--very-light, $white);
-            @apply px-2 sm:px-5 py-16 block;
+            @apply sm:px-6 py-10 block lt-sm:text-xs;
 
             &,
-            &:focus-visible {
+            a:focus-visible {
                 @apply rounded-2xl;
             }
         }
 
+        .next,
+        .prev {
+            @apply w-1/2;
+        }
+
+        .next .content {
+            @apply pr-5;
+        }
+
+        .prev .content {
+            @apply pl-5;
+        }
+
         .title {
-            @apply text-3xl sm:text-4xl md:text-5xl font-700 mt-5;
+            @apply text-xl sm:text-3xl font-700 sm:mt-3;
         }
     }
 }
