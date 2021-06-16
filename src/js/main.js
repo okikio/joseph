@@ -124,7 +124,7 @@ on(window, {
                 toggleClass(_backUp, "hide", _scrollTop < window.innerHeight);
 
                 // If device width is greater than 700px
-                if ("Promise" in window) {
+                if ("Promise" in window && !_isMobile) {
                     let { clientRect, target, figure, overlay, header, main, isHero } = bannerInfo;
 
                     // On scroll turn on parallax effect for images with the class "effect-parallax"
