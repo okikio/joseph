@@ -270,17 +270,10 @@
     }
 
     &-overlay {
-        @apply bg-gray-300 dark:bg-gray-900 bg-opacity-70 dark:bg-opacity-80;
-        transition: background-color #{$transitionDuration} ease,
-            opacity #{$transitionDuration} ease;
         @apply absolute top-0 left-0 w-screen h-screen;
         opacity: 0;
         pointer-events: none;
         z-index: -1;
-
-        @supports (backdrop-filter: blur(5px)) {
-            @apply backdrop-filter backdrop-blur;
-        }
     }
 
     // Mobile navbar settings
@@ -385,8 +378,15 @@
             }
 
             .navbar-overlay {
+                @apply bg-gray-300 dark:bg-gray-900 bg-opacity-70 dark:bg-opacity-80;
+                transition: background-color #{$transitionDuration} ease,
+                    opacity #{$transitionDuration} ease;
                 opacity: 1;
                 pointer-events: auto;
+
+                @supports (backdrop-filter: blur(5px)) {
+                    @apply backdrop-filter backdrop-blur;
+                }
             }
         }
     }

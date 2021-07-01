@@ -38,7 +38,8 @@
         "url": "https://github.com/okikio/joseph/issues"
     },
     "dependencies": {
-        "@okikio/native": "^2.1.8",
+        "@okikio/animate": "^2.3.1",
+        "@okikio/native": "^3.0.1",
         "@swup/preload-plugin": "^1.0.3",
         "@swup/scroll-plugin": "^1.1.0",
         "swup": "^2.0.14"
@@ -47,14 +48,14 @@
         "@csstools/postcss-sass": "^4.0.0",
         "@fullhuman/postcss-purgecss": "^4.0.3",
         "autoprefixer": "^10.2.6",
-        "browser-sync": "^2.27.3",
+        "browser-sync": "^2.27.4",
         "cloudinary": "^1.26.1",
         "del": "^6.0.0",
         "dotenv": "^10.0.0",
-        "esbuild": "^0.12.9",
+        "esbuild": "^0.12.14",
         "fibers": "^5.0.0",
         "gulp": "^4.0.2",
-        "gulp-esbuild": "^0.8.2",
+        "gulp-esbuild": "^0.8.3",
         "gulp-if": "^3.0.0",
         "gulp-minify-inline-json": "^1.4.2",
         "gulp-plumber": "^1.2.1",
@@ -69,9 +70,9 @@
         "postcss-csso": "^5.0.1",
         "postcss-easings": "^3.0.1",
         "postcss-easy-import": "^3.0.0",
-        "postcss-scss": "^3.0.5",
+        "postcss-scss": "^4.0.0",
         "sass": "^1.35.1",
         "tailwindcss": "^2.2.4",
-        "typescript": "^4.3.4"
+        "typescript": "^4.3.5"
     }
 }
