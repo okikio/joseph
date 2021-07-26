@@ -6,7 +6,7 @@ cloudinary.v2.config({
     api_key: "",
     api_secret: ""
 });
-cloudinary.v2.uploader.explicit("joseph-projects/sarbot/Joseph_s_Trimmed_Video",
+cloudinary.v2.uploader.explicit("joseph-projects/ultima-apparel/MoCapLimitedTest",
     {
         resource_type: "video", type: "upload",
         eager_async: true,
@@ -14,8 +14,8 @@ cloudinary.v2.uploader.explicit("joseph-projects/sarbot/Joseph_s_Trimmed_Video",
             { format: "mp4", quality: "auto:low", video_codec: "auto", raw_transformations: "f_mp4,vc_auto,q_auto:low" },
         ]
     },
-    function (error, result) { 
+    function (error, result) {
         if (error) return console.warn(error);
-        console.log(result); 
+        console.log(result);
     }
 );
