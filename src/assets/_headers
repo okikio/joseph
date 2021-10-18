@@ -10,10 +10,10 @@
   Content-Security-Policy: default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com https://josephojo.com; script-src 'self' https://cdn.polyfill.io https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/; form-action 'self'; frame-ancestors 'self';
   Permissions-Policy: geolocation=(), microphone=(), usb=(), sync-xhr=(self), camera=(), interest-cohort=()
   Link: <https://fonts.gstatic.com>; rel=preconnect; crossorigin
-  Link: </css/app.min.css>; rel=preload; as=style
   Link: <https://fonts.gstatic.com/s/frankruhllibre/v6/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGhA.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   Link: <https://fonts.gstatic.com/s/manrope/v4/xn7gYHE41ni1AdIRggexSg.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   Link: <https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
+  Link: </css/app.min.css>; rel=preload; as=style
   Link: <https://cdn.polyfill.io>; rel=preconnect; crossorigin
   Link: <https://res.cloudinary.com>; rel=preconnect; crossorigin
 
