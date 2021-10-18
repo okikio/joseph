@@ -258,6 +258,13 @@ html[theme="dark"] {
     height: 400px;
     min-height: 300px;
 
+    &-slidable .tile-content p {
+        transition: flex 0.5s easeOutQuad, opacity 0.35s easeOutQuad;
+        @apply relative block;
+        height: 0;
+        opacity: 0;
+    }
+
     &-hover {
         .core-img,
         .no-script-img {
@@ -271,21 +278,32 @@ html[theme="dark"] {
                 opacity: 0;
             }
         }
+
+        &.tile-slidable:hover .tile-content p {
+            opacity: 1;
+            
+            // flex-grow: 0;
+            // flex-grow: 1;
+            flex: 1;
+        }
     }
 
     &-content {
         transition: color #{$transitionDuration} ease;
         @include applyTheme(color, "white");
         @apply text-sm sm:text-base leading-relaxed px-5 py-5 font-400;
-        position: absolute;
-        bottom: 0;
-        left: 0;
+        @apply relative h-full flex flex-col;
+        // position: absolute;
+        // bottom: 0;
+        // left: 0;
     }
 
     &-title {
         transition: color #{$transitionDuration} ease;
         @include applyTheme(color, "white");
         @apply text-lg leading-loose font-600 pb-2;
+
+        @apply flex flex-col justify-end;
     }
 
     &,
@@ -311,10 +329,11 @@ blockquote {
     transition: color ease #{$transitionDuration};
 
     &:before {
+        font-family: 'Frank Ruhl Libre', sans-serif;
         position: absolute;
-        content: "\🙶";
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z' fill='rgb(255, 58, 107)' /%3E%3C/svg%3E");
         opacity: 0.2;
-        transform: translate(20px, 20px) scale(5);
+        transform: translate(20px, -35px) scale(5) rotateZ(180deg);
         top: 0;
         left: 0;
     }

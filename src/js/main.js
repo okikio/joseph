@@ -241,7 +241,7 @@ on(document, "ready", () => {
     try {
         // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features or supports webp (most browser that support webp can handle the history management SWUP does)
         if ("Promise" in window) {
-            console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
+            // console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
 
             // Page transition manager SWUP for faster page loads
             const Swup = new swup({

@@ -239,9 +239,15 @@
 
     &-btn {
         transition: color #{$transitionDuration} ease,
-            background-color 0.45s ease, box-shadow 0.2s ease-out;
+            background-color 0.45s ease, 
+            transform ease 0.1s,
+            box-shadow 0.2s ease-out;
         @apply ml-3 w-10 h-10 rounded-md;
         @include applyTheme(background-color, "light");
+
+        & > * { 
+            transition: transform ease 0.1s;
+        }
 
         svg {
             @apply inline-block text-2xl;
@@ -270,6 +276,8 @@
     }
 
     &-overlay {
+        transition: background-color #{$transitionDuration} ease,
+            opacity #{$transitionDuration} ease;
         @apply absolute top-0 left-0 w-screen h-screen;
         opacity: 0;
         pointer-events: none;
@@ -379,8 +387,6 @@
 
             .navbar-overlay {
                 @apply bg-gray-300 dark:bg-gray-900 bg-opacity-70 dark:bg-opacity-80;
-                transition: background-color #{$transitionDuration} ease,
-                    opacity #{$transitionDuration} ease;
                 opacity: 1;
                 pointer-events: auto;
 

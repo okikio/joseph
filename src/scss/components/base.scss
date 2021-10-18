@@ -50,18 +50,18 @@ body {
     color: $white;
 }
 
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-    // font-family: inherit;
-    // line-height: 1.15;
-    // font-weight: 400;
-    // color: inherit;
-    // display: block;
-}
+// .h1,
+// .h2,
+// .h3,
+// .h4,
+// .h5,
+// .h6 {
+//     // font-family: inherit;
+//     // line-height: 1.15;
+//     // font-weight: 400;
+//     // color: inherit;
+//     // display: block;
+// }
 
 .h1 {
     margin: 2.1rem 0 1.68rem 0;
@@ -247,6 +247,25 @@ a.skip-main {
 .no-script-img,
 .placeholder-img {
     color: transparent;
+}
+
+:is(.navbar-btn, .btn):active {
+    @apply scale-[0.85];
+
+    & > * {
+        @apply scale-[1.25];
+    }
+}
+
+.btn:active > * {
+    @apply scale-[1.025];
+}
+
+.cookie-banner {
+    @apply underline text-sm text-center text-black dark:text-white;
+    @apply py-5 px-4;
+
+    text-underline-offset: 0.5em;
 }
 
 .footer {

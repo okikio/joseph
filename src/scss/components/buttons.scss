@@ -43,8 +43,14 @@
 
 .btn {
     transition: background-color #{$transitionDuration} ease,
-        color #{$transitionDuration} ease, width 0.6s ease 0s !important;
+        color #{$transitionDuration} ease, 
+        transform ease 0.1s, 
+        width 0.6s ease 0s !important;
     @apply overflow-hidden select-none;
+
+    & > * { 
+        transition: transform ease 0.1s;
+    }
 
     &-hover {
         @apply w-10;
