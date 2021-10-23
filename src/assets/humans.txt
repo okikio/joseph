@@ -1,7 +1,7 @@
 /* DEVELOPMENT */
   Okiki Ojo: Development, Concept, Research, Art Direction, SEO, etc...
   Contact: hey@okikio.dev
-  Site: https://okikio.dev
+  Site: https://blog.okikio.dev
   Github: https://github.com/okikio
   From: Oshawa, Canada
 

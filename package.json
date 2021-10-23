@@ -27,7 +27,7 @@
     "author": {
         "name": "Okiki Ojo",
         "email": "hey@okikio.dev",
-        "url": "https://okikio.dev"
+        "url": "https://blog.okikio.dev"
     },
     "copyright": "Joseph Ojo",
     "homepage": "https://josephojo.com/",
@@ -66,12 +66,12 @@
         "gulp-size": "^4.0.1",
         "gulp-terser": "^2.1.0",
         "gulp-typescript": "^6.0.0-alpha.1",
-        "postcss": "^8.3.9",
+        "postcss": "^8.3.11",
         "postcss-csso": "^5.0.1",
         "postcss-easings": "^3.0.1",
         "postcss-easy-import": "^3.0.0",
         "postcss-scss": "^4.0.1",
-        "sass": "^1.43.2",
+        "sass": "^1.43.3",
         "tailwindcss": "^2.2.17",
         "typescript": "^4.4.4"
     }
