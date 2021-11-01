@@ -68,12 +68,15 @@
         @apply py-32 sm:py-36 z-10;
     }
 
+    .headline {
+    }
+
     h1 {
         @apply font-title font-900 text-4xl sm:text-5xl md:text-6xl mb-4;
-        line-height: 1;
+        line-height: 1.25;
 
         @screen lg {
-            @apply leading-none mb-8;
+            @apply mb-8;
         }
     }
 
@@ -135,6 +138,7 @@ html[theme="dark"] {
 .capsule-layer {
     @apply z-10 relative;
     @apply px-2 sm:px-5;
+    @apply text-lg md:text-xl;
 
     .layout {
         @include applyTheme(color, "white");
@@ -146,6 +150,10 @@ html[theme="dark"] {
 
         transition: background-color #{$transitionDuration} ease,
             color #{$transitionDuration} ease;
+    }
+
+    .layer-title {
+        @apply text-xl md:text-2xl pb-3;
     }
 }
 
@@ -227,6 +235,7 @@ html[theme="dark"] {
 .about-layer {
     .container {
         @apply max-w-screen-lg pb-8 leading-8 font-500 px-2 sm:px-5;
+        max-width: 70ch;
     }
 
     h1 {
@@ -235,10 +244,12 @@ html[theme="dark"] {
 
     .tile {
         @apply sm:max-w-xs mb-5 sm:float-left sm:mr-5;
-        height: 400px;
+        height: 300px;
 
         @screen sm {
-            height: 350px;
+            min-height: 50px;
+            height: 200px;
+            max-width: 13rem;
         }
 
         img {
@@ -250,6 +261,13 @@ html[theme="dark"] {
 .publication-layer {
     a {
         word-break: break-all;
+    }
+}
+
+.col-grid a {
+    &:hover,
+    &:focus {
+        @apply no-underline;
     }
 }
 
@@ -277,6 +295,12 @@ html[theme="dark"] {
                 transform: scale(1.2);
                 opacity: 0;
             }
+
+            .tile-title {
+                text-decoration-color: lighten($secondary-dark, 20%) !important;
+                text-decoration-color: var(--secondary, lighten($secondary-dark, 20%)) !important;
+                @apply underline;
+            }
         }
 
         &.tile-slidable:hover .tile-content p {
@@ -291,8 +315,9 @@ html[theme="dark"] {
     &-content {
         transition: color #{$transitionDuration} ease;
         @include applyTheme(color, "white");
-        @apply text-sm sm:text-base leading-relaxed px-5 py-5 font-400;
+        @apply text-sm sm:text-base md:text-lg leading-relaxed px-5 py-5 font-400;
         @apply relative h-full flex flex-col;
+        @apply max-w-md;
         // position: absolute;
         // bottom: 0;
         // left: 0;
@@ -301,9 +326,12 @@ html[theme="dark"] {
     &-title {
         transition: color #{$transitionDuration} ease;
         @include applyTheme(color, "white");
-        @apply text-lg leading-loose font-600 pb-2;
 
+        @apply text-xl leading-loose font-600 pb-2;
         @apply flex flex-col justify-end;
+
+        text-underline-offset: theme("spacing.3");
+        @apply underline;
     }
 
     &,

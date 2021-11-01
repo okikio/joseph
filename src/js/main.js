@@ -72,6 +72,7 @@ on(window, {
 
                 // Find the layer-images in each layer
                 each(_image, image => {
+
                     srcWid = Math.round(width(image));
                     srcHei = Math.round(height(image));
 
@@ -79,11 +80,14 @@ on(window, {
                     coreImg = find(image, ".core-img")[0];
 
                     // Make sure the image that is loaded is the same size as its container
-                    srcset = attr(coreImg, "data-src");
-
-                    // On larger screens load smaller images, for faster image load times
-                    src = srcset.replace(/w_auto/, `w_${srcWid}`);
-                    if (srcHei > srcWid) src = src.replace(/ar_4:3,/, `ar_3:4,`);
+                    src = srcset = attr(coreImg, "data-src");
+                    
+                    // Avoid resizing images that have this attribute
+                    if (attr(image, "resize-image") != "false") {
+                        // On larger screens load smaller images, for faster image load times
+                        src = srcset.replace(/w_auto/, `w_${srcWid}`);
+                        if (srcHei > srcWid) src = src.replace(/ar_4:3,/, `ar_3:4,`);
+                    }
 
                     // Only load a new image If something has changed
                     if (src !== attr(coreImg, "src")) {

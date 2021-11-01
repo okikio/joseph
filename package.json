@@ -47,15 +47,15 @@
     "devDependencies": {
         "@csstools/postcss-sass": "^4.0.0",
         "@fullhuman/postcss-purgecss": "^4.0.3",
-        "autoprefixer": "^10.3.7",
-        "browser-sync": "^2.27.5",
+        "autoprefixer": "^10.4.0",
+        "browser-sync": "^2.27.7",
         "cloudinary": "^1.27.1",
         "del": "^6.0.0",
         "dotenv": "^10.0.0",
-        "esbuild": "^0.12.29",
+        "esbuild": "^0.13.12",
         "fibers": "^5.0.0",
         "gulp": "^4.0.2",
-        "gulp-esbuild": "^0.8.7",
+        "gulp-esbuild": "^0.9.1",
         "gulp-if": "^3.0.0",
         "gulp-minify-inline-json": "^1.4.4",
         "gulp-plumber": "^1.2.1",
@@ -70,9 +70,9 @@
         "postcss-csso": "^5.0.1",
         "postcss-easings": "^3.0.1",
         "postcss-easy-import": "^3.0.0",
-        "postcss-scss": "^4.0.1",
-        "sass": "^1.43.3",
-        "tailwindcss": "^2.2.17",
+        "postcss-scss": "^4.0.2",
+        "sass": "^1.43.4",
+        "tailwindcss": "^2.2.19",
         "typescript": "^4.4.4"
     }
 }
