@@ -14,6 +14,9 @@
   Link: <https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   Link: <https://cdn.polyfill.io>; rel=preconnect; crossorigin
   Link: <https://res.cloudinary.com>; rel=preconnect; crossorigin
+  
+/about
+  X-Robots-Tag: index, follow, noimageindex
 
 /css/*.css
   Cache-Control: public, max-age=604800, stale-while-revalidate=6480
