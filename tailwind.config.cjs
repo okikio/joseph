@@ -4,10 +4,10 @@ weights.forEach(val => {
   fontWeight[val] = val;
 })
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  mode: "jit",
-  purge: [
+  content: [
     'src/**/*.pug'
   ],
   theme: {

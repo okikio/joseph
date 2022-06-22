@@ -112,7 +112,8 @@ figcaption {
 
 
 img,
-video {
+video,
+lite-youtube {
     object-position: center center;
     object-fit: cover;
     min-height: 200px;
@@ -291,8 +292,8 @@ a.skip-main {
         @apply px-0.5;
     }
 
-    .container {
-        @apply max-w-screen-md;
+    .footer-container {
+        @apply container max-w-screen-md;
         @apply flex flex-wrap justify-around lt-lg:flex-col lt-lg:text-center;
     }
 }

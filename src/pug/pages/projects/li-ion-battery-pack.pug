@@ -1,0 +1,83 @@
+extends /layout.pug
+
+block pageInfo
+  -
+    let page = {
+      url: "/projects/li-ion-battery-pack",
+      name: "li-ion-battery-pack",
+      title: "Lithium-ion Battery Pack — A battery pack designed for a commercial mobile robot and supports many safety features, signal measurement, and cell balancing.",
+      description: "This robotic battery pack was built for a commercial mobile robot (not Boxer) using more than 200 Lithium-ion cells. It includes safety features, signal measurement, and cell balancing."
+    };
+
+block banner
+  +banner({
+    title: "Project 1: Lithium-ion Battery Pack (2021)",
+    content: "This robotic battery pack was built for a commercial mobile robot (not Boxer) using more than 200 Lithium-ion cells. It includes safety features, signal measurement, and cell balancing.",
+    image: {
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/FinalPack_Iso_Beauty",
+      alt: "An image of the 3D CAD renders of the battery pack from an isometric perspective.",
+    },
+    mode: "banner"
+  })
+
+block content
+  .container-lg
+    .style-letter-head D
+    |  ue to my research experience with Lithium-ion batteries, I was tasked with building a battery pack from scratch for a robotic vehicle at another research lab at Ontario Tech. The battery pack had specific requirements that had the match that of the robot. It had to fit the specific compartment on the robot, match a minimum capacity, and a specific voltage requirement. It also needed to be safe, reliable, and rechargeable.  
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/FinalPack_Iso_Beauty",
+      alt: "An image of the 3D CAD renders of the battery pack from an isometric perspective."
+    })(width="960" height="768")
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/FinalPack_Side_Beauty",
+      alt: "An image of the 3D CAD renders of the battery pack from a side perspective."
+    })(width="960" height="768")
+    br
+    | There were two rows stacked on top of each other in the battery pack. The bottom row had 12 series stacks of 16 cells in parallel and the top row completed the total 13 series pack. The pack consisted of discharge and charge receptacles, and fuses carefully selected for the expected charge & discharge currents. Voltage and temperature signals were recorded via the battery management system on board on which were several passive cell balancers for the series stack. A current measurement shunt resistor and a safety disconnect were also included for additional protection.  
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/InternalPic_1",
+      alt: "An image of the internals of the battery pack from a top perspective."
+    })(width="960" height="768")
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/InternalPic_2",
+      alt: "An image of the internals of the battery pack from an isometric perspective."
+    })(width="960" height="540")
+    br
+    | Everything was placed tightly in a steel case and surrounded with fire resistant material to prevent the spread of fire in a thermal runaway scenario.    
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/Exterior_1",
+      alt: "An image of the externals of the battery pack from a top-front isometric perspective."
+    })(width="960" height="540")
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/Exterior_2",
+      alt: "An image of the externals of the battery pack from a top perspective."
+    })(width="960" height="540")
+    br
+    br
+    +img-view({
+      src: "cloudinary/joseph-projects/li-ion-battery-pack/Exterior_3",
+      alt: "An image of the externals of the battery pack from a top-side isometric perspective."
+    })(width="960" height="540")
+    //- br
+    //- br
+    //- +img-view({
+    //-   src: "cloudinary/joseph-projects/li-ion-battery-pack/Exterior_4",
+    //-   alt: "Device Configuration UI for selecting and configuring devices"
+    //- })(width="860" height="540")
+
+
+  //- Next page layer
+  +next-page("Publications", "Boxer")
+

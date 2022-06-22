@@ -53,6 +53,18 @@ block content
         | Here are some of the projects I have worked on. These include some ongoing and finished research projects, personal projects, as well as some old school and work projects I think you should know about.
 
       .row.col-grid
+        .col-8
+          +link("/projects/li-ion-battery-pack")
+            +tile({
+              title: "Lithium-ion Battery Pack",
+              content: "This robotic battery pack was built for a commercial mobile robot (not Boxer) using more than 200 Lithium-ion cells. It includes safety features, signal measurement, and cell balancing.",
+              class: "layer-box layer-surface block layer-tile-outline tile-slidable",
+              image: {
+                src: "cloudinary/joseph-projects/li-ion-battery-pack/FinalPack_Iso_Beauty",
+                alt: "An image of the 3D CAD renders of the battery pack in an isometric perspective.",
+              }
+            })
+
         .col-4
           +link("/projects/boxer")
             +tile({
@@ -60,7 +72,7 @@ block content
               content: "Boxer is a robotic platform designed as an autonomous delivery vehicle and built for research purposes.",
               class: "layer-box layer-surface block layer-tile-outline tile-slidable",
               image: {
-                src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+                src: "cloudinary/joseph-projects/boxer/04_ADR_RenderProj_3",
                 alt: "An image of a rendered robot."
               }
             })
@@ -101,11 +113,11 @@ block content
               }
             })
 
-        .col-8
+        .col-6(class="sm:col-4")
           +link("/projects/phoenix")
             +tile({
               title: "Phoenix",
-              content: "As part of my job as an engineering intern at Celestica, one of my projects was the design of a new solar panel frame cheaper and stronger than previous versions.",
+              content: "As part of my job as an engineering intern at Celestica, one of my projects was the design of a new solar panel frame cheaper and more reliable than previous versions.",
               class: "layer-box layer-surface block layer-tile-outline tile-slidable",
               image: {
                 src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
@@ -113,7 +125,7 @@ block content
               }
             })
 
-        .col-12
+        .col-6(class="sm:col-8")
           +link("/projects/publications")
             +tile({
               title: "Publications",

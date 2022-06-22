@@ -11,10 +11,10 @@ block pageInfo
 
 block banner
   +banner({
-    title: "Project 1: Boxer (2019 – Present)",
+    title: "Project 2: Boxer (2019 - 2021)",
     content: "Boxer is a robotic platform designed as an autonomous delivery vehicle and built for research purposes.",
     image: {
-      src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+      src: "cloudinary/joseph-projects/boxer/04_ADR_RenderProj_3",
       alt: "An image of a rendered robot."
     },
     mode: "banner"
@@ -50,7 +50,7 @@ block content
     | Due to space restrictions, hub motors were used and in doing so, a Five-link suspension design was implemented on both the front and rear wheels to ensure proper handling.
     br
     br
-    | This work is still a work in progress, but I will update it periodically.
+    | I am no longer part of this beautiful project but have since moved on to something even more exciting (#[+link("https://reindeere.ca") Reindeere Robotics]).
     br
     br
     figure.text-center
@@ -58,6 +58,13 @@ block content
         source(src='https://res.cloudinary.com/okikio-assets/video/upload/f_auto,q_auto/v1623362278/joseph-projects/boxer/Boxer_Moving.mp4' type='video/mp4')
 
       figcaption.italic Boxer on the move
+    br
+    br
+    figure.text-center
+      //- video.w-full(controls preload="metadata"  poster="https://res.cloudinary.com/okikio-assets/video/upload/v1623362278/joseph-projects/boxer/Boxer_Moving.jpg"  name='media' loading="lazy")
+      //-   source(src='https://res.cloudinary.com/okikio-assets/video/upload/f_auto,q_auto/v1623362278/joseph-projects/boxer/Boxer_Moving.mp4' type='video/mp4')
+      lite-youtube.mx-auto(videoid="wAD9aOm3C_I" playlabel="Boxer on the move")
+      figcaption.italic Boxer on the move
 
   //- Next page layer
-  +next-page("Publications", "Battery Manager")
+  +next-page("Li-ion Battery Pack", "Battery Manager")

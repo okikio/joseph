@@ -38,7 +38,7 @@
             @apply rounded-2xl overflow-hidden;
         }
 
-        .container {
+        .contain {
             @apply container max-w-screen-3xl;
         }
 
@@ -51,8 +51,8 @@
         }
     }
 
-    .container {
-        @apply relative max-w-full;
+    .contain {
+        @apply container relative max-w-full;
     }
 
     .image-container,
@@ -233,7 +233,8 @@ html[theme="dark"] {
 }
 
 .about-layer {
-    .container {
+    .contain {
+        @apply container;
         @apply max-w-screen-lg pb-8 leading-8 font-500 px-2 sm:px-5;
         max-width: 70ch;
     }

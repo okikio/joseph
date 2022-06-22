@@ -98,11 +98,11 @@ task("css", async () => {
         import("@csstools/postcss-sass"),
         import("postcss-easings")
     ]);
-    
+
     return stream(`${scssFolder}/*.scss`, {
         pipes: [
             postcss([
-                _import(),
+                // _import(),
                 sass({
                     outputStyle: "compressed",
                     fiber
@@ -113,7 +113,7 @@ task("css", async () => {
             postcss([
                 easings(),
             ], { syntax: scss }),
-            
+
             rename({ extname: ".min.css" }), // Rename
         ],
         dest: cssFolder,
@@ -144,7 +144,8 @@ tasks({
                     sourcemap: true,
                     format: "esm",
                     platform: "browser",
-                    target: ["es2018"],
+                    target: ["es2018", "chrome81", "safari14", "firefox93"],
+                    treeShaking: true,
                     outfile: "modern.min.js",
                 }),
 
@@ -329,7 +330,7 @@ task("watch", async () => {
                     extensions: ["html"],
                 },
             },
-            
+
             browser: "chrome",
             scrollThrottle: 250,
         },

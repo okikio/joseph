@@ -1,7 +1,13 @@
 // Imported external libraries
-import swup from "swup";
-import scrollPlugin from "@swup/scroll-plugin";
-import preloadPlugin from "@swup/preload-plugin";
+import _swup from "swup";
+import _scrollPlugin from "@swup/scroll-plugin";
+import _preloadPlugin from "@swup/preload-plugin";
+
+const swup = _swup.default;
+const scrollPlugin = _scrollPlugin.default;
+const preloadPlugin = _preloadPlugin.default;
+
+import "lite-youtube-embed/src/lite-yt-embed.js";
 
 // Internal use components
 import { setTheme, getTheme } from "./theme";
@@ -246,6 +252,8 @@ on(document, "ready", () => {
         // To avoid bugs in older browser, SWUP can only run if the browser supports modern es6 features or supports webp (most browser that support webp can handle the history management SWUP does)
         if ("Promise" in window) {
             // console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
+
+            // console.log(new swup({}))
 
             // Page transition manager SWUP for faster page loads
             const Swup = new swup({

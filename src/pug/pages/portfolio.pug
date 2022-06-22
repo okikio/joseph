@@ -25,12 +25,23 @@ block content
     .py-5
       .row.col-grid
         .col-6
+          +link("/projects/li-ion-battery-pack")
+            +tile({
+              title: "Lithium-ion Battery Pack",
+              content: "This robotic battery pack was built for a commercial mobile robot (not Boxer) using more than 200 Lithium-ion cells. It includes safety features, signal measurement, and cell balancing.",
+              image: {
+                src: "cloudinary/joseph-projects/li-ion-battery-pack/FinalPack_Iso_Beauty",
+                alt: "An image of the 3D CAD renders of the battery pack in an isometric perspective.",
+              }
+            })
+
+        .col-6
           +link("/projects/boxer")
             +tile({
               title: "Boxer",
               content: "Boxer is a robotic platform designed as an autonomous delivery vehicle and built for research purposes.",
               image: {
-                src: "cloudinary/joseph-projects/boxer/03_ADR_Render_04",
+                src: "cloudinary/joseph-projects/boxer/04_ADR_RenderProj_3",
                 alt: "An image of a rendered robot."
               }
             })
@@ -72,7 +83,7 @@ block content
           +link("/projects/phoenix")
             +tile({
               title: "Phoenix",
-              content: "As part of my job as an engineering intern at Celestica, one of my projects was the design of a new solar panel frame cheaper and stronger than previous versions.",
+              content: "As part of my job as an engineering intern at Celestica, one of my projects was the design of a new solar panel frame cheaper and more reliable than previous versions.",
               image: {
                 src: "cloudinary/joseph-projects/phoenix/New_Solar_Panel_1-03",
                 alt: "An image of Joseph Ojo holding a large pane of Solar Panels.",
