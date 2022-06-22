@@ -46,11 +46,13 @@ task("html", async () => {
     const [
         { default: plumber },
         { default: pug },
-        { default: minifyJSON }
+        { default: minifyJSON },
+        { partytownSnippet }
     ] = await Promise.all([
         import("gulp-plumber"),
         import("gulp-pug"),
-        import('gulp-minify-inline-json')
+        import('gulp-minify-inline-json'),
+        import('@builder.io/partytown/integration')
     ]);
 
     let icons = require(iconResolve);
@@ -60,7 +62,12 @@ task("html", async () => {
             // Compile src html using Pug
             pug({
                 ...pugConfig,
-                data: { icons },
+                data: { 
+                    icons, 
+                        partytownSnippet: partytownSnippet({
+                        "forward": ["dataLayer.push"]
+                    }) 
+                },
             }),
 
             minifyJSON(), // Minify application/ld+json
@@ -275,7 +282,9 @@ task("production", async () => {
 });
 
 // Other assets
-task("assets", () => {
+task("assets", async () => {
+    const { copyLibFiles } = await import('@builder.io/partytown/utils');
+    await copyLibFiles(`${destFolder}/~partytown`);
     return stream(`${assetsFolder}/**/*`, {
         opts: {
             base: assetsFolder,

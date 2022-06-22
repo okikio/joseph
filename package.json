@@ -46,6 +46,7 @@
         "swup": "^2.0.15"
     },
     "devDependencies": {
+        "@builder.io/partytown": "^0.6.1",
         "@csstools/postcss-sass": "^5.0.1",
         "@fullhuman/postcss-purgecss": "^4.1.3",
         "autoprefixer": "^10.4.7",
