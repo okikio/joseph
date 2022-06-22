@@ -9,13 +9,17 @@
   X-UA-Compatible: IE=edge
   Content-Security-Policy: default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com https://josephojo.com https://i.ytimg.com https: data:; script-src 'self' https://cdn.polyfill.io https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/; form-action 'self'; frame-src https://www.youtube-nocookie.com; frame-ancestors 'self';
   Permissions-Policy: geolocation=(), microphone=(), usb=(), sync-xhr=(self), camera=(), interest-cohort=()
-  Link: <https://fonts.gstatic.com/s/frankruhllibre/v6/j8_36_fAw7jrcalD7oKYNX0QfAnPUzPC9JfGhA.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
-  Link: <https://fonts.gstatic.com/s/manrope/v4/xn7gYHE41ni1AdIRggexSg.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
-  Link: <https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
+  Link: </css/fonts/23264a9f72c7ee2fc0cf1ea07dc8a1b5.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
+  Link: </css/fonts/b4c7b2477ff7bdf9127058331d11ba30.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
+  Link: </css/fonts/1f12f8efe65c71b79bdb8ea3c11eef19.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
+  Link: </css/fonts/59b1a3b54115926daf73af06b7f05758.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous
   Link: <https://cdn.polyfill.io>; rel=preconnect; crossorigin
   Link: <https://res.cloudinary.com>; rel=preconnect; crossorigin
   
 /about
+  X-Robots-Tag: index, follow, noimageindex
+
+/contact
   X-Robots-Tag: index, follow, noimageindex
 
 /css/*.css

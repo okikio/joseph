@@ -76,45 +76,48 @@ task("html", async () => {
 let browserSync;
 task("css", async () => {
     const [
-        { default: fiber },
-
         { default: postcss },
         { default: tailwind },
 
-        { default: _import },
-
         { default: scss },
         { default: sass },
-        { default: easings }
-    ] = await Promise.all([
-        import("fibers"),
+        { default: easings },
 
+        { postcssFontGrabber }
+    ] = await Promise.all([
         import("gulp-postcss"),
         import("tailwindcss"),
 
-        import("postcss-easy-import"),
-
         import("postcss-scss"),
         import("@csstools/postcss-sass"),
-        import("postcss-easings")
+        import("postcss-easings"),
+
+        import("postcss-font-grabber")
     ]);
 
     return stream(`${scssFolder}/*.scss`, {
         pipes: [
             postcss([
-                // _import(),
                 sass({
-                    outputStyle: "compressed",
-                    fiber
+                    outputStyle: "compressed"
                 }),
                 tailwind("./tailwind.config.cjs"),
             ], { syntax: scss }),
 
             postcss([
-                easings(),
+                easings()
             ], { syntax: scss }),
 
             rename({ extname: ".min.css" }), // Rename
+
+            postcss([
+                postcssFontGrabber({
+                    // postcss-font-grabber needs to know the CSS output
+                    // directory in order to calculate the new font URL.
+                    cssDest: `${cssFolder}/`,
+                    fontDest: `${cssFolder}/fonts/`,
+                }),
+            ], { syntax: scss }),
         ],
         dest: cssFolder,
         end: browserSync ? [browserSync.stream()] : undefined,
