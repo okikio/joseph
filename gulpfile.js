@@ -255,7 +255,10 @@ task("production", async () => {
                     // Purge, Compress & Prefix CSS
                     purgecss({
                         content: [`${htmlFolder}/**/*.html`],
-                        safelist: ["active", "show", "focus", "hide", /-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
+                        safelist: {
+                            standard: ["active", "show", "focus", "hide", /-show$/, /-initial$/, /-hide$/, /navbar-focus/, /navbar-link-focus/, /btn-expand/, /at-top/],
+                            greedy: [/lite\-youtube/, /lyt/]
+                        },
                         keyframes: false,
                         fontFace: false,
                     }),

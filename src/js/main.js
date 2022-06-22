@@ -253,8 +253,6 @@ on(document, "ready", () => {
         if ("Promise" in window) {
             // console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
 
-            // console.log(new swup({}))
-
             // Page transition manager SWUP for faster page loads
             const Swup = new swup({
                 linkSelector,
