@@ -263,8 +263,29 @@ html[theme="dark"] {
             max-width: 13rem;
         }
 
+        .placeholder-img {
+            transition: background-color #{$transitionDuration} ease;
+            background-color: #797886;
+
+            img {
+                filter: none;
+            }
+        }
+
+        @at-root html[theme="dark"] {
+            .about-layer .tile .placeholder-img {
+                background-color: #1d1c2b;
+            }
+        }
+        
+
         img {
-            object-position: top center;
+            @apply object-center lt-sm:object-contain lt-xsm:object-cover;
+            @apply rounded;
+
+            @screen sm {
+                object-position: top center;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 mixin seo(page)
   - let { title, url, description, websiteURL } = page;
+  - title = url == "/" ? page.title : page.title + " — Joseph Ojo";
+
   meta(name="og:locale" content="en_Us")
   meta(property="og:type" content="website")
 

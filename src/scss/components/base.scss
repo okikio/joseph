@@ -219,6 +219,8 @@ a.skip-main {
     left: 0;
     top: 0;
 
+    @apply w-full h-full;
+
     img {
         transform: scale(1.1);
         filter: blur(5px);
@@ -249,7 +251,8 @@ a.skip-main {
 
 .core-img,
 .no-script-img,
-.placeholder-img {
+.placeholder-img,
+.placeholder-img img {
     color: transparent;
 }
 

@@ -67,6 +67,8 @@ module.exports = {
 
         'lt-sm': { 'max': '639px' },
         // => @media (max-width: 639px) { ... }
+        
+        'xsm': { 'min': '339px' },
 
         'lt-xsm': { 'max': '339px' },
         // => @media (max-width: 639px) { ... }

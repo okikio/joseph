@@ -1,5 +1,7 @@
 mixin banner(value = {})
   - let { content, title, image, mode = "hero" } = value;
+  - let width = mode == "hero" ? 1448 : 1488;
+  - let height = mode == "hero" ? 464 : 500;
 
   .banner(class=mode)
     .contain
@@ -8,7 +10,7 @@ mixin banner(value = {})
           Object.assign({
             loading: "eager"
           }, image)
-        ).effect-parallax
+        ).effect-parallax(width=width height=height)
 
       .layout
         header.content
