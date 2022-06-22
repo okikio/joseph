@@ -9,6 +9,8 @@
   X-UA-Compatible: IE=edge
   Content-Security-Policy: default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com https://josephojo.com https://i.ytimg.com https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.polyfill.io https://bundlejs.com https://*.bundlejs.com https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://bundlejs.com https://*.bundlejs.com; block-all-mixed-content; upgrade-insecure-requests; base-uri 'self'; object-src 'none'; worker-src 'self'; manifest-src 'self'; media-src 'self' https://res.cloudinary.com/; form-action 'self'; frame-src 'self' https://www.youtube-nocookie.com; frame-ancestors 'self' https:;
   Permissions-Policy: geolocation=(), microphone=(), usb=(), sync-xhr=(self), camera=(), browsing-topics=()
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Opener-Policy: same-origin
   Link: <https://cdn.polyfill.io>; rel=preconnect; crossorigin
   Link: <https://res.cloudinary.com>; rel=preconnect; crossorigin
   
