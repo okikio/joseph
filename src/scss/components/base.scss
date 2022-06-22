@@ -212,13 +212,17 @@ a.skip-main {
 }
 
 .placeholder-img {
+    @apply overflow-hidden;
     image-rendering: auto;
     image-rendering: smooth;
-    transform: scale(1.1);
     position: absolute;
-    filter: blur(5px);
     left: 0;
     top: 0;
+
+    img {
+        transform: scale(1.1);
+        filter: blur(5px);
+    }
 }
 
 .core-img {

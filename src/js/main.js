@@ -19,6 +19,7 @@ const _dropdown = '.dropdown';
 const _navOverlay = '.navbar-overlay';
 const _navbar = '.navbar';
 const _banner = '.banner';
+const _resizeImage = '[resize-image]';
 const _menu = '.navbar-menu';
 const _backUp = '#to-top';
 const _skipMain = ".skip-main";
@@ -77,8 +78,7 @@ on(window, {
                 };
 
                 // Find the layer-images in each layer
-                each(_image, image => {
-
+                each(_resizeImage, image => {
                     srcWid = Math.round(width(image));
                     srcHei = Math.round(height(image));
 
@@ -254,49 +254,49 @@ on(document, "ready", () => {
             // console.log("%cDocument loaded, SWUP starting...", "color: #00c300");
 
             // Page transition manager SWUP for faster page loads
-            const Swup = new swup({
-                linkSelector,
-                animateHistoryBrowsing: true,
-                containers: ["[data-container]"],
-                plugins: [
-                    // Preload pages
-                    new preloadPlugin(),
+            // const Swup = new swup({
+            //     linkSelector,
+            //     // animateHistoryBrowsing: true,
+            //     containers: ["[data-container]"],
+            //     plugins: [
+            //         // Preload pages
+            //         new preloadPlugin(),
 
-                    // For every new page, scroll to the top smoothly
-                    new scrollPlugin({
-                        doScrollingRightAway: false,
-                        animateScroll: false,
-                        scrollFriction: 0.3,
-                        scrollAcceleration: 0.04,
-                    })
-                ]
-            });
+            //         // For every new page, scroll to the top smoothly
+            //         // new scrollPlugin({
+            //         //     doScrollingRightAway: false,
+            //         //     animateScroll: false,
+            //         //     scrollFriction: 0.3,
+            //         //     scrollAcceleration: 0.04,
+            //         // })
+            //     ]
+            // });
 
-            // Remove initial cache, the inital cache is always incomplete
-            Swup.cache.remove(window.location.pathname);
+            // // Remove initial cache, the inital cache is always incomplete
+            // Swup.cache.remove(window.location.pathname);
 
-            // This event runs for every page view after initial load
-            Swup.on("clickLink", () => {
-                // Remove click event from scroll down button
-                off(_scrolldown, "click", goDown);
+            // // This event runs for every page view after initial load
+            // Swup.on("clickLink", () => {
+            //     // Remove click event from scroll down button
+            //     off(_scrolldown, "click", goDown);
 
-                removeClass(_dropdown, "show");
-                if (windowWid <= 700) {
-                    removeClass(_navbar, "navbar-show");
-                }
-            });
+            //     removeClass(_dropdown, "show");
+            //     if (windowWid <= 700) {
+            //         removeClass(_navbar, "navbar-show");
+            //     }
+            // });
 
-            Swup.on("samePage", () => {
-                // If on the same page reinvigorate the scroll down button click event
-                // On scroll down button click animate scroll to the height of the banner layer
-                on(_scrolldown, "click", goDown);
-            });
+            // Swup.on("samePage", () => {
+            //     // If on the same page reinvigorate the scroll down button click event
+            //     // On scroll down button click animate scroll to the height of the banner layer
+            //     on(_scrolldown, "click", goDown);
+            // });
 
-            Swup.on('contentReplaced', () => {
-                init(); resize(); scroll();
-            });
+            // Swup.on('contentReplaced', () => {
+            //     init(); resize(); scroll();
+            // });
 
-            Swup.on('willReplaceContent', activeNavLink);
+            // Swup.on('willReplaceContent', activeNavLink);
         }
 
         activeNavLink();

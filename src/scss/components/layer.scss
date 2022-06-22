@@ -95,10 +95,11 @@
             transition: background-color #{$transitionDuration} ease;
             background-color: #797886;
             @apply inline-block mx-auto relative;
+            @apply overflow-hidden;
 
             img {
                 position: relative;
-                object-fit: scale-down;
+                object-fit: contain;
                 object-position: center center;
                 transform: scale(1);
             }
@@ -109,6 +110,15 @@
                 height: auto;
                 top: 0;
                 left: 0;
+            }
+
+            .placeholder-img {
+                @apply absolute inset-0 object-contain;
+                
+                img {
+                    filter: none;
+                    @apply w-full;
+                }
             }
         }
     }
