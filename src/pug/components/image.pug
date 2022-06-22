@@ -20,7 +20,7 @@ mixin image(value = {})
       if overlay
         .image-overlay
       .placeholder-img
-        img(src!=`${urlParse("w_50,e_blur:500")}.jpg` alt=alt loading=loading)&attributes(attributes)
-      img.core-img(data-src!=`${urlParse()}.jpg` alt=alt loading=loading itemprop="url")&attributes(attributes)
+        img(src!=`${urlParse("w_50,e_blur:500")}.jpg` crossorigin alt=alt loading=loading)&attributes(attributes)
+      img.core-img(data-src!=`${urlParse()}.jpg` crossorigin alt=alt loading=loading itemprop="url")&attributes(attributes)
       noscript
-        img.no-script-img(src!=`${urlParse()}.jpg` aria-hidden="true" alt=alt loading=loading)&attributes(attributes)
+        img.no-script-img(src!=`${urlParse()}.jpg` crossorigin aria-hidden="true" alt=alt loading=loading)&attributes(attributes)
