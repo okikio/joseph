@@ -64,8 +64,6 @@ html(lang="en")
       block footer
         +footer
 
-    script(src=`https://cdn.polyfill.io/v3/polyfill.min.js?features=default,es2015,es2016,es2017,fetch,smoothscroll,WebAnimations` async)
-
     script(src="/js/legacy.min.js", nomodule async)
     script(src="/js/modern.min.js", type="module" async)
 
@@ -77,7 +75,7 @@ html(lang="en")
     
     // Global site tag (gtag.js) - Google Analytics
     script(src='https://www.googletagmanager.com/gtag/js?id=G-235NHS61W0' type="text/partytown" defer crossorigin)
-    script(src='/js/umami.min.js' type="text/partytown" defer crossorigin)
+    //- script(src='/js/umami.min.js' type="text/partytown" defer crossorigin)
     script(src='/js/measurements.min.js' type="text/partytown" defer crossorigin)
 
     script(type="application/ld+json" defer).
